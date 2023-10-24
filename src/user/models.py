@@ -20,29 +20,32 @@ class CustomUserManager(BaseUserManager):
         return user
 
     # # スーパーユーザーを作成するメソッド
-    # def create_superuser(self, username, email, password=None, ):
-    #     # create_user メソッドを使用してスーパーユーザーを作成
-    #     return self.create_user(username, email, password, )
+    def create_superuser(self, username, email, password=None, ):
+        user = self.create_user(username, email, password)
+        user.is_staff = True
+        user.is_superuser = True
+        # create_user メソッドを使用してスーパーユーザーを作成
+        return self.create_user(username, email, password, )
 # カスタムユーザーモデルを定義
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     # プライマリキーとして id カラムを定義
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     # ユーザー名を格納するフィールド
     username = models.CharField(max_length=30, unique=True)
     # メールアドレスを格納するフィールド
     email = models.EmailField(unique=True)
     # # ユーザーアカウントが有効かどうかを示すフィールド
-    # is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     # # スタッフ権限を持つかどうかを示すフィールド
-    # is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     # CustomUserManager をオブジェクトとして使用
     objects = CustomUserManager()
     # ユーザー名を識別子として使用
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     # メールアドレスを識別子として使用
-    EMAIL_FIELD = 'email'
+    # EMAIL_FIELD = 'email'
     # ユーザー作成時に必須のフィールド（メールアドレス）を指定
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = []
     # ユーザー名を表示用の文字列として設定
     def __str__(self):
         return self.username
