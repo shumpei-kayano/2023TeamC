@@ -32,7 +32,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'sass_processor',
+    'user',
 ]
+
+AUTH_USER_MODEL = 'user.CustomUser' # 追加
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
