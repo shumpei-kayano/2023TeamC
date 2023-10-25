@@ -1,0 +1,3 @@
+signup-email.html　新規登録メアド入力画面
+check_email.html　新規登録メール確認画面
+signup.html　新規登録基本情報入力画面
