@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sass_processor',
     'user',
-    'user.apps.UserConfig'
 ]
 
 AUTH_USER_MODEL = 'user.CustomUser' # 追加
