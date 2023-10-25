@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
         user.is_superuser = True
         # create_user メソッドを使用してスーパーユーザーを作成
         return self.create_user(username, email, password, )
-# カスタムユーザーモデルを定義
+# カスタムユーザーモデルを定義/
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     # プライマリキーとして id カラムを定義
     # id = models.AutoField(primary_key=True)
