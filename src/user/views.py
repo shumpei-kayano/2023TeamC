@@ -4,7 +4,7 @@ from .forms import CustomUserForm
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 
-class PersonCreateView(CreateView):
+class CustomUserCreateView(CreateView):
     model = CustomUser#モデルを指定する
     form_class = CustomUserForm#フォームを指定する
     template_name = "user/singup.html"#テンプレートを指定する
