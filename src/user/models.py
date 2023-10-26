@@ -28,8 +28,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(username, email, password, )
 # カスタムユーザーモデルを定義/
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    # プライマリキーとして id カラムを定義
-    # id = models.AutoField(primary_key=True)
+
     # ユーザー名を格納するフィールド
     username = models.CharField(max_length=30, unique=True)
     # メールアドレスを格納するフィールド
