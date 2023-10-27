@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static'assets/icon.png' %}" />
+    {% comment %} {% block css %} {% endcomment %}
+    <!--mystyle-->
+    <link rel="stylesheet" href="{% static 'user/css/sanitize.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <style>        
+        .nav-item {
+            cursor: pointer;
+        }        
+        .active {
+            color: #007880;       
+        }    
+    </style>
+    {% comment %} {% endblock %} {% endcomment %}
+</head>
+<body>
+
+    <main>
+        {% block header %}{% endblock %}
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li>
+                <div id="icon" class="nav-item" onclick="changeColor('icon')">
+                    <a href="{% url  create_diary.htmlに遷移 %}"><img src="{% static'assets/home.png' %}">
+                </div> 
+                    <div id="text" class="nav-item" onclick="changeColor('text')">ホーム</a>
+                    </div>
+                    </li>
+                    <li>
+                <div class="main__month">
+                    <a class="main__month__link" href="{% url  calendar_manth.htmlに遷移 %}"><img src="{% static'assets/month.png' %}" id="icon" class="icon" onclick="changeIconColor()">月</a>
+                </div>
+                </li>
+                <li>
+                <div class="main__week">
+                    <a class="main__week__link" href="{% url  calendar_week.htmlに遷移 %}"><img src="{% static'assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()">週</a>
+                </div>
+                </li>
+                <li>
+                <div calss="main__setting">
+                    <a class="main__setting__link" href="{% url  setting.htmlに遷移 %}"><img src="{% static'assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()">設定</a>
+                </div>
+                </li>
+            </ul>
+            </nav>
+        </div>
+    </footer>
+    <script>        
+        function changeColor(id) {
+            const element = document.getElementById(id);           
+            element.classList.add('active');        
+        }
+    </script>
+    {% comment %} {% block js %}
+    <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %} {% endcomment %}
+</body>
+</html>
