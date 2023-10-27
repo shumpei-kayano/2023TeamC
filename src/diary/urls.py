@@ -12,10 +12,4 @@ urlpatterns = [
     path('create_diary', views.calendar_month,name='create_diary'),
     path('diary_delete', views.calendar_month,name='diary_delete'),
     path('diary_graph', views.calendar_month,name='diary_graph'),
-from user import views
-
-app_name = 'diary'
-urlpatterns = [
-    #path('positive_conversion', views.CustomUserCreate, name='positive_conversion'),
-
 ]
