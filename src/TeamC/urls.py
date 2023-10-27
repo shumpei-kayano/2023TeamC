@@ -4,8 +4,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('user.urls'))
+    path('admin/', admin.site.urls), # 管理サイト
+    path('accounts/',include('allauth.urls')), # ログインする前
+    path('diary/',include('diary.urls')),
+    path('',include('user.urls')),
+
+    
 ]
 
 # 画像のURLを追加

@@ -1,8 +1,6 @@
-from django import forms
-from .models import CustomUser
+# from django import forms
 
-class CustomUserForm(forms.ModelForm):
-
-  class Meta:
-      model = CustomUser#ここでmodelを指定してモデル情報と紐づける
-      fields = ["username", "password","email"]#扱うフィールド名を指定する
+# class CustomUserForm(forms.Form):
+  # username = forms.CharField(label='お名前',max_length=30, unique=True)
+  # passwordb = forms.CharField(label='パスワード', max_length=128,unipue=True)
+  # email = forms.EmailField(label='メールアドレス',unique=True)
