@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+#def positive_conversion(request):
+ #   return render(request, 'diaty/positive_conversion.html')
