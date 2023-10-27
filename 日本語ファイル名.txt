@@ -1,3 +1,21 @@
 signup-email.html　新規登録メアド入力画面
 check_email.html　新規登録メール確認画面
 signup.html　新規登録基本情報入力画面
+<<<<<<< HEAD
+base.html　ヘッダーとフッター
+email.html　新規メール確認画面
+base_use.html　
+index.html　
+login_success.html　
+login.html　
+password_reset_confirmation.html　パスワード再設定メール確認画面
+password_reset_email_send.html　
+password_reset_input-emal.html　
+password_reset_input.html　
+password_reset_output.html　
+signup_email_confirmation.html　
+signup_info_confirmation.html　
+signup_output.html　
+tutorial.html　
+=======
+>>>>>>> 1416a879b5f71f30c65bd4f08772ddc9ce3de209
