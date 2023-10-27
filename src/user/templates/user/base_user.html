@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static'assets/icon.png' %}" />
+    <!--mystyle-->
+    <link rel="stylesheet" href="{% static 'user/css/sanitiza.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+</head>
+<body>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- {% block js %}
+    <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %} -->
+</body>
+</html>
