@@ -65,8 +65,9 @@
             element.classList.add('active');        
         }
     </script>
-    {% comment %} {% block js %}
-    <script src="{% static 'js/main.js' %}"></script>
-    {% endblock %} {% endcomment %}
+
+    {% block js %}
+    {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
+    {% endblock %}
 </body>
 </html>

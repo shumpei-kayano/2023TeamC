@@ -20,32 +20,37 @@
 {% endblock %}
 
 {% block content %}
+<!-- ユーザーが入力した日記の表示 -->
 <div class="content__today-diary__text">
     <p>
         {{ ユーザーが入力した日記を表示させてください }}
     </p>
 </div>
 
-<main>
-    <div class="main__title">
-        <h1>日記のポジティブ変換</h1>
+<!-- ネコ画像 -->
+<div class="content__today-diary__positive-img">
+    <img src="{% static "assets/positive_neko.png" %}}" alt="ポジティブな猫の画像">
+</div>
+
+<!-- ポジティブ変換した日記の表示 -->
+    <!-- enctype='multipart/form-data'でファイルアップロード -->
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="content__today-diary__positive-text">
+        <p>
+            {{ ポジティブ変換した日記を表示させてください }}
+        </p>
     </div>
-    <div class="main__diary">
-        <div class="main__diary__date">
-            <p>{{ 日記の日付を次の書式で表示させてください→0000/00/00(月) }}</p>
-        </div>
-        <div class="main__diary__content">
-            <p>{{ 日記の内容を表示させてください }}</p>
-        </div>
+    <p>日記の内容を上記に変更しますか？</p>
+    <div class="button">
+        <button type="submit">保存</button>
     </div>
-    <div class="main__positive">
-        <div class="main__positive__title">
-            <h2>ポジティブ変換</h2>
-        </div>
-        <div class="main__positive__content">
-            <p>{{ 日記の内容をポジティブ変換したものを表示させてください }}</p>
-        </div>
-    </div>
+</form>
+<div class="cancel__button">
+    <button id="back-button" type="button">キャンセル</button>
+</div>
+
+<!-- カウンセリング催促ポップアップ -->
     <div class="main__counseling">
         <div class="main__counseling__title">
             <h2>カウンセリング催促</h2>
@@ -65,4 +70,20 @@
     </div>
     {% endif %}
 </main>
+{% endblock %}
+
+{% block js %}
+<script>
+    // キャンセルボタンを押したときの処理
+    document.getElementById("back-button").addEventListener("click", function() {
+        history.back();
+    });
+
+    // カウンセリング催促ポップアップの表示
+    {% if カウンセリング催促ポップアップを表示させる場合 %}
+    $(function(){
+        $('.main__popup').fadeIn();
+    });
+    {% endif %}
+</script>
 {% endblock %}
