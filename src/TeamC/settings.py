@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 ]
 #django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
 SITE_ID = 1
@@ -57,13 +58,13 @@ AUTHENTICATION_BACKENDS = (
 
 #ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL = 'user:signup'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'user:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 #ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET =True
 
-#django-allauthが送信するメールの件名に自動付与される接頭語をブランクに設定
-ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+# #django-allauthが送信するメールの件名に自動付与される接頭語をブランクに設定
+# ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # #デフォルトのメール送信元を設定
 # DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
