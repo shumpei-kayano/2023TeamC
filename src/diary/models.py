@@ -24,7 +24,7 @@ class Diary(models.Model):
     movie4 = models.FileField(verbose_name='動画4', upload_to='diary_movie/', blank=True, null=True)
 
     # AIコメント
-    ai_comment = models.CharField(verbose_name='AIコメント')
+    ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
 
     def __str__(self):
         return f'Diary by {self.user}'
@@ -35,7 +35,7 @@ class Emotion(models.Model):
     # 日記への外部キー
     diary = models.ForeignKey(Diary, verbose_name='日記', on_delete=models.PROTECT)
     # 感情推論
-    reasoning = models.CharField(verbose_name='感情推論')
+    reasoning = models.CharField(verbose_name='感情推論', max_length=10)
     # ポジティブな感情スコア
     positive = models.FloatField(verbose_name='ポジティブ')
     # ネガティブな感情スコア
