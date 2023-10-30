@@ -60,3 +60,40 @@ def loading(request):
 
 def logout_success(request):
     return render(request, 'diary/logout_success.html')
+
+def logout(request):
+    return render(request, 'diary/logout.html')
+
+
+def member_information_edit_cancel(request):
+    return render(request, 'diary/member_information_edit_cancel.html')
+
+def member_information_edit_check(request):
+    return render(request, 'diary/logout.html')
+
+def member_information_edit_comp(request):
+    return render(request, 'diary/member_information_edit_comp.html')
+
+def member_information_edit(request):
+    return render(request, 'diary/member_information_edit.html')
+
+def member_information(request):
+    return render(request, 'diary/member_information.html')
+
+def month_graph(request):
+    return render(request, 'diary/month_graph.html')
+
+def positive_conversion(request):
+    return render(request, 'diary/positive_conversion.html')
+
+def setting(request):
+    return render(request, 'diary/setting.html')
+
+def today_counseling(request):
+    return render(request, 'diary/today_counseling.html')
+
+def today_diary_detail_(request):
+    return render(request, 'diary/today_diary_detail_.html')
+
+def week_graph(request):
+    return render(request, 'diary/week_graph.html')
