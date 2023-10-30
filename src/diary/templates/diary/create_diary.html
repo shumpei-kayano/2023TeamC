@@ -1,5 +1,8 @@
 <!-- 日記作成画面１ -->
-{% extends "base.html" %}
+
+<h1>aaaaaaa</h1>
+
+{% comment %} {% extends "base.html" %}
 
 {% load static %}
 
@@ -9,7 +12,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static'assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
         </div>
     <div class="header__nowdate">
         {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
@@ -18,13 +21,12 @@
         <div class="header__weather__img">
             <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
         </div>
-        {{ 気温を表示おねがいします 00℃ } }}
+        {{ 気温を表示おねがいします 00℃ }}
 </header>
 
 {% endblock %}
 
 {% block content %}
-<main>
     <form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
         {% csrf_token %}
         <div class="content__today-diary__text">
@@ -43,12 +45,4 @@
         </div>
     </form>
 
-
-
-    </form>
-        
-</main>
-{% endblock %}
-
-{% block footer %}
-{% endblock %}
+{% endblock %} {% endcomment %}
