@@ -19,6 +19,22 @@
 </header>
 {% endblock %}
 
+<!-- <style>
+    /* ポップアップの初期状態は非表示 */
+    .popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+</style>
+</head> -->
+
 {% block content %}
 <!-- ユーザーが入力した日記の表示 -->
 <div class="content__today-diary__text">
@@ -46,30 +62,34 @@
         <button type="submit">保存</button>
     </div>
 </form>
+
 <div class="cancel__button">
     <button id="back-button" type="button">キャンセル</button>
 </div>
 
-<!-- カウンセリング催促ポップアップ -->
-    <div class="main__counseling">
-        <div class="main__counseling__title">
-            <h2>カウンセリング催促</h2>
-        </div>
-        <div class="main__counseling__content">
-            <p>{{ 日記の内容をポジティブ変換したものを表示させてください }}</p>
-        </div>
+<!-- ポップアップ要素
+<div class="popup" id="popup">
+    <p>特定の条件に合致しました。メッセージを表示します。</p>
+</div> -->
+
+<!-- ポップアップ要素 -->
+{% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+<div class="popup">
+    <div class="popup__text">
+        <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
     </div>
-    {% if カウンセリング催促ポップアップを表示させる場合 %}
-    <div class="main__popup">
-        <div class="main__popup__content">
-            <p>カウンセリングの予約をしましょう！</p>
-        </div>
-        <div class="main__popup__button">
-            <a href="{% url 'counseling' %}">カウンセリング予約</a>
-        </div>
+    <div class="popup__img">
+        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
     </div>
-    {% endif %}
-</main>
+    <div class="button">
+        <button type="button">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <a href="{% url 'counseling' %}"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</a>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}
 
 {% block js %}
@@ -80,10 +100,33 @@
     });
 
     // カウンセリング催促ポップアップの表示
-    {% if カウンセリング催促ポップアップを表示させる場合 %}
     $(function(){
-        $('.main__popup').fadeIn();
+        $('.popup').fadeIn();
     });
-    {% endif %}
+
+    $(document).ready(function() {
+        // ポップアップを下からスライドして表示
+        $('.popup').slideDown();
+
+        // キャンセルボタンをクリックした時の処理
+        $('.cancel-button').click(function() {
+            $('.popup').slideUp();
+        });
+    });
+
+    {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        
+        var userText = document.getElementById("user-text").value;
+        
+        // 特定の条件が満たされた場合にポップアップを表示
+        if (userText.includes("特定のワード")) {
+            // ポップアップを表示
+            document.getElementById("popup").style.display = "block";
+        } else {
+            // 特定の条件に該当しない場合はフォームを通常の方法で送信
+            this.submit();
+        }
+    }); {% endcomment %}
 </script>
 {% endblock %}
