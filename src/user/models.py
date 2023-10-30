@@ -40,9 +40,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     # CustomUserManager をオブジェクトとして使用
     objects = CustomUserManager()
     # ユーザー名を識別子として使用
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     # メールアドレスを識別子として使用
-    # EMAIL_FIELD = 'email'
+    EMAIL_FIELD = 'email'
     # ユーザー作成時に必須のフィールド（メールアドレス）を指定
     REQUIRED_FIELDS = []
     # ユーザー名を表示用の文字列として設定

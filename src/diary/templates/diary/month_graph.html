@@ -1,1 +1,99 @@
 <!--月間統計グラフと総評画面-->
+{% extends "base_diary.html" %}
+{% load static %}
+{% block title %}月間グラフ{% endblock %}
+
+{% comment %} {% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
+        </div>
+    <div class="header__nowdate">
+        {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
+    <div class="header__weather">
+        {{ 天気を表示おねがいします  }}
+        <div class="header__weather__img">
+            <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
+        </div>
+        {{ 気温を表示おねがいします 00℃ }}
+</header>
+{% endblock %} {% endcomment %}
+
+{% block content %}
+    <form method="POST" action="{% url 'calender_month.html' %}"><!--月間カレンダーに遷移させてください-->
+        {% csrf_token %}
+        <div id="tab__button">
+            <div class="tab__button__img">
+                <button type="button">月間カレンダー</button>
+            </div>
+        </div>
+
+        <div id="tab__button">
+            <div class="tab__button__img">
+                <button type="button">月間グラフ</button>
+            </div>
+    </form>
+
+    <div id="next__button">
+        <div class="next__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}"></button><!--先月へ遷移お願いします-->
+        </div>
+
+        <div class="calender__date">
+            {% comment %} {{ 現在の日付と曜日を表示おねがいします 0000/00(月) }} {% endcomment %}
+        </div>
+
+        <div class="next__next__img">
+            <button type="button" onclick="history.forward()"><img src="{% static 'assets/next_arrow.png' %}"></button><!--来月へ遷移お願いします-->
+        </div>
+    </div>
+
+    <div id="emotion__graph">
+        <div class="emotion__graph__img">
+            <img src="{% static 'assets/emotion_graph.png' %}" alt="感情グラフ">
+            {% comment %} 月間感情グラフ {% endcomment %}
+        </div>
+
+    <div id="responce__text">
+        <div class="responce__text__img">
+            <img src="{% static 'assets/responce_text.png' %}" alt="レスポンス">
+            {% comment %} カウンセリングレスポンス {% endcomment %}
+                
+        </div>
+    
+
+
+
+
+
+
+
+
+
+    
+    {% comment %} Javascriptで {% endcomment %}
+    {% comment %} //classの要素の取得
+    const demo_class_items = document.getElementsByClassName('demo_tab_btn');
+    
+    for(let i = 0; i < demo_class_items.length; i++){
+        //クリックイベント
+        demo_class_items[i].onclick = function(e){
+            clk_num = i+1;
+    
+            //ボタンへclassの削除と追加
+            btn = document.querySelectorAll('.demo_tab_btn');
+            for(let ii = 0; ii < btn.length; ii++){
+                btn[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_btn:nth-child('+clk_num+')').classList.add('act');
+    
+            //タブボディclassの削除と追加
+            cnt = document.querySelectorAll('.demo_tab_content');
+            for(let ii = 0; ii < cnt.length; ii++){
+                cnt[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_content:nth-child('+clk_num+')').classList.add('act');
+    
+        }
+    } {% endcomment %}
