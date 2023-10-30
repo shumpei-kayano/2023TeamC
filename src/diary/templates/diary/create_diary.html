@@ -1,15 +1,14 @@
 <!-- 日記作成画面１ -->
 
-<h1>aaaaaaa</h1>
 
-{% comment %} {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 
 {% block title %}日記作成{% endblock %}
 
-{% block header %}
-<header>
+{% comment %} {% block header %} {% endcomment %}
+{% comment %} <header>
     <div class="header__button">
         <div class="header__back__img">
             <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
@@ -26,8 +25,10 @@
 
 {% endblock %}
 
+{% comment %} {% block content %} {% endcomment %}
 {% block content %}
-    <form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
+<h1>aaaaaaa</h1>
+    {% comment %} <form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
         {% csrf_token %}
         <div class="content__today-diary__text">
             <img src="透過画像のパス" alt="透過画像" class="follow-image">
@@ -43,6 +44,6 @@
         <div class="cancel__button">
             <button type="button">確認</button>
         </div>
-    </form>
+    </form> {% endcomment %}
 
-{% endblock %} {% endcomment %}
+{% endblock %}
