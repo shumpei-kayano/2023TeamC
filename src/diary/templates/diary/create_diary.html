@@ -1,14 +1,12 @@
 <!-- 日記作成画面１ -->
-
-
 {% extends "base_diary.html" %}
 
 {% load static %}
 
 {% block title %}日記作成{% endblock %}
 
-{% comment %} {% block header %} {% endcomment %}
-{% comment %} <header>
+{% block header %}
+<header>
     <div class="header__button">
         <div class="header__back__img">
             <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
@@ -22,28 +20,24 @@
         </div>
         {{ 気温を表示おねがいします 00℃ }}
 </header>
-
 {% endblock %}
 
-{% comment %} {% block content %} {% endcomment %}
 {% block content %}
-<h1>aaaaaaa</h1>
-    {% comment %} <form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
-        {% csrf_token %}
-        <div class="content__today-diary__text">
-            <img src="透過画像のパス" alt="透過画像" class="follow-image">
-                <input type="textarea" placeholder="テキストを入力してください (最大1000字まで)" oninput="updateImagePosition(this)">
-            <div id="char-count">文字数: 0</div>
-        <!--Javascriptでテキストボックス内にネココを透過させた画像を追従させます-->
-        <!--Javascriptで文字数をカウントします-->
-        </div>
-        <div class="icon__button">
-            <label for="image"><img src="{% static'assets/image.png' %}">写真・動画を添付</label>
-            <input type="file" id="media" name="media" accept="image/*,video/*">
-        </div>
-        <div class="cancel__button">
-            <button type="button">確認</button>
-        </div>
-    </form> {% endcomment %}
-
+<form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
+    {% csrf_token %}
+    <div class="content__today-diary__text">
+        <img src="透過画像のパス" alt="透過画像" class="follow-image">
+            <input type="textarea" placeholder="テキストを入力してください (最大1000字まで)" oninput="updateImagePosition(this)">
+        <div id="char-count">文字数: 0</div>
+    <!--Javascriptでテキストボックス内にネココを透過させた画像を追従させます-->
+    <!--Javascriptで文字数をカウントします-->
+    </div>
+    <div class="icon__button">
+        <label for="image"><img src="{% static'assets/image.png' %}">写真・動画を添付</label>
+        <input type="file" id="media" name="media" accept="image/*,video/*">
+    </div>
+    <div class="cancel__button">
+        <button type="button">確認</button>
+    </div>
+</form>
 {% endblock %}
