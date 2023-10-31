@@ -62,11 +62,11 @@ ACCOUNT_EMAIL_VERIFICATION= 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 #ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'user:signup'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/user/login/'
+LOGIN_REDIRECT_URL = 'diary:home_top'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 #ログアウトリンクのクリック一発でログアウトする設定
-ACCOUNT_LOGOUT_ON_GET =True
+# ACCOUNT_LOGOUT_ON_GET =True
 
 #django-allauthが送信するメールの件名に自動付与される接頭語をブランクに設定
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
