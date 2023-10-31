@@ -1,1 +1,88 @@
-<!-- カウンセリング実行画面（ホーム）とカウンセリング実行画面（グラフ） -->
+<!-- カウンセリング実行画面（ホーム）-->
+{% extends "base.html" %}
+
+{% load static%}
+
+{% block title %}カウンセリング詳細{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__nowdate">
+        {{ 現在の日付と曜日を次の書式で表示させてください→0000/00/00(月) }}
+    <div class="header__nowdate">
+        <div class="header__weaher">
+            <div class="header__weaher__img">
+                <img src="{% static "assets/{{ 天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}" %}}" alt="天気の画像">
+            </div>
+            {{ 気温を次の書式で表示させてください→00℃ }}
+        </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- タブ -->
+<div class="tab__button">
+    <div class="tab__button--left">
+        <button type="button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">
+            日記詳細</button>
+    </div>
+    <div class="tab__button--right">
+        <button type="button" onclick="location.href='{% url 'today_diary_graph.htmlに遷移させてください' %}'">
+            グラフ</button>
+    </div>
+</div>
+
+<!-- 編集削除ボタン -->
+<div class="content__today-diary__group">
+    <div class="icon__button">
+        <div class="icon__button__delete">
+            <a href="{% url  diary_delete.htmlに遷移させてください %}">
+                <img src="{% static'diary/assets/delete.png' %}">削除</a>
+        <div class="icon__button__edit">
+            <a href="{% url  diary_update.htmlに遷移させてください %}">
+                <img src="{% static'diary/assets/edit.png' %}">編集</a>
+        </div>
+    </div>
+
+    <!-- ユーザーが保存した日記の表示 -->
+    <div class="content__today-diary__text">
+        <p>
+            {{ ユーザーが入力した日記を表示させてください }}
+        </p>
+    </div>
+
+    <!-- ユーザーが保存した画像の表示(とりあえず4枚表示すると仮定して) -->
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+</div><!-- content__today-diary__group -->
+
+<!-- ネココのカウンセリングコメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ カウンセリングのコメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/counselor_neko.png' %}" alt="カウンセラーネココの画像">
+</div>
+
+{% endblock %}

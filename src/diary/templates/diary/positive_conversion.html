@@ -1,5 +1,5 @@
 <!-- ポジティブ変換画面とカウンセリング催促ポップアップ -->
-{% extends "base.html" %}
+{% extends "base_diary.html" %}
 
 {% load static%}
 
@@ -59,12 +59,12 @@
     </div>
     <p>日記の内容を上記に変更しますか？</p>
     <div class="button">
-        <button type="submit">保存</button>
+        <button type="submit" id="save-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
     </div>
 </form>
 
 <div class="cancel__button">
-    <button id="back-button" type="button">キャンセル</button>
+    <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
 </div>
 
 <!-- ポップアップ要素
@@ -74,7 +74,7 @@
 
 <!-- ポップアップ要素 -->
 {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
-<div class="popup">
+<div class="popup" id="first-popup">
     <div class="popup__text">
         <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
     </div>
@@ -82,10 +82,27 @@
         <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
     </div>
     <div class="button">
-        <button type="button">ネココのアドバイスを受ける</button>
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
     </div>
     <div class="gray__button">
-        <a href="{% url 'counseling' %}"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</a>
+        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+    </div>
+</div>
+
+<div class="popup" id="second-popup">
+    <div class="popup__text">
+        <p>キャンセルするとカウンセリングを<br>
+            受けることができなくなります。<br>
+            キャンセルしますか？</p>
+    </div>
+    <div class="popup__img">
+        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+    </div>
+    <div class="button">
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <button class="close-button" onclick="closePopup('second-popup')">×</button>
     </div>
 </div>
 {% endif %}
@@ -114,11 +131,30 @@
         });
     });
 
+    function closePopup(id) {
+        document.getElementById(id).classList.remove("show");
+    }
+
+      // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function() {
+    document.getElementById("first-popup").classList.add("show");
+    });
+
+      // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
+    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
+    document.getElementById("second-popup").classList.add("show");
+    });
+
+      // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+        document.getElementById("first-popup").classList.remove("show");
+        document.getElementById("second-popup").classList.remove("show");
+    });
     {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        
+
         var userText = document.getElementById("user-text").value;
-        
+
         // 特定の条件が満たされた場合にポップアップを表示
         if (userText.includes("特定のワード")) {
             // ポップアップを表示
@@ -130,58 +166,3 @@
     }); {% endcomment %}
 </script>
 {% endblock %}
-
-<html>
-<head>
-  <title>Django Pop-up Example</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <h1>Django Pop-up Example</h1>
-    <button id="save-button">Save</button>
-
-    <div class="popup" id="first-popup">
-      <div class="popup-header">
-        <h2>Save confirmation</h2>
-        <button class="close-button" onclick="closePopup('first-popup')">×</button>
-      </div>
-      <div class="popup-body">
-        Are you sure you want to save?
-      </div>
-    </div>
-
-    <div class="popup" id="second-popup">
-      <div class="popup-header">
-        <h2>Cancel confirmation</h2>
-        <button class="close-button" onclick="closePopup('second-popup')">×</button>
-      </div>
-      <div class="popup-body">
-        Are you sure you want to cancel?
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function closePopup(id) {
-      document.getElementById(id).classList.remove("show");
-    }
-
-    // 保存ボタンをクリックしたときに最初のポップアップを表示する
-    document.getElementById("save-button").addEventListener("click", function() {
-      document.getElementById("first-popup").classList.add("show");
-    });
-
-    // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
-    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
-      document.getElementById("second-popup").classList.add("show");
-    });
-
-    // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
-    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
-      document.getElementById("first-popup").classList.remove("show");
-      document.getElementById("second-popup").classList.remove("show");
-    });
-  </script>
-</body>
-</html>
