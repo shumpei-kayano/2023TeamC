@@ -130,3 +130,58 @@
     }); {% endcomment %}
 </script>
 {% endblock %}
+
+<html>
+<head>
+  <title>Django Pop-up Example</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Django Pop-up Example</h1>
+    <button id="save-button">Save</button>
+
+    <div class="popup" id="first-popup">
+      <div class="popup-header">
+        <h2>Save confirmation</h2>
+        <button class="close-button" onclick="closePopup('first-popup')">×</button>
+      </div>
+      <div class="popup-body">
+        Are you sure you want to save?
+      </div>
+    </div>
+
+    <div class="popup" id="second-popup">
+      <div class="popup-header">
+        <h2>Cancel confirmation</h2>
+        <button class="close-button" onclick="closePopup('second-popup')">×</button>
+      </div>
+      <div class="popup-body">
+        Are you sure you want to cancel?
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function closePopup(id) {
+      document.getElementById(id).classList.remove("show");
+    }
+
+    // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function() {
+      document.getElementById("first-popup").classList.add("show");
+    });
+
+    // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
+    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
+      document.getElementById("second-popup").classList.add("show");
+    });
+
+    // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+      document.getElementById("first-popup").classList.remove("show");
+      document.getElementById("second-popup").classList.remove("show");
+    });
+  </script>
+</body>
+</html>
