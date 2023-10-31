@@ -1,1 +1,76 @@
-<!-- 日記作成画面２ -->
+<!-- 日記内容確認画面 -->
+{% extends "base_diary.html" %}
+
+{% block title %}日記内容確認{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
+        </div>
+    <div class="header__nowdate">
+        {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
+    <div class="header__weather">
+        {{ 天気を表示おねがいします  }}
+        <div class="header__weather__img">
+            <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
+        </div>
+        {{ 気温を表示おねがいします 00℃ }}
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- 入力されたテキストの表示 -->
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="content__today-diary__text">
+        <p>
+            {{ 入力された日記を表示させてください }}
+        </p>
+    </div>
+
+    <!-- ユーザーが保存した画像の表示(とりあえず4枚表示すると仮定して) -->
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    <div class="content__today-diary__button">
+        <button type="submit" class="btn btn-primary">保存</button>
+    </div>
+</form>
+{% endblock %}
+
+<div class="form-group">
+    <label for="title">タイトル</label>
+    <input type="text" class="form-control" id="title" value="{{ diary.title }}" readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="content">内容</label>
+    <textarea class="form-control" id="content">{{ diary.content }}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="image">写真</label>
+    <img src="{{ diary.image.url }}" alt="写真">
+  </div>
+
+  <button type="submit" class="btn btn-primary">保存</button>
+</div>
