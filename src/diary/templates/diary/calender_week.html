@@ -27,24 +27,24 @@
 </div>
 
 <!-- 週間のページネーション -->
-<div class="col-md-6">
-    <div class="text-right">
+<div class="date__pagenation">
+    <div class="next__button">
         <button id="prev-week"><img src="{% static 'assets/left_arrow.png' %}"></button>
         <div calss="text-center">
             <span id="year-month"></span>
         </div>
         <button id="next-week"><img src="{% static 'assets/right_arrow.png' %}"></button>
-        <div class="return__button">
+        <div class="icon__button">
             <button id="now-week"><img src="{% static 'assets/return_arrow.png' %}">今週</button>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <ul class="week-list--group">
+<div class="week">
+    <div class="week__list">
+        <ul class="week__list__group">
             {% for 1週間の日記一覧を表示させてください %}
-                <li class="week-list--group-item">
+                <li class="week__list__group-item">
                     <div class="d-flex justify-content-between">
                         <span class="text-primary">{{ 00/00の書式で日付を表示させてください }}</span><br>
                         <span class="text-primary">{{ 月 ←の書式で表示させてください }}</span>

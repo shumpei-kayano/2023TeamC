@@ -7,8 +7,8 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{% static 'assets/icon.png' %}" />
     <!--mystyle-->
-    <link rel="stylesheet" href="{% static 'user/css/sanitize.css' %}">
-    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'diary/css/sanitize.css' %}">
+    <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
     <style>
         .nav-item {
             cursor: pointer;
@@ -32,7 +32,7 @@
                     <li>
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
 
-                                <img src="{% static 'assets/home.png' %}" alt="ホームの画像">
+                                <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
                         </div>
                         <div id="text" class="nav-item" onclick="changeColor('text')">ホーム<!--</a>-->
                         </div>
@@ -40,21 +40,21 @@
                     <li>
                         <div class="main__month">
 
-                                <img src="{% static 'assets/month.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="月間カレンダーの画像">
+                                <img src="{% static 'diary/assets/mouth.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="月間カレンダーの画像">
                                 月<!--</a>-->
                         </div>
                     </li>
                     <li>
                         <div class="main__week">
 
-                                <img src="{% static 'assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="週間カレンダーの画像">
+                                <img src="{% static 'diary/assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="週間カレンダーの画像">
                                 週<!--</a>-->
                         </div>
                     </li>
                     <li>
                         <div calss="main__setting">
 
-                                <img src="{% static 'assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="歯車の画像">
+                                <img src="{% static 'diary/assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="歯車の画像">
                                 設定<!--</a>-->
                         </div>
                     </li>
