@@ -22,6 +22,7 @@
 
 {% block content %}
 <!-- 入力されたテキストの表示 -->
+<div class="content__form-group">
 <form method="post" enctype='multipart/form-data'>
     {% csrf_token %}
     <div class="content__today-diary__text">
@@ -51,26 +52,107 @@
             <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
         </div>
     {% endif %}
-    <div class="content__today-diary__button">
-        <button type="submit" class="btn btn-primary">保存</button>
+
+    <div class="cancel__button">
+        <button type="submit" onclick="history.href='{% url 'positive_conversion.htmlに遷移させてください' %}'">日記をポジティブに変換</button>
+    </div>
+    <div class="button">
+        <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
     </div>
 </form>
+</div>
+
+<!-- ポップアップ要素 -->
+{% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+<div class="popup" id="first-popup">
+    <div class="popup__text">
+        <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+    </div>
+    <div class="popup__img">
+        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+    </div>
+    <div class="button">
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+    </div>
+</div>
+
+<div class="popup" id="second-popup">
+    <div class="popup__text">
+        <p>キャンセルするとカウンセリングを<br>
+            受けることができなくなります。<br>
+            キャンセルしますか？</p>
+    </div>
+    <div class="popup__img">
+        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+    </div>
+    <div class="button">
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}
 
-<div class="form-group">
-    <label for="title">タイトル</label>
-    <input type="text" class="form-control" id="title" value="{{ diary.title }}" readonly>
-  </div>
+{% block js %}
+<script>
+    // キャンセルボタンを押したときの処理
+    document.getElementById("header__back__img").addEventListener("click", function() {
+        history.back();
+    });
 
-  <div class="form-group">
-    <label for="content">内容</label>
-    <textarea class="form-control" id="content">{{ diary.content }}</textarea>
-  </div>
+    // カウンセリング催促ポップアップの表示
+    $(function(){
+        $('.popup').fadeIn();
+    });
 
-  <div class="form-group">
-    <label for="image">写真</label>
-    <img src="{{ diary.image.url }}" alt="写真">
-  </div>
+    $(document).ready(function() {
+        // ポップアップを下からスライドして表示
+        $('.popup').slideDown();
 
-  <button type="submit" class="btn btn-primary">保存</button>
-</div>
+        // キャンセルボタンをクリックした時の処理
+        //$('.cancel-button').click(function() {
+            //$('.popup').slideUp();
+        //});
+    });
+
+    function closePopup(id) {
+        document.getElementById(id).classList.remove("show");
+    }
+
+      // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function() {
+    document.getElementById("first-popup").classList.add("show");
+    });
+
+      // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
+    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
+    document.getElementById("second-popup").classList.add("show");
+    });
+
+      // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+        document.getElementById("first-popup").classList.remove("show");
+        document.getElementById("second-popup").classList.remove("show");
+    });
+    {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        var userText = document.getElementById("user-text").value;
+
+        // 特定の条件が満たされた場合にポップアップを表示
+        if (userText.includes("特定のワード")) {
+            // ポップアップを表示
+            document.getElementById("popup").style.display = "block";
+        } else {
+            // 特定の条件に該当しない場合はフォームを通常の方法で送信
+            this.submit();
+        }
+    }); {% endcomment %}
+</script>
+{% endblock %}
