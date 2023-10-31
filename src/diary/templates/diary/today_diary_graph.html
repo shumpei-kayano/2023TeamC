@@ -45,15 +45,16 @@
     </div>
 </div>
 
-<!-- ポジティブ変換した日記の表示 -->
-    <!-- enctype='multipart/form-data'でファイルアップロード -->
-<form method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    <div class="content__today-diary__positive-text">
-        <p>
-            {{ ポジティブ変換した日記を表示させてください }}
-        </p>
-    </div>
+<!-- ネコココメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ ネコココメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/neko_comment.png' %}" alt="ネココの画像">
+</div>
 </form>
 
 {% endblock %}

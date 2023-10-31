@@ -49,20 +49,23 @@
         </div>
     </div>
 
-<!-- レスポンスの表示 -->
-    <div id="responce__text">
-        <div class="responce__text__img">
-            <img src="{% static 'diary/assets/responce_text.png' %}" alt="レスポンス">
-                <textarea readonly>{{ text_data }}</textarea>
-            {% comment %} カウンセリングレスポンスを取得して表示 {% endcomment %}
-        </div>
-    </div>
+<!-- ネココのカウンセリングコメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ カウンセリングのコメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/counselor_neko.png' %}" alt="カウンセラーネココの画像">
+</div>
+
 {% endblock %}
 
 <!--カレンダー遷移-->
 {% block javascripts %}
 <script>
-    
+
     $(function() {
         // 現在の年月を取得する
         const now = new Date();
