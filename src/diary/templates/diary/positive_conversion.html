@@ -9,13 +9,13 @@
 <header>
     <div class="header__nowdate">
         {{ 現在の日付と曜日を次の書式で表示させてください→0000/00/00(月) }}
-    <div class="header__nowdate">
-        <div class="header__weaher">
-            <div class="header__weaher__img">
-                <img src="{% static "assets/{{ 天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}" %}}" alt="天気の画像">
-            </div>
-            {{ 気温を次の書式で表示させてください→00℃ }}
+    </div>
+    <div class="header__weaher">
+        <div class="header__weaher__img">
+            <img src="{% static "assets/{{ 天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}" %}}" alt="天気の画像">
         </div>
+        {{ 気温を次の書式で表示させてください→00℃ }}
+    </div>
 </header>
 {% endblock %}
 
