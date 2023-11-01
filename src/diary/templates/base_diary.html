@@ -31,31 +31,31 @@
                 <ul>
                     <li>
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                            <a href="{% url  create_diary.htmlに遷移 %}">
+                            {% comment %}<a href="{% url  create_diary.htmlに遷移 %}">{% endcomment %}
                                 <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
                         </div>
-                        <div id="text" class="nav-item" onclick="changeColor('text')">ホーム</a>
+                        <div id="text" class="nav-item" onclick="changeColor('text')">ホーム{% comment %}</a>{% endcomment %}
                         </div>
                     </li>
                     <li>
                         <div class="main__month">
-                            <a class="main__month__link" href="{% url  calendar_month.htmlに遷移 %}">
+                            {% comment %}<a class="main__month__link" href="{% url  calendar_month.htmlに遷移 %}">{% endcomment %}
                                 <img src="{% static 'diary/assets/month.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="月間カレンダーの画像">
-                                月</a>
+                                月{% comment %}</a>{% endcomment %}
                         </div>
                     </li>
                     <li>
                         <div class="main__week">
-                            <a class="main__week__link" href="{% url  calendar_week.htmlに遷移 %}">
+                            {% comment %}<a class="main__week__link" href="{% url  calendar_week.htmlに遷移 %}">{% endcomment %}
                                 <img src="{% static 'diary/assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="週間カレンダーの画像">
-                                週</a>
+                                週{% comment %}</a>{% endcomment %}
                         </div>
                     </li>
                     <li>
                         <div calss="main__setting">
-                            <a class="main__setting__link" href="{% url  setting.htmlに遷移 %}">
+                            {% comment %}<a class="main__setting__link" href="{% url  setting.htmlに遷移 %}">{% endcomment %}
                                 <img src="{% static 'diary/assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="歯車の画像">
-                                設定</a>
+                                設定{% comment %}</a>{% endcomment %}
                         </div>
                     </li>
                 </ul>

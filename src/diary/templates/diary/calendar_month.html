@@ -1,1 +1,151 @@
 <!--カレンダー月-->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}月間カレンダー{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>月間カレンダー</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+{% comment %} <!-- タブ -->
+<div class="tab__button">
+    <div class="tab__button--left">
+        <button type="button" onclick="location.href='{% url 'calendar_month.htmlに遷移させてください' %}'">
+            月間カレンダー</button>
+    </div>
+    <div class="tab__button--right">
+        <button type="button" onclick="location.href='{% url 'month_graph.htmlに遷移させてください' %}'">
+            月間グラフ</button>
+    </div>
+</div>
+
+<!-- 月のページネーション -->
+<div class="date__pagenation">
+    <div class="next__button">
+        <button id="prev-week"><img src="{% static 'assets/left_arrow.png' %}"></button>
+        <div calss="text-center">
+            <span id="year-month"></span>
+        </div>
+        <button id="next-week"><img src="{% static 'assets/right_arrow.png' %}"></button>
+        <div class="icon__button">
+            <button id="now-week"><img src="{% static 'assets/return_arrow.png' %}">今月</button>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<!-- カレンダー -->
+<div id="calendar" class="calendar-wrap"></div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+const date = new Date();
+let currentMonth = date.getMonth();
+let currentYear = date.getFullYear();
+
+function createCalendar(month, year) {
+    const monthDays = ["日", "月", "火", "水", "木", "金", "土"];
+    let calendarHTML = `
+        <div class="calendar-header">
+            <button id="prevMonth">前の月</button>
+            <button id="nextMonth">翌月</button>
+            <span id="currentMonthYear">${year}年${month + 1}月</span>
+            <button id="thisMonth">今月</button>
+        </div>
+        <table class="calendar">
+            <thead>
+                <tr>
+    `;
+
+    for (let i = 0; i < 7; i++) {
+        if (i === 0) {
+            calendarHTML += `<th class="sun">${monthDays[i]}</th>`;
+        } else if (i === 6) {
+            calendarHTML += `<th class="sat">${monthDays[i]}</th>`;
+        } else {
+            calendarHTML += `<th>${monthDays[i]}</th>`;
+        }
+    }
+
+    calendarHTML += '</tr></thead><tbody>';
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+
+    for (let i = 0; i < 6; i++) {
+        calendarHTML += '<tr>';
+
+        for (let j = 0; j < 7; j++) {
+            if (i === 0 && j < firstDay) {
+                calendarHTML += '<td class="mute"></td>';
+            } else if (i * 7 + j - firstDay + 1 > daysInMonth) {
+                calendarHTML += '<td class="mute"></td>';
+            } else {
+                const day = i * 7 + j - firstDay + 1;
+                if (day === date.getDate() && month === currentMonth && year === currentYear) {
+                    calendarHTML += `<td class="today">${day}</td>`;
+                } else if (j === 1) {
+                    calendarHTML += `<td class="off">${day}</td>`;
+                } else {
+                    calendarHTML += `<td>${day}</td>`;
+                }
+            }
+        }
+
+        calendarHTML += '</tr>';
+    }
+
+    calendarHTML += '</tbody></table>';
+
+    return calendarHTML;
+}
+
+function updateCalendar() {
+    const calendarContainer = document.getElementById('calendar');
+    calendarContainer.innerHTML = createCalendar(currentMonth, currentYear);
+
+    const prevMonthButton = document.getElementById('prevMonth');
+    const nextMonthButton = document.getElementById('nextMonth');
+    const thisMonthButton = document.getElementById('thisMonth');
+    const currentMonthYear = document.getElementById('currentMonthYear');
+
+    prevMonthButton.addEventListener('click', function () {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
+        updateCalendar();
+    });
+
+    nextMonthButton.addEventListener('click', function () {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
+        updateCalendar();
+    });
+
+    thisMonthButton.addEventListener('click', function () {
+        const now = new Date();
+        currentMonth = now.getMonth();
+        currentYear = now.getFullYear();
+        currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
+        updateCalendar();
+    });
+}
+
+updateCalendar();
+</script>
+{% endblock %}
