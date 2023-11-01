@@ -9,14 +9,16 @@
         <div class="header__back__img">
             <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
         </div>
+    </div>
     <div class="header__nowdate">
         {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
+    </div>
     <div class="header__weather">
-        {{ 天気を表示おねがいします  }}
         <div class="header__weather__img">
             <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
         </div>
         {{ 気温を表示おねがいします 00℃ }}
+    </div>
 </header>
 {% endblock %}
 
@@ -31,25 +33,14 @@
         </p>
     </div>
 
-    <!-- ユーザーが保存した画像の表示(とりあえず4枚表示すると仮定して) -->
+    <!-- ユーザーが保存した画像と動画の表示 -->
     {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        <div class="content__today-diary__images">
+            {% for 画像・動画を表示させてください %}
+                <div class="content__today-diary__img">
+                    <img src="{{ ユーザーが保存した画像・動画を表示させてください }}" alt="日記の画像・動画">
+                </div>
+            {% endfor %}
         </div>
     {% endif %}
 
@@ -60,7 +51,7 @@
         <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
     </div>
 </form>
-</div>
+</div><!-- content__form-group -->
 
 <!-- ポップアップ要素 -->
 {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
