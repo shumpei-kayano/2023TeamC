@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'home_top.html' %}"><!--次のページに遷移させてください-->
+<form method="POST" enctype='multipart/form-data'><!--次のページに遷移させてください-->
     {% csrf_token %}
     <!-- ユーザーが保存した日記の表示 -->
     <div class="content__today-diary__text">
@@ -60,9 +60,11 @@
     <p>日記を削除すると感情分析の</p>
     <p>データも削除されます。</p>
     <p>日記を削除しますか？</p>
-
+</div>
     <div class="button">
-        <button type="submit" id="deleta-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+        <button type="submit" id="deleta-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">日記を削除</button>
+        {% comment %} 日記を削除してください {% endcomment %}
+        {% comment %} 削除したあとホーム画面に日記を削除しましたとアラート表示お願いします {% endcomment %}
     </div>
 </form>
 
@@ -70,5 +72,5 @@
     <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
 </div>
 
-</form>
+
 {% endblock %}
