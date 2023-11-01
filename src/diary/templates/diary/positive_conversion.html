@@ -12,7 +12,7 @@
     </div>
     <div class="header__weaher">
         <div class="header__weaher__img">
-            <img src="{% static "assets/{{ 天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}" %}}" alt="天気の画像">
+            <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}' %}" alt="天気の画像">
         </div>
         {{ 気温を次の書式で表示させてください→00℃ }}
     </div>
@@ -45,7 +45,7 @@
 
 <!-- ネコ画像 -->
 <div class="content__today-diary__positive-img">
-    <img src="{% static "assets/positive_neko.png" %}}" alt="ポジティブな猫の画像">
+    <img src="{% static 'diary/assets/positive_neko.png' %}" alt="ポジティブな猫の画像">
 </div>
 
 <!-- ポジティブ変換した日記の表示 -->
@@ -79,13 +79,13 @@
         <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
     </div>
     <div class="popup__img">
-        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
     </div>
     <div class="button">
         <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
     </div>
     <div class="gray__button">
-        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
     </div>
 </div>
 
@@ -96,13 +96,13 @@
             キャンセルしますか？</p>
     </div>
     <div class="popup__img">
-        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
     </div>
     <div class="button">
         <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
     </div>
     <div class="gray__button">
-        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
     </div>
 </div>
 {% endif %}

@@ -7,7 +7,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
         </div>
     </div>
     <div class="header__nowdate">
@@ -15,7 +15,7 @@
     </div>
     <div class="header__weather">
         <div class="header__weather__img">
-            <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
+            <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
         </div>
         {{ 気温を表示おねがいします 00℃ }}
     </div>
@@ -25,32 +25,32 @@
 {% block content %}
 <!-- 入力されたテキストの表示 -->
 <div class="content__form-group">
-<form method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    <div class="content__today-diary__text">
-        <p>
-            {{ 入力された日記を表示させてください }}
-        </p>
-    </div>
-
-    <!-- ユーザーが保存した画像と動画の表示 -->
-    {% if 画像があれば %}
-        <div class="content__today-diary__images">
-            {% for 画像・動画を表示させてください %}
-                <div class="content__today-diary__img">
-                    <img src="{{ ユーザーが保存した画像・動画を表示させてください }}" alt="日記の画像・動画">
-                </div>
-            {% endfor %}
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class="content__today-diary__text">
+            <p>
+                {{ 入力された日記を表示させてください }}
+            </p>
         </div>
-    {% endif %}
 
-    <div class="cancel__button">
-        <button type="submit" onclick="history.href='{% url 'positive_conversion.htmlに遷移させてください' %}'">日記をポジティブに変換</button>
-    </div>
-    <div class="button">
-        <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
-    </div>
-</form>
+        <!-- ユーザーが保存した画像と動画の表示 -->
+        {% if 画像があれば %}
+            <div class="content__today-diary__images">
+                {% for 画像・動画を表示させてください %}
+                    <div class="content__today-diary__img">
+                        <img src="{{ ユーザーが保存した画像・動画を表示させてください }}" alt="日記の画像・動画">
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="cancel__button">
+            <button type="submit" onclick="history.href='{% url 'positive_conversion.htmlに遷移させてください' %}'">日記をポジティブに変換</button>
+        </div>
+        <div class="button">
+            <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+        </div>
+    </form>
 </div><!-- content__form-group -->
 
 <!-- ポップアップ要素 -->
@@ -60,13 +60,13 @@
         <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
     </div>
     <div class="popup__img">
-        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
     </div>
     <div class="button">
         <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
     </div>
     <div class="gray__button">
-        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
     </div>
 </div>
 
@@ -77,13 +77,13 @@
             キャンセルしますか？</p>
     </div>
     <div class="popup__img">
-        <img src="{% static "assets/counseling_request.png" %}}" alt="カウンセリングを薦める猫の画像">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
     </div>
     <div class="button">
         <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
     </div>
     <div class="gray__button">
-        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static "assets/close.png" %}}" alt="アイコン">キャンセル</button>
+        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
     </div>
 </div>
 {% endif %}

@@ -1,1 +1,33 @@
 <!--会員情報編集確認画面-->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}会員情報変更{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+        </div>
+    </div>
+        <div class="header__text">
+            <p>会員情報変更</p>
+        </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+
+
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="cancel__button">
+        <button type="submit" onclick="history.href='{% url 'positive_conversion.htmlに遷移させてください' %}'">日記をポジティブに変換</button>
+    </div>
+    <div class="button">
+        <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+    </div>
+</form>
