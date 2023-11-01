@@ -1,6 +1,13 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ホーム{% endblock title %}
+
+
+{% block contents %}
 新規登録orログイン
 
 <p class="notion"><a href="{% url 'account_login' %}">ログイン</a></p>
 <p class="notion"><a href="{% url 'account_signup' %}">新規登録</a></p>
-{% endblock %}
+{% endblock contents %}
