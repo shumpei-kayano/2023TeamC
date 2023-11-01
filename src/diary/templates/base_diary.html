@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" href="{% static 'assets/icon.png' %}" />
+    <link rel="icon" href="{% static 'diary/assets/icon.png' %}" />
     <!--mystyle-->
     <link rel="stylesheet" href="{% static 'diary/css/sanitize.css' %}">
     <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
@@ -22,8 +22,8 @@
 
     <main>
         {% block header %}{% endblock %}
-        {% block content %}
-        {% endblock %}
+
+        {% block content %}{% endblock %}
     </main>
     <footer>
         <div class="menu">
@@ -31,31 +31,31 @@
                 <ul>
                     <li>
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                            {% comment %}<a href="{% url  create_diary.htmlに遷移 %}">{% endcomment %}
+                            <a href="{% url  create_diary.htmlに遷移 %}">
                                 <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
                         </div>
-                        <div id="text" class="nav-item" onclick="changeColor('text')">ホーム{% comment %}</a>{% endcomment %}
+                        <div id="text" class="nav-item" onclick="changeColor('text')">ホーム</a>
                         </div>
                     </li>
                     <li>
                         <div class="main__month">
-                            {% comment %}<a class="main__month__link" href="{% url  calendar_month.htmlに遷移 %}">{% endcomment %}
+                            <a class="main__month__link" href="{% url  calendar_month.htmlに遷移 %}">
                                 <img src="{% static 'diary/assets/month.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="月間カレンダーの画像">
-                                月{% comment %}</a>{% endcomment %}
+                                月</a>
                         </div>
                     </li>
                     <li>
                         <div class="main__week">
-                            {% comment %}<a class="main__week__link" href="{% url  calendar_week.htmlに遷移 %}">{% endcomment %}
+                            <a class="main__week__link" href="{% url  calendar_week.htmlに遷移 %}">
                                 <img src="{% static 'diary/assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="週間カレンダーの画像">
-                                週{% comment %}</a>{% endcomment %}
+                                週</a>
                         </div>
                     </li>
                     <li>
                         <div calss="main__setting">
-                            {% comment %}<a class="main__setting__link" href="{% url  setting.htmlに遷移 %}">{% endcomment %}
+                            <a class="main__setting__link" href="{% url  setting.htmlに遷移 %}">
                                 <img src="{% static 'diary/assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="歯車の画像">
-                                設定{% comment %}</a>{% endcomment %}
+                                設定</a>
                         </div>
                     </li>
                 </ul>
@@ -70,7 +70,7 @@
     </script>
 
     {% block js %}
-    {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
+        <script src="{% static 'js/main.js' %}"></script>
     {% endblock %}
 </body>
 </html>
