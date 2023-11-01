@@ -190,3 +190,13 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     'STATIC_URL': '/debug_toolbar/',
 }
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'  # あなたのSMTPホスト
+EMAIL_PORT = 587  # ポート番号
+EMAIL_HOST_USER = 'your_email@example.com'  # 送信元メールアドレス
+EMAIL_HOST_PASSWORD = 'your_password'  # パスワード
+EMAIL_USE_TLS = True  # TLSを使用する場合はTrueに設定
+DEFAULT_FROM_EMAIL = 'your_email@example.com'  # デフォルトの送信元メールアドレス
