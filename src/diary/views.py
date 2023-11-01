@@ -92,8 +92,8 @@ def setting(request):
 def today_counseling(request):
     return render(request, 'diary/today_counseling.html')
 
-def today_diary_detail_(request):
-    return render(request, 'diary/today_diary_detail_.html')
+def today_diary_detail(request):
+    return render(request, 'diary/today_diary_detail.html')
 
 def week_graph(request):
     return render(request, 'diary/week_graph.html')
