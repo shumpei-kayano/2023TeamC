@@ -4,14 +4,14 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 # カスタムユーザーマネージャークラスを定義
 class CustomUserManager(BaseUserManager):
     # 一般のユーザーを作成するメソッド
-    def create_user(self, username, email, password=None, ):
+    def create_user(self, username, email, password=None,**extra_fields):
         # メールアドレスが指定されていない場合はエラーを発生させる
         if not email:
-            raise ValueError('The Email field must be set')
+            raise ValueError('emailに記入漏れがあります')
         # メールアドレスを正規化（小文字化）する
         email = self.normalize_email(email)
         # ユーザーオブジェクトを作成
-        user = self.model(username=username, email=email, )
+        user = self.model(username=username, email=email,**extra_fields )
         # パスワードをハッシュ化してユーザーオブジェクトに設定
         user.set_password(password)
         # ユーザーオブジェクトをデータベースに保存
@@ -20,12 +20,12 @@ class CustomUserManager(BaseUserManager):
         return user
 
     # # スーパーユーザーを作成するメソッド
-    def create_superuser(self, username, email, password=None, ):
-        user = self.create_user(username, email, password)
+    def create_superuser(self, username, password=None, **extra_fields ):
+        user = self.create_user(username, password,**extra_fields)
         user.is_staff = True
         user.is_superuser = True
         # create_user メソッドを使用してスーパーユーザーを作成
-        return self.create_user(username, email, password, )
+        return self.create_user(username, password, )
 # カスタムユーザーモデルを定義/
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 

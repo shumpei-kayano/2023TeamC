@@ -15,12 +15,12 @@
     <div class="header__nowdate">
         {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
     </div>
-    <div class="header__weather">
+    {% comment %} <div class="header__weather">
         <div class="header__weather__img">
             <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
         </div>
         {{ 気温を表示おねがいします 00℃ }}
-    </div>
+    </div> {% endcomment %}
 </header>
 {% endblock %}
 
