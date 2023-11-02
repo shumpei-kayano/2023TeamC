@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from .models import Diary, emotion
+from .models import Diary, Emotion
 from user.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
@@ -29,18 +29,8 @@ def calender_week(request):
 
 @login_required
 def create_diary_confirmation(request):
-      user = request.user  # 現在のログインユーザーを取得
-      user_id = user.id  # ユーザーのIDを取得
-      # ユーザーのIDをデータベースに保存
-      customuser = CustomUser(user_id=user_id)
-      customuser.save()
       if request.method == 'POST':
-        form = DiaryCreateForm(request.POST, request.FILES)
         input_data = request.POST.get('content')
-        new_diary = form.save(commit=False)
-        new_diary.user = request.user
-        user_id = user.id  # ユーザーのIDを取得
-        new_diary.save()
         return render(request, 'diary/create_diary_confirmation.html', {'input_data': input_data})
       else:
           form = DiaryCreateForm()
