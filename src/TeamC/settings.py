@@ -190,8 +190,3 @@ DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 #--------------------allauthの基本設定--------------------
 
-
-#----------------------メディアファイル設定------------------------------------
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
-#----------------------メディアファイル設定------------------------------------
