@@ -35,4 +35,5 @@ urlpatterns = [
     path('today/counseling', views.today_counseling,name='today_counseling'),
     path('today/diary/detail', views.today_diary_detail,name='today_diary_detail'),
     path('week/graph', views.week_graph,name='week_graph'),
+    path('a',view.a,name='a')
 ]
