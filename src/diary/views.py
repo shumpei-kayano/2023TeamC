@@ -97,6 +97,3 @@ def today_diary_detail(request):
 
 def week_graph(request):
     return render(request, 'diary/week_graph.html')
-  
-def a(request):
-  return render(request, 'diary/a.html')
