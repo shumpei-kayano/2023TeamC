@@ -43,9 +43,9 @@
     <form method="post" enctype='multipart/form-data'>
         {% csrf_token %}
         <div class="content__today-diary__text">
-            <p>
-                {{ 入力された日記を表示させてください }}
-            </p>
+          {% if input_data %}
+          <p>入力データ: {{ input_data }}</p>
+          {% endif %}
         </div>
 
         <!-- ユーザーが保存した画像と動画の表示 -->
