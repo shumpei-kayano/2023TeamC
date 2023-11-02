@@ -12,14 +12,32 @@
             <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
         </div>
     </div>
-    {% comment %} <div class="header__nowdate">
+    <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
+        {% comment %} {% if カレンダーから遷移した場合 %}
             {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
+        {% else %} {% endcomment %}
+        <div id="current_date">
+            <script>
+                var today = new Date();
+            
+                // 年・月・日・曜日を取得
+                var year = today.getFullYear();
+                var month = today.getMonth() + 1;
+                var week = today.getDay();
+                var day = today.getDate();
+            
+                var week_ja = ["日", "月", "火", "水", "木", "金", "土"];
+            
+                // 年・月・日・曜日を書き出す
+                document.write(year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日");
+            </script>
+            
+        </div>
+        {% comment %} {% endif %} {% endcomment %}
     </div>
+
+    {% comment %} 
     <!-- 天気アイコン・気温の表示  -->
     <div class="header__weather">
         {% if カレンダーから遷移した場合 %}
