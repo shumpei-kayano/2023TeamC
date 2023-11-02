@@ -1,6 +1,8 @@
 <!-- 日記内容確認画面 -->
 {% extends "base_diary.html" %}
 
+{% load static %}
+
 {% block title %}日記内容確認{% endblock %}
 
 {% block header %}
@@ -10,7 +12,7 @@
             <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
         </div>
     </div>
-    <div class="header__nowdate">
+    {% comment %} <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
         {% if カレンダーから遷移した場合 %}
             {{ 選択された日付を表示する }}
@@ -31,7 +33,7 @@
             </div>
             {{ 現在の気温を表示 }}
         {% endif %}
-    </div>
+    </div> {% endcomment %}
 </header>
 {% endblock %}
 
@@ -47,7 +49,7 @@
         </div>
 
         <!-- ユーザーが保存した画像と動画の表示 -->
-        {% if 画像があれば %}
+        {% comment %} {% if 画像があれば %}
             <div class="content__today-diary__images">
                 {% for 画像・動画を表示させてください %}
                     <div class="content__today-diary__img">
@@ -55,13 +57,13 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <div class="cancel__button">
-            <button type="submit" onclick="history.href='{% url 'positive_conversion.htmlに遷移させてください' %}'">日記をポジティブに変換</button>
+            <button type="submit" onclick="history.href='{% url 'diary:positive_conversion' %}'">日記をポジティブに変換</button>
         </div>
         <div class="button">
-            <button id="save-button" type="submit" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+            <button id="save-button" type="submit" onclick="location.href='{% url 'diary:today_diary_detail' %}'">保存</button>
         </div>
     </form>
 </div><!-- content__form-group -->
