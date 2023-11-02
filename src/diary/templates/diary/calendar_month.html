@@ -1,5 +1,5 @@
 <!--カレンダー月-->
-{% extends "base_diary.html" %}
+{% comment %} {% extends "base_diary.html" %}
 
 {% load static%}
 
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-{% comment %} <!-- タブ -->
+<!-- タブ -->
 <div class="tab__button">
     <div class="tab__button--left">
         <button type="button" onclick="location.href='{% url 'calendar_month.htmlに遷移させてください' %}'">
@@ -39,20 +39,27 @@
         </div>
     </div>
 </div> {% endcomment %}
-
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
 <!-- カレンダー -->
 <div id="calendar" class="calendar-wrap"></div>
 
-{% endblock %}
+{% comment %} {% endblock %} {% endcomment %}
 
-{% block js %}
+{% comment %} {% block js %} {% endcomment %}
 <script>
 const date = new Date();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 
+// カレンダーのHTMLを生成する関数
 function createCalendar(month, year) {
     const monthDays = ["日", "月", "火", "水", "木", "金", "土"];
+    // 月の切り替えボタン
     let calendarHTML = `
         <div class="calendar-header">
             <button id="prevMonth">前の月</button>
@@ -65,6 +72,7 @@ function createCalendar(month, year) {
                 <tr>
     `;
 
+    // 曜日を表記する
     for (let i = 0; i < 7; i++) {
         if (i === 0) {
             calendarHTML += `<th class="sun">${monthDays[i]}</th>`;
@@ -74,7 +82,6 @@ function createCalendar(month, year) {
             calendarHTML += `<th>${monthDays[i]}</th>`;
         }
     }
-
     calendarHTML += '</tr></thead><tbody>';
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -82,24 +89,36 @@ function createCalendar(month, year) {
 
     for (let i = 0; i < 6; i++) {
         calendarHTML += '<tr>';
-
         for (let j = 0; j < 7; j++) {
+            const day = i * 7 + j - firstDay + 1;
+            const cellData = {
+                day: day,
+                 // データベースから画像を取得する関数を呼び出す
+                image: getImageForDate(day, currentMonth, currentYear),
+            };
+
+            // 日付のセルを生成
             if (i === 0 && j < firstDay) {
                 calendarHTML += '<td class="mute"></td>';
             } else if (i * 7 + j - firstDay + 1 > daysInMonth) {
                 calendarHTML += '<td class="mute"></td>';
             } else {
-                const day = i * 7 + j - firstDay + 1;
                 if (day === date.getDate() && month === currentMonth && year === currentYear) {
-                    calendarHTML += `<td class="today">${day}</td>`;
+                    calendarHTML += `<td class="today">${day}`;
                 } else if (j === 1) {
-                    calendarHTML += `<td class="off">${day}</td>`;
+                    calendarHTML += `<td class="off">${day}`;
                 } else {
-                    calendarHTML += `<td>${day}</td>`;
+                    calendarHTML += `<td>${day}`;
                 }
+
+                // 画像が存在する場合、セル内に画像を表示
+                if (cellData.image) {
+                    calendarHTML += `<img src="${cellData.image}" alt="Image" />`;
+                }
+
+                calendarHTML += '</td>';
             }
         }
-
         calendarHTML += '</tr>';
     }
 
@@ -147,5 +166,19 @@ function updateCalendar() {
 }
 
 updateCalendar();
+
+// 日付セルにクリックイベントを追加
+const calendarContainer = document.getElementById('calendar');
+calendarContainer.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.tagName === 'TD' && !target.classList.contains('mute')) {
+        const day = target.textContent;
+        if (day) {
+            window.location.href = `/diary/${currentYear}/${currentMonth + 1}/${day}/`;
+        }
+    }
+});
 </script>
-{% endblock %}
+</body>
+</html>
+{% comment %} {% endblock %} {% endcomment %}

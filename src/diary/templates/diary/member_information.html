@@ -19,31 +19,25 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table">
-        <tbody>
-        <!-- ユーザーの会員情報の表示 -->
-        <div class="content__user-info__name">
-            <tr>
-                <td>ユーザーネーム</td><br>
-                <td>{{ ユーザーネームを表示させてください }}</td>
-            </tr><hr>
-        </div>
-        <div class="content__user-info__email">
-            <tr>
-                <td>メールアドレス</td><br>
-                <td>{{ メールアドレスを表示させてください }}</td>
-            </tr><hr>
-        </div>
-        <div class="content__user-info__password">
-            <tr>
-                <td>パスワード</td><br>
-                <td>{{ パスワードを表示させてください }}</td>
-            </tr><hr>
-        </div>
-        </tbody>
-    </table>
 
-    <form method="POST" action="{% url 'member_information_edit.html' %}"><!--次のページに遷移させてください-->
+<!-- ユーザーの会員情報の表示 -->
+    <div class="content__user-info__name">
+        <p>ユーザーネーム</p>
+        <p>{{ ユーザーネームを表示させてください }}</p>
+    <hr>
+    </div>
+    <div class="content__user-info__email">
+        <p>メールアドレス</p>
+        <p>{{ メールアドレスを表示させてください }}</p>
+    <hr>
+    </div>
+    <div class="content__user-info__password">
+        <p>パスワード</p>
+        <p>{{ パスワードを表示させてください }}</p>
+    <hr>
+    </div>
+
+    <form method="POST" action="{% url 'member_information_edit.html' %}">
         {% csrf_token %}
         <div class="cancel__button">
             <button type="button">会員情報を変更する</button>

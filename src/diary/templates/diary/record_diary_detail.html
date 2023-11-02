@@ -1,4 +1,4 @@
-<!-- 日記詳細画面 ネココポジティブコメント画面（ホーム） -->
+<!-- 過去の日揮詳細 -->
 {% extends "base.html" %}
 
 {% load static%}
@@ -8,27 +8,14 @@
 {% block header %}
 <header>
     <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div>
-    <!-- 天気アイコン・気温の表示  -->
-    <div class="header__weather">
-        {% if カレンダーから遷移した場合 %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+        <p>{{ 現在の日付と曜日を次の書式で表示させてください→0000/00/00(月) }}</p>
+    <div class="header__nowdate">
+        <div class="header__weaher">
+            <div class="header__weaher__img">
+                <img src="{% static "assets/{{ 当時の天気のアイコンを表示させてください（晴れsunny.png、曇りcloud.png、雨rain.png） }}" %}}" alt="天気の画像">
             </div>
-            {{ 選択された日の気温を表示おねがいします 00℃ }}
-        {% else %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 現在の気温を表示 }}
-        {% endif %}
-    </div>
+            <p>{{ 気温を次の書式で表示させてください→00℃ }}</p>
+        </div>
 </header>
 {% endblock %}
 
@@ -124,50 +111,3 @@
     });
 </script>
 {% endblock %}
-{% comment %} <script src="{% static 'js/image-preview.js' %}">
-
-    function openImage(image) {
-        // 画像の元の比率で表示する
-        let imageWidth = image.width;
-        let imageHeight = image.height;
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
-        let maxWidth = windowWidth - 100;
-        let maxHeight = windowHeight - 100;
-        let ratio = imageWidth / imageHeight;
-        let width = Math.min(maxWidth, imageWidth);
-        let height = width / ratio;
-        if (height > maxHeight) {
-            height = maxHeight;
-          width = height * ratio;
-        }
-    
-        // 画像ポップアップを表示する
-        let imagePreview = document.getElementById("image-preview");
-        imagePreview.style.width = width + "px";
-        imagePreview.style.height = height + "px";
-        imagePreview.style.display = "block";
-    
-        // 画像をポップアップに表示する
-        let imageElement = document.getElementById("image");
-        imageElement.src = image.src;
-    
-        // 閉じるボタンを追加する
-        let closeButton = document.createElement("button");
-        closeButton.textContent = "閉じる";
-        closeButton.onclick = closeImage;
-        closeButton.className = "close-button";
-        imagePreview.appendChild(closeButton);
-        }
-    
-      // 画像ポップアップを閉じる
-        function closeImage() {
-        let imagePreview = document.getElementById("image-preview");
-        imagePreview.style.display = "none";
-    
-        // 画像をポップアップから削除する
-        let imageElement = document.getElementById("image");
-        imageElement.src = "";
-        }
-    
-    </script> {% endcomment %}

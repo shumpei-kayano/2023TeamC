@@ -26,19 +26,19 @@
         <!-- ユーザーネームの編集 -->
         <div class="content__user-name__text">
             <label for="username">ユーザーネーム</label>
-            <input type="text" id="username" name="username" value="現在のユーザーネーム"><br>
+            <br><input type="text" id="username" name="username">
         </div>
 
         <!-- メールアドレスの編集 -->
         <div class="content__user-email__text">
-            <label for="email">メールアドレス:</label>
-            <input type="email" id="email" name="email" value="現在のメールアドレス"><br>
+            <label for="email">メールアドレス</label>
+            <br><input type="email" id="email" name="email">
         </div>
 
         <!-- パスワードの編集 -->
         <div class="content__user-password__text">
-            <label for="password">パスワード:</label>
-            <input type="password" id="password" name="password" value="現在のパスワード"><br>
+            <label for="password">パスワード</label>
+            <br><input type="password" id="password" name="password">
         </div>
 
         <!-- 送信ボタン -->
@@ -46,5 +46,9 @@
             <button type="button">確認する</button>
         </div>
     </form>
+
+    <div class="neko__dango.image">
+        <img src="{% static 'diary/assets/back_arrow.png' %}">
+    </div>
 
 {% endblock %}
