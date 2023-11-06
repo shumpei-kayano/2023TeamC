@@ -1,1 +1,35 @@
 <!--ログアウト実行画面 -->
+
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}設定{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>設定</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="logout__success__title">ログアウトしました</h1>
+
+<!-- ネコココメント -->
+<div class="logout__success-text">
+    <p>ログイン画面を表示する場合は、<br>「トップページへ」ボタンを<br>クリックしてくださいにゃ</p>
+</div>
+
+<!-- ネココの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像">
+</div>
+
+<div class="button">
+    <button id="save-button" type="submit" onclick="location.href='{% url 'diary:home_top.htmlへ遷移お願いします' %}'">トップページへ</button>
+</div>
+    
+{% endblock %}
