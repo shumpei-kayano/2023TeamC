@@ -1,1 +1,133 @@
 <!-- 過去の日次グラフ -->
+{% load static %}
+
+{% block title %}グラフ{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__nowdate">
+        <!-- 日付の表示 書式は0000/00/00(月) -->
+        {% if カレンダーから遷移した場合 %}
+            {{ 選択された日付を表示する }}
+        {% else %}
+            {{ 現在の日付を表示する }}
+        {% endif %}
+    </div>
+    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__weather">
+        {% if カレンダーから遷移した場合 %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 選択された日の気温を表示おねがいします 00℃ }}
+        {% else %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 現在の気温を表示 }}
+        {% endif %}
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+{% if 日記があれば %}
+<!-- タブ -->
+<div class="tab__button">
+    <div class="tab__button--left">
+        <button type="button" onclick="location.href='{% url 'record_diary_detail.htmlに遷移させてください' %}'">
+            日記詳細</button>
+    </div>
+    <div class="tab__button--right">
+        <button type="button" onclick="location.href='{% url 'record_diary_graph.htmlに遷移させてください' %}'">
+            グラフ</button>
+    </div>
+</div>
+
+<!-- グラフの表示 -->
+<script src="{% static 'js/chart.min.js' %}"></script>
+
+<div id="circle__graph">
+    <div class="circle__graph__img">
+        <img src="{% static 'diary/assets/circle_graph.png' %}" alt="感情グラフ">感情の合計</img>
+        {% comment %} グラフを表示 {% endcomment %}
+        <div style="position: relative;">
+            <canvas id="myPieChart" width="400" height="200"></canvas>
+            <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ネコココメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ ネコココメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/review_neko.png' %}" alt="ネココの画像">
+</div>
+
+{% else %}
+    <div class="content__today-diary__group">
+        <!-- ネコココメント -->
+        <div class="content__no-diary__comment">
+            <p>
+                日記がなゃいー。
+            </p>
+        </div>
+        <!-- ネココの画像 -->
+        <div class="content__no-diary__comment__img">
+            <img src="{% static'diary/assets/tea_neko.png' %}" alt="ネココの画像">
+        </div>
+        <!-- 日記を書くボタン -->
+        <div class="content__no-diary__button">
+            <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
+                日記を書く</button>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+var data = {{ data|safe }};
+var canvas = document.getElementById('myPieChart');
+
+var ctx = canvas.getContext('2d');
+var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: data.labels,
+        datasets: [{
+            data: data.values,
+            backgroundColor: ['red', 'blue', 'green', 'yellow']  // カラーコードを指定
+        }]
+    }
+});
+
+// 円グラフのクリックイベント処理
+canvas.onclick = function(evt) {
+    var activePoint = myPieChart.getElementsAtEvent(evt)[0];
+    if (activePoint) {
+        // クリックした項目に関連付けられた詳細情報を取得
+        var itemIndex = activePoint._index;
+        var itemLabel = data.labels[itemIndex];
+        var itemValue = data.values[itemIndex];
+
+        // クリック位置に詳細情報を表示
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        popup.style.left = (evt.clientX - canvas.getBoundingClientRect().left) + 'px';
+        popup.style.top = (evt.clientY - canvas.getBoundingClientRect().top) + 'px';
+        popup.innerHTML = `<p>項目: ${itemLabel}</p><p>値: ${itemValue}</p>`;
+
+        // クリックした項目の詳細情報を非表示にするために、別の場所をクリックした際にポップアップを非表示にするコードを追加
+        document.body.onclick = function() {
+            popup.style.display = 'none';
+        };
+    }
+};
+
+</script>
+{% endblock %}
