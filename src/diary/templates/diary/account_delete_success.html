@@ -1,1 +1,35 @@
 <!--アカウント削除実行画面-->
+
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}設定{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>設定</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<p class="deleta__success__title">アカウントが削除されました</p>
+
+<!-- ネコココメント -->
+<div class="deleta__success-text">
+    <p>ご利用ありがとうございましたにゃ</p>
+</div>
+
+<!-- ネココの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像">
+</div>
+
+<div class="button">
+    <button id="save-button" type="submit" onclick="location.href='{% url 'diary:home_top.htmlへ遷移お願いします' %}'">トップページへ</button>
+</div>
+    
+{% endblock %}

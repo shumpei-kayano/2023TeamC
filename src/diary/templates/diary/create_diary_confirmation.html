@@ -52,10 +52,14 @@
         </div>
 
         <div class="cancel__button">
-            <button type="submit" onclick="history.href='{% url 'diary:positive_conversion' %}'">日記をポジティブに変換</button>
+            <button type="submit" id="submit-button" onclick="showLoadingScreen('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
+<<<<<<< HEAD
           <a href="{% url 'diary:today_diary_detail' %}"><button>保存</button></a>
+=======
+            <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">保存</button>
+>>>>>>> c24bb3d9817d9d4cdbe851fb52880eaeaed62156
         </div>
     </form>
 </div><!-- content__form-group -->
@@ -138,6 +142,21 @@
         document.getElementById("first-popup").classList.remove("show");
         document.getElementById("second-popup").classList.remove("show");
     });
+
+// ロード画面呼び出し
+        function showLoadingScreen(redirectUrl) {
+            // ロード画面を表示
+            document.getElementById('loader').style.display = 'block';
+    
+            // ボタンを非アクティブ化
+            document.getElementById('save-button').disabled = true;
+            document.getElementById('submit-button').disabled = true;
+    
+            // 待ち時間後にリダイレクト
+            setTimeout(function() {
+                window.location.href = redirectUrl;
+            }, 5000); // 5秒後にリダイレクト
+        }
     {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
         e.preventDefault();
 
