@@ -28,17 +28,17 @@ def calender_week(request):
 
 @login_required
 def create_diary_confirmation(request):
-  if request.method == 'POST':
-    # 保存ボタンがクリックされた場合
-    form = DiaryCreateForm(request.POST, request.FILES)
-    if form.is_valid():
-        new_diary = form.save(commit=False)
-        new_diary.user = request.user  # ログイン中のユーザーを設定
-        new_diary.save()  # データベースに保存
-        return render(request, 'diary/create_diary_confirmation.html', {'form': form})
-  else:
-      form = DiaryCreateForm()
-      return render(request, 'diary/create_diary.html', {'Diary': form})
+    if request.method == 'POST':
+        form = DiaryCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_diary = form.save(commit=False)
+            new_diary.user = request.user  # ログイン中のユーザーを設定
+            new_diary.save()  # データベースに保存
+            return render(request, 'diary/create_diary_confirmation.html', {'form': form, 'saved_diary': new_diary})
+    else:
+        form = DiaryCreateForm()
+        return render(request, 'diary/create_diary.html', {'Diary': form})
+
 
 @login_required
 def create_diary(request):
@@ -135,12 +135,8 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request):
-    if request.method == 'POST':
-      return render(request, 'diary/today_diary_detail.html')
-    else:
-      form = DiaryCreateForm()
-      return render(request, 'diary/create_diary.html',{'Diary':form})
-    
+    return render(request, 'diary/today_diary_detail.html')
+
 @login_required
 def week_graph(request):
     return render(request, 'diary/week_graph.html')

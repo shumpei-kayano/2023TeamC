@@ -43,23 +43,27 @@
     <form method="POST" action="{% url 'diary:today_diary_detail' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="content__today-diary__text">
-          {% if all %}
-          <h2>POSTデータの表示</h2>
-          <p>{{ all }}</p>
-          <p>{{ form }}</p>
-
-      {% endif %}
+            <p>{{ saved_diary.content }}</p>
+            {% if saved_diary.photo1 %}
+                <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1">
+            {% endif %}
+            {% if saved_diary.photo2 %}
+                <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2">
+            {% endif %}
+            {% if saved_diary.photo3 %}
+                <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3">
+            {% endif %}
+            {% if saved_diary.photo4 %}
+                <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
+            {% endif %}
         </div>
+        
 
         <div class="cancel__button">
             <button type="submit" id="submit-button" onclick="showLoadingScreen('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
-<<<<<<< HEAD
-          <a href="{% url 'diary:today_diary_detail' %}"><button>保存</button></a>
-=======
             <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">保存</button>
->>>>>>> c24bb3d9817d9d4cdbe851fb52880eaeaed62156
         </div>
     </form>
 </div><!-- content__form-group -->
