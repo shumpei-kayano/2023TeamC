@@ -40,33 +40,22 @@
 {% block content %}
 <!-- 入力されたテキストの表示 -->
 <div class="content__form-group">
-    <form method="post" enctype='multipart/form-data'>
+    <form method="POST" action="{% url 'diary:today_diary_detail' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="content__today-diary__text">
-          {% if input_data %}
-          <p>入力データ: {{ input_data }}</p>
-          {% endif %}
-          {% if input_photo %}
-          <p>画面データ: {{ input_photo }}</p>
-          {% endif %}
-        </div>
+          {% if all %}
+          <h2>POSTデータの表示</h2>
+          <p>{{ all }}</p>
+          <p>{{ form }}</p>
 
-        <!-- ユーザーが保存した画像と動画の表示 -->
-        {% comment %} {% if 画像があれば %}
-            <div class="content__today-diary__images">
-                {% for 画像・動画を表示させてください %}
-                    <div class="content__today-diary__img">
-                        <img src="{{ ユーザーが保存した画像・動画を表示させてください }}" alt="日記の画像・動画">
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %} {% endcomment %}
+      {% endif %}
+        </div>
 
         <div class="cancel__button">
             <button type="submit" onclick="history.href='{% url 'diary:positive_conversion' %}'">日記をポジティブに変換</button>
         </div>
         <div class="button">
-            <button id="save-button" type="submit" onclick="location.href='{% url 'diary:today_diary_detail' %}'">保存</button>
+          <a href="{% url 'diary:today_diary_detail' %}"><button>保存</button></a>
         </div>
     </form>
 </div><!-- content__form-group -->
