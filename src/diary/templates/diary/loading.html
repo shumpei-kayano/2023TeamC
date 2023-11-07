@@ -1,41 +1,36 @@
-<!-- ロード画面 -->
-{% block content %}
+<!-- ロード画面のコンテンツ -->
+<div id="loader" style="display: none;">
+    <p style="font-size: 24px; color: #333;">Loading...</p>
+</div>
+</div>
 
-<body>
-    <div id="loader">
-        {% comment %} <div id="loader" style="display: none;"> {% endcomment %}
-            <!-- ロード画面の内容 -->
-        <img src="/path_to_loading_image.gif" alt="Loading..." />
-        <p>Loading...</p>
-    </div>
-</body>
-</html>
-
-{% comment %} <script>
-    function showLoadingScreen(redirectUrl) {
-        // ロード画面を表示
+< script >
+// ロード画面呼び出し
+    function showLoadingScreen() {
         document.getElementById('loader').style.display = 'block';
-
-        // ボタンを非アクティブ化
-        document.getElementById('save-button').disabled = true;
-        document.getElementById('submit-button').disabled = true;
-
-        // 待ち時間後にリダイレクト
-        setTimeout(function() {
-            window.location.href = redirectUrl;
-        }, 5000); // 5秒後にリダイレクト
     }
-</script> {% endcomment %}
 
-{% comment %} この例では、showLoadingScreen 関数を使用して共通のロード画面を表示し、redirectUrl パラメータに異なるページのURLを渡します。ボタンごとにクリック時にこの関数を呼び出し、適切なページにリダイレクトします。
+    function hideLoadingScreen() {
+        document.getElementById('loader').style.display = 'none';
+    }
 
-この方法を使用すると、同じロード画面を複数のボタンで共有し、異なるページに遷移できます。 {% endcomment %}
+    function showLoadingScreenAndRedirect() {
+        showLoadingScreen(); // ロード画面を表示
 
+    function showLoadingScreenAndRedirect1() {
+        var redirectUrl = '/diary:positive_conversion';  // ボタン1用のリダイレクト先URL
+        window.location.href = redirectUrl;  // リダイレクト
+    }
 
+    function showLoadingScreenAndRedirect2() {
+        var redirectUrl = '/diary:today_diary_detail';  // ボタン2用のリダイレクト先URL
+        window.location.href = redirectUrl;  // リダイレクト
+    }
 
-
-
-
-
-{% endblock %}
-```
+            // 待ち時間後にリダイレクト
+            setTimeout(function() {
+                hideLoadingScreen(); // ロード画面を非表示
+                window.location.href = redirectUrl;
+            }, 5000); // 5秒後にリダイレクト
+        }
+</ script>
