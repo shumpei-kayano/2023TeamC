@@ -56,21 +56,25 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'diary:create_diary_confirmation' %}"><!--次のページに遷移させてください-->
+<form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data"><!--次のページに遷移させてください-->
     {% csrf_token %}
     <div class="content__today-diary__text">
-        <img src="{% static 'diary/assets/input_text_neko.png' %}" alt="透過画像" class="follow-image">
-        <input type="textarea" placeholder="テキストを入力してください (最大1000字まで)" oninput="updateImagePosition(this)" name='content'>
-        <div id="char-count">文字数: 0</div>
-    <!--Javascriptでテキストボックス内にネココを透過させた画像を追従させます-->
-    <!--Javascriptで文字数をカウントします-->
-    </div>
-    <div class="icon__button">
-        <label for="image"><img src="{% static 'diary/assets/img_icon.png' %}">写真・動画を添付</label>
-        <input type="file" id="media" name="media" accept="image/*,video/*">
+      <div class='diarycontent'>
+        {{ Diary.content }} 
+        <div class='photomv'>
+          {{ Diary.photo1 }}
+          {{ Diary.photo2 }}
+          {{ Diary.photo3 }}
+          {{ Diary.photo4 }}
+          {{ Diary.movie1 }}
+          {{ Diary.movie2 }}
+          {{ Diary.movie3 }}
+          {{ Diary.movie4 }}
+        </div>
+      </div>
     </div>
     <div class="cancel__button">
-        <button type="submit" ulr="create_diary_confirmation">確認</button>
+        <button type="submit">確認</button>
     </div>
 </form>
 {% endblock %}

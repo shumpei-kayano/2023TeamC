@@ -31,8 +31,12 @@ urlpatterns = [
     path('member/information', views.member_information,name='member_information'),
     path('month/graph', views.month_graph,name='month_graph'),
     path('positive/conversion', views.positive_conversion,name='positive_conversion'),
+    path('record/diary/graph', views.record_diary_graph,name='record_diary_graph'),
+    path('record/diary/detail', views.record_diary_detail,name='record_diary_detail'),
     path('setting', views.setting,name='setting'),
     path('today/counseling', views.today_counseling,name='today_counseling'),
+    path('today/counseling/graph', views.today_counseling_graph,name='today_counseling_graph'),
     path('today/diary/detail', views.today_diary_detail,name='today_diary_detail'),
+    path('today/diary/graph', views.today_diary_graph,name='today_diary_graph'),
     path('week/graph', views.week_graph,name='week_graph'),
 ]
