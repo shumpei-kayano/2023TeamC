@@ -145,3 +145,18 @@ def today_diary_detail(request):
 def week_graph(request):
     return render(request, 'diary/week_graph.html')
 
+@login_required
+def today_diary_graph(request):
+  return render(request,'diary/today_diary_graph.html')
+
+@login_required
+def today_counseling_graph(request):
+  return render(request,'diary/today_counseling_graph.html')
+
+@login_required
+def record_diary_detail(request):
+  return render(request,'diary/record_diary_detail.html')
+
+@login_required
+def record_diary_graph(request):
+  return render(request,'diary/record_diary_graph.html')

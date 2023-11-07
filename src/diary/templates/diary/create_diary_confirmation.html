@@ -40,7 +40,7 @@
 {% block content %}
 <!-- 入力されたテキストの表示 -->
 <div class="content__form-group">
-    <form method="POST" action="{% url 'diary:today_diary_detail' %}" enctype="multipart/form-data">
+
         {% csrf_token %}
         <div class="content__today-diary__text">
           {% if all %}
@@ -55,13 +55,9 @@
             <button type="submit" id="submit-button" onclick="showLoadingScreen('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
-<<<<<<< HEAD
-          <a href="{% url 'diary:today_diary_detail' %}"><button>保存</button></a>
-=======
-            <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">保存</button>
->>>>>>> c24bb3d9817d9d4cdbe851fb52880eaeaed62156
+            <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">ポジティブ変換しない</button>
         </div>
-    </form>
+
 </div><!-- content__form-group -->
 
 <!-- ポップアップ要素 -->
