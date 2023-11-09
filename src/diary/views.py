@@ -64,8 +64,8 @@ def diary_home(request):
 
 @login_required
 def diary_update(request, diary_id):
-    specific_diary = get_object_or_404(Diary, id=diary_id,  some_other_condition=some_value)
-    return render(request, 'diary/diary_update.html', {'specific_diary': specific_diary},{'diary_id': diary_id})
+    diary = get_object_or_404(Diary, id=diary_id)
+    return render(request, 'diary/diary_update.html',{'diary': diary})
 
 @login_required
 def help_calender(request):
