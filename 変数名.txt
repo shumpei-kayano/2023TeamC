@@ -1,3 +1,5 @@
 ファイル名: user.views
 クラス名:   CustomUserCreate()
 説明:       ログイン前画面で、ユーザー情報を表示するためのビュー
+
+AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA googleapi-key
