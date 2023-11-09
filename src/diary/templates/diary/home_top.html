@@ -17,10 +17,16 @@
         <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
     </div>
     <div class="content__home__text">
-        <p></p>
+        <p>今日はどんな1日ですか？
+            感じたことを書き残そー。
+        </p>
     </div>
     <div class="content__home__img">
         <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+    </div>
+    <div class="btn-large">
+        {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+        <button type="button" onclick="location.href='{% url '' %}'">日記を書く</button>
     </div>
 </div>
 
