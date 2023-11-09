@@ -43,11 +43,7 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 <form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data"><!--次のページに遷移させてください-->
-=======
-<form method="POST" action="{% url 'diary:create_diary_confirmation' %}"  enctype="multipart/form-data"  ><!--次のページに遷移させてください--> 
->>>>>>> 700f2c8bcaf51910346cc497b6bfa9bd81f29be1
     {% csrf_token %}
     <div class="content__today-diary__text">
       <div class='diarycontent'>

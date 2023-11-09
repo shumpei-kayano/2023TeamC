@@ -67,7 +67,7 @@ def create_diary(request):
 
 
 @login_required
-def diary_delete(request):
+def diary_delete(request,):
     return render(request, 'diary/diary_delete.html')
 
 @login_required
@@ -79,13 +79,8 @@ def diary_home(request):
     return render(request, 'diary/diary_home.html')
 
 @login_required
-<<<<<<< HEAD
 def diary_update(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-=======
-def diary_update(request, diary_id):
-    diary = get_object_or_404(Diary, id=diary_id,)
->>>>>>> 700f2c8bcaf51910346cc497b6bfa9bd81f29be1
     return render(request, 'diary/diary_update.html',{'diary': diary})
 
 @login_required
