@@ -56,7 +56,7 @@
             {% if saved_diary.photo4 %}
                 <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
             {% endif %}
-        </div>
+        </div
         
 
         <div class="cancel__button">
@@ -64,18 +64,21 @@
         </div>
         <div class="button">
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
             <a href="{% url 'diary:today_diary_detail' %}" class="button-link">ポジティブ変換しない</a>
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> 6a7f64671d72e9784cde079a7d5f9b39caef533a
             <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">ポジティブ変換しない</button>
-=======
-            <a href="{% url 'diary:today_diary_detail' %}" class="button-link">ポジティブ変換しない</a>
->>>>>>> 7955d79214752aaef493f93284bc3da958dd5789
-=======
+            <a href="{% url 'diary:today_diary_detail' object.pk %}" class="button-link">ポジティブ変換しない</a>
             <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' %}')">保存</button>
+<<<<<<< HEAD
+=======
 >>>>>>> 5d2f38e6a398468994f2b46dd5563d9d3a0223ee
 >>>>>>> eb74c2cdb6c06e87c8c641bd63b33e685717b3af
+>>>>>>> 6a7f64671d72e9784cde079a7d5f9b39caef533a
         </div>
 
 </div><!-- content__form-group -->
