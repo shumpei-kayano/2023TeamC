@@ -37,7 +37,7 @@ def calender_week(request):
     return render(request, 'diary/calender_week.html')
 
 @login_required
-def create_diary_confirmation(request):
+def create_diary_confirmation(request, pk):
     if  get_today_diary().exists():   # もし今日の日記が存在したら
         post = get_today_diary()
         return render(request, 'diary/today_diary_detail.html', {'post': post})
@@ -48,7 +48,8 @@ def create_diary_confirmation(request):
             new_diary = form.save(commit=False)
             new_diary.user = request.user  # ログイン中のユーザーを設定
             new_diary.save()  # データベースに保存
-            return render(request, 'diary/create_diary_confirmation.html', {'form': form, 'saved_diary': new_diary})
+            diary = get_object_or_404(Diary, id=pk)
+            return render(request, 'diary/create_diary_confirmation.html', {'form': form, 'saved_diary': new_diary}, {'diary': diary})
     else:
         form = DiaryCreateForm()
         return render(request, 'diary/create_diary.html', {'Diary': form})
@@ -67,8 +68,9 @@ def create_diary(request):
 
 
 @login_required
-def diary_delete(request):
-    return render(request, 'diary/diary_delete.html')
+def diary_delete(request, pk):
+    diary = get_object_or_404(Diary, id=pk)
+    return render(request, 'diary/diary_delete.html',{'diary': diary})
 
 @login_required
 def diary_graph(request):
@@ -79,13 +81,8 @@ def diary_home(request):
     return render(request, 'diary/diary_home.html')
 
 @login_required
-<<<<<<< HEAD
 def diary_update(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-=======
-def diary_update(request, diary_id):
-    diary = get_object_or_404(Diary, id=diary_id,)
->>>>>>> 700f2c8bcaf51910346cc497b6bfa9bd81f29be1
     return render(request, 'diary/diary_update.html',{'diary': diary})
 
 @login_required
@@ -161,12 +158,14 @@ def today_counseling(request):
     return render(request, 'diary/today_counseling.html')
 
 @login_required
-def today_diary_detail(request):
+def today_diary_detail(request, pk):
     if not get_today_diary().exists():  # もし今日の日記が存在しない場合
         form = DiaryCreateForm()
         return render(request, 'diary/create_diary.html', {'Diary': form})
+    
     post = get_today_diary()
-    return render(request, 'diary/today_diary_detail.html', {'post': post})
+    diary = get_object_or_404(Diary, id=pk)
+    return render(request, 'diary/today_diary_detail.html', {'post': post}, {'diary': diary})
 
 @login_required
 def week_graph(request):
