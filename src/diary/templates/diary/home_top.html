@@ -1,1 +1,26 @@
 <!-- ログイン後トップ画面（ホーム）のち日記詳細画面 -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ホームトップ{% endblock %}
+
+{% block header %}
+<header>
+    {% comment %} create_diary.htmlのヘッダーと同じ表記なので完成次第ここにもコピペする {% endcomment %}
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="content__home">
+    <div class="content__home__logo">
+        <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+    </div>
+    <div class="content__home__text">
+        <p></p>
+    </div>
+    <div class="content__home__img">
+        <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+    </div>
+</div>
+{% endblock %}
