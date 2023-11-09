@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
 from django.shortcuts import get_object_or_404
 
+from datetime import datetime, date
+from django.shortcuts import render
+
+
 
 @login_required
 def account_delete_success(request):
@@ -137,7 +141,13 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request):
-    return render(request, 'diary/today_diary_detail.html')
+    today = date.today()
+    start_of_day = datetime.combine(today, datetime.min.time())
+    end_of_day = datetime.combine(today, datetime.max.time())
+    
+    post = Diary.objects.filter(created_at__range=(start_of_day, end_of_day))
+    return render(request, 'diary/today_diary_detail.html', {'post': post})
+
 
 @login_required
 def week_graph(request):
