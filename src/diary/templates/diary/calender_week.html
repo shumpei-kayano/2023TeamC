@@ -1,4 +1,8 @@
 <!--カレンダー週-->
+<!--週間カレンダーは以下の条件でテンプレートを作成しています。
+・明日以降の日にちのセルはクリックできない。
+・現在以前の日にちのセルをクリックすると、日記詳細ページに遷移する。
+・日記を作成していない日にちのセルをクリックすると、トップページに遷移する。-->
 {% extends "base_diary.html" %}
 
 {% load static%}
@@ -17,6 +21,7 @@
 <!-- タブ -->
 <div class="tab__button">
     <div class="tab__button--left">
+        {% comment %} ボタンの遷移先の指定をお願いします {% endcomment %}
         <button type="button" onclick="location.href='{% url 'calender_week.htmlに遷移させてください' %}'">
             週間カレンダー</button>
     </div>
@@ -26,92 +31,86 @@
     </div>
 </div>
 
-<!-- 週間のページネーション -->
-<div class="date__pagenation">
-    <div class="next__button">
-        <button id="prev-week"><img src="{% static 'assets/left_arrow.png' %}"></button>
-        <div calss="text-center">
-            <span id="year-month"></span>
-        </div>
-        <button id="next-week"><img src="{% static 'assets/right_arrow.png' %}"></button>
-        <div class="icon__button">
-            <button id="now-week"><img src="{% static 'assets/return_arrow.png' %}">今週</button>
-        </div>
+<!-- 週間カレンダーページネーション -->
+<div class="calendar-week">
+    <div class="calendar-header">
+        {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
+        <a href="{% url '' %}"><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
+        {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
+        <span>{{  }}年{{  }}月</span>
+        {% comment %} 週を動的に進められるようにしてください {% endcomment %}
+        <a href="{% url '' %}"><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
+        {% comment %} 現在の週を表示させてください {% endcomment %}
+        <a href="{% url '' %}"><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
     </div>
-</div>
 
-<div class="week">
-    <div class="week__list">
-        <ul class="week__list__group">
-            {% for 1週間の日記一覧を表示させてください %}
-                <li class="week__list__group-item">
-                    <div class="d-flex justify-content-between">
-                        <span class="text-primary">{{ 00/00の書式で日付を表示させてください }}</span><br>
-                        <span class="text-primary">{{ 月 ←の書式で表示させてください }}</span>
-                    </div>
-                    <i class="diary-icon {{ 感情のアイコンを表示させてください positive_face.png,neutral~,mix~,negative~.png }}"></i>
-                    <p>{{ 日記の詳細を「先頭７文字＋・・・」の書式で表示させてください }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <!-- 週間カレンダー一覧 -->
+    <table>
+        <thead>
+            <tr>
+                <th class="sun">日</th>
+                <th>月</th>
+                <th>火</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th class="sat">土</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for 1週分を繰り返し表示 %}
+                <td>
+                    {% if 日付が現在以降なら %}
+                        {% if 日記が保存されている場合 %}
+                            <div class="calendar-week__list">
+                                {% comment %} その日のrecord_diary_detail.htmlに遷移させてください {% endcomment %}
+                                <a href="{% url '' %}">
+                                    <div class="calendar-week__list__date">
+                                        {% comment %} 月/日の表示をさせてください {% endcomment %}
+                                        {{  }}/{{  }}
+                                    </div>
+                                    <div class="calendar-week__list__img">
+                                        {% comment %} 顔アイコンと日記の一部を表示してください {% endcomment %}
+                                        <img src="{パスを指定してください}" alt="顔のアイコン">
+                                    </div>
+                                    <div class="calendar-week__list__text">
+                                        {{ 先頭5文字を表示（文字数は変更する可能性大） }}・・・
+                                    </div>
+                                    <div class="calendar-week__list__icon">
+                                        <img src="{% static 'diary/assets/right_arrow.png' %}" alt="右矢印のアイコン">
+                                    </div>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="calendar-week__list--no-diary">
+                                {% comment %} 日記が保存されていない場合、home_top.htmlにhtmlに遷移させてください{% endcomment %}
+                                <a href="{% url '' %}">
+                                    <div class="calendar-week__list__date">
+                                        {% comment %} 月/日の表示をさせてください {% endcomment %}
+                                        {{  }}/{{  }}
+                                    </div>
+                                    <div class="calendar-week__list__icon">
+                                        <img src="{% static 'diary/assets/right_arrow.png' %}" alt="右矢印のアイコン">
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="calendar-week__list--after">
+                            <div class="calendar-week__list__date">
+                                {% comment %} 月/日の表示をさせてください {% endcomment %}
+                                {{  }}/{{  }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 </div>
 {% endblock %}
 
-{% block javascripts %}
-<script>
-$(function() {
-    // 現在の年月を取得する
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-
-    // 年月を表示する
-    $('#year-month').text(year + '\n' + month + '月');
-
-    // 前週ボタンをクリックした時の処理
-    $('#prev-week').click(function() {
-    // 現在の週を取得する
-        const week = now.getWeek();
-    // 1週前を取得する
-        const prevWeek = week - 1;
-    // 年月を更新する
-        year = now.getFullYear() - 1;
-        month = now.getMonth() + 1;
-        if (prevWeek < 0) {
-        year--;
-        month--;
-        prevWeek = 52;
-        }
-        $('#year-month').text(year + '\n' + month + '月');
-    });
-
-    // 来週ボタンをクリックした時の処理
-    $('#next-week').click(function() {
-    // 現在の週を取得する
-        const week = now.getWeek();
-    // 1週間後を取得する
-        const nextWeek = week + 1;
-    // 年月を更新する
-        year = now.getFullYear() + 1;
-        month = now.getMonth() + 1;
-        if (nextWeek > 52) {
-        year++;
-        month = 1;
-        nextWeek = 1;
-        }
-        $('#year-month').text(year + '\n' + month + '月');
-    });
-
-    // 今週ボタンをクリックした時の処理
-    $('#now-week').click(function() {
-    // 現在の週を取得する
-        const week = now.getWeek();
-    // 年月を更新する
-        year = now.getFullYear();
-        month = now.getMonth() + 1;
-        $('#year-month').text(year + '\n' + month + '月');
-    });
-});
-</script>
-{% endblock %}
+{% comment %} {% block javascripts %}
+{% endblock %} {% endcomment %}
