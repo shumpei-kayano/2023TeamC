@@ -60,13 +60,28 @@
         
 
         <div class="cancel__button">
-            <button type="submit" id="submit-button" onclick="showLoadingScreen('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
+            <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
+<<<<<<< HEAD
             <a href="{% url 'diary:today_diary_detail' %}" class="button-link">ポジティブ変換しない</a>
+=======
+            <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' %}')">保存</button>
+>>>>>>> 5d2f38e6a398468994f2b46dd5563d9d3a0223ee
         </div>
 
 </div><!-- content__form-group -->
+
+<!-- ロード画面のコンテンツ -->
+<div id="loader" style="display: none;">
+    <div class="load__img">
+        <img src="{% static 'diary/assets/tea_neko.png' %}" alt="ロード画面neko">
+    </div>
+    <div class="load__text">
+        <p style="font-size: 24px; color: #333;">読み込み中...</p>
+    </div>
+</div>
+
 
 <!-- ポップアップ要素 -->
 {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
@@ -148,19 +163,37 @@
     });
 
 // ロード画面呼び出し
-        function showLoadingScreen(redirectUrl) {
-            // ロード画面を表示
-            document.getElementById('loader').style.display = 'block';
-    
-            // ボタンを非アクティブ化
-            document.getElementById('save-button').disabled = true;
-            document.getElementById('submit-button').disabled = true;
-    
+    function showLoadingScreen() {
+        document.getElementById('loader').style.display = 'block';
+    }
+
+    function hideLoadingScreen() {
+        document.getElementById('loader').style.display = 'none';
+    }
+
+    function showLoadingScreenAndRedirect() {
+        showLoadingScreen(); // ロード画面を表示
+
+    function showLoadingScreenAndRedirect1() {
+        var redirectUrl = '/diary:positive_conversion';  // ボタン1用のリダイレクト先URL
+        window.location.href = redirectUrl;  // リダイレクト
+    }
+
+    function showLoadingScreenAndRedirect2() {
+        var redirectUrl = '/diary:today_diary_detail';  // ボタン2用のリダイレクト先URL
+        window.location.href = redirectUrl;  // リダイレクト
+    }
+
             // 待ち時間後にリダイレクト
             setTimeout(function() {
+                hideLoadingScreen(); // ロード画面を非表示
                 window.location.href = redirectUrl;
             }, 5000); // 5秒後にリダイレクト
         }
+
+</script>
+{% endblock %}
+
     {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -175,5 +208,3 @@
             this.submit();
         }
     }); {% endcomment %}
-</script>
-{% endblock %}
