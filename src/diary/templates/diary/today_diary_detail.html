@@ -52,9 +52,22 @@
             {% if post %}
             <ul>
                 {% for entry in post %}
-                    <li>
-                        {{ entry.content }}<br>
-                    </li>
+                        <br>作成日時：{{entry.created_at}}</br><br>
+                        <br>日記内容：{{ entry.content }}</br><br>
+                        {% if entry.photo1 %}
+                            <img src="{{ entry.photo1.url }}" alt="Diary Photo1">
+                        {% endif %}
+                        {% if entry.photo2 %}
+                            <img src="{{ entry.photo2.url }}" alt="Diary Photo2">
+                        {% endif %}
+                        {% if entry.photo3 %}
+                            <img src="{{ entry.photo3.url }}" alt="Diary Photo3">
+                        {% endif %}
+                        {% if entry.photo4 %}
+                            <img src="{{ entry.photo4.url }}" alt="Diary Photo4">
+                        {% endif %}
+                    </div>
+                    
                 {% endfor %}
             </ul>
         {% else %}
@@ -64,7 +77,7 @@
                 <img src="{% static 'diary/assets/delete.png' %}" alt="削除">削除</a>
         </div>
         <div class="icon__button__edit">
-            <a href="{% url  'diary:diary_update' %}">
+            <a href="{% url  'diary:diary_update' object.pk %}">
                 <img src="{% static 'diary/assets/edit.png' %}"　alt="編集">編集</a>
         </div>
 
