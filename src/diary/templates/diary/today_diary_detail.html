@@ -1,5 +1,5 @@
 <!-- 日記詳細画面 ネココポジティブコメント画面（ホーム） -->
-{% extends "base.html" %}
+{% comment %} {% extends "base.html" %} {% endcomment %}
 
 {% load static%}
 
@@ -9,15 +9,15 @@
 <header>
     <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
+        {% comment %} {% if カレンダーから遷移した場合 %}
             {{ 選択された日付を表示する }}
         {% else %}
             {{ 現在の日付を表示する }}
         {% endif %}
-    </div>
+    </div> {% endcomment %}
     <!-- 天気アイコン・気温の表示  -->
     <div class="header__weather">
-        {% if カレンダーから遷移した場合 %}
+        {% comment %} {% if カレンダーから遷移した場合 %}
             <div class="header__weather__img">
                 <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
             </div>
@@ -27,7 +27,7 @@
                 <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
             </div>
             {{ 現在の気温を表示 }}
-        {% endif %}
+        {% endif %} {% endcomment %}
     </div>
 </header>
 {% endblock %}
@@ -36,12 +36,12 @@
 <!-- タブ -->
 <div class="tab__button">
     <div class="tab__button--left">
-        <button type="button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">
-            日記詳細</button>
+        {% comment %} <button type="button" onclick="location.href='{% url 'diary:today_diary_detail.html' %}'">
+            日記詳細</button> {% endcomment %}
     </div>
     <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'today_diary_graph.htmlに遷移させてください' %}'">
-            グラフ</button>
+        {% comment %} <button type="button" onclick="location.href='{% url 'today_diary_graph.htmlに遷移させてください' %}'">
+            グラフ</button> {% endcomment %}
     </div>
 </div>
 
@@ -49,23 +49,34 @@
 <div class="content__today-diary__group">
     <div class="icon__button">
         <div class="icon__button__delete">
-            <a href="{% url  diary_delete.htmlに遷移させてください %}">
-                <img src="{% static'diary/assets/delete.png' %}">削除</a>
+            {% if post %}
+            <ul>
+                {% for entry in post %}
+                    <li>
+                        {{ entry.content }}<br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>今日の日記はありません。</p>
+        {% endif %}
+            <a href="{% url  'diary:diary_delete' %}">
+                <img src="{% static 'diary/assets/delete.png' %}" alt="削除">削除</a>
         </div>
         <div class="icon__button__edit">
-            <a href="{% url  diary_update.htmlに遷移させてください %}">
-                <img src="{% static'diary/assets/edit.png' %}">編集</a>
+            <a href="{% url  'diary:diary_update' %}">
+                <img src="{% static 'diary/assets/edit.png' %}"　alt="編集">編集</a>
         </div>
 
     <!-- ユーザーが保存した日記の表示 -->
     <div class="content__today-diary__text">
         <p>
-            {{ ユーザーが入力した日記を表示させてください }}
+            {% comment %} {{ ユーザーが入力した日記を表示させてください }} {% endcomment %}
         </p>
     </div>
 
     <!-- ユーザーが保存した画像の表示 -->
-    {% if 画像があれば %}
+    {% comment %} {% if 画像があれば %}
         <div class="content__today-diary__images">
             {% for 画像を表示させてください %}
                 <div class="content__today-diary__img">
@@ -75,7 +86,7 @@
                 </div>
             {% endfor %}
         </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
 </div><!-- content__today-diary__group -->
 
 <!-- ネコココメント -->
@@ -86,7 +97,7 @@
 </div>
 <!-- ネココの画像 -->
 <div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/neko_comment.png' %}" alt="ネココの画像">
+    <img src="{% static 'diary/assets/neko_comment.png' %}" alt="ネココの画像">
 </div>
 
 <!-- 画像のポップアップ -->
@@ -107,7 +118,7 @@
 .modal-footer {
     text-align: center;
   } {% endcomment %}
-{% block js%}
+{% comment %} {% block js%}
 <script>
     // 画像をクリックしたときに画像ポップアップを開く
     $(".content__today-diary__images a").on("click", function(e) {
@@ -123,7 +134,7 @@
     e.preventDefault();
     });
 </script>
-{% endblock %}
+{% endblock %} {% endcomment %}
 {% comment %} <script src="{% static 'js/image-preview.js' %}">
 
     function openImage(image) {

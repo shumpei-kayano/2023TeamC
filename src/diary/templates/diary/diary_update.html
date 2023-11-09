@@ -6,7 +6,7 @@
 {% block title %}日記編集{% endblock %}
 
 {% block header %}
-<header>
+{% comment %} <header>
     <div class="header__button">
         <div class="header__back__img">
             <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
@@ -19,11 +19,11 @@
             <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
         </div>
         {{ 気温を表示おねがいします 00℃ }}
-</header>
+</header> {% endcomment %}
 {% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'create_diary_confirmation.html' %}"><!--次のページに遷移させてください-->
+<form method="POST" action="{% url 'diary:create_diary_confirmation' %}"><!--次のページに遷移させてください-->
     {% csrf_token %}
     <div class="content__today-diary__text">
         <img src="透過画像のパス" alt="透過画像" class="follow-image">
@@ -31,7 +31,7 @@
             <!-- 保存されている日記を表示お願いします -->
             <div class="content__diary__text">
                 <p>
-                    {{ ユーザーが入力した日記を表示させてください }}
+                    {{ specific_diary.content }}
                 </p>
             </div>
     </div>
@@ -40,7 +40,7 @@
     <!--Javascriptで文字数をカウントします-->
     </div>
     <div class="icon__button">
-        <label for="image"><img src="{% static'assets/image.png' %}">写真・動画を添付</label>
+        <label for="image"><img src="{% static 'assets/image.png' %}">写真・動画を添付</label>
         <input type="file" id="media" name="media" accept="image/*,video/*">
     </div>
 
