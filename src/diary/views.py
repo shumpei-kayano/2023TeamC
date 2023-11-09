@@ -68,9 +68,14 @@ def create_diary(request):
 
 
 @login_required
+<<<<<<< HEAD
 def diary_delete(request, pk):
     diary = get_object_or_404(Diary, id=pk)
     return render(request, 'diary/diary_delete.html',{'diary': diary})
+=======
+def diary_delete(request,):
+    return render(request, 'diary/diary_delete.html')
+>>>>>>> b3984609a44fcd13e6df1122fe07df3d3723bb17
 
 @login_required
 def diary_graph(request):
