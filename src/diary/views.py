@@ -4,6 +4,7 @@ from .models import Diary, Emotion
 from user.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
+from django.shortcuts import get_object_or_404
 
 
 @login_required
@@ -58,8 +59,9 @@ def diary_home(request):
     return render(request, 'diary/diary_home.html')
 
 @login_required
-def diary_update(request):
-    return render(request, 'diary/diary_update.html')
+def diary_update(request, diary_id):
+    specific_diary = get_object_or_404(Diary, id=diary_id,  some_other_condition=some_value)
+    return render(request, 'diary/diary_update.html', {'specific_diary': specific_diary},{'diary_id': diary_id})
 
 @login_required
 def help_calender(request):
