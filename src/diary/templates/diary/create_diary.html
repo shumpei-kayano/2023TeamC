@@ -37,6 +37,34 @@
         {% comment %} {% endif %} {% endcomment %}
     </div>
 
+    ----------------------------------------------------------
+    触らないで検証中（原田
+    <script>
+    function getLocation() {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          // 緯度
+          const latitude = position.coords.latitude;
+          // 経度
+          const longitude = position.coords.longitude;
+    
+          // 現在の位置にマーカーを表示
+          const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+          });
+        },
+        function(error) {
+          // エラー処理
+          console.log(`エラー：${error.code}`);
+        }
+      );
+    }
+
+    getLocation();
+    </script>
+-----------------------------------------------------------------
+
     {% comment %} 
     <!-- 天気アイコン・気温の表示  -->
     <div class="header__weather">
