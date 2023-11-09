@@ -38,8 +38,7 @@ def calender_week(request):
 
 @login_required
 def create_diary_confirmation(request):
-    today_diary = get_today_diary()  # 今日の日記を取得
-    if today_diary.exists():  # もし今日の日記が存在する場合
+    if  get_today_diary().exists():   # もし今日の日記が存在したら
         post = get_today_diary()
         return render(request, 'diary/today_diary_detail.html', {'post': post})
 
@@ -56,12 +55,14 @@ def create_diary_confirmation(request):
 
 @login_required
 def create_diary(request):
-    if not get_today_diary().exists():  # もし今日の日記が存在しない場合
-        form = DiaryCreateForm()
-        return render(request, 'diary/create_diary.html', {'Diary': form})
+    if get_today_diary().exists():  # もし今日の日記が存在したら
+        post = get_today_diary()
+        return render(request, 'diary/today_diary_detail.html', {'post': post})
+    
+    today = date.today()
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form,'today': today})
 
-    post = get_today_diary()
-    return render(request, 'diary/today_diary_detail.html', {'post': post})
 
 
 
@@ -181,3 +182,4 @@ def record_diary_detail(request):
 @login_required
 def record_diary_graph(request):
   return render(request,'diary/record_diary_graph.html')
+
