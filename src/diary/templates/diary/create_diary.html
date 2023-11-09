@@ -18,52 +18,11 @@
             {{ 選択された日付を表示する }}
         {% else %} {% endcomment %}
         <div id="current_date">
-            <script>
-                var today = new Date();
-            
-                // 年・月・日・曜日を取得
-                var year = today.getFullYear();
-                var month = today.getMonth() + 1;
-                var week = today.getDay();
-                var day = today.getDate();
-            
-                var week_ja = ["日", "月", "火", "水", "木", "金", "土"];
-            
-                // 年・月・日・曜日を書き出す
-                document.write(year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日");
-            </script>
+
             
         </div>
         {% comment %} {% endif %} {% endcomment %}
     </div>
-
-    ----------------------------------------------------------
-    触らないで検証中（原田
-    <script>
-    function getLocation() {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          // 緯度
-          const latitude = position.coords.latitude;
-          // 経度
-          const longitude = position.coords.longitude;
-    
-          // 現在の位置にマーカーを表示
-          const marker = new google.maps.Marker({
-            position: { lat: latitude, lng: longitude },
-            map: map,
-          });
-        },
-        function(error) {
-          // エラー処理
-          console.log(`エラー：${error.code}`);
-        }
-      );
-    }
-
-    getLocation();
-    </script>
------------------------------------------------------------------
 
     {% comment %} 
     <!-- 天気アイコン・気温の表示  -->
@@ -84,10 +43,15 @@
 {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data"><!--次のページに遷移させてください-->
+=======
+<form method="POST" action="{% url 'diary:create_diary_confirmation' %}"  enctype="multipart/form-data"  ><!--次のページに遷移させてください--> 
+>>>>>>> 700f2c8bcaf51910346cc497b6bfa9bd81f29be1
     {% csrf_token %}
     <div class="content__today-diary__text">
       <div class='diarycontent'>
+        {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}
         {{ Diary.content }}
         <div class='photomv'>
           {{ Diary.photo1 }}
