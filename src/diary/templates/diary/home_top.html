@@ -1,1 +1,71 @@
 <!-- ログイン後トップ画面（ホーム）のち日記詳細画面 -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ホームトップ{% endblock %}
+
+{% block header %}
+<header>
+    {% comment %} create_diary.htmlのヘッダーと同じ表記なので完成次第ここにもコピペする {% endcomment %}
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="content__home">
+    <div class="content__home__logo">
+        <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+    </div>
+    <div class="content__home__text">
+        <p>今日はどんな1日ですか？
+            感じたことを書き残そー。
+        </p>
+    </div>
+    <div class="content__home__img">
+        <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+    </div>
+    <div class="btn-large">
+        {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+        <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
+    </div>
+</div>
+
+
+----------------------------------------------------------
+触らないで検証中（原田
+<script>
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        // 緯度
+        const latitude = position.coords.latitude;
+        // 経度
+        const longitude = position.coords.longitude;
+  
+        // Geocoding API を使用して、緯度経度から住所を取得
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+          latLng: { lat: latitude, lng: longitude },
+        }, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            // 住所を取得できた場合
+            const address = results[0].formattedAddress;
+            // 画面に表示
+            document.getElementById("address").innerHTML = address;
+          } else {
+            // 住所を取得できなかった場合
+            console.log(`エラー：${status}`);
+          }
+        });
+      },
+      function(error) {
+        // エラー処理
+        console.log(`エラー：${error.code}`);
+      }
+    );
+  }
+  getLocation();
+</script>
+-----------------------------------------------------------------
+
+{% endblock %}
