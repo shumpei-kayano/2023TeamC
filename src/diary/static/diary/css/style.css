@@ -1,10 +1,22 @@
+@charset "UTF-8";
 body {
   font-family: Notosans, sans-serif;
   background-color: #EEFEFF;
-}
-
-body {
   width: 390px;
   height: 844px;
   margin: 0 auto;
+}
+
+header {
+  padding-top: 50px; /* ヘッダーの上部に50pxの余白を追加 */
+  background-color: #FFFFFF; /* 白い背景色を設定 */
+}
+
+.date-area {
+  background-color: #04CAD6;
+  height: 50px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
