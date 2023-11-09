@@ -55,10 +55,13 @@ def create_diary_confirmation(request, pk):
         return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
-def create_diary(request):
-    if get_today_diary().exists():  # もし今日の日記が存在したら
-        post = get_today_diary()
-        return render(request, 'diary/today_diary_detail.html', {'post': post})
+def create_diary(request,pk=None):
+    if pk is not None:
+        diary = get_object_or_404(Diary, id=pk)
+
+        if get_today_diary().exists():  # もし今日の日記が存在したら
+            post = get_today_diary()
+            return render(request, 'diary/today_diary_detail.html', {'post': post,'diary':diary})
     
     today = date.today()
     form = DiaryCreateForm()
@@ -68,14 +71,9 @@ def create_diary(request):
 
 
 @login_required
-<<<<<<< HEAD
 def diary_delete(request, pk):
     diary = get_object_or_404(Diary, id=pk)
     return render(request, 'diary/diary_delete.html',{'diary': diary})
-=======
-def diary_delete(request,):
-    return render(request, 'diary/diary_delete.html')
->>>>>>> b3984609a44fcd13e6df1122fe07df3d3723bb17
 
 @login_required
 def diary_graph(request):

@@ -40,7 +40,7 @@
                 <ul>
                     <li>
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                            <a href="{% url 'diary:create_diary' %}">
+                            <a href="{% url 'diary:create_diary' diary.pk %}">
                                 <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
                         </div>
                         <div id="text" class="nav-item" onclick="changeColor('text')">ホーム</a>
