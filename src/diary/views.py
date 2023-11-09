@@ -78,8 +78,8 @@ def diary_home(request):
     return render(request, 'diary/diary_home.html')
 
 @login_required
-def diary_update(request, diary_id):
-    diary = get_object_or_404(Diary, id=diary_id)
+def diary_update(request, pk):
+    diary = get_object_or_404(Diary, id=pk)
     return render(request, 'diary/diary_update.html',{'diary': diary})
 
 @login_required

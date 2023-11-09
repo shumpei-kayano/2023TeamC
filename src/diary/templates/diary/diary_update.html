@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'diary:create_diary_confirmation' %}"><!--次のページに遷移させてください-->
+<form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}"><!--次のページに遷移させてください-->
     {% csrf_token %}
     <div class="content__today-diary__text">
         <img src="透過画像のパス" alt="透過画像" class="follow-image">

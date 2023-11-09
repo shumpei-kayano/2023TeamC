@@ -73,11 +73,11 @@
         {% else %}
             <p>今日の日記はありません。</p>
         {% endif %}
-            <a href="{% url  'diary:diary_delete' %}">
+            <a href="{% url  'diary:diary_delete' diary.pk %}">
                 <img src="{% static 'diary/assets/delete.png' %}" alt="削除">削除</a>
         </div>
         <div class="icon__button__edit">
-            <a href="{% url  'diary:diary_update' object.pk %}">
+            <a href="{% url  'diary:diary_update' diary.pk %}">
                 <img src="{% static 'diary/assets/edit.png' %}"　alt="編集">編集</a>
         </div>
 
