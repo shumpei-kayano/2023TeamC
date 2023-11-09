@@ -8,16 +8,16 @@
     <link rel="icon" href="{% static 'diary/assets/icon.png' %}" />
     <!--mystyle-->
     <link rel="stylesheet" href="{% static 'diary/css/sanitize.css' %}">
-    <link rel="stylesheet" href="{% static 'diary/static/diary/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA&language=ja" async defer></script>
     <style>
         html { height: 100% }
         body { height: 100% }
         #map { height: 100%; width: 100% }
     </style>
-
-    {% comment %} <div class="date-area"></div> {% endcomment %}
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap" rel="stylesheet">
     <style>
         .nav-item {
             cursor: pointer;
@@ -37,34 +37,43 @@
     <footer>
         <div class="menu">
             <nav>
-                <ul>
-                    <li>
+                <ul class="menu__list">
+                    <li class="menu__item">
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
                             <a href="{% url 'diary:create_diary' diary.pk %}">
                                 <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
-                        </div>
-                        <div id="text" class="nav-item" onclick="changeColor('text')">ホーム</a>
+                                <div id="text" class="nav-text" onclick="changeColor('text')">ホーム</div>
+                            </a>
                         </div>
                     </li>
-                    <li>
+                    <li class="menu__item">
                         <div class="main__month">
-                            <a class="main__month__link" href="{% url 'diary:calendar_month' %}">
-                                <img src="{% static 'diary/assets/month.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="月間カレンダーの画像">
-                                月</a>
+                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
+                                <a href="{% url 'diary:calender_month' %}">
+                                    <img src="{% static 'diary/assets/month.png' %}" alt="月間カレンダーの画像">
+                                    <div id="text" class="nav-text" onclick="changeColor('text')">月</div>
+                                </a>
+                            </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="menu__item">
                         <div class="main__week">
-                            <a class="main__week__link" href="{% url 'diary:calender_week' %}">
-                                <img src="{% static 'diary/assets/week.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="週間カレンダーの画像">
-                                週</a>
+                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
+                                <a href="{% url 'diary:calender_week' %}">
+                                    <img src="{% static 'diary/assets/week.png' %}" alt="週間カレンダーの画像">
+                                    <div id="text" class="nav-text" onclick="changeColor('text')">週</div>
+                                </a>
+                            </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="menu__item">
                         <div calss="main__setting">
-                            <a class="main__setting__link" href="{% url 'diary:setting' %}">
-                                <img src="{% static 'diary/assets/setting.png' %}" id="icon" class="icon" onclick="changeIconColor()" alt="歯車の画像">
-                                設定</a>
+                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
+                                <a href="{% url 'diary:setting' %}">
+                                    <img src="{% static 'diary/assets/setting.png' %}" alt="設定の画像">
+                                    <div id="text" class="nav-text" onclick="changeColor('text')">設定</div>
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>

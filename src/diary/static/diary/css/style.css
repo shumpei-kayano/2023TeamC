@@ -1,22 +1,52 @@
 @charset "UTF-8";
 body {
-  font-family: Notosans, sans-serif;
   background-color: #EEFEFF;
   width: 390px;
   height: 844px;
   margin: 0 auto;
 }
 
-header {
-  padding-top: 50px; /* ヘッダーの上部に50pxの余白を追加 */
-  background-color: #FFFFFF; /* 白い背景色を設定 */
+body, button, p, h1, h2, diarycontent, content__today-diary__text {
+  font-family: "Noto Sans JP", sans-serif;
 }
 
-.date-area {
+.camera__area {
+  height: 50px;
+  background-color: #FFFFFF;
+}
+
+header {
   background-color: #04CAD6;
   height: 50px;
-  color: #FFFFFF;
   display: flex;
-  align-items: center;
-  justify-content: center;
+}
+header button {
+  margin-left: 24px;
+  margin: 11px;
+}
+
+.header__nowdate {
+  font-size: 20% !important;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 11px;
+}
+
+.menu__list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+.menu__list .menu__item {
+  text-align: center;
+}
+.menu__list .menu__item .nav-text {
+  text-decoration: none !important;
+  color: #ADADAD; /* メニューテキストの色 */
+  font-size: 10%; /* テキストのサイズを10%に調整 */
+}
+.menu__list .menu__item .nav-text .icon {
+  width: 24px; /* アイコンの幅 */
+  height: 24px; /* アイコンの高さ */
 }

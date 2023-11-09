@@ -1,26 +1,66 @@
 body {
-    font-family: Notosans, sans-serif;
     background-color: $main_background_color;
     width: 390px;
     height: 844px;
     margin: 0 auto; 
 }
 
-header {
-    padding-top: 50px; /* ヘッダーの上部に50pxの余白を追加 */
-    background-color: $background_color; /* 白い背景色を設定 */
+body, button, p, h1, h2, diarycontent, content__today-diary__text {
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.date-area {
+.camera__area {
+    height: 50px;
+    background-color: $background_color; 
+}
+
+header {
     background-color: $header_color;
     height: 50px;
-    color: $header_text_color;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    
+    button {
+        margin-left: 24px;
+        margin: 11px;
+
+
+    }
 }
 
+.header__nowdate {
+    font-size: 20% !important;
+    color: $header_text_color;
+    text-align: center;
+    margin: 11px;
+}
 
+// footer {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     background-color: $background_color; 
+//     color: $footer_text_color; 
+//     height: 60px;
+// }
 
+.menu__list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
 
+    .menu__item {
+        text-align: center;
 
+        .nav-text {
+            text-decoration: none !important;
+            color: $footer_text_color; /* メニューテキストの色 */
+            font-size: 10%; /* テキストのサイズを10%に調整 */
+
+            .icon {
+                width: 24px; /* アイコンの幅 */
+                height: 24px; /* アイコンの高さ */
+            }
+        }
+    }
+}
