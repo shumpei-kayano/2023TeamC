@@ -4,7 +4,17 @@ from .models import Diary, Emotion
 from user.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
+from django.shortcuts import get_object_or_404
 
+from datetime import datetime, date
+from django.shortcuts import render
+
+# 今日の日記を取得
+def get_today_diary():
+    today = date.today()
+    start_of_day = datetime.combine(today, datetime.min.time())
+    end_of_day = datetime.combine(today, datetime.max.time())
+    return Diary.objects.filter(created_at__range=(start_of_day, end_of_day))
 
 @login_required
 def account_delete_success(request):
@@ -28,6 +38,11 @@ def calender_week(request):
 
 @login_required
 def create_diary_confirmation(request):
+    today_diary = get_today_diary()  # 今日の日記を取得
+    if today_diary.exists():  # もし今日の日記が存在する場合
+        post = get_today_diary()
+        return render(request, 'diary/today_diary_detail.html', {'post': post})
+
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
@@ -39,11 +54,16 @@ def create_diary_confirmation(request):
         form = DiaryCreateForm()
         return render(request, 'diary/create_diary.html', {'Diary': form})
 
-
 @login_required
 def create_diary(request):
-    form = DiaryCreateForm()
-    return render(request, 'diary/create_diary.html',{'Diary':form})
+    if not get_today_diary().exists():  # もし今日の日記が存在しない場合
+        form = DiaryCreateForm()
+        return render(request, 'diary/create_diary.html', {'Diary': form})
+
+    post = get_today_diary()
+    return render(request, 'diary/today_diary_detail.html', {'post': post})
+
+
 
 @login_required
 def diary_delete(request):
@@ -58,8 +78,9 @@ def diary_home(request):
     return render(request, 'diary/diary_home.html')
 
 @login_required
-def diary_update(request):
-    return render(request, 'diary/diary_update.html')
+def diary_update(request, diary_id):
+    specific_diary = get_object_or_404(Diary, id=diary_id,  some_other_condition=some_value)
+    return render(request, 'diary/diary_update.html', {'specific_diary': specific_diary},{'diary_id': diary_id})
 
 @login_required
 def help_calender(request):
@@ -135,7 +156,11 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request):
-    return render(request, 'diary/today_diary_detail.html')
+    if not get_today_diary().exists():  # もし今日の日記が存在しない場合
+        form = DiaryCreateForm()
+        return render(request, 'diary/create_diary.html', {'Diary': form})
+    post = get_today_diary()
+    return render(request, 'diary/today_diary_detail.html', {'post': post})
 
 @login_required
 def week_graph(request):
