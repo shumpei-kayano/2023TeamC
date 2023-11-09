@@ -56,15 +56,24 @@
             {% if saved_diary.photo4 %}
                 <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
             {% endif %}
-        </div
-        
+        </div>
 
         <div class="cancel__button">
             <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
+<<<<<<< HEAD
             <a href="{% url 'diary:today_diary_detail' object.pk %}" class="button-link">ポジティブ変換しない</a>
             <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' diary.pk %})">保存</button>
+=======
+
+            <a href="{% url 'diary:today_diary_detail' %}" class="button-link">ポジティブ変換しない</a>
+
+            <button id="save-button" type="submit" onclick="showLoadingScreen('{% url 'diary:today_diary_detail' %}')">ポジティブ変換しない</button>
+            <a href="{% url 'diary:today_diary_detail' object.pk %}" class="button-link">ポジティブ変換しない</a>
+            <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' %}')">保存</button>
+
+>>>>>>> 15a898f9d0f35d75a284c640cb0f5334ac8e9269
         </div>
 
 </div><!-- content__form-group -->
