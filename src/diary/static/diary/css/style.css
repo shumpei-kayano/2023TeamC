@@ -50,3 +50,27 @@ header button {
   width: 24px; /* アイコンの幅 */
   height: 24px; /* アイコンの高さ */
 }
+
+.scroll--box {
+  height: 684px;
+  overflow: auto;
+}
+.scroll--box .scroll--content {
+  background-color: #fafafa;
+}
+
+.scroll-box::-webkit-scrollbar {
+  background: rgba(239, 239, 239, 0.6078431373);
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
