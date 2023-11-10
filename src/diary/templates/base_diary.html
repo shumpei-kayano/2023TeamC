@@ -28,7 +28,9 @@
     </style>
 </head>
 <body>
-
+<div id="content">
+    
+    
     <main>
         {% block header %}{% endblock %}
 
@@ -50,7 +52,10 @@
                         <div class="main__month">
                             <div id="icon" class="nav-item" onclick="changeColor('icon')">
                                 <a href="{% url 'diary:calendar_month' %}">
-                                    <img src="{% static 'diary/assets/month.png' %}" alt="月間カレンダーの画像">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21.6 2.18182H20.4V0H18V2.18182H6V0H3.6V2.18182H2.4C1.08 2.18182 0 3.16364 0 4.36364V21.8182C0 23.0182 1.08 24 2.4 24H21.6C22.92 24 24 23.0182 24 21.8182V4.36364C24 3.16364 22.92 2.18182 21.6 2.18182ZM21.6 21.8182H2.4V7.63636H21.6V21.8182Z" fill="#ADADAD"/>
+                                    </svg>
+                                    {% comment %} <img src="{% static 'diary/assets/Vector.svg' %}" alt="月間カレンダーの画像"> {% endcomment %}
                                     <div id="text" class="nav-text" onclick="changeColor('text')">月</div>
                                 </a>
                             </div>
@@ -80,6 +85,8 @@
             </nav>
         </div>
     </footer>
+</div>
+</div>
     <script>
         function changeColor(id) {
             const element = document.getElementById(id);
