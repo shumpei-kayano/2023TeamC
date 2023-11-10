@@ -40,7 +40,7 @@
                 <ul class="menu__list">
                     <li class="menu__item">
                         <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                            <a href="{% url 'diary:create_diary' diary.pk %}">
+                            <a href="{% url 'diary:create_diary' %}">
                                 <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
                                 <div id="text" class="nav-text" onclick="changeColor('text')">ホーム</div>
                             </a>
@@ -49,7 +49,7 @@
                     <li class="menu__item">
                         <div class="main__month">
                             <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                                <a href="{% url 'diary:calender_month' %}">
+                                <a href="{% url 'diary:calendar_month' %}">
                                     <img src="{% static 'diary/assets/month.png' %}" alt="月間カレンダーの画像">
                                     <div id="text" class="nav-text" onclick="changeColor('text')">月</div>
                                 </a>
