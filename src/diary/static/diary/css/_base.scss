@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap');
+
 body {
-    background-color: $main_background_color;
-    width: 390px;
-    height: 844px;
+    background-color: $web_background_color;
+    width: 100%;
     margin: 0 auto; 
+    padding-bottom: 60px; // フッターの高さに合わせて調整
+}
+
+main {
+    min-height: 575px; /* 最低高さを625pxに設定 */
+    /* その他のスタイル */
+}
+
+#content {
+    width: 390px; // コンテンツの幅を390pxに設定
+    margin: 0 auto; // コンテンツを中央に配置
+    background-color: $main_background_color; // コンテンツの背景色を設定
 }
 
 body, button, p, h1, h2, diarycontent, content__today-diary__text {
@@ -18,14 +31,25 @@ header {
     background-color: $header_color;
     height: 50px;
     display: flex;
+    justify-content: center; /* 子要素を水平方向に中央揃え */
+    color: $header_text_color;
+
     
     button {
         margin-left: 24px;
         margin: 11px;
 
-
+        .header__text {
+            display: flex;
+            justify-content: center; /* 水平方向の中央揃え */
+            align-items: center; /* 垂直方向の中央揃え */
+            text-align: center; /* テキストを中央揃え */
+            font-size: 20%;
+        }
     }
 }
+
+
 
 .header__nowdate {
     font-size: 20% !important;
@@ -34,20 +58,21 @@ header {
     margin: 11px;
 }
 
-// footer {
-//     display: flex;
-//     justify-content: space-around;
-//     align-items: center;
-//     background-color: $background_color; 
-//     color: $footer_text_color; 
-//     height: 60px;
-// }
+footer {
+    bottom: 50; // フッターをビューポートの最下部に配置
+    width: 390px; // フッターの幅を設定
+    background-color: $background_color;
+    height: 60px; // フッターの高さを50pxに設定
+    display: flex; // フッターをフレックスコンテナにする
+    align-items: center; /* 垂直方向の中央揃え */
+}
 
 .menu__list {
+    width: 390px; // メニューの幅を390pxに設定
     list-style: none;
     display: flex;
     justify-content: space-around;
-    padding: 0;
+    // padding: 0;
 
     .menu__item {
         text-align: center;
