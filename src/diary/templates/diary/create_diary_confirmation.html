@@ -62,8 +62,8 @@
             <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
         </div>
         <div class="button">
-            <a href="{% url 'diary:today_diary_detail' diary.pk %}" class="button-link">ポジティブ変換しない</a>
-            <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' diary.pk %})">保存</button>
+            <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
+            <button id="save-button" type="submit" onclick="showLoadingScreenAndRedirect2('{% url 'diary:today_diary_detail' saved_diary.pk %})">保存</button>
         </div>
 
 </div><!-- content__form-group -->

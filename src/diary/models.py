@@ -9,9 +9,9 @@ class Diary(models.Model):
     # 日記の内容
     content = models.TextField(verbose_name='内容', max_length=1000, blank=False, null=False)
     # 作成日時
-    created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
+    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
     # 更新日時
-    updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
+    updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
     # 写真へのリンク (空であることも許可)
     photo1 = models.ImageField(verbose_name='写真1', upload_to='diary_photos/', blank=True, null=True)
     photo2 = models.ImageField(verbose_name='写真2', upload_to='diary_photos/', blank=True, null=True)

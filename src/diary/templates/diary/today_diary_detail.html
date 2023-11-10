@@ -52,7 +52,7 @@
             {% if post %}
             <ul>
                 {% for entry in post %}
-                        <br>作成日時：{{entry.created_at}}</br><br>
+                        <br>作成日時：{{entry.created_date}}</br><br>
                         <br>日記内容：{{ entry.content }}</br><br>
                         {% if entry.photo1 %}
                             <img src="{{ entry.photo1.url }}" alt="Diary Photo1">

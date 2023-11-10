@@ -44,12 +44,9 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
-<form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data"><!--次のページに遷移させてください-->
-=======
-<form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data"><!--次のページに遷移させてください-->
->>>>>>> b3984609a44fcd13e6df1122fe07df3d3723bb17
-    {% csrf_token %}
+<form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+
+{% csrf_token %}
     <div class="content__today-diary__text">
       <div class='diarycontent'>
         {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}

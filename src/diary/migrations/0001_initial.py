@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField(max_length=1000, verbose_name='内容')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='作成日時')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='更新日時')),
+                ('created_date', models.DateField(auto_now_add=True, verbose_name='作成日')),
+                ('updated_date', models.DateField(auto_now=True, verbose_name='更新日')),
                 ('photo1', models.ImageField(blank=True, null=True, upload_to='diary_photos/', verbose_name='写真1')),
                 ('photo2', models.ImageField(blank=True, null=True, upload_to='diary_photos/', verbose_name='写真2')),
                 ('photo3', models.ImageField(blank=True, null=True, upload_to='diary_photos/', verbose_name='写真3')),
