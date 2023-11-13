@@ -11,11 +11,22 @@ main {
   min-height: 575px; /* 最低高さを625pxに設定 */
   /* その他のスタイル */
 }
+@media only screen and (max-width: 767px) {
+  main {
+    /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
+    min-height: 100vh;
+  }
+}
 
 #content {
   width: 390px;
   margin: 0 auto;
   background-color: #EEFEFF;
+}
+@media only screen and (max-width: 767px) {
+  #content {
+    width: 100%;
+  }
 }
 
 body, button, p, h1, h2, diarycontent, content__today-diary__text {

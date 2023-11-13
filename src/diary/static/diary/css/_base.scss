@@ -1,21 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap');
 
-body {
+html,body {
     background-color: $web_background_color;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     padding-bottom: 60px; // フッターの高さに合わせて調整
 }
 
 main {
-    min-height: 575px; /* 最低高さを625pxに設定 */
+    max-height: 575px; /* 最低高さを625pxに設定 */
     /* その他のスタイル */
+
+    @media only screen and (max-width: 767px) {
+        /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
+        max-height: 575px; /* 最低高さを625pxに設定 */
+    }
 }
 
 #content {
     width: 390px; // コンテンツの幅を390pxに設定
+    height: 100%;
     margin: 0 auto; // コンテンツを中央に配置
     background-color: $main_background_color; // コンテンツの背景色を設定
+
+    @media only screen and (max-width: 767px) {
+        /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
+        width: 100%;
+    }
 }
 
 body, button, p, h1, h2, diarycontent, content__today-diary__text {
