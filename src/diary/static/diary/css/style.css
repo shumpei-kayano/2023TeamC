@@ -1,31 +1,40 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap");
+html {
+  height: 100%;
+}
+
 body {
   background-color: #FFFDF3;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   padding-bottom: 60px;
 }
 
 main {
-  min-height: 575px; /* 最低高さを625pxに設定 */
+  min-height: 784px; /* 最低高さを625pxに設定 */
   /* その他のスタイル */
 }
 @media only screen and (max-width: 767px) {
   main {
     /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
-    min-height: 100vh;
+    min-height: 784px; /* 最低高さを625pxに設定 */
   }
 }
 
-#content {
+#content .content {
   width: 390px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   background-color: #EEFEFF;
 }
 @media only screen and (max-width: 767px) {
-  #content {
+  #content .content {
+    /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
     width: 100%;
+    height: 100%;
   }
 }
 

@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
     
     
     <main>
@@ -96,7 +96,7 @@
     </script>
 
     {% block js %}
-        <script src="{% static 'js/main.js' %}"></script>
+        {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
     {% endblock %}
 </body>
 </html>
