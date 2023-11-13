@@ -1,0 +1,162 @@
+<!--月間統計グラフと総評画面-->
+{% extends "base_diary.html" %}
+{% load static %}
+{% block title %}月間グラフ{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>月間グラフ</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- タブ -->
+    <div class="tab__button">
+        <div class="tab__button--left">
+            <button type="button" onclick="location.href='{% url 'calender_month.htmlに遷移させてください' %}'">
+                月間カレンダー</button>
+        </div>
+        <div class="tab__button--right">
+            <button type="button" onclick="location.href='{% url 'month_graph.htmlに遷移させてください' %}'">
+                月間グラフ</button>
+        </div>
+    </div>
+
+
+<!-- 月間のページネーション -->
+<div class="col-md-6">
+    <div class="text-right">
+            <button onclick="moveToPreviousMonth()"><img src="{% static 'diary/assets/left_arrow.png' %}"></button>
+        <div calss="text-center">
+            <span id="year-month"></span>
+        </div>
+            <button onclick="moveToThisMonth()"><img src="{% static 'diary/assets/right_arrow.png' %}"></button>
+        <div class="return__button">
+            <button onclick="moveToNextMonth()"><img src="{% static 'diary/assets/return_arrow.png' %}">今月</button>
+        </div>
+    </div>
+</div>
+
+<!-- グラフの表示 -->
+    <div id="emotion__graph">
+        <div class="emotion__graph__img">
+            <img src="{% static 'diary/assets/emotion_graph.png' %}" alt="感情グラフ">感情グラフ</img>
+            {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
+            <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
+            <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+        </div>
+    </div>
+
+<!-- ネココのカウンセリングコメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ カウンセリングのコメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static 'diary/assets/counselor_neko.png' %}" alt="カウンセラーネココの画像">
+</div>
+
+{% endblock %}
+
+<!--カレンダー遷移-->
+{% block javascripts %}
+<script>
+    // 現在の日付を取得
+    var currentDate = new Date();
+
+    // 先月に遷移
+    function moveToPreviousMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateDisplay();
+    }
+
+    // 今月に遷移
+    function moveToThisMonth() {
+        currentDate = new Date();
+        updateDisplay();
+    }
+
+    // 来月に遷移
+    function moveToNextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateDisplay();
+    }
+
+    // 月の遷移を画面に表示
+    function updateDisplay() {
+        var monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+        var displayDate = monthNames[currentDate.getMonth()] + " " + currentDate.getFullYear();
+        alert("遷移先の月: " + displayDate);
+    }
+
+
+{% comment %} グラフ {% endcomment %}
+<script src="{% static 'chart.min.js' %}"></script>
+
+    // データベースから取得したデータ
+    var data = {{ data|safe }};
+
+    // 棒グラフの描画
+    var barChartCanvas = document.getElementById("barChart");
+    var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '棒グラフ',
+                data: data.bar_data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)'
+            }]
+        }
+    });
+
+    // 折れ線グラフの描画
+    var lineChartCanvas = document.getElementById("lineChart");
+    var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '折れ線グラフ',
+                data: data.line_data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+</script>
+{% endblock %}
+
+
+
+    <!-- タブ切り替え -->
+    {% comment %} Javascriptで {% endcomment %}
+    {% comment %} //classの要素の取得
+    const demo_class_items = document.getElementsByClassName('demo_tab_btn');
+    
+    for(let i = 0; i < demo_class_items.length; i++){
+        //クリックイベント
+        demo_class_items[i].onclick = function(e){
+            clk_num = i+1;
+    
+            //ボタンへclassの削除と追加
+            btn = document.querySelectorAll('.demo_tab_btn');
+            for(let ii = 0; ii < btn.length; ii++){
+                btn[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_btn:nth-child('+clk_num+')').classList.add('act');
+    
+            //タブボディclassの削除と追加
+            cnt = document.querySelectorAll('.demo_tab_content');
+            for(let ii = 0; ii < cnt.length; ii++){
+                cnt[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_content:nth-child('+clk_num+')').classList.add('act');
+    
+        }
+    } {% endcomment %}

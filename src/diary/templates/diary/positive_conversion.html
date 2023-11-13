@@ -1,0 +1,181 @@
+<!-- ポジティブ変換画面とカウンセリング催促ポップアップ -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}日記のポジティブ変換{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__nowdate">
+        <!-- 日付の表示 書式は0000/00/00(月) -->
+        {% if カレンダーから遷移した場合 %}
+            {{ 選択された日付を表示する }}
+        {% else %}
+            {{ 現在の日付を表示する }}
+        {% endif %}
+    </div>
+    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__weather">
+        {% if カレンダーから遷移した場合 %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 選択された日の気温を表示おねがいします 00℃ }}
+        {% else %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 現在の気温を表示 }}
+        {% endif %}
+    </div>
+</header>
+{% endblock %}
+
+<!-- <style>
+    /* ポップアップの初期状態は非表示 */
+    .popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+</style>
+</head> -->
+
+{% block content %}
+<!-- ユーザーが入力した日記の表示 -->
+<div class="content__today-diary__text">
+    <p>
+        {{ ユーザーが入力した日記を表示させてください }}
+    </p>
+</div>
+
+<!-- ネコ画像 -->
+<div class="content__today-diary__positive-img">
+    <img src="{% static 'diary/assets/positive_neko.png' %}" alt="ポジティブな猫の画像">
+</div>
+
+<!-- ポジティブ変換した日記の表示 -->
+    <!-- enctype='multipart/form-data'でファイルアップロード -->
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <div class="content__today-diary__positive-text">
+        <p>
+            {{ ポジティブ変換した日記を表示させてください }}
+        </p>
+    </div>
+    <p>日記の内容を上記に変更しますか？</p>
+    <div class="button">
+        <button type="submit" id="save-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+    </div>
+</form>
+
+<div class="cancel__button">
+    <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+</div>
+
+<!-- ポップアップ要素
+<div class="popup" id="popup">
+    <p>特定の条件に合致しました。メッセージを表示します。</p>
+</div> -->
+
+<!-- ポップアップ要素 -->
+{% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+<div class="popup" id="first-popup">
+    <div class="popup__text">
+        <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+    </div>
+    <div class="popup__img">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
+    </div>
+    <div class="button">
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
+    </div>
+</div>
+
+<div class="popup" id="second-popup">
+    <div class="popup__text">
+        <p>キャンセルするとカウンセリングを<br>
+            受けることができなくなります。<br>
+            キャンセルしますか？</p>
+    </div>
+    <div class="popup__img">
+        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
+    </div>
+    <div class="button">
+        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+    </div>
+    <div class="gray__button">
+        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+    // キャンセルボタンを押したときの処理
+    document.getElementById("back-button").addEventListener("click", function() {
+        history.back();
+    });
+
+    // カウンセリング催促ポップアップの表示
+    $(function(){
+        $('.popup').fadeIn();
+    });
+
+    $(document).ready(function() {
+        // ポップアップを下からスライドして表示
+        $('.popup').slideDown();
+
+        // キャンセルボタンをクリックした時の処理
+        $('.cancel-button').click(function() {
+            $('.popup').slideUp();
+        });
+    });
+
+    function closePopup(id) {
+        document.getElementById(id).classList.remove("show");
+    }
+
+      // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function() {
+    document.getElementById("first-popup").classList.add("show");
+    });
+
+      // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
+    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
+    document.getElementById("second-popup").classList.add("show");
+    });
+
+      // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+        document.getElementById("first-popup").classList.remove("show");
+        document.getElementById("second-popup").classList.remove("show");
+    });
+    {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        var userText = document.getElementById("user-text").value;
+
+        // 特定の条件が満たされた場合にポップアップを表示
+        if (userText.includes("特定のワード")) {
+            // ポップアップを表示
+            document.getElementById("popup").style.display = "block";
+        } else {
+            // 特定の条件に該当しない場合はフォームを通常の方法で送信
+            this.submit();
+        }
+    }); {% endcomment %}
+</script>
+{% endblock %}

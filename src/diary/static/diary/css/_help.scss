@@ -1,0 +1,29 @@
+.scroll--box{
+    height: 684px;
+    // 高さが上限を超えたときだけスクロールバーを表示
+    overflow: auto;
+    // overflow: scroll;
+    .scroll--content{
+        background-color: #fafafa;
+    }
+}
+// スクロールバー背景色
+.scroll-box::-webkit-scrollbar {
+    background: #efefef9b;
+    // スクロールバーの幅を調整
+    width: 5px;
+    height: 5px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.scroll-box::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // border: 2px solid red;
+}
+// スクロールバー（hover時）
+.scroll-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+}

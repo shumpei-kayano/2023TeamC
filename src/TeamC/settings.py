@@ -19,7 +19,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -32,7 +31,14 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'sass_processor',
+    'user',
+    'diary',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -43,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'allauth.account.middleware.AccountMiddleware',#追加
 ]
 
 INTERNAL_IPS = ['127.0.0.1', '::1', 'localhost', '0.0.0.0']
@@ -53,7 +60,9 @@ ROOT_URLCONF = 'TeamC.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.normpath(os.path.join(BASE_DIR, 'user/templates/account')),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,8 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = '/usr/share/nginx/html/static/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -139,3 +150,45 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     'STATIC_URL': '/debug_toolbar/',
 }
+
+#---------------------メール送信設定-------------------------
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'  # あなたのSMTPホスト
+EMAIL_PORT = 587  # ポート番号
+EMAIL_HOST_USER = 'your_email@example.com'  # 送信元メールアドレス
+EMAIL_HOST_PASSWORD = 'your_password'  # パスワード
+EMAIL_USE_TLS = True  # TLSを使用する場合はTrueに設定
+DEFAULT_FROM_EMAIL = 'your_email@example.com'  # デフォルトの送信元メールアドレス
+#---------------------メール送信設定-------------------------
+
+
+#--------------------allauthの基本設定--------------------
+# allauthのモデルじゃなくて独自のカスタムユーザーがログイン認証になる
+AUTH_USER_MODEL = 'user.CustomUser' 
+#django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+  #一般ユーザー用（メールアドレス認証）
+  'allauth.account.auth_backends.AuthenticationBackend',
+  #管理サイト用（ユーザー名認証）
+  'django.contrib.auth.backends.ModelBackend',
+)
+# メールによる認証を使用
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = True
+#サインアップにメールアドレス確認をはさむように設定
+ACCOUNT_EMAIL_VERIFICATION= 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+#ログイン/ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'diary:home_top'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+#ログアウトリンクのクリック一発でログアウトする設定
+ACCOUNT_LOGOUT_ON_GET =True
+#django-allauthが送信するメールの件名に自動付与される接頭語をブランクに設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+#デフォルトのメール送信元を設定
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+# Allauthのメール確認を無効にする
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+#--------------------allauthの基本設定--------------------
+

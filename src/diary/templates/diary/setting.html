@@ -1,0 +1,27 @@
+<!-- 設定画面  -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}設定{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>設定</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<div class="setting__menu">
+<ul>
+    <li><a href="/member_infomation.html">会員情報</a></li>
+    <li><a href="/fugoo">Fugooとは</a></li>
+    <li><a href="/help.html">ヘルプ</a></li>
+    <li><a href="/logout.html">ログアウト</a></li>
+    <li><a href="/account_deleta.html">アカウント削除</a></li>
+</ul>
+</div>
+{% endblock %}

@@ -1,0 +1,189 @@
+<!--週間統計グラフと総評画面-->
+{% extends "base_diary.html" %}
+{% load static %}
+{% block title %}グラフ{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__text">
+        <p>週間グラフ</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- タブ -->
+    <div class="tab__button">
+        <div class="tab__button--left">
+            <button type="button" onclick="location.href='{% url 'calender_week.htmlに遷移させてください' %}'">
+                週間カレンダー</button>
+        </div>
+        <div class="tab__button--right">
+            <button type="button" onclick="location.href='{% url 'week_graph.htmlに遷移させてください' %}'">
+                週間グラフ</button>
+        </div>
+    </div>
+
+
+<!-- 週間のページネーション -->
+<div class="col-md-6">
+    <div class="text-right">
+        <button id="prev-week"><img src="{% static 'assets/left_arrow.png' %}"></button>
+        <div calss="text-center">
+            <span id="year-month"></span>
+        </div>
+        <button id="next-week"><img src="{% static 'assets/right_arrow.png' %}"></button>
+        <div class="return__button">
+            <button id="now-week"><img src="{% static 'assets/return_arrow.png' %}">今週</button>
+        </div>
+    </div>
+</div>
+
+<!-- グラフの表示 -->
+    <div id="emotion__graph">
+        <div class="emotion__graph__img">
+            <img src="{% static 'diary/assets/emotion_graph.png' %}" alt="感情グラフ">感情グラフ</img>
+            {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
+            <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
+            <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+        </div>
+    </div>
+
+<!-- ネココのカウンセリングコメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ カウンセリングのコメントを表示させてください }}
+    </p>
+</div>
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/counselor_neko.png' %}" alt="カウンセラーネココの画像">
+</div>
+
+{% endblock %}
+
+<!--カレンダー遷移-->
+{% block javascripts %}
+<script>
+
+    $(function() {
+        // 現在の年月を取得する
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+    
+        // 年月を表示する
+        $('#year-month').text(year + '\n' + month + '月');
+    
+        // 前週ボタンをクリックした時の処理
+        $('#prev-week').click(function() {
+        // 現在の週を取得する
+            const week = now.getWeek();
+        // 1週前を取得する
+            const prevWeek = week - 1;
+        // 年月を更新する
+            year = now.getFullYear() - 1;
+            month = now.getMonth() + 1;
+            if (prevWeek < 0) {
+            year--;
+            month--;
+            prevWeek = 52;
+            }
+            $('#year-month').text(year + '\n' + month + '月');
+        });
+    
+        // 来週ボタンをクリックした時の処理
+        $('#next-week').click(function() {
+        // 現在の週を取得する
+            const week = now.getWeek();
+        // 1週間後を取得する
+            const nextWeek = week + 1;
+        // 年月を更新する
+            year = now.getFullYear() + 1;
+            month = now.getMonth() + 1;
+            if (nextWeek > 52) {
+            year++;
+            month = 1;
+            nextWeek = 1;
+            }
+            $('#year-month').text(year + '\n' + month + '月');
+        });
+    
+        // 今週ボタンをクリックした時の処理
+        $('#now-week').click(function() {
+        // 現在の週を取得する
+            const week = now.getWeek();
+        // 年月を更新する
+            year = now.getFullYear();
+            month = now.getMonth() + 1;
+            $('#year-month').text(year + '\n' + month + '月');
+        });
+    });
+
+
+{% comment %} グラフ {% endcomment %}
+<script src="{% static 'chart.min.js' %}"></script>
+
+    // データベースから取得したデータ
+    var data = {{ data|safe }};
+
+    // 棒グラフの描画
+    var barChartCanvas = document.getElementById("barChart");
+    var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '棒グラフ',
+                data: data.bar_data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)'
+            }]
+        }
+    });
+
+    // 折れ線グラフの描画
+    var lineChartCanvas = document.getElementById("lineChart");
+    var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '折れ線グラフ',
+                data: data.line_data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+</script>
+{% endblock %}
+
+
+
+    <!-- タブ切り替え -->
+    {% comment %} Javascriptで {% endcomment %}
+    {% comment %} //classの要素の取得
+    const demo_class_items = document.getElementsByClassName('demo_tab_btn');
+    
+    for(let i = 0; i < demo_class_items.length; i++){
+        //クリックイベント
+        demo_class_items[i].onclick = function(e){
+            clk_num = i+1;
+    
+            //ボタンへclassの削除と追加
+            btn = document.querySelectorAll('.demo_tab_btn');
+            for(let ii = 0; ii < btn.length; ii++){
+                btn[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_btn:nth-child('+clk_num+')').classList.add('act');
+    
+            //タブボディclassの削除と追加
+            cnt = document.querySelectorAll('.demo_tab_content');
+            for(let ii = 0; ii < cnt.length; ii++){
+                cnt[ii].classList.remove('act');
+            }
+            document.querySelector('.demo_tab_content:nth-child('+clk_num+')').classList.add('act');
+    
+        }
+    } {% endcomment %}

@@ -1,0 +1,70 @@
+<!-- 日記作成画面１ -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日記作成{% endblock %}
+
+{% block header %}
+<div class="camera__area"></div>
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+        </div>
+    </div>
+    <div class="header__nowdate">
+        <!-- 日付の表示 書式は0000/00/00(月) -->
+        {% comment %} {% if カレンダーから遷移した場合 %}
+            {{ 選択された日付を表示する }}
+        {% else %} {% endcomment %}
+        <div id="current_date">
+
+            
+        </div>
+        {% comment %} {% endif %} {% endcomment %}
+    </div>
+
+    {% comment %} 
+    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__weather">
+        {% if カレンダーから遷移した場合 %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 選択された日の気温を表示おねがいします 00℃ }}
+        {% else %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 現在の気温を表示 }}
+        {% endif %} {% endcomment %}
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+
+{% csrf_token %}
+    <div class="content__today-diary__text">
+      <div class='diarycontent'>
+        {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}
+        {{ Diary.content }}
+        <div class='photomv'>
+          {{ Diary.photo1 }}
+          {{ Diary.photo2 }}
+          {{ Diary.photo3 }}
+          {{ Diary.photo4 }}
+          {{ Diary.movie1 }}
+          {{ Diary.movie2 }}
+          {{ Diary.movie3 }}
+          {{ Diary.movie4 }}
+        </div>
+      </div>
+    </div>
+    <div class="cancel__button">
+        <button type="submit">確認</button>
+    </div>
+</form>
+{% endblock %}

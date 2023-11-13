@@ -1,0 +1,76 @@
+<!-- 日記削除画面 -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日記削除{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+        </div>
+    </div>
+        <div class="header__text">
+            <p>日記削除</p>
+        </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<form method="POST" enctype='multipart/form-data'><!--次のページに遷移させてください-->
+    {% csrf_token %}
+    <!-- ユーザーが保存した日記の表示 -->
+    <div class="content__today-diary__text">
+        <p>
+            {{ ユーザーが入力した日記を表示させてください }}
+        </p>
+    </div>
+
+    <!-- ユーザーが保存した画像の表示(とりあえず4枚表示すると仮定して) -->
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+    {% if 画像があれば %}
+        <div class="content__today-diary__img">
+            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+        </div>
+    {% endif %}
+</div><!-- content__today-diary__group -->
+
+<!-- ネコココメントの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static'diary/assets/neko_comment.png' %}" alt="ネココの画像">
+</div>
+
+<div class="deleta__diary__comment__text">
+    <p>日記を削除すると感情分析の</p>
+    <p>データも削除されます。</p>
+    <p>日記を削除しますか？</p>
+</div>
+    <div class="button">
+        <button type="submit" id="deleta-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">日記を削除</button>
+        {% comment %} 日記を削除してください {% endcomment %}
+        {% comment %} 削除したあとホーム画面に日記を削除しましたとアラート表示お願いします {% endcomment %}
+    </div>
+</form>
+
+<div class="cancel__button">
+    <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+</div>
+
+
+{% endblock %}

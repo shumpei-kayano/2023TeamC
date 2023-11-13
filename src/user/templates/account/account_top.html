@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ホーム{% endblock title %}
+
+
+{% block contents %}
+新規登録orログイン
+
+<p class="notion"><a href="{% url 'user:tutorial1' %}">ここからスタートです</a></p>
+<p class="notion"><a href="{% url 'account_login' %}">ログイン</a></p>
+{% endblock contents %}

@@ -1,0 +1,197 @@
+<!-- 日記詳細画面 ネココポジティブコメント画面（ホーム） -->
+{% comment %} {% extends "base.html" %} {% endcomment %}
+
+{% load static%}
+
+{% block title %}日記詳細{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__nowdate">
+        <!-- 日付の表示 書式は0000/00/00(月) -->
+        {% comment %} {% if カレンダーから遷移した場合 %}
+            {{ 選択された日付を表示する }}
+        {% else %}
+            {{ 現在の日付を表示する }}
+        {% endif %}
+    </div> {% endcomment %}
+    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__weather">
+        {% comment %} {% if カレンダーから遷移した場合 %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 選択された日の気温を表示おねがいします 00℃ }}
+        {% else %}
+            <div class="header__weather__img">
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+            </div>
+            {{ 現在の気温を表示 }}
+        {% endif %} {% endcomment %}
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- タブ -->
+<div class="tab__button">
+    <div class="tab__button--left">
+        {% comment %} <button type="button" onclick="location.href='{% url 'diary:today_diary_detail.html' %}'">
+            日記詳細</button> {% endcomment %}
+    </div>
+    <div class="tab__button--right">
+        {% comment %} <button type="button" onclick="location.href='{% url 'today_diary_graph.htmlに遷移させてください' %}'">
+            グラフ</button> {% endcomment %}
+    </div>
+</div>
+
+<!-- 編集削除ボタン -->
+<div class="content__today-diary__group">
+    <div class="icon__button">
+        <div class="icon__button__delete">
+            {% if post %}
+            <ul>
+                {% for entry in post %}
+                        <br>作成日時：{{entry.created_date}}</br><br>
+                        <br>日記内容：{{ entry.content }}</br><br>
+                        {% if entry.photo1 %}
+                            <img src="{{ entry.photo1.url }}" alt="Diary Photo1">
+                        {% endif %}
+                        {% if entry.photo2 %}
+                            <img src="{{ entry.photo2.url }}" alt="Diary Photo2">
+                        {% endif %}
+                        {% if entry.photo3 %}
+                            <img src="{{ entry.photo3.url }}" alt="Diary Photo3">
+                        {% endif %}
+                        {% if entry.photo4 %}
+                            <img src="{{ entry.photo4.url }}" alt="Diary Photo4">
+                        {% endif %}
+                    </div>
+                    
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>今日の日記はありません。</p>
+        {% endif %}
+            <a href="{% url  'diary:diary_delete' diary.pk %}">
+                <img src="{% static 'diary/assets/delete.png' %}" alt="削除">削除</a>
+        </div>
+        <div class="icon__button__edit">
+            <a href="{% url  'diary:diary_update' diary.pk %}">
+                <img src="{% static 'diary/assets/edit.png' %}"　alt="編集">編集</a>
+        </div>
+
+    <!-- ユーザーが保存した日記の表示 -->
+    <div class="content__today-diary__text">
+        <p>
+            {% comment %} {{ ユーザーが入力した日記を表示させてください }} {% endcomment %}
+        </p>
+    </div>
+
+    <!-- ユーザーが保存した画像の表示 -->
+    {% comment %} {% if 画像があれば %}
+        <div class="content__today-diary__images">
+            {% for 画像を表示させてください %}
+                <div class="content__today-diary__img">
+                    <a href="#" data-image-id="{{ 画像のid }}">
+                    <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %} {% endcomment %}
+</div><!-- content__today-diary__group -->
+
+<!-- ネコココメント -->
+<div class="content__today-diary__comment">
+    <p>
+        {{ ネコココメントを表示させてください }}
+    </p>
+</div>
+<!-- ネココの画像 -->
+<div class="content__today-diary__comment__img">
+    <img src="{% static 'diary/assets/neko_comment.png' %}" alt="ネココの画像">
+</div>
+
+<!-- 画像のポップアップ -->
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" id="image-modal-image" class="img-fluid" alt="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% comment %} css
+.modal-footer {
+    text-align: center;
+  } {% endcomment %}
+{% comment %} {% block js%}
+<script>
+    // 画像をクリックしたときに画像ポップアップを開く
+    $(".content__today-diary__images a").on("click", function(e) {
+    // 画像ポップアップのコンテンツを取得
+    let image = $(this).data("image-id");
+    let imageUrl = $("#diary-{{ diary.id }}-image-{{ image }}").attr("src");
+
+    // 画像ポップアップを開く
+    $("#image-modal-image").attr("src", imageUrl);
+    $("#image-modal").modal("show");
+
+    // イベントをキャンセル
+    e.preventDefault();
+    });
+</script>
+{% endblock %} {% endcomment %}
+{% comment %} <script src="{% static 'js/image-preview.js' %}">
+
+    function openImage(image) {
+        // 画像の元の比率で表示する
+        let imageWidth = image.width;
+        let imageHeight = image.height;
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+        let maxWidth = windowWidth - 100;
+        let maxHeight = windowHeight - 100;
+        let ratio = imageWidth / imageHeight;
+        let width = Math.min(maxWidth, imageWidth);
+        let height = width / ratio;
+        if (height > maxHeight) {
+            height = maxHeight;
+          width = height * ratio;
+        }
+    
+        // 画像ポップアップを表示する
+        let imagePreview = document.getElementById("image-preview");
+        imagePreview.style.width = width + "px";
+        imagePreview.style.height = height + "px";
+        imagePreview.style.display = "block";
+    
+        // 画像をポップアップに表示する
+        let imageElement = document.getElementById("image");
+        imageElement.src = image.src;
+    
+        // 閉じるボタンを追加する
+        let closeButton = document.createElement("button");
+        closeButton.textContent = "閉じる";
+        closeButton.onclick = closeImage;
+        closeButton.className = "close-button";
+        imagePreview.appendChild(closeButton);
+        }
+    
+      // 画像ポップアップを閉じる
+        function closeImage() {
+        let imagePreview = document.getElementById("image-preview");
+        imagePreview.style.display = "none";
+    
+        // 画像をポップアップから削除する
+        let imageElement = document.getElementById("image");
+        imageElement.src = "";
+        }
+    
+    </script> {% endcomment %}
