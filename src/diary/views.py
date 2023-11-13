@@ -28,7 +28,7 @@ def calendar_month(request):
 def calender_week(request):
     return render(request, 'diary/calender_week.html')
 
-def create_diary_confirmation(request, pk=None):
+def create_diary_confirmation(request):
 
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
