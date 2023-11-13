@@ -23,6 +23,7 @@ urlpatterns = [
     path('help/graph', views.help_graph,name='help_graph'),
     path('help', views.help,name='help'),
     path('home/top', views.home_top,name='home_top'),
+    path('home/top/<int:pk>', views.home_top2,name='home_top'),
     path('loading', views.loading,name='loading'),
     path('logout/success', views.logout_success,name='logout_success'),
     path('logout',views.logout,name='logout'),
