@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
-
+from django.views.generic.edit import UpdateView
 
 @login_required
 def account_delete_success(request):
@@ -78,6 +78,7 @@ def diary_graph(request):
 def diary_home(request,pk):
     return render(request, 'diary/diary_home.html')
 
+
 @login_required
 def diary_update(request, pk):
     diary = get_object_or_404(Diary, id=pk)
@@ -106,7 +107,7 @@ def help(request):
 @login_required
 def home_top(request,):
     today = date.today()
-    diary_today = get_object_or_404(Diary, user=request.user, created_date=today)
+    diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
         return render(request, 'diary/today_diary_detail.html', {'diary': diary_today})
     return render(request, 'diary/home_top.html')
