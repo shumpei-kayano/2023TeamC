@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{% static 'diary/assets/icon.png' %}" />
@@ -23,7 +24,7 @@
     </style>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
     
     
     <main>
@@ -81,16 +82,16 @@
         </div>
     </footer>
 </div>
-</div>
-    <script>
-        function changeColor(id) {
-            const element = document.getElementById(id);
-            element.classList.add('active');
-        }
-    </script>
+
+<script>
+    function changeColor(id) {
+        const element = document.getElementById(id);
+        element.classList.add('active');
+    }
+</script>
 
     {% block js %}
-        <script src="{% static 'js/main.js' %}"></script>
+        {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
     {% endblock %}
 </body>
 </html>
