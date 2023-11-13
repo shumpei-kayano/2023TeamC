@@ -12,27 +12,16 @@ body {
   padding-bottom: 60px;
 }
 
-main {
-  min-height: 784px; /* 最低高さを625pxに設定 */
-  /* その他のスタイル */
-}
-@media only screen and (max-width: 767px) {
-  main {
-    /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
-    min-height: 784px; /* 最低高さを625pxに設定 */
-  }
-}
-
-#content .content {
+.content {
   width: 390px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
   background-color: #EEFEFF;
+  position: relative;
 }
 @media only screen and (max-width: 767px) {
-  #content .content {
-    /* 768pxより小さい画面では、min-heightをビューポートの高さの100%に設定する。 */
+  .content {
     width: 100%;
     height: 100%;
   }
@@ -74,11 +63,12 @@ header button .header__text {
 }
 
 footer {
-  bottom: 50;
-  width: 390px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: #FFFFFF;
   height: 60px;
-  display: flex;
+  overflow: hidden;
   align-items: center; /* 垂直方向の中央揃え */
 }
 
@@ -87,9 +77,11 @@ footer {
   list-style: none;
   display: flex;
   justify-content: space-around;
+  align-self: center;
 }
 .menu__list .menu__item {
   text-align: center;
+  max-height: 60px;
 }
 .menu__list .menu__item .nav-text {
   text-decoration: none !important;

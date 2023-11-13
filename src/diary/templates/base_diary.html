@@ -87,13 +87,13 @@
         </div>
     </footer>
 </div>
-</div>
-    <script>
-        function changeColor(id) {
-            const element = document.getElementById(id);
-            element.classList.add('active');
-        }
-    </script>
+
+<script>
+    function changeColor(id) {
+        const element = document.getElementById(id);
+        element.classList.add('active');
+    }
+</script>
 
     {% block js %}
         {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
