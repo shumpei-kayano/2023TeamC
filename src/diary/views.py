@@ -105,7 +105,7 @@ def help(request):
     return render(request, 'diary/help.html')
 
 @login_required
-def home_top(request,):
+def home_top(request):
     today = date.today()
     diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
@@ -116,12 +116,7 @@ def home_top(request,):
 def home_top2(request, pk):
         diary = get_object_or_404(Diary, id=pk)
         diary.delete()
-        today=date.today()
-        diary_today = get_object_or_404(Diary, user=request.user, created_date=today)
-        if diary_today:
-            return render(request, 'diary/today_diary_detail.html', {'diary': diary_today})
-    
-        return render(request, 'diary/home_top.html')
+        return redirect('diary:home_top1')
 
 
 @login_required
