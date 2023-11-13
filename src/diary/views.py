@@ -8,15 +8,6 @@ from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 
 
-# 今日の日記を取得
-def get_today_diary(request):
-    today = date.today()
-    user = request.user
-    start_of_day = datetime.combine(today, datetime.min.time())
-    end_of_day = datetime.combine(today, datetime.max.time())
-    return Diary.objects.filter(user=user, created_date__range=(start_of_day, end_of_day)).first()
-
-
 @login_required
 def account_delete_success(request):
     return render(request, 'diary/account_delete_success.html')
@@ -37,7 +28,7 @@ def calendar_month(request):
 def calender_week(request):
     return render(request, 'diary/calender_week.html')
 
-def create_diary_confirmation(request, pk=None):
+def create_diary_confirmation(request):
 
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
@@ -47,7 +38,7 @@ def create_diary_confirmation(request, pk=None):
             new_diary.save()  # データベースに保存
             
             # 一旦カレンダーが出来るまで----------------------------------------------------------
-            saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first() 
+            saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
             return redirect('diary:create_diary_confirmation', pk=saved_diary.id)
     else:
@@ -55,11 +46,11 @@ def create_diary_confirmation(request, pk=None):
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 def create_diary_confirmation2(request, pk):
-      diary = get_object_or_404(Diary, id=pk)
-      # 一旦カレンダーが出来るまで----------------------------------------------------------
-      saved_diary = Diary.objects.get(pk = diary.id)
-      #-------------------------------------------------------------------------------------
-      return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
+    diary = get_object_or_404(Diary, id=pk)
+    # 一旦カレンダーが出来るまで----------------------------------------------------------
+    saved_diary = Diary.objects.get(pk = diary.id)
+    #-------------------------------------------------------------------------------------
+    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
 @login_required
 def create_diary(request):
@@ -74,8 +65,6 @@ def create_diary(request):
     return render(request, 'diary/create_diary.html', {'Diary': form, 'today': today})
 
 
-
-
 @login_required
 def diary_delete(request, pk):
     diary = get_object_or_404(Diary, id=pk)
@@ -86,7 +75,7 @@ def diary_graph(request):
     return render(request, 'diary/diary_graph.html')
 
 @login_required
-def diary_home(request):
+def diary_home(request,pk):
     return render(request, 'diary/diary_home.html')
 
 @login_required
@@ -115,8 +104,24 @@ def help(request):
     return render(request, 'diary/help.html')
 
 @login_required
-def home_top(request):
+def home_top(request,):
+    today = date.today()
+    diary_today = get_object_or_404(Diary, user=request.user, created_date=today)
+    if diary_today:
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary_today})
     return render(request, 'diary/home_top.html')
+    
+@login_required
+def home_top2(request, pk):
+        diary = get_object_or_404(Diary, id=pk)
+        diary.delete()
+        today=date.today()
+        diary_today = get_object_or_404(Diary, user=request.user, created_date=today)
+        if diary_today:
+            return render(request, 'diary/today_diary_detail.html', {'diary': diary_today})
+    
+        return render(request, 'diary/home_top.html')
+
 
 @login_required
 def loading(request):
@@ -168,13 +173,12 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request, pk):
-    if not get_today_diary().exists():  # もし今日の日記が存在しない場合
-        form = DiaryCreateForm()
-        return render(request, 'diary/create_diary.html', {'Diary': form})
-    
-    post = get_today_diary()
-    diary = get_object_or_404(Diary, id=pk)
-    return render(request, 'diary/today_diary_detail.html', {'post': post}, {'diary': diary})
+    today = date.today()
+    diary = get_object_or_404(Diary, user=request.user, created_date=today)
+    if diary:
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
 def week_graph(request):

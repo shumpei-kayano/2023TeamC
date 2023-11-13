@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap");
 html {
+  font-size: 10px;
   height: 100%;
 }
 
@@ -42,16 +43,31 @@ header {
   justify-content: center; /* 子要素を水平方向に中央揃え */
   color: #FFFFFF;
 }
-header button {
+header .header__button button {
+  border-radius: 5px;
+  border: 0.1rem solid #FFF;
+  background-color: #04CAD6;
+  font-size: 1.4rem;
+  color: #fff;
   margin-left: 24px;
-  margin: 11px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  width: 7.2rem; /* 72px / 10px = 7.2rem */
+  height: 2.8rem; /* 28px / 10px = 2.8rem */
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
-header button .header__text {
+header .header__button button .header__text {
   display: flex;
   justify-content: center; /* 水平方向の中央揃え */
   align-items: center; /* 垂直方向の中央揃え */
   text-align: center; /* テキストを中央揃え */
-  font-size: 20%;
+  font-size: 2rem;
+}
+header .header__button button:hover {
+  background: #00A3AE;
 }
 
 .header__nowdate {
