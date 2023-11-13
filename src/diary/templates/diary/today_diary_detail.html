@@ -36,53 +36,50 @@
 <!-- タブ -->
 <div class="tab__button">
     <div class="tab__button--left">
-        {% comment %} <button type="button" onclick="location.href='{% url 'diary:today_diary_detail.html' %}'">
+        {% comment %} <button type="button" onclick="location.href='{% url 'diary:diary_diary_detail.html' %}'">
             日記詳細</button> {% endcomment %}
     </div>
     <div class="tab__button--right">
-        {% comment %} <button type="button" onclick="location.href='{% url 'today_diary_graph.htmlに遷移させてください' %}'">
+        {% comment %} <button type="button" onclick="location.href='{% url 'diary_diary_graph.htmlに遷移させてください' %}'">
             グラフ</button> {% endcomment %}
     </div>
 </div>
 
 <!-- 編集削除ボタン -->
-<div class="content__today-diary__group">
+<div class="content__diary-diary__group">
     <div class="icon__button">
         <div class="icon__button__delete">
-            {% if post %}
+            {% if diary %}
             <ul>
-                {% for entry in post %}
-                        <br>作成日時：{{entry.created_date}}</br><br>
-                        <br>日記内容：{{ entry.content }}</br><br>
-                        {% if entry.photo1 %}
-                            <img src="{{ entry.photo1.url }}" alt="Diary Photo1">
+                        <br>作成日時：{{diary.created_date}}</br><br>
+                        <br>日記内容：{{ diary.content }}</br><br>
+                        {% if diary.photo1 %}
+                            <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
                         {% endif %}
-                        {% if entry.photo2 %}
-                            <img src="{{ entry.photo2.url }}" alt="Diary Photo2">
+                        {% if diary.photo2 %}
+                            <img src="{{ todya.photo2.url }}" alt="Diary Photo2">
                         {% endif %}
-                        {% if entry.photo3 %}
-                            <img src="{{ entry.photo3.url }}" alt="Diary Photo3">
+                        {% if diary.photo3 %}
+                            <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
                         {% endif %}
-                        {% if entry.photo4 %}
-                            <img src="{{ entry.photo4.url }}" alt="Diary Photo4">
+                        {% if diary.photo4 %}
+                            <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
                         {% endif %}
                     </div>
-                    
-                {% endfor %}
             </ul>
         {% else %}
             <p>今日の日記はありません。</p>
         {% endif %}
-            <a href="{% url  'diary:diary_delete' diary.pk %}">
-                <img src="{% static 'diary/assets/delete.png' %}" alt="削除">削除</a>
+            <a href="{% url  'diary:diary_delete' diary.id %}">
+                <img src="{% static 'diary/assets/delete.png' %}" >削除</a>
         </div>
         <div class="icon__button__edit">
-            <a href="{% url  'diary:diary_update' diary.pk %}">
-                <img src="{% static 'diary/assets/edit.png' %}"　alt="編集">編集</a>
+            <a href="{% url  'diary:diary_update' diary.id %}">
+                <img src="{% static 'diary/assets/edit.png' %}">編集</a>
         </div>
 
     <!-- ユーザーが保存した日記の表示 -->
-    <div class="content__today-diary__text">
+    <div class="content__diary-diary__text">
         <p>
             {% comment %} {{ ユーザーが入力した日記を表示させてください }} {% endcomment %}
         </p>
@@ -90,9 +87,9 @@
 
     <!-- ユーザーが保存した画像の表示 -->
     {% comment %} {% if 画像があれば %}
-        <div class="content__today-diary__images">
+        <div class="content__diary-diary__images">
             {% for 画像を表示させてください %}
-                <div class="content__today-diary__img">
+                <div class="content__diary-diary__img">
                     <a href="#" data-image-id="{{ 画像のid }}">
                     <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
                     </a>
@@ -100,16 +97,16 @@
             {% endfor %}
         </div>
     {% endif %} {% endcomment %}
-</div><!-- content__today-diary__group -->
+</div><!-- content__diary-diary__group -->
 
 <!-- ネコココメント -->
-<div class="content__today-diary__comment">
+<div class="content__diary-diary__comment">
     <p>
         {{ ネコココメントを表示させてください }}
     </p>
 </div>
 <!-- ネココの画像 -->
-<div class="content__today-diary__comment__img">
+<div class="content__diary-diary__comment__img">
     <img src="{% static 'diary/assets/neko_comment.png' %}" alt="ネココの画像">
 </div>
 
@@ -134,7 +131,7 @@
 {% comment %} {% block js%}
 <script>
     // 画像をクリックしたときに画像ポップアップを開く
-    $(".content__today-diary__images a").on("click", function(e) {
+    $(".content__diary-diary__images a").on("click", function(e) {
     // 画像ポップアップのコンテンツを取得
     let image = $(this).data("image-id");
     let imageUrl = $("#diary-{{ diary.id }}-image-{{ image }}").attr("src");
