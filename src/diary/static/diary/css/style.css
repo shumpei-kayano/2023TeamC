@@ -112,7 +112,6 @@ footer {
   display: flex;
   width: 342px;
   height: 48px;
-  padding: 12px 32px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -124,12 +123,17 @@ footer {
   cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
 
+.btn-large:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+
 .btn-large button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
   border: none; /* ボタンのデフォルトのボーダーを削除 */
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
