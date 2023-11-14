@@ -5,69 +5,80 @@
 
 {% block title %}日記編集{% endblock %}
 
-{% block header %}
+{% comment %} {% block header %} {% endcomment %}
 {% comment %} <header>
     <div class="header__button">
         <div class="header__back__img">
             <button type="button" onclick="history.back()"><img src="{% static 'assets/back_arrow.png' %}">戻る</button>
         </div>
-    <div class="header__nowdate">
-        {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
-    <div class="header__weather">
-        {{ 天気を表示おねがいします  }}
-        <div class="header__weather__img">
-            <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}"alt="天気の画像" >
+        <div class="header__nowdate">
+            {{ 現在の日付と曜日を表示おねがいします 0000/00/00(月) }}
         </div>
-        {{ 気温を表示おねがいします 00℃ }}
-</header> {% endcomment %}
-{% endblock %}
+        <div class="header__weather">
+            {{ 天気を表示おねがいします  }}
+            <div class="header__weather__img">
+                <img src="{% static 'assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png)}}' %}" alt="天気の画像" >
+            </div>
+            {{ 気温を表示おねがいします 00℃ }}
+        </div>
+    </div>
+</header>
+{% endblock %} {% endcomment %}
 
 {% block content %}
-<form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}"><!--次のページに遷移させてください-->
+<form method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data">
     {% csrf_token %}
+    
     <div class="content__today-diary__text">
         <img src="透過画像のパス" alt="透過画像" class="follow-image">
-            <input type="textarea" placeholder="テキストを入力してください (最大1000字まで)" oninput="updateImagePosition(this)">
-            <!-- 保存されている日記を表示お願いします -->
-            <div class="content__diary__text">
-                <p>
-                    {{ form.as_p }}
-                </p>
-            </div>
+        <div class="content__diary__text">
+            <p>
+                <!-- 保存されている日記を表示お願いします -->
+            </p>
+        </div>
     </div>
-        <div id="char-count">文字数: 0</div>
-    <!--Javascriptでテキストボックス内にネココを透過させた画像を追従させます-->
-    <!--Javascriptで文字数をカウントします-->
-    </div>
-    <div class="icon__button">
-        <label for="image"><img src="{% static 'assets/image.png' %}">写真・動画を添付</label>
-        <input type="file" id="media" name="media" accept="image/*,video/*">
-    </div>
+    <!-- Javascriptでテキストボックス内にネココを透過させた画像を追従させます -->
+    <!-- Javascriptで文字数をカウントします -->
 
-        <!-- ユーザーが保存した画像の表示(とりあえず4枚表示すると仮定して) -->
-        {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
-    {% endif %}
-    {% if 画像があれば %}
-        <div class="content__today-diary__img">
-            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-        </div>
+    <br>作成日時：{{diary.created_date}}</br><br>
+
+    <label for="content">日記内容：</label>
+    <textarea id="content" name="content">{{ diary.content }}</textarea><br>
+
+    <!-- 画像1 -->
+    {% if diary.photo1 %}
+        <label for="photo1">画像1：</label>
+        <input type="file" id="photo1" name="photo1"><br>
+        <img src="{{ diary.photo1.url }}" alt="Diary Photo1"><br>
     {% endif %}
 
-    <div class="cancel__button">
-        <button type="button">確認</button>
-    </div>
+    <!-- 画像2 -->
+    {% if diary.photo2 %}
+        <label for="photo2">画像2：</label>
+        <input type="file" id="photo2" name="photo2"><br>
+        <img src="{{ diary.photo2.url }}" alt="Diary Photo2"><br>
+    {% endif %}
+
+
+    <!-- 画像3 -->
+    {% if diary.photo3 %}
+        <label for="photo3">画像3：</label>
+        <input type="file" id="photo3" name="photo3"><br>
+        <img src="{{ diary.photo3.url }}" alt="Diary Photo3"><br>
+    {% endif %}
+
+
+    <!-- 画像4 -->
+    {% if diary.photo4 %}
+        <label for="photo4">画像4：</label>
+        <input type="file" id="photo4" name="photo4"><br>
+        <img src="{{ diary.photo4.url }}" alt="Diary Photo4"><br>
+    {% endif %}
+
+    <!-- Submit button -->
+    <input type="submit" value="更新">
 </form>
+
+<div class="cancel__button">
+</div>
 {% endblock %}

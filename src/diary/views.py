@@ -47,10 +47,16 @@ def create_diary_confirmation(request):
 
 def create_diary_confirmation2(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-    # 一旦カレンダーが出来るまで----------------------------------------------------------
-    saved_diary = Diary.objects.get(pk = diary.id)
-    #-------------------------------------------------------------------------------------
+    
+    if request.method == 'POST':
+        form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
+        if form.is_valid():
+            form.save()
+            return redirect('diary:create_diary_confirmation', pk=pk)
+
+    saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
+
 
 @login_required
 def create_diary(request):
@@ -59,7 +65,7 @@ def create_diary(request):
     diary = Diary.objects.filter(user=request.user,created_date=today,)
     #-------------------------------------------------------------------------------------
     if diary:
-      return render(request, 'diary/today_diary_detail.html', {'post': diary})
+      return render(request, 'diary/today_diary_detail.html', {'diary': diary})
 
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form, 'today': today})
