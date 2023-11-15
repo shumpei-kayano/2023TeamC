@@ -47,10 +47,16 @@ def create_diary_confirmation(request):
 
 def create_diary_confirmation2(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-    # 一旦カレンダーが出来るまで----------------------------------------------------------
-    saved_diary = Diary.objects.get(pk = diary.id)
-    #-------------------------------------------------------------------------------------
+    
+    if request.method == 'POST':
+        form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
+        if form.is_valid():
+            form.save()
+            return redirect('diary:create_diary_confirmation', pk=pk)
+
+    saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
+
 
 @login_required
 def create_diary(request):
@@ -59,7 +65,7 @@ def create_diary(request):
     diary = Diary.objects.filter(user=request.user,created_date=today,)
     #-------------------------------------------------------------------------------------
     if diary:
-      return render(request, 'diary/today_diary_detail.html', {'post': diary})
+      return render(request, 'diary/today_diary_detail.html', {'diary': diary})
 
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form, 'today': today})
@@ -109,11 +115,11 @@ def home_top(request):
     today = date.today()
     diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary_today})
+        return redirect('diary:today_diary_detail')
     return render(request, 'diary/home_top.html')
     
 @login_required
-def home_top2(request, pk):
+def home_top2(request,pk):
         diary = get_object_or_404(Diary, id=pk)
         diary.delete()
         return redirect('diary:home_top1')
@@ -168,7 +174,17 @@ def today_counseling(request):
     return render(request, 'diary/today_counseling.html')
 
 @login_required
-def today_diary_detail(request, pk):
+def today_diary_detail(request):
+    today = date.today()
+    diary = get_object_or_404(Diary, user=request.user, created_date=today)
+    if diary:
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form})
+
+
+@login_required
+def today_diary_detail2(request,pk):
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
     if diary:

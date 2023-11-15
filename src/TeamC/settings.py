@@ -180,7 +180,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION= 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 #ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'diary:home_top'
+LOGIN_REDIRECT_URL = 'diary:home_top1'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 #ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET =True
