@@ -1,73 +1,84 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500&display=swap");
 html {
   font-size: 10px;
-  height: 100%;
 }
 
 body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   background-color: #FFFDF3;
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding-bottom: 60px;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+header h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+header, .content, footer {
+  width: 39rem;
 }
 
 .content {
-  width: 390px;
-  height: 100%;
   margin: 0 auto;
+  padding-top: 5rem; /* ヘッダーの高さ */
+  padding-bottom: 6rem; /* フッターの高さ */
   background-color: #EEFEFF;
-  position: relative;
-}
-@media only screen and (max-width: 767px) {
-  .content {
-    width: 100%;
-    height: 100%;
-  }
 }
 
-body, button, p, h1, h2, diarycontent, content__today-diary__text {
-  font-family: "Noto Sans JP", sans-serif;
-}
-
-.camera__area {
-  height: 50px;
-  background-color: #FFFFFF;
+main {
+  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+  height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
 }
 
 header {
+  position: fixed;
+  top: 0;
+  color: #FFFFFF;
   background-color: #04CAD6;
-  height: 50px;
+  height: 5rem; /* 50px / 10px = 5rem */
+  padding-left: 2.4rem; /* 画面の両端に24pxのパディングを追加 */
+  padding-right: 2.4rem;
   display: flex;
   justify-content: center; /* 子要素を水平方向に中央揃え */
-  color: #FFFFFF;
+  justify-content: space-between;
+  align-items: center; /* 垂直方向の中央揃え */
 }
-header .header__button button {
+header a {
+  display: flex;
+  padding: 0.5rem 1.6rem 0.5rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  min-width: 72px;
+  min-height: 28px;
   border-radius: 5px;
   border: 0.1rem solid #FFF;
   background-color: #04CAD6;
-  font-size: 1.4rem;
-  color: #fff;
-  margin-left: 24px;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: flex;
-  width: 7.2rem; /* 72px / 10px = 7.2rem */
-  height: 2.8rem; /* 28px / 10px = 2.8rem */
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
 }
-header .header__button button .header__text {
-  display: flex;
-  justify-content: center; /* 水平方向の中央揃え */
-  align-items: center; /* 垂直方向の中央揃え */
-  text-align: center; /* テキストを中央揃え */
+header svg {
+  display: inline-block; /* インラインブロック要素にすることで、行内要素のように振る舞う */
+  vertical-align: middle; /* ボタン内で垂直方向に中央揃えにする */
+  margin-right: 0.4rem;
+}
+header p {
   font-size: 2rem;
+  flex-grow: 1; /* テキストが全体の中央揃えになるようにする */
+  text-align: center;
 }
-header .header__button button:hover {
-  background: #00A3AE;
+header a:hover {
+  background-color: #00A3AE;
 }
 
 .header__nowdate {
@@ -80,36 +91,43 @@ header .header__button button:hover {
 footer {
   position: fixed;
   bottom: 0;
-  width: 390px;
   background-color: #FFFFFF;
-  height: 60px;
+  height: 6rem;
   overflow: hidden;
-  align-items: center; /* 垂直方向の中央揃え */
 }
 
 .menu__list {
-  width: 390px;
-  list-style: none;
   display: flex;
   justify-content: space-around;
-  align-self: center;
+  align-items: center;
 }
 .menu__list .menu__item {
-  text-align: center;
-  max-height: 60px;
+  align-items: center;
+  justify-content: center; /* 子要素を水平方向に中央揃え */
 }
-.menu__list .menu__item .nav-text {
-  text-decoration: none !important;
+.menu__list a {
+  width: 60px;
+}
+.menu__list a .nav-text {
+  margin-top: 4px;
   color: #ADADAD; /* メニューテキストの色 */
-  font-size: 10%; /* テキストのサイズを10%に調整 */
-}
-.menu__list .menu__item .nav-text .icon {
-  width: 24px; /* アイコンの幅 */
-  height: 24px; /* アイコンの高さ */
+  font-size: 1rem; /* テキストのサイズを10%に調整 */
 }
 
+@media only screen and (max-width: 767px) {
+  .content {
+    width: 100%;
+    height: 100%;
+  }
+  header {
+    height: 50px;
+  }
+  footer {
+    height: 60px;
+  }
+}
 .scroll--box {
-  height: 684px;
+  height: 73.4rem;
   overflow: auto;
 }
 .scroll--box .scroll--content {
@@ -130,4 +148,28 @@ footer {
 
 .scroll-box::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
+}
+
+.photomv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.photomv img {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+}
+
+.calendar--background {
+  background-color: #FFFFFF;
+}
+
+.calendar__month td {
+  border: 1px solid #04CAD6;
+  width: 5.5rem;
+  height: 6.6rem;
 }
