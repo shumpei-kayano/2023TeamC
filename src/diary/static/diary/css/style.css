@@ -126,6 +126,54 @@ footer {
     height: 60px;
   }
 }
+.btn-large {
+  display: flex;
+  width: 342px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: var(--custom-color, #00ABB6);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  text-align: center; /* 中央寄せを追加 */
+  cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+}
+
+.btn-large:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+
+.btn-large button {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  color: #FFF;
+  font-family: Noto Sans JP;
+  font-size: 1.6rem;
+}
+
+.content_home_text {
+  display: flex;
+  width: 341px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--, #00ABB6);
+  font-family: Noto Sans JP;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .scroll--box {
   height: 73.4rem;
   overflow: auto;

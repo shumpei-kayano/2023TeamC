@@ -18,4 +18,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./src /app
 
 # Gunicornの起動 プロジェクト名を変更すること（testDjangoの部分）
-CMD ["gunicorn", "TeamC.wsgi:application", "--bind", "0.0.0.0:8003"]
+CMD ["gunicorn", "TeamC.wsgi:application", "--bind", "0.0.0.0:8000"]
