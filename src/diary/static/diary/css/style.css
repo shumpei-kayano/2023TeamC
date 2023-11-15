@@ -114,9 +114,6 @@ footer {
   font-size: 1rem; /* テキストのサイズを10%に調整 */
 }
 
-<<<<<<< HEAD
-.btn {
-=======
 @media only screen and (max-width: 767px) {
   .content {
     width: 100%;
@@ -129,8 +126,7 @@ footer {
     height: 60px;
   }
 }
-.btn-large {
->>>>>>> ba12c2982c109e6e166611c0d84434dedb925adc
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -304,7 +300,6 @@ footer {
   background-color: rgb(173, 173, 173);
 }
 
-<<<<<<< HEAD
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -340,7 +335,8 @@ th {
   font-weight: 400;
   line-height: normal;
   text-align: left;
-=======
+}
+
 .photomv {
   display: flex;
   flex-wrap: wrap;
@@ -363,5 +359,4 @@ th {
   border: 1px solid #04CAD6;
   width: 5.5rem;
   height: 6.6rem;
->>>>>>> ba12c2982c109e6e166611c0d84434dedb925adc
 }
