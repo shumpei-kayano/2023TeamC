@@ -43,8 +43,9 @@
         {% comment %} 現在の週を表示させてください {% endcomment %}
         <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
     </div>
-
+</div>
     <!-- 週間カレンダー一覧 -->
+    <div class="week-calendar">
     <table>
         <thead>
             <tr>
@@ -71,7 +72,7 @@
             </tr>
         </thead>
     </table>
-</div>
+    </div>
 {% endblock %}
 
 {% comment %} {% block javascripts %}
