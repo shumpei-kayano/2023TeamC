@@ -1,0 +1,13 @@
+.photomv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.photomv img {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
