@@ -41,10 +41,10 @@
     <!-- Javascriptで文字数をカウントします -->
 
     <br>作成日時：{{diary.created_date}}</br><br>
-
+    
     <label for="content">日記内容：</label>
-    <textarea id="content" name="content">{{ diary.content }}</textarea><br>
-
+    <textarea id="content" name="content" rows="8" cols="80">{{ diary.content }}</textarea><br>
+    
     <!-- 画像1 -->
     {% if diary.photo1 %}
         <label for="photo1">画像1：</label>
