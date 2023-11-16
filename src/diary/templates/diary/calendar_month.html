@@ -14,193 +14,135 @@
 {% endblock %}
 
 {% block content %}
-<!-- タブ -->
-<div class="tab__button">
-    <div class="tab__button--left">
-        <button type="button" onclick="location.href='{% url 'diary:calendar_month' %}'">
-            月間カレンダー</button>
+<div class="calendar--background">
+    <!-- タブ -->
+    <div class="tab__button">
+        <div class="tab__button--left">
+            <button type="button" onclick="location.href='{% url 'diary:calendar_month' %}'">
+                月間カレンダー</button>
+        </div>
+        <div class="tab__button--right">
+            <button type="button" onclick="location.href='{% url 'diary:month_graph' %}'">
+                月間グラフ</button>
+        </div>
     </div>
-    <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'diary:month_graph' %}'">
-            月間グラフ</button>
+
+    <!-- カレンダーページネーション -->
+    <div class="calendar-week">
+        <div class="calendar-header">
+            {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
+            <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
+            {% comment %} 月を動的に進められるようにしてください {% endcomment %}
+            <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
+            {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
+            <span>年月</span>
+            {% comment %} 現在の月を表示させてください {% endcomment %}
+            <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
+        </div>
     </div>
-</div>
 
-<!-- カレンダー -->
-<div id="calendar" class="calendar-wrap"></div>
-
+    <!-- カレンダー -->
+    <div id="calendar" class="calendar__month">
+        <table>
+            <thead>
+                <tr>
+                    <th class="sun">日</th>
+                    <th>月</th>
+                    <th>火</th>
+                    <th>水</th>
+                    <th>木</th>
+                    <th>金</th>
+                    <th class="sat">土</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 第1週 -->
+                <tr>
+                    <td class="sun--td">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="sat--td">
+                    </td>
+                </tr>
+                <!-- 第2週 -->
+                <tr>
+                    <td class="sun--td">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="sat--td">
+                    </td>
+                </tr>
+                <!-- 第3週 -->
+                <tr>
+                    <td class="sun--td">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="sat--td">
+                    </td>
+                </tr>
+                <!-- 第4週 -->
+                <tr>
+                    <td class="sun--td">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="sat--td">
+                    </td>
+                </tr>
+                <!-- 第5週 -->
+                <tr>
+                    <td class="sun--td">
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="sat--td">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!-- calendar--background -->
 {% endblock %}
-
-{% block js %}
-<script>
-    const date = new Date();
-    // 現在の月
-    let currentMonth = date.getMonth();
-    // 現在の年
-    let currentYear = date.getFullYear();
-
-    // カレンダーのHTMLを生成する関数
-    function createCalendar(month, year) {
-        
-        const monthDays = ["日", "月", "火", "水", "木", "金", "土"];
-        // 月のページネーション
-        let calendarHTML = `
-            <div class="calendar-header">
-                <button id="prevMonth"><img src="{% static 'assets/left_arrow.png' %}" alt="前の月"></button>
-                <button id="nextMonth"><img src="{% static 'assets/right_arrow.png' %}" alt="翌月"></button>
-                <span id="currentMonthYear">${year}年${month + 1}月</span>
-                <button id="thisMonth"><img src="{% static 'assets/return_arrow.png' %}" alt="今月"></button>
-            </div>
-            <table class="calendar">
-                <thead>
-                    <tr>
-        `;
-
-        // 曜日をヘッダーに追加 0は日曜日、6は土曜日
-        for (let i = 0; i < 7; i++) {
-            if (i === 0) {
-                calendarHTML += `<th class="sun">${monthDays[i]}</th>`;
-            } else if (i === 6) {
-                calendarHTML += `<th class="sat">${monthDays[i]}</th>`;
-            } else {
-                calendarHTML += `<th>${monthDays[i]}</th>`;
-            }
-        }
-        calendarHTML += '</tr></thead><tbody>';
-
-        // 指定された月の最初の日と最後の日数を取得
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        // 月の最初の日の曜日を取得
-        const firstDay = new Date(year, month, 1).getDay();
-
-        // カレンダーの日付部分を生成
-        for (let i = 0; i < 6; i++) {
-            calendarHTML += '<tr>';
-            for (let j = 0; j < 7; j++) {
-                const day = i * 7 + j - firstDay + 1;
-                const cellData = {
-                    // 日にちを取得
-                    day: day,
-
-                    // 感情を表すアイコンのパスを取得するため、サーバー側で定義された関数を呼び出す
-                    // ポジティブ=positive_face.png, ネガティブ=negative_face.png, 中立=neutral_face.png, 混在=mix_face.png
-                    // 引数：day=日にち, currentMonth=指定の月, currentYear=指定の年
-                    image: 関数名の入力をお願いします(day, currentMonth, currentYear),
-                };
-
-                // 月の最初の日より前、月の最後の日より後のセルは空白にする
-                if (i === 0 && j < firstDay) {
-                    calendarHTML += '<td class="mute"></td>';
-                } else if (i * 7 + j - firstDay + 1 > daysInMonth) {
-                    calendarHTML += '<td class="mute"></td>';
-                } else {
-                    // 現在の日付のセルの場合はcurrent-dateクラスを追加
-                    if (day === date.getDate() && month === date.getMonth() && year === date.getFullYear()) {
-                        calendarHTML += `<td class="today current-date" data-day="${day}">${day}`;
-                    } else {
-                        if (j === 1) {
-                            // 月曜日にはoffクラスを追加
-                            calendarHTML += `<td class="off">${day}`;
-                        } else {
-                            // 他の日付のセルの場合はcurrent-dateクラスを追加しない
-                            calendarHTML += `<td data-day="${day}">${day}`;
-                        }
-                    }
-
-                    //日記が記録されている場合、セル内に感情を表すアイコンを表示
-                    if (cellData.image) {
-                        calendarHTML += `<img src="${cellData.image}" alt="感情を表すアイコン" />`;
-                    }
-
-                    calendarHTML += '</td>';
-                }
-            }
-            calendarHTML += '</tr>';
-        }
-
-        calendarHTML += '</tbody></table>';
-
-        return calendarHTML;
-    }
-
-    // カレンダーを更新する関数
-    function updateCalendar() {
-        const calendarContainer = document.getElementById('calendar');
-        calendarContainer.innerHTML = createCalendar(currentMonth, currentYear);
-
-        const prevMonthButton = document.getElementById('prevMonth');
-        const nextMonthButton = document.getElementById('nextMonth');
-        const thisMonthButton = document.getElementById('thisMonth');
-        const currentMonthYear = document.getElementById('currentMonthYear');
-
-        // 前の月、翌月、今月ボタンのクリックイベントを追加
-        prevMonthButton.addEventListener('click', function () {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
-            updateCalendar();
-        });
-
-        nextMonthButton.addEventListener('click', function () {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
-            updateCalendar();
-        });
-
-        thisMonthButton.addEventListener('click', function () {
-            const now = new Date();
-            currentMonth = now.getMonth();
-            currentYear = now.getFullYear();
-            currentMonthYear.textContent = `${currentYear}年${currentMonth + 1}月`;
-            updateCalendar();
-        });
-    }
-
-    // 指定された月と年に基づいてカレンダーを初期化
-    updateCalendar();
-
-    // 日付セルにクリックイベントを追加して、詳細ページまたは作成画面に遷移する
-    const calendarContainer = document.getElementById('calendar');
-    calendarContainer.addEventListener('click', (event) => {
-        const target = event.target;
-        if (target.tagName === 'td' && !target.classList.contains('mute')) {
-            const day = target.dataset.day; // 日付を取得
-            if (day) {
-                if (day === date.getDate().toString()) {
-
-                    // 現在の日付をクリックした場合はホームトップ画面に遷移
-                    window.location.href = 'home_top.htmlに遷移させてください';
-
-                } else if (day >= date.getDate()) {
-                    // 現在の日付より後の日付をクリックできないようにする
-                    return;
-                } else {
-
-                    // 他の日付をクリックした場合は詳細ページに遷移
-                    window.location.href = 'record_diary_detail.htmlに遷移させてください';
-
-                    //window.location.href = `/diary/${currentYear}/${currentMonth + 1}/${day}/`;
-                }
-            }
-        }
-    });
-</script>
-{% endblock %}
-    {% comment %}CSSで設定するやつ <style>
-        /* 現在の日付のセルのスタイル */
-        .current-date {
-            background-color: yellow; /* 背景色を変更して強調表示 */
-            font-weight: bold; /* フォントを太字にするなど、他のスタイルも追加できます */
-            /* 他のスタイルを設定 */
-        }
-        td {
-            cursor: pointer;
-        }
-    </style> {% endcomment %}
