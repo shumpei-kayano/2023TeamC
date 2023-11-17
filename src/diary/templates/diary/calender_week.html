@@ -19,29 +19,48 @@
 
 {% block content %}
 <!-- タブ -->
-<div class="tab__button">
-    <div class="tab__button--left">
-        {% comment %} ボタンの遷移先の指定をお願いします {% endcomment %}
-        {% comment %} <button type="button" onclick="location.href='{% url 'calender_week.htmlに遷移させてください' %}'"> {% endcomment %}
-            週間カレンダー</button>
+
+{% url 'diary:calender_week' as calender_week_url %}
+{% url 'diary:week_graph' as week_graph_url %}
+<div class="tab__button a--tab">
+    <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
+        <a href="{{ calender_week_url }}">週間カレンダー</a>
     </div>
-    <div class="tab__button--right">
-        {% comment %} <button type="button" onclick="location.href='{% url 'week_graph.htmlに遷移させてください' %}'"> {% endcomment %}
-            週間グラフ</button>
+    <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
+        <a href="{{ week_graph_url }}">週間グラフ</a>
     </div>
 </div>
+
+{% comment %} <div class="tab__button a--tab">
+    <div class="a--tab--left">
+        <a href="{% url 'diary:calender_week' %}">週間カレンダー</a>
+    </div>
+    <div class="a--tab--right">
+        <a href="{% url 'diary:week_graph' %}">週間グラフ</a>
+    </div>
+</div> {% endcomment %}
 
 <!-- 週間カレンダーページネーション -->
 <div class="calendar-week">
     <div class="calendar-header">
         {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
-        <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
-        {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-        {% comment %} <span>{{  }}年{{  }}月</span> {% endcomment %}
-        {% comment %} 週を動的に進められるようにしてください {% endcomment %}
-        <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
+        <div class="next__button">
+            <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
+            {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
+            {% comment %} <span>{{  }}年{{  }}月</span> {% endcomment %}
+            {% comment %} 週を動的に進められるようにしてください {% endcomment %}
+            <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
+        </div>
         {% comment %} 現在の週を表示させてください {% endcomment %}
-        <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
+            <p>2021年9月</p>
+        <div class="a--blue">
+            <a href="">
+                <svg id="mySvg" width="16" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z" fill="#00ABB6"/>
+                </svg>
+                <p>今週</p>
+            </a>
+        </div>
     </div>
 </div>
     <!-- 週間カレンダー一覧 -->
@@ -76,4 +95,24 @@
 {% endblock %}
 
 {% comment %} {% block javascripts %}
+<script>
+// SVG要素を取得
+var svg = document.getElementById('mySvg');
+
+// ホバー時の色
+var hoverColor = '#00737A';  // ここにホバー時の色を設定
+
+// デフォルトの色を保存
+var defaultColor = svg.getAttribute('fill');  // getAttributeメソッドを使用
+
+// ホバー時のイベントハンドラを設定
+svg.addEventListener('mouseover', function() {
+    svg.setAttribute('fill', hoverColor);  // setAttributeメソッドを使用
+});
+
+// ホバーが終了したときのイベントハンドラを設定
+svg.addEventListener('mouseout', function() {
+    svg.setAttribute('fill', defaultColor);  // setAttributeメソッドを使用
+});
+</script>
 {% endblock %} {% endcomment %}

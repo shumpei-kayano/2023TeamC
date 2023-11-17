@@ -276,6 +276,119 @@ footer {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
 
+.a--blue {
+  display: flex;
+  width: 72px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.a--blue p {
+  color: #00ABB6;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.64px;
+  display: inline-block;
+  margin: 0;
+  padding: 0 0 7px 0;
+  vertical-align: middle;
+}
+.a--blue svg {
+  vertical-align: middle;
+  margin-bottom: 5px;
+}
+.a--blue:hover {
+  text-decoration: none;
+  background-image: linear-gradient(#00737A, #00737A);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 calc(100% - 3px);
+}
+.a--blue:hover p {
+  color: #00737A;
+}
+.a--blue:hover img {
+  fill: #00737A;
+}
+
+.a--tab {
+  display: flex;
+  text-align: center;
+  margin: 16px 30px;
+  margin-bottom: 12px;
+}
+.a--tab--left {
+  width: 174px;
+  height: 33px;
+}
+.a--tab--left a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  color: #FFF;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.24px;
+  border-radius: 9.057px 0 0 9.057px;
+  box-shadow: inset 0 0 0 2px #00ABB6;
+  background: #00ABB6;
+}
+.a--tab--left a.active {
+  background-color: var(--custom-color, #00ABB6);
+  color: #FFF;
+}
+.a--tab--right {
+  width: 174px;
+  height: 33px;
+}
+.a--tab--right a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  color: #00ABB6;
+  font-size: 1.2rem;
+  border-radius: 0 9.057px 9.057px 0;
+  box-shadow: inset 0 0 0 2px #00ABB6;
+  background: var(--custom-color, #FFF);
+}
+.a--tab--right a:hover {
+  background-color: rgba(65, 60, 60, 0.078);
+}
+.a--tab--right a.active {
+  background-color: #FFF;
+  color: var(--, #00ABB6);
+}
+
+.next__button a {
+  display: inline-block;
+  border: 2px solid #000; /* 四角の枠線 */
+  padding: 10px; /* 画像と枠線の間の余白 */
+  text-decoration: none; /* リンクの下線を消す */
+}
+
+.next__button a img {
+  display: block;
+  height: auto; /* 高さは自動 */
+}
+
 .scroll--box {
   height: 73.4rem;
   overflow: auto;
