@@ -177,7 +177,7 @@ function getLocation() {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        const geocoder = new google.maps.Geocoder();
+        let geocoder = new google.maps.Geocoder();
         geocoder.geocode(
           {
             location: { lat: latitude, lng: longitude },
@@ -280,14 +280,11 @@ fetch(url)
     const date = document.getElementsByClassName("date");
     const weatherImg = document.getElementsByClassName("weatherImg");
     const weatherTelop = document.getElementsByClassName("weatherTelop");
-    const tempMin = document.getElementsByClassName("tempMin");
     const tempMax = document.getElementsByClassName("tempMax");
 
     weatherCodeList.forEach(function (el, i) {
       let dt = new Date(timeDefinesList[i]);
       let weekdayCount = dt.getDay();
-      if (weekdayCount === 0) date[i].style.color = "red";
-      if (weekdayCount === 6) date[i].style.color = "blue";
       var m = ("00" + (dt.getMonth() + 1)).slice(-2);
       var d = ("00" + dt.getDate()).slice(-2);
       date[i].textContent = `${m}/${d}(${dayList[weekdayCount]})`;
