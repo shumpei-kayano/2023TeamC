@@ -43,17 +43,17 @@
 {% block content %}
 {% if 日記があれば %}
 <!-- タブ -->
-<div class="tab__button">
-    <div class="tab__button--left">
-        <button type="button" onclick="location.href='{% url 'record_diary_detail.htmlに遷移させてください' %}'">
-            日記詳細</button>
+    <!-- タブ -->
+    {% url 'diary:record_diary_detail' as record_diary_detail_url %}
+    {% url 'diary:record_diary_graph' as record_diary_graph_url %}
+    <div class="tab__button a--tab">
+        <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
+            <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
+        </div>
+        <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+            <a href="{{ record_diary_graph_url }}">グラフ</a>
+        </div>
     </div>
-    <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'record_diary_graph.htmlに遷移させてください' %}'">
-            グラフ</button>
-    </div>
-</div>
-
 <!-- グラフの表示 -->
 <script src="{% static 'js/chart.min.js' %}"></script>
 
