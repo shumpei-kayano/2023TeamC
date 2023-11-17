@@ -56,10 +56,12 @@
             {% if saved_diary.photo4 %}
                 <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
             {% endif %}
+            <p>{{ saved_diary.ai_comment }}</p>
         </div>
 
         <div class="cancel__button">
-            <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button>
+            <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
+            {% comment %} <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button> {% endcomment %}
         </div>
         <div class="button">
             <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
