@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block content %}
-
     <h3 class="member__header-text">会員情報を変更しました</h3>
 
     <p class="member__content-text">メールをご確認ください</p>
@@ -23,20 +22,24 @@
 
     <p class="member__red-text">メールが届いているか、<br>メール受信ボックスを確認してください。</p>
 
-<!--メールを送信してください-->
+    {% comment %} メール認証が終わってない {% endcomment %}
+    <p>ユーザーネーム: {{ user.username }}</p>
+    <p>メールアドレス: {{ user.email }}</p>
+
+    <!--メールを送信してください-->
     
     <div class="member__neko.image">
         <img src="{% static 'diary/assets/member_neko.png' %}">
     </div>
 
     <p class="member__content-text">入力いただいたメールアドレスが<br>間違っていたと予想される場合は、変更手続きを<br>初めからやり直してください。</p>
-
+{% comment %} 
     <form method="POST" action="{% url 'setting.html' %}"><!--次のページに遷移させてください-->
         {% csrf_token %}
         <div class="cancel__button">
             <button type="button">設定トップへ</button>
         </div>
     </form>
+{% endcomment %}
 
 {% endblock %}
-

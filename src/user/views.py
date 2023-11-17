@@ -9,3 +9,6 @@ def account_top(request):
 
 def tutorial1(request):
     return render(request, 'tutorial1.html')
+
+def logout(request):
+    return render(request, 'logout.html')

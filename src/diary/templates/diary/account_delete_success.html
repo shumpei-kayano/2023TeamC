@@ -25,11 +25,11 @@
 
 <!-- ネココの画像 -->
 <div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像">
+    {% comment %} <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像"> {% endcomment %}
 </div>
 
 <div class="button">
-    <button id="save-button" type="submit" onclick="location.href='{% url 'diary:home_top.htmlへ遷移お願いします' %}'">トップページへ</button>
+    <a href="{% url 'user:account_top' %}">トップページへ</a>
 </div>
     
 {% endblock %}
