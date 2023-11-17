@@ -48,8 +48,6 @@ class Emotion(models.Model):
     week_number = models.IntegerField(verbose_name='週番号')
     # 月
     month = models.IntegerField(verbose_name='月')
-    # 週
-    week = models.IntegerField(verbose_name='週')
     # 日
     day = models.IntegerField(verbose_name='日')
     # 年
