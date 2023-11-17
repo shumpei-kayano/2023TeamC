@@ -192,3 +192,9 @@ DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 #--------------------allauthの基本設定--------------------
 
+# APIキーの読み込み
+def read_api_key():
+    with open('api_key.txt', 'r') as file:
+        return file.read().strip()
+
+OPENAI_API_KEY = read_api_key()

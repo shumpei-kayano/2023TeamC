@@ -7,27 +7,11 @@
 
 {% block header %}
 <header>
-    <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% comment %} {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div> {% endcomment %}
-    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__spacer--top"></div>
+    <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
-        {% comment %} {% if カレンダーから遷移した場合 %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 選択された日の気温を表示おねがいします 00℃ }}
-        {% else %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 現在の気温を表示 }}
-        {% endif %} {% endcomment %}
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
     </div>
 </header>
 {% endblock %}
@@ -47,7 +31,7 @@
 
 <!-- 編集削除ボタン -->
 <div class="content__diary-diary__group">
-    <div class="icon__button">
+    <div class="a--blue">
         <div class="icon__button__delete">
             {% if diary %}
             <ul>
@@ -102,7 +86,7 @@
 <!-- ネコココメント -->
 <div class="content__diary-diary__comment">
     <p>
-        {{ ネコココメントを表示させてください }}
+        {{ diary.ai_comment }}
     </p>
 </div>
 <!-- ネココの画像 -->

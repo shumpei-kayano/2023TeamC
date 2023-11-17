@@ -10,7 +10,9 @@ body {
   background-color: #FFFDF3;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -21,109 +23,180 @@ li {
   list-style: none;
 }
 
-header h1 {
-  font-size: 2rem;
-  text-align: center;
-}
-
-header, .content, footer {
+header, main, footer {
   width: 39rem;
-}
-
-.content {
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: 5rem; /* ヘッダーの高さ */
-  padding-bottom: 6rem; /* フッターの高さ */
-  background-color: #EEFEFF;
-}
-
-main {
-  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
-  height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
 }
 
 header {
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
   position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   color: #FFFFFF;
   background-color: #04CAD6;
-  height: 5rem; /* 50px / 10px = 5rem */
-  padding-left: 2.4rem; /* 画面の両端に24pxのパディングを追加 */
-  padding-right: 2.4rem;
+  height: 5rem;
   display: flex;
-  justify-content: center; /* 子要素を水平方向に中央揃え */
-  justify-content: space-between;
   align-items: center; /* 垂直方向の中央揃え */
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
 }
-header a {
+header h1 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+header .header__spacer--top {
+  margin-right: auto; /* h1以外の要素を左寄せにする */
   display: flex;
-  padding: 0.5rem 1.6rem 0.5rem 1.6rem;
+  width: 7.2rem;
+  height: 2.8rem;
+}
+header .header__button {
+  margin-right: auto; /* h1以外の要素を左寄せにする */
+  display: flex;
+}
+header .header__button a {
+  display: flex;
+  align-items: center;
+  width: 7.2rem;
+  height: 2.8rem;
   font-size: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font-weight: bold;
   color: #fff;
-  min-width: 72px;
-  min-height: 28px;
   border-radius: 5px;
   border: 0.1rem solid #FFF;
   background-color: #04CAD6;
 }
-header svg {
-  display: inline-block; /* インラインブロック要素にすることで、行内要素のように振る舞う */
-  vertical-align: middle; /* ボタン内で垂直方向に中央揃えにする */
-  margin-right: 0.4rem;
+header .header__button a svg {
+  margin-right: 0.5rem;
 }
-header p {
-  font-size: 2rem;
-  flex-grow: 1; /* テキストが全体の中央揃えになるようにする */
-  text-align: center;
-}
-header a:hover {
+header .header__button a:hover {
   background-color: #00A3AE;
 }
+header .header__spacer, header .header__weather {
+  margin-left: auto; /* 要素を右寄せにする */
+  width: 7.2rem;
+  height: 2.8rem;
+}
+header .header__weather span {
+  font-size: 1.6rem;
+}
 
-.header__nowdate {
-  font-size: 20% !important;
-  color: #FFFFFF;
-  text-align: center;
-  margin: 11px;
+main {
+  margin-top: 5rem; /*上に空白を追加*/
+  height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+  background-color: #EEFEFF;
+}
+main .scroll--content {
+  background-color: #fafafa;
+}
+
+.main::-webkit-scrollbar {
+  background: rgba(239, 239, 239, 0.6078431373);
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
 }
 
 footer {
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
   position: fixed;
   bottom: 0;
+  right: 0;
+  left: 0;
   background-color: #FFFFFF;
   height: 6rem;
   overflow: hidden;
 }
-
-.menu__list {
+footer .menu__list {
+  padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+footer .menu__item {
+  margin: 0;
+}
+footer a {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 1rem; /* 画面の両端に24pxのパディングを追加 */ /* クリック領域を広くするための余白 */
 }
-.menu__list .menu__item {
-  align-items: center;
-  justify-content: center; /* 子要素を水平方向に中央揃え */
-}
-.menu__list a {
-  width: 60px;
-}
-.menu__list a .nav-text {
-  margin-top: 4px;
-  color: #ADADAD; /* メニューテキストの色 */
+footer .nav-text {
   font-size: 1rem; /* テキストのサイズを10%に調整 */
+  color: #ADADAD; /* メニューテキストの色 */
+  margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
 }
 
 @media only screen and (max-width: 767px) {
-  .content {
+  header, .main, footer {
     width: 100%;
-    height: 100%;
+    max-width: none;
   }
   header {
     height: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  header a {
+    width: 72px;
+    height: 28px;
+    font-size: 14px;
+    border: 1px solid #FFF;
+  }
+  header a svg {
+    margin-right: 5px;
+  }
+  header a:hover {
+    background-color: #00A3AE;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  main {
+    margin-top: 50px; /*上に空白を追加*/
+    height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+  }
+  .main::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 20px;
+  }
+  .main::-webkit-scrollbar-thumb {
+    border-radius: 20px;
   }
   footer {
     height: 60px;
+    padding-right: 24px;
+    padding-left: 24px;
+    height: 60px;
+  }
+  footer a {
+    padding: 0 10px; /* 画面の両端に24pxのパディングを追加 */ /* クリック領域を広くするための余白 */
+  }
+  footer .nav-text {
+    font-size: 10px; /* テキストのサイズを10%に調整 */
+    margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
 .btn {
@@ -276,28 +349,131 @@ footer {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
 
-.scroll--box {
-  height: 73.4rem;
-  overflow: auto;
+.a--blue {
+  display: flex;
+  width: 72px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
-.scroll--box .scroll--content {
-  background-color: #fafafa;
+.a--blue p {
+  color: #00ABB6;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.64px;
+  display: inline-block;
+  margin: 0;
+  padding: 0 0 7px 0;
+  vertical-align: middle;
+}
+.a--blue svg {
+  vertical-align: middle;
+  margin-bottom: 5px;
+}
+.a--blue:hover {
+  text-decoration: none;
+  background-image: linear-gradient(#00737A, #00737A);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 calc(100% - 3px);
+}
+.a--blue:hover p {
+  color: #00737A;
+}
+.a--blue:hover img {
+  fill: #00737A;
 }
 
-.scroll-box::-webkit-scrollbar {
-  background: rgba(239, 239, 239, 0.6078431373);
-  width: 5px;
-  height: 5px;
-  border-radius: 20px;
+.a--tab {
+  display: flex;
+  text-align: center;
+  margin: 16px 30px;
+  margin-bottom: 12px;
+}
+.a--tab--left {
+  width: 174px;
+  height: 33px;
+}
+.a--tab--left a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  color: #FFF;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.24px;
+  border-radius: 9.057px 0 0 9.057px;
+  box-shadow: inset 0 0 0 2px #00ABB6;
+  background: #00ABB6;
+}
+.a--tab--left a.active {
+  background-color: var(--custom-color, #00ABB6);
+  color: #FFF;
+}
+.a--tab--right {
+  width: 174px;
+  height: 33px;
+}
+.a--tab--right a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  color: #00ABB6;
+  font-size: 1.2rem;
+  border-radius: 0 9.057px 9.057px 0;
+  box-shadow: inset 0 0 0 2px #00ABB6;
+  background: var(--custom-color, #FFF);
+}
+.a--tab--right a:hover {
+  background-color: rgba(65, 60, 60, 0.078);
+}
+.a--tab--right a.active {
+  background-color: #FFF;
+  color: var(--, #00ABB6);
 }
 
-.scroll-box::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
+.next__button {
+  display: flex;
 }
 
-.scroll-box::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
+.next__button a {
+  display: flex;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #00ABB6; /* 四角の枠線 */
+  text-decoration: none; /* リンクの下線を消す */
+  width: 44px; /* ボタンの幅 */
+  height: 44px; /* ボタンの高さ */
+  box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
+  border-radius: 5px;
+  background-color: #FFF;
+}
+.next__button a:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+
+.next__button a img {
+  display: block;
+  height: auto; /* 高さは自動 */
 }
 
 .week-calendar table {
@@ -335,6 +511,12 @@ footer {
   font-weight: 400;
   line-height: normal;
   text-align: left;
+}
+
+.next__button {
+  margin-top: 16px;
+  margin-bottom: 12px;
+  margin-left: 30px;
 }
 
 .photomv {

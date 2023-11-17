@@ -7,7 +7,12 @@
 
 {% block header %}
 <header>
-    {% comment %} create_diary.htmlのヘッダーと同じ表記なので完成次第ここにもコピペする {% endcomment %}
+    <div class="header__spacer--top"></div>
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
 </header>
 {% endblock %}
 
@@ -30,7 +35,17 @@
     </div>
 </div>
 
-
-
+<!-- 天気 -->
+{% comment %}
+<div id="location"></div>
+<div class="weatherForecast">
+  <div class="weather">
+    <div class="date">--/--(-)</div>
+    <img class="weatherImg">
+    <div class="weatherTelop">--</div>
+    <div><span class="tempMax">-℃</span></div>
+  </div>
+</div>
+{% endcomment %}
 
 {% endblock %}
