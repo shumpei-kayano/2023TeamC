@@ -242,22 +242,26 @@ const weatherCodeList = new Array();
 const tempsMinList = new Array();
 const tempsMaxList = new Array();
 
-main().then(url =>{
-// JSON取得
-fetch(url)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (weather) {
-    document
-      .getElementById("location")
-      .prepend(
-        `${weather[1].publishingOffice}: ${weather[1].timeSeries[0].areas[0].area.name} `
-      );
-    const isTodaysData = weather[0].timeSeries[2].timeDefines.length === 4;
-    const weatherCodes = weather[0].timeSeries[0].areas[0].weatherCodes;
-    const timeDefines = weather[0].timeSeries[0].timeDefines;
-    const temps = weather[0].timeSeries[2].areas[0].temps;
+main().then(url => {
+  // JSON取得
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (weather) {
+      const dateContainer = document.getElementsByClassName("date")[0];
+
+      if (dateContainer) {
+        // location要素が存在する場合の処理
+        dateContainer.textContent = `${weather[1].publishingOffice}: ${weather[1].timeSeries[0].areas[0].area.name} `;
+      } else {
+        console.error("ID 'date' not found in the document.");
+      }
+
+      const isTodaysData = weather[0].timeSeries[2].timeDefines.length === 4;
+      const weatherCodes = weather[0].timeSeries[0].areas[0].weatherCodes;
+      const timeDefines = weather[0].timeSeries[0].timeDefines;
+      const temps = weather[0].timeSeries[2].areas[0].temps;
     weatherCodeList.push(weatherCodes[0], weatherCodes[1]);
     timeDefinesList.push(timeDefines[0], timeDefines[1]);
     if (isTodaysData) {
@@ -276,7 +280,6 @@ fetch(url)
       tempsMinList.push(weather[1].timeSeries[1].areas[0].tempsMin[i]);
       tempsMaxList.push(weather[1].timeSeries[1].areas[0].tempsMax[i]);
     }
-
     const date = document.getElementsByClassName("date");
     const weatherImg = document.getElementsByClassName("weatherImg");
     const weatherTelop = document.getElementsByClassName("weatherTelop");
@@ -287,12 +290,10 @@ fetch(url)
       let weekdayCount = dt.getDay();
       var m = ("00" + (dt.getMonth() + 1)).slice(-2);
       var d = ("00" + dt.getDate()).slice(-2);
+
       date[i].textContent = `${m}/${d}(${dayList[weekdayCount]})`;
-      
+
       weatherImg[i].src = STATIC_URL + weatherCode[el][0];
-
-
-      weatherTelop[i].textContent = weatherCode[el][1];//晴れ後雨等
 
       tempMax[i].textContent = tempsMaxList[i] + "℃";
     });
