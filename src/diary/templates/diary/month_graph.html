@@ -13,16 +13,16 @@
 
 {% block content %}
 <!-- タブ -->
-    <div class="tab__button">
-        <div class="tab__button--left">
-            <button type="button" onclick="location.href='{% url 'calender_month.htmlに遷移させてください' %}'">
-                月間カレンダー</button>
-        </div>
-        <div class="tab__button--right">
-            <button type="button" onclick="location.href='{% url 'month_graph.htmlに遷移させてください' %}'">
-                月間グラフ</button>
-        </div>
+{% url 'diary:calendar_month' as calendar_month_url %}
+{% url 'diary:month_graph' as month_graph_url %}
+<div class="tab__button a--tab">
+    <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+        <a href="{{ calendar_month_url }}">月間カレンダー</a>
     </div>
+    <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+        <a href="{{ month_graph_url }}">月間グラフ</a>
+    </div>
+</div>
 
 
 <!-- 月間のページネーション -->

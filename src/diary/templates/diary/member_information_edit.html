@@ -10,13 +10,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            {% comment %} member_information_edit_cancel.htmlに遷移させてください {% endcomment %}
-            <a href="">
-                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
-                </svg>
-                戻る</a>
-        </div>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
     </div>
     <h1>会員情報変更</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
@@ -25,34 +19,36 @@
 
 {% block content %}
 
-    <form method="POST" action="{% url 'member_information_edit_check.html' %}"><!--次のページに遷移させてください-->
+    <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
         {% csrf_token %}
         <!-- ユーザーネームの編集 -->
         <div class="content__user-name__text">
             <label for="username">ユーザーネーム</label>
-            <br><input type="text" id="username" name="username">
+            <br><input type="text" id="username" name="username" value="{{ user.username }}">
         </div>
 
         <!-- メールアドレスの編集 -->
         <div class="content__user-email__text">
             <label for="email">メールアドレス</label>
-            <br><input type="email" id="email" name="email">
+            <br><input type="email" id="email" name="email" value="{{ user.email }}">
             <!--エラー-->
             <div class="error-message" id="email-error"></div>
         </div>
 
+
+{% comment %} 検討中
         <!-- パスワードの編集 -->
         <div class="content__user-password__text">
             <label for="password">パスワード</label>
             <br><input type="password" id="password" name="password">
             <!--エラー-->
             <div class="error-message" id="password-error"></div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- 送信ボタン -->
         <div class="cancel__button">
-            <button type="button">確認する</button>
-        </div>
+        <button type="submit">確認する</button>
+    </div>
     </form>
 
 
