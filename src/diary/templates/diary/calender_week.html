@@ -11,9 +11,9 @@
 
 {% block header %}
 <header>
-    <div class="header__text">
-        <p>週間カレンダー</p>
-    </div>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>週間カレンダー</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
@@ -22,11 +22,11 @@
 <div class="tab__button">
     <div class="tab__button--left">
         {% comment %} ボタンの遷移先の指定をお願いします {% endcomment %}
-        <button type="button" onclick="location.href='{% url 'calender_week.htmlに遷移させてください' %}'">
+        {% comment %} <button type="button" onclick="location.href='{% url 'calender_week.htmlに遷移させてください' %}'"> {% endcomment %}
             週間カレンダー</button>
     </div>
     <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'week_graph.htmlに遷移させてください' %}'">
+        {% comment %} <button type="button" onclick="location.href='{% url 'week_graph.htmlに遷移させてください' %}'"> {% endcomment %}
             週間グラフ</button>
     </div>
 </div>
@@ -35,81 +35,44 @@
 <div class="calendar-week">
     <div class="calendar-header">
         {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
-        <a href="{% url '' %}"><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
+        <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
         {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-        <span>{{  }}年{{  }}月</span>
+        {% comment %} <span>{{  }}年{{  }}月</span> {% endcomment %}
         {% comment %} 週を動的に進められるようにしてください {% endcomment %}
-        <a href="{% url '' %}"><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
+        <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
         {% comment %} 現在の週を表示させてください {% endcomment %}
-        <a href="{% url '' %}"><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
+        <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
     </div>
-
+</div>
     <!-- 週間カレンダー一覧 -->
+    <div class="week-calendar">
     <table>
         <thead>
             <tr>
-                <th class="sun">日</th>
-                <th>月</th>
-                <th>火</th>
-                <th>水</th>
-                <th>木</th>
-                <th>金</th>
-                <th class="sat">土</th>
+                <td class="sun">日</td>
+                {% comment %} <td></td> {% endcomment %}
+            </tr>
+            <tr>
+                <td class="mon">月</td>
+            </tr>
+            <tr>
+                <td class="tue">火</td>
+            </tr>
+            <tr>
+                <td class="wed">水</td>
+            </tr>
+            <tr>
+                <td class="thr">木</td>
+            </tr>
+            <tr>
+                <td class="sun">金</td>
+            </tr>
+            <tr>
+                <td class="sat">土</td>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                {% for 1週分を繰り返し表示 %}
-                <td>
-                    {% if 日付が現在以降なら %}
-                        {% if 日記が保存されている場合 %}
-                            <div class="calendar-week__list">
-                                {% comment %} その日のrecord_diary_detail.htmlに遷移させてください {% endcomment %}
-                                <a href="{% url '' %}">
-                                    <div class="calendar-week__list__date">
-                                        {% comment %} 月/日の表示をさせてください {% endcomment %}
-                                        {{  }}/{{  }}
-                                    </div>
-                                    <div class="calendar-week__list__img">
-                                        {% comment %} 顔アイコンと日記の一部を表示してください {% endcomment %}
-                                        <img src="{パスを指定してください}" alt="顔のアイコン">
-                                    </div>
-                                    <div class="calendar-week__list__text">
-                                        {{ 先頭5文字を表示（文字数は変更する可能性大） }}・・・
-                                    </div>
-                                    <div class="calendar-week__list__icon">
-                                        <img src="{% static 'diary/assets/right_arrow.png' %}" alt="右矢印のアイコン">
-                                    </div>
-                                </a>
-                            </div>
-                        {% else %}
-                            <div class="calendar-week__list--no-diary">
-                                {% comment %} 日記が保存されていない場合、home_top.htmlにhtmlに遷移させてください{% endcomment %}
-                                <a href="{% url '' %}">
-                                    <div class="calendar-week__list__date">
-                                        {% comment %} 月/日の表示をさせてください {% endcomment %}
-                                        {{  }}/{{  }}
-                                    </div>
-                                    <div class="calendar-week__list__icon">
-                                        <img src="{% static 'diary/assets/right_arrow.png' %}" alt="右矢印のアイコン">
-                                    </div>
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <div class="calendar-week__list--after">
-                            <div class="calendar-week__list__date">
-                                {% comment %} 月/日の表示をさせてください {% endcomment %}
-                                {{  }}/{{  }}
-                            </div>
-                        </div>
-                    {% endif %}
-                </td>
-                {% endfor %}
-            </tr>
-        </tbody>
     </table>
-</div>
+    </div>
 {% endblock %}
 
 {% comment %} {% block javascripts %}

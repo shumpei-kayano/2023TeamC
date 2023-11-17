@@ -27,71 +27,21 @@
     </style>
 </head>
 <body>
-<div id="content" class="content">
 
     {% block header %}{% endblock %}
 
     <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer>
-        <div class="menu">
-            <nav>
-                <ul class="menu__list">
-                    <li class="menu__item">
-                        <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                            <a href="{% url 'diary:home_top1' %}">
-                                <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像">
-                                <div id="text" class="nav-text" onclick="changeColor('text')">ホーム</div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="menu__item">
-                        <div class="main__month">
-                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                                <a href="{% url 'diary:calendar_month' %}">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21.6 2.18182H20.4V0H18V2.18182H6V0H3.6V2.18182H2.4C1.08 2.18182 0 3.16364 0 4.36364V21.8182C0 23.0182 1.08 24 2.4 24H21.6C22.92 24 24 23.0182 24 21.8182V4.36364C24 3.16364 22.92 2.18182 21.6 2.18182ZM21.6 21.8182H2.4V7.63636H21.6V21.8182Z" fill="#ADADAD"/>
-                                    </svg>
-                                    {% comment %} <img src="{% static 'diary/assets/Vector.svg' %}" alt="月間カレンダーの画像"> {% endcomment %}
-                                    <div id="text" class="nav-text" onclick="changeColor('text')">月</div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="menu__item">
-                        <div class="main__week">
-                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                                <a href="{% url 'diary:calender_week' %}">
-                                    <img src="{% static 'diary/assets/week.png' %}" alt="週間カレンダーの画像">
-                                    <div id="text" class="nav-text" onclick="changeColor('text')">週</div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="menu__item">
-                        <div calss="main__setting">
-                            <div id="icon" class="nav-item" onclick="changeColor('icon')">
-                                <a href="{% url 'diary:setting' %}">
-                                    <img src="{% static 'diary/assets/setting.png' %}" alt="設定の画像">
-                                    <div id="text" class="nav-text" onclick="changeColor('text')">設定</div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+        <div class="scroll--content">
+            {% block content %}{% endblock %}
         </div>
-    </footer>
-</div>
+    </main>
 
 <footer>
     <div class="menu">
         <nav>
             <ul class="menu__list">
                 <li class="menu__item">
-                    <a href="{% url 'diary:create_diary' %}">
+                    <a href="{% url 'diary:home_top1' %}">
                         {% comment %} <img src="{% static 'diary/assets/home.png' %}" alt="ホームの画像"> {% endcomment %}
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 0L0 10.2857H3V24H9V17.1429H15V24H21V10.1829L24 10.2857L12 0Z" fill="#ADADAD"/>
@@ -130,7 +80,6 @@
         </nav>
     </div>
 </footer>
-
 
 {% comment %} <script>
     function changeColor(id) {

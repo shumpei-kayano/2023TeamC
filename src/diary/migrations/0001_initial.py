@@ -44,7 +44,6 @@ class Migration(migrations.Migration):
                 ('mixed', models.FloatField(verbose_name='混合')),
                 ('week_number', models.IntegerField(verbose_name='週番号')),
                 ('month', models.IntegerField(verbose_name='月')),
-                ('week', models.IntegerField(verbose_name='週')),
                 ('day', models.IntegerField(verbose_name='日')),
                 ('year', models.IntegerField(verbose_name='年')),
                 ('diary', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='diary.diary', verbose_name='日記')),
