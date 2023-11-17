@@ -10,7 +10,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="location.href='{% url 'setting.htmlに遷移させてください' %}'"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
         </div>
     </div>
         <div class="header__text">
@@ -30,12 +30,11 @@
 </div>
 
 <!--ログアウト-->
-<form method="POST" enctype='multipart/form-data'>
+
     {% csrf_token %}
     <div class="button">
-        <button type="submit" id="deleta-button" onclick="location.href='{% url 'logout_success.htmlに遷移させてください' %}'">ログアウト</button>
+        <a href="{% url 'user:logout' %}">ログアウト</a>
     </div>
-</form>
 
     <div class="cancel__button">
         <button id="back-button" type="button" onclick="history.back()">キャンセル</button>

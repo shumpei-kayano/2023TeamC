@@ -9,47 +9,45 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="location.href='{% url 'member_infomation_edit_cancel.htmlに遷移させてください' %}'"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
         </div>
     </div>
-        <div class="header__text">
-            <p>会員情報変更</p>
-        </div>
+    <div class="header__text">
+        <p>会員情報変更</p>
+    </div>
 </header>
 {% endblock %}
 
 {% block content %}
-
 <div class="member-info__check-text">
     <p>入力内容をご確認ください</p>
 </div>
 <!-- ユーザーの会員情報の表示 -->
 <div class="content__user-info__name">
     <p>ユーザーネーム</p>
-    <p>{{ 新しく入力されたユーザーネームを表示させてください }}</p>
-<hr>
+    <p>{{ username }}</p>
+    <hr>
 </div>
 <div class="content__user-info__email">
     <p>メールアドレス</p>
-    <p>{{ 新しく入力されたメールアドレスを表示させてください }}</p>
-<hr>
+    <p>{{ email }}</p>
+    <hr>
 </div>
+
+<!-- 保留
 <div class="content__user-info__password">
     <p>パスワード</p>
     <p>{{ 新しく入力されたパスワードを表示させてください }}</p>
-<hr>
+    <hr>
 </div>
+-->
 
-<form method="POST" enctype='multipart/form-data'>
-    {% csrf_token %}
-    <div class="button">
-        <button type="submit" id="save-button" onclick="location.href='{% url 'member_infomation_edit_comp.htmlに遷移させてください' %}'">登録</button>
-    </div>
-</form>
-
+{% csrf_token %}
+{% with username=request.session.username email=request.session.email %}
+    <a href="{% url 'diary:member_information_edit_comp' %}">登録</a>
+{% endwith %}
 <div class="neko__dango.image">
     <img src="{% static 'diary/assets/neko_dango.png' %}">
 </div>
 
 {% endblock %}
-```

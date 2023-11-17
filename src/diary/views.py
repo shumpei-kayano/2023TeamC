@@ -44,9 +44,23 @@ def analyze_sentiment(text, diary):
 
 
 
-@login_required
 def account_delete_success(request):
+    # ログイン中のユーザーアカウントを取得
+    user = request.user
+    # ユーザに関連するデータを削除
+    user_diaries = Diary.objects.filter(user=user)
+
+    # 日記に関連する感情分析データを削除
+    for diary in user_diaries:
+        Emotion.objects.filter(diary=diary).delete()
+
+    # 日記を削除
+    user_diaries.delete()
+
+    # ユーザを削除
+    user.delete()
     return render(request, 'diary/account_delete_success.html')
+
 
 @login_required
 def account_delete(request):
@@ -186,11 +200,38 @@ def member_information_edit_cancel(request):
 
 @login_required
 def member_information_edit_check(request):
-    return render(request, 'diary/logout.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        request.session['username'] =username
+        request.session['email'] =email
+    return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email':email})
 
 @login_required
 def member_information_edit_comp(request):
-    return render(request, 'diary/member_information_edit_comp.html')
+    # セッション受け取る
+    new_username = request.session.get('username')
+    new_email = request.session.get('email')
+
+    # ユーザー情報を取得
+    user = request.user
+
+    # ユーザー情報を更新
+    if new_username:
+        user.username = new_username
+
+    # メールアドレスを更新
+    if new_email:
+        user.email = new_email
+
+    # セーブ
+    user.save()
+
+    # セッションを削除
+    request.session.pop('username', None)
+    request.session.pop('email', None)
+
+    return render(request, 'diary/member_information_edit_comp.html', {'user': user})
 
 @login_required
 def member_information_edit(request):

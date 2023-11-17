@@ -10,7 +10,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="location.href='{% url 'setting.htmlに遷移させてください' %}'"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+            <a href="{% url 'diary:setting' %}"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</a>
         </div>
     </div>
         <div class="header__text">
@@ -34,7 +34,7 @@
 <form method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
     <div class="button">
-        <button type="submit" id="deleta-button" onclick="location.href='{% url 'account_deleta_success.htmlに遷移させてください' %}'">アカウントを削除</button>
+        <a href="{% url 'diary:account_delete_success' %}">アカウントを削除</a>
     </div>
 </form>
 

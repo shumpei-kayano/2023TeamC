@@ -23,24 +23,25 @@
 <!-- ユーザーの会員情報の表示 -->
     <div class="content__user-info__name">
         <p>ユーザーネーム</p>
-        <p>{{ ユーザーネームを表示させてください }}</p>
+        <p>{{ user.username }}</p>
     <hr>
     </div>
     <div class="content__user-info__email">
         <p>メールアドレス</p>
-        <p>{{ メールアドレスを表示させてください }}</p>
-    <hr>
-    </div>
-    <div class="content__user-info__password">
-        <p>パスワード</p>
-        <p>{{ パスワードを表示させてください }}</p>
+        <p>{{ user.email }}</p>
     <hr>
     </div>
 
-    <form method="POST" action="{% url 'member_information_edit.html' %}">
+    {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
+    {% comment %} <div class="content__user-info__password">
+        <p>パスワード</p>
+        <p>{{ user.password }}</p>
+    <hr>
+    </div> {% endcomment %}
+
         {% csrf_token %}
         <div class="cancel__button">
-            <button type="button">会員情報を変更する</button>
+            <a href="{% url 'diary:member_information_edit' %}">会員情報を変更する</a>
         </div>
     </form>
 
