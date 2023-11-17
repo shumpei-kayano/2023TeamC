@@ -9,12 +9,48 @@ from datetime import datetime, date
 from django.views.generic.edit import UpdateView
 from django.conf import settings
 import openai
+import boto3
+
+# comrehendを使って感情分析を行う関数
+def analyze_sentiment(text, diary):
+    # 感情分析の生成
+    comprehend = boto3.client('comprehend', 'us-east-1')
+    result = comprehend.detect_sentiment(Text=text, LanguageCode='ja')
+
+    # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在するか確認
+    existing_emotion = Emotion.objects.filter(diary=diary, diary__user=diary.user).first()
+
+    # Emotion モデルにデータをセット
+    if existing_emotion:
+        # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在する場合は上書き保存
+        existing_emotion.reasoning = result['Sentiment']
+        existing_emotion.positive = result['SentimentScore']['Positive']
+        existing_emotion.negative = result['SentimentScore']['Negative']
+        existing_emotion.neutral = result['SentimentScore']['Neutral']
+        existing_emotion.mixed = result['SentimentScore']['Mixed']
+        existing_emotion.save()
+    # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
+    else:
+        new_emotion = Emotion(
+            diary=diary,
+            reasoning=result['Sentiment'],
+            positive=result['SentimentScore']['Positive'],
+            negative=result['SentimentScore']['Negative'],
+            neutral=result['SentimentScore']['Neutral'],
+            mixed=result['SentimentScore']['Mixed'],
+            week_number=diary.created_date.isocalendar()[1],
+            month=diary.created_date.month,
+            day=diary.created_date.day,
+            year=diary.created_date.year
+        )
+        new_emotion.save()
+
 
 
 @login_required
 def account_delete_success(request):
     return render(request, 'diary/account_delete_success.html')
-  
+
 @login_required
 def account_delete(request):
     return render(request, 'diary/account_delete.html')
@@ -37,7 +73,7 @@ def create_diary_confirmation(request):
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
-            new_diary.user = request.user  
+            new_diary.user = request.user
             new_diary.save()  # データベースに保存
             openai.api_key = settings.OPENAI_API_KEY
 
@@ -59,14 +95,17 @@ def create_diary_confirmation(request):
             # 一旦カレンダーが出来るまで----------------------------------------------------------
             saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
+            
             return redirect('diary:create_diary_confirmation', pk=saved_diary.id)
     else:
         form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 def create_diary_confirmation2(request, pk):
+    # pkからdiaryを取得する
     diary = get_object_or_404(Diary, id=pk)
 
+    # 編集した時の処理
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
         if form.is_valid():
@@ -90,6 +129,9 @@ def create_diary_confirmation2(request, pk):
 
             return redirect('diary:create_diary_confirmation', pk=pk)
 
+    # 感情分析の実行関数
+    analyze_sentiment(diary.content, diary)
+    
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
@@ -157,6 +199,8 @@ def home_top(request):
 @login_required
 def home_top2(request,pk):
         diary = get_object_or_404(Diary, id=pk)
+        emotion = Emotion.objects.get(diary=diary)
+        emotion.delete()
         diary.delete()
         return redirect('diary:home_top1')
 

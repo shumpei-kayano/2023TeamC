@@ -1,0 +1,10 @@
+.calendar--background{
+    background-color: $background_color;
+}
+
+.calendar__month td {
+    border:1px solid $header_color;
+    width: 5.5rem;
+    height: 6.6rem;
+}
+
