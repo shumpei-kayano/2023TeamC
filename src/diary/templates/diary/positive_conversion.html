@@ -5,7 +5,7 @@
 
 {% block title %}日記のポジティブ変換{% endblock %}
 
-{% block header %}
+{% comment %} {% block header %}
 <header>
     <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
@@ -30,7 +30,7 @@
         {% endif %}
     </div>
 </header>
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 <!-- <style>
     /* ポップアップの初期状態は非表示 */
@@ -52,7 +52,7 @@
 <!-- ユーザーが入力した日記の表示 -->
 <div class="content__today-diary__text">
     <p>
-        {{ ユーザーが入力した日記を表示させてください }}
+        {{ diary.content }}
     </p>
 </div>
 
@@ -63,16 +63,16 @@
 
 <!-- ポジティブ変換した日記の表示 -->
     <!-- enctype='multipart/form-data'でファイルアップロード -->
-<form method="post" enctype='multipart/form-data'>
+<form method="POST"  enctype='multipart/form-data'>
     {% csrf_token %}
     <div class="content__today-diary__positive-text">
         <p>
-            {{ ポジティブ変換した日記を表示させてください }}
+            {{ save_content }}
         </p>
     </div>
     <p>日記の内容を上記に変更しますか？</p>
     <div class="button">
-        <button type="submit" id="save-button" onclick="location.href='{% url 'today_diary_detail.htmlに遷移させてください' %}'">保存</button>
+        <button type="submit" id="save-button" name="save_button" onclick="location.href='{% url 'diary:today_diary_detail' diary.pk %}'">保存</button>
     </div>
 </form>
 

@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
+from django.views.generic.edit import UpdateView
+from django.conf import settings
+import openai
 import boto3
 
 # comrehendを使って感情分析を行う関数
@@ -72,7 +75,23 @@ def create_diary_confirmation(request):
             new_diary = form.save(commit=False)
             new_diary.user = request.user
             new_diary.save()  # データベースに保存
-            
+            openai.api_key = settings.OPENAI_API_KEY
+
+            user_diary = "貴方は「観測者」です。以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って日記に対する感想を返してください。段階を踏んで考えて答えてください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。\n・動機\nチャット相手の話を聞いて、アドバイスをしようとしている。\n・欠点、短所、不安\n年齢を聞かれる\n# 基本設定\nあなたの一人称が「可愛いボク」です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\n{キャラクター}は100文字以上しゃべれません。箇条書きでの返答はせず、{キャラクター}が会話しているように、カウンセリングをする。\n以下の日記に対してカウンセリングしてください。\n"+ new_diary.content
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages= [
+                        {   "role"      : "user",
+                            "content"   : user_diary
+                        }
+                    ]
+            )
+            ai_comment = response["choices"][0]["message"]["content"]
+            # データベースへの保存
+            new_diary.ai_comment = ai_comment
+            new_diary.save()
+            print(ai_comment)
+
             # 一旦カレンダーが出来るまで----------------------------------------------------------
             saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
@@ -85,11 +104,29 @@ def create_diary_confirmation(request):
 def create_diary_confirmation2(request, pk):
     # pkからdiaryを取得する
     diary = get_object_or_404(Diary, id=pk)
+
     # 編集した時の処理
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
         if form.is_valid():
             form.save()
+            openai.api_key = settings.OPENAI_API_KEY
+
+            user_diary = "貴方は「観測者」です。以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って日記に対する感想を返してください。段階を踏んで考えて答えてください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。\n・動機\nチャット相手の話を聞いて、アドバイスをしようとしている。\n・欠点、短所、不安\n年齢を聞かれる\n# 基本設定\nあなたの一人称が「可愛いボク」です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\n{キャラクター}は100文字以上しゃべれません。箇条書きでの返答はせず、{キャラクター}が会話しているように、カウンセリングをする。\n以下の日記に対してカウンセリングしてください。\n"+ diary.content
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages= [
+                        {   "role"      : "user",
+                            "content"   : user_diary
+                        }
+                    ]
+            )
+            ai_comment = response["choices"][0]["message"]["content"]
+            # データベースへの保存
+            diary.ai_comment = ai_comment
+            diary.save()
+            print(ai_comment)
+
             return redirect('diary:create_diary_confirmation', pk=pk)
 
     # 感情分析の実行関数
@@ -205,8 +242,29 @@ def month_graph(request):
     return render(request, 'diary/month_graph.html')
 
 @login_required
-def positive_conversion(request):
-    return render(request, 'diary/positive_conversion.html')
+def positive_conversion(request, pk):
+    diary = get_object_or_404(Diary, id=pk)
+    openai.api_key = settings.OPENAI_API_KEY
+    save_content = ""
+
+    if 'save_button' in request.POST:
+    # データベースへの保存
+        diary.content = save_content
+        diary.save()  # データベースの保存は最後に行う
+        return redirect('diary:today_diary_detail', pk=pk)
+    else:
+        user_diary = "以下は日記のコンテンツです。ポジティブで前向きになれるよう、ネガティブな言葉を変換し、書き換えてください。あなたのセリフはいりません。\n" + diary.content
+        response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": user_diary}
+            ]
+        )
+        ai_content = response["choices"][0]["message"]["content"]
+        save_content = ai_content
+
+
+    return render(request, 'diary/positive_conversion.html', {'diary': diary, 'save_content':save_content })
 
 @login_required
 def setting(request):
@@ -224,7 +282,6 @@ def today_diary_detail(request):
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
-
 
 @login_required
 def today_diary_detail2(request,pk):
