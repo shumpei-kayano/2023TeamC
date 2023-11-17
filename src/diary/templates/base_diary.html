@@ -26,15 +26,14 @@
     </style>
 </head>
 <body>
-<div id="content" class="content">
 
     {% block header %}{% endblock %}
 
     <main>
-        {% block content %}{% endblock %}
+        <div class="scroll--content">
+            {% block content %}{% endblock %}
+        </div>
     </main>
-
-</div>
 
 <footer>
     <div class="menu">
@@ -80,7 +79,6 @@
         </nav>
     </div>
 </footer>
-
 
 {% comment %} <script>
     function changeColor(id) {
