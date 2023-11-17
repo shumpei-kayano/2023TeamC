@@ -296,7 +296,7 @@ fetch(url)
 
 
       weatherTelop[i].textContent = weatherCode[el][1];//晴れ後雨等
-      tempMin[i].textContent = tempsMinList[i] + "℃";
+
       tempMax[i].textContent = tempsMaxList[i] + "℃";
     });
   });
