@@ -23,87 +23,89 @@
 {% endblock %}
 
 {% block content %}
-<div class="content__help__group">
-    <div class="content__help__text--h2">
-        <h2>日記作成</h2>
-    </div>
-    <div cass="content__help__list">
-        <ol>
-            <li>
-                <p>ホームトップ画面の<img src="{% static 'diary/assets/help_home_icon.png' %}" alt="ホームの画像">ボタンから<br>
-                    <svg width="33" height="36" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.171 26.376C6.149 26.53 6.105 26.926 6.105 27.168C6.105 27.751 6.105 28.675 6.105 29.203C6.105 30.105 6.105 33.669 6.105 34.45C6.105 35.033 5.83 35.33 5.17 35.33C4.697 35.33 4.048 35.297 3.597 35.253L3.52 34.373C4.004 34.461 4.499 34.505 4.796 34.505C5.093 34.505 5.214 34.373 5.225 34.087C5.225 33.482 5.225 29.731 5.225 29.203C5.225 28.829 5.225 27.74 5.225 27.157C5.225 26.926 5.181 26.541 5.148 26.376H6.171ZM1.232 28.235C1.54 28.268 1.815 28.29 2.167 28.29C2.816 28.29 8.371 28.29 9.02 28.29C9.273 28.29 9.647 28.279 9.911 28.235V29.148C9.625 29.126 9.295 29.126 9.031 29.126C8.371 29.126 2.838 29.126 2.167 29.126C1.837 29.126 1.518 29.137 1.232 29.159V28.235ZM3.762 30.82C3.289 31.766 2.266 33.163 1.639 33.845L0.891 33.328C1.617 32.646 2.563 31.337 2.992 30.446L3.762 30.82ZM8.36 30.457C8.943 31.161 9.823 32.536 10.263 33.328L9.449 33.779C9.009 32.921 8.184 31.546 7.612 30.853L8.36 30.457ZM12.111 30.237C12.452 30.27 13.024 30.303 13.651 30.303C14.454 30.303 18.865 30.303 19.679 30.303C20.229 30.303 20.614 30.259 20.867 30.237V31.315C20.636 31.304 20.174 31.271 19.69 31.271C18.854 31.271 14.465 31.271 13.651 31.271C13.046 31.271 12.463 31.293 12.111 31.315V30.237ZM27.409 26.805C27.299 27.069 27.178 27.355 27.024 27.828C26.672 28.95 25.396 32.899 24.923 34.01L23.933 34.043C24.483 32.778 25.759 28.796 26.089 27.63C26.232 27.124 26.276 26.871 26.309 26.574L27.409 26.805ZM29.499 30.49C30.269 31.612 31.479 33.834 31.93 34.967L31.017 35.374C30.577 34.186 29.455 31.898 28.663 30.853L29.499 30.49ZM23.504 33.779C25.088 33.702 29.026 33.262 30.445 33.053L30.687 33.911C29.158 34.109 25.11 34.549 23.559 34.703C23.284 34.725 22.954 34.769 22.646 34.813L22.47 33.801C22.8 33.812 23.185 33.801 23.504 33.779Z" fill="#007880"/>
-                        <path d="M16.5 0L5 9.85714H7.875V23h23.625V16.4286h29.375V23H25.125V9.75857L28 9.85714L16.5 0Z" fill="#00ABB6"/>
-                    </svg>
-                    <img src="{% static 'diary/assets/help_create_btn.svg' %}" alt="日記作成ボタンの画像">ボタンをタップして日記作成<br>
-                    <img src="{% static 'diary/assets/edit.png' %}" alt="日記作成ボタンの画像">
-                    画面に移動します。</p>
-            </li>
-            <li>
-                <p>日記作成画面では日記の入力と写真、動画を添<br>
-                    付することができます。（最大8枚まで）</p>
-            </li>
-            <li>
-                <p>日記を入力したら<img src="{% static 'diary/assets/help_save_btn.svg' %}" alt="保存ボタンの画像">ボタンをタップ<br>
-                    してください。</p>
-                <div class="content__help__list__chart">
-                    <img src="{% static 'diary/assets/help_create_diary_chart.svg' %}" alt="日記作成の図">
-                </div>
-            </li>
-            <li>
-                <p>日記を保存する際にネココがアドバイスをして<br>
-                    くれることがあります。</p>
-                <div class="content__help__list__chart">
-                    <img src="{% static 'diary/assets/counseling_chart.svg' %}" alt="カウンセリングポップアップの図">
-                </div>
-            </li>
-        </ol>
-    </div>
-</div>
+<main class="ground ground--white">
+    <div class="scroll--content">
 
-<div class="content__help__group">
-    <div class="content__help__text--h2">
-        <h2>日記のポジティブ変換</h2>
-    </div>
-    <div cass="content__help__list">
-        <ol>
-            <li>
-                <p>日記を保存後、<img src="{% static 'diary/assets/help_positive_btn.svg' %}" alt="ポジティブ変換ボタンの画像">ボタン<br>
-                    をタップすると入力内容をポジティブな文章に<br>
-                    変換することができます。</p>
-            </li>
-            <li>
-                <p><img src="{% static 'diary/assets/counseling_cancel_btn.svg' %}" alt="キャンセルボタンの画像">ボタンをタップすると変換せずに<br>
-                    日記を保存します。</p>
-            </li>
-        </ol>
-    </div>
-</div>
+        <div class="content__help--background-color">
+            <div class="content__help__group">
+                <div class="content__help__text--h2">
+                    <h2>日記作成</h2>
+                </div>
+                <div cass="content__help__list">
+                    <ol class="list_test-wrap">
+                        <li class="list_test">
+                            <p>ホームトップ画面の<img src="{% static 'diary/assets/help_home_icon.svg' %}" alt="ホームの画像">ボタンから<br>
+                                <img src="{% static 'diary/assets/help_create_btn.svg' %}" alt="日記作成ボタンの画像">ボタンをタップして日記作成<br>
+                                画面に移動します。</p>
+                        </li>
+                        <li class="list_test">
+                            <p>日記作成画面では日記の入力と写真、動画を添<br>
+                                付することができます。（最大8枚まで）</p>
+                        </li>
+                        <li class="list_test">
+                            <p>日記を入力したら<img src="{% static 'diary/assets/help_save_btn.svg' %}" alt="保存ボタンの画像">ボタンをタップ<br>
+                                してください。</p>
+                            <div class="content__help__list__chart">
+                                <img src="{% static 'diary/assets/help_create_diary_chart.svg' %}" alt="日記作成の図">
+                            </div>
+                        </li>
+                        <li class="list_test">
+                            <p>日記を保存する際にネココがアドバイスをして<br>
+                                くれることがあります。</p>
+                            <div class="content__help__list__chart">
+                                <img src="{% static 'diary/assets/counseling_chart.svg' %}" alt="カウンセリングポップアップの図">
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
 
-<div class="content__help__group">
-    <div class="content__help__text--h2">
-        <h2>日記詳細</h2>
-    </div>
-    <div cass="content__help__list">
-        <ol>
-            <li>
-                <p>日記作成後、ホームトップ画面に日記詳細が表<br>
-                    示されます。日記の削除や編集、ネココのコメ<br>
-                    ントを閲覧することができます。</p>
-                <p>詳しくはヘルプの「日記の編集・削除」ページ<br>
-                    をご覧ください。</p>
-                <div class="content__help__list__chart">
-                    <img src="{% static 'diary/assets/help_diary_detail_chart.svg' %}" alt="日記詳細の図">
+            <div class="content__help__group">
+                <div class="content__help__text--h2">
+                    <h2>日記のポジティブ変換</h2>
                 </div>
-            </li>
-            <li>
-                <p><img src="{% static 'diary/assets/help_graph_btn.svg' %}" alt="グラフボタンの画像">ボタンをタップしてその日の感情の<br>
-                    合計グラフを閲覧できます。</p>
-                <div class="content__help__list__chart">
-                    <img src="{% static 'diary/assets/help_graph_chart.svg' %}" alt="日記詳細の図">
+                <div cass="content__help__list">
+                    <ol class="list_test-wrap">
+                        <li class="list_test">
+                            <p>日記を保存後、<img src="{% static 'diary/assets/help_positive_btn.svg' %}" alt="ポジティブ変換ボタンの画像">ボタン<br>
+                                をタップすると入力内容をポジティブな文章に<br>
+                                変換することができます。</p>
+                        </li>
+                        <li class="list_test">
+                            <p><img src="{% static 'diary/assets/positive_cancel_btn.svg' %}" alt="キャンセルボタンの画像">ボタンをタップすると変換せずに<br>
+                                日記を保存します。</p>
+                        </li>
+                    </ol>
                 </div>
-            </li>
-        </ol>
+            </div>
+
+            <div class="content__help__group">
+                <div class="content__help__text--h2">
+                    <h2>日記詳細</h2>
+                </div>
+                <div cass="content__help__list">
+                    <ol class="list_test-wrap">
+                        <li class="list_test">
+                            <p>日記作成後、ホームトップ画面に日記詳細が表<br>
+                                示されます。日記の削除や編集、ネココのコメ<br>
+                                ントを閲覧することができます。</p>
+                            <p>詳しくはヘルプの「日記の編集・削除」ページ<br>
+                                をご覧ください。</p>
+                            <div class="content__help__list__chart">
+                                <img src="{% static 'diary/assets/help_diary_detail_chart.svg' %}" alt="日記詳細の図">
+                            </div>
+                        </li>
+                        <li class="list_test">
+                            <p><img src="{% static 'diary/assets/help_graph_btn.svg' %}" alt="グラフボタンの画像">ボタンをタップしてその日の感情の<br>
+                                合計グラフを閲覧できます。</p>
+                            <div class="content__help__list__chart--last">
+                                <img src="{% static 'diary/assets/help_graph_chart.svg' %}" alt="日記詳細の図">
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</main>
 {% endblock %}

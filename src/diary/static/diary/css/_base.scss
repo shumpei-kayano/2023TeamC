@@ -14,11 +14,16 @@ body {
     flex-direction: column; // 縦並びにする
 }
 
+p{
+    line-height: 1.7rem;
+    letter-spacing: 0.04rem;
+}
+
 a{
     text-decoration: none; // リンクの下線を消す
 }
 
-li{
+.menu__item, .list_item{
     list-style: none;
 }
 
@@ -119,8 +124,8 @@ main{
 .main::-webkit-scrollbar {
     background: #efefef9b;
     // スクロールバーの幅を調整
-    width: 5px;
-    height: 5px;
+    width: 2px;
+    height: 2px;
     // 角丸を指定
     border-radius: 20px;
 }
@@ -134,6 +139,15 @@ main{
 // スクロールバー（hover時）
 .main::-webkit-scrollbar-thumb:hover {
     background-color: rgb(173, 173, 173);
+}
+
+.ground{
+    &--white{
+        background-color: $background_color;
+    }
+    &--blue{
+        background-color: $main_background_color;
+    }
 }
 
 // .camera__area {

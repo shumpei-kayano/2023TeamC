@@ -27,12 +27,12 @@
     <div class="header__weather">
         {% if カレンダーから遷移した場合 %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 選択された日の気温を表示おねがいします 00℃ }}
         {% else %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 現在の気温を表示 }}
         {% endif %}
@@ -41,62 +41,68 @@
 {% endblock %}
 
 {% block content %}
-{% if 日記があれば %}
-<!-- タブ -->
-    <!-- タブ -->
-    {% url 'diary:record_diary_detail' as record_diary_detail_url %}
-    {% url 'diary:record_diary_graph' as record_diary_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
-            <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
-        </div>
-        <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
-            <a href="{{ record_diary_graph_url }}">グラフ</a>
-        </div>
-    </div>
-<!-- グラフの表示 -->
-<script src="{% static 'js/chart.min.js' %}"></script>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-<div id="circle__graph">
-    <div class="circle__graph__img">
-        <img src="{% static 'diary/assets/circle_graph.png' %}" alt="感情グラフ">感情の合計</img>
-        {% comment %} グラフを表示 {% endcomment %}
-        <div style="position: relative;">
-            <canvas id="myPieChart" width="400" height="200"></canvas>
-            <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+        {% if 日記があれば %}
+        <!-- タブ -->
+            <!-- タブ -->
+            {% url 'diary:record_diary_detail' as record_diary_detail_url %}
+            {% url 'diary:record_diary_graph' as record_diary_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
+                    <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
+                </div>
+                <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+                    <a href="{{ record_diary_graph_url }}">グラフ</a>
+                </div>
+            </div>
+        <!-- グラフの表示 -->
+        <script src="{% static 'js/chart.min.js' %}"></script>
+
+        <div id="circle__graph">
+            <div class="circle__graph__img">
+                <img src="{% static 'diary/assets/circle_graph.svg' %}" alt="感情グラフ">感情の合計</img>
+                {% comment %} グラフを表示 {% endcomment %}
+                <div style="position: relative;">
+                    <canvas id="myPieChart" width="400" height="200"></canvas>
+                    <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<!-- ネコココメント -->
-<div class="content__today-diary__comment">
-    <p>
-        {{ ネコココメントを表示させてください }}
-    </p>
-</div>
-<!-- ネコココメントの画像 -->
-<div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/review_neko.png' %}" alt="ネココの画像">
-</div>
-
-{% else %}
-    <div class="content__today-diary__group">
         <!-- ネコココメント -->
-        <div class="content__no-diary__comment">
+        <div class="content__today-diary__comment">
             <p>
-                日記がないよー。
+                {{ ネコココメントを表示させてください }}
             </p>
         </div>
-        <!-- ネココの画像 -->
-        <div class="content__no-diary__comment__img">
-            <img src="{% static'diary/assets/tea_neko.png' %}" alt="ネココの画像">
+        <!-- ネコココメントの画像 -->
+        <div class="content__today-diary__comment__img">
+            <img src="{% static'diary/assets/review_neko.svg' %}" alt="ネココの画像">
         </div>
-        <!-- 日記を書くボタン -->
-        <div class="content__no-diary__button">
-            <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
-                日記を書く</button>
+
+        {% else %}
+            <div class="content__today-diary__group">
+                <!-- ネコココメント -->
+                <div class="content__no-diary__comment">
+                    <p>
+                        日記がないよー。
+                    </p>
+                </div>
+                <!-- ネココの画像 -->
+                <div class="content__no-diary__comment__img">
+                    <img src="{% static'diary/assets/tea_neko.svg' %}" alt="ネココの画像">
+                </div>
+                <!-- 日記を書くボタン -->
+                <div class="content__no-diary__button">
+                    <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
+                        日記を書く</button>
+            </div>
+        {% endif %}
+
     </div>
-{% endif %}
+</main>
 {% endblock %}
 
 {% block javascripts %}

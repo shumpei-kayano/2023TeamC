@@ -23,16 +23,20 @@
 {% endblock %}
 
 {% block content %}
-<div class="help__menu">
-<ul>
-    <li><a href="/help_diary.html">日記作成</a></li>
-    <li><a href="/help_diary_edit.html">日記の編集・削除</a></li>
-    <li><a href="/help_calender.html">月間・週間カレンダー</a></li>
-    <li><a href="/help_graph.html">統計グラフ</a></li>
-</ul>
-</div>
+<main class="ground ground--white">
+    <div class="scroll--content">
+        <div class="help__menu">
+        <ul>
+            <li class="list_item"><a href="/help_diary.html">日記作成</a></li>
+            <li class="list_item"><a href="/help_diary_edit.html">日記の編集・削除</a></li>
+            <li class="list_item"><a href="/help_calender.html">月間・週間カレンダー</a></li>
+            <li class="list_item"><a href="/help_graph.html">統計グラフ</a></li>
+        </ul>
+        </div>
 
-<div class="neko__dango.image">
-    <img src="{% static 'diary/assets/back_arrow.png' %}">
-</div>
+        <div class="neko__dango.image">
+            <img src="{% static 'diary/assets/back_arrow.svg' %}">
+        </div>
+    </div>
+</main>
 {% endblock %}

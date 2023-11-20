@@ -27,27 +27,33 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-{% csrf_token %}
-    <div class="content__today-diary__text">
-      <div class='diarycontent'>
-        {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}
-        {{ Diary.content }}
-        <div class='photomv'>
-          {{ Diary.photo1 }}
-          {{ Diary.photo2 }}
-          {{ Diary.photo3 }}
-          {{ Diary.photo4 }}
-          {{ Diary.movie1 }}
-          {{ Diary.movie2 }}
-          {{ Diary.movie3 }}
-          {{ Diary.movie4 }}
-        </div>
-      </div>
+        <form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+
+        {% csrf_token %}
+            <div class="content__today-diary__text">
+            <div class='diarycontent'>
+                {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}
+                {{ Diary.content }}
+                <div class='photomv'>
+                {{ Diary.photo1 }}
+                {{ Diary.photo2 }}
+                {{ Diary.photo3 }}
+                {{ Diary.photo4 }}
+                {{ Diary.movie1 }}
+                {{ Diary.movie2 }}
+                {{ Diary.movie3 }}
+                {{ Diary.movie4 }}
+                </div>
+            </div>
+            </div>
+            <div class="cancel__button">
+                <button type="submit">確認</button>
+            </div>
+        </form>
+
     </div>
-    <div class="cancel__button">
-        <button type="submit">確認</button>
-    </div>
-</form>
+</main>
 {% endblock %}

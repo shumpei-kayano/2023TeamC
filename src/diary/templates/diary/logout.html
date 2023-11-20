@@ -19,24 +19,29 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--white">
+    <div class="scroll--content">
 
-<div class="cancel__neko.image">
-    <img src="{% static 'diary/assets/cancel__neko.png' %}">
-</div>
+        <div class="cancel__neko.image">
+            <img src="{% static 'diary/assets/cancel__neko.svg' %}">
+        </div>
 
-<div class="logout__text">
-    <p>ログアウトしますか？</p>
-</div>
+        <div class="logout__text">
+            <p>ログアウトしますか？</p>
+        </div>
 
-<!--ログアウト-->
+        <!--ログアウト-->
 
-    {% csrf_token %}
-    <div class="button">
-        <a href="{% url 'user:logout' %}">ログアウト</a>
+            {% csrf_token %}
+            <div class="button">
+                <a href="{% url 'user:logout' %}">ログアウト</a>
+            </div>
+
+            <div class="cancel__button">
+                <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+            </div>
+
     </div>
-
-    <div class="cancel__button">
-        <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
-    </div>
+</main>
 {% endblock %}
 ```

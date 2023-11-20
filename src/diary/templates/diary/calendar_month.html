@@ -14,135 +14,140 @@
 {% endblock %}
 
 {% block content %}
-<div class="calendar--background">
-    <!-- タブ -->
-    {% url 'diary:calendar_month' as calendar_month_url %}
-    {% url 'diary:month_graph' as month_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-            <a href="{{ calendar_month_url }}">月間カレンダー</a>
-        </div>
-        <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-            <a href="{{ month_graph_url }}">月間グラフ</a>
-        </div>
-    </div>
+<main class="ground ground--white"><!-- 追加した要素 -->
+    <div class="scroll--content"><!-- 追加した要素 -->
+        <div class="calendar--background">
+            <!-- タブ -->
+            {% url 'diary:calendar_month' as calendar_month_url %}
+            {% url 'diary:month_graph' as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a href="{{ month_graph_url }}">月間グラフ</a>
+                </div>
+            </div>
 
-    <!-- カレンダーページネーション -->
-    <div class="calendar-week">
-        <div class="calendar-header">
-            {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
-            {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
-            {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-            <span>年月</span>
-            {% comment %} 現在の月を表示させてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
-        </div>
-    </div>
+            <!-- カレンダーページネーション -->
+            <div class="calendar-week">
+                <div class="calendar-header">
+                    {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
+                    <a href=""><img src="{% static 'diary/assets/left_arrow.svg' %}" alt="矢印のアイコン">前の週</a>
+                    {% comment %} 月を動的に進められるようにしてください {% endcomment %}
+                    <a href=""><img src="{% static 'diary/assets/right_arrow.svg' %}" alt="矢印のアイコン">次の週</a>
+                    {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
+                    <span>年月</span>
+                    {% comment %} 現在の月を表示させてください {% endcomment %}
+                    <a href=""><img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン">今週</a>
+                </div>
+            </div>
 
-    <!-- カレンダー -->
-    <div id="calendar" class="calendar__month">
-        <table>
-            <thead>
-                <tr>
-                    <th class="sun">日</th>
-                    <th>月</th>
-                    <th>火</th>
-                    <th>水</th>
-                    <th>木</th>
-                    <th>金</th>
-                    <th class="sat">土</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 第1週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第2週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第3週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第4週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第5週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div><!-- calendar--background -->
+            <!-- カレンダー -->
+            <div id="calendar" class="calendar__month">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sun">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="sat">土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 第1週 -->
+                        <tr>
+                            <td class="sun--td">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="sat--td">
+                            </td>
+                        </tr>
+                        <!-- 第2週 -->
+                        <tr>
+                            <td class="sun--td">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="sat--td">
+                            </td>
+                        </tr>
+                        <!-- 第3週 -->
+                        <tr>
+                            <td class="sun--td">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="sat--td">
+                            </td>
+                        </tr>
+                        <!-- 第4週 -->
+                        <tr>
+                            <td class="sun--td">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="sat--td">
+                            </td>
+                        </tr>
+                        <!-- 第5週 -->
+                        <tr>
+                            <td class="sun--td">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="sat--td">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- calendar  background -->
+
+    </div><!-- scroll  content -->
+</main>
 {% endblock %}
