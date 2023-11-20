@@ -28,14 +28,14 @@
 
 {% block content %}
 <!-- タブ -->
-<div class="tab__button">
-    <div class="tab__button--left">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">
-            日記詳細</button>
+{% url 'diary:record_counseling' as record_counseling_url %}
+{% url 'diary:record_counseling_graph' as record_counseling_graph_url %}
+<div class="tab__button a--tab">
+    <div class="a--tab--left {% if request.path == record_counseling_url %}active{% endif %}">
+        <a href="{{ record_counseling_url }}">日記詳細画面</a>
     </div>
-    <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'record_counseling_graph.htmlに遷移させてください' %}'">
-            グラフ</button>
+    <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+        <a href="{{ record_diary_graph_url }}">グラフ</a>
     </div>
 </div>
 

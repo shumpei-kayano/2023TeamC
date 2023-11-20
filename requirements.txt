@@ -8,6 +8,6 @@ django-extensions
 django-cleanup
 django-sass-processor
 geocoder
-openai
+openai==0.28
 awscli
 boto3

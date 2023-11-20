@@ -47,9 +47,23 @@ def analyze_sentiment(text, diary):
 
 
 
-@login_required
 def account_delete_success(request):
+    # ログイン中のユーザーアカウントを取得
+    user = request.user
+    # ユーザに関連するデータを削除
+    user_diaries = Diary.objects.filter(user=user)
+
+    # 日記に関連する感情分析データを削除
+    for diary in user_diaries:
+        Emotion.objects.filter(diary=diary).delete()
+
+    # 日記を削除
+    user_diaries.delete()
+
+    # ユーザを削除
+    user.delete()
     return render(request, 'diary/account_delete_success.html')
+
 
 @login_required
 def account_delete(request):
@@ -95,7 +109,7 @@ def create_diary_confirmation(request):
             # 一旦カレンダーが出来るまで----------------------------------------------------------
             saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
-            
+
             return redirect('diary:create_diary_confirmation', pk=saved_diary.id)
     else:
         form = DiaryCreateForm()
@@ -112,7 +126,7 @@ def create_diary_confirmation2(request, pk):
             form.save()
             openai.api_key = settings.OPENAI_API_KEY
 
-            user_diary = "貴方は「観測者」です。以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って日記に対する感想を返してください。段階を踏んで考えて答えてください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。\n・動機\nチャット相手の話を聞いて、アドバイスをしようとしている。\n・欠点、短所、不安\n年齢を聞かれる\n# 基本設定\nあなたの一人称が「可愛いボク」です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\n{キャラクター}は100文字以上しゃべれません。箇条書きでの返答はせず、{キャラクター}が会話しているように、カウンセリングをする。\n以下の日記に対してカウンセリングしてください。\n"+ diary.content
+            user_diary = "以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って日記に対する感想を返してください。段階を踏んで考えて答えてください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は文末には[知らんけど]と語尾は[にゃん]を適切に使い分けしゃべり、敬語を使うことは絶対にありません。\n・動機\nチャット相手の話を聞いて、アドバイスをしようとしている。\n・欠点、短所、不安\n年齢を聞かれる\n# 基本設定\nあなたの一人称が　可愛いボク　です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\nレスポンスは一言で返してください。箇条書きでの返答はせず、{キャラクター}が会話しているように、カウンセリングをする。\n以下の日記に対してカウンセリングしてください。\n"+ diary.content
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [
@@ -223,11 +237,38 @@ def member_information_edit_cancel(request):
 
 @login_required
 def member_information_edit_check(request):
-    return render(request, 'diary/logout.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        request.session['username'] =username
+        request.session['email'] =email
+    return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email':email})
 
 @login_required
 def member_information_edit_comp(request):
-    return render(request, 'diary/member_information_edit_comp.html')
+    # セッション受け取る
+    new_username = request.session.get('username')
+    new_email = request.session.get('email')
+
+    # ユーザー情報を取得
+    user = request.user
+
+    # ユーザー情報を更新
+    if new_username:
+        user.username = new_username
+
+    # メールアドレスを更新
+    if new_email:
+        user.email = new_email
+
+    # セーブ
+    user.save()
+
+    # セッションを削除
+    request.session.pop('username', None)
+    request.session.pop('email', None)
+
+    return render(request, 'diary/member_information_edit_comp.html', {'user': user})
 
 @login_required
 def member_information_edit(request):
