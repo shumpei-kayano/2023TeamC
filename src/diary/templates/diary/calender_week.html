@@ -84,7 +84,6 @@
                                 {% endif %}
                                     {% endfor %}
                             {% else %}
-                                <!-- 未来の日にちはクリック不可（スタイルを変更しても良い） -->
                                 <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
                                 {%for diary in diary %}
                                 {%if diary.created_date == day%}
