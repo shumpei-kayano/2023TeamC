@@ -7,41 +7,25 @@
 
 {% block header %}
 <header>
-    <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div>
-    <!-- 天気アイコン・気温の表示  -->
+    <div class="header__spacer--top"></div>
+    <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
-        {% if カレンダーから遷移した場合 %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 選択された日の気温を表示おねがいします 00℃ }}
-        {% else %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 現在の気温を表示 }}
-        {% endif %}
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
     </div>
 </header>
 {% endblock %}
 
 {% block content %}
 <!-- タブ -->
-<div class="tab__button">
-    <div class="tab__button--left">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">
-            日記詳細</button>
+{% url 'diary:today_counseling' as today_counseling_url %}
+{% url 'diary:today_counseling_graph' as today_counseling_graph_url %}
+<div class="tab__button a--tab">
+    <div class="a--tab--left {% if request.path == today_counseling_url %}active{% endif %}">
+        <a href="{{ today_counseling_url }}">日記詳細画面</a>
     </div>
-    <div class="tab__button--right">
-        <button type="button" onclick="location.href='{% url 'today_counseling_graph.htmlに遷移させてください' %}'">
-            グラフ</button>
+    <div class="a--tab--right {% if request.path == today_counseling_graph_url %}active{% endif %}">
+        <a href="{{ today_counseling_graph_url }}">グラフ</a>
     </div>
 </div>
 

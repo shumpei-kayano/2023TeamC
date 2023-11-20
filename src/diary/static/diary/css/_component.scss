@@ -260,11 +260,26 @@
     }
 }
 
+.next__button {
+    display: flex;
+}
+
 .next__button a {
-    display: inline-block;
-    border: 2px solid #000; /* 四角の枠線 */
-    padding: 10px; /* 画像と枠線の間の余白 */
+    display: flex;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $a_blue_button; /* 四角の枠線 */
     text-decoration: none; /* リンクの下線を消す */
+    width: 44px; /* ボタンの幅 */
+    height: 44px; /* ボタンの高さ */
+    box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
+    border-radius: 5px;
+    background-color: #FFF;
+
+    &:hover {
+        background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
+    }
 }
 
 .next__button a img {

@@ -34,6 +34,8 @@ header {
   padding-right: 2.4rem;
   position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   color: #FFFFFF;
   background-color: #04CAD6;
   height: 5rem;
@@ -78,10 +80,13 @@ header .header__button a svg {
 header .header__button a:hover {
   background-color: #00A3AE;
 }
-header .header__spacer {
-  margin-left: auto; /* h1以外の要素を右寄せにする */
+header .header__spacer, header .header__weather {
+  margin-left: auto; /* 要素を右寄せにする */
   width: 7.2rem;
   height: 2.8rem;
+}
+header .header__weather span {
+  font-size: 1.6rem;
 }
 
 main {
@@ -115,6 +120,8 @@ footer {
   padding-left: 2.4rem;
   position: fixed;
   bottom: 0;
+  right: 0;
+  left: 0;
   background-color: #FFFFFF;
   height: 6rem;
   overflow: hidden;
@@ -443,11 +450,25 @@ footer .nav-text {
   color: var(--, #00ABB6);
 }
 
+.next__button {
+  display: flex;
+}
+
 .next__button a {
-  display: inline-block;
-  border: 2px solid #000; /* 四角の枠線 */
-  padding: 10px; /* 画像と枠線の間の余白 */
+  display: flex;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #00ABB6; /* 四角の枠線 */
   text-decoration: none; /* リンクの下線を消す */
+  width: 44px; /* ボタンの幅 */
+  height: 44px; /* ボタンの高さ */
+  box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
+  border-radius: 5px;
+  background-color: #FFF;
+}
+.next__button a:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
 
 .next__button a img {
@@ -490,6 +511,12 @@ footer .nav-text {
   font-weight: 400;
   line-height: normal;
   text-align: left;
+}
+
+.next__button {
+  margin-top: 16px;
+  margin-bottom: 12px;
+  margin-left: 30px;
 }
 
 .photomv {

@@ -33,6 +33,8 @@ header {
     padding-right: 2.4rem;
     position: fixed;
     top: 0;
+    right: 0;
+    left: 0;
     color: $header_text_color;
     background-color: $header_color;
     height: 5rem;
@@ -82,10 +84,14 @@ header {
             }
         }
     }
-    .header__spacer{
-        margin-left: auto; /* h1以外の要素を右寄せにする */
+    .header__spacer, .header__weather{
+        margin-left: auto; /* 要素を右寄せにする */
         width: 7.2rem;
         height: 2.8rem;
+    }
+
+    .header__weather span{
+        font-size: 1.6rem;
     }
 }
 
@@ -148,6 +154,8 @@ footer {
     position: fixed;
     // フッターをビューポートの最下部に配置
     bottom: 0;
+    right: 0;
+    left: 0;
     background-color: $background_color;
     height: 6rem; // フッターの高さを50pxに設定
     overflow: hidden; // フッターの高さを超える内容を非表示にする

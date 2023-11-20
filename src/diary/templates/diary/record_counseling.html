@@ -1,13 +1,23 @@
-<!-- カウンセリング実行画面（ホーム）-->
+<!-- 過去のカウンセリング日記詳細 -->
 {% extends "base.html" %}
 
 {% load static%}
 
-{% block title %}カウンセリング詳細{% endblock %}
+{% block title %}日記詳細{% endblock %}
 
 {% block header %}
 <header>
-    <div class="header__spacer--top"></div>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} calendar_month.htmlまたはcalendar_week.htmlに遷移させてください {% endcomment %}
+            <a href="">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <!-- カレンダーから選択した日付・天気を表示してください。 -->
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
@@ -18,14 +28,15 @@
 
 {% block content %}
 <!-- タブ -->
-{% url 'diary:today_counseling' as today_counseling_url %}
-{% url 'diary:today_counseling_graph' as today_counseling_graph_url %}
+
+{% url 'diary:record_counseling' as record_counseling_url %}
+{% url 'diary:record_counseling_graph' as record_counseling_graph_url %}
 <div class="tab__button a--tab">
-    <div class="a--tab--left {% if request.path == today_counseling_url %}active{% endif %}">
-        <a href="{{ today_counseling_url }}">日記詳細画面</a>
+    <div class="a--tab--left {% if request.path == record_counseling_url %}active{% endif %}">
+        <a href="{{ record_counseling_url }}">日記詳細画面</a>
     </div>
-    <div class="a--tab--right {% if request.path == today_counseling_graph_url %}active{% endif %}">
-        <a href="{{ today_counseling_graph_url }}">グラフ</a>
+    <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+        <a href="{{ record_diary_graph_url }}">グラフ</a>
     </div>
 </div>
 

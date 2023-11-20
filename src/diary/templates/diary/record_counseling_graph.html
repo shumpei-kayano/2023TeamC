@@ -1,7 +1,9 @@
-<!-- 過去の日次グラフ -->
-{% load static %}
+<!-- 過去のカウンセリング日記詳細（日次グラフ） -->
+{% extends "base.html" %}
 
-{% block title %}グラフ{% endblock %}
+{% load static%}
+
+{% block title %}日記詳細{% endblock %}
 
 {% block header %}
 <header>
@@ -15,45 +17,28 @@
                 戻る</a>
         </div>
     </div>
-    <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div>
-    <!-- 天気アイコン・気温の表示  -->
+    <!-- カレンダーから選択した日付・天気を表示してください。 -->
+    <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
-        {% if カレンダーから遷移した場合 %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 選択された日の気温を表示おねがいします 00℃ }}
-        {% else %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 現在の気温を表示 }}
-        {% endif %}
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
     </div>
 </header>
 {% endblock %}
 
 {% block content %}
-{% if 日記があれば %}
 <!-- タブ -->
-    <!-- タブ -->
-    {% url 'diary:record_diary_detail' as record_diary_detail_url %}
-    {% url 'diary:record_diary_graph' as record_diary_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
-            <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
-        </div>
-        <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
-            <a href="{{ record_diary_graph_url }}">グラフ</a>
-        </div>
+{% url 'diary:record_counseling' as record_counseling_url %}
+{% url 'diary:record_counseling_graph' as record_counseling_graph_url %}
+<div class="tab__button a--tab">
+    <div class="a--tab--left {% if request.path == record_counseling_url %}active{% endif %}">
+        <a href="{{ record_counseling_url }}">日記詳細画面</a>
     </div>
+    <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+        <a href="{{ record_diary_graph_url }}">グラフ</a>
+    </div>
+</div>
+
 <!-- グラフの表示 -->
 <script src="{% static 'js/chart.min.js' %}"></script>
 
@@ -68,35 +53,18 @@
     </div>
 </div>
 
-<!-- ネコココメント -->
-<div class="content__today-diary__comment">
+<!-- ネココのカウンセリングコメント -->
+<div class="content__today-diary__counseling-comment">
     <p>
-        {{ ネコココメントを表示させてください }}
+        {{ カウンセリングのコメントを表示させてください }}
     </p>
 </div>
 <!-- ネコココメントの画像 -->
 <div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/review_neko.png' %}" alt="ネココの画像">
+    <img src="{% static'diary/assets/counselor_neko.png' %}" alt="カウンセラーネココの画像">
 </div>
+</form>
 
-{% else %}
-    <div class="content__today-diary__group">
-        <!-- ネコココメント -->
-        <div class="content__no-diary__comment">
-            <p>
-                日記がないよー。
-            </p>
-        </div>
-        <!-- ネココの画像 -->
-        <div class="content__no-diary__comment__img">
-            <img src="{% static'diary/assets/tea_neko.png' %}" alt="ネココの画像">
-        </div>
-        <!-- 日記を書くボタン -->
-        <div class="content__no-diary__button">
-            <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
-                日記を書く</button>
-    </div>
-{% endif %}
 {% endblock %}
 
 {% block javascripts %}
