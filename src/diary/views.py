@@ -82,7 +82,6 @@ def calendar_month(request):
 
 
 @login_required
-
 def calender_week(request, selected_date=None):
     # パラメータが指定されていない場合は今日の日付を使用
     if selected_date:
@@ -91,6 +90,10 @@ def calender_week(request, selected_date=None):
         selected_date= selected_date - timedelta(days=7)
     else:
         selected_date = date.today()
+    next_week_param = request.GET.get('next_week', None)
+    if next_week_param:
+        # Move to the next week
+        selected_date += timedelta(weeks=1)
     selected_weekday = selected_date.weekday()
     # カレンダーの開始日を計算（選択された日の週の日曜日）
     start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
@@ -101,6 +104,17 @@ def calender_week(request, selected_date=None):
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
 
     return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date,'diary':diary})
+
+@login_required
+# 週間カレンダーを進める処理
+def calender_week_up(request, selected_date=None):
+    selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    selected_date += timedelta(days=7)  # ここで7日を足す
+    selected_weekday = selected_date.weekday()
+    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
+    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+    diary = Diary.objects.filter(user=request.user)
+    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date, 'diary': diary})
 
 
 def create_diary_confirmation(request):

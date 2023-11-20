@@ -44,12 +44,13 @@
             {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
             {% comment %} <span>{{  }}年{{  }}月</span> {% endcomment %}
             {% comment %} 週を動的に進められるようにしてください {% endcomment %}
-            <a href="{% url 'diary:calender_week' %}?prev_week=false">
+            <a href="{% url 'diary:calender_week_up'  week_dates.0|date:'Y-m-d' %}">
                 <img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">
             </a>
         </div>
         {% comment %} 現在の週を表示させてください {% endcomment %}
-            <p>{{ selected_date }}</p>
+        <p>{{ selected_date|date:"Y年n月" }}</p>
+
         <div class="a--blue">
             <a href="{% url 'diary:calender_week'%}">
                 <svg id="mySvg" width="16" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +86,11 @@
                             {% else %}
                                 <!-- 未来の日にちはクリック不可（スタイルを変更しても良い） -->
                                 <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
+                                {%for diary in diary %}
+                                {%if diary.created_date == day%}
+                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}</a>
+                                {% endif %}
+                                    {% endfor %}
                             {% endif %}
                         </td>
                     {% endfor %}
