@@ -91,18 +91,12 @@ def calender_week(request, selected_date=None):
         selected_date= selected_date - timedelta(days=7)
     else:
         selected_date = date.today()
-
     selected_weekday = selected_date.weekday()
-
     # カレンダーの開始日を計算（選択された日の週の日曜日）
     start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
-
     # カレンダーに表示する日付のリストを作成
     week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
-    
     diary = Diary.objects.filter(user=request.user)
-    
-    
     # ここで、各日付に対する条件に合わせて適切な処理を行う
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
 
