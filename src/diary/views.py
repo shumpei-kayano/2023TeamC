@@ -88,17 +88,10 @@ def calender_week(request, selected_date=None):
     if selected_date:
         # selected_dateをdatetime.date型に変換
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+        selected_date= selected_date - timedelta(days=7)
     else:
         selected_date = date.today()
 
-        # 左ボタンがクリックされた場合
-    if request.GET.get('prev_week'):
-        # 今日の日付を取得
-        today = date.today()
-        # 今日の日付をパラメータとして渡して、前の週の日付を計算
-        prev_week_date = today - timedelta(days=(today.weekday() + 1) % 7)
-        return redirect('diary:calender_week', selected_date=prev_week_date.isoformat())
-    # 選択された日の曜日を取得
     selected_weekday = selected_date.weekday()
 
     # カレンダーの開始日を計算（選択された日の週の日曜日）
@@ -109,10 +102,11 @@ def calender_week(request, selected_date=None):
     
     diary = Diary.objects.filter(user=request.user)
     
+    
     # ここで、各日付に対する条件に合わせて適切な処理を行う
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
 
-    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date,'diary':diary})
+    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date,'diary':diary})
 
 
 def create_diary_confirmation(request):

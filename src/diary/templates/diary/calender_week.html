@@ -37,7 +37,7 @@
         {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
         <div class="next__button">
             <!-- 左ボタン -->
-            <a href="{% url 'diary:calender_week' %}?prev_week=true">
+            <a href="{% url 'diary:calender_week' week_dates.0|date:'Y-m-d'　%}">
                 <img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">
             </a>
 
