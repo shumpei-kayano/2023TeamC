@@ -31,28 +31,25 @@
     </div>
 </div>
 
-{% comment %} <div class="tab__button a--tab">
-    <div class="a--tab--left">
-        <a href="{% url 'diary:calender_week' %}">週間カレンダー</a>
-    </div>
-    <div class="a--tab--right">
-        <a href="{% url 'diary:week_graph' %}">週間グラフ</a>
-    </div>
-</div> {% endcomment %}
-
 <!-- 週間カレンダーページネーション -->
 <div class="calendar-week">
     <div class="calendar-header">
         {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
         <div class="next__button">
-            <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
+            <!-- 左ボタン -->
+            <a href="{% url 'diary:calender_week' %}?prev_week=true">
+                <img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">
+            </a>
+
             {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
             {% comment %} <span>{{  }}年{{  }}月</span> {% endcomment %}
             {% comment %} 週を動的に進められるようにしてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
+            <a href="{% url 'diary:calender_week' %}?prev_week=false">
+                <img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">
+            </a>
         </div>
         {% comment %} 現在の週を表示させてください {% endcomment %}
-            <p>2021年9月</p>
+            <p>{{ selected_date }}</p>
         <div class="a--blue">
             <a href="">
                 <svg id="mySvg" width="16" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,54 +62,25 @@
 </div>
     <!-- 週間カレンダー一覧 -->
     <div class="week-calendar">
-    <table>
-        <thead>
-            <tr>
-                <td class="sun">日</td>
-                {% comment %} <td></td> {% endcomment %}
-            </tr>
-            <tr>
-                <td class="mon">月</td>
-            </tr>
-            <tr>
-                <td class="tue">火</td>
-            </tr>
-            <tr>
-                <td class="wed">水</td>
-            </tr>
-            <tr>
-                <td class="thr">木</td>
-            </tr>
-            <tr>
-                <td class="sun">金</td>
-            </tr>
-            <tr>
-                <td class="sat">土</td>
-            </tr>
-        </thead>
-    </table>
+        <table>
+            <tbody>
+                <tr>
+                    {% for day in week_dates %}
+                        <td>
+                            {% if day < selected_date %}
+                                <!-- 過去の日にちは詳細ページへのリンク -->
+                                <a href="{% url 'diary:create_diary' %}">{{ day.day }}</a>
+                            {% elif day == selected_date %}
+                                <!-- 現在の日はトップページへのリンク -->
+                                <a href="{% url 'diary:create_diary' %}">{{ day.day }}</a>
+                            {% else %}
+                                <!-- 未来の日にちはクリック不可（スタイルを変更しても良い） -->
+                                <span class="future-day">{{ day.day }}</span>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
     </div>
 {% endblock %}
-
-{% comment %} {% block javascripts %}
-<script>
-// SVG要素を取得
-var svg = document.getElementById('mySvg');
-
-// ホバー時の色
-var hoverColor = '#00737A';  // ここにホバー時の色を設定
-
-// デフォルトの色を保存
-var defaultColor = svg.getAttribute('fill');  // getAttributeメソッドを使用
-
-// ホバー時のイベントハンドラを設定
-svg.addEventListener('mouseover', function() {
-    svg.setAttribute('fill', hoverColor);  // setAttributeメソッドを使用
-});
-
-// ホバーが終了したときのイベントハンドラを設定
-svg.addEventListener('mouseout', function() {
-    svg.setAttribute('fill', defaultColor);  // setAttributeメソッドを使用
-});
-</script>
-{% endblock %} {% endcomment %}

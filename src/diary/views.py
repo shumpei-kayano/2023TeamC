@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 from django.views.generic.edit import UpdateView
 from django.conf import settings
+from django.shortcuts import render
+from datetime import date, timedelta
 import openai
 import boto3
 
@@ -77,9 +79,39 @@ def base(request):
 def calendar_month(request):
     return render(request, 'diary/calendar_month.html')
 
+
+
 @login_required
-def calender_week(request):
-    return render(request, 'diary/calender_week.html')
+
+def calender_week(request, selected_date=None):
+    # パラメータが指定されていない場合は今日の日付を使用
+    if selected_date:
+        # selected_dateをdatetime.date型に変換
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        selected_date = date.today()
+
+        # 左ボタンがクリックされた場合
+    if request.GET.get('prev_week'):
+        # 今日の日付を取得
+        today = date.today()
+        # 今日の日付をパラメータとして渡して、前の週の日付を計算
+        prev_week_date = today - timedelta(days=(today.weekday() + 1) % 7)
+        return redirect('diary:calender_week', selected_date=prev_week_date.isoformat())
+    # 選択された日の曜日を取得
+    selected_weekday = selected_date.weekday()
+
+    # カレンダーの開始日を計算（選択された日の週の日曜日）
+    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
+
+    # カレンダーに表示する日付のリストを作成
+    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+
+    # ここで、各日付に対する条件に合わせて適切な処理を行う
+    # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
+
+    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date})
+
 
 def create_diary_confirmation(request):
 
