@@ -87,6 +87,7 @@ header .header__spacer, header .header__weather {
 }
 header .header__weather span {
   font-size: 1.6rem;
+  text-align: right;
 }
 
 main {

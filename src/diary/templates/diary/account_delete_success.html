@@ -29,7 +29,8 @@
 </div>
 
 <div class="button">
-    <button id="save-button" type="submit" onclick="location.href='{% url 'diary:home_top.htmlへ遷移お願いします' %}'">トップページへ</button>
+    {% comment %} user/account_top.htmlに遷移させてください {% endcomment %}
+    <button id="save-button" type="submit" onclick="location.href='{% url '' %}'">トップページへ</button>
 </div>
     
 {% endblock %}
