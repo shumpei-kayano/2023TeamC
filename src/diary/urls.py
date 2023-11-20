@@ -9,7 +9,7 @@ urlpatterns = [
     path('base', views.base,name='base'),
     path('calendar/month', views.calendar_month,name='calendar_month'),
     path('calender/week', views.calender_week,name='calender_week'),
-   path('calender/week/<str:selected_date>/', views.calender_week, name='calender_week'),    path('create/diary/confirmation', views.create_diary_confirmation,name='create_diary_confirmation'),
+    path('calender/week/<str:selected_date>/', views.calender_week, name='calender_week'),    path('create/diary/confirmation', views.create_diary_confirmation,name='create_diary_confirmation'),
     path('create/diary/confirmation/<int:pk>', views.create_diary_confirmation2,name='create_diary_confirmation'),
     path('create/diary', views.create_diary,name='create_diary'),
     path('create/diary/<int:pk>', views.create_diary,name='create_diary'),

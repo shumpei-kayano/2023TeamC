@@ -282,7 +282,6 @@ main().then(url => {
     }
     const date = document.getElementsByClassName("date");
     const weatherImg = document.getElementsByClassName("weatherImg");
-    const weatherTelop = document.getElementsByClassName("weatherTelop");
     const tempMax = document.getElementsByClassName("tempMax");
 
     weatherCodeList.forEach(function (el, i) {
