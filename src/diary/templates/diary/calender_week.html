@@ -69,10 +69,21 @@
                         <td>
                             {% if day < selected_date %}
                                 <!-- 過去の日にちは詳細ページへのリンク -->
-                                <a href="{% url 'diary:create_diary' %}">{{ day.day }}</a>
+                                <a href="{% url 'diary:create_diary' %}">{{ day.day }}{{diary.created_date}}</a>
+                            {%for diary in diary%}
+                            {%if diary.created_date == day%}
+                            <p>{{ diary.content }}</p>
+                            {% endif %}
+                                {% endfor %}
+
                             {% elif day == selected_date %}
                                 <!-- 現在の日はトップページへのリンク -->
                                 <a href="{% url 'diary:create_diary' %}">{{ day.day }}</a>
+                                {%for diary in diary%}
+                                {%if diary.created_date == day%}
+                                <p>{{ diary.content }}</p>
+                                {% endif %}
+                                    {% endfor %}
                             {% else %}
                                 <!-- 未来の日にちはクリック不可（スタイルを変更しても良い） -->
                                 <span class="future-day">{{ day.day }}</span>
