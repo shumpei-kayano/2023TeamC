@@ -14,15 +14,20 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-<p class="deleta__success__title">日記を削除しました</p>
+        <p class="deleta__success__title">日記を削除しました</p>
 
-<!-- ネココの画像 -->
-<div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像">
-</div>
+        <!-- ネココの画像 -->
+        <div class="content__today-diary__comment__img">
+            <img src="{% static'diary/assets/member_neko.svg' %}" alt="ネココの画像">
+        </div>
 
-<div class="button">
-    <button id="save-button" type="button" onclick="location.href='{% url 'diary:home_top1' %}'">ホームトップへ</button>
-</div>
+        <div class="button">
+            <button id="save-button" type="button" onclick="location.href='{% url 'diary:home_top1' %}'">ホームトップへ</button>
+        </div>
+
+    </div>
+</main>
 {% endblock %}

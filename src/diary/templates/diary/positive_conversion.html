@@ -19,12 +19,12 @@
     <div class="header__weather">
         {% if カレンダーから遷移した場合 %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 選択された日の気温を表示おねがいします 00℃ }}
         {% else %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 現在の気温を表示 }}
         {% endif %}
@@ -49,76 +49,82 @@
 </head> -->
 
 {% block content %}
-<!-- ユーザーが入力した日記の表示 -->
-<div class="content__today-diary__text">
-    <p>
-        {{ diary.content }}
-    </p>
-</div>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-<!-- ネコ画像 -->
-<div class="content__today-diary__positive-img">
-    <img src="{% static 'diary/assets/positive_neko.png' %}" alt="ポジティブな猫の画像">
-</div>
+        <!-- ユーザーが入力した日記の表示 -->
+        <div class="content__today-diary__text">
+            <p>
+                {{ diary.content }}
+            </p>
+        </div>
 
-<!-- ポジティブ変換した日記の表示 -->
-    <!-- enctype='multipart/form-data'でファイルアップロード -->
-<form method="POST"  enctype='multipart/form-data'>
-    {% csrf_token %}
-    <div class="content__today-diary__positive-text">
-        <p>
-            {{ save_content }}
-        </p>
-    </div>
-    <p>日記の内容を上記に変更しますか？</p>
-    <div class="button">
-        <button type="submit" id="save-button" name="save_button" onclick="location.href='{% url 'diary:today_diary_detail' diary.pk %}'">保存</button>
-    </div>
-</form>
+        <!-- ネコ画像 -->
+        <div class="content__today-diary__positive-img">
+            <img src="{% static 'diary/assets/positive_neko.svg' %}" alt="ポジティブな猫の画像">
+        </div>
 
-<div class="cancel__button">
-    <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
-</div>
+        <!-- ポジティブ変換した日記の表示 -->
+            <!-- enctype='multipart/form-data'でファイルアップロード -->
+        <form method="POST"  enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class="content__today-diary__positive-text">
+                <p>
+                    {{ save_content }}
+                </p>
+            </div>
+            <p>日記の内容を上記に変更しますか？</p>
+            <div class="button">
+                <button type="submit" id="save-button" name="save_button" onclick="location.href='{% url 'diary:today_diary_detail' diary.pk %}'">保存</button>
+            </div>
+        </form>
 
-<!-- ポップアップ要素
-<div class="popup" id="popup">
-    <p>特定の条件に合致しました。メッセージを表示します。</p>
-</div> -->
+        <div class="cancel__button">
+            <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+        </div>
 
-<!-- ポップアップ要素 -->
-{% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
-<div class="popup" id="first-popup">
-    <div class="popup__text">
-        <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
-    </div>
-    <div class="popup__img">
-        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
-    </div>
-    <div class="button">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-    </div>
-    <div class="gray__button">
-        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
-    </div>
-</div>
+        <!-- ポップアップ要素
+        <div class="popup" id="popup">
+            <p>特定の条件に合致しました。メッセージを表示します。</p>
+        </div> -->
 
-<div class="popup" id="second-popup">
-    <div class="popup__text">
-        <p>キャンセルするとカウンセリングを<br>
-            受けることができなくなります。<br>
-            キャンセルしますか？</p>
+        <!-- ポップアップ要素 -->
+        {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+        <div class="popup" id="first-popup">
+            <div class="popup__text">
+                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
+        </div>
+
+        <div class="popup" id="second-popup">
+            <div class="popup__text">
+                <p>キャンセルするとカウンセリングを<br>
+                    受けることができなくなります。<br>
+                    キャンセルしますか？</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
-    <div class="popup__img">
-        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
-    </div>
-    <div class="button">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-    </div>
-    <div class="gray__button">
-        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
-    </div>
-</div>
-{% endif %}
+</main>
 
 {% endblock %}
 

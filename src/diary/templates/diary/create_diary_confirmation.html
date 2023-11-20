@@ -9,7 +9,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
         </div>
     </div>
     {% comment %} <div class="header__nowdate">
@@ -24,12 +24,12 @@
     <div class="header__weather">
         {% if カレンダーから遷移した場合 %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 選択された日の気温を表示おねがいします 00℃ }}
         {% else %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 現在の気温を表示 }}
         {% endif %}
@@ -38,83 +38,89 @@
 {% endblock %}
 
 {% block content %}
-<!-- 入力されたテキストの表示 -->
-<div class="content__form-group">
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-        {% csrf_token %}
-        <div class="content__today-diary__text">
-            <p>{{ saved_diary.content }}</p>
-            {% if saved_diary.photo1 %}
-                <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1">
-            {% endif %}
-            {% if saved_diary.photo2 %}
-                <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2">
-            {% endif %}
-            {% if saved_diary.photo3 %}
-                <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3">
-            {% endif %}
-            {% if saved_diary.photo4 %}
-                <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
-            {% endif %}
-            <p>{{ saved_diary.ai_comment }}</p>
-            {{ comprehend}}
+        <!-- 入力されたテキストの表示 -->
+        <div class="content__form-group">
+
+                {% csrf_token %}
+                <div class="content__today-diary__text">
+                    <p>{{ saved_diary.content }}</p>
+                    {% if saved_diary.photo1 %}
+                        <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1">
+                    {% endif %}
+                    {% if saved_diary.photo2 %}
+                        <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2">
+                    {% endif %}
+                    {% if saved_diary.photo3 %}
+                        <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3">
+                    {% endif %}
+                    {% if saved_diary.photo4 %}
+                        <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
+                    {% endif %}
+                    <p>{{ saved_diary.ai_comment }}</p>
+                    {{ comprehend}}
+                </div>
+
+                <div class="cancel__button">
+                    <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
+                    {% comment %} <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button> {% endcomment %}
+                </div>
+                <div class="button">
+                    <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
+                </div>
+
+        </div><!-- content__form-group -->
+
+        <!-- ロード画面のコンテンツ -->
+        <div id="loader" style="display: none;">
+            <div class="load__img">
+                <img src="{% static 'diary/assets/tea_neko.svg' %}" alt="ロード画面neko">
+            </div>
+            <div class="load__text">
+                <p style="font-size: 24px; color: #333;">読み込み中...</p>
+            </div>
         </div>
 
-        <div class="cancel__button">
-            <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
-            {% comment %} <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button> {% endcomment %}
+
+        <!-- ポップアップ要素 -->
+        {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+        <div class="popup" id="first-popup">
+            <div class="popup__text">
+                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
         </div>
-        <div class="button">
-            <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
+
+        <div class="popup" id="second-popup">
+            <div class="popup__text">
+                <p>キャンセルするとカウンセリングを<br>
+                    受けることができなくなります。<br>
+                    キャンセルしますか？</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
         </div>
-
-</div><!-- content__form-group -->
-
-<!-- ロード画面のコンテンツ -->
-<div id="loader" style="display: none;">
-    <div class="load__img">
-        <img src="{% static 'diary/assets/tea_neko.png' %}" alt="ロード画面neko">
-    </div>
-    <div class="load__text">
-        <p style="font-size: 24px; color: #333;">読み込み中...</p>
-    </div>
-</div>
-
-
-<!-- ポップアップ要素 -->
-{% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
-<div class="popup" id="first-popup">
-    <div class="popup__text">
-        <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
-    </div>
-    <div class="popup__img">
-        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
-    </div>
-    <div class="button">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-    </div>
-    <div class="gray__button">
-        <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
-    </div>
-</div>
-
-<div class="popup" id="second-popup">
-    <div class="popup__text">
-        <p>キャンセルするとカウンセリングを<br>
-            受けることができなくなります。<br>
-            キャンセルしますか？</p>
-    </div>
-    <div class="popup__img">
-        <img src="{% static 'diary/assets/counseling_request.png' %}" alt="カウンセリングを薦める猫の画像">
-    </div>
-    <div class="button">
-        <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-    </div>
-    <div class="gray__button">
-        <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.png' %}" alt="アイコン">キャンセル</button>
-    </div>
-</div>
-{% endif %}
+        {% endif %}
+    
+    </div><!-- scroll content -->
+</main>
 
 {% endblock %}
 

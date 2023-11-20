@@ -29,12 +29,12 @@
     <div class="header__weather">
         {% if カレンダーから遷移した場合 %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 選択された日の気温を表示おねがいします 00℃ }}
         {% else %}
             <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.png 曇り cloud.png 雨 rain.png 雪 snow.png)}}' %}"alt="天気の画像" >
+                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
             </div>
             {{ 現在の気温を表示 }}
         {% endif %}
@@ -43,94 +43,100 @@
 {% endblock %}
 
 {% block content %}
-{% if 日記があれば %}
-    <!-- タブ -->
-    {% url 'diary:record_diary_detail' as record_diary_detail_url %}
-    {% url 'diary:record_diary_graph' as record_diary_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
-            <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
-        </div>
-        <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
-            <a href="{{ record_diary_graph_url }}">グラフ</a>
-        </div>
-    </div>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-    <!-- 編集削除ボタン -->
-    <div class="content__today-diary__group">
-        <div class="icon__button">
-            <div class="icon__button__delete">
-                <a href="{% url  diary_delete.htmlに遷移させてください %}">
-                    <img src="{% static'diary/assets/delete.png' %}">削除</a>
-            </div>
-            <div class="icon__button__edit">
-                <a href="{% url  diary_update.htmlに遷移させてください %}">
-                    <img src="{% static'diary/assets/edit.png' %}">編集</a>
+        {% if 日記があれば %}
+            <!-- タブ -->
+            {% url 'diary:record_diary_detail' as record_diary_detail_url %}
+            {% url 'diary:record_diary_graph' as record_diary_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == record_diary_detail_url %}active{% endif %}">
+                    <a href="{{ record_diary_detail_url }}">日記詳細画面</a>
+                </div>
+                <div class="a--tab--right {% if request.path == record_diary_graph_url %}active{% endif %}">
+                    <a href="{{ record_diary_graph_url }}">グラフ</a>
+                </div>
             </div>
 
-        <!-- ユーザーが保存した日記の表示 -->
-        <div class="content__today-diary__text">
-            <p>
-                {{ ユーザーが入力した日記を表示させてください }}
-            </p>
-        </div>
-
-        <!-- ユーザーが保存した画像の表示 -->
-        {% if 画像があれば %}
-            <div class="content__today-diary__images">
-                {% for 画像を表示させてください %}
-                    <div class="content__today-diary__img">
-                        <a href="#" data-image-id="{{ 画像のid }}">
-                        <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-                        </a>
+            <!-- 編集削除ボタン -->
+            <div class="content__today-diary__group">
+                <div class="icon__button">
+                    <div class="icon__button__delete">
+                        <a href="{% url  diary_delete.htmlに遷移させてください %}">
+                            <img src="{% static'diary/assets/delete.svg' %}">削除</a>
                     </div>
-                {% endfor %}
+                    <div class="icon__button__edit">
+                        <a href="{% url  diary_update.htmlに遷移させてください %}">
+                            <img src="{% static'diary/assets/edit.svg' %}">編集</a>
+                    </div>
+
+                <!-- ユーザーが保存した日記の表示 -->
+                <div class="content__today-diary__text">
+                    <p>
+                        {{ ユーザーが入力した日記を表示させてください }}
+                    </p>
+                </div>
+
+                <!-- ユーザーが保存した画像の表示 -->
+                {% if 画像があれば %}
+                    <div class="content__today-diary__images">
+                        {% for 画像を表示させてください %}
+                            <div class="content__today-diary__img">
+                                <a href="#" data-image-id="{{ 画像のid }}">
+                                <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div><!-- content__today-diary__group -->
+
+            <!-- ネコココメント -->
+            <div class="content__today-diary__comment">
+                <p>
+                    {{ ネコココメントを表示させてください }}
+                </p>
+            </div>
+            <!-- ネココの画像 -->
+            <div class="content__today-diary__comment__img">
+                <img src="{% static'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+            </div>
+
+            <!-- 画像のポップアップ -->
+            <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal-label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img src="" id="image-modal-image" class="img-fluid" alt="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="content__today-diary__group">
+                <!-- ネコココメント -->
+                <div class="content__no-diary__comment">
+                    <p>
+                        日記がないよー。
+                    </p>
+                </div>
+                <!-- ネココの画像 -->
+                <div class="content__no-diary__comment__img">
+                    <img src="{% static'diary/assets/tea_neko.svg' %}" alt="ネココの画像">
+                </div>
+                <!-- 日記を書くボタン -->
+                <div class="content__no-diary__button">
+                    <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
+                        日記を書く</button>
             </div>
         {% endif %}
-    </div><!-- content__today-diary__group -->
 
-    <!-- ネコココメント -->
-    <div class="content__today-diary__comment">
-        <p>
-            {{ ネコココメントを表示させてください }}
-        </p>
-    </div>
-    <!-- ネココの画像 -->
-    <div class="content__today-diary__comment__img">
-        <img src="{% static'diary/assets/neko_comment.png' %}" alt="ネココの画像">
-    </div>
-
-    <!-- 画像のポップアップ -->
-    <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal-label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="" id="image-modal-image" class="img-fluid" alt="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                </div>
-            </div>
-        </div>
-    </div>
-{% else %}
-    <div class="content__today-diary__group">
-        <!-- ネコココメント -->
-        <div class="content__no-diary__comment">
-            <p>
-                日記がないよー。
-            </p>
-        </div>
-        <!-- ネココの画像 -->
-        <div class="content__no-diary__comment__img">
-            <img src="{% static'diary/assets/tea_neko.png' %}" alt="ネココの画像">
-        </div>
-        <!-- 日記を書くボタン -->
-        <div class="content__no-diary__button">
-            <button type="button" onclick="location.href='{% url 'create_diary.htmlに遷移させてください' %}'">
-                日記を書く</button>
-    </div>
-{% endif %}
+    </div><!-- scroll content -->
+</main>
 {% endblock %}
 {% comment %} css
 .modal-footer {

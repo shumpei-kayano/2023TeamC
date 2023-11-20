@@ -15,11 +15,16 @@ body {
   flex-direction: column;
 }
 
+p {
+  line-height: 1.7rem;
+  letter-spacing: 0.04rem;
+}
+
 a {
   text-decoration: none;
 }
 
-li {
+.menu__item, .list_item {
   list-style: none;
 }
 
@@ -102,8 +107,8 @@ main .scroll--content {
 
 .main::-webkit-scrollbar {
   background: rgba(239, 239, 239, 0.6078431373);
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
   border-radius: 20px;
 }
 
@@ -114,6 +119,13 @@ main .scroll--content {
 
 .main::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
+}
+
+.ground--white {
+  background-color: #FFFFFF;
+}
+.ground--blue {
+  background-color: #EEFEFF;
 }
 
 footer {
@@ -475,6 +487,38 @@ footer .nav-text {
 .next__button a img {
   display: block;
   height: auto; /* 高さは自動 */
+}
+
+.content__help--background-color {
+  padding: 0 2.4rem;
+}
+.content__help--background-color h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 4rem auto 2.4rem auto;
+  border-bottom: solid;
+  border-color: rgba(4, 202, 214, 0.4);
+  border-width: 7px; /*太さ*/
+}
+.content__help--background-color p {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  letter-spacing: 0.04rem;
+}
+.content__help--background-color .list_test-wrap .list_test {
+  margin-left: 2.2rem; /* 要素と要素の間指定 */
+  margin-bottom: 1.6rem;
+  font-size: 1.4rem; /* 文字サイズ指定 */
+}
+.content__help--background-color .content__help__list__chart {
+  margin-bottom: 1.6rem;
+}
+.content__help--background-color .content__help__list__chart--last {
+  margin-bottom: 4rem;
 }
 
 .week-calendar table {

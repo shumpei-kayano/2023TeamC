@@ -17,42 +17,48 @@
 {% endblock %}
 
 {% block content %}
-<!-- タブ -->
-{% url 'diary:today_diary_detail' as today_diary_detail_url %}
-{% url 'diary:today_diary_graph' as today_diary_graph_url %}
-<div class="tab__button a--tab">
-    <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
-        <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
-    </div>
-    <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
-        <a href="{{ today_diary_graph_url }}">グラフ</a>
-    </div>
-</div>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-<!-- グラフの表示 -->
-<script src="{% static 'js/chart.min.js' %}"></script>
-
-<div id="circle__graph">
-    <div class="circle__graph__img">
-        <img src="{% static 'diary/assets/circle_graph.png' %}" alt="感情グラフ">感情の合計</img>
-        {% comment %} グラフを表示 {% endcomment %}
-        <div style="position: relative;">
-            <canvas id="myPieChart" width="400" height="200"></canvas>
-            <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+        <!-- タブ -->
+        {% url 'diary:today_diary_detail' as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph' as today_diary_graph_url %}
+        <div class="tab__button a--tab">
+            <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
+                <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
+            </div>
+            <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
+                <a href="{{ today_diary_graph_url }}">グラフ</a>
+            </div>
         </div>
-    </div>
-</div>
 
-<!-- ネコココメント -->
-<div class="content__today-diary__comment">
-    <p>
-        {{ ネコココメントを表示させてください }}
-    </p>
-</div>
-<!-- ネコココメントの画像 -->
-<div class="content__today-diary__comment__img">
-    <img src="{% static'diary/assets/review_neko.png' %}" alt="ネココの画像">
-</div>
+        <!-- グラフの表示 -->
+        <script src="{% static 'js/chart.min.js' %}"></script>
+
+        <div id="circle__graph">
+            <div class="circle__graph__img">
+                <img src="{% static 'diary/assets/circle_graph.svg' %}" alt="感情グラフ">感情の合計</img>
+                {% comment %} グラフを表示 {% endcomment %}
+                <div style="position: relative;">
+                    <canvas id="myPieChart" width="400" height="200"></canvas>
+                    <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ネコココメント -->
+        <div class="content__today-diary__comment">
+            <p>
+                {{ ネコココメントを表示させてください }}
+            </p>
+        </div>
+        <!-- ネコココメントの画像 -->
+        <div class="content__today-diary__comment__img">
+            <img src="{% static'diary/assets/review_neko.svg' %}" alt="ネココの画像">
+        </div>
+
+    </div>
+</main>
 
 {% endblock %}
 

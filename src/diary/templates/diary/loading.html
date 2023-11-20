@@ -1,9 +1,16 @@
 <!-- ロード画面のコンテンツ -->
-<div id="loader" style="display: none;">
-    <p style="font-size: 24px; color: #333;">Loading...</p>
-</div>
-</div>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
+        <div id="loader" style="display: none;">
+            <p style="font-size: 24px; color: #333;">Loading...</p>
+        </div>
+        </div>
+    
+    </div>
+</main>
+
+{% block js %}
 < script >
 // ロード画面呼び出し
     function showLoadingScreen() {
@@ -34,3 +41,4 @@
             }, 5000); // 5秒後にリダイレクト
         }
 </ script>
+{% endblock %}

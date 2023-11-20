@@ -23,34 +23,38 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--white">
+    <div class="scroll--content">
 
-<!-- ユーザーの会員情報の表示 -->
-    <div class="content__user-info__name">
-        <p>ユーザーネーム</p>
-        <p>{{ user.username }}</p>
-    <hr>
-    </div>
-    <div class="content__user-info__email">
-        <p>メールアドレス</p>
-        <p>{{ user.email }}</p>
-    <hr>
-    </div>
-
-    {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
-    {% comment %} <div class="content__user-info__password">
-        <p>パスワード</p>
-        <p>{{ user.password }}</p>
-    <hr>
-    </div> {% endcomment %}
-
-        {% csrf_token %}
-        <div class="cancel__button">
-            <a href="{% url 'diary:member_information_edit' %}">会員情報を変更する</a>
+        <!-- ユーザーの会員情報の表示 -->
+        <div class="content__user-info__name">
+            <p>ユーザーネーム</p>
+            <p>{{ user.username }}</p>
+        <hr>
         </div>
-    </form>
+        <div class="content__user-info__email">
+            <p>メールアドレス</p>
+            <p>{{ user.email }}</p>
+        <hr>
+        </div>
 
-    <div class="neko__dango.image">
-        <img src="{% static 'diary/assets/back_arrow.png' %}">
-    </div>
+        {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
+        {% comment %} <div class="content__user-info__password">
+            <p>パスワード</p>
+            <p>{{ user.password }}</p>
+        <hr>
+        </div> {% endcomment %}
+
+            {% csrf_token %}
+            <div class="cancel__button">
+                <a href="{% url 'diary:member_information_edit' %}">会員情報を変更する</a>
+            </div>
+        </form>
+
+        <div class="neko__dango.image">
+            <img src="{% static 'diary/assets/back_arrow.svg' %}">
+        </div>
     
+    </div>
+</main>
 {% endblock %}
