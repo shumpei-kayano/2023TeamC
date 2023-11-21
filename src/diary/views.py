@@ -16,7 +16,7 @@ from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
 
 # comrehendを使って感情分析を行う関数
-def analyze_sentiment(text, diary):
+def analyze_sentiment(text, diary,user):
     # 感情分析の生成
     comprehend = boto3.client('comprehend', 'us-east-1')
     result = comprehend.detect_sentiment(Text=text, LanguageCode='ja')
@@ -37,15 +37,12 @@ def analyze_sentiment(text, diary):
     else:
         new_emotion = Emotion(
             diary=diary,
+            user = user,
             reasoning=result['Sentiment'],
             positive=result['SentimentScore']['Positive'],
             negative=result['SentimentScore']['Negative'],
             neutral=result['SentimentScore']['Neutral'],
             mixed=result['SentimentScore']['Mixed'],
-            week_number=diary.created_date.isocalendar()[1],
-            month=diary.created_date.month,
-            day=diary.created_date.day,
-            year=diary.created_date.year
         )
         new_emotion.save()
 
@@ -105,11 +102,11 @@ def calendar_month(request,selected_date=None):
             else:
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
-        diary = Diary.objects.filter(user=request.user)
+    diary = Diary.objects.filter(user=request.user)
+    emotion = Emotion.objects.filter(user = request.user)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-
-    return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -132,20 +129,6 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
-
-@login_required
-# 週間カレンダーを進める処理
-def calender_week_up(request, selected_date=None):
-    selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-    selected_weekday = selected_date.weekday()
-    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
-    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
-    # 前の週の日曜日を取得
-    week_start = week_dates[0] - timedelta(days=7)
-    # 次の週の日曜日を取得
-    week_start_up = week_dates[0] + timedelta(days=7)
-    diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date, 'diary': diary, 'week_start': week_start, 'week_start_up': week_start_up})
 
 def create_diary_confirmation(request):
 
@@ -210,7 +193,7 @@ def create_diary_confirmation2(request, pk):
             return redirect('diary:create_diary_confirmation', pk=pk)
 
     # 感情分析の実行関数
-    analyze_sentiment(diary.content, diary)
+    analyze_sentiment(diary.content, diary,request.user)
     
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
@@ -399,8 +382,7 @@ def today_diary_detail(request):
 
 @login_required
 def today_diary_detail2(request,pk):
-    today = date.today()
-    diary = get_object_or_404(Diary, user=request.user, created_date=today)
+    diary = get_object_or_404(Diary, id=pk)
     if diary:
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()
