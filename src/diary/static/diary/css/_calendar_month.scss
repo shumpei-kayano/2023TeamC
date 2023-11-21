@@ -8,3 +8,26 @@
     height: 6.6rem;
 }
 
+.calender-month-page {
+    .a--tab--left {
+        a {
+            background-color: #00ABB6; // active時の左側のボタンの背景色を黒に設定
+            color: #FFF; // active時の左側のボタンのテキスト色を白に設定
+        }
+    }
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .a--blue{
+        margin-right: 24px;
+
+        .a--blue a {
+            display: flex;
+            align-items: center;
+        }
+    }
+}

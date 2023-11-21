@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="calendar--background">
+<div class="calendar--background calender-month-page">
     <!-- タブ -->
     {% url 'diary:calendar_month' as calendar_month_url %}
     {% url 'diary:month_graph' as month_graph_url %}
@@ -31,13 +31,20 @@
     <div class="calendar-week">
         <div class="calendar-header">
             {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">前の週</a>
-            {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">次の週</a>
-            {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-            <span>年月</span>
+            <div class="next__button">
+                <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
+                {% comment %} 月を動的に進められるようにしてください {% endcomment %}
+                <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
+                {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
+                <span>年月</span>
+            </div>
             {% comment %} 現在の月を表示させてください {% endcomment %}
-            <a href=""><img src="{% static 'diary/assets/return_arrow.png' %}" alt="矢印のアイコン">今週</a>
+            <div class="a--blue">
+                <a href="">
+                    <img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン"></a>
+                    <p>今月</p>
+                </a>
+            </div>
         </div>
     </div>
 

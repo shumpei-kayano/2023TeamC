@@ -23,12 +23,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="help__menu">
+<div class="setting__menu">
 <ul>
-    <li><a href="/help_diary.html">日記作成</a></li>
-    <li><a href="/help_diary_edit.html">日記の編集・削除</a></li>
-    <li><a href="/help_calender.html">月間・週間カレンダー</a></li>
-    <li><a href="/help_graph.html">統計グラフ</a></li>
+    <li><a href="{% url 'diary:help_diary' %}">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+    <li><a href="{% url 'diary:help_diary_edit' %}">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+    <li><a href="{% url 'diary:help_calender' %}">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+    <li><a href="{% url 'diary:help_graph' %}">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
 </ul>
 </div>
 

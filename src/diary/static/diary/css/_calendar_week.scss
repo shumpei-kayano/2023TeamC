@@ -41,3 +41,12 @@
     margin-bottom: 12px;
     margin-left: 30px;
 }
+
+.calender-week-page {
+    .a--tab--left {
+        a {
+            background-color: #00ABB6; // active時の左側のボタンの背景色を黒に設定
+            color: #FFF; // active時の左側のボタンのテキスト色を白に設定
+        }
+    }
+}

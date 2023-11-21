@@ -18,27 +18,18 @@
 {% endblock %}
 
 {% block content %}
-<!-- タブ -->
-
-{% url 'diary:calender_week' as calender_week_url %}
-{% url 'diary:week_graph' as week_graph_url %}
-<div class="tab__button a--tab">
-    <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
-        <a href="{{ calender_week_url }}">週間カレンダー</a>
+<div class="calendar--background calender-week-page">
+    <!-- タブ -->
+    {% url 'diary:calender_week' as calender_week_url %}
+    {% url 'diary:week_graph' as week_graph_url %}
+    <div class="tab__button a--tab">
+        <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
+            <a href="{{ calender_week_url }}">週間カレンダー</a>
+        </div>
+        <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
+            <a href="{{ week_graph_url }}">週間グラフ</a>
+        </div>
     </div>
-    <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
-        <a href="{{ week_graph_url }}">週間グラフ</a>
-    </div>
-</div>
-
-{% comment %} <div class="tab__button a--tab">
-    <div class="a--tab--left">
-        <a href="{% url 'diary:calender_week' %}">週間カレンダー</a>
-    </div>
-    <div class="a--tab--right">
-        <a href="{% url 'diary:week_graph' %}">週間グラフ</a>
-    </div>
-</div> {% endcomment %}
 
 <!-- 週間カレンダーページネーション -->
 <div class="calendar-week">
