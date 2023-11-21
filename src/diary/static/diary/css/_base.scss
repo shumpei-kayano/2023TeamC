@@ -94,8 +94,11 @@ header {
         width: 7.2rem;
         height: 2.8rem;
     }
-
+    .weatherImg{
+        width: 2.2rem;
+    }
     .header__weather span{
+        margin-left: 0.5rem;
         font-size: 1.6rem;
         text-align: right;
     }
