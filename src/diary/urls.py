@@ -11,7 +11,6 @@ urlpatterns = [
     path('calendar/month/<str:selected_date>/', views.calendar_month,name='calendar_month'),
     path('calender/week', views.calender_week,name='calender_week'),
     path('calender/week/<str:selected_date>/', views.calender_week, name='calender_week'),
-    path('calender/week/up/<str:selected_date>/', views.calender_week_up, name='calender_week_up'),
     path('create/diary/confirmation', views.create_diary_confirmation,name='create_diary_confirmation'),
     path('create/diary/confirmation/<int:pk>', views.create_diary_confirmation2,name='create_diary_confirmation'),
     path('create/diary', views.create_diary,name='create_diary'),
