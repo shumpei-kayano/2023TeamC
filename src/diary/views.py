@@ -12,6 +12,8 @@ from django.shortcuts import render
 from datetime import date, timedelta
 import openai
 import boto3
+from calendar import monthcalendar, setfirstweekday, SUNDAY
+from dateutil.relativedelta import relativedelta
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary):
@@ -76,8 +78,38 @@ def base(request):
     return render(request, 'diary/base.html')
 
 @login_required
-def calendar_month(request):
-    return render(request, 'diary/calendar_month.html')
+def calendar_month(request,selected_date=None):
+    # パラメータが指定されていない場合は今日の日付を使用
+    if selected_date:
+        # selected_dateをdatetime.date型に変換
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        selected_date = date.today()
+    # 前月と次月の日付を計算
+    prev_month = selected_date - relativedelta(months=1)
+    next_month = selected_date + relativedelta(months=1)
+    # 週の最初を日曜日に設定
+    setfirstweekday(SUNDAY)
+    # カレンダーの開始日を計算（選択された月の1日）
+    start_of_month = selected_date.replace(day=1)
+    # カレンダーに表示する日付のリストを作成
+    month_matrix = monthcalendar(selected_date.year, selected_date.month)
+# 月全体の週のリストを作成
+    weeks = []
+    for week_data in month_matrix:
+        week_dates = []
+        for day in week_data:
+            if day == 0:
+                # 0は先月または来月の日なので空白として扱う
+                week_dates.append(None)
+            else:
+                week_dates.append(start_of_month + timedelta(days=day - 1))
+        weeks.append(week_dates)
+        diary = Diary.objects.filter(user=request.user)
+    # 各日付に対する条件に合わせて適切な処理をここで実行
+    # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
+
+    return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
 
 
@@ -305,29 +337,27 @@ def month_graph(request):
     return render(request, 'diary/month_graph.html')
 
 @login_required
-def positive_conversion(request, pk):
+def positive_conversion(request, pk,):
     diary = get_object_or_404(Diary, id=pk)
     openai.api_key = settings.OPENAI_API_KEY
-    save_content = ""
+    # 変換前の日記データを取得
+    user_content = diary.content
 
-    if 'save_button' in request.POST:
-    # データベースへの保存
-        diary.content = save_content
-        diary.save()  # データベースの保存は最後に行う
-        return redirect('diary:today_diary_detail', pk=pk)
-    else:
-        user_diary = "以下は日記のコンテンツです。ポジティブで前向きになれるよう、ネガティブな言葉を変換し、書き換えてください。あなたのセリフはいりません。\n" + diary.content
-        response = openai.ChatCompletion.create(
+    user_diary = "以下は日記のコンテンツです。ポジティブで前向きになれるよう、ネガティブな言葉を変換し、書き換えてください。あなたのセリフはいりません。\n" + diary.content
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "user", "content": user_diary}
             ]
         )
-        ai_content = response["choices"][0]["message"]["content"]
-        save_content = ai_content
-
-
-    return render(request, 'diary/positive_conversion.html', {'diary': diary, 'save_content':save_content })
+    ai_content = response["choices"][0]["message"]["content"]
+    save_content = ai_content
+    
+    # データベースへの保存
+    diary.content = save_content
+    diary.save()  # データベースの保存は最後に行う
+    
+    return render(request, 'diary/positive_conversion.html',{'diary':diary,'save_content':save_content, 'user_content':user_content})
 
 @login_required
 def setting(request):
