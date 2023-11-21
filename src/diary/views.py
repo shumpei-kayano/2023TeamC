@@ -111,37 +111,6 @@ def calendar_month(request,selected_date=None):
 
     return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
-from datetime import date, datetime, timedelta
-
-from datetime import date, timedelta, datetime
-
-from datetime import date, timedelta, datetime
-
-@login_required
-def calendar_month(request, selected_date=None):
-    if selected_date:
-        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-    else:
-        selected_date = date.today()
-
-    first_day_of_month = selected_date.replace(day=1)
-    weeks_in_month = []
-    current_day = first_day_of_month
-
-    while current_day.month == first_day_of_month.month:
-        # 週の開始日を正確に計算
-        start_of_week = current_day - timedelta(days=(current_day.weekday() + 1) % 7)  # 日曜日を週の初めとする
-        week_number = start_of_week.strftime("%W")
-        week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
-        weeks_in_month.append({'week_number': week_number, 'dates': week_dates})
-        current_day += timedelta(days=7)
-        
-    first_day_of_previous_month = first_day_of_month - timedelta(days=1)
-    previous_month = first_day_of_previous_month.replace(day=1)
-    diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calendar_month.html', context={'diary':diary,'weeks_in_month': weeks_in_month, 'selected_date': selected_date,'week_start':previous_month})
-
-
 @login_required
 def calender_week(request, selected_date=None):
     # selected_dateをdatetime.date型に変換
