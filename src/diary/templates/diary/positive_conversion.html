@@ -66,18 +66,19 @@
 
         <!-- ポジティブ変換した日記の表示 -->
             <!-- enctype='multipart/form-data'でファイルアップロード -->
-        <form method="POST"  enctype='multipart/form-data'>
-            {% csrf_token %}
-            <div class="content__today-diary__positive-text">
-                <p>
-                    {{ save_content }}
-                </p>
-            </div>
-            <p>日記の内容を上記に変更しますか？</p>
-            <div class="button">
-                <button type="submit" id="save-button" name="save_button" onclick="location.href='{% url 'diary:today_diary_detail' diary.pk %}'">保存</button>
-            </div>
-        </form>
+            <form method="POST" action="{% url 'diary:positive_conversion2' diary.pk %}" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="content__today-diary__positive-text">
+                    <p>
+                        {{ save_content }}
+                    </p>
+                </div>
+                <p>日記の内容を上記に変更しますか？</p>
+                <div class="button">
+                    <button type="submit" id="save-button">保存</button>
+                </div>
+            </form>
+            
 
         <div class="cancel__button">
             <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
