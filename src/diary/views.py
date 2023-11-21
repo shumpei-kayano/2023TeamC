@@ -103,9 +103,10 @@ def calendar_month(request,selected_date=None):
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
+    emotion = Emotion.objects.filter(user = request.user)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -381,8 +382,7 @@ def today_diary_detail(request):
 
 @login_required
 def today_diary_detail2(request,pk):
-    today = date.today()
-    diary = get_object_or_404(Diary, user=request.user, created_date=today)
+    diary = get_object_or_404(Diary, id=pk)
     if diary:
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()

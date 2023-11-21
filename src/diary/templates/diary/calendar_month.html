@@ -71,15 +71,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 第1週 -->
+                        <!-- 月にある週間の数 -->
                         {% for week in weeks %}
                             <tr>
+                              {% comment %} 確定7回回る {% endcomment %}
                                 {% for day in week %}
                                     <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
                                         {% if day.day %}
-                                            {{ day.day }}
-                                            <!-- ここに日付に関する追加の処理を追加 -->
-                                            <!-- 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など -->
+                                          {{ day.day }}
+                                            {%for emotion in emotion %}
+                                              {%if emotion.created_date == day%}
+                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">{{ emotion.reasoning }}</a>
+                                              {% endif %}
+                                            {% endfor %}
                                         {% endif %}
                                     </td>
                                 {% endfor %}
