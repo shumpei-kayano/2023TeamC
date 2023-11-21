@@ -16,7 +16,7 @@ from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
 
 # comrehendを使って感情分析を行う関数
-def analyze_sentiment(text, diary):
+def analyze_sentiment(text, diary,user):
     # 感情分析の生成
     comprehend = boto3.client('comprehend', 'us-east-1')
     result = comprehend.detect_sentiment(Text=text, LanguageCode='ja')
@@ -37,15 +37,12 @@ def analyze_sentiment(text, diary):
     else:
         new_emotion = Emotion(
             diary=diary,
+            user = user,
             reasoning=result['Sentiment'],
             positive=result['SentimentScore']['Positive'],
             negative=result['SentimentScore']['Negative'],
             neutral=result['SentimentScore']['Neutral'],
             mixed=result['SentimentScore']['Mixed'],
-            week_number=diary.created_date.isocalendar()[1],
-            month=diary.created_date.month,
-            day=diary.created_date.day,
-            year=diary.created_date.year
         )
         new_emotion.save()
 
@@ -195,7 +192,7 @@ def create_diary_confirmation2(request, pk):
             return redirect('diary:create_diary_confirmation', pk=pk)
 
     # 感情分析の実行関数
-    analyze_sentiment(diary.content, diary)
+    analyze_sentiment(diary.content, diary,request.user)
     
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
