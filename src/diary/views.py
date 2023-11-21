@@ -105,41 +105,12 @@ def calendar_month(request,selected_date=None):
             else:
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
-        diary = Diary.objects.filter(user=request.user)
+    diary = Diary.objects.filter(user=request.user)
+    emotion = Emotion.objects.filter(diary__user=request.user)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,})
 
-    return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
-
-from datetime import date, datetime, timedelta
-
-from datetime import date, timedelta, datetime
-
-from datetime import date, timedelta, datetime
-
-@login_required
-def calendar_month(request, selected_date=None):
-    if selected_date:
-        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-    else:
-        selected_date = date.today()
-
-    first_day_of_month = selected_date.replace(day=1)
-    weeks_in_month = []
-    current_day = first_day_of_month
-
-    while current_day.month == first_day_of_month.month:
-        # 週の開始日を正確に計算
-        start_of_week = current_day - timedelta(days=(current_day.weekday() + 1) % 7)  # 日曜日を週の初めとする
-        week_number = start_of_week.strftime("%W")
-        week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
-        weeks_in_month.append({'week_number': week_number, 'dates': week_dates})
-        current_day += timedelta(days=7)
-        
-    first_day_of_previous_month = first_day_of_month - timedelta(days=1)
-    previous_month = first_day_of_previous_month.replace(day=1)
-    diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calendar_month.html', context={'diary':diary,'weeks_in_month': weeks_in_month, 'selected_date': selected_date,'week_start':previous_month})
 
 
 @login_required
@@ -163,20 +134,6 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
-
-@login_required
-# 週間カレンダーを進める処理
-def calender_week_up(request, selected_date=None):
-    selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-    selected_weekday = selected_date.weekday()
-    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
-    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
-    # 前の週の日曜日を取得
-    week_start = week_dates[0] - timedelta(days=7)
-    # 次の週の日曜日を取得
-    week_start_up = week_dates[0] + timedelta(days=7)
-    diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date, 'diary': diary, 'week_start': week_start, 'week_start_up': week_start_up})
 
 def create_diary_confirmation(request):
 
