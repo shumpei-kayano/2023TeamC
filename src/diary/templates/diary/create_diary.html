@@ -30,24 +30,25 @@
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
-        <form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+        {% comment %} action="{% url 'diary:create_diary_confirmation' %}" {% endcomment %}
+        <form method="POST" action="" enctype="multipart/form-data">
 
         {% csrf_token %}
             <div class="content__today-diary__text">
-            <div class='diarycontent'>
-                {{today}}<br>        {% comment %} 現在の日付を取得 {% endcomment %}
-                {{ Diary.content }}
-                <div class='photomv'>
-                {{ Diary.photo1 }}
-                {{ Diary.photo2 }}
-                {{ Diary.photo3 }}
-                {{ Diary.photo4 }}
-                {{ Diary.movie1 }}
-                {{ Diary.movie2 }}
-                {{ Diary.movie3 }}
-                {{ Diary.movie4 }}
+                <div class='diarycontent'>
+                    {% comment %}  {{today}}<br>        現在の日付を取得 {% endcomment %}
+                    {{ Diary.content }}
+                    <div class='photomv'>
+                        {{ Diary.photo1 }}
+                        {{ Diary.photo2 }}
+                        {{ Diary.photo3 }}
+                        {{ Diary.photo4 }}
+                        {{ Diary.movie1 }}
+                        {{ Diary.movie2 }}
+                        {{ Diary.movie3 }}
+                        {{ Diary.movie4 }}
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="cancel__button">
                 <button type="submit">確認</button>
@@ -56,4 +57,62 @@
 
     </div>
 </main>
+{% endblock %}
+
+{% block js %}
+<script>
+    # widgets = {
+        #     'content': forms.Textarea(attrs={'class': 'your-css-class'}),
+        #     'photo1': forms.FileInput(attrs={'class': 'your-css-class'}),
+        #     'photo2': forms.FileInput(attrs={'class': 'your-css-class'}),
+        #     'photo3': forms.FileInput(attrs={'class': 'your-css-class'}),
+        #     'photo4': forms.FileInput(attrs={'class': 'your-css-class'}),
+        #     'movie1': forms.URLInput(attrs={'class': 'your-css-class'}),
+        #     'movie2': forms.URLInput(attrs={'class': 'your-css-class'}),
+        #     'movie3': forms.URLInput(attrs={'class': 'your-css-class'}),
+        #     'movie4': forms.URLInput(attrs={'class': 'your-css-class'}),
+        # }
+    ページのDOMが完全に読み込まれたときに実行される関数
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初期表示では2つ目以降のphotoとmovieの要素を非表示にする
+        hideElements('photo', 2);
+        hideElements('movie', 2);
+
+        function hideElements(type, start) {
+            for (let i = start; i <= 4; i++) {
+            const element = document.getElementById(`id_${type}${i}`);
+            if (element) {
+                element.style.display = 'none';
+            }
+            }
+        }
+
+        function showNextElement(type, index) {
+            const nextIndex = index + 1;
+            const nextElement = document.getElementById(`id_${type}${nextIndex}`);
+            if (nextElement) {
+            nextElement.style.display = 'block';
+            }
+        }
+
+        function handleFileInput(type, index) {
+            const input = document.getElementById(`id_${type}${index}`);
+            if (input) {
+            input.addEventListener('change', function() {
+                showNextElement(type, index);
+            });
+            }
+        }
+
+        // photoファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInput('photo', i);
+        }
+
+        // movieファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInput('movie', i);
+        }
+    });
+</script>
 {% endblock %}
