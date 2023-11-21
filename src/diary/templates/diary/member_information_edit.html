@@ -10,7 +10,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.png' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
     </div>
     <h1>会員情報変更</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
@@ -18,48 +18,55 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--white">
+    <div class="scroll--content">
 
-    <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
-        {% csrf_token %}
-        <!-- ユーザーネームの編集 -->
-        <div class="content__user-name__text">
-            <label for="username">ユーザーネーム</label>
-            <br><input type="text" id="username" name="username" value="{{ user.username }}">
+        <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
+            {% csrf_token %}
+            <!-- ユーザーネームの編集 -->
+            <div class="content__user-name__text">
+                <label for="username">ユーザーネーム</label>
+                <br><input type="text" id="username" name="username" value="{{ user.username }}">
+            </div>
+
+            <!-- メールアドレスの編集 -->
+            <div class="content__user-email__text">
+                <label for="email">メールアドレス</label>
+                <br><input type="email" id="email" name="email" value="{{ user.email }}">
+                <!--エラー-->
+                <div class="error-message" id="email-error"></div>
+            </div>
+
+
+    {% comment %} 検討中
+            <!-- パスワードの編集 -->
+            <div class="content__user-password__text">
+                <label for="password">パスワード</label>
+                <br><input type="password" id="password" name="password">
+                <!--エラー-->
+                <div class="error-message" id="password-error"></div>
+            </div> {% endcomment %}
+
+            <!-- 送信ボタン -->
+            <div class="cancel__button">
+            <button type="submit">確認する</button>
+        </div>
+        </form>
+
+
+        <div class="neko__dango.image">
+            <img src="{% static 'diary/assets/neko_dango.svg' %}">
         </div>
 
-        <!-- メールアドレスの編集 -->
-        <div class="content__user-email__text">
-            <label for="email">メールアドレス</label>
-            <br><input type="email" id="email" name="email" value="{{ user.email }}">
-            <!--エラー-->
-            <div class="error-message" id="email-error"></div>
-        </div>
 
+        {% comment %} パスワードが8文字以上の半角英数字でない場合とメールアドレスの書式が正しくない場合は
+    テキストボックスの下にエラーメッセージを表示{% endcomment %}
 
-{% comment %} 検討中
-        <!-- パスワードの編集 -->
-        <div class="content__user-password__text">
-            <label for="password">パスワード</label>
-            <br><input type="password" id="password" name="password">
-            <!--エラー-->
-            <div class="error-message" id="password-error"></div>
-        </div> {% endcomment %}
-
-        <!-- 送信ボタン -->
-        <div class="cancel__button">
-        <button type="submit">確認する</button>
     </div>
-    </form>
+</main>
+{% endblock %}
 
-
-    <div class="neko__dango.image">
-        <img src="{% static 'diary/assets/neko_dango.png' %}">
-    </div>
-
-
-    {% comment %} パスワードが8文字以上の半角英数字でない場合とメールアドレスの書式が正しくない場合は
-テキストボックスの下にエラーメッセージを表示{% endcomment %}
-
+{% block script %}
 <script>
     const form = document.querySelector('form');
 

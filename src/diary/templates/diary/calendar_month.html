@@ -14,142 +14,82 @@
 {% endblock %}
 
 {% block content %}
-<div class="calendar--background calender-month-page">
-    <!-- タブ -->
-    {% url 'diary:calendar_month' as calendar_month_url %}
-    {% url 'diary:month_graph' as month_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-            <a href="{{ calendar_month_url }}">月間カレンダー</a>
-        </div>
-        <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-            <a href="{{ month_graph_url }}">月間グラフ</a>
-        </div>
-    </div>
-
-    <!-- カレンダーページネーション -->
-    <div class="calendar-week">
-        <div class="calendar-header">
-            {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-            <div class="next__button">
-                <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-                <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-                <span>年月</span>
+<main class="ground ground--white"><!-- 追加した要素 -->
+    <div class="scroll--content"><!-- 追加した要素 -->
+        <div class="calendar--background calender-month-page">
+            <!-- タブ -->
+            {% url 'diary:calendar_month' as calendar_month_url %}
+            {% url 'diary:month_graph' as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a href="{{ month_graph_url }}">月間グラフ</a>
+                </div>
             </div>
-            {% comment %} 現在の月を表示させてください {% endcomment %}
-            <div class="a--blue">
-                <a href="">
-                    <img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン"></a>
-                    <p>今月</p>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <!-- カレンダー -->
-    <div id="calendar" class="calendar__month">
-        <table>
-            <thead>
-                <tr>
-                    <th class="sun">日</th>
-                    <th>月</th>
-                    <th>火</th>
-                    <th>水</th>
-                    <th>木</th>
-                    <th>金</th>
-                    <th class="sat">土</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 第1週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第2週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第3週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第4週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-                <!-- 第5週 -->
-                <tr>
-                    <td class="sun--td">
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td class="sat--td">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div><!-- calendar--background -->
+            <!-- 月間カレンダーページネーション -->
+            <div class="calendar-week">
+                <div class="calendar-header">
+                    {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
+                    <div class="next__button">
+                        <!-- 左ボタン -->
+                        <a href="{% url 'diary:calendar_month' prev_month %}">
+                            <img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">
+                        </a>
+
+                        {% comment %} 月を動的に進められるようにしてください {% endcomment %}
+                        <a href="{% url 'diary:calendar_month' next_month %}">
+                            <img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">
+                        </a>
+                    </div>
+                    {% comment %} 現在の月を表示させてください {% endcomment %}
+                    <p>{{ selected_date|date:"Y年m月" }}</p>
+                    <div class="a--blue">
+                        <a href="{% url 'diary:calendar_month' selected_date %}">
+                            <svg id="mySvg" width="16" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z" fill="#00ABB6"/>
+                            </svg>
+                            <p>今月</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- カレンダー -->
+            <div id="calendar" class="calendar__month">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sun">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="sat">土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 第1週 -->
+                        {% for week in weeks %}
+                            <tr>
+                                {% for day in week %}
+                                    <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
+                                        {% if day.day %}
+                                            {{ day.day }}
+                                            <!-- ここに日付に関する追加の処理を追加 -->
+                                            <!-- 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など -->
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- calendar  background -->
+
+    </div><!-- scroll  content -->
+</main>
 {% endblock %}

@@ -23,26 +23,30 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--white">
+    <div class="scroll--content">
 
-    <!--ねこ画像-->
-    <div class="cancel__neko__img">
-        <img src="{% static'diary/assets/cancel_neko.png' %}" alt="ネココの画像">
-    </div>
-    <!-- enctype='multipart/form-data'でファイルアップロード -->
-<form method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
+            <!--ねこ画像-->
+            <div class="cancel__neko__img">
+                <img src="{% static'diary/assets/cancel_neko.svg' %}" alt="ネココの画像">
+            </div>
+            <!-- enctype='multipart/form-data'でファイルアップロード -->
+        <form method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
 
-    <div class="content__member-info__cancel-text">
-        <p>変更内容は保存されません。</p>
-        <p>会員情報画面に戻りますか？</p>
-    </div>
+            <div class="content__member-info__cancel-text">
+                <p>変更内容は保存されません。</p>
+                <p>会員情報画面に戻りますか？</p>
+            </div>
 
-    <div class="button">
-        <button type="submit" id="save-button" onclick="location.href='{% url 'member_infomation.htmlに遷移させてください' %}'">戻る</button>
+            <div class="button">
+                <button type="submit" id="save-button" onclick="location.href='{% url 'member_infomation.htmlに遷移させてください' %}'">戻る</button>
+            </div>
+            
+            <div class="cancel__button">
+                <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+            </div>
+        </form>
     </div>
-    
-    <div class="cancel__button">
-        <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
-    </div>
-</form>
+</main>
 {% endblock %}

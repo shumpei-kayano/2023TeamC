@@ -12,65 +12,61 @@
 {% endblock %}
 
 {% block content %}
-<div class="calendar--background month-graph-page">
-    <!-- タブ -->
-    {% url 'diary:calendar_month' as calendar_month_url %}
-    {% url 'diary:month_graph' as month_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-            <a href="{{ calendar_month_url }}">月間カレンダー</a>
-        </div>
-        <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-            <a href="{{ month_graph_url }}">月間グラフ</a>
-        </div>
-    </div>
-
-
-    <!-- カレンダーページネーション -->
-    <div class="calendar-week">
-        <div class="calendar-header">
-            {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-            <div class="next__button">
-                <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-                <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-                <span>年月</span>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+        <div class="calendar--background month-graph-page">
+            <!-- タブ -->
+            {% url 'diary:calendar_month' as calendar_month_url %}
+            {% url 'diary:month_graph' as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a href="{{ month_graph_url }}">月間グラフ</a>
+                </div>
             </div>
-            {% comment %} 現在の月を表示させてください {% endcomment %}
-            <div class="a--blue">
-                <a href="">
-                    <img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン"></a>
-                    <p>今月</p>
-                </a>
+
+        <!-- 月間のページネーション -->
+        <div class="col-md-6">
+            <div class="text-right">
+                    <button onclick="moveToPreviousMonth()"><img src="{% static 'diary/assets/left_arrow.svg' %}"></button>
+                <div calss="text-center">
+                    <span id="year-month"></span>
+                </div>
+                    <button onclick="moveToThisMonth()"><img src="{% static 'diary/assets/right_arrow.svg' %}"></button>
+                <div class="return__button">
+                    <button onclick="moveToNextMonth()"><img src="{% static 'diary/assets/return_arrow.svg' %}">今月</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- グラフの表示 -->
-        {% comment %} <div id="emotion__graph">
-            <div class="emotion__graph__img">
-                <img src="{% static 'diary/assets/emotion_graph.png' %}" alt="感情グラフ">感情グラフ</img> {% endcomment %}
-                {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
-                {% comment %} <canvas id="barChart" width="200" height="200"></canvas><!-- 棒グラフ -->
-                <canvas id="lineChart" width="200" height="200"></canvas><!-- 折れ線グラフ -->
+        <!-- グラフの表示 -->
+            <div id="emotion__graph">
+                <div class="emotion__graph__img">
+                    <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
+                    {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
+                    <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
+                    <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+                </div>
             </div>
-        </div> {% endcomment %}
+
 
         <!-- ネココのカウンセリングコメント -->
-    <div class="content__home__text--pink">
-        <div class="content__today-diary__comment">
-            <p>
-            テストテストテストテストテストテストテスト
-            </p>
-        <!-- ネコココメントの画像 -->
-            <div class="content__today-diary__comment__img">
-                <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+        <div class="content__home__text--pink">
+            <div class="content__today-diary__comment">
+                <p>
+                テストテストテストテストテストテストテスト
+                </p>
+            <!-- ネコココメントの画像 -->
+                <div class="content__today-diary__comment__img">
+                    <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+                </div>
             </div>
         </div>
     </div>
+</main>
 
-</div>
 {% endblock %}
 
 <!--カレンダー遷移-->

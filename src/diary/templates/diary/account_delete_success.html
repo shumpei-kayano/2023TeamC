@@ -15,21 +15,27 @@
 {% endblock %}
 
 {% block content %}
+<main class="ground ground--white">
+<div class="scroll--content">
 
-<p class="deleta__success__title">アカウントが削除されました</p>
+    <p class="deleta__success__title">アカウントが削除されました</p>
 
-<!-- ネコココメント -->
-<div class="deleta__success-text">
-    <p>ご利用ありがとうございましたにゃ</p>
+    <!-- ネコココメント -->
+    <div class="deleta__success-text">
+        <p>ご利用ありがとうございましたにゃ</p>
+    </div>
+
+    <!-- ネココの画像 -->
+    <div class="content__today-diary__comment__img">
+        <img src="{% static'diary/assets/member_neko.svg' %}" alt="ネココの画像">
+    </div>
+
+    <div class="button">
+        {% comment %} user/account_top.htmlに遷移させてください {% endcomment %}
+        <button id="save-button" type="submit" onclick="location.href='{% url '' %}'">トップページへ</button>
+        <a href="{% url 'user:account_top' %}">トップページへ</a>
+    </div>
 </div>
-
-<!-- ネココの画像 -->
-<div class="content__today-diary__comment__img">
-    {% comment %} <img src="{% static'diary/assets/member_neko.png' %}" alt="ネココの画像"> {% endcomment %}
-</div>
-
-<div class="button">
-    <a href="{% url 'user:account_top' %}">トップページへ</a>
-</div>
+</main>
     
 {% endblock %}

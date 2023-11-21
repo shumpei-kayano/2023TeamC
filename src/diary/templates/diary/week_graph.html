@@ -12,64 +12,61 @@
 {% endblock %}
 
 {% block content %}
-<div class="calendar--background week-graph-page">
-    <!-- タブ -->
-    {% url 'diary:calender_week' as calender_week_url %}
-    {% url 'diary:week_graph' as week_graph_url %}
-    <div class="tab__button a--tab">
-        <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
-            <a href="{{ calender_week_url }}">週間カレンダー</a>
-        </div>
-        <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
-            <a href="{{ week_graph_url }}">週間グラフ</a>
-        </div>
-    </div>
-
-
-    <!-- 週間のページネーション -->
-    <div class="calendar-week">
-        <div class="calendar-header">
-            {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-            <div class="next__button">
-                <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-                <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
-                {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-                <span>年月</span>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+        <div class="calendar--background week-graph-page">
+            <!-- タブ -->
+            {% url 'diary:calender_week' as calender_week_url %}
+            {% url 'diary:week_graph' as week_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
+                    <a href="{{ calender_week_url }}">週間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
+                    <a href="{{ week_graph_url }}">週間グラフ</a>
+                </div>
             </div>
-            {% comment %} 現在の月を表示させてください {% endcomment %}
-            <div class="a--blue">
-                <a href="">
-                    <img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン"></a>
-                    <p>今月</p>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <!-- グラフの表示 -->
-        {% comment %} <div id="emotion__graph">
-            <div class="emotion__graph__img">
-                <img src="{% static 'diary/assets/emotion_graph.png' %}" alt="感情グラフ">感情グラフ</img> {% endcomment %}
-                {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
-                {% comment %} <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
-                <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+            <!-- 週間のページネーション -->
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button id="prev-week"><img src="{% static 'assets/left_arrow.svg' %}"></button>
+                    <div calss="text-center">
+                        <span id="year-month"></span>
+                    </div>
+                    <button id="next-week"><img src="{% static 'assets/right_arrow.svg' %}"></button>
+                    <div class="return__button">
+                        <button id="now-week"><img src="{% static 'assets/return_arrow.svg' %}">今週</button>
+                    </div>
+                </div>
             </div>
-        </div> {% endcomment %}
 
-        <!-- ネココのカウンセリングコメント -->
-    <div class="content__home__text--pink">
-        <div class="content__today-diary__comment">
-            <p>
-            テストテストテストテストテストテストテスト
-            </p>
-        <!-- ネコココメントの画像 -->
-            <div class="content__today-diary__comment__img">
-                <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+            <!-- グラフの表示 -->
+            <div id="emotion__graph">
+                <div class="emotion__graph__img">
+                    <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
+                    {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
+                    <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
+                    <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+                </div>
+            </div>
+            
+            <!-- ネココのカウンセリングコメント -->
+            <div class="content__home__text--pink">
+                <div class="content__today-diary__comment">
+                    <p>
+                    テストテストテストテストテストテストテスト
+                    </p>
+                    <!-- ネコココメントの画像 -->
+                    <div class="content__today-diary__comment__img">
+                        <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+</main>
 
 {% endblock %}
 

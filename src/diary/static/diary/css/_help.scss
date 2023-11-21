@@ -1,28 +1,66 @@
-// .scroll--box{
-//     // 高さが上限を超えたときだけスクロールバーを表示
-//     overflow: auto;
-//     // overflow: scroll;
-//     .scroll--content{
-//         background-color: #fafafa;
-//     }
-// }
-// // スクロールバー背景色
-// .scroll-box::-webkit-scrollbar {
-//     background: #efefef9b;
-//     // スクロールバーの幅を調整
-//     width: 5px;
-//     height: 5px;
-//     // 角丸を指定
-//     border-radius: 20px;
-// }
-// // スクロールボタン
-// .scroll-box::-webkit-scrollbar-thumb {
-//     background-color: rgb(216, 216, 216);
-//     // 角丸を指定
-//     border-radius: 20px;
-//     // border: 2px solid red;
-// }
-// // スクロールバー（hover時）
-// .scroll-box::-webkit-scrollbar-thumb:hover {
-//     background-color: rgb(173, 173, 173);
-// }
+.content__help__group{
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+        display: inline-block;
+        // 子要素を直接中央揃えにする
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 4rem auto 2.4rem auto;
+        border-bottom:solid;
+        border-color:rgba(4, 202, 214, 0.40);
+        border-width:7px;/*太さ*/
+    }
+}
+
+.list_test-wrap{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    // リストアイテムに番号を表示させる
+    .list_test {
+        font-size:  1.4rem;
+        margin-bottom: 1.6rem;
+
+        counter-increment: my-counter; // カウンターをインクリメント
+        display: flex; // Flexboxを使用して横に揃える
+        margin-left: 2.4rem;
+
+        &::before {
+            content: counter(my-counter); // カウンターの値を表示
+            display: inline-block;
+            // width: 1.5em; // 適切な幅に調整
+            // text-align: right; // 右寄せ
+            margin-right: 1em; // 番号とテキストの間隔
+            margin-top: 0.15rem;
+        }
+
+        p{
+            margin: 0;
+            line-height: 170%;
+            letter-spacing: 0.04rem;
+        }
+
+        img{
+            margin: 0 0.3rem;
+        }
+        .list_test--icon{
+            margin: 0 1rem 1.5rem 0;
+        }
+    }
+
+    .content__help__list__chart, .content__help__list__chart--last{
+        img{
+            display: block;
+            margin: 0 auto;
+            // margin-left: -40px;
+            margin-bottom: 1.6rem;
+        }
+    }
+
+    .content__help__list__chart--last{
+        margin-bottom: 4rem;
+    }
+}

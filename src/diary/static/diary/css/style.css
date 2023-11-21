@@ -15,15 +15,20 @@ body {
   flex-direction: column;
 }
 
+p {
+  line-height: 1.7rem;
+  letter-spacing: 0.04rem;
+}
+
 a {
   text-decoration: none;
 }
 
-li {
+.menu__item, .list_item {
   list-style: none;
 }
 
-header, main, footer {
+header, .ground, footer {
   width: 39rem;
   max-width: 100%;
   margin: 0 auto;
@@ -87,32 +92,37 @@ header .header__spacer, header .header__weather {
 }
 header .header__weather span {
   font-size: 1.6rem;
+  text-align: right;
 }
 
-main {
+.ground {
   margin-top: 5rem; /*上に空白を追加*/
   height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
-  background-color: #EEFEFF;
-}
-main .scroll--content {
-  background-color: #fafafa;
 }
 
-.main::-webkit-scrollbar {
-  background: rgba(239, 239, 239, 0.6078431373);
-  width: 5px;
-  height: 5px;
+.ground::-webkit-scrollbar {
+  background: rgba(217, 217, 217, 0.1);
+  width: 2px;
+  height: 2px;
   border-radius: 20px;
 }
 
-.main::-webkit-scrollbar-thumb {
+.ground::-webkit-scrollbar-thumb {
   background-color: rgb(216, 216, 216);
   border-radius: 20px;
+  padding-left: 2.4rem;
 }
 
-.main::-webkit-scrollbar-thumb:hover {
+.ground::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
+}
+
+.ground--white {
+  background-color: #FFFFFF;
+}
+.ground--blue {
+  background-color: #EEFEFF;
 }
 
 footer {
@@ -125,6 +135,7 @@ footer {
   background-color: #FFFFFF;
   height: 6rem;
   overflow: hidden;
+  border-top: 1px solid rgba(217, 217, 217, 0.5);
 }
 footer .menu__list {
   padding: 0;
@@ -149,7 +160,7 @@ footer .nav-text {
 }
 
 @media only screen and (max-width: 767px) {
-  header, .main, footer {
+  header, .ground, footer {
     width: 100%;
     max-width: none;
   }
@@ -173,16 +184,16 @@ footer .nav-text {
   h1 {
     font-size: 20px;
   }
-  main {
+  .ground {
     margin-top: 50px; /*上に空白を追加*/
     height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   }
-  .main::-webkit-scrollbar {
+  .ground::-webkit-scrollbar {
     width: 5px;
     height: 5px;
     border-radius: 20px;
   }
-  .main::-webkit-scrollbar-thumb {
+  .ground::-webkit-scrollbar-thumb {
     border-radius: 20px;
   }
   footer {
@@ -466,6 +477,57 @@ footer .nav-text {
 .next__button a img {
   display: block;
   height: auto; /* 高さは自動 */
+}
+
+.content__help__group h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 4rem auto 2.4rem auto;
+  border-bottom: solid;
+  border-color: rgba(4, 202, 214, 0.4);
+  border-width: 7px; /*太さ*/
+}
+
+.list_test-wrap {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.list_test-wrap .list_test {
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+  counter-increment: my-counter;
+  display: flex;
+  margin-left: 2.4rem;
+}
+.list_test-wrap .list_test::before {
+  content: counter(my-counter);
+  display: inline-block;
+  margin-right: 1em;
+  margin-top: 0.15rem;
+}
+.list_test-wrap .list_test p {
+  margin: 0;
+  line-height: 170%;
+  letter-spacing: 0.04rem;
+}
+.list_test-wrap .list_test img {
+  margin: 0 0.3rem;
+}
+.list_test-wrap .list_test .list_test--icon {
+  margin: 0 1rem 1.5rem 0;
+}
+.list_test-wrap .content__help__list__chart img, .list_test-wrap .content__help__list__chart--last img {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1.6rem;
+}
+.list_test-wrap .content__help__list__chart--last {
+  margin-bottom: 4rem;
 }
 
 .week-calendar table {

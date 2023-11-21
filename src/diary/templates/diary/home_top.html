@@ -7,8 +7,7 @@
 
 {% block header %}
 <header>
-
-
+    <div class="header__spacer--top"></div><!-- 追加 -->
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
@@ -18,35 +17,41 @@
 {% endblock %}
 
 {% block content %}
-<div class="content__home">
-    <div class="content__home__logo">
-        <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
-    </div>
-    <div class="content__home__text">
-        <p>今日はどんな1日ですか？
-            感じたことを書き残そー。
-        </p>
-    </div>
-    <div class="content__home__img">
-        <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
-    </div>
-    <div class="btn--large">
-        {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
-        <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
-    </div>
-</div>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
 
-<!-- 天気 -->
-{% comment %}
-<div id="location"></div>
-<div class="weatherForecast">
-  <div class="weather">
-    <div class="date">--/--(-)</div>
-    <img class="weatherImg">
-    <div class="weatherTelop">--</div>
-    <div><span class="tempMax">-℃</span></div>
-  </div>
-</div>
-{% endcomment %}
+        <div class="content__home">
+            <div class="content__home__logo">
+                <img src="{% static 'diary/assets/logo.svg' %}" alt="ロゴ">
+            </div>
+            <div class="content__home__text">
+                <p>今日はどんな1日ですか？
+                    感じたことを書き残そー。
+                </p>
+            </div>
+            <div class="content__home__img">
+                <img src="{% static 'diary/assets/home_top_neko.svg' %}" alt="ネコの画像">
+            </div>
+            <div class="btn--large">
+                {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+                <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
+            </div>
+        </div>
+
+        <!-- 天気 -->
+        {% comment %}
+        <div id="location"></div>
+        <div class="weatherForecast">
+        <div class="weather">
+            <div class="date">--/--(-)</div>
+            <img class="weatherImg">
+            <div class="weatherTelop">--</div>
+            <div><span class="tempMax">-℃</span></div>
+        </div>
+        </div>
+        {% endcomment %}
+
+    </div>
+</main>
 
 {% endblock %}
