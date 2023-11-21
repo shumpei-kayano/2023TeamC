@@ -111,29 +111,72 @@ def calendar_month(request,selected_date=None):
 
     return render(request, 'diary/calendar_month.html', {'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
+from datetime import date, datetime, timedelta
+
+from datetime import date, timedelta, datetime
+
+from datetime import date, timedelta, datetime
+
+@login_required
+def calendar_month(request, selected_date=None):
+    if selected_date:
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        selected_date = date.today()
+
+    first_day_of_month = selected_date.replace(day=1)
+    weeks_in_month = []
+    current_day = first_day_of_month
+
+    while current_day.month == first_day_of_month.month:
+        # 週の開始日を正確に計算
+        start_of_week = current_day - timedelta(days=(current_day.weekday() + 1) % 7)  # 日曜日を週の初めとする
+        week_number = start_of_week.strftime("%W")
+        week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+        weeks_in_month.append({'week_number': week_number, 'dates': week_dates})
+        current_day += timedelta(days=7)
+        
+    first_day_of_previous_month = first_day_of_month - timedelta(days=1)
+    previous_month = first_day_of_previous_month.replace(day=1)
+    diary = Diary.objects.filter(user=request.user)
+    return render(request, 'diary/calendar_month.html', context={'diary':diary,'weeks_in_month': weeks_in_month, 'selected_date': selected_date,'week_start':previous_month})
 
 
 @login_required
-
 def calender_week(request, selected_date=None):
-    # パラメータが指定されていない場合は今日の日付を使用
+    # selected_dateをdatetime.date型に変換
     if selected_date:
-        # selected_dateをdatetime.date型に変換
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-        selected_date= selected_date - timedelta(days=7)
+    # パラメータが指定されていない場合は今日の日付を使用
     else:
         selected_date = date.today()
+    # 選択された日付の曜日を取得
     selected_weekday = selected_date.weekday()
     # カレンダーの開始日を計算（選択された日の週の日曜日）
     start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
     # カレンダーに表示する日付のリストを作成
     week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+    # 前の週の日曜日を取得
+    week_start =week_dates[0]- timedelta(days=7)
+    # 次の週の日曜日を取得
+    week_start_up =week_dates[0]+ timedelta(days=7)
+    # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
-    # ここで、各日付に対する条件に合わせて適切な処理を行う
-    # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
+    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
 
-    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date,'diary':diary})
-
+@login_required
+# 週間カレンダーを進める処理
+def calender_week_up(request, selected_date=None):
+    selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    selected_weekday = selected_date.weekday()
+    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
+    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+    # 前の週の日曜日を取得
+    week_start = week_dates[0] - timedelta(days=7)
+    # 次の週の日曜日を取得
+    week_start_up = week_dates[0] + timedelta(days=7)
+    diary = Diary.objects.filter(user=request.user)
+    return render(request, 'diary/calender_week.html', {'week_dates': week_dates, 'selected_date': selected_date, 'diary': diary, 'week_start': week_start, 'week_start_up': week_start_up})
 
 def create_diary_confirmation(request):
 
@@ -340,24 +383,33 @@ def month_graph(request):
 def positive_conversion(request, pk,):
     diary = get_object_or_404(Diary, id=pk)
     openai.api_key = settings.OPENAI_API_KEY
-    # 変換前の日記データを取得
-    user_content = diary.content
-
     user_diary = "以下は日記のコンテンツです。ポジティブで前向きになれるよう、ネガティブな言葉を変換し、書き換えてください。あなたのセリフはいりません。\n" + diary.content
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": user_diary}
-            ]
-        )
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": user_diary}
+        ]
+    )
+    # aiコメント生成
     ai_content = response["choices"][0]["message"]["content"]
-    save_content = ai_content
-    
-    # データベースへの保存
-    diary.content = save_content
-    diary.save()  # データベースの保存は最後に行う
-    
-    return render(request, 'diary/positive_conversion.html',{'diary':diary,'save_content':save_content, 'user_content':user_content})
+    # セッションに保存
+    request.session['ai_content'] =ai_content
+    return render(request, 'diary/positive_conversion.html', {'diary': diary, 'save_content':ai_content })
+
+@login_required
+def positive_conversion2(request, pk):
+    # セッションを取得
+    new_aicntent = request.session.get('ai_content')
+    # pkからdiaryを取得する
+    diary = get_object_or_404(Diary, id=pk)
+    # diaryのcontentを更新
+    diary.content = new_aicntent
+    # データベースの保存
+    diary.save()
+    # セッション削除
+    request.session.pop('ai_content', None)
+    return redirect('diary:today_diary_detail', pk=pk)
+
 
 @login_required
 def setting(request):

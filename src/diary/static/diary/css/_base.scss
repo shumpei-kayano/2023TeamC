@@ -27,7 +27,7 @@ a{
     list-style: none;
 }
 
-header, main, footer {
+header, .ground, footer {
     width: 39rem; // 任意の幅を設定
     max-width: 100%; // ビューポートの幅を超えないように設定
     margin: 0 auto; // 中央に配置
@@ -101,28 +101,14 @@ header {
     }
 }
 
-// .content {
-//     margin: 0 auto; // コンテンツを中央に配置
-//     // position: relative; // コンテンツを相対配置にする
-//     // padding-top: 5rem; /* ヘッダーの高さ */
-//     // padding-bottom: 6rem; /* フッターの高さ */
-//     background-color: $main_background_color; // コンテンツの背景色を設定
-// }
-
-main{
+.ground{
     margin-top: 5rem; /*上に空白を追加*/
     height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
-    background-color: $main_background_color;
-
-    // overflow: scroll;
-    .scroll--content{
-        background-color: #fafafa;
-    }
 }
 // スクロールバー背景色
-.main::-webkit-scrollbar {
-    background: #efefef9b;
+.ground::-webkit-scrollbar {
+    background: rgba(217, 217, 217, 0.10);
     // スクロールバーの幅を調整
     width: 2px;
     height: 2px;
@@ -130,14 +116,14 @@ main{
     border-radius: 20px;
 }
 // スクロールボタン
-.main::-webkit-scrollbar-thumb {
+.ground::-webkit-scrollbar-thumb {
     background-color: rgb(216, 216, 216);
     // 角丸を指定
     border-radius: 20px;
-    // border: 2px solid red;
+    padding-left: 2.4rem;
 }
 // スクロールバー（hover時）
-.main::-webkit-scrollbar-thumb:hover {
+.ground::-webkit-scrollbar-thumb:hover {
     background-color: rgb(173, 173, 173);
 }
 
@@ -174,6 +160,7 @@ footer {
     background-color: $background_color;
     height: 6rem; // フッターの高さを50pxに設定
     overflow: hidden; // フッターの高さを超える内容を非表示にする
+    border-top: 1px solid rgba(217, 217, 217, 0.50);
 
     .menu__list {
         padding: 0;
@@ -200,7 +187,7 @@ footer {
 }
 
 @media only screen and (max-width: 767px) {
-    header, .main, footer {
+    header, .ground, footer {
         width: 100%;
         max-width: none; // 追加
     }
@@ -228,19 +215,19 @@ footer {
         font-size: 20px;
     }
 
-    main{
+    .ground{
         margin-top: 50px; /*上に空白を追加*/
         height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
     // スクロールバー背景色
-    .main::-webkit-scrollbar {
+    .ground::-webkit-scrollbar {
         width: 5px;
         height: 5px;
         // 角丸を指定
         border-radius: 20px;
     }
     // スクロールボタン
-    .main::-webkit-scrollbar-thumb {
+    .ground::-webkit-scrollbar-thumb {
         border-radius: 20px;
     }
 
