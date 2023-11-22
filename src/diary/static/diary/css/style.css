@@ -90,7 +90,11 @@ header .header__spacer, header .header__weather {
   width: 7.2rem;
   height: 2.8rem;
 }
+header .weatherImg {
+  width: 2.2rem;
+}
 header .header__weather span {
+  margin-left: 0.5rem;
   font-size: 1.6rem;
   text-align: right;
 }
@@ -407,7 +411,7 @@ footer .nav-text {
 .a--tab {
   display: flex;
   text-align: center;
-  margin: 16px 30px;
+  margin: 16px;
   margin-bottom: 12px;
 }
 .a--tab--left, .a--tab--right {
@@ -530,6 +534,16 @@ footer .nav-text {
   margin-bottom: 4rem;
 }
 
+.calendar--background calender-week-page {
+  background-color: #EEFEFF;
+}
+
+.calendar-header {
+  width: 390px;
+  height: 44px;
+  margin-bottom: 12px;
+}
+
 .week-calendar table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -553,13 +567,15 @@ footer .nav-text {
 }
 
 .week-calendar tr {
-  background-color: #FFFFFF;
   width: 390px;
   height: 72px;
 }
 
-.week-calendar th {
+.week-calendar td {
   background-color: #FFFFFF;
+}
+
+.week-calendar th {
   color: black;
   font-size: 1.4rem;
   font-weight: 400;
