@@ -16,7 +16,7 @@
 {% block content %}
 <main class="ground ground--white"><!-- 追加した要素 -->
     <div class="scroll--content"><!-- 追加した要素 -->
-        <div class="calendar--background">
+        <div class="calendar--background calender-month-page">
             <!-- タブ -->
             {% url 'diary:calendar_month' as calendar_month_url %}
             {% url 'diary:month_graph' as month_graph_url %}
@@ -81,7 +81,9 @@
                                           {{ day.day }}
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
-                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">{{ emotion.reasoning }}</a>
+                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
+                                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
+                                              </a>
                                               {% endif %}
                                             {% endfor %}
                                         {% endif %}
