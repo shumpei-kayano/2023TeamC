@@ -14,8 +14,9 @@ import openai
 import boto3
 from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
-import matplotlib.pyplot as plt
-# import seaborn as sns
+import json
+from django.http import JsonResponse
+
 
 sentiment_dict = {
   'POSITIVE':'positive_face.png',
@@ -410,20 +411,16 @@ def today_diary_graph(request, pk):
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
     # 日記に関連する感情分析データを取得
-    emotion_data = Emotion.objects.filter(diary=diary).first()
-
+    emotion_data = Emotion.objects.filter(user=request.user).first()
     if emotion_data:
-        # データの準備
-        labels = ['positive', 'negative', 'neutral', 'mixed']
-        values = [emotion_data.positive, emotion_data.negative, emotion_data.neutral, emotion_data.mixed]
+        data = {'labels': ['positive', 'negative', 'neutral', 'mixed'],
+                'values': [emotion_data.positive, emotion_data.negative, emotion_data.neutral, emotion_data.mixed]
+                }
+        # JSON形式に変換
+        json_data = json.dumps(data)
 
-        # 円グラフ
-        plt.figure(figsize=(6, 6))
-        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
-    # 画像を保存
-        image_path = f'diary/static/diary/assets/circle_graph_{pk}.svg'
-        plt.savefig(image_path)
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
+        return render(request, 'diary/today_diary_graph.html', {'diary': diary, 'ai_comment': ai_comment, 'emotion_data': json_data})
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'emotion_data':None})
 
 @login_required
 def today_counseling_graph(request):

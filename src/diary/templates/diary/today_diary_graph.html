@@ -33,12 +33,8 @@
         </div>
 
         <!-- グラフの表示 -->
-        <script src="{% static 'js/chart.min.js' %}"></script>
-
         <div id="circle__graph">
             <div class="circle__graph__img">
-              
-              <img src="{% static 'diary/assets/circle_graph_' %}{{ diary.id }}.svg" alt="感情グラフ">感情の合計</img>
                 {% comment %} グラフを表示 {% endcomment %}
                 <div style="position: relative;">
                     <canvas id="myPieChart" width="400" height="200"></canvas>
@@ -50,7 +46,7 @@
         <!-- ネコココメント -->
         <div class="content__today-diary__comment">
             <p>
-                {{ diary.ai_comment }}
+                {{ ai_comment }}
             </p>
         </div>
         <!-- ネコココメントの画像 -->
@@ -59,13 +55,15 @@
         </div>
 
     </div>
+    
 </main>
 
 {% endblock %}
 
 {% block javascripts %}
 <script>
-var data = {{ data|safe }};
+var data = {{ emotion_data|safe }};
+console.log({{emotion_data|safe}});  // データをコンソールに出力
 var canvas = document.getElementById('myPieChart');
 
 var ctx = canvas.getContext('2d');
@@ -81,6 +79,7 @@ var myPieChart = new Chart(ctx, {
 });
 
 // 円グラフのクリックイベント処理
+
 canvas.onclick = function(evt) {
     var activePoint = myPieChart.getElementsAtEvent(evt)[0];
     if (activePoint) {
