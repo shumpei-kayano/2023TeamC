@@ -1,3 +1,17 @@
+// main.groundvground--blue {
+// background-color: $main_background_color;
+// }
+
+.calendar--background calender-week-page {
+    background-color: $main_background_color;
+}
+
+.calendar-header {
+    width: 390px;
+    height: 44px;
+    margin-bottom: 12px;
+}
+
 .week-calendar table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -22,13 +36,17 @@
 
 
 .week-calendar tr {
-    background-color: $background_color;
+    // background-color: $background_color;
     width: 390px;
     height: 72px;
 }
 
-.week-calendar th {
+.week-calendar td {
     background-color: $background_color;
+}
+
+.week-calendar th {
+    // background-color: $background_color;
     color: black;
     font-size: 1.4rem;
     font-weight: 400;
@@ -40,4 +58,13 @@
     margin-top: 16px;
     margin-bottom: 12px;
     margin-left: 30px;
+}
+
+.calender-week-page {
+    .a--tab--left {
+        a {
+            background-color: #00ABB6; // active時の左側のボタンの背景色を黒に設定
+            color: #FFF; // active時の左側のボタンのテキスト色を白に設定
+        }
+    }
 }

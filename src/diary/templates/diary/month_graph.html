@@ -14,19 +14,18 @@
 {% block content %}
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
-
-        <!-- タブ -->
-        {% url 'diary:calendar_month' as calendar_month_url %}
-        {% url 'diary:month_graph' as month_graph_url %}
-        <div class="tab__button a--tab">
-            <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-                <a href="{{ calendar_month_url }}">月間カレンダー</a>
+        <div class="calendar--background month-graph-page">
+            <!-- タブ -->
+            {% url 'diary:calendar_month' as calendar_month_url %}
+            {% url 'diary:month_graph' as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a href="{{ month_graph_url }}">月間グラフ</a>
+                </div>
             </div>
-            <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-                <a href="{{ month_graph_url }}">月間グラフ</a>
-            </div>
-        </div>
-
 
         <!-- 月間のページネーション -->
         <div class="col-md-6">
@@ -52,17 +51,19 @@
                 </div>
             </div>
 
-        <!-- ネココのカウンセリングコメント -->
-        <div class="content__today-diary__comment">
-            <p>
-                {{ カウンセリングのコメントを表示させてください }}
-            </p>
-        </div>
-        <!-- ネコココメントの画像 -->
-        <div class="content__today-diary__comment__img">
-            <img src="{% static 'diary/assets/counselor_neko.svg' %}" alt="カウンセラーネココの画像">
-        </div>
 
+        <!-- ネココのカウンセリングコメント -->
+        <div class="content__home__text--pink">
+            <div class="content__today-diary__comment">
+                <p>
+                テストテストテストテストテストテストテスト
+                </p>
+            <!-- ネコココメントの画像 -->
+                <div class="content__today-diary__comment__img">
+                    <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 

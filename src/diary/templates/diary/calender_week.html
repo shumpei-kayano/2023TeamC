@@ -19,17 +19,19 @@
 
 {% block content %}
 <main class="ground ground--blue"><!-- 追加した要素 -->
-
-{% url 'diary:calender_week' as calender_week_url %}
-{% url 'diary:week_graph' as week_graph_url %}
-<div class="tab__button a--tab">
-    <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
-        <a href="{{ calender_week_url }}">週間カレンダー</a>
+    <div class="calendar--background calender-week-page">
+        <!-- タブ -->
+        {% url 'diary:calender_week' as calender_week_url %}
+        {% url 'diary:week_graph' as week_graph_url %}
+        <div class="tab__button a--tab">
+            <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
+                <a href="{{ calender_week_url }}">週間カレンダー</a>
+            </div>
+            <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
+                <a href="{{ week_graph_url }}">週間グラフ</a>
+            </div>
+        </div>
     </div>
-    <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
-        <a href="{{ week_graph_url }}">週間グラフ</a>
-    </div>
-</div>
 
 <!-- 週間カレンダーページネーション -->
 <div class="calendar-week">
@@ -41,7 +43,7 @@
                 <img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">
             </a>
 
-            <a href="{% url 'diary:calender_week_up' week_start_up %}">
+            <a href="{% url 'diary:calender_week' week_start_up %}">
                 <img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">
             </a>
         </div>
@@ -56,6 +58,8 @@
                 <p>今週</p>
             </a>
         </div>
+    </div>
+    
         <!-- 週間カレンダー一覧 -->
         <div class="week-calendar">
           <table>
@@ -93,9 +97,7 @@
             </tbody>
         </table>
         </div>
-    
-    </div>
-</main>
+    </main>
 </div>
 
 {% endblock %}

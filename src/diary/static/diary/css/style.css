@@ -90,7 +90,11 @@ header .header__spacer, header .header__weather {
   width: 7.2rem;
   height: 2.8rem;
 }
+header .weatherImg {
+  width: 2.2rem;
+}
 header .header__weather span {
+  margin-left: 0.5rem;
   font-size: 1.6rem;
   text-align: right;
 }
@@ -334,11 +338,16 @@ footer .nav-text {
 
 .setting__menu ul {
   list-style: none; /* リストアイテムのマーカーを非表示にする */
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+  padding: 0px;
+  background-color: #FFFFFF;
 }
 .setting__menu ul a {
   display: flex;
   width: 342px;
-  height: 61.273px;
+  height: 60px;
   padding-bottom: 0px;
   justify-content: space-between;
   align-items: center;
@@ -349,10 +358,11 @@ footer .nav-text {
   font-size: 1.6rem;
   letter-spacing: 0.8px;
   text-decoration: none;
+  cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
 .setting__menu ul a img {
-  width: 1px;
-  height: 0px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }
 
@@ -363,6 +373,7 @@ footer .nav-text {
 .a--blue {
   display: flex;
   width: 72px;
+  height: 22px;
   justify-content: center;
   align-items: center;
   gap: 5px;
@@ -376,8 +387,8 @@ footer .nav-text {
   letter-spacing: 0.64px;
   display: inline-block;
   margin: 0;
-  padding: 0 0 7px 0;
   vertical-align: middle;
+  margin-top: 0px;
 }
 .a--blue svg {
   vertical-align: middle;
@@ -387,8 +398,8 @@ footer .nav-text {
   text-decoration: none;
   background-image: linear-gradient(#00737A, #00737A);
   background-repeat: no-repeat;
-  background-size: 100% 2px;
-  background-position: 0 calc(100% - 3px);
+  background-size: 90% 4px;
+  background-position: 0 calc(100% + 3px);
 }
 .a--blue:hover p {
   color: #00737A;
@@ -400,14 +411,14 @@ footer .nav-text {
 .a--tab {
   display: flex;
   text-align: center;
-  margin: 16px 30px;
+  margin: 16px;
   margin-bottom: 12px;
 }
-.a--tab--left {
+.a--tab--left, .a--tab--right {
   width: 174px;
   height: 33px;
 }
-.a--tab--left a {
+.a--tab--left a, .a--tab--right a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
@@ -418,47 +429,32 @@ footer .nav-text {
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
-  color: #FFF;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.24px;
-  border-radius: 9.057px 0 0 9.057px;
   box-shadow: inset 0 0 0 2px #00ABB6;
   background: #00ABB6;
 }
-.a--tab--left a.active {
-  background-color: var(--custom-color, #00ABB6);
-  color: #FFF;
-}
-.a--tab--right {
-  width: 174px;
-  height: 33px;
-}
-.a--tab--right a {
-  width: 100%; /* ボタンを親要素と同じ幅に広げる */
-  height: 100%; /* ボタンを親要素と同じ高さに広げる */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 32px; /* パディングをここに移動 */
-  border: none; /* ボタンのデフォルトのボーダーを削除 */
-  background: transparent; /* 背景を透明にする */
-  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
-  border-radius: 50px;
-  color: #00ABB6;
-  font-size: 1.2rem;
-  border-radius: 0 9.057px 9.057px 0;
-  box-shadow: inset 0 0 0 2px #00ABB6;
-  background: var(--custom-color, #FFF);
-}
-.a--tab--right a:hover {
+.a--tab--left a:hover, .a--tab--right a:hover {
   background-color: rgba(65, 60, 60, 0.078);
 }
-.a--tab--right a.active {
+.a--tab--left a {
+  cursor: pointer;
+  border-radius: 9.057px 0 0 9.057px;
+  color: #00ABB6;
   background-color: #FFF;
-  color: var(--, #00ABB6);
+}
+.a--tab--right a {
+  cursor: pointer;
+  border-radius: 0 9.057px 9.057px 0;
+  color: #00ABB6;
+  background-color: #FFF;
+}
+.a--tab--right.active a {
+  background-color: #00ABB6;
+  color: #FFF;
 }
 
 .next__button {
@@ -538,6 +534,16 @@ footer .nav-text {
   margin-bottom: 4rem;
 }
 
+.calendar--background calender-week-page {
+  background-color: #EEFEFF;
+}
+
+.calendar-header {
+  width: 390px;
+  height: 44px;
+  margin-bottom: 12px;
+}
+
 .week-calendar table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -561,13 +567,15 @@ footer .nav-text {
 }
 
 .week-calendar tr {
-  background-color: #FFFFFF;
   width: 390px;
   height: 72px;
 }
 
-.week-calendar th {
+.week-calendar td {
   background-color: #FFFFFF;
+}
+
+.week-calendar th {
   color: black;
   font-size: 1.4rem;
   font-weight: 400;
@@ -579,6 +587,11 @@ footer .nav-text {
   margin-top: 16px;
   margin-bottom: 12px;
   margin-left: 30px;
+}
+
+.calender-week-page .a--tab--left a {
+  background-color: #00ABB6;
+  color: #FFF;
 }
 
 .photomv {
@@ -603,4 +616,114 @@ footer .nav-text {
   border: 1px solid #04CAD6;
   width: 5.5rem;
   height: 6.6rem;
+}
+
+.calender-month-page .a--tab--left a {
+  background-color: #00ABB6;
+  color: #FFF;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendar-header .a--blue {
+  margin-right: 24px;
+}
+.calendar-header .a--blue .a--blue a {
+  display: flex;
+  align-items: center;
+}
+
+main {
+  background-color: #EEFEFF;
+}
+
+.month-graph-page {
+  justify-content: center;
+  align-items: center;
+}
+.month-graph-page .month-graph-page .a--tab--right.active a {
+  background-color: #00ABB6;
+  color: #FFF;
+}
+
+.content__home__text--pink {
+  justify-content: center;
+  align-items: center;
+}
+.content__home__text--pink .content__today-diary__comment {
+  position: relative;
+  fill: #FFFFFF;
+  stroke-width: 2px;
+  stroke: #04CAD6;
+  width: 342px;
+  height: 216px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFBBDC;
+  border-radius: 10px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.content__home__text--pink .content__today-diary__comment p {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+.content__home__text--pink .content__today-diary__comment .content__today-diary__comment__img {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+}
+
+.week-graph-page .a--tab--right.active a {
+  background-color: #00ABB6;
+  color: #FFF;
+}
+
+.content__home__text--pink {
+  justify-content: center;
+  align-items: center;
+}
+.content__home__text--pink .content__today-diary__comment {
+  position: relative;
+  fill: #FFFFFF;
+  stroke-width: 2px;
+  stroke: #FFFFFF;
+  width: 342px;
+  height: 216px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFBBDC;
+  border-radius: 10px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.content__home__text--pink .content__today-diary__comment p {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+.content__home__text--pink .content__today-diary__comment .content__today-diary__comment__img {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+}
+
+main {
+  background-color: #FFFFFF;
 }

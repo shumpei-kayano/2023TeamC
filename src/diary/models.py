@@ -10,7 +10,7 @@ class Diary(models.Model):
     content = models.TextField(verbose_name='内容', max_length=1000, blank=False, null=False)
     # 作成日時
     created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
-    # 更新日時sa
+    # 更新日時
     updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
     # 写真へのリンク (空であることも許可)
     photo1 = models.ImageField(verbose_name='写真1', upload_to='diary_photos/', blank=True, null=True)
@@ -31,7 +31,8 @@ class Diary(models.Model):
 
 class Emotion(models.Model):
     '''感情分析モデル'''
-
+    # ユーザーへの外部キー
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     # 日記への外部キー
     diary = models.ForeignKey(Diary, verbose_name='日記', on_delete=models.PROTECT)
     # 感情推論
@@ -44,14 +45,10 @@ class Emotion(models.Model):
     neutral = models.FloatField(verbose_name='中立')
     # 混合感情スコア
     mixed = models.FloatField(verbose_name='混合')
-    # 週番号
-    week_number = models.IntegerField(verbose_name='週番号')
-    # 月
-    month = models.IntegerField(verbose_name='月')
-    # 日
-    day = models.IntegerField(verbose_name='日')
-    # 年
-    year = models.IntegerField(verbose_name='年')
+    # 作成日時
+    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
+    # 更新日時sa
+    updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
 
     def __str__(self):
         return f'Emotion analysis for Diary {self.diary}'
