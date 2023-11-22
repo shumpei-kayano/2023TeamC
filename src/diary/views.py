@@ -421,7 +421,7 @@ def today_diary_graph(request, pk):
         plt.figure(figsize=(6, 6))
         plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
     # 画像を保存
-        image_path = f'diary/static/diary/assets/circle_graph_{diary_id}.svg'
+        image_path = f'diary/static/diary/assets/circle_graph_{pk}.svg'
         plt.savefig(image_path)
     return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
 

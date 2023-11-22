@@ -21,8 +21,8 @@
     <div class="scroll--content">
 
         <!-- タブ -->
-        {% url 'diary:today_diary_detail' as today_diary_detail_url %}
-        {% url 'diary:today_diary_graph' as today_diary_graph_url %}
+        {% url 'diary:today_diary_detail' pk=diary.id as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph' pk=diary.id as today_diary_graph_url %}
         <div class="tab__button a--tab">
             <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
                 <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
@@ -37,7 +37,8 @@
 
         <div id="circle__graph">
             <div class="circle__graph__img">
-                <img src="{% static 'diary/assets/circle_graph.svg' %}" alt="感情グラフ">感情の合計</img>
+              
+              <img src="{% static 'diary/assets/circle_graph_' %}{{ diary.id }}.svg" alt="感情グラフ">感情の合計</img>
                 {% comment %} グラフを表示 {% endcomment %}
                 <div style="position: relative;">
                     <canvas id="myPieChart" width="400" height="200"></canvas>
