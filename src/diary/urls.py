@@ -45,6 +45,6 @@ urlpatterns = [
     path('today/counseling/graph', views.today_counseling_graph,name='today_counseling_graph'),
     path('today/diary/detail', views.today_diary_detail,name='today_diary_detail'),
     path('today/diary/detail/<int:pk>', views.today_diary_detail2,name='today_diary_detail'),
-    path('today/diary/graph', views.today_diary_graph,name='today_diary_graph'),
+    path('today/diary/graph/<int:pk>', views.today_diary_graph,name='today_diary_graph'),
     path('week/graph', views.week_graph,name='week_graph'),
 ]

@@ -14,6 +14,8 @@ import openai
 import boto3
 from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
+import matplotlib.pyplot as plt
+# import seaborn as sns
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary,user):
@@ -393,8 +395,27 @@ def week_graph(request):
     return render(request, 'diary/week_graph.html')
 
 @login_required
-def today_diary_graph(request):
-  return render(request,'diary/today_diary_graph.html')
+def today_diary_graph(request, pk):
+    # Diary モデルから特定の日記データを取得
+    diary = get_object_or_404(Diary, id=pk)
+
+    # Diary インスタンスから ai_comment を取得
+    ai_comment = diary.ai_comment
+    # 日記に関連する感情分析データを取得
+    emotion_data = Emotion.objects.filter(diary=diary).first()
+
+    if emotion_data:
+        # データの準備
+        labels = ['positive', 'negative', 'neutral', 'mixed']
+        values = [emotion_data.positive, emotion_data.negative, emotion_data.neutral, emotion_data.mixed]
+
+        # 円グラフ
+        plt.figure(figsize=(6, 6))
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
+    # 画像を保存
+        image_path = f'diary/static/diary/assets/circle_graph_{diary_id}.svg'
+        plt.savefig(image_path)
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
 
 @login_required
 def today_counseling_graph(request):
