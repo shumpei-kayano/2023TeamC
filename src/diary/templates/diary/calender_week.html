@@ -68,7 +68,10 @@
                                 {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
                             {%for diary in diary%}
                             {%if diary.created_date == day%}
-                            <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}</a>
+                            <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
+                              <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
+                            </a>
+                            
                             {% endif %}
                                 {% endfor %}
 
@@ -77,14 +80,18 @@
                                 {%for diary in diary %}
                                 {%if diary.created_date == day%}
                                 <!-- 現在の日はトップページへのリンク -->
-                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}</a>
+                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
+                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
+                                </a>
                                 {% endif %}
                                     {% endfor %}
                             {% else %}
                                 <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
                                 {%for diary in diary %}
                                 {%if diary.created_date == day%}
-                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}</a>
+                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
+                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
+                                </a>
                                 {% endif %}
                                     {% endfor %}
                             {% endif %}
