@@ -221,13 +221,37 @@ footer .nav-text {
   gap: 10px;
   flex-shrink: 0;
   border-radius: 50px;
+  font-weight: 700;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   text-align: center; /* 中央寄せを追加 */
   cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
-.btn--large {
+.btn--blue {
   width: 342px;
   height: 48px;
+}
+.btn--blue button {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+}
+.btn--blue button:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+.btn--large {
+  width: 342px;
+  height: 56px;
 }
 .btn--large button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -240,6 +264,7 @@ footer .nav-text {
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
   background: var(--custom-color, #00ABB6);
   color: #FFF;
   font-size: 1.6rem;
@@ -262,6 +287,7 @@ footer .nav-text {
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
   background: var(--custom-color, #FFF);
   color: var(--, #00ABB6);
   font-size: 1.6rem;
@@ -284,6 +310,7 @@ footer .nav-text {
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
   background: var(--custom-color, #FF4747);
   color: #FFF;
   font-size: 1.6rem;
@@ -370,6 +397,40 @@ footer .nav-text {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
 
+.help__menu ul {
+  list-style: none; /* リストアイテムのマーカーを非表示にする */
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+  padding: 0px;
+  background-color: #FFFFFF;
+}
+.help__menu ul a {
+  display: flex;
+  width: 342px;
+  height: 60px;
+  padding-bottom: 0px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid #A29C9C;
+  background: #FFF;
+  color: #000;
+  font-size: 1.6rem;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+}
+.help__menu ul a img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.help__menu ul li a:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+
 .a--blue {
   display: flex;
   width: 72px;
@@ -429,6 +490,7 @@ footer .nav-text {
   background: transparent; /* 背景を透明にする */
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
@@ -483,6 +545,24 @@ footer .nav-text {
   height: auto; /* 高さは自動 */
 }
 
+.user-infomation {
+  width: 342px;
+  height: 273px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
+.user-infomation .user-label {
+  font-size: 1.4rem;
+  margin: 0;
+}
+.user-infomation .user-info {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 16px;
+}
+
 .content__help__group h2 {
   font-size: 2rem;
   font-weight: 500;
@@ -532,6 +612,11 @@ footer .nav-text {
 }
 .list_test-wrap .content__help__list__chart--last {
   margin-bottom: 4rem;
+}
+
+.img-dango {
+  margin-top: 340px;
+  margin-left: 24px;
 }
 
 .calendar--background calender-week-page {
@@ -726,4 +811,56 @@ main {
 
 main {
   background-color: #FFFFFF;
+}
+
+.img-inu {
+  margin-top: 375px;
+  margin-left: 51px;
+}
+
+.counseling-neko {
+  margin-top: 300px;
+  margin-left: 2px;
+}
+
+.img-neko {
+  margin-top: 300px;
+  margin-left: 4px;
+}
+
+hr {
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+
+.btn--blue {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 50px;
+}
+
+input[type=text], input[type=email] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.neko-dango {
+  margin-top: 200px;
+  margin-left: 24px;
 }
