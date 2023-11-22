@@ -29,40 +29,6 @@
                 </div>
             </div>
 
-        <!-- カレンダーページネーション -->
-        <!--<div class="calendar-week">
-            <div class="calendar-header">
-                {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
-                <div class="next__button">
-                    <a href=""><img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン"></a>
-                    {% comment %} 月を動的に進められるようにしてください {% endcomment %}
-                    <a href=""><img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン"></a>
-                    {% comment %} 選択した年月のテキストを表示してください {% endcomment %}
-                    <span>年月</span>
-                </div>
-                {% comment %} 現在の月を表示させてください {% endcomment %}
-                <div class="a--blue">
-                    <a href="">
-                        <img src="{% static 'diary/assets/return_arrow.svg' %}" alt="矢印のアイコン"></a>
-                        <p>今月</p>
-                    </a>
-                </div>
-            </div>-->
-            {% comment %} </div> {% endcomment %}
-
-            {% comment %} <div class="calendar--background">
-                <!-- タブ -->
-                {% url 'diary:calendar_month' as calendar_month_url %}
-                {% url 'diary:month_graph' as month_graph_url %}
-                <div class="tab__button a--tab">
-                    <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-                        <a href="{{ calendar_month_url }}">月間カレンダー</a>
-                    </div>
-                    <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-                        <a href="{{ month_graph_url }}">月間グラフ</a>
-                    </div>
-                </div> {% endcomment %}
-
             <!-- 月間カレンダーページネーション -->
             <div class="calendar-week">
                 <div class="calendar-header">
@@ -115,7 +81,9 @@
                                           {{ day.day }}
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
-                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">{{ emotion.reasoning }}</a>
+                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
+                                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
+                                              </a>
                                               {% endif %}
                                             {% endfor %}
                                         {% endif %}

@@ -14,7 +14,15 @@ import openai
 import boto3
 from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
+import matplotlib.pyplot as plt
+# import seaborn as sns
 
+sentiment_dict = {
+  'POSITIVE':'positive_face.png',
+  'NEGATIVE':'negative_face.png',
+  'NEUTRAL':'neutral_face.png',
+  'MIXED':'mix_face.png'
+}
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary,user):
     # 感情分析の生成
@@ -46,7 +54,9 @@ def analyze_sentiment(text, diary,user):
         )
         new_emotion.save()
 
-
+def emoface(emotion):
+    return sentiment_dict.get(emotion, '')
+    
 
 def account_delete_success(request):
     # ログイン中のユーザーアカウントを取得
@@ -106,7 +116,7 @@ def calendar_month(request,selected_date=None):
     emotion = Emotion.objects.filter(user = request.user)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -128,7 +138,7 @@ def calender_week(request, selected_date=None):
     week_start_up =week_dates[0]+ timedelta(days=7)
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
+    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict})
 
 def create_diary_confirmation(request):
 
@@ -393,8 +403,27 @@ def week_graph(request):
     return render(request, 'diary/week_graph.html')
 
 @login_required
-def today_diary_graph(request):
-  return render(request,'diary/today_diary_graph.html')
+def today_diary_graph(request, pk):
+    # Diary モデルから特定の日記データを取得
+    diary = get_object_or_404(Diary, id=pk)
+
+    # Diary インスタンスから ai_comment を取得
+    ai_comment = diary.ai_comment
+    # 日記に関連する感情分析データを取得
+    emotion_data = Emotion.objects.filter(diary=diary).first()
+
+    if emotion_data:
+        # データの準備
+        labels = ['positive', 'negative', 'neutral', 'mixed']
+        values = [emotion_data.positive, emotion_data.negative, emotion_data.neutral, emotion_data.mixed]
+
+        # 円グラフ
+        plt.figure(figsize=(6, 6))
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
+    # 画像を保存
+        image_path = f'diary/static/diary/assets/circle_graph_{pk}.svg'
+        plt.savefig(image_path)
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
 
 @login_required
 def today_counseling_graph(request):
