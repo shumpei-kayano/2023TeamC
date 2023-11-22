@@ -27,17 +27,18 @@
     <div class="scroll--content">
 
         <!-- ユーザーの会員情報の表示 -->
-        <div class="content__user-info__name">
-            <p>ユーザーネーム</p>
-            <p>{{ user.username }}</p>
-        <hr>
+        <div class="user-infomation">
+            <div class="content__user-info__name">
+                <p class="user-label">ユーザーネーム</p>
+                <p class="user-info">{{ user.username }}</p>
+            <hr>
+            </div>
+            <div class="content__user-info__email">
+                <p class="user-label">メールアドレス</p>
+                <p class="user-info">{{ user.email }}</p>
+            <hr>
+            </div>
         </div>
-        <div class="content__user-info__email">
-            <p>メールアドレス</p>
-            <p>{{ user.email }}</p>
-        <hr>
-        </div>
-
         {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
         {% comment %} <div class="content__user-info__password">
             <p>パスワード</p>
@@ -46,8 +47,8 @@
         </div> {% endcomment %}
 
             {% csrf_token %}
-            <div class="cancel__button">
-                <a href="{% url 'diary:member_information_edit' %}">会員情報を変更する</a>
+            <div class="btn--blue">
+                <button type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">会員情報を変更する</button>
             </div>
         </form>
 
