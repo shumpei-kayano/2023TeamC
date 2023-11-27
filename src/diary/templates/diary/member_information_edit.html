@@ -30,17 +30,19 @@
         <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
             {% csrf_token %}
             <!-- ユーザーネームの編集 -->
-            <div class="content__user-name__text">
-                <label for="username">ユーザーネーム</label>
-                <br><input type="text" id="username" name="username" value="{{ user.username }}">
-            </div>
+            <div class="user-infomation">
+                <div class="content__user-name__text">
+                    <label for="username">ユーザーネーム</label>
+                    <br><input type="text" id="username" name="username" value="{{ user.username }}">
+                </div>
 
-            <!-- メールアドレスの編集 -->
-            <div class="content__user-email__text">
-                <label for="email">メールアドレス</label>
-                <br><input type="email" id="email" name="email" value="{{ user.email }}">
-                <!--エラー-->
-                <div class="error-message" id="email-error"></div>
+                <!-- メールアドレスの編集 -->
+                <div class="content__user-email__text">
+                    <label for="email">メールアドレス</label>
+                    <br><input type="email" id="email" name="email" value="{{ user.email }}">
+                    <!--エラー-->
+                    <div class="error-message" id="email-error"></div>
+                </div>
             </div>
 
 
@@ -54,14 +56,13 @@
             </div> {% endcomment %}
 
             <!-- 送信ボタン -->
-            <div class="cancel__button">
+        <div class="btn--blue">
             <button type="submit">確認する</button>
         </div>
         </form>
 
-
         <div class="neko__dango.image">
-            <img src="{% static 'diary/assets/neko_dango.svg' %}">
+            <img class="neko-dango" img src="{% static 'diary/assets/neko_dango.svg' %}">
         </div>
 
 

@@ -21,8 +21,8 @@
     <div class="scroll--content">
 
         <!-- タブ -->
-        {% url 'diary:today_diary_detail' as today_diary_detail_url %}
-        {% url 'diary:today_diary_graph' as today_diary_graph_url %}
+        {% url 'diary:today_diary_detail' pk=diary.id as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph' pk=diary.id as today_diary_graph_url %}
         <div class="tab__button a--tab">
             <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
                 <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
@@ -33,15 +33,13 @@
         </div>
 
         <!-- グラフの表示 -->
-        <script src="{% static 'js/chart.min.js' %}"></script>
-
         <div id="circle__graph">
             <div class="circle__graph__img">
-                <img src="{% static 'diary/assets/circle_graph.svg' %}" alt="感情グラフ">感情の合計</img>
                 {% comment %} グラフを表示 {% endcomment %}
                 <div style="position: relative;">
                     <canvas id="myPieChart" width="400" height="200"></canvas>
-                    <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+                    {{ data }}
+                    <div id="popup" style="position: absolute; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
                 </div>
             </div>
         </div>
@@ -49,25 +47,25 @@
         <!-- ネコココメント -->
         <div class="content__today-diary__comment">
             <p>
-                {{ ネコココメントを表示させてください }}
+                {{ ai_comment }}
             </p>
         </div>
         <!-- ネコココメントの画像 -->
         <div class="content__today-diary__comment__img">
-            <img src="{% static'diary/assets/review_neko.svg' %}" alt="ネココの画像">
+            <img src="{% static 'diary/assets/review_neko.svg' %}" alt="ネココの画像">
         </div>
 
     </div>
+    
 </main>
 
 {% endblock %}
 
 {% block javascripts %}
 <script>
+var canvas = document.getElementById('myPieChart').getContext('2d');
 var data = {{ data|safe }};
-var canvas = document.getElementById('myPieChart');
 
-var ctx = canvas.getContext('2d');
 var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -80,6 +78,7 @@ var myPieChart = new Chart(ctx, {
 });
 
 // 円グラフのクリックイベント処理
+
 canvas.onclick = function(evt) {
     var activePoint = myPieChart.getElementsAtEvent(evt)[0];
     if (activePoint) {

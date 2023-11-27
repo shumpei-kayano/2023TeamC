@@ -1,0 +1,27 @@
+input[type="text"], input[type="email"] {
+    width: 100%;  // テキストボックスの幅を親要素の100%に設定
+    display: flex;
+    width: 342px;
+    height: 45px;
+    padding: 16px 0px 16px 16px;
+    justify-content: center;
+    align-items: center;
+    // gap: 8.876px;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+
+    border-radius: 8.876px;
+    border: 1px solid #A29C9C;
+    background: #FFF;
+    box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+    font-size: 1.4rem;
+}
+
+.neko-dango {
+    margin-top: 200px;
+    margin-left: 24px;
+}

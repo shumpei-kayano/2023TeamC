@@ -16,8 +16,8 @@
     <div class="scroll--content">
         <div class="calendar--background week-graph-page">
             <!-- タブ -->
-            {% url 'diary:calender_week' as calender_week_url %}
-            {% url 'diary:week_graph' as week_graph_url %}
+            {% url 'diary:calender_week' selected_date as calender_week_url %}
+            {% url 'diary:week_graph' selected_date as week_graph_url %}
             <div class="tab__button a--tab">
                 <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
                     <a href="{{ calender_week_url }}">週間カレンダー</a>
@@ -30,15 +30,21 @@
             <!-- 週間のページネーション -->
             <div class="col-md-6">
                 <div class="text-right">
-                    <button id="prev-week"><img src="{% static 'assets/left_arrow.svg' %}"></button>
+                  <div class="next__button">
+                  <a href="{% url 'diary:week_graph' week_start %}">
+                    <img src="{% static 'diary/assets/left_arrow.svg' %}">
+                  </a>
                     <div calss="text-center">
                         <span id="year-month"></span>
                     </div>
-                    <button id="next-week"><img src="{% static 'assets/right_arrow.svg' %}"></button>
+                    <a href="{% url 'diary:week_graph' week_start_up %}">
+                      <img src="{% static 'diary/assets/right_arrow.svg' %}">
+                    </a>
                     <div class="return__button">
-                        <button id="now-week"><img src="{% static 'assets/return_arrow.svg' %}">今週</button>
+                        <button id="now-week"><img src="{% static 'diary/assets/return_arrow.svg' %}">今週</button>
                     </div>
                 </div>
+            </div>
             </div>
 
             <!-- グラフの表示 -->
@@ -50,7 +56,6 @@
                     <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
                 </div>
             </div>
-            
             <!-- ネココのカウンセリングコメント -->
             <div class="content__home__text--pink">
                 <div class="content__today-diary__comment">
@@ -66,132 +71,100 @@
         </div>
     </div>
 </div>
+
 </main>
-
-{% endblock %}
-
-<!--カレンダー遷移-->
-{% block javascripts %}
 <script>
-
-    $(function() {
-        // 現在の年月を取得する
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-    
-        // 年月を表示する
-        $('#year-month').text(year + '\n' + month + '月');
-    
-        // 前週ボタンをクリックした時の処理
-        $('#prev-week').click(function() {
-        // 現在の週を取得する
-            const week = now.getWeek();
-        // 1週前を取得する
-            const prevWeek = week - 1;
-        // 年月を更新する
-            year = now.getFullYear() - 1;
-            month = now.getMonth() + 1;
-            if (prevWeek < 0) {
-            year--;
-            month--;
-            prevWeek = 52;
-            }
-            $('#year-month').text(year + '\n' + month + '月');
-        });
-    
-        // 来週ボタンをクリックした時の処理
-        $('#next-week').click(function() {
-        // 現在の週を取得する
-            const week = now.getWeek();
-        // 1週間後を取得する
-            const nextWeek = week + 1;
-        // 年月を更新する
-            year = now.getFullYear() + 1;
-            month = now.getMonth() + 1;
-            if (nextWeek > 52) {
-            year++;
-            month = 1;
-            nextWeek = 1;
-            }
-            $('#year-month').text(year + '\n' + month + '月');
-        });
-    
-        // 今週ボタンをクリックした時の処理
-        $('#now-week').click(function() {
-        // 現在の週を取得する
-            const week = now.getWeek();
-        // 年月を更新する
-            year = now.getFullYear();
-            month = now.getMonth() + 1;
-            $('#year-month').text(year + '\n' + month + '月');
-        });
-    });
-
-
-{% comment %} グラフ {% endcomment %}
-<script src="{% static 'chart.min.js' %}"></script>
-
-    // データベースから取得したデータ
-    var data = {{ data|safe }};
-
-    // 棒グラフの描画
-    var barChartCanvas = document.getElementById("barChart");
-    var barChart = new Chart(barChartCanvas, {
-        type: 'bar',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                label: '棒グラフ',
-                data: data.bar_data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)'
-            }]
-        }
-    });
-
-    // 折れ線グラフの描画
-    var lineChartCanvas = document.getElementById("lineChart");
-    var lineChart = new Chart(lineChartCanvas, {
-        type: 'line',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                label: '折れ線グラフ',
-                data: data.line_data,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        }
-    });
-
+  var ctx = document.getElementById('lineChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: chartData.date,
+          datasets: [
+              {
+                  label: 'Positive',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Negative',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Neutral',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Mixed',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1,
+              }
+          ]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
 </script>
+<script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var myChart = new Chart(ctx, {
+      type: 'horizontalBar',  // type を 'horizontalBar' に変更
+      data: {
+          labels: chartData.date,
+          datasets: [
+              {
+                  label: 'Positive',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Negative',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Neutral',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Mixed',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1
+              }
+          ]
+      },
+      options: {
+            { stacked: "100%" }
+
+      }
+  });
+</script>
+
 {% endblock %}
-
-
-
-    <!-- タブ切り替え -->
-    {% comment %} Javascriptで {% endcomment %}
-    {% comment %} //classの要素の取得
-    const demo_class_items = document.getElementsByClassName('demo_tab_btn');
-    
-    for(let i = 0; i < demo_class_items.length; i++){
-        //クリックイベント
-        demo_class_items[i].onclick = function(e){
-            clk_num = i+1;
-    
-            //ボタンへclassの削除と追加
-            btn = document.querySelectorAll('.demo_tab_btn');
-            for(let ii = 0; ii < btn.length; ii++){
-                btn[ii].classList.remove('act');
-            }
-            document.querySelector('.demo_tab_btn:nth-child('+clk_num+')').classList.add('act');
-    
-            //タブボディclassの削除と追加
-            cnt = document.querySelectorAll('.demo_tab_content');
-            for(let ii = 0; ii < cnt.length; ii++){
-                cnt[ii].classList.remove('act');
-            }
-            document.querySelector('.demo_tab_content:nth-child('+clk_num+')').classList.add('act');
-    
-        }
-    } {% endcomment %}

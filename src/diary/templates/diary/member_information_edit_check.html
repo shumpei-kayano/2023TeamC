@@ -26,17 +26,18 @@
             <p>入力内容をご確認ください</p>
         </div>
         <!-- ユーザーの会員情報の表示 -->
-        <div class="content__user-info__name">
-            <p>ユーザーネーム</p>
-            <p>{{ username }}</p>
-            <hr>
+        <div class="user-infomation">
+            <div class="content__user-info__name">
+                <p>ユーザーネーム</p>
+                <p>{{ username }}</p>
+                <hr>
+            </div>
+            <div class="content__user-info__email">
+                <p>メールアドレス</p>
+                <p>{{ email }}</p>
+                <hr>
+            </div>
         </div>
-        <div class="content__user-info__email">
-            <p>メールアドレス</p>
-            <p>{{ email }}</p>
-            <hr>
-        </div>
-
         <!-- 保留
         <div class="content__user-info__password">
             <p>パスワード</p>

@@ -35,7 +35,7 @@ urlpatterns = [
     path('member/information/edit/comp', views.member_information_edit_comp,name='member_information_edit_comp'),
     path('member/information/edit', views.member_information_edit,name='member_information_edit'),
     path('member/information', views.member_information,name='member_information'),
-    path('month/graph', views.month_graph,name='month_graph'),
+    path('month/graph/<str:selected_date>', views.month_graph,name='month_graph'),
     path('positive/conversion/<int:pk>', views.positive_conversion,name='positive_conversion'),
     path('positive/conversion2/<int:pk>', views.positive_conversion2,name='positive_conversion2'),
     path('record/diary/graph', views.record_diary_graph,name='record_diary_graph'),
@@ -45,6 +45,6 @@ urlpatterns = [
     path('today/counseling/graph', views.today_counseling_graph,name='today_counseling_graph'),
     path('today/diary/detail', views.today_diary_detail,name='today_diary_detail'),
     path('today/diary/detail/<int:pk>', views.today_diary_detail2,name='today_diary_detail'),
-    path('today/diary/graph', views.today_diary_graph,name='today_diary_graph'),
-    path('week/graph', views.week_graph,name='week_graph'),
+    path('today/diary/graph/<int:pk>', views.today_diary_graph,name='today_diary_graph'),
+    path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
 ]
