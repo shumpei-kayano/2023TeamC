@@ -76,17 +76,18 @@ def chart_data_week(request,startday):
     return data
   
 def chart_data_day(request):
-    today = date.today()
+    todays = date.today()
+    today = todays.strftime("%Y-%m-%d")
     # Emotionデータをフィルタリング
     emotions = Emotion.objects.filter(user = request.user,created_date = today)  # または必要な条件に基づいてフィルタリング
     # データをJSON形式に変換
     data = {
-        'labels': [emotions.reasoning ],
-        'positive': [emotions.positive],
-        'negative': [emotions.negative],
-        'neutral': [emotions.neutral],
-        'mixed': [emotions.mixed],
-
+        'labels': [emotion.reasoning for emotion in emotions],
+        'positive': [emotion.positive for emotion in emotions],
+        'negative': [emotion.negative for emotion in emotions],
+        'neutral': [emotion.neutral for emotion in emotions],
+        'mixed': [emotion.mixed for emotion in emotions],
+        'date' : [emotion.created_date for emotion in emotions]
     }
     return data
   
@@ -497,7 +498,7 @@ def today_diary_graph(request, pk):
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
-    data = chart_data(request)
+    data = chart_data_day(request)
     # JsonResponseを使用してJSONデータを返す
     circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
     print(data)
