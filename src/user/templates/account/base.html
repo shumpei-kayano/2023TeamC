@@ -1,24 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="AI×ネコの日記アプリ">
-
-
-  
-  <!-- タイトルの設定-->
-  <title>Tutorial</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="AI×ネコの日記アプリ">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'user/assets/icon.svg' %}" />
+    <!--mystyle-->
+    <link rel="stylesheet" href="{% static 'user/css/sanitize.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <!-- jQueryを読み込む -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>const STATIC_URL = "{% static 'user/assets/' %}";</script>
+</head>
 <body>
 
-  {% block contents %}
+    {% block header %}{% endblock %}
 
-   <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
+    <main class="ground ground--blue">
+        <div class="scroll--content">
 
-  {% endblock %}
+            {% block content %}
+            <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
+            {% endblock %}
 
+        </div>
+    </main>
 
+    <footer>
+        <small>&copy; 発行年</small>
+    </footer>
+
+    {% block js %}{% endblock %}
 
 </body>
 </html>
