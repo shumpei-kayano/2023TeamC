@@ -10,7 +10,8 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</img></button>
+        </div>
     </div>
     <h1>会員情報変更</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
@@ -18,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--white">
+<main class="ground grounds--white">
     <div class="scroll--content">
 
         <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
