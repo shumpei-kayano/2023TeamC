@@ -12,6 +12,7 @@ import openai
 import boto3
 from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
+import json
 from django.http import JsonResponse
 
 
@@ -55,10 +56,15 @@ def analyze_sentiment(text, diary,user):
 def emoface(emotion):
     return sentiment_dict.get(emotion, '')
 
-def chart_data(request):
+def chart_data(request,startday):
+  
+    # 文字列を日付オブジェクトに変換
+    start_date = startday.strftime("%Y-%m-%d")
+    # 一週間後の日付を計算
+    one_week = startday + timedelta(days=6)
+    one_week_str = one_week.strftime("%Y-%m-%d")
     # Emotionデータをフィルタリング
-    emotions = Emotion.objects.filter(user = request.user)  # または必要な条件に基づいてフィルタリング
-
+    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
     # データをJSON形式に変換
     data = {
         'labels': [emotion.reasoning for emotion in emotions],
@@ -66,6 +72,7 @@ def chart_data(request):
         'negative': [emotion.negative for emotion in emotions],
         'neutral': [emotion.neutral for emotion in emotions],
         'mixed': [emotion.mixed for emotion in emotions],
+        'date' : [emotion.created_date for emotion in emotions]
     }
     return data
   
@@ -467,10 +474,9 @@ def week_graph(request,selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     #json形式で受け取る
-    data = chart_data(request)
+    data = chart_data(request,start_of_week)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict,'emotion':emotion,'data':chart_data_json})
-
 
 @login_required
 def today_diary_graph(request, pk):
@@ -479,10 +485,12 @@ def today_diary_graph(request, pk):
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
-    # 日記に関連する感情分析データを取得
-    emotion_data = Emotion.objects.filter(diary=diary).first()
-
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
+    data = chart_data(request)
+    # JsonResponseを使用してJSONデータを返す
+    circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
+    print(data)
+    print(circle_data_json)
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json})
 
 @login_required
 def today_counseling_graph(request):

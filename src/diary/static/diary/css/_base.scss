@@ -20,6 +20,7 @@ p{
 }
 
 a{
+    letter-spacing: 0.04rem;
     text-decoration: none; // リンクの下線を消す
 }
 
@@ -52,6 +53,8 @@ header {
     h1 {
         font-size: 2rem;
         font-weight: 400;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .header__spacer--top{
@@ -95,7 +98,9 @@ header {
         height: 2.8rem;
     }
     .weatherImg{
-        width: 2.2rem;
+        max-width: 2.2rem;
+        height: auto;
+        padding-bottom: 0.4rem;
     }
     .header__weather span{
         margin-left: 0.5rem;
@@ -111,10 +116,10 @@ header {
 }
 // スクロールバー背景色
 .ground::-webkit-scrollbar {
-    background: rgba(217, 217, 217, 0.10);
+    background-color: transparent;
     // スクロールバーの幅を調整
     width: 2px;
-    height: 2px;
+    // height: 2px;
     // 角丸を指定
     border-radius: 20px;
 }
@@ -123,7 +128,7 @@ header {
     background-color: rgb(216, 216, 216);
     // 角丸を指定
     border-radius: 20px;
-    padding-left: 2.4rem;
+    // padding-left: 2.4rem;
 }
 // スクロールバー（hover時）
 .ground::-webkit-scrollbar-thumb:hover {

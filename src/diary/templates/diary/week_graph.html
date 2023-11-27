@@ -52,7 +52,6 @@
                 <div class="emotion__graph__img">
                     <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
                     {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
-                    <canvas id="myChart"></canvas>
                     <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
                     <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
                 </div>
@@ -72,15 +71,64 @@
         </div>
     </div>
 </div>
+
 </main>
 <script>
-  var ctx = document.getElementById('myChart').getContext('2d');
+  var ctx = document.getElementById('lineChart').getContext('2d');
   var chartData = {{ data|safe }};
   
   var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-          labels: chartData.labels,
+          labels: chartData.date,
+          datasets: [
+              {
+                  label: 'Positive',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Negative',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Neutral',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Mixed',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1,
+              }
+          ]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+<script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var myChart = new Chart(ctx, {
+      type: 'horizontalBar',  // type を 'horizontalBar' に変更
+      data: {
+          labels: chartData.date,
           datasets: [
               {
                   label: 'Positive',
@@ -113,12 +161,10 @@
           ]
       },
       options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
+            { stacked: "100%" }
+
       }
   });
 </script>
+
 {% endblock %}
