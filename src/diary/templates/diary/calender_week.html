@@ -76,7 +76,7 @@
                                                     {% comment %} 日記を押したら飛ぶ {% endcomment %}
                                                 <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
                                                     {% comment %} 感情画像 {% endcomment %}
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.png" alt="{{ emotion_entry.reasoning }}">
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                     {% comment %} 日記の内容 {% endcomment %}
                                                     {{ diary_entry.content }}
                                                 </a>
@@ -92,7 +92,7 @@
                                         {% for emotion_entry in emotion %}
                                             {% if emotion_entry.diary_id == diary_entry.id %}
                                                 <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.png" alt="{{ emotion_entry.reasoning }}">
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                     {{ diary_entry.content }}
                                                 </a>
                                             {% endif %}
@@ -107,7 +107,7 @@
                                         {% for emotion_entry in emotion %}
                                             {% if emotion_entry.diary_id == diary_entry.id %}
                                                 <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.png" alt="{{ emotion_entry.reasoning }}">
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                     {{ diary_entry.content }}
                                                 </a>
                                             {% endif %}
