@@ -67,21 +67,6 @@ def chart_data_week(request,startday):
     }
     return data
   
-def chart_data_day(request):
-    todays = date.today()
-    today = todays.strftime("%Y-%m-%d")
-    # Emotionデータをフィルタリング
-    emotions = Emotion.objects.filter(user = request.user,created_date = today)  # または必要な条件に基づいてフィルタリング
-    # データをJSON形式に変換
-    data = {
-        'labels': [emotion.reasoning for emotion in emotions],
-        'positive': [emotion.positive for emotion in emotions],
-        'negative': [emotion.negative for emotion in emotions],
-        'neutral': [emotion.neutral for emotion in emotions],
-        'mixed': [emotion.mixed for emotion in emotions],
-        'date' : [emotion.created_date for emotion in emotions]
-    }
-    return data
 
 def chart_data_month(request,startday):
     # 年と月の取得
@@ -507,6 +492,19 @@ def week_graph(request,selected_date=None):
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json})
 
+def chart_data_day(request, pk):
+    # Emotionデータをフィルタリング
+    emotions = Emotion.objects.filter(user = request.user, diary_id=pk)  # または必要な条件に基づいてフィルタリング
+    # データをJSON形式に変換
+    data = {
+        'labels': [emotion.reasoning for emotion in emotions],
+        'positive': [emotion.positive for emotion in emotions],
+        'negative': [emotion.negative for emotion in emotions],
+        'neutral': [emotion.neutral for emotion in emotions],
+        'mixed': [emotion.mixed for emotion in emotions],
+    }
+    return data
+
 @login_required
 def today_diary_graph(request, pk):
     # Diary モデルから特定の日記データを取得
@@ -514,7 +512,7 @@ def today_diary_graph(request, pk):
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
-    data = chart_data_day(request)
+    data = chart_data_day(request,pk)
     # JsonResponseを使用してJSONデータを返す
     circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
     print(data)
