@@ -47,8 +47,6 @@ def analyze_sentiment(text, diary,user):
         )
         new_emotion.save()
 
-def emoface(emotion):
-    return sentiment_dict.get(emotion, '')
 
 def chart_data_week(request,startday):
     # 文字列を日付オブジェクトに変換
@@ -422,7 +420,7 @@ def month_graph(request,selected_date=None):
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict,'data':chart_data_json})
+    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'data':chart_data_json})
 
 
 @login_required
