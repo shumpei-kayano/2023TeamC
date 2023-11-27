@@ -16,12 +16,6 @@ import json
 from django.http import JsonResponse
 
 
-sentiment_dict = {
-  'POSITIVE':'positive_face.png',
-  'NEGATIVE':'negative_face.png',
-  'NEUTRAL':'neutral_face.png',
-  'MIXED':'mix_face.png'
-}
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary,user):
     # 感情分析の生成
@@ -147,9 +141,10 @@ def calendar_month(request,selected_date=None):
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
+
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict})
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -171,7 +166,8 @@ def calender_week(request, selected_date=None):
     week_start_up =week_dates[0]+ timedelta(days=7)
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
-    return render(request, 'diary/calender_week.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict})
+    emotion = Emotion.objects.filter(user = request.user)
+    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
 
 def create_diary_confirmation(request):
 
