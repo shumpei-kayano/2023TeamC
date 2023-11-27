@@ -61,7 +61,7 @@ def chart_data_week(request,startday):
     start_date = startday.strftime("%Y-%m-%d")
     # 一週間後の日付を計算
     one_week = startday + timedelta(days=6)
-    one_week_str = one_week.strftime("%Y-%m-%d")
+    one_week_str = one_week
     # Emotionデータをフィルタリング
     emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
     # データをJSON形式に変換
@@ -90,7 +90,25 @@ def chart_data_day(request):
         'date' : [emotion.created_date for emotion in emotions]
     }
     return data
-  
+
+def chart_data_month(request,startday):
+    # 年と月の取得
+    year = startday.year
+    month = startday.month
+
+    # Emotionデータをフィルタリング
+    emotions = Emotion.objects.filter(user=request.user, created_date__year=year, created_date__month=month)
+
+    data = {
+        'labels': [emotion.reasoning for emotion in emotions],
+        'positive': [emotion.positive for emotion in emotions],
+        'negative': [emotion.negative for emotion in emotions],
+        'neutral': [emotion.neutral for emotion in emotions],
+        'mixed': [emotion.mixed for emotion in emotions],
+        'date' : [emotion.created_date for emotion in emotions]
+    }
+
+    return data
 
 def account_delete_success(request):
     # ログイン中のユーザーアカウントを取得
@@ -389,6 +407,7 @@ def month_graph(request,selected_date=None):
     start_of_month = selected_date.replace(day=1)
     # カレンダーに表示する日付のリストを作成
     month_matrix = monthcalendar(selected_date.year, selected_date.month)
+    print(start_of_month)
 # 月全体の週のリストを作成
     weeks = []
     for week_data in month_matrix:
@@ -402,9 +421,12 @@ def month_graph(request,selected_date=None):
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
+        #json形式で受け取る
+    data = chart_data_month(request,start_of_month)
+    chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict})
+    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict,'data':chart_data_json})
 
 
 @login_required
