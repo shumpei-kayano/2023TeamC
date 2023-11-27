@@ -485,7 +485,7 @@ def week_graph(request,selected_date=None):
     #json形式で受け取る
     data = chart_data_week(request,start_of_week)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
-    return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict,'emotion':emotion,'data':chart_data_json})
+    return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json})
 
 @login_required
 def today_diary_graph(request, pk):
