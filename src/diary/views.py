@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView
 from .models import Diary, Emotion
 from user.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
-from django.views.generic.edit import UpdateView
 from django.conf import settings
 from django.shortcuts import render
 from datetime import date, timedelta
@@ -57,7 +55,23 @@ def analyze_sentiment(text, diary,user):
 
 def emoface(emotion):
     return sentiment_dict.get(emotion, '')
-    
+
+def chart_data(request):
+    # Emotionデータをフィルタリング
+    emotions = Emotion.objects.filter(user = request.user)  # または必要な条件に基づいてフィルタリング
+
+    # データをJSON形式に変換
+    data = {
+        'labels': [emotion.reasoning for emotion in emotions],
+        'positive': [emotion.positive for emotion in emotions],
+        'negative': [emotion.negative for emotion in emotions],
+        'neutral': [emotion.neutral for emotion in emotions],
+        'mixed': [emotion.mixed for emotion in emotions],
+    }
+    return data
+  
+
+  
 
 def account_delete_success(request):
     # ログイン中のユーザーアカウントを取得
@@ -339,8 +353,40 @@ def member_information(request):
     return render(request, 'diary/member_information.html')
 
 @login_required
-def month_graph(request):
-    return render(request, 'diary/month_graph.html')
+def month_graph(request,selected_date=None):
+    # パラメータが指定されていない場合は今日の日付を使用
+    if selected_date:
+        # selected_dateをdatetime.date型に変換
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        selected_date = date.today()
+        
+    # 前月と次月の日付を計算
+    prev_month = selected_date - relativedelta(months=1)
+    next_month = selected_date + relativedelta(months=1)
+    # 週の最初を日曜日に設定
+    setfirstweekday(SUNDAY)
+    # カレンダーの開始日を計算（選択された月の1日）
+    start_of_month = selected_date.replace(day=1)
+    # カレンダーに表示する日付のリストを作成
+    month_matrix = monthcalendar(selected_date.year, selected_date.month)
+# 月全体の週のリストを作成
+    weeks = []
+    for week_data in month_matrix:
+        week_dates = []
+        for day in week_data:
+            if day == 0:
+                # 0は先月または来月の日なので空白として扱う
+                week_dates.append(None)
+            else:
+                week_dates.append(start_of_month + timedelta(days=day - 1))
+        weeks.append(week_dates)
+    diary = Diary.objects.filter(user=request.user)
+    emotion = Emotion.objects.filter(user = request.user)
+    # 各日付に対する条件に合わせて適切な処理をここで実行
+    # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
+    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'emodict':sentiment_dict})
+
 
 @login_required
 def positive_conversion(request, pk,):
@@ -400,8 +446,31 @@ def today_diary_detail2(request,pk):
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
-def week_graph(request):
-    return render(request, 'diary/week_graph.html')
+def week_graph(request,selected_date=None):
+    # selected_dateをdatetime.date型に変換
+    if selected_date:
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    # パラメータが指定されていない場合は今日の日付を使用
+    else:
+        selected_date = date.today()
+    #Emotionのinstance化
+    emotion = Emotion.objects.filter(user = request.user)
+    # 選択された日付の曜日を取得
+    selected_weekday = selected_date.weekday()
+    # カレンダーの開始日を計算（選択された日の週の日曜日）
+    start_of_week = selected_date - timedelta(days=(selected_weekday + 1) % 7)
+    # カレンダーに表示する日付のリストを作成
+    week_dates = [start_of_week + timedelta(days=i) for i in range(7)]
+    # 前の週の日曜日を取得
+    week_start =week_dates[0]- timedelta(days=7)
+    # 次の週の日曜日を取得
+    week_start_up =week_dates[0]+ timedelta(days=7)
+    # ユーザの日記を全て取得
+    diary = Diary.objects.filter(user=request.user)
+    #json形式で受け取る
+    data = chart_data(request)
+    chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
+    return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict,'emotion':emotion,'data':chart_data_json})
 
 @login_required
 def today_diary_graph(request, pk):
@@ -410,17 +479,12 @@ def today_diary_graph(request, pk):
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
-    # 日記に関連する感情分析データを取得
-    emotion_data = Emotion.objects.filter(user=request.user).first()
-    if emotion_data:
-        data = {'labels': ['positive', 'negative', 'neutral', 'mixed'],
-                'values': [emotion_data.positive, emotion_data.negative, emotion_data.neutral, emotion_data.mixed]
-                }
-        # JSON形式に変換
-        json_data = json.dumps(data)
-
-        return render(request, 'diary/today_diary_graph.html', {'diary': diary, 'ai_comment': ai_comment, 'emotion_data': json_data})
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'emotion_data':None})
+    data = chart_data(request)
+    # JsonResponseを使用してJSONデータを返す
+    circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
+    print(data)
+    print(circle_data_json)
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json})
 
 @login_required
 def today_counseling_graph(request):

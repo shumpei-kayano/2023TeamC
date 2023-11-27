@@ -9,6 +9,7 @@
     background: transparent; /* 背景を透明にする */
     cursor: inherit; /* 親要素のカーソルスタイルを継承する */
     border-radius: 50px;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .btn {
@@ -18,13 +19,31 @@
     gap: 10px;
     flex-shrink: 0;
     border-radius: 50px;
+    font-weight: 700;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     text-align: center; /* 中央寄せを追加 */
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
-    &--large {
+    &--blue {
         width: 342px;
         height: 48px;
+
+        button {
+            @include button-style;
+            
+            background: var(--custom-color, #00ABB6);
+            color: #FFF;
+            font-size: 1.6rem;
+
+            &:hover {
+                background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    &--large {
+        width: 342px;
+        height: 56px;
 
         button {
             @include button-style;
@@ -124,14 +143,6 @@
     }
 }
 
-// .icon__button{
-//     display: inline-flex;
-//     height: 46px;
-//     justify-content: center;
-//     align-items: center;
-//     gap: 10px;
-//     flex-shrink: 0;
-// }
 .setting__menu ul{
     list-style: none; /* リストアイテムのマーカーを非表示にする */
     margin-left: 24px;
@@ -164,8 +175,44 @@
         }
     }
 }
-
 .setting__menu ul li a:hover {
+    background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
+}
+
+.help__menu ul{
+    list-style: none; /* リストアイテムのマーカーを非表示にする */
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+    padding: 0px;
+    background-color: $background_color; // 背景色を設定
+
+    a {
+        display: flex;
+        width: 342px;
+        height: 60px;
+        padding-bottom: 0px;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        border-bottom: 1px solid #A29C9C;
+        background: #FFF;
+        color: #000;
+        font-size: 1.6rem;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+        cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+
+            img {
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
+            
+        }
+    }
+}
+
+.help__menu ul li a:hover {
     background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
 }
 
@@ -287,4 +334,24 @@
 .next__button a img {
     display: block;
     height: auto; /* 高さは自動 */
+}
+
+.user-infomation {
+    width: 342px;
+    height: 273px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+
+    .user-label{
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+        .user-info {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 0;
+            padding: 16px;
+    }
 }

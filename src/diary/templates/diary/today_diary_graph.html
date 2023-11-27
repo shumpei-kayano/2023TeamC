@@ -38,7 +38,8 @@
                 {% comment %} グラフを表示 {% endcomment %}
                 <div style="position: relative;">
                     <canvas id="myPieChart" width="400" height="200"></canvas>
-                    <div id="popup" style="position: absolute; display: none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
+                    {{ data }}
+                    <div id="popup" style="position: absolute; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div>
                 </div>
             </div>
         </div>
@@ -62,11 +63,9 @@
 
 {% block javascripts %}
 <script>
-var data = {{ emotion_data|safe }};
-console.log({{emotion_data|safe}});  // データをコンソールに出力
-var canvas = document.getElementById('myPieChart');
+var canvas = document.getElementById('myPieChart').getContext('2d');
+var data = {{ data|safe }};
 
-var ctx = canvas.getContext('2d');
 var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {

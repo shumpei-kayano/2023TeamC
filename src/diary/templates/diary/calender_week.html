@@ -21,8 +21,8 @@
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="calendar--background calender-week-page">
         <!-- タブ -->
-        {% url 'diary:calender_week' as calender_week_url %}
-        {% url 'diary:week_graph' as week_graph_url %}
+        {% url 'diary:calender_week' selected_date as calender_week_url %}
+        {% url 'diary:week_graph' selected_date as week_graph_url %}
         <div class="tab__button a--tab">
             <div class="a--tab--left {% if request.path == calender_week_url %}active{% endif %}">
                 <a href="{{ calender_week_url }}">週間カレンダー</a>

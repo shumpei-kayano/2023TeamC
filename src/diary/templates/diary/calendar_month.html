@@ -18,8 +18,8 @@
     <div class="scroll--content"><!-- 追加した要素 -->
         <div class="calendar--background calender-month-page">
             <!-- タブ -->
-            {% url 'diary:calendar_month' as calendar_month_url %}
-            {% url 'diary:month_graph' as month_graph_url %}
+            {% url 'diary:calendar_month' selected_date as calendar_month_url %}
+            {% url 'diary:month_graph' selected_date as month_graph_url %}
             <div class="tab__button a--tab">
                 <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
                     <a href="{{ calendar_month_url }}">月間カレンダー</a>
@@ -74,7 +74,6 @@
                         <!-- 月にある週間の数 -->
                         {% for week in weeks %}
                             <tr>
-                              {% comment %} 確定7回回る {% endcomment %}
                                 {% for day in week %}
                                     <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
                                         {% if day.day %}
