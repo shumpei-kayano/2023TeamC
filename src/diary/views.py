@@ -12,6 +12,7 @@ import openai
 import boto3
 from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
+import json
 from django.http import JsonResponse
 
 
@@ -489,7 +490,6 @@ def week_graph(request,selected_date=None):
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emodict':sentiment_dict,'emotion':emotion,'data':chart_data_json})
 
-
 @login_required
 def today_diary_graph(request, pk):
     # Diary モデルから特定の日記データを取得
@@ -497,10 +497,12 @@ def today_diary_graph(request, pk):
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
-    # 日記に関連する感情分析データを取得
-    emotion_data = Emotion.objects.filter(diary=diary).first()
-
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment})
+    data = chart_data(request)
+    # JsonResponseを使用してJSONデータを返す
+    circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
+    print(data)
+    print(circle_data_json)
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json})
 
 @login_required
 def today_counseling_graph(request):

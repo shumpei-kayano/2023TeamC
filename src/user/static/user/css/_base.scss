@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500&display=swap');
+html{
+    font-size: 10px;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+    background-color: $web_background_color;
+    width: 100%;
+    height: 100%;
+    margin: 0; // ブラウザのデフォルトスタイルを無効化
+    display: flex; // 要素を横並びにする
+    flex-direction: column; // 縦並びにする
+}
+
+p{
+    line-height: 1.7rem;
+    letter-spacing: 0.04rem;
+}
+
+a{
+    letter-spacing: 0.04rem;
+    // text-decoration: none; // リンクの下線を消す
+}
+
+header, .ground, footer {
+    width: 39rem; // 任意の幅を設定
+    max-width: 100%; // ビューポートの幅を超えないように設定
+    margin: 0 auto; // 中央に配置
+    background-color: $main_background_color;
+}
+
+@media only screen and (max-width: 767px) {
+    header, .ground, footer {
+        width: 100%;
+        max-width: none; // 追加
+    }
+
+}
