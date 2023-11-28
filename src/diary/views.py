@@ -48,44 +48,18 @@ def analyze_sentiment(text, diary,user):
         new_emotion.save()
 
 
-def chart_data_week(request,startday):
-    # 文字列を日付オブジェクトに変換
-    start_date = startday.strftime("%Y-%m-%d")
-    # 一週間後の日付を計算
-    one_week = startday + timedelta(days=6)
-    one_week_str = one_week
-    # Emotionデータをフィルタリング
-    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
-    # データをJSON形式に変換
-    data = {
-        'labels': [emotion.reasoning for emotion in emotions],
-        'positive': [emotion.positive for emotion in emotions],
-        'negative': [emotion.negative for emotion in emotions],
-        'neutral': [emotion.neutral for emotion in emotions],
-        'mixed': [emotion.mixed for emotion in emotions],
-        'date' : [emotion.created_date for emotion in emotions]
-    }
-    return data
-  
+def chart_data(emotions):
 
-def chart_data_month(request,startday):
-    # 年と月の取得
-    year = startday.year
-    month = startday.month
+  data = {
+      'labels': [emotion.reasoning for emotion in emotions],
+      'positive': [emotion.positive for emotion in emotions],
+      'negative': [emotion.negative for emotion in emotions],
+      'neutral': [emotion.neutral for emotion in emotions],
+      'mixed': [emotion.mixed for emotion in emotions],
+      'date' : [emotion.created_date for emotion in emotions]
+  }
 
-    # Emotionデータをフィルタリング
-    emotions = Emotion.objects.filter(user=request.user, created_date__year=year, created_date__month=month)
-
-    data = {
-        'labels': [emotion.reasoning for emotion in emotions],
-        'positive': [emotion.positive for emotion in emotions],
-        'negative': [emotion.negative for emotion in emotions],
-        'neutral': [emotion.neutral for emotion in emotions],
-        'mixed': [emotion.mixed for emotion in emotions],
-        'date' : [emotion.created_date for emotion in emotions]
-    }
-
-    return data
+  return data
 
 def account_delete_success(request):
     # ログイン中のユーザーアカウントを取得
@@ -104,7 +78,14 @@ def account_delete_success(request):
     user.delete()
     return render(request, 'diary/account_delete_success.html')
 
-
+def aicomment(emotion):
+  positive = emotion.order_by('-positive').first()
+  negative = emotion.order_by('-negative').first()
+  positive_diary = Diary.objects.get(id = positive.diary_id)
+  negative_diary = Diary.objects.get(id = negative.diary_id)
+  if len(emotion) > 3:#週４つ以上だったら
+    
+    return aicomment
 
 @login_required
 def account_delete(request):
@@ -180,7 +161,6 @@ def create_diary_confirmation(request):
         if form.is_valid():
             new_diary = form.save(commit=False)
             new_diary.user = request.user
-            new_diary.save()  # データベースに保存
             openai.api_key = settings.OPENAI_API_KEY
 
             user_diary = "貴方は「観測者」です。以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って日記に対する感想を返してください。段階を踏んで考えて答えてください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。\n・動機\nチャット相手の話を聞いて、アドバイスをしようとしている。\n・欠点、短所、不安\n年齢を聞かれる\n# 基本設定\nあなたの一人称が「可愛いボク」です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\n{キャラクター}は100文字以上しゃべれません。箇条書きでの返答はせず、{キャラクター}が会話しているように、カウンセリングをする。\n以下の日記に対してカウンセリングしてください。\n"+ new_diary.content
@@ -196,8 +176,8 @@ def create_diary_confirmation(request):
             # データベースへの保存
             new_diary.ai_comment = ai_comment
             new_diary.save()
-            print(ai_comment)
-
+            
+            
             # 一旦カレンダーが出来るまで----------------------------------------------------------
             saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
@@ -231,7 +211,7 @@ def create_diary_confirmation2(request, pk):
             # データベースへの保存
             diary.ai_comment = ai_comment
             diary.save()
-            print(ai_comment)
+
 
             return redirect('diary:create_diary_confirmation', pk=pk)
 
@@ -388,7 +368,6 @@ def month_graph(request,selected_date=None):
     start_of_month = selected_date.replace(day=1)
     # カレンダーに表示する日付のリストを作成
     month_matrix = monthcalendar(selected_date.year, selected_date.month)
-    print(start_of_month)
 # 月全体の週のリストを作成
     weeks = []
     for week_data in month_matrix:
@@ -401,9 +380,12 @@ def month_graph(request,selected_date=None):
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
-    emotion = Emotion.objects.filter(user = request.user)
-        #json形式で受け取る
-    data = chart_data_month(request,start_of_month)
+    year = start_of_month.year
+    month = start_of_month.month
+    emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    data = chart_data(emotion)
+    #json形式で受け取る
+    # ai_comment = ai_comment(emotion)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
@@ -487,12 +469,21 @@ def week_graph(request,selected_date=None):
     week_start =week_dates[0]- timedelta(days=7)
     # 次の週の日曜日を取得
     week_start_up =week_dates[0]+ timedelta(days=7)
-    # ユーザの日記を全て取得
-    diary = Diary.objects.filter(user=request.user)
+    #--------------------------------------------------------特定の週のフィルター
+    # 文字列を日付オブジェクトに変換
+    start_date = start_of_week.strftime("%Y-%m-%d")
+    # 一週間後の日付を計算
+    one_week = start_of_week + timedelta(days=6)
+    one_week_str = one_week
+    # データをフィルタリング
+    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
+    diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
+    #---------------------------------------------------------
     #json形式で受け取る
-    data = chart_data_week(request,start_of_week)
+    ai_comment = aicomment(emotions)
+    data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
-    return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json})
+    return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})
 
 def chart_data_day(request, pk):
     # Emotionデータをフィルタリング
