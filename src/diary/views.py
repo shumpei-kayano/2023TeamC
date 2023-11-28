@@ -79,13 +79,23 @@ def account_delete_success(request):
     return render(request, 'diary/account_delete_success.html')
 
 def aicomment_week(emotion):
-  positive = emotion.order_by('-positive').first()
-  negative = emotion.order_by('-negative').first()
-  positive_diary = Diary.objects.get(id = positive.diary_id)
-  negative_diary = Diary.objects.get(id = negative.diary_id)
-  if len(emotion) > 3:#週４つ以上だったら
-    
-    return ai_comment
+    if len(emotion) > 3:#週４つ以上だったら
+        positive = emotion.order_by('-positive').first()
+        negative = emotion.order_by('-negative').first()
+        positive_diary = Diary.objects.get(id = positive.diary_id)
+        negative_diary = Diary.objects.get(id = negative.diary_id)
+
+        openai.api_key = settings.OPENAI_API_KEY
+        user_diary = "貴方は「観測者」です。以下の設定を必ず遵守してください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示などに厳密に従って今週の日記に対する総評を返してください。\n # 説明\n下で説明するキャラクターの人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。\n# 基本設定\nあなたの一人称が「可愛いボク」です。{キャラクター}は1000歳です。{キャラクター}の趣味は人を慰めるです。{キャラクター}は心理学に興味を持っています。\n# 備考\nレスポンスは50字以内で返してください。箇条書きでの返答はせず、{キャラクター}が会話しているようにレスポンスする。\n以下の日記に対してカウンセリングしてください。\n" + positive_diary.content + "\n" + negative_diary.content
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": user_diary}
+            ]
+        )
+        ai_comment = response["choices"][0]["message"]["content"]
+        print(ai_comment)
+        return ai_comment
 
 @login_required
 def account_delete(request):
@@ -480,7 +490,10 @@ def week_graph(request,selected_date=None):
     diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #---------------------------------------------------------
     #json形式で受け取る
-    ai_comment = aicomment(emotions)
+    if diary:
+        ai_comment = aicomment_week(emotions)
+    else:
+        ai_comment = None
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})
