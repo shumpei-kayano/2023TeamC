@@ -78,14 +78,14 @@ def account_delete_success(request):
     user.delete()
     return render(request, 'diary/account_delete_success.html')
 
-def aicomment(emotion):
+def aicomment_week(emotion):
   positive = emotion.order_by('-positive').first()
   negative = emotion.order_by('-negative').first()
   positive_diary = Diary.objects.get(id = positive.diary_id)
   negative_diary = Diary.objects.get(id = negative.diary_id)
   if len(emotion) > 3:#週４つ以上だったら
     
-    return aicomment
+    return ai_comment
 
 @login_required
 def account_delete(request):
