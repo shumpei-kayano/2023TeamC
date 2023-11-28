@@ -29,6 +29,36 @@ class Diary(models.Model):
     def __str__(self):
         return f'Diary by {self.user}'
 
+class Month_AI(models.Model):
+    '''月の総評モデル'''
+
+    # ユーザーへの外部キー
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
+    # AIコメント
+    ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
+    # 作成日時
+    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
+    # 更新日時
+    updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
+
+    def __str__(self):
+        return f'Diary by {self.user}'
+
+class Week_AI(models.Model):
+    '''週の総評モデル'''
+
+    # ユーザーへの外部キー
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
+    # AIコメント
+    ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
+    # 作成日時
+    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
+    # 更新日時
+    updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
+
+    def __str__(self):
+        return f'Diary by {self.user}'
+
 class Emotion(models.Model):
     '''感情分析モデル'''
     # ユーザーへの外部キー
@@ -47,7 +77,7 @@ class Emotion(models.Model):
     mixed = models.FloatField(verbose_name='混合')
     # 作成日時
     created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
-    # 更新日時sa
+    # 更新日時
     updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
 
     def __str__(self):

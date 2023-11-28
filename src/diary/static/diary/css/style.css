@@ -685,6 +685,47 @@ footer .nav-text {
 .FlexTextarea {
   position: relative;
   width: 100%;
+  padding: 2.4rem;
+  font-size: 1.6rem;
+  line-height: 1.7rem;
+  letter-spacing: 0.04rem;
+  border: none;
+  border-bottom: rgba(4, 202, 214, 0.15);
+}
+.FlexTextarea ::placeholder {
+  color: #A29C9C;
+}
+.FlexTextarea .FlexTextarea__dummy {
+  overflow: hidden;
+  visibility: hidden;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  min-height: 120px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  border: 1px solid;
+}
+.FlexTextarea .FlexTextarea__textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid #b6c3c6;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  resize: none;
+}
+.FlexTextarea .FlexTextarea__textarea:focus {
+  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);
   margin: 0 auto;
 }
 .FlexTextarea img {
@@ -727,6 +768,7 @@ footer .nav-text {
 }
 
 .content__text-count {
+  margin: 0.8rem 2.4rem 0 0.8rem;
   margin: 0.8rem 2.4rem;
   text-align: right;
   font-size: 1.2rem;

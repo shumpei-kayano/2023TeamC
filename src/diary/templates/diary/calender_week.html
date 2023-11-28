@@ -69,38 +69,56 @@
                         <td>
                             {% if day < selected_date %}
                                 {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                            {%for diary in diary%}
-                            {%if diary.created_date == day%}
-                            <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
-                              <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
-                            </a>
-                            
-                            {% endif %}
+                                {% for diary_entry in diary %}
+                                    {% if diary_entry.created_date == day %}
+                                        {% for emotion_entry in emotion %}
+                                            {% if emotion_entry.diary_id == diary_entry.id %}
+                                                    {% comment %} 日記を押したら飛ぶ {% endcomment %}
+                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                    {% comment %} 感情画像 {% endcomment %}
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    {% comment %} 日記の内容 {% endcomment %}
+                                                    {{ diary_entry.content }}
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
                                 {% endfor %}
 
                             {% elif day == selected_date %}
                                 {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                                {%for diary in diary %}
-                                {%if diary.created_date == day%}
-                                <!-- 現在の日はトップページへのリンク -->
-                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
-                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
-                                </a>
-                                {% endif %}
-                                    {% endfor %}
+                                {% for diary_entry in diary %}
+                                    {% if diary_entry.created_date == day %}
+                                        {% for emotion_entry in emotion %}
+                                            {% if emotion_entry.diary_id == diary_entry.id %}
+                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    {{ diary_entry.content }}
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+
                             {% else %}
                                 <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
-                                {%for diary in diary %}
-                                {%if diary.created_date == day%}
-                                <a href="{% url 'diary:today_diary_detail' diary.id %}">{{ diary.content }}
-                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
-                                </a>
-                                {% endif %}
-                                    {% endfor %}
+                                {% for diary_entry in diary %}
+                                    {% if diary_entry.created_date == day %}
+                                        {% for emotion_entry in emotion %}
+                                            {% if emotion_entry.diary_id == diary_entry.id %}
+                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    {{ diary_entry.content }}
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
                             {% endif %}
                         </td>
                     {% endfor %}
                 </tr>
+                
             </tbody>
         </table>
         </div>

@@ -71,103 +71,116 @@
     </div>
 </main>
 
-{% endblock %}
 
-<!--カレンダー遷移-->
-{% block javascripts %}
+
 <script>
-    // 現在の日付を取得
-    var currentDate = new Date();
+  var ctx = document.getElementById('lineChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: chartData.date,
+          datasets: [
+              {
+                  label: 'Positive',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Negative',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Neutral',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: 'Mixed',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1,
+              }
+          ]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script><script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
 
-    // 先月に遷移
-    function moveToPreviousMonth() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        updateDisplay();
+  // 平均を計算する関数
+  function calculateAverage(dataArray) {
+    if (dataArray.length === 0) {
+      return 0;
     }
+    var sum = dataArray.reduce((total, value) => total + value, 0);
+    return sum / dataArray.length;
+  }
 
-    // 今月に遷移
-    function moveToThisMonth() {
-        currentDate = new Date();
-        updateDisplay();
-    }
-
-    // 来月に遷移
-    function moveToNextMonth() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        updateDisplay();
-    }
-
-    // 月の遷移を画面に表示
-    function updateDisplay() {
-        var monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-        var displayDate = monthNames[currentDate.getMonth()] + " " + currentDate.getFullYear();
-        alert("遷移先の月: " + displayDate);
-    }
-
-
-{% comment %} グラフ {% endcomment %}
-<script src="{% static 'chart.min.js' %}"></script>
-
-    // データベースから取得したデータ
-    var data = {{ data|safe }};
-
-    // 棒グラフの描画
-    var barChartCanvas = document.getElementById("barChart");
-    var barChart = new Chart(barChartCanvas, {
-        type: 'bar',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                label: '棒グラフ',
-                data: data.bar_data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)'
-            }]
-        }
-    });
-
-    // 折れ線グラフの描画
-    var lineChartCanvas = document.getElementById("lineChart");
-    var lineChart = new Chart(lineChartCanvas, {
-        type: 'line',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                label: '折れ線グラフ',
-                data: data.line_data,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        }
-    });
-
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: [''], // ラベルを設定
+          datasets: [
+              {
+                  label: 'Positive',
+                  data: [calculateAverage(chartData.positive)],
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Negative',
+                  data: [calculateAverage(chartData.negative)],
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Neutral',
+                  data: [calculateAverage(chartData.neutral)],
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1
+              },
+              {
+                  label: 'Mixed',
+                  data: [calculateAverage(chartData.mixed)],
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1
+              }
+          ]
+      },
+      options: {
+          indexAxis: 'y', 
+          scales: {
+              x: {
+                  stacked: true
+              },
+              y: {
+                  stacked: true
+              }
+          }
+      }
+  });
 </script>
+
+
 {% endblock %}
-
-
-
-    <!-- タブ切り替え -->
-    {% comment %} Javascriptで {% endcomment %}
-    {% comment %} //classの要素の取得
-    const demo_class_items = document.getElementsByClassName('demo_tab_btn');
-    
-    for(let i = 0; i < demo_class_items.length; i++){
-        //クリックイベント
-        demo_class_items[i].onclick = function(e){
-            clk_num = i+1;
-    
-            //ボタンへclassの削除と追加
-            btn = document.querySelectorAll('.demo_tab_btn');
-            for(let ii = 0; ii < btn.length; ii++){
-                btn[ii].classList.remove('act');
-            }
-            document.querySelector('.demo_tab_btn:nth-child('+clk_num+')').classList.add('act');
-    
-            //タブボディclassの削除と追加
-            cnt = document.querySelectorAll('.demo_tab_content');
-            for(let ii = 0; ii < cnt.length; ii++){
-                cnt[ii].classList.remove('act');
-            }
-            document.querySelector('.demo_tab_content:nth-child('+clk_num+')').classList.add('act');
-    
-        }
-    } {% endcomment %}
