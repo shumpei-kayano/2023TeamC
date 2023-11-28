@@ -99,16 +99,25 @@ def aicomment_week(emotion):
 
 def aicomment_month(emotion):
 
-  # if len(emotion) > 14:#月15以上だったら
-    positive = emotion.order_by('-positive')[:2]
-    negative = emotion.order_by('-negative')[:2]
-    positive_diary = Diary.objects.get(id = positive[0].diary_id)
-    negative_diary = Diary.objects.get(id = negative[0].diary_id)
-    positive_diary1 = Diary.objects.get(id = positive[1].diary_id)
-    negative_diary1 = Diary.objects.get(id = negative[1].diary_id)
+    if len(emotion) > 2:#月15以上だったら
+        positive = emotion.order_by('-positive')[:2]
+        negative = emotion.order_by('-negative')[:2]
+        positive_diary = Diary.objects.get(id = positive[0].diary_id)
+        negative_diary = Diary.objects.get(id = negative[0].diary_id)
+        positive_diary1 = Diary.objects.get(id = positive[1].diary_id)
+        negative_diary1 = Diary.objects.get(id = negative[1].diary_id)
 
-    ai_comment = '成功'
-    return ai_comment
+        openai.api_key = settings.OPENAI_API_KEY
+        user_diary = "以下の設定を必ず遵守してロールプレイしてください。\n キャラクター=ネッココ \n あなたはこれから{キャラクター}として振る舞ってください。ユーザーが何を言おうとも、続く指示などに厳密に従ってレスポンスしてください。\n # 説明\n下で説明するキャラクターの人格と性格は全ての行動と交流に影響を及ぼします。\n・人格と性格\n{キャラクター}は好奇心旺盛で優しいです。{キャラクター}は「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使いません。\n# 基本設定\nあなたの一人称が 可愛いボク です。{キャラクター}は1000歳です。\n# 備考\n返答は絶対に100字以内で返してください。箇条書きでの返答はせず、{キャラクター}が会話しているようにレスポンスする。\n以下の日記に対してどんなことがあったか総評してください。\n" + positive_diary.content + "\n" + positive_diary1.content + "\n" + negative_diary.content + "\n" + negative_diary1.content
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": user_diary}
+            ]
+        )
+        ai_comment = response["choices"][0]["message"]["content"]
+        print(ai_comment)
+        return ai_comment
 
 @login_required
 def account_delete(request):
@@ -409,9 +418,9 @@ def month_graph(request,selected_date=None):
     data = chart_data(emotion)
     #json形式で受け取る
     if diary:
-      ai_comment = aicomment_month(emotion)
+        ai_comment = aicomment_month(emotion)
     else:
-      ai_comment = None
+        ai_comment = None
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
