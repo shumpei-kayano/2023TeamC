@@ -81,8 +81,8 @@
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
                                                 <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
-                                                  <img src="{% static 'diary/assets/' %}{{ emodict.emotion.reasoning|default:'positive_face.png' }}" alt="{{ emotion.reasoning }}">
-                                              </a>
+                                                    <img src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
+                                                </a>
                                               {% endif %}
                                             {% endfor %}
                                         {% endif %}

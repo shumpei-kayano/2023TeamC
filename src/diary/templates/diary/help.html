@@ -10,7 +10,7 @@
     <div class="header__button">
         <div class="header__back__img">
             {% comment %} help.htmlに遷移させてください {% endcomment %}
-            <a href="">
+            <a href="{% url 'diary:setting' %}">
                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
                 </svg>
@@ -27,10 +27,10 @@
     <div class="scroll--content">
         <div class="help__menu">
         <ul>
-            <li class="list_item"><a href="/help_diary.html">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="/help_diary_edit.html">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="/help_calender.html">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="/help_graph.html">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            <li class="list_item"><a href="{% url 'diary:help_diary'%}">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            <li class="list_item"><a href="{% url 'diary:help_diary_edit'%}">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            <li class="list_item"><a href="{% url 'diary:help_calender'%}">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            <li class="list_item"><a href="{% url 'diary:help_graph'%}">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
         </ul>
         </div>
 
