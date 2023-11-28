@@ -9,7 +9,7 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            {% comment %} help.htmlに遷移させてください {% endcomment %}
+            {% comment %} home_top.htmlに遷移させてください {% endcomment %}
             <a href="">
                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
@@ -21,7 +21,7 @@
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
-        <span class="tempMax">-℃</span>
+        <span class="file_name" class="tempMax">-℃</span>
     </div>
 </header>
 {% endblock %}
@@ -41,27 +41,64 @@
                     {% comment %} <div class="FlexTextarea__dummy" aria-hidden="true"></div> {% endcomment %}
                     {{ Diary.content }}
                 </div>
-                {% comment %}
-                    <textarea name="content" cols="40" rows="10" class="content__textarea" 
-                    placeholder="ここに書いてください（最大1000文字）" 
-                    oninput="countCharacters(this)" maxlength="1000" required="" id="id_content"></textarea> 
-                    {% endcomment %}
 
                 <!-- 文字数を表示する要素 -->
                 <div id="characterCount" class="content__text-count">0/1000</div>
-                
+
                 <div class='photomv'>
-                    {{ Diary.photo1 }}
-                    {{ Diary.photo2 }}
-                    {{ Diary.photo3 }}
-                    {{ Diary.photo4 }}
-                    {{ Diary.movie1 }}
-                    {{ Diary.movie2 }}
-                    {{ Diary.movie3 }}
-                    {{ Diary.movie4 }}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <label for="id_photo1" id="label_photo1" onclick="document.getElementById('id_photo1').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
+                        {{ Diary.photo1 }}
+                        <span class="file_name" id="file_name_photo1">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_photo2">
+                        <label for="id_photo2" id="label_photo2" onclick="document.getElementById('id_photo2').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
+                        {{ Diary.photo2 }}
+                        <span class="file_name" id="file_name_photo2">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_photo3">
+                        <label for="id_photo3" id="label_photo3" onclick="document.getElementById('id_photo3').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
+                        {{ Diary.photo3 }}
+                        <span class="file_name" id="file_name_photo3">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_photo4">
+                        <label for="id_photo4" id="label_photo4" onclick="document.getElementById('id_photo4').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
+                        {{ Diary.photo4 }}
+                        <span class="file_name" id="file_name_photo4">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" id="container_movie1">
+                        <label for="id_movie1" id="label_movie1" onclick="document.getElementById('id_movie1').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
+                        {{ Diary.movie1 }}
+                        <span class="file_name" id="file_name_movie1">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_movie2">
+                        <label for="id_movie2" id="label_movie2" onclick="document.getElementById('id_movie2').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
+                        {{ Diary.movie2 }}
+                        <span class="file_name" id="file_name_movie2">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_movie3">
+                        <label for="id_movie3" id="label_movie3" onclick="document.getElementById('id_movie3').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
+                        {{ Diary.movie3 }}
+                        <span class="file_name" id="file_name_movie3">選択されていません</span>
+                    </div>
+
+                    <div class="custom-file-upload" style="display: none;" id="container_movie4">
+                        <label for="id_movie4" id="label_movie4" onclick="document.getElementById('id_movie4').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
+                        {{ Diary.movie4 }}
+                        <span class="file_name" id="file_name_movie4">選択されていません</span>
+                    </div>
+                </div>
+
+                <div class="btn--blue">
+                    <button type="submit">確認</button>
                 </div>
             </div>
-                <button class="btn btn--blue" type="submit">確認</button>
         </form>
 
     </div>
@@ -137,11 +174,11 @@
         // 指定されたタイプ（photoまたはmovie）と開始インデックスから4までの要素を非表示
         function hideElements(type, start) {
             for (let i = start; i <= 4; i++) {
-                // id属性に id_ を付与し
-                const element = document.getElementById(`id_${type}${i}`);
-                if (element) {
+                // id属性に id_ を付与
+                const container = document.getElementById(`container_${type}${i}`);
+                if (container) {
                     // 非表示
-                    element.style.display = 'none';
+                    container.style.display = 'none';
                 }
             }
         }
@@ -149,21 +186,31 @@
         // 指定されたタイプとインデックスの次の要素を表示する関数
         function showNextElement(type, index) {
             const nextIndex = index + 1;
-            const nextElement = document.getElementById(`id_${type}${nextIndex}`);
-            if (nextElement) {
+            const nextContainer = document.getElementById(`container_${type}${nextIndex}`);
+            if (nextContainer) {
                 // 次の要素を表示
-                nextElement.style.display = 'block';
+                nextContainer.style.display = 'block';
             }
         }
 
         // photoまたはmovieのファイルが選択されたときに次の要素を表示するイベントを設定
         function handleFileInput(type, index) {
             const input = document.getElementById(`id_${type}${index}`);
-            if (input) {
-                // input要素のchangeイベントを設定
+            const label = document.getElementById(`label_${type}${index}`);
+            const fileNamespan class="file_name" = document.getElementById(`file_name_${type}${index}`);
+
+            if (input && label && fileNameSpan) {
+                //label.addEventListener('click', function() {
+                    //input.click();
+                //});
+
                 input.addEventListener('change', function() {
-                    // 次の要素を表示
-                    showNextElement(type, index);
+                    if (input.files.length > 0) {
+                        fileNameSpan.textContent = input.files[0].name;
+                        showNextElement(type, index);
+                    } else {
+                        fileNameSpan.textContent = '選択されていません';
+                    }
                 });
             }
         }
@@ -178,6 +225,18 @@
         // movieファイルの処理
         for (let i = 1; i <= 4; i++) {
             handleFileInput('movie', i);
+        }
+
+        // ファイル名を更新する関数
+        function updateFileName(input, fileNameSpanId) {
+            const fileNamespan class="file_name" = document.getElementById(fileNameSpanId);
+            if (fileNameSpan) {
+                if (input.files.length > 0) {
+                    fileNameSpan.textContent = input.files[0].name;
+                } else {
+                    fileNameSpan.textContent = '選択されていません';
+                }
+            }
         }
     });
 </script>

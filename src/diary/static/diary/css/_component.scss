@@ -27,6 +27,8 @@
     &--blue {
         width: 342px;
         height: 48px;
+        margin-top: 24px;
+        margin-bottom: 40px;
 
         button {
             @include button-style;
@@ -66,8 +68,10 @@
             @include button-style;
             
             background: var(--custom-color, #FFF);
-            color: var(--, #00ABB6);
+            color:#00ABB6;
             font-size: 1.6rem;
+            border: 1px solid #00ABB6;
+            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
             &:hover {
                 background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
@@ -79,15 +83,33 @@
         width: 342px;
         height: 48px;
 
-        button {
+        button, a{
             @include button-style;
             
-            background: var(--custom-color, #FF4747);
+            background: #FF4747;
             color: #FFF;
             font-size: 1.6rem;
 
             &:hover {
                 background-color: $red_btn_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    
+    &--blue--info {
+        width: 342px;
+        height: 48px;
+
+        button {
+            @include button-style;
+            
+            background: var(--custom-color, #00ABB6);
+            color: #FFF;
+            font-size: 1.6rem;
+
+            &:hover {
+                background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
             }
         }
     }
