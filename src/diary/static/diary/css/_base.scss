@@ -43,7 +43,7 @@ header {
     left: 0;
     color: $header_text_color;
     background-color: $header_color;
-    height: 5rem;
+    height: 5rem; // calc(5rem / 844 * 100%);
     display: flex;
     align-items: center; /* 垂直方向の中央揃え */
     justify-content: space-between;
