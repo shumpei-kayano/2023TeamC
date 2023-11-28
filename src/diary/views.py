@@ -96,7 +96,7 @@ def aicomment_week(emotion):
         ai_comment = response["choices"][0]["message"]["content"]
         print(ai_comment)
         return ai_comment
-
+    return None
 
 def aicomment_month(emotion):
 
@@ -516,16 +516,23 @@ def week_graph(request,selected_date=None):
     emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
     diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #---------------------------------------------------------
+    # AIコメントがあるかフィルター
     week_ai=Week_AI.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #週の総評がなかったら、週の日記が存在したら
     if not week_ai and diary:
         ai_comment = aicomment_week(emotions)
-        comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
-        comment_save.save()
+        # ai_commentの中身があれば
+        if ai_comment:
+            # 週の総評を保存
+            comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
+            comment_save.save()
     else:
-        ai_comment = None
-    
-    ai_comment = week_ai.ai_comment
+        ai_comment = '4日以上日記をかいてくにゃさい'
+    #週の総評があったら
+    if week_ai:
+        # 総評コメントを取得
+        week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
+        ai_comment = week_ai.ai_comment
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})
