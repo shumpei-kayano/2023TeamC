@@ -105,6 +105,7 @@ def account_delete_success(request):
     return render(request, 'diary/account_delete_success.html')
 
 
+
 @login_required
 def account_delete(request):
     return render(request, 'diary/account_delete.html')
@@ -171,6 +172,7 @@ def calender_week(request, selected_date=None):
     emotion = Emotion.objects.filter(user = request.user)
     return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
 
+@login_required
 def create_diary_confirmation(request):
 
     if request.method == 'POST':
