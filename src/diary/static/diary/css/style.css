@@ -1048,14 +1048,15 @@ label {
 }
 
 .btn--blue--info {
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   margin-top: 40px;
 }
 
 .btn--white {
   display: flex;
   justify-content: center;
-  margin-left: 4px;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
 * {
