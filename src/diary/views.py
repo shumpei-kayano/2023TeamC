@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Diary, Emotion
+from .models import Diary, Emotion,Month_AI,Week_AI
 from user.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from .forms import DiaryCreateForm
@@ -79,12 +79,26 @@ def account_delete_success(request):
     return render(request, 'diary/account_delete_success.html')
 
 def aicomment_week(emotion):
-  positive = emotion.order_by('-positive').first()
-  negative = emotion.order_by('-negative').first()
-  positive_diary = Diary.objects.get(id = positive.diary_id)
-  negative_diary = Diary.objects.get(id = negative.diary_id)
+
   if len(emotion) > 3:#週４つ以上だったら
-    
+    positive = emotion.order_by('-positive').first()
+    negative = emotion.order_by('-negative').first()
+    positive_diary = Diary.objects.get(id = positive.diary_id)
+    negative_diary = Diary.objects.get(id = negative.diary_id)
+    ai_comment = '成功'
+    return ai_comment
+
+def aicomment_month(emotion):
+
+  # if len(emotion) > 14:#月15以上だったら
+    positive = emotion.order_by('-positive')[:2]
+    negative = emotion.order_by('-negative')[:2]
+    positive_diary = Diary.objects.get(id = positive[0].diary_id)
+    negative_diary = Diary.objects.get(id = negative[0].diary_id)
+    positive_diary1 = Diary.objects.get(id = positive[1].diary_id)
+    negative_diary1 = Diary.objects.get(id = negative[1].diary_id)
+
+    ai_comment = '成功'
     return ai_comment
 
 @login_required
@@ -385,7 +399,10 @@ def month_graph(request,selected_date=None):
     emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     data = chart_data(emotion)
     #json形式で受け取る
-    # ai_comment = ai_comment(emotion)
+    if diary:
+      ai_comment = aicomment_month(emotion)
+    else:
+      ai_comment = None
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
@@ -480,7 +497,10 @@ def week_graph(request,selected_date=None):
     diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #---------------------------------------------------------
     #json形式で受け取る
-    ai_comment = aicomment(emotions)
+    if diary:
+      ai_comment = aicomment_week(emotions)
+    else:
+      ai_comment = None
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})
