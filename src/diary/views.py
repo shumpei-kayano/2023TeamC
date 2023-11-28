@@ -96,7 +96,7 @@ def aicomment_week(emotion):
         ai_comment = response["choices"][0]["message"]["content"]
         print(ai_comment)
         return ai_comment
-    return None
+    return '4日以上日記をかいてくにゃさい'
 
 def aicomment_month(emotion):
 
@@ -119,7 +119,7 @@ def aicomment_month(emotion):
         ai_comment = response["choices"][0]["message"]["content"]
         print(ai_comment)
         return ai_comment
-    return None
+    return '15日以上日記をかいてくにゃさい'
 
 @login_required
 def account_delete(request):
