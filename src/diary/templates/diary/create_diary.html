@@ -21,7 +21,7 @@
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
-        <span class="file_name" class="tempMax">-℃</span>
+        <span class="tempMax">-℃</span>
     </div>
 </header>
 {% endblock %}
@@ -47,51 +47,59 @@
 
                 <div class='photomv'>
                     <div class="custom-file-upload" id="container_photo1">
-                        <label for="id_photo1" id="label_photo1" onclick="document.getElementById('id_photo1').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
-                        {{ Diary.photo1 }}
-                        <span class="file_name" id="file_name_photo1">選択されていません</span>
+                        <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo1 }}
+                        </label>
+                        <span id="file_name_photo1">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_photo2">
-                        <label for="id_photo2" id="label_photo2" onclick="document.getElementById('id_photo2').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
-                        {{ Diary.photo2 }}
-                        <span class="file_name" id="file_name_photo2">選択されていません</span>
+                        <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo2 }}
+                        </label>
+                        <span id="file_name_photo2">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_photo3">
-                        <label for="id_photo3" id="label_photo3" onclick="document.getElementById('id_photo3').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
-                        {{ Diary.photo3 }}
-                        <span class="file_name" id="file_name_photo3">選択されていません</span>
+                        <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo3 }}
+                        </label>
+                        <span id="file_name_photo3">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_photo4">
-                        <label for="id_photo4" id="label_photo4" onclick="document.getElementById('id_photo4').click()"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択</label>
-                        {{ Diary.photo4 }}
-                        <span class="file_name" id="file_name_photo4">選択されていません</span>
+                        <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo4 }}
+                        </label>
+                        <span id="file_name_photo4">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" id="container_movie1">
-                        <label for="id_movie1" id="label_movie1" onclick="document.getElementById('id_movie1').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
-                        {{ Diary.movie1 }}
-                        <span class="file_name" id="file_name_movie1">選択されていません</span>
+                        <label id="label_movie1"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                            {{ Diary.movie1 }}
+                        </label>
+                        <span id="file_name_movie1">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_movie2">
-                        <label for="id_movie2" id="label_movie2" onclick="document.getElementById('id_movie2').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
-                        {{ Diary.movie2 }}
-                        <span class="file_name" id="file_name_movie2">選択されていません</span>
+                        <label id="label_movie2"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                            {{ Diary.movie2 }}
+                        </label>
+                        <span id="file_name_movie2">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_movie3">
-                        <label for="id_movie3" id="label_movie3" onclick="document.getElementById('id_movie3').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
-                        {{ Diary.movie3 }}
-                        <span class="file_name" id="file_name_movie3">選択されていません</span>
+                        <label id="label_movie3"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                            {{ Diary.movie3 }}
+                    </label>
+                        <span id="file_name_movie3">選択されていません</span>
                     </div>
 
                     <div class="custom-file-upload" style="display: none;" id="container_movie4">
-                        <label for="id_movie4" id="label_movie4" onclick="document.getElementById('id_movie4').click()"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択</label>
-                        {{ Diary.movie4 }}
-                        <span class="file_name" id="file_name_movie4">選択されていません</span>
+                        <label id="label_movie4"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                            {{ Diary.movie4 }}
+                        </label>
+                        <span id="file_name_movie4">選択されていません</span>
                     </div>
                 </div>
 
@@ -197,13 +205,9 @@
         function handleFileInput(type, index) {
             const input = document.getElementById(`id_${type}${index}`);
             const label = document.getElementById(`label_${type}${index}`);
-            const fileNamespan class="file_name" = document.getElementById(`file_name_${type}${index}`);
+            const fileNameSpan = document.getElementById(`file_name_${type}${index}`);
 
             if (input && label && fileNameSpan) {
-                //label.addEventListener('click', function() {
-                    //input.click();
-                //});
-
                 input.addEventListener('change', function() {
                     if (input.files.length > 0) {
                         fileNameSpan.textContent = input.files[0].name;
@@ -213,6 +217,10 @@
                     }
                 });
             }
+            //if (input && label && fileNameSpan) {
+                //label.addEventListener('click', function() {
+                    //input.click();
+                //});
         }
 
         //handleFileInput関数を使用して、各photoおよびmovieフィールドに対してファイルが選択されたときの
@@ -229,7 +237,7 @@
 
         // ファイル名を更新する関数
         function updateFileName(input, fileNameSpanId) {
-            const fileNamespan class="file_name" = document.getElementById(fileNameSpanId);
+            const fileNameSpan = document.getElementById(fileNameSpanId);
             if (fileNameSpan) {
                 if (input.files.length > 0) {
                     fileNameSpan.textContent = input.files[0].name;
