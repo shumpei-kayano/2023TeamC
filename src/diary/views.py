@@ -119,6 +119,7 @@ def aicomment_month(emotion):
         ai_comment = response["choices"][0]["message"]["content"]
         print(ai_comment)
         return ai_comment
+    return None
 
 @login_required
 def account_delete(request):
@@ -416,17 +417,30 @@ def month_graph(request,selected_date=None):
     year = start_of_month.year
     month = start_of_month.month
     emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
-    data = chart_data(emotion)
-    #json形式で受け取る
-    if diary:
-            ai_comment = aicomment_month(emotion)
-
+    # 今月の日記があるか確認
+    diary_diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    # AIコメントがあるかフィルター
+    month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    #月の総評がなかったら、月の日記が存在したら
+    if not month_ai and diary_diary:
+        ai_comment = aicomment_month(emotion)
+        # ai_commentの中身があれば
+        if ai_comment:
+            # 月の総評を保存
+            comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
+            comment_save.save()
     else:
-        ai_comment = None
+        ai_comment = '15日以上日記をかいてくにゃさい'
+    #月の総評があったら
+    if month_ai:
+        # 総評コメントを取得
+        month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
+        ai_comment = month_ai.ai_comment
+    data = chart_data(emotion)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'data':chart_data_json})
+    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'data':chart_data_json,'ai_comment':ai_comment})
 
 
 @login_required
