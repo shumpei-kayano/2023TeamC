@@ -28,13 +28,13 @@
         <!-- ユーザーの会員情報の表示 -->
         <div class="user-infomation">
             <div class="content__user-info__name">
-                <p>ユーザーネーム</p>
-                <p>{{ username }}</p>
+                <p class="user-label">ユーザーネーム</p>
+                <p class="user-info">{{ username }}</p>
                 <hr>
             </div>
             <div class="content__user-info__email">
-                <p>メールアドレス</p>
-                <p>{{ email }}</p>
+                <p class="user-label">メールアドレス</p>
+                <p class="user-info">{{ email }}</p>
                 <hr>
             </div>
         </div>
@@ -45,14 +45,15 @@
             <hr>
         </div>
         -->
-
         {% csrf_token %}
         {% with username=request.session.username email=request.session.email %}
+        <div class="a">
+            <div class="--button">
             <a href="{% url 'diary:member_information_edit_comp' %}">登録</a>
-        {% endwith %}
-        <div class="neko__dango.image">
-            <img src="{% static 'diary/assets/neko_dango.svg' %}">
+            </div>
         </div>
+        {% endwith %}
+            <img class="dango_neko_member" img src="{% static 'diary/assets/neko_dango.svg' %}">
     </div>
 </main>
 {% endblock %}

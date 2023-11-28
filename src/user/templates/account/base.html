@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,7 +22,7 @@
     <main class="ground ground--blue">
         <div class="scroll--content">
 
-            {% block content %}
+            {% block contents %}
             <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
             {% endblock %}
 

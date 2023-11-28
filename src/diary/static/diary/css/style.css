@@ -232,6 +232,8 @@ footer .nav-text {
 .btn--blue {
   width: 342px;
   height: 48px;
+  margin-top: 24px;
+  margin-bottom: 40px;
 }
 .btn--blue button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -292,8 +294,10 @@ footer .nav-text {
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
   background: var(--custom-color, #FFF);
-  color: var(--, #00ABB6);
+  color: #00ABB6;
   font-size: 1.6rem;
+  border: 1px solid #00ABB6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .btn--white button:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -302,7 +306,7 @@ footer .nav-text {
   width: 342px;
   height: 48px;
 }
-.btn--red button {
+.btn--red button, .btn--red a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
@@ -314,12 +318,35 @@ footer .nav-text {
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
-  background: var(--custom-color, #FF4747);
+  background: #FF4747;
   color: #FFF;
   font-size: 1.6rem;
 }
-.btn--red button:hover {
+.btn--red button:hover, .btn--red a:hover {
   background-color: #E32B2B; /* マウスをかざしたときの背景色 */
+}
+.btn--blue--info {
+  width: 342px;
+  height: 48px;
+}
+.btn--blue--info button {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+}
+.btn--blue--info button:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
 }
 
 .content__home__text {
@@ -627,7 +654,7 @@ footer .nav-text {
 }
 
 .calendar-header {
-  width: 390px;
+  width: 100%;
   height: 44px;
   margin-bottom: 12px;
 }
@@ -685,47 +712,6 @@ footer .nav-text {
 .FlexTextarea {
   position: relative;
   width: 100%;
-  padding: 2.4rem;
-  font-size: 1.6rem;
-  line-height: 1.7rem;
-  letter-spacing: 0.04rem;
-  border: none;
-  border-bottom: rgba(4, 202, 214, 0.15);
-}
-.FlexTextarea ::placeholder {
-  color: #A29C9C;
-}
-.FlexTextarea .FlexTextarea__dummy {
-  overflow: hidden;
-  visibility: hidden;
-  box-sizing: border-box;
-  padding: 5px 15px;
-  min-height: 120px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  border: 1px solid;
-}
-.FlexTextarea .FlexTextarea__textarea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  overflow: hidden;
-  box-sizing: border-box;
-  padding: 5px 15px;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  border: 1px solid #b6c3c6;
-  border-radius: 4px;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  resize: none;
-}
-.FlexTextarea .FlexTextarea__textarea:focus {
-  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);
   margin: 0 auto;
 }
 .FlexTextarea img {
@@ -768,7 +754,6 @@ footer .nav-text {
 }
 
 .content__text-count {
-  margin: 0.8rem 2.4rem 0 0.8rem;
   margin: 0.8rem 2.4rem;
   text-align: right;
   font-size: 1.2rem;
@@ -813,6 +798,7 @@ footer .nav-text {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .calendar-header .a--blue {
   margin-right: 24px;
@@ -934,7 +920,7 @@ hr {
   margin-top: 0px;
 }
 
-.btn--blue {
+.btn--blue--info {
   margin-left: 24px;
   margin-right: 24px;
   margin-top: 50px;
@@ -964,4 +950,187 @@ label {
 .neko-dango {
   margin-top: 200px;
   margin-left: 24px;
+}
+
+.a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.a .--button a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border: none;
+  background: transparent;
+  cursor: inherit;
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+  width: 342px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  cursor: pointer;
+}
+.a .--button a:hover {
+  background-color: #00909A;
+}
+
+.member-info__check-text p {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 88px;
+  margin-bottom: 40px;
+}
+
+.dango_neko_member {
+  margin-left: 24px;
+  margin-top: 30px;
+}
+
+.cancel__neko__img {
+  margin-top: 115px;
+  margin-bottom: 40px;
+}
+
+.content__member-info__cancel-text {
+  color: #000;
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+}
+.content__member-info__cancel-text p {
+  margin-bottom: 10px;
+}
+
+.account__deleta-text {
+  color: #000;
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 34px */
+  letter-spacing: 0.8px;
+  margin-bottom: 24px;
+}
+
+.btn--blue--info {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.btn--white {
+  display: flex;
+  justify-content: center;
+  margin-left: 4px;
+}
+
+* {
+  margin: 0;
+}
+
+.scroll--content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.member__header-text {
+  color: #000;
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.member__content-text {
+  color: #000;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-bottom: 24px;
+}
+
+.highlight {
+  font-weight: 700;
+}
+
+.member__red-text {
+  color: #F00;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  letter-spacing: 0.64px;
+}
+
+.member__neko {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.info__date {
+  color: #000;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-top: 20px;
+}
+
+.info__date p {
+  margin-bottom: 10px;
+}
+
+.member-text__content {
+  color: #000;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.28px;
+}
+
+.cancel__neko {
+  margin-top: 95px;
+  margin-bottom: 24px;
+}
+
+.account__deleta-text {
+  color: #000;
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 34px */
+  letter-spacing: 0.8px;
+  margin-bottom: 24px;
+}
+
+.btn--red {
+  margin-bottom: 40px;
 }
