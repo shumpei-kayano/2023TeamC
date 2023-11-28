@@ -37,7 +37,7 @@ class Month_AI(models.Model):
     # AIコメント
     ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
     # 作成日時
-    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
+    created_date = models.DateField(verbose_name='作成日時')
     # 更新日時
     updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
 
@@ -52,7 +52,7 @@ class Week_AI(models.Model):
     # AIコメント
     ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
     # 作成日時
-    created_date = models.DateField(verbose_name='作成日時', auto_now_add=True)
+    created_date = models.DateField(verbose_name='作成日時')
     # 更新日時
     updated_date = models.DateField(verbose_name='更新日時', auto_now=True)
 
