@@ -429,6 +429,8 @@ def month_graph(request,selected_date=None):
             # 月の総評を保存
             comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
             comment_save.save()
+        else:
+          ai_comment = '15日以上日記をかいてくにゃさい'
     else:
         ai_comment = '15日以上日記をかいてくにゃさい'
     #月の総評があったら
@@ -540,6 +542,8 @@ def week_graph(request,selected_date=None):
             # 週の総評を保存
             comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
             comment_save.save()
+        else:
+            ai_comment = '15日以上日記をかいてくにゃさい'
     else:
         ai_comment = '4日以上日記をかいてくにゃさい'
     #週の総評があったら
