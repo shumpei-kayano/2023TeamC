@@ -81,7 +81,7 @@
             
 
         <div class="cancel__button">
-            <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+          <a href="{% url  'diary:diary_update' diary.id %}">キャンセル</a>
         </div>
 
         <!-- ポップアップ要素
