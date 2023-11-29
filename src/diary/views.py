@@ -413,16 +413,14 @@ def month_graph(request,selected_date=None):
             else:
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
-    diary = Diary.objects.filter(user=request.user)
     year = start_of_month.year
     month = start_of_month.month
     emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
-    # 今月の日記があるか確認
-    diary_diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
-    # AIコメントがあるかフィルター
+    # 日記・AIコメントがあるかフィルター
+    diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     #月の総評がなかったら、月の日記が存在したら
-    if not month_ai and diary_diary:
+    if not month_ai and diary:
         ai_comment = aicomment_month(emotion)
         # ai_commentの中身があれば
         if ai_comment:
