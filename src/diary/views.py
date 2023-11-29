@@ -94,7 +94,6 @@ def aicomment_week(emotion):
             ]
         )
         ai_comment = response["choices"][0]["message"]["content"]
-        print(ai_comment)
         return ai_comment
     return None
 
@@ -117,7 +116,6 @@ def aicomment_month(emotion):
             ]
         )
         ai_comment = response["choices"][0]["message"]["content"]
-        print(ai_comment)
         return ai_comment
     return None
 
@@ -551,12 +549,11 @@ def week_graph(request,selected_date=None):
     else:
         ai_comment = '4日以上日記をかいてくにゃさい'
     #週の総評があったら
+    week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
     if week_ai and len(diary)>3:
         # 総評コメントを取得
-        week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
         ai_comment = week_ai.ai_comment
     else:
-      week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
       week_ai.delete
       ai_comment = '4日以上日記をかいてくにゃさい'
     data = chart_data(emotions)
