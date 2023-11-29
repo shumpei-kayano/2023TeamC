@@ -440,7 +440,7 @@ def month_graph(request,selected_date=None):
         ai_comment = month_ai.ai_comment
     else:
       month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
-      month_ai.delete
+      month_ai.delete()
       ai_comment = '15日以上日記をかいてくにゃさい'
     data = chart_data(emotion)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
@@ -557,7 +557,7 @@ def week_graph(request,selected_date=None):
         ai_comment = week_ai.ai_comment
     else:
       week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
-      week_ai.delete
+      week_ai.delete()
       ai_comment = '4日以上日記をかいてくにゃさい'
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
