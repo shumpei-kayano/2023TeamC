@@ -434,10 +434,12 @@ def month_graph(request,selected_date=None):
     else:
         ai_comment = '15日以上日記をかいてくにゃさい'
     #月の総評があったら
-    if month_ai:
+    if month_ai and len(diary)>14:
         # 総評コメントを取得
         month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
         ai_comment = month_ai.ai_comment
+    else:
+      ai_comment = '15日以上日記をかいてくにゃさい'
     data = chart_data(emotion)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
@@ -543,14 +545,16 @@ def week_graph(request,selected_date=None):
             comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
             comment_save.save()
         else:
-            ai_comment = '15日以上日記をかいてくにゃさい'
+            ai_comment = '4日以上日記をかいてくにゃさい'
     else:
         ai_comment = '4日以上日記をかいてくにゃさい'
     #週の総評があったら
-    if week_ai:
+    if week_ai and len(diary)>3:
         # 総評コメントを取得
         week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
         ai_comment = week_ai.ai_comment
+    else:
+      ai_comment = '4日以上日記をかいてくにゃさい'
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})
