@@ -48,7 +48,7 @@
             </a>
         </div>
         {% comment %} 年、月 {% endcomment %}
-        <p>{{ selected_date|date:"Y年n月" }}</p>
+        <p class="calendar-header__select-date">{{ selected_date|date:"Y年n月" }}</p>
 
         <div class="a--blue">
             <a href="{% url 'diary:calender_week'%}">

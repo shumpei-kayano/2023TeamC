@@ -79,7 +79,7 @@
                                         {% if day.day %}
                                         {%if today == day %}
                                         {% comment %} ここが当日の日記です {% endcomment %}
-                                        <p>{{ day.day }}</p> 
+                                        <p class="calendar__month--today-td">{{ day.day }}</p> 
                                         {% else %}
                                         <p>{{ day.day }}</p>
                                         {% endif %}
