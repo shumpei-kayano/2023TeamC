@@ -190,6 +190,11 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 # Allauthのメール確認を無効にする
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+SOCIALACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm'
+}
+
 #--------------------allauthの基本設定--------------------
 
 # APIキーの読み込み
