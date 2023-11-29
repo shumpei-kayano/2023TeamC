@@ -13,6 +13,11 @@
     align-items: center;
     width: 100%;
 
+    .calendar-header__select-date{
+        font-size: 18px;
+        font-weight: 700;
+    }
+
     .a--blue{
         margin-right: 24px;
 
@@ -53,15 +58,23 @@
     }
 
     td {
-        font-size: 18px;
+        position: relative;  // テーブルセルを相対位置に設定
+        font-size: 16px;
         border: 1px solid $header_color;
         
         p{
-            margin-top: 5px;
-            margin-bottom: 5px;
+            position: absolute;  // テキストを絶対位置に設定
+            top: 0;  // 上部に配置
+            left: 50%;  // 水平方向に中央に配置
+            transform: translateX(-50%);  // 水平方向に中央に配置
+            margin-top: 8px;
         }
         img{
-            margin-bottom: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
         }
     }
 }
@@ -77,3 +90,19 @@
 //         margin-bottom: 5px;  // テキストと画像の間に余白を追加
 //     }
 // }
+
+@media only screen and (max-width: 767px) {
+    .calendar__month {
+        table {
+            td {
+                font-size: 18px;
+                p{
+                    margin-top: 25px;
+                }
+                img{
+                    margin-bottom: 25px;
+                }
+            }
+        }
+    }
+}
