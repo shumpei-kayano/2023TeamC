@@ -100,7 +100,7 @@ def aicomment_week(emotion):
 
 def aicomment_month(emotion):
 
-    if len(emotion) > 2:#月15以上だったら
+    if len(emotion) > 14:#月15以上だったら
         positive = emotion.order_by('-positive')[:2]
         negative = emotion.order_by('-negative')[:2]
         positive_diary = Diary.objects.get(id = positive[0].diary_id)
