@@ -392,7 +392,7 @@ def month_graph(request,selected_date=None):
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
     else:
         selected_date = date.today()
-        
+    
     # 前月と次月の日付を計算
     prev_month = selected_date - relativedelta(months=1)
     next_month = selected_date + relativedelta(months=1)
