@@ -1,71 +1,8 @@
-// .FlexTextarea {
-//     ::placeholder {
-//       color: #A29C9C;
-//     }
-// }
-
-// // .FlexTextarea__dummy {
-// //     overflow: hidden; // ダミーテキストエリアの溢れる部分を非表示
-// //     visibility: hidden; // ダミーテキストエリアを不可視
-// //     box-sizing: border-box; // ダミーテキストエリアの幅と高さに、paddingとborderが含まれるようにする
-// //     padding: 2.4rem;
-// //     // min-height: 390px;
-// //     white-space: pre-wrap; // テキストの行が端に達したときに折り返す
-// //     word-wrap: break-word; // 単語が端に達したときに折り返す
-// //     overflow-wrap: break-word; // テキストの行が端に達したときに折り返す
-// //     border: 1px solid;
-// // }
-// .content__textarea__img {
-//     position: relative;
-//     width: 100%;
-//     height: 100%;
-//     z-index: 0;
-//   }
-
-  
-// .content__textarea {
-//     position: absolute; // 親要素を基準に配置
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     z-index: 1;
-
-//     font-size:1.6rem;
-//     line-height: 1.7rem;
-//     letter-spacing: 0.04rem;
-//     display: block;
-//     overflow: hidden;
-//     box-sizing: border-box;
-//     padding: 2.4rem;
-//     width: 100%;
-//     max-height: 49.2rem;
-//     background-color: transparent;
-//     border: none;
-//     border-bottom: rgba(4, 202, 214, 0.15);
-// //   color: inherit; // テキストエリアの色を、親要素から継承
-// //   font: inherit; // テキストエリアのフォントを、親要素から継承
-// //   letter-spacing: inherit;
-//     resize: none;
-// }
-
-  
-// .content__textarea:focus {
-//     box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
-//     outline: 0;
-// }
 .FlexTextarea {
     position: relative;
     width: 100%;
     // max-width: 600px; // 画像とテキストエリアの最大幅を設定（任意の値に変更）
     margin: 0 auto; // 中央揃え（必要に応じて変更）
-
-    img {
-        max-width: 100%; // 画像の最大幅をコンテナに合わせる
-        height: auto; // 高さを自動調整
-        display: block; // 不要な空白を削除
-    }
 
     .content__textarea {
         // 親要素に対して相対位置で配置する
@@ -84,9 +21,10 @@
         line-height: 170%;
         letter-spacing: 0.04rem;
         // 画像と同じ比率で固定するためのスタイル
-        aspect-ratio: attr(width) / attr(height);
+        //aspect-ratio: attr(width) / attr(height);
         // 複数行表示と改行の保持
         white-space: pre-wrap;
+        //overflow: hidden; // はみ出たら非表示
 
         // スクロールバーのデザイン
         &::-webkit-scrollbar {
@@ -101,6 +39,19 @@
 
         &::-webkit-scrollbar-thumb:hover {
             background-color: #00ABB6;
+        }
+
+        img {
+            position: absolute; // 画像の位置をテキストエリア全体に合わせる
+            top: 0;
+            left: 0;
+            width: 100%; // 画像の幅をテキストエリア全体に合わせる
+            height: 100%; // 画像の高さをテキストエリア全体に合わせる
+            object-fit: cover; // 画像がテキストエリア全体に表示されるようにする
+            // max-width: 100%; // 画像の最大幅をコンテナに合わせる
+            // overflow: hidden; // はみ出たら非表示
+            // height: auto; // 高さを自動調整
+            // display: block; // 不要な空白を削除
         }
     }
 }
@@ -122,19 +73,9 @@
     color: red;
 }
 
-// label {
-//     // padding: 5px 20px;
-//     // color: #ffffff;
-//     background-color: #295d72;
-//     // cursor: pointer;
-//     // border-radius:10px;
-//     // transition: .3s;
-//   }
-//   label:hover {
-//     opacity: 0.8;
-//     }
 .custom-file-upload{
     margin: 1rem 2.4rem;
+    text-align: left;
     span{
         font-size: 14px;
     }
@@ -147,7 +88,7 @@
 .custom-file-upload label {
     min-height: 24px;
     position: relative;
-    padding: 0 15px;
+    padding-right: 15px;
     color: $a_blue_button;
     font-size: 1.6rem;
     font-weight: 500;
@@ -178,14 +119,7 @@
     }
 }
 
-// .photomv {
-//     display: flex;
-//     flex-direction: column; // 縦並びにする
-//     justify-content: center;
-// }
-
-// .photomv img {
-//     width: 200px;
-//     height: 200px;
-//     margin: 10px;
-// }
+.btn--blue{
+    margin: 24px auto 40px auto;
+    box-sizing: border-box; // パディングとボーダーを幅と高さに含める
+}
