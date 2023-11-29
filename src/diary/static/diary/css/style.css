@@ -807,16 +807,6 @@ footer .nav-text {
   box-sizing: border-box;
 }
 
-.calendar--background {
-  background-color: #FFFFFF;
-}
-
-.calendar__month td {
-  border: 1px solid #04CAD6;
-  width: 5.5rem;
-  height: 6.6rem;
-}
-
 .calender-month-page .a--tab--left a {
   background-color: #00ABB6;
   color: #FFF;
@@ -834,6 +824,40 @@ footer .nav-text {
 .calendar-header .a--blue .a--blue a {
   display: flex;
   align-items: center;
+}
+
+.calendar__month {
+  overflow-x: auto; /* カレンダーが横に広がった場合に横スクロール可能にする */
+}
+.calendar__month table {
+  width: 100%;
+  table-layout: fixed; /* テーブルのレイアウトを固定にする */
+  height: calc(100vh - 227px);
+}
+.calendar__month th, .calendar__month td {
+  text-align: center;
+  box-sizing: border-box;
+}
+.calendar__month th {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.calendar__month .sun {
+  color: #FC8686;
+}
+.calendar__month .sat {
+  color: #0094FF;
+}
+.calendar__month td {
+  font-size: 18px;
+  border: 1px solid #04CAD6;
+}
+.calendar__month td p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.calendar__month td img {
+  margin-bottom: 5px;
 }
 
 main {

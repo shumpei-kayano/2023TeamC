@@ -36,17 +36,17 @@
         {% csrf_token %}
             <div class="content__today-diary">
                 {% comment %}  {{today}}<br>        現在の日付を取得 {% endcomment %}
-                <div class="FlexTextarea">
+                <div class="FlexTextarea"><!-- CSSのため追加 -->
                     <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.svg' %}" alt="pen">
-                    {% comment %} <div class="FlexTextarea__dummy" aria-hidden="true"></div> {% endcomment %}
                     {{ Diary.content }}
                 </div>
 
-                <!-- 文字数を表示する要素 -->
+                <!-- 文字数をカウントする要素 -->
                 <div id="characterCount" class="content__text-count">0/1000</div>
 
                 <div class='photomv'>
-                    <div class="custom-file-upload" id="container_photo1">
+                    <div class="custom-file-upload" id="container_photo1"><!-- CSSのため追加 -->
+                        <!-- ラベル追加 label要素を表示、input要素を非表示にする-->
                         <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                             {{ Diary.photo1 }}
                         </label>
@@ -115,25 +115,6 @@
 
 {% block js %}
 <script>
-    {% comment %} // 内容に応じてサイズが可変するテキストエリア
-    function flexTextarea(el) {
-        // テキストエリアのサイズを計算するために使用するダミーテキストエリアを取得
-        const dummy = el.querySelector('.FlexTextarea__dummy')
-        // テキストエリアの入力イベントにハンドラを登録
-        el.querySelector('.content__textarea').addEventListener('input', e => {
-            // ダミーテキストエリアのテキストを、入力されたテキストと改行コードの組み合わせで更新
-            dummy.textContent = e.target.value + '\u200b'
-        })
-    }
-    // すべてのテキストエリア要素に対して、flexTextarea() 関数を呼び出す
-    document.querySelectorAll('.content').forEach(flexTextarea) {% endcomment %}
-
-    // 文字数のカウント
-    {% comment %} function countCharacters(textarea) {
-        let count = $(textarea).val().length;
-        $('#characterCount').text(count + '/1000');
-    } {% endcomment %}
-
     // 文字数のカウント
     function countCharacters(textarea) {
         let count = $(textarea).val().length;
@@ -173,7 +154,7 @@
         return true;
     }
 
-    // ページのDOMが完全に読み込まれたときに実行
+    // ページのDOMが完全に読み込まれたときに実行、ボタンを動的に表示させる
     document.addEventListener('DOMContentLoaded', function() {
         // 初期表示では2つ目以降のphotoとmovieの要素を非表示にするための関数を呼び出す
         hideElements('photo', 2);
@@ -235,7 +216,7 @@
             handleFileInput('movie', i);
         }
 
-        // ファイル名を更新する関数
+        // 添付ファイルを選択後、ファイル名を更新する関数
         function updateFileName(input, fileNameSpanId) {
             const fileNameSpan = document.getElementById(fileNameSpanId);
             if (fileNameSpan) {

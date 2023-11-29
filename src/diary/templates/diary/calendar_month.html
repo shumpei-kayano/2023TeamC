@@ -77,7 +77,7 @@
                                 {% for day in week %}
                                     <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
                                         {% if day.day %}
-                                          {{ day.day }}
+                                          <p>{{ day.day }}</p>
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
                                                 <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
