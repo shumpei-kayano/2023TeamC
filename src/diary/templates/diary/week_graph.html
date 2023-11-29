@@ -40,9 +40,8 @@
                     <a href="{% url 'diary:week_graph' week_start_up %}">
                       <img src="{% static 'diary/assets/right_arrow.svg' %}">
                     </a>
-                    <div class="return__button">
-                        <button id="now-week"><img src="{% static 'diary/assets/return_arrow.svg' %}">今週</button>
-                    </div>
+                    {% comment %} 今週に戻る {% endcomment %}
+                    <a href="{% url 'diary:week_graph' %}"><img src="{% static 'diary/assets/return_arrow.svg' %}">今週</a>
                 </div>
             </div>
             </div>
