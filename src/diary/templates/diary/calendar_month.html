@@ -77,7 +77,12 @@
                                 {% for day in week %}
                                     <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
                                         {% if day.day %}
-                                          <p>{{ day.day }}</p>
+                                        {%if today == day %}
+                                        {% comment %} ここが当日の日記です {% endcomment %}
+                                        <p>{{ day.day }}</p> 
+                                        {% else %}
+                                        <p>{{ day.day }}</p>
+                                        {% endif %}
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
                                                 <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">

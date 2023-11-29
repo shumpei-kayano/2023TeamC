@@ -14,7 +14,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA&language=ja&callback=getLocation" async defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="{% static 'diary/js/weather.js' %}"></script>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>const STATIC_URL = "{% static 'diary/assets/' %}";</script>
@@ -81,4 +80,5 @@
 {% block js %}{% endblock %}
 
 </body>
+<script src="{% static 'diary/js/weather.js' %}"></script>
 </html>
