@@ -818,6 +818,10 @@ footer .nav-text {
   align-items: center;
   width: 100%;
 }
+.calendar-header .calendar-header__select-date {
+  font-size: 18px;
+  font-weight: 700;
+}
 .calendar-header .a--blue {
   margin-right: 24px;
 }
@@ -849,17 +853,36 @@ footer .nav-text {
   color: #0094FF;
 }
 .calendar__month td {
-  font-size: 18px;
+  position: relative;
+  font-size: 16px;
   border: 1px solid #04CAD6;
 }
 .calendar__month td p {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
 }
 .calendar__month td img {
-  margin-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
 }
 
+@media only screen and (max-width: 767px) {
+  .calendar__month table td {
+    font-size: 18px;
+  }
+  .calendar__month table td p {
+    margin-top: 25px;
+  }
+  .calendar__month table td img {
+    margin-bottom: 25px;
+  }
+}
 main {
   background-color: #EEFEFF;
 }
