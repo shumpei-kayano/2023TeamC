@@ -288,7 +288,8 @@ def diary_home(request,pk):
 @login_required
 def diary_update(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-    return render(request, 'diary/diary_update.html',{'diary': diary})
+    form = DiaryCreateForm(instance=diary)
+    return render(request, 'diary/diary_update.html',{'diary': diary,'Diary':form})
 
 @login_required
 def help_calender(request):
