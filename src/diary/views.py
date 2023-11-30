@@ -100,7 +100,7 @@ def aicomment_week(emotion):
 
 def aicomment_month(emotion):
 
-    if len(emotion) > 2:#月15以上だったら
+    if len(emotion) > 14:#月15以上だったら
         positive = emotion.order_by('-positive')[:2]
         negative = emotion.order_by('-negative')[:2]
         positive_diary = Diary.objects.get(id = positive[0].diary_id)
@@ -119,6 +119,7 @@ def aicomment_month(emotion):
         ai_comment = response["choices"][0]["message"]["content"]
         print(ai_comment)
         return ai_comment
+    return None
 
 @login_required
 def account_delete(request):
@@ -130,6 +131,7 @@ def base(request):
 
 @login_required
 def calendar_month(request,selected_date=None):
+    today = date.today()
     # パラメータが指定されていない場合は今日の日付を使用
     if selected_date:
         # selected_dateをdatetime.date型に変換
@@ -161,10 +163,11 @@ def calendar_month(request,selected_date=None):
 
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month})
+    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
 
 @login_required
 def calender_week(request, selected_date=None):
+    today = date.today()
     # selected_dateをdatetime.date型に変換
     if selected_date:
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
@@ -184,7 +187,7 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
-    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
+    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
 def create_diary_confirmation(request):
@@ -391,7 +394,7 @@ def month_graph(request,selected_date=None):
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
     else:
         selected_date = date.today()
-        
+    
     # 前月と次月の日付を計算
     prev_month = selected_date - relativedelta(months=1)
     next_month = selected_date + relativedelta(months=1)
@@ -412,21 +415,41 @@ def month_graph(request,selected_date=None):
             else:
                 week_dates.append(start_of_month + timedelta(days=day - 1))
         weeks.append(week_dates)
-    diary = Diary.objects.filter(user=request.user)
     year = start_of_month.year
     month = start_of_month.month
     emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
-    data = chart_data(emotion)
-    #json形式で受け取る
-    if diary:
-            ai_comment = aicomment_month(emotion)
-
+    # 日記・AIコメントがあるかフィルター
+    diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    #月の総評がなかったら、月の日記が存在したら
+    if not month_ai and diary:
+        ai_comment = aicomment_month(emotion)
+        # ai_commentの中身があれば
+        if ai_comment:
+            # 月の総評を保存
+            comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
+            comment_save.save()
+        else:
+          ai_comment = '15日以上日記をかいてくにゃさい'
     else:
-        ai_comment = None
+        ai_comment = '15日以上日記をかいてくにゃさい'
+    #月の総評があったら
+    month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    if month_ai and len(diary)>14:
+        # 総評コメントを取得
+        month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
+        ai_comment = month_ai.ai_comment
+    elif month_ai:
+      month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
+      month_ai.delete()
+      ai_comment = '15日以上日記をかいてくにゃさい'
+    else:
+      ai_comment = '15日以上日記をかいてくにゃさい'
+    data = chart_data(emotion)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'data':chart_data_json})
+    return render(request, 'diary/month_graph.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'data':chart_data_json,'ai_comment':ai_comment})
 
 
 @login_required
@@ -526,13 +549,22 @@ def week_graph(request,selected_date=None):
             # 週の総評を保存
             comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
             comment_save.save()
+        else:
+            ai_comment = '4日以上日記をかいてくにゃさい'
     else:
         ai_comment = '4日以上日記をかいてくにゃさい'
     #週の総評があったら
-    if week_ai:
+    week_ai=Week_AI.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
+    if week_ai and len(diary)>3:
         # 総評コメントを取得
         week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
         ai_comment = week_ai.ai_comment
+    elif week_ai:
+      week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
+      week_ai.delete()
+      ai_comment = '4日以上日記をかいてくにゃさい'
+    else:
+      ai_comment = '4日以上日記をかいてくにゃさい'
     data = chart_data(emotions)
     chart_data_json = JsonResponse(data, safe=False).content.decode('utf-8')
     return render(request, 'diary/week_graph.html' ,{'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'emotion':emotion,'data':chart_data_json,'ai_comment':ai_comment})

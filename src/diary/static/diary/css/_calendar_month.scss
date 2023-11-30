@@ -1,13 +1,3 @@
-.calendar--background{
-    background-color: $background_color;
-}
-
-.calendar__month td {
-    border:1px solid $header_color;
-    width: 5.5rem;
-    height: 6.6rem;
-}
-
 .calender-month-page {
     .a--tab--left {
         a {
@@ -23,12 +13,103 @@
     align-items: center;
     width: 100%;
 
+    .calendar-header__select-date{
+        font-size: 18px;
+        font-weight: 700;
+    }
+
     .a--blue{
         margin-right: 24px;
 
         .a--blue a {
             display: flex;
             align-items: center;
+        }
+    }
+}
+
+.calendar__month {
+    overflow-x: auto; /* カレンダーが横に広がった場合に横スクロール可能にする */
+    //height: auto; /* コンテンツに基づいて高さを調整できるように固定の高さを削除 */
+
+
+    table {
+        width: 100%;
+        table-layout: fixed; /* テーブルのレイアウトを固定にする */
+        height: calc(100vh - 227px);
+    }
+
+    th, td {
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    th {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .sun {
+        color: #FC8686;
+    }
+
+    .sat {
+        color: #0094FF;
+    }
+
+    td {
+        position: relative;  // テーブルセルを相対位置に設定
+        font-size: 16px;
+        border: 1px solid $header_color;
+
+        .calendar__month--today-td{
+            background-color: $header_color;
+            width: 80%;
+            border-radius: 50px;
+            color: #ffffff;
+        }
+        
+        p{
+            position: absolute;  // テキストを絶対位置に設定
+            top: 0;  // 上部に配置
+            left: 50%;  // 水平方向に中央に配置
+            transform: translateX(-50%);  // 水平方向に中央に配置
+            margin-top: 8px;
+        }
+        img{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+        }
+    }
+}
+
+// a {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     text-decoration: none;
+//     color: inherit;
+
+//     img {
+//         margin-bottom: 5px;  // テキストと画像の間に余白を追加
+//     }
+// }
+
+@media only screen and (max-width: 767px) {
+    .calendar__month {
+        table {
+            td {
+                font-size: 18px;
+                p{
+                    margin-top: 25px;
+                }
+                img{
+                    margin-bottom: 25px;
+                }
+            }
         }
     }
 }

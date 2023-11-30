@@ -39,9 +39,8 @@
                 <a href="{% url 'diary:month_graph' next_month %}">
                   <img src="{% static 'diary/assets/right_arrow.svg' %}">
                 </a>
-                <div class="return__button">
-                    <button onclick="moveToNextMonth()"><img src="{% static 'diary/assets/return_arrow.svg' %}">今月</button>
-                </div>
+                {% comment %} 今月に戻る {% endcomment %}
+                    <a href="{% url 'diary:month_graph' %}"><img src="{% static 'diary/assets/return_arrow.svg' %}">今月</a>
             </div>
         </div>
 
@@ -60,7 +59,7 @@
         <div class="content__home__text--pink">
             <div class="content__today-diary__comment">
                 <p>
-                テストテストテストテストテストテストテスト
+                    {{ ai_comment }}
                 </p>
             <!-- ネコココメントの画像 -->
                 <div class="content__today-diary__comment__img">
