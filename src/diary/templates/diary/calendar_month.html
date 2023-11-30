@@ -25,7 +25,15 @@
                     <a href="{{ calendar_month_url }}">月間カレンダー</a>
                 </div>
                 <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
-                    <a href="{{ month_graph_url }}">月間グラフ</a>
+                    <a id = "month_graph" href="{{ month_graph_url }}">月間グラフ</a>
+                      <div id="loading">
+                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                        <div class="loading-content">
+                          <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                          読み込み中...
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
 
@@ -101,5 +109,12 @@
         </div><!-- calendar  background -->
 
     </div><!-- scroll  content -->
+    
 </main>
+<script>
+document.getElementById('month_graph').addEventListener('click', function (event) {
+  // ボタンがクリックされたらローディング画面を表示
+  document.getElementById('loading').style.display = 'block';
+});
+</script>
 {% endblock %}
