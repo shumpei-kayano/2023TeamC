@@ -7,34 +7,51 @@
 {% block contents %}
 <section class="section-accounts" id="section-signup">
     <div class="wrapperHeader">
-        <h2>ユーザー登録</h2>
-        <p>すでにアカウントをお持ちであれば、こちらから<a href="{% url 'account_login' %}"><span class="accounts-link">ログイン</span></a>してください。</p>
+        <div class="header__back__img">
+            <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+        </div>
+        <p class="signup-text">ユーザー登録</p>
+            <p class="login-text">すでにアカウントをお持ちであれば、<br>こちらから<a href="{% url 'account_login' %}"><span class="accounts-link">ログイン</span></a>してください。</p>
     </div>
     <div class="wrapper-accounts-form">
         <form method="post" action="{% url 'account_signup' %}" class="form-accounts">
             {% csrf_token %}
 
             <div class="form-content">
-              <label>username</label>
-              <input type="username" name="username" autocomplete="username" required id=" id_username">
+                <div class="user-infomation">
+                    <div class="content__user-name__text">
+                        <label for="username">ユーザーネーム</label>
+                        <br><input type="username" name="username" autocomplete="username" required id=" id_username">
+                    </div>
 
-              <label>Email</label>
-              <input type="email" name="email" autocomplete="email" required id="id_email">
+                    <div class="content__user-email__text">
+                        <label for="email">メールアドレス</label>
+                        <br><input type="email" name="email" autocomplete="email" required id="id_email">
+                    </div>
 
-              <label>Password</label>
-              <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+                    <div class="content__user-pass__text">
+                        <label for="pass">パスワード</label>
+                        <br><input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+                    </div>
 
-              <label>Password（確認用）</label>
-              <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+                    <div class="content__user-pass2__text">
+                        <label for="pass2">パスワード（確認用）</label>
+                        <br><input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+                    </div>
+                </div>
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                {% endif %}
             </div>
-
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-            {% endif %}
-
-            <button class="accounts-btn" type="submit">登録</button>
+            <div class="btn btn--blue">
+                <button type="submit">登録</button>
+            </div>
         </form>
+        <div class="back-home">
+            <a class="backToHome" href="{% url 'user:account_top' %}">＜＜＜ホームに戻る</a>    
+        </div>
     </div>
-    <a class="backToHome" href="{% url 'user:account_top' %}">＜＜＜ホームに戻る</a>
 </section>
 {% endblock contents %}
