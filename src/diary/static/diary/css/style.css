@@ -1217,6 +1217,7 @@ label {
   margin: 24px auto 40px auto;
 }
 
+/* 767以下の時のフルスクリーン設定 */
 #loading {
   display: none;
   position: fixed;
@@ -1250,3 +1251,4 @@ label {
     margin: auto;
   }
 }
+/* ここまで */
