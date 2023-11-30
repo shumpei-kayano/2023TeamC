@@ -1,0 +1,38 @@
+.ground--blue {
+    background-color: $main_background_color;
+}
+
+.img-icon {
+    margin-top: 70px;
+    margin-left: 48px;
+} 
+
+.login__text{
+    color: #000;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.8px;
+}
+
+.html {
+    display: flex; // フレックスボックスを有効にする
+    justify-content: center; // 横方向に中央揃え
+    align-items: center; // 縦方向に中央揃え
+}
+
+.btn--large {
+    margin-top: 50px;
+    margin-left: 24px;
+}
+
+.login__text {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: 75px;
+}
+
+.btn--white {
+    margin-left: 24px;
+}
