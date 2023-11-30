@@ -38,7 +38,6 @@ header, .ground, footer {
 header {
   padding-left: 2.4rem;
   padding-right: 2.4rem;
-  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -50,12 +49,11 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  margin-bottom: 0;
 }
 header h1 {
   font-size: 2rem;
   font-weight: 400;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 header .header__spacer--top {
   margin-right: auto; /* h1以外の要素を左寄せにする */
@@ -104,8 +102,12 @@ header .header__weather span {
   text-align: right;
 }
 
+.logo-img {
+  margin-top: 0;
+}
+
 .ground {
-  margin-top: 5rem; /*上に空白を追加*/
+  margin-top: 0rem; /*上に空白を追加*/
   height: calc(100vh - 5rem - 6rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
 }
 
@@ -131,10 +133,20 @@ header .header__weather span {
   background-color: #EEFEFF;
 }
 
+footer {
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 15px;
+  background-color: #EEFEFF;
+}
+
 @media only screen and (max-width: 767px) {
   .ground {
-    margin-top: 50px; /*上に空白を追加*/
-    height: calc(100vh - 100px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   }
 }
 @media only screen and (max-width: 767px) and (max-width: 767px) {
@@ -163,8 +175,8 @@ header .header__weather span {
     font-size: 20px;
   }
   .ground {
-    margin-top: 50px; /*上に空白を追加*/
-    height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    margin-top: 0px; /*上に空白を追加*/
+    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   }
   .ground::-webkit-scrollbar {
     width: 5px;
@@ -175,6 +187,10 @@ header .header__weather span {
     border-radius: 20px;
   }
 }
+footer {
+  margin-bottom: 0;
+}
+
 .btn {
   display: flex;
   justify-content: center;
@@ -389,11 +405,14 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   border-color: #FFFFFF transparent transparent transparent;
 }
 
+.header__back__img {
+  display: flex;
+  align-items: center;
+}
 .header__back__img a {
   display: flex;
   width: 96px;
   height: 48px;
-  justify-content: center;
   align-items: center;
   border-radius: 50px;
   border: 1px solid #FFF;
@@ -407,11 +426,23 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   letter-spacing: 0.56px;
 }
 .header__back__img a:hover {
-  background-color: #008999;
+  background-color: #004c54;
 }
-.header__back__img a img {
-  margin-right: 8px;
-  margin-top: 2px;
+.header__back__img img {
+  margin: 0;
+}
+.header__back__img img.logo-img {
+  margin-left: 170px;
+}
+.header__back__img .header__back__img a, .header__back__img .header__back__img .logo-img {
+  display: inline-block;
+}
+
+.logo-img {
+  width: 90.621px;
+  height: 48px;
+  flex-shrink: 0;
+  margin-left: 225px;
 }
 
 .ground--blue {
@@ -519,11 +550,13 @@ label {
   text-align: center;
   color: #000;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
   line-height: 170%; /* 23.8px */
   letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .back-home {

@@ -37,7 +37,7 @@ header, .ground, footer {
 header {
     padding-left: 2.4rem;
     padding-right: 2.4rem;
-    position: fixed;
+    // position: fixed;
     top: 0;
     right: 0;
     left: 0;
@@ -49,12 +49,11 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    margin-bottom: 0; // 追加：ヘッダーの下のマージンを0に設定
 
     h1 {
         font-size: 2rem;
         font-weight: 400;
-        margin-top: 0;
-        margin-bottom: 0;
     }
 
     .header__spacer--top{
@@ -109,8 +108,12 @@ header {
     }
 }
 
+.logo-img {
+    margin-top: 0; // 追加：次の要素の上のマージンを0に設定
+}
+
 .ground{
-    margin-top: 5rem; /*上に空白を追加*/
+    margin-top: 0rem; /*上に空白を追加*/
     height: calc(100vh - 5rem - 6rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
 //     overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
 }
@@ -156,49 +159,50 @@ header {
 //     margin: 11px;
 // }
 
-// footer {
-    // padding-right: 2.4rem;
-    // padding-left: 2.4rem;
-    //スクロールしてもフッターが固定される
+footer {
+    padding-right: 2.4rem;
+    padding-left: 2.4rem;
+    // スクロールしてもフッターが固定される
     // position: fixed;
     // フッターをビューポートの最下部に配置
-    // bottom: 0;
-    // right: 0;
-    // left: 0;
-    // height: 50px;
-    // background-color: $main_background_color;
-//     height: 6rem; // フッターの高さを50pxに設定
-//     overflow: hidden; // フッターの高さを超える内容を非表示にする
-//     // border-top: 1px solid rgba(217, 217, 217, 0.50);
+    position: absolute; // 追加
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 15px;
+    background-color: $main_background_color;
+    // height: 6rem; // フッターの高さを50pxに設定
+    // overflow: hidden; // フッターの高さを超える内容を非表示にする
+    // border-top: 1px solid rgba(217, 217, 217, 0.50);
 
-//     .menu__list {
-//         padding: 0;
-//         display: flex;
-//         // 要素の間に均等なスペースを配置
-//         justify-content: space-between;
-//     }
-//     .menu__item {
-//         margin: 0;
-//     }
-//     a {
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         text-align: center;
-//         text-decoration: none;
-//         padding: 0 1rem; /* 画面の両端に24pxのパディングを追加 */ /* クリック領域を広くするための余白 */
-//     }
-//     .nav-text {
-//         font-size: 1rem; /* テキストのサイズを10%に調整 */
-//         color: $footer_text_color; /* メニューテキストの色 */
-//         margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
-//     }
-// }
+    // .menu__list {
+    //     padding: 0;
+    //     display: flex;
+    //     // 要素の間に均等なスペースを配置
+    //     justify-content: space-between;
+    // }
+    // .menu__item {
+    //     margin: 0;
+    // }
+    // a {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     text-align: center;
+    //     text-decoration: none;
+    //     padding: 0 1rem; /* 画面の両端に24pxのパディングを追加 */ /* クリック領域を広くするための余白 */
+    // }
+    // .nav-text {
+    //     font-size: 1rem; /* テキストのサイズを10%に調整 */
+    //     color: $footer_text_color; /* メニューテキストの色 */
+    //     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
+    // }
+}
 
 @media only screen and (max-width: 767px) {
     .ground{
-        margin-top: 50px; /*上に空白を追加*/
-        height: calc(100vh - 100px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+        // margin-top: 0px; /*上に空白を追加*/
+        height: calc(100vh  - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
 
 @media only screen and (max-width: 767px) {
@@ -231,8 +235,8 @@ header {
     }
 
     .ground{
-        margin-top: 50px; /*上に空白を追加*/
-        height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+        margin-top: 0px; /*上に空白を追加*/
+        height: calc(100vh  - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
     // スクロールバー背景色
     .ground::-webkit-scrollbar {
@@ -260,4 +264,9 @@ header {
     //         margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
     //     }
     }
+}
+
+footer {
+    margin-bottom: 0; // 追加：フッターの下のマージンを0に設定
+    // 以下省略
 }
