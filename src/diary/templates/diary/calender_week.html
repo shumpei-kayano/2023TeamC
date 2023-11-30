@@ -48,7 +48,7 @@
             </a>
         </div>
         {% comment %} 年、月 {% endcomment %}
-        <p>{{ selected_date|date:"Y年n月" }}</p>
+        <p class="calendar-header__select-date">{{ selected_date|date:"Y年n月" }}</p>
 
         <div class="a--blue">
             <a href="{% url 'diary:calender_week'%}">
@@ -66,57 +66,72 @@
             <tbody>
                 <tr>
                     {% for day in week_dates %}
-                        <td>
-                            {% if day < selected_date %}
-                                {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                                {% for diary_entry in diary %}
-                                    {% if diary_entry.created_date == day %}
-                                        {% for emotion_entry in emotion %}
-                                            {% if emotion_entry.diary_id == diary_entry.id %}
-                                                    {% comment %} 日記を押したら飛ぶ {% endcomment %}
-                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                    {% comment %} 感情画像 {% endcomment %}
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                    {% comment %} 日記の内容 {% endcomment %}
-                                                    {{ diary_entry.content }}
-                                                </a>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
+                    <td>
+                        {% comment %} 今日の日記 {% endcomment %}
+                        {% if today == day %}
+                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
+                            {% for diary_entry in diary %}
+                                {% if diary_entry.created_date == day %}
+                                    {% for emotion_entry in emotion %}
+                                        {% if emotion_entry.diary_id == diary_entry.id %}
+                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                {{ diary_entry.content }}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                            {% comment %} ここまで {% endcomment %}
 
-                            {% elif day == selected_date %}
-                                {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                                {% for diary_entry in diary %}
-                                    {% if diary_entry.created_date == day %}
-                                        {% for emotion_entry in emotion %}
-                                            {% if emotion_entry.diary_id == diary_entry.id %}
-                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                    {{ diary_entry.content }}
-                                                </a>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
+                        {% elif day < selected_date %}
+                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
+                            {% for diary_entry in diary %}
+                                {% if diary_entry.created_date == day %}
+                                    {% for emotion_entry in emotion %}
+                                        {% if emotion_entry.diary_id == diary_entry.id %}
+                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                {{ diary_entry.content }}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
 
-                            {% else %}
-                                <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
-                                {% for diary_entry in diary %}
-                                    {% if diary_entry.created_date == day %}
-                                        {% for emotion_entry in emotion %}
-                                            {% if emotion_entry.diary_id == diary_entry.id %}
-                                                <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                    <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                    {{ diary_entry.content }}
-                                                </a>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </td>
-                    {% endfor %}
+                        {% elif day == selected_date %}
+                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
+                            {% for diary_entry in diary %}
+                                {% if diary_entry.created_date == day %}
+                                    {% for emotion_entry in emotion %}
+                                        {% if emotion_entry.diary_id == diary_entry.id %}
+                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                {{ diary_entry.content }}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+
+                        {% else %}
+                            <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
+                            {% for diary_entry in diary %}
+                                {% if diary_entry.created_date == day %}
+                                    {% for emotion_entry in emotion %}
+                                        {% if emotion_entry.diary_id == diary_entry.id %}
+                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                {{ diary_entry.content }}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                
                 </tr>
                 
             </tbody>

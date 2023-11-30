@@ -857,6 +857,12 @@ footer .nav-text {
   font-size: 16px;
   border: 1px solid #04CAD6;
 }
+.calendar__month td .calendar__month--today-td {
+  background-color: #04CAD6;
+  width: 80%;
+  border-radius: 50px;
+  color: #ffffff;
+}
 .calendar__month td p {
   position: absolute;
   top: 0;

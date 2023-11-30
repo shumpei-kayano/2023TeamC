@@ -37,9 +37,10 @@
             <div class="a--blue">
                 <div class="icon__button__delete">
                     {% if diary %}
-                    <ul>
-                                <br>作成日時：{{diary.created_date}}</br><br>
-                                <br>日記内容：{{ diary.content }}</br><br>
+                    {% comment %} <ul> {% endcomment %}
+                                {% comment %} <br>作成日時：{{diary.created_date}}</br> {% endcomment %}
+                                <!-- 日記内容 -->
+                                {{ diary.content }}</br>
                                 {% if diary.photo1 %}
                                     <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
                                 {% endif %}
@@ -53,7 +54,7 @@
                                     <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
                                 {% endif %}
                             </div>
-                    </ul>
+                    {% comment %} </ul> {% endcomment %}
                 {% else %}
                     <p>今日の日記はありません。</p>
                 {% endif %}

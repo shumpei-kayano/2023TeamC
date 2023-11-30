@@ -167,6 +167,7 @@ def calendar_month(request,selected_date=None):
 
 @login_required
 def calender_week(request, selected_date=None):
+    today = date.today()
     # selected_dateをdatetime.date型に変換
     if selected_date:
         selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
@@ -186,7 +187,7 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
-    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up})
+    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
 def create_diary_confirmation(request):

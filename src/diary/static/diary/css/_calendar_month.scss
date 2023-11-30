@@ -61,6 +61,13 @@
         position: relative;  // テーブルセルを相対位置に設定
         font-size: 16px;
         border: 1px solid $header_color;
+
+        .calendar__month--today-td{
+            background-color: $header_color;
+            width: 80%;
+            border-radius: 50px;
+            color: #ffffff;
+        }
         
         p{
             position: absolute;  // テキストを絶対位置に設定
