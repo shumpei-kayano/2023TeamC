@@ -224,31 +224,62 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
     }
 }
 
-.header__back__img  a{
+.header__back__img {
     display: flex;
-    width: 96px;
-    height: 48px;
-    // padding: 18px 28px 10px 28px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    border: 1px solid #FFF;
-    background:#00ABB6;
+    align-items: center; 
 
-    color: #FFF;
-    text-align: center;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.56px;
 
-    &:hover {
-        background-color: #008999;
+    a {
+        display: flex;
+        width: 96px;
+        height: 48px;
+        // padding: 18px 28px 10px 28px;
+        // justify-content: center;
+        align-items: center;
+        // flex-direction: row;
+        border-radius: 50px;
+        border: 1px solid #FFF;
+        background:#00ABB6;
+
+        color: #FFF;
+        text-align: center;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.56px;
+
+        &:hover {
+            background-color: #004c54;
+        }
     }
 
     img {
-        margin-right: 8px;
-        margin-top: 2px;
+        margin: 0;  // マージンをリセット
     }
+
+    img.logo-img {
+        margin-left: 170px;  // 中央揃え
+    }
+
+    .header__back__img a, .header__back__img .logo-img {
+        display: inline-block; // <a>タグと.logo-imgクラスをインラインブロック要素として扱う
+    }
+
+
+
+    // img {
+    //     margin-right: 8px;
+    //     margin-top: 2px;
+    // }
 }    
+
+.logo-img {
+    width: 90.621px;
+    height: 48px;
+    // padding-right: 0px;
+    // justify-content: center;
+    // align-items: center;
+    flex-shrink: 0;
+    margin-left: 225px;
+}

@@ -93,7 +93,7 @@
                                         {% endif %}
                                             {%for emotion in emotion %}
                                               {%if emotion.created_date == day%}
-                                                <a href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
+                                                <a style="display: block;" href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
                                                     <img src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
                                                 </a>
                                               {% endif %}
