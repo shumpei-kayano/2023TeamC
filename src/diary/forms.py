@@ -7,6 +7,7 @@ class DiaryCreateForm(forms.ModelForm):
         fields = ['content', 'photo1', 'photo2', 'photo3', 'photo4', 'movie1', 'movie2', 'movie3', 'movie4',]
         
         widgets = {
+                    # テキストエリアとボタンを動的に表示するための属性を追加
                     'content': forms.Textarea(attrs={'class': 'content__textarea', 'placeholder': 'ここに書いてください（最大1000文字）', 'oninput': 'countCharacters(this)'}),
                     'photo1': forms.FileInput(attrs={'onchange': 'updateFileName(this, "file_name_photo1")'}),
                     'photo2': forms.FileInput(attrs={'onchange': 'updateFileName(this, "file_name_photo2")'}),

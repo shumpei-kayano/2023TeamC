@@ -47,7 +47,7 @@
         width: 342px;
         height: 56px;
 
-        button {
+        button, a{
             @include button-style;
             
             background: var(--custom-color, #00ABB6);
@@ -64,7 +64,7 @@
         width: 342px;
         height: 48px;
         
-        button {
+        button, a{
             @include button-style;
             
             background: var(--custom-color, #FFF);
@@ -376,4 +376,14 @@
             margin: 0;
             padding: 16px;
     }
+}
+
+.back-home a {
+    color: #A29C9C;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    text-align: center;
 }

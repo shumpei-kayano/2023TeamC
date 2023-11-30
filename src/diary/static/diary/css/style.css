@@ -807,16 +807,6 @@ footer .nav-text {
   box-sizing: border-box;
 }
 
-.calendar--background {
-  background-color: #FFFFFF;
-}
-
-.calendar__month td {
-  border: 1px solid #04CAD6;
-  width: 5.5rem;
-  height: 6.6rem;
-}
-
 .calender-month-page .a--tab--left a {
   background-color: #00ABB6;
   color: #FFF;
@@ -828,6 +818,10 @@ footer .nav-text {
   align-items: center;
   width: 100%;
 }
+.calendar-header .calendar-header__select-date {
+  font-size: 18px;
+  font-weight: 700;
+}
 .calendar-header .a--blue {
   margin-right: 24px;
 }
@@ -836,6 +830,65 @@ footer .nav-text {
   align-items: center;
 }
 
+.calendar__month {
+  overflow-x: auto; /* カレンダーが横に広がった場合に横スクロール可能にする */
+}
+.calendar__month table {
+  width: 100%;
+  table-layout: fixed; /* テーブルのレイアウトを固定にする */
+  height: calc(100vh - 227px);
+}
+.calendar__month th, .calendar__month td {
+  text-align: center;
+  box-sizing: border-box;
+}
+.calendar__month th {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.calendar__month .sun {
+  color: #FC8686;
+}
+.calendar__month .sat {
+  color: #0094FF;
+}
+.calendar__month td {
+  position: relative;
+  font-size: 16px;
+  border: 1px solid #04CAD6;
+}
+.calendar__month td .calendar__month--today-td {
+  background-color: #04CAD6;
+  width: 80%;
+  border-radius: 50px;
+  color: #ffffff;
+}
+.calendar__month td p {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+}
+.calendar__month td img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+}
+
+@media only screen and (max-width: 767px) {
+  .calendar__month table td {
+    font-size: 18px;
+  }
+  .calendar__month table td p {
+    margin-top: 25px;
+  }
+  .calendar__month table td img {
+    margin-bottom: 25px;
+  }
+}
 main {
   background-color: #EEFEFF;
 }
@@ -1163,3 +1216,39 @@ label {
 .btn--large {
   margin: 24px auto 40px auto;
 }
+
+/* 767以下の時のフルスクリーン設定 */
+#loading {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #EEFEFF;  
+  #logo {
+    width: 25%;
+    margin-top: 7%;
+    margin-left: 5%;
+    position: absolute; /* 絶対位置に設定 */
+    top: 0; /* 上端に配置 */
+    left: 0; /* 左端に配置 */
+  }
+}
+
+#loading .loading-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 180%;
+
+  #teacat {
+    display: block;
+    width: 55%; /* 幅を100pxに設定 */
+    margin: auto;
+  }
+}
+/* ここまで */
