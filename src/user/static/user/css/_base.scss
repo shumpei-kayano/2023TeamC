@@ -3,12 +3,17 @@ html{
     font-size: 10px;
 }
 
+.main {
+    background-color: $main_background_color;
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
     background-color: $web_background_color;
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    min-height: 100vh; /* height: 100% を min-height: 100vh に変更 */
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
@@ -33,6 +38,8 @@ header, .ground, footer {
     max-width: 100%; // ビューポートの幅を超えないように設定
     margin: 0 auto; // 中央に配置
 }
+
+
 
 header {
     padding-left: 2.4rem;
@@ -112,40 +119,40 @@ header {
     margin-top: 0; // 追加：次の要素の上のマージンを0に設定
 }
 
-.ground{
-    margin-top: 0rem; /*上に空白を追加*/
-    height: calc(100vh - 5rem ); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
-//     overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
-}
-// スクロールバー背景色
-.ground::-webkit-scrollbar {
-    background-color: transparent;
-    // スクロールバーの幅を調整
-    width: 2px;
-    // height: 2px;
-    // 角丸を指定
-    border-radius: 20px;
-}
-// スクロールボタン
-.ground::-webkit-scrollbar-thumb {
-    background-color: rgb(216, 216, 216);
-    // 角丸を指定
-    border-radius: 20px;
-    // padding-left: 2.4rem;
-}
-// スクロールバー（hover時）
-.ground::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(173, 173, 173);
-}
+// .ground{
+//     margin-top: 0rem; /*上に空白を追加*/
+//     height: calc(100vh - 5rem - 15px ); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+// //     overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+// }
+// // スクロールバー背景色
+// .ground::-webkit-scrollbar {
+//     background-color: transparent;
+//     // スクロールバーの幅を調整
+//     width: 2px;
+//     // height: 2px;
+//     // 角丸を指定
+//     border-radius: 20px;
+// }
+// // スクロールボタン
+// .ground::-webkit-scrollbar-thumb {
+//     background-color: rgb(216, 216, 216);
+//     // 角丸を指定
+//     border-radius: 20px;
+//     // padding-left: 2.4rem;
+// }
+// // スクロールバー（hover時）
+// .ground::-webkit-scrollbar-thumb:hover {
+//     background-color: rgb(173, 173, 173);
+// }
 
-.ground{
-    &--white{
-        background-color: $main_background_color;
-    }
-    &--blue{
-        background-color: $main_background_color;
-    }
-}
+// .ground{
+//     &--white{
+//         background-color: $main_background_color;
+//     }
+//     &--blue{
+//         background-color: $main_background_color;
+//     }
+// }
 
 // .camera__area {
 //     height: 50px;
@@ -165,13 +172,16 @@ footer {
     // スクロールしてもフッターが固定される
     // position: fixed;
     // フッターをビューポートの最下部に配置
-    position: absolute; // 追加
+    // position: absolute; // 追加
     bottom: 0;
     right: 0;
     left: 0;
     height: 15px;
     background-color: $main_background_color;
-    flex-shrink: 0;
+    margin-top: auto; /* 追加 */
+
+    // flex-shrink: 0;
+    // position: static;
     // height: 6rem; // フッターの高さを50pxに設定
     // overflow: hidden; // フッターの高さを超える内容を非表示にする
     // border-top: 1px solid rgba(217, 217, 217, 0.50);
@@ -203,7 +213,7 @@ footer {
 @media only screen and (max-width: 767px) {
     .ground{
         // margin-top: 0px; /*上に空白を追加*/
-        height: calc(100vh  - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+        height: calc(100vh  - 5rem - 1.5rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
 
 @media only screen and (max-width: 767px) {
@@ -237,7 +247,7 @@ footer {
 
     .ground{
         margin-top: 0px; /*上に空白を追加*/
-        height: calc(100vh  - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+        height: auto; /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
     // スクロールバー背景色
     .ground::-webkit-scrollbar {
@@ -251,22 +261,22 @@ footer {
         border-radius: 20px;
     }
 
-    // footer {
-    //     height: 60px;
-    //     padding-right: 24px;
-    //     padding-left: 24px;
-    //     height: 60px; // フッターの高さを50pxに設定
-
-    //     a {
-    //         padding: 0 10px; /* 画面の両端に24pxのパディングを追加 */ /* クリック領域を広くするための余白 */
-    //     }
-    //     .nav-text {
-    //         font-size: 10px; /* テキストのサイズを10%に調整 */
-    //         margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
-    //     }
+    footer {
+        height: 15px;
+        padding-right: 24px;
+        padding-left: 24px;
+        // bottom: 0;
+        position: static; // 修正：フッターの位置を固定しない
+        // margin-top: auto; // 追加：フッターを他のコンテンツの下に自動的に配置
+        background-color: $main_background_color;
+        }
     }
 }
 
+.ground.ground--blue{
+    background-color: $main_background_color;
+    flex-grow: 1;
+}
 // footer {
 //     margin-top: 0; 
 //     margin-bottom: 0; // 追加：フッターの下のマージンを0に設定
@@ -277,3 +287,14 @@ footer {
 //     margin-top: 0; 
 //     margin-bottom: 0; // 追加：フッターの下のマージンを0に設定
 // }
+
+// body {
+//     display: flex;
+//     flex-direction: column;
+//     min-height: 100vh;
+// }
+
+// footer {
+//     margin-top: auto;
+// }
+

@@ -146,7 +146,7 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
 }
 
 // トップへ戻る
-.back-top {
+.back-home {
     display: flex;
     width: 172px;
     height: 24px;
@@ -156,7 +156,7 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
     flex-shrink: 0;
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
-    button {
+    a{
         
         color: #A29C9C;
         font-size: 1.6rem;
@@ -258,9 +258,9 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
         margin: 0;  // マージンをリセット
     }
 
-    img.logo-img {
-        margin-left: 170px;  // 中央揃え
-    }
+    // img.logo-img {
+    //     margin-left: 170px;  // 中央揃え
+    // }
 
     .header__back__img a, .header__back__img .logo-img {
         display: inline-block; // <a>タグと.logo-imgクラスをインラインブロック要素として扱う
@@ -282,4 +282,10 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
     // align-items: center;
     flex-shrink: 0;
     margin-left: 225px;
+}
+
+.back-home {
+    margin-left: 109px;
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
