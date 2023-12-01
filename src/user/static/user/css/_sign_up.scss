@@ -49,6 +49,9 @@ label {
         margin-right: 8px;
         margin-top: 2px;
     }
+        img.logo-img {
+        margin-left: 170px;  // 中央揃え
+    }
 }    
 
 .btn--blue {
@@ -80,11 +83,7 @@ label {
 }
 
 .back-home {
-    color: #A29C9C;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0.64px;
-    text-align: center;
+    margin-left: 109px;
+    margin-top: 50px;
+    margin-bottom: 20px;
 }

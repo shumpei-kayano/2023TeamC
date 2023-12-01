@@ -93,11 +93,21 @@
                 {{ diary.ai_comment }}
             </p>
         </div>
+
+
         <!-- ネココの画像 -->
+        {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
+        {% if diary.counseling %}
+        <div class="content__diary-diary__comment__img">
+            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="ネココの画像">
+        </div>
+        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
+        {% else %}
         <div class="content__diary-diary__comment__img">
             <img src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
         </div>
-
+        {% endif %}
+        
         <!-- 画像のポップアップ -->
         <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal-label" aria-hidden="true">
             <div class="modal-dialog" role="document">
