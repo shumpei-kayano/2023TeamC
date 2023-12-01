@@ -18,7 +18,7 @@ class DiaryCreateForm(forms.ModelForm):
                     'movie3': forms.FileInput(attrs={'onchange': 'updateFileName(this, "file_name_movie3")'}),
                     'movie4': forms.FileInput(attrs={'onchange': 'updateFileName(this, "file_name_movie4")'}),
                 }
-        
+
                     # 'photo1': forms.ClearableFileInput(attrs={'class': 'content__photo-btn', 'type': 'button'}),
                     # 'photo2': forms.ClearableFileInput(attrs={'class': 'content__photo-btn', 'type': 'button'}),
                     # 'photo3': forms.ClearableFileInput(attrs={'class': 'content__photo-btn', 'type': 'button'}),

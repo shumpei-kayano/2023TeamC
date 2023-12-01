@@ -6,6 +6,7 @@
 {% block title %}日記内容確認{% endblock %}
 
 {% block header %}
+
 <header>
 
     {% comment %} <div class="header__nowdate">
@@ -88,40 +89,50 @@
         </div>
 
 
-        <!-- ポップアップ要素 -->
-        {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
-        <div class="popup" id="first-popup">
-            <div class="popup__text">
-                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
-            </div>
-            <div class="popup__img">
-                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-            </div>
-            <div class="button">
-                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-            </div>
-            <div class="gray__button">
-                <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
-            </div>
+<!-- ポップアップ要素 -->
+{% comment %} 悪い言葉があればポップアップを表示 {% endcomment %}
+{% if saved_diary.counseling %}
+    {% comment %} 1回目のポップアップ {% endcomment %}
+    <div class="popup show" id="first-popup">
+        <div class="popup__text">
+            <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
         </div>
+        <div class="popup__img">
+            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+        </div>
+         {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+        <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ネココのアドバイスを受ける</a>
+        <div class="gray__button">
+            {% comment %} キャンセルを押したら、2回目のポップアップを表示 {% endcomment %}
+            <button class="close-button" onclick="closePopup('first-popup')">
+                <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル
+            </button>
+        </div>
+    </div>
 
-        <div class="popup" id="second-popup">
-            <div class="popup__text">
-                <p>キャンセルするとカウンセリングを<br>
-                    受けることができなくなります。<br>
-                    キャンセルしますか？</p>
-            </div>
-            <div class="popup__img">
-                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-            </div>
-            <div class="button">
-                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-            </div>
-            <div class="gray__button">
-                <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
-            </div>
+    {% comment %} 2回目のポップアップ {% endcomment %}
+    <div class="popup" id="second-popup">
+        <div class="popup__text">
+            <p>キャンセルするとカウンセリングを<br>
+                受けることができなくなります。<br>
+                キャンセルしますか？</p>
         </div>
-        {% endif %}
+        <div class="popup__img">
+            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+        </div>
+        <div class="button">
+            {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+            <a href="{% url 'diary:today_counseling'  %}" class="button-link">ネココのアドバイスを受ける</a>
+        </div>
+        <div class="gray__button">
+            {% comment %} キャンセルを押したら、counselingの値が0になる　{% endcomment %}
+            <a href="{% url 'diary:today_diary_detail3' saved_diary.pk %}" class="button-link">
+                <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</a>
+            </button>
+        </div>
+    </div>
+{% endif %}
+
     
     </div><!-- scroll content -->
 </main>
@@ -131,46 +142,52 @@
 {% block js %}
 <script>
     // 戻るボタンを押したときの処理
-    document.getElementById("header__back__btn").addEventListener("click", function() {
+    document.getElementById("header__back__btn").addEventListener("click", function () {
         history.back();
     });
 
     // カウンセリング催促ポップアップの表示
-    $(function(){
-        $('.popup').fadeIn();
+    $(function () {
+        $('.popup.show').fadeIn();
     });
 
-    $(document).ready(function() {
-        // ポップアップを下からスライドして表示
-        $('.popup').slideDown();
+    $(document).ready(function () {
+        // ポップアップを全画面表示
+        $('.popup.show').css({
+            'position': 'fixed',
+            'top': 0,
+            'left': 0,
+            'width': '100%',
+            'height': '100%'
+        });
 
         // キャンセルボタンをクリックした時の処理
         //$('.cancel-button').click(function() {
-            //$('.popup').slideUp();
+        //$('.popup').slideUp();
         //});
     });
 
     function closePopup(id) {
         document.getElementById(id).classList.remove("show");
+
+        // 次のポップアップを表示
+        if (id === "first-popup") {
+            document.getElementById("second-popup").classList.add("show");
+        }
     }
 
-      // 保存ボタンをクリックしたときに最初のポップアップを表示する
-    document.getElementById("save-button").addEventListener("click", function() {
-    document.getElementById("first-popup").classList.add("show");
+    // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function () {
+        document.getElementById("first-popup").classList.add("show");
     });
 
-      // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
-    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
-    document.getElementById("second-popup").classList.add("show");
-    });
-
-      // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
-    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+    // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function () {
         document.getElementById("first-popup").classList.remove("show");
         document.getElementById("second-popup").classList.remove("show");
     });
 
-// ロード画面呼び出し
+    // ロード画面呼び出し
     function showLoadingScreen() {
         document.getElementById('loader').style.display = 'block';
     }
@@ -182,25 +199,25 @@
     function showLoadingScreenAndRedirect() {
         showLoadingScreen(); // ロード画面を表示
 
-    function showLoadingScreenAndRedirect1() {
-        var redirectUrl = '/diary:positive_conversion';  // ボタン1用のリダイレクト先URL
-        window.location.href = redirectUrl;  // リダイレクト
-    }
+        function showLoadingScreenAndRedirect1() {
+            var redirectUrl = '/diary:positive_conversion';  // ボタン1用のリダイレクト先URL
+            window.location.href = redirectUrl;  // リダイレクト
+        }
 
-    function showLoadingScreenAndRedirect2() {
-        var redirectUrl = '/diary:today_diary_detail';  // ボタン2用のリダイレクト先URL
-        window.location.href = redirectUrl;  // リダイレクト
-    }
+        function showLoadingScreenAndRedirect2() {
+            var redirectUrl = '/diary:today_diary_detail';  // ボタン2用のリダイレクト先URL
+            window.location.href = redirectUrl;  // リダイレクト
 
             // 待ち時間後にリダイレクト
-            setTimeout(function() {
+            setTimeout(function () {
                 hideLoadingScreen(); // ロード画面を非表示
                 window.location.href = redirectUrl;
             }, 5000); // 5秒後にリダイレクト
         }
-
+    }
 </script>
 {% endblock %}
+
 
     {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
         e.preventDefault();
