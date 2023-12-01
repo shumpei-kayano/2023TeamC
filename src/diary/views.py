@@ -440,6 +440,11 @@ def month_graph(request,selected_date=None):
         # 総評コメントを取得
         month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
         ai_comment = month_ai.ai_comment
+        if request.method == "POST":
+          month_ai.delete()
+          ai_comment = aicomment_week(emotion)
+          comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
+          comment_save.save()
     elif month_ai:
       month_ai=Month_AI.objects.get(user = request.user,created_date__year = year,created_date__month = month)
       month_ai.delete()
@@ -573,6 +578,11 @@ def week_graph(request,selected_date=None):
         # 総評コメントを取得
         week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
         ai_comment = week_ai.ai_comment
+        if request.method == "POST":
+          week_ai.delete()
+          ai_comment = aicomment_week(emotions)
+          comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
+          comment_save.save()
     elif week_ai:
       week_ai=Week_AI.objects.get(user = request.user,created_date__range=[start_date,one_week_str])
       week_ai.delete()

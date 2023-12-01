@@ -67,6 +67,17 @@
                 </div>
             </div>
         </div>
+        <form id="form-loading" method="POST" action="{% url 'diary:month_graph' selected_date=selected_date %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <button type="submit" onclick="submitForm()">更新</button>
+          <div id="loading">
+            <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+            <div class="loading-content">
+              <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+              読み込み中...
+            </div>
+          </div>
+        </form>
     </div>
 </main>
 
@@ -119,7 +130,8 @@
           }
       }
   });
-</script><script>
+</script>
+<script>
   var ctx = document.getElementById('barChart').getContext('2d');
   var chartData = {{ data|safe }};
 
@@ -133,53 +145,62 @@
   }
 
   var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: [''], // ラベルを設定
-          datasets: [
-              {
-                  label: '好調',
-                  data: [calculateAverage(chartData.positive)],
-                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                  borderColor: 'rgba(75, 192, 192, 1)',
-                  borderWidth: 1
+    type: 'bar',
+    data: {
+        labels: [''], // ラベルを設定
+        datasets: [
+            {
+                label: '好調',
+                data: [calculateAverage(chartData.positive)],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
               },
-              {
-                  label: '不調',
-                  data: [calculateAverage(chartData.negative)],
-                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                  borderColor: 'rgba(255, 99, 132, 1)',
-                  borderWidth: 1
-              },
-              {
-                  label: '普通',
-                  data: [calculateAverage(chartData.neutral)],
-                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
-                  borderColor: 'rgba(255, 255, 0, 1)',
-                  borderWidth: 1
-              },
-              {
-                  label: '複雑',
-                  data: [calculateAverage(chartData.mixed)],
-                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
-                  borderColor: 'rgba(128, 128, 128, 1)',
-                  borderWidth: 1
-              }
-          ]
-      },
-      options: {
-          indexAxis: 'y', 
-          scales: {
-              x: {
-                  stacked: true
-              },
-              y: {
-                  stacked: true
-              }
-          }
-      }
+            {
+                label: '不調',
+                data: [calculateAverage(chartData.negative)],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: '普通',
+                data: [calculateAverage(chartData.neutral)],
+                backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                borderColor: 'rgba(255, 255, 0, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: '複雑',
+                data: [calculateAverage(chartData.mixed)],
+                backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                borderColor: 'rgba(128, 128, 128, 1)',
+                borderWidth: 1,
+            }
+        ]
+    },
+    options: {
+        indexAxis: 'y', 
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        },
+        elements: {
+            bar: {
+                borderRadius: 10 // ゼロのスタート地点も丸くする設定
+            }
+        }
+    }
   });
-</script>
-
-
+  </script>
+<script>
+  document.getElementById('form-loading').addEventListener('submit', function (event) {
+    // ボタンがクリックされたらローディング画面を表示
+    document.getElementById('loading').style.display = 'block';
+  });
+  </script>
 {% endblock %}
