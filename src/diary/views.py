@@ -56,7 +56,7 @@ def chart_data(emotions):
       'negative': [emotion.negative for emotion in emotions],
       'neutral': [emotion.neutral for emotion in emotions],
       'mixed': [emotion.mixed for emotion in emotions],
-      'date' : [emotion.created_date for emotion in emotions]
+      'date' : [emotion.month_day for emotion in emotions]
   }
 
   return data
