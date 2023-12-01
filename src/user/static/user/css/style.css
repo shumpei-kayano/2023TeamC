@@ -108,7 +108,7 @@ header .header__weather span {
 
 .ground {
   margin-top: 0rem; /*上に空白を追加*/
-  height: calc(100vh - 5rem - 6rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+  height: calc(100vh - 5rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
 }
 
 .ground::-webkit-scrollbar {
@@ -142,6 +142,7 @@ footer {
   left: 0;
   height: 15px;
   background-color: #EEFEFF;
+  flex-shrink: 0;
 }
 
 @media only screen and (max-width: 767px) {
@@ -187,10 +188,6 @@ footer {
     border-radius: 20px;
   }
 }
-footer {
-  margin-bottom: 0;
-}
-
 .btn {
   display: flex;
   justify-content: center;
