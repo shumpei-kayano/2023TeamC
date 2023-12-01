@@ -42,46 +42,296 @@
 
             <br>作成日時：{{diary.created_date}}</br><br>
             
-            <label for="content">日記内容：</label>
-            <textarea id="content" name="content" rows="8" cols="80">{{ diary.content }}</textarea><br>
+        {% comment %} create_diaryのコピー {% endcomment %}
             
-            <!-- 画像1 -->
-            {% if diary.photo1 %}
-                <label for="photo1">画像1：</label>
-                <input type="file" id="photo1" name="photo1"><br>
-                <img src="{{ diary.photo1.url }}" alt="Diary Photo1"><br>
-            {% endif %}
+        {% csrf_token %}
+        <div class="content__today-diary">
+            {% comment %}  {{today}}<br>        現在の日付を取得 {% endcomment %}
+            <div class="FlexTextarea"><!-- CSSのため追加 -->
+                <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.svg' %}" alt="pen">
+                {{ Diary.content }}
+            </div>
 
-            <!-- 画像2 -->
-            {% if diary.photo2 %}
-                <label for="photo2">画像2：</label>
-                <input type="file" id="photo2" name="photo2"><br>
-                <img src="{{ diary.photo2.url }}" alt="Diary Photo2"><br>
-            {% endif %}
+            <!-- 文字数をカウントする要素 -->
+            <div id="characterCount" class="content__text-count">0/1000</div>
+            <div class='photomv'>
+    
+                {% comment %} photoが4枚の時 {% endcomment %}
+                {% if diary.photo4 %}
+                <div class="custom-file-upload" id="container_photo1">
+                <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                    {{ Diary.photo1 }}
+                    <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br>
+                    <span id="file_name_photo1"></span>
+                </div>
+                <div class="custom-file-upload" id="container_photo1">
+                    <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                        {{ Diary.photo2 }}
+                        <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br>
+                        <span id="file_name_photo2"></span>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo3 }}
+                            <img src="{{ diary.photo3.url }}" alt="Diary Photo3" style="width: 100px; height: auto;"><br>
+                            <span id="file_name_photo3"></span>
+                        </div>
+                            <div class="custom-file-upload" id="container_photo1">
+                            <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                {{ Diary.photo4 }}
+                                <img src="{{ diary.photo4.url }}" alt="Diary Photo4" style="width: 100px; height: auto;"><br>
+                                <span id="file_name_photo4"></span>
+                            </div>
 
+                        {% comment %} photoが3枚のとき {% endcomment %}
+                        {% elif diary.photo3 %}
+                        <div class="custom-file-upload" id="container_photo1">
+                        <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                            {{ Diary.photo1 }}
+                            <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br>
+                            <span id="file_name_photo1"></span>
+                        </div>
+                        <div class="custom-file-upload" id="container_photo1">
+                            <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                {{ Diary.photo2 }}
+                                <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br>
+                                <span id="file_name_photo2"></span>
+                            </div>
+                            <div class="custom-file-upload" id="container_photo1">
+                                <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                    {{ Diary.photo3 }}
+                                    <img src="{{ diary.photo3.url }}" alt="Diary Photo3" style="width: 100px; height: auto;"><br>
+                                    <span id="file_name_photo3"></span>
+                                </div>
+                                    <div class="custom-file-upload" id="container_photo1">
+                                    <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                        {{ Diary.photo4 }}
+                                        <span id="file_name_photo4"></span>
+                                    </div>
+                            {% comment %} photoが2枚のとき {% endcomment %}
+                            {% elif diary.photo2 %}
+                            <div class="custom-file-upload" id="container_photo1">
+                            <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                {{ Diary.photo1 }}
+                                <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br>
+                                <span id="file_name_photo1"></span>
+                            </div>
+                            <div class="custom-file-upload" id="container_photo1">
+                                <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                    {{ Diary.photo2 }}
+                                    <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br>
+                                    <span id="file_name_photo2"></span>
+                                </div>
+                                <div class="custom-file-upload" id="container_photo1">
+                                    <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                        {{ Diary.photo3 }}
+                                        <span id="file_name_photo3"></span>
+                                    </div>
+                                        <div class="custom-file-upload" id="container_photo4">
+                                        <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                            {{ Diary.photo4 }}
+                                            <span id="file_name_photo4"></span>
+                                        </div>
 
-            <!-- 画像3 -->
-            {% if diary.photo3 %}
-                <label for="photo3">画像3：</label>
-                <input type="file" id="photo3" name="photo3"><br>
-                <img src="{{ diary.photo3.url }}" alt="Diary Photo3"><br>
-            {% endif %}
+                                {% comment %} photoが1枚の時 {% endcomment %}
+                                {% elif diary.photo1 %}
+                                <div class="custom-file-upload" id="container_photo1">
+                                <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                    {{ Diary.photo1 }}
+                                    <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br>
+                                    <span id="file_name_photo1"></span>
+                                </div>
+                                <div class="custom-file-upload" id="container_photo1">
+                                    <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                        {{ Diary.photo2 }}
+                                        <span id="file_name_photo2"></span>
+                                    </div>
+                                    <div class="custom-file-upload" id="container_photo3">
+                                        <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                            {{ Diary.photo3 }}
+                                            <span id="file_name_photo3"></span>
+                                        </div>
+                                            <div class="custom-file-upload" id="container_photo4">
+                                            <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                                {{ Diary.photo4 }}
+                                                <span id="file_name_photo4"></span>
+                                            </div>
 
+                                        {% comment %} 0枚の時 {% endcomment %}
+                                        {% else %}
+                                        <div class="custom-file-upload" id="container_photo1">
+                                        <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                            {{ Diary.photo1 }}
+                                            <span id="file_name_photo1"></span>
+                                        </div>
+                                        <div class="custom-file-upload" id="container_photo2">
+                                            <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                                {{ Diary.photo2 }}
+                                                <span id="file_name_photo2"></span>
+                                            </div>
+                                            <div class="custom-file-upload" id="container_photo3">
+                                                <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                                    {{ Diary.photo3 }}
+                                                    <span id="file_name_photo3"></span>
+                                                </div>
+                                                    <div class="custom-file-upload" id="container_photo4">
+                                                    <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
+                                                        {{ Diary.photo4 }}
+                                                        <span id="file_name_photo4"></span>
+                                                    </div>
+                                        {% endif  %}
+                <div class="custom-file-upload" id="container_movie1">
+                    <label id="label_movie1"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                        {{ Diary.movie1 }}
+                    </label>
+                    <span id="file_name_movie1">選択されていません</span>
+                </div>
 
-            <!-- 画像4 -->
-            {% if diary.photo4 %}
-                <label for="photo4">画像4：</label>
-                <input type="file" id="photo4" name="photo4"><br>
-                <img src="{{ diary.photo4.url }}" alt="Diary Photo4"><br>
-            {% endif %}
+                <div class="custom-file-upload" style="display: none;" id="container_movie2">
+                    <label id="label_movie2"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                        {{ Diary.movie2 }}
+                    </label>
+                    <span id="file_name_movie2">選択されていません</span>
+                </div>
 
-            <!-- Submit button -->
-            <input type="submit" value="更新">
-        </form>
+                <div class="custom-file-upload" style="display: none;" id="container_movie3">
+                    <label id="label_movie3"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                        {{ Diary.movie3 }}
+                </label>
+                    <span id="file_name_movie3">選択されていません</span>
+                </div>
 
-        <div class="cancel__button">
+                <div class="custom-file-upload" style="display: none;" id="container_movie4">
+                    <label id="label_movie4"><img src="{% static 'diary/assets/movie_icon.svg' %}" alt="動画アイコン">動画を選択
+                        {{ Diary.movie4 }}
+                    </label>
+                    <span id="file_name_movie4">選択されていません</span>
+                </div>
+            </div>
+
+            <div class="btn--blue">
+                <button type="submit">確認</button>
+            </div>
         </div>
+    </form>
 
     </div>
 </main>
+{% endblock %}
+{% block js %}
+<script>
+    // 文字数のカウント
+    function countCharacters(textarea) {
+        let count = $(textarea).val().length;
+        let maxLength = 1000;
+        let countDisplay = count + '/' + maxLength;
+        $('#characterCount').text(countDisplay);
+
+        if (count > maxLength) {
+            $('#characterCount').addClass('error'); // スタイリング用のクラスを追加
+            $('#characterCount').text('入力できる文字数を超えています。' + countDisplay);
+        } else {
+            $('#characterCount').removeClass('error'); // エラーがない場合はクラスを削除
+        }
+    }
+
+    // Enterキーが押されたときの処理
+    function checkEnter(event) {
+        // テキストエリア要素を取得
+        let textarea = $('#diaryContent')[0];
+        // テキストエリア内の文字数を取得
+        let count = textarea.value.length;
+        // テキストエリアの最大文字数
+        let maxLength = 1000;
+
+        // Enterキーが押され、かつテキストエリア内の文字数が最大文字数以上の場合
+        if (event.key === 'Enter' && count >= maxLength) {
+            // Enterキーのデフォルトの動作をキャンセル
+            event.preventDefault();
+            // テキストエリアに改行を追加
+            textarea.value += '\n';
+            // 文字数を再計算して表示
+            countCharacters(textarea);
+            // イベントの伝播を停止
+            return false;
+        }
+        // Enter以外の場合は何もしない
+        return true;
+    }
+
+    // ページのDOMが完全に読み込まれたときに実行、ボタンを動的に表示させる
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初期表示では2つ目以降のphotoとmovieの要素を非表示にするための関数を呼び出す
+        hideElements('photo', 2);
+        hideElements('movie', 2);
+
+        // 指定されたタイプ（photoまたはmovie）と開始インデックスから4までの要素を非表示
+        function hideElements(type, start) {
+            for (let i = start; i <= 4; i++) {
+                // id属性に id_ を付与
+                const container = document.getElementById(`container_${type}${i}`);
+                if (container) {
+                    // 非表示
+                    container.style.display = 'none';
+                }
+            }
+        }
+
+        // 指定されたタイプとインデックスの次の要素を表示する関数
+        function showNextElement(type, index) {
+            const nextIndex = index + 1;
+            const nextContainer = document.getElementById(`container_${type}${nextIndex}`);
+            if (nextContainer) {
+                // 次の要素を表示
+                nextContainer.style.display = 'block';
+            }
+        }
+
+        // photoまたはmovieのファイルが選択されたときに次の要素を表示するイベントを設定
+        function handleFileInput(type, index) {
+            const input = document.getElementById(`id_${type}${index}`);
+            const label = document.getElementById(`label_${type}${index}`);
+            const fileNameSpan = document.getElementById(`file_name_${type}${index}`);
+
+            if (input && label && fileNameSpan) {
+                input.addEventListener('change', function() {
+                    if (input.files.length > 0) {
+                        fileNameSpan.textContent = input.files[0].name;
+                        showNextElement(type, index);
+                    } else {
+                        fileNameSpan.textContent = '選択されていません';
+                    }
+                });
+            }
+            //if (input && label && fileNameSpan) {
+                //label.addEventListener('click', function() {
+                    //input.click();
+                //});
+        }
+
+        //handleFileInput関数を使用して、各photoおよびmovieフィールドに対してファイルが選択されたときの
+        // 動的な表示を設定
+        // photoファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInput('photo', i);
+        }
+
+        // movieファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInput('movie', i);
+        }
+
+        // 添付ファイルを選択後、ファイル名を更新する関数
+        function updateFileName(input, fileNameSpanId) {
+            const fileNameSpan = document.getElementById(fileNameSpanId);
+            if (fileNameSpan) {
+                if (input.files.length > 0) {
+                    fileNameSpan.textContent = input.files[0].name;
+                } else {
+                    fileNameSpan.textContent = '選択されていません';
+                }
+            }
+        }
+    });
+</script>
 {% endblock %}

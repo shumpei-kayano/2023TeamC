@@ -30,7 +30,7 @@
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
-        <form method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+        <form id = "creatediaryform"method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
 
         {% csrf_token %}
             <div class="content__today-diary">
@@ -103,7 +103,14 @@
                 </div>
 
                 <div class="btn--blue">
-                    <button type="submit">確認</button>
+                  <button id="submitButton" type="submit">確認</button>
+                  <div id="loading">
+                    <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                    <div class="loading-content">
+                      <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                      読み込み中...
+                    </div>
+                  </div>
                 </div>
             </div>
         </form>
@@ -233,5 +240,9 @@
             }
         }
     });
+    document.getElementById('creatediaryform').addEventListener('submit', function (event) {
+      // ボタンがクリックされたらローディング画面を表示
+      document.getElementById('loading').style.display = 'block';
+  });
 </script>
 {% endblock %}

@@ -1,7 +1,570 @@
-h1 {
-  color: red;
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500&display=swap");
+html {
+  font-size: 10px;
 }
 
-h2 {
-  background-color: yellow;
-}/*# sourceMappingURL=style.css.map */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  background-color: #FFFDF3;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  line-height: 1.7rem;
+  letter-spacing: 0.04rem;
+}
+
+a {
+  letter-spacing: 0.04rem;
+  text-decoration: none;
+}
+
+.menu__item, .list_item {
+  list-style: none;
+}
+
+header, .ground, footer {
+  width: 39rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  top: 0;
+  right: 0;
+  left: 0;
+  color: #FFFFFF;
+  background-color: #EEFEFF;
+  height: 5rem;
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 0;
+}
+header h1 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+header .header__spacer--top {
+  margin-right: auto; /* h1以外の要素を左寄せにする */
+  display: flex;
+  width: 7.2rem;
+  height: 2.8rem;
+}
+header .header__button {
+  margin-right: auto; /* h1以外の要素を左寄せにする */
+  display: flex;
+}
+header .header__button a {
+  display: flex;
+  align-items: center;
+  width: 7.2rem;
+  height: 2.8rem;
+  font-size: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+  border: 0.1rem solid #FFF;
+  background-color: #04CAD6;
+}
+header .header__button a svg {
+  margin-right: 0.5rem;
+}
+header .header__button a:hover {
+  background-color: #00A3AE;
+}
+header .header__spacer, header .header__weather {
+  margin-left: auto; /* 要素を右寄せにする */
+  width: 7.2rem;
+  height: 2.8rem;
+}
+header .weatherImg {
+  max-width: 2.2rem;
+  height: auto;
+  padding-bottom: 0.4rem;
+}
+header .header__weather span {
+  margin-left: 0.5rem;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+.logo-img {
+  margin-top: 0;
+}
+
+.ground {
+  margin-top: 0rem; /*上に空白を追加*/
+  height: calc(100vh - 5rem - 6rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+}
+
+.ground::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.ground::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.ground::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
+.ground--white {
+  background-color: #EEFEFF;
+}
+.ground--blue {
+  background-color: #EEFEFF;
+}
+
+footer {
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 15px;
+  background-color: #EEFEFF;
+}
+
+@media only screen and (max-width: 767px) {
+  .ground {
+    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+  }
+}
+@media only screen and (max-width: 767px) and (max-width: 767px) {
+  header, .ground, footer {
+    width: 100%;
+    max-width: none;
+  }
+  header {
+    height: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  header a {
+    width: 72px;
+    height: 28px;
+    font-size: 14px;
+    border: 1px solid #FFF;
+  }
+  header a svg {
+    margin-right: 5px;
+  }
+  header a:hover {
+    background-color: #00A3AE;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  .ground {
+    margin-top: 0px; /*上に空白を追加*/
+    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+  }
+  .ground::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 20px;
+  }
+  .ground::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+  }
+}
+footer {
+  margin-bottom: 0;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  text-align: center; /* 中央寄せを追加 */
+  cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+}
+.btn--blue {
+  width: 342px;
+  height: 48px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+.btn--blue button, .btn--blue a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+}
+.btn--blue button:hover, .btn--blue a:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+.btn--large {
+  width: 342px;
+  height: 56px;
+}
+.btn--large button, .btn--large a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+}
+.btn--large button:hover, .btn--large a:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+.btn--white {
+  width: 342px;
+  height: 48px;
+}
+.btn--white button, .btn--white a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #FFF);
+  color: #00ABB6;
+  font-size: 1.6rem;
+  border: 1px solid #00ABB6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.btn--white button:hover, .btn--white a:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+.btn--back {
+  width: 96px;
+  height: 48px;
+  padding: 18px 28px 10px 28px;
+  border-radius: 50px;
+}
+.btn--back button {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--, #00ABB6);
+  color: #FFF;
+  font-size: 1.6rem;
+}
+.btn--back button:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+
+.user-infomation {
+  width: 342px;
+  height: 310px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
+.user-infomation .user-label {
+  font-size: 1.4rem;
+  margin: 0;
+}
+.user-infomation .user-info {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 16px;
+}
+
+input[type=text], input[type=email] input[type=password] input[type=password2] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+.back-top {
+  display: flex;
+  width: 172px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+}
+.back-top button {
+  color: #A29C9C;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+.back-top button:hover {
+  color: #797979; /* マウスをかざしたときの背景色 */
+  text-decoration: underline;
+  text-decoration-color: #797979;
+}
+
+.content__home__text {
+  position: relative;
+  fill: #FFFFFF;
+  stroke-width: 2px;
+  stroke: #04CAD6;
+  width: 340px;
+  height: 122px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #04CAD6;
+  border-radius: 10px;
+}
+.content__home__text p {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+.content__home__text::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 20px;
+  border-style: solid;
+  border-color: #04CAD6 transparent transparent transparent;
+}
+.content__home__text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 18px;
+  border-style: solid;
+  border-color: #FFFFFF transparent transparent transparent;
+}
+
+.header__back__img {
+  display: flex;
+  align-items: center;
+}
+.header__back__img a {
+  display: flex;
+  width: 96px;
+  height: 48px;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #004c54;
+}
+.header__back__img img {
+  margin: 0;
+}
+.header__back__img img.logo-img {
+  margin-left: 170px;
+}
+.header__back__img .header__back__img a, .header__back__img .header__back__img .logo-img {
+  display: inline-block;
+}
+
+.logo-img {
+  width: 90.621px;
+  height: 48px;
+  flex-shrink: 0;
+  margin-left: 225px;
+}
+
+.ground--blue {
+  background-color: #EEFEFF;
+}
+
+.img-icon {
+  margin-top: 70px;
+  margin-left: 48px;
+}
+
+.login__text {
+  color: #000;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+
+.html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn--large {
+  margin-top: 50px;
+  margin-left: 24px;
+}
+
+.login__text {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 75px;
+}
+
+.btn--white {
+  margin-left: 24px;
+}
+
+input[type=username], input[type=email], input[type=password], input[type=password] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.signup-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.login-text {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-home {
+  color: #A29C9C;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  text-align: center;
+}
