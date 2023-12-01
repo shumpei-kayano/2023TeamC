@@ -51,7 +51,7 @@
                 <div class="emotion__graph__img">
                     <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
                     {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
-                    <canvas id="barChart" width="400" height="200"></canvas><!-- 棒グラフ -->
+                    <canvas id="barChart" width="400" height="60"></canvas><!-- 棒グラフ -->
                     <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
                 </div>
             </div>
@@ -130,7 +130,7 @@
       return 0;
     }
     var sum = dataArray.reduce((total, value) => total + value, 0);
-    return sum / dataArray.length;
+    return Math.floor(sum / dataArray.length);
   }
 
   var myChart = new Chart(ctx, {
@@ -171,12 +171,12 @@
       options: {
           indexAxis: 'y', 
           scales: {
-              x: {
-                  stacked: true
-              },
-              y: {
-                  stacked: true
-              }
+            y: {
+              stacked: "100%",
+          },
+          x: {
+              stacked: "100%",
+          }
           }
       }
   });
