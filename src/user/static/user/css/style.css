@@ -4,12 +4,16 @@ html {
   font-size: 10px;
 }
 
+.main {
+  background-color: #EEFEFF;
+}
+
 body {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
   background-color: #FFFDF3;
   width: 100%;
-  height: 100%;
+  min-height: 100vh; /* height: 100% を min-height: 100vh に変更 */
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -106,48 +110,20 @@ header .header__weather span {
   margin-top: 0;
 }
 
-.ground {
-  margin-top: 0rem; /*上に空白を追加*/
-  height: calc(100vh - 5rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
-}
-
-.ground::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.ground::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.ground::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
-}
-
-.ground--white {
-  background-color: #EEFEFF;
-}
-.ground--blue {
-  background-color: #EEFEFF;
-}
-
 footer {
   padding-right: 2.4rem;
   padding-left: 2.4rem;
-  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
   height: 15px;
   background-color: #EEFEFF;
-  flex-shrink: 0;
+  margin-top: auto; /* 追加 */
 }
 
 @media only screen and (max-width: 767px) {
   .ground {
-    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    height: calc(100vh - 5rem - 1.5rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   }
 }
 @media only screen and (max-width: 767px) and (max-width: 767px) {
@@ -177,7 +153,7 @@ footer {
   }
   .ground {
     margin-top: 0px; /*上に空白を追加*/
-    height: calc(100vh - 5rem - 15px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    height: auto; /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   }
   .ground::-webkit-scrollbar {
     width: 5px;
@@ -187,7 +163,19 @@ footer {
   .ground::-webkit-scrollbar-thumb {
     border-radius: 20px;
   }
+  footer {
+    height: 15px;
+    padding-right: 24px;
+    padding-left: 24px;
+    position: static;
+    background-color: #EEFEFF;
+  }
 }
+.ground.ground--blue {
+  background-color: #EEFEFF;
+  flex-grow: 1;
+}
+
 .btn {
   display: flex;
   justify-content: center;
@@ -334,7 +322,7 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
 }
 
-.back-top {
+.back-home {
   display: flex;
   width: 172px;
   height: 24px;
@@ -344,7 +332,7 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   flex-shrink: 0;
   cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
-.back-top button {
+.back-home a {
   color: #A29C9C;
   font-size: 1.6rem;
   font-style: normal;
@@ -352,7 +340,7 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   line-height: normal;
   letter-spacing: 0.64px;
 }
-.back-top button:hover {
+.back-home a:hover {
   color: #797979; /* マウスをかざしたときの背景色 */
   text-decoration: underline;
   text-decoration-color: #797979;
@@ -428,9 +416,6 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
 .header__back__img img {
   margin: 0;
 }
-.header__back__img img.logo-img {
-  margin-left: 170px;
-}
 .header__back__img .header__back__img a, .header__back__img .header__back__img .logo-img {
   display: inline-block;
 }
@@ -440,6 +425,12 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
   height: 48px;
   flex-shrink: 0;
   margin-left: 225px;
+}
+
+.back-home {
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .ground--blue {
@@ -527,6 +518,9 @@ label {
   margin-right: 8px;
   margin-top: 2px;
 }
+.header__back__img a img.logo-img {
+  margin-left: 170px;
+}
 
 .btn--blue {
   margin-top: 40px;
@@ -557,11 +551,88 @@ label {
 }
 
 .back-home {
-  color: #A29C9C;
-  font-size: 1.6rem;
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.mail-text {
+  color: #000;
+  font-family: Noto Sans JP;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  letter-spacing: 0.8px;
+  text-align: center;
+}
+
+.mail-text2 {
+  color: #000;
+  text-align: center;
+  font-family: Noto Sans JP;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 27.2px */
   letter-spacing: 0.64px;
+  text-align: center;
+}
+
+.mail-text3 {
+  color: #000;
+  text-align: center;
+  font-family: Noto Sans JP;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.header__back__img {
+  margin-left: 270px;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+
+.back-home {
+  padding-top: 170px;
+}
+
+.wrapperHeader {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
   text-align: center;
 }
