@@ -2,13 +2,14 @@
 //     margin: 0;
 // }
 
-.scroll--content {
+.member__scroll--content {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex-direction: column; // 子要素を縦方向に並べる
 }
+
 
 .member__header-text {
     color: #000;
