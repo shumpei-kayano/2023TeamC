@@ -74,7 +74,7 @@
                                 {% if diary_entry.created_date == day %}
                                     {% for emotion_entry in emotion %}
                                         {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                            <a  style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
                                                 <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                 {{ diary_entry.content }}
                                             </a>
@@ -90,7 +90,7 @@
                                 {% if diary_entry.created_date == day %}
                                     {% for emotion_entry in emotion %}
                                         {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                            <a  style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
                                                 <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                 {{ diary_entry.content }}
                                             </a>
@@ -105,7 +105,7 @@
                                 {% if diary_entry.created_date == day %}
                                     {% for emotion_entry in emotion %}
                                         {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                            <a style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
                                                 <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                 {{ diary_entry.content }}
                                             </a>
@@ -120,7 +120,7 @@
                                 {% if diary_entry.created_date == day %}
                                     {% for emotion_entry in emotion %}
                                         {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                            <a style="width:100%; height:100%; display:block;"  href="{% url 'diary:today_diary_detail' diary_entry.id %}">
                                                 <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
                                                 {{ diary_entry.content }}
                                             </a>
