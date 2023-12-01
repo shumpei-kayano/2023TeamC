@@ -9,31 +9,20 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
+            {% comment %} home_top.htmlに遷移させてください {% endcomment %}
+            <a href="#" id="header__back__btn" onclick="history.back()">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
         </div>
     </div>
-    {% comment %} <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div>
-    <!-- 天気アイコン・気温の表示  -->
+
+    <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
-        {% if カレンダーから遷移した場合 %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 選択された日の気温を表示おねがいします 00℃ }}
-        {% else %}
-            <div class="header__weather__img">
-                <img src="{% static 'diary/assets/{{ 天気のアイコンを表示させてください  weather_icon (晴れ sunny.svg 曇り cloud.svg 雨 rain.svg 雪 snow.svg)}}' %}"alt="天気の画像" >
-            </div>
-            {{ 現在の気温を表示 }}
-        {% endif %}
-    </div> {% endcomment %}
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
 </header>
 {% endblock %}
 
@@ -47,27 +36,37 @@
                 {% csrf_token %}
                 <div class="content__today-diary__text">
                     <p>{{ saved_diary.content }}</p>
-                    {% if saved_diary.photo1 %}
-                        <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1">
-                    {% endif %}
-                    {% if saved_diary.photo2 %}
-                        <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2">
-                    {% endif %}
-                    {% if saved_diary.photo3 %}
-                        <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3">
-                    {% endif %}
-                    {% if saved_diary.photo4 %}
-                        <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
-                    {% endif %}
-                    <p>{{ saved_diary.ai_comment }}</p>
-                    {{ comprehend}}
+
+                    <div class="content__today-diary__img">
+                        {% if saved_diary.photo1 %}
+                            <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1" class="content__today-diary__item">
+                        {% endif %}
+                        {% if saved_diary.photo2 %}
+                            <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2" class="content__today-diary__item">
+                        {% endif %}
+                        {% if saved_diary.photo3 %}
+                            <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3" class="content__today-diary__item">
+                        {% endif %}
+                        {% if saved_diary.photo4 %}
+                            <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4" class="content__today-diary__item">
+                        {% endif %}
+                    </div>
                 </div>
 
-                <div class="cancel__button">
+                <!-- ネコココメント -->
+                <div class="content__diary__comment">
+                    <p>{{ saved_diary.ai_comment }}</p>
+                </div>
+                <!-- ネココの画像 -->
+                <div class="content__diary__comment__img">
+                    <img src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                </div>
+
+                <div class="btn--blue">
                     <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
                     {% comment %} <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button> {% endcomment %}
                 </div>
-                <div class="button">
+                <div class="btn--white">
                     <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
                 </div>
 
@@ -126,8 +125,8 @@
 
 {% block js %}
 <script>
-    // キャンセルボタンを押したときの処理
-    document.getElementById("header__back__img").addEventListener("click", function() {
+    // 戻るボタンを押したときの処理
+    document.getElementById("header__back__btn").addEventListener("click", function() {
         history.back();
     });
 
