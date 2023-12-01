@@ -17,7 +17,7 @@ from django.http import JsonResponse
 
 
 # comrehendを使って感情分析を行う関数
-def analyze_sentiment(text, diary,user):
+def analyze_sentiment(text, diary, user):
     # 感情分析の生成
     comprehend = boto3.client('comprehend', 'us-east-1')
     result = comprehend.detect_sentiment(Text=text, LanguageCode='ja')
@@ -29,21 +29,21 @@ def analyze_sentiment(text, diary,user):
     if existing_emotion:
         # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在する場合は上書き保存
         existing_emotion.reasoning = result['Sentiment']
-        existing_emotion.positive = result['SentimentScore']['Positive']
-        existing_emotion.negative = result['SentimentScore']['Negative']
-        existing_emotion.neutral = result['SentimentScore']['Neutral']
-        existing_emotion.mixed = result['SentimentScore']['Mixed']
+        existing_emotion.positive = round(result['SentimentScore']['Positive'] * 100, 1)
+        existing_emotion.negative = round(result['SentimentScore']['Negative'] * 100, 1)
+        existing_emotion.neutral = round(result['SentimentScore']['Neutral'] * 100, 1)
+        existing_emotion.mixed = round(result['SentimentScore']['Mixed'] * 100, 1)
         existing_emotion.save()
-    # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
     else:
+        # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
         new_emotion = Emotion(
             diary=diary,
-            user = user,
+            user=user,
             reasoning=result['Sentiment'],
-            positive=result['SentimentScore']['Positive'],
-            negative=result['SentimentScore']['Negative'],
-            neutral=result['SentimentScore']['Neutral'],
-            mixed=result['SentimentScore']['Mixed'],
+            positive=round(result['SentimentScore']['Positive'] * 100, 1),
+            negative=round(result['SentimentScore']['Negative'] * 100, 1),
+            neutral=round(result['SentimentScore']['Neutral'] * 100, 1),
+            mixed=round(result['SentimentScore']['Mixed'] * 100, 1),
         )
         new_emotion.save()
 
@@ -56,7 +56,7 @@ def chart_data(emotions):
       'negative': [emotion.negative for emotion in emotions],
       'neutral': [emotion.neutral for emotion in emotions],
       'mixed': [emotion.mixed for emotion in emotions],
-      'date' : [emotion.created_date for emotion in emotions]
+      'date' : [emotion.month_day for emotion in emotions]
   }
 
   return data
@@ -86,7 +86,7 @@ def aicomment_week(emotion):
         negative_diary = Diary.objects.get(id = negative.diary_id)
 
         openai.api_key = settings.OPENAI_API_KEY
-        user_diary = "貴方は以下の設定や指示を遵守し、今週の日記に対する感想を下さい。\n #キャラクター{\n・ネッココ}\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n150文字以内}\n・形式{\n箇条書きでの返答はせず、{キャラクター}が会話しているようにする\n最初に今週どんなことがあったかを70字以内で簡潔に振り返る}\n・例文{\n今週は{日記の内容}があったね。おつかれさま！来週も充実した生活がおくれるといいね！}}\n以下が日記の内容です。\n" + positive_diary.content + "\n" + negative_diary.content
+        user_diary = "貴方は以下の設定や指示を遵守し、今週の日記に対する感想を下さい。特に出力ルールには厳密に従ってください。\n #キャラクター{\n・ネッココ}\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n150文字以内}\n・形式{\n箇条書きでの返答はしない\n最初に今週どんなことがあったかを70字以内で簡潔に振り返る\n正確な日本語、文法を使用する\n敬語は使用しない}\n・例文{\n今週は{日記の内容}があったね。おつかれさま！来週も充実した生活がおくれるといいね！}}\n以下が日記の内容です。\n" + positive_diary.content + "\n" + negative_diary.content
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -234,7 +234,7 @@ def create_diary_confirmation2(request, pk):
             form.save()
             openai.api_key = settings.OPENAI_API_KEY
 
-            user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はせず、{キャラクター}が会話しているようにする}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n"+ diary.content
+            user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n"+ diary.content
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [

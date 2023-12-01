@@ -82,3 +82,7 @@ class Emotion(models.Model):
 
     def __str__(self):
         return f'Emotion analysis for Diary {self.diary}'
+      
+    @property
+    def month_day(self):
+      return f"{self.created_date.month}月{self.created_date.day}日"

@@ -259,7 +259,7 @@ footer .nav-text {
   width: 342px;
   height: 56px;
 }
-.btn--large button {
+.btn--large button, .btn--large a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
@@ -275,7 +275,7 @@ footer .nav-text {
   color: #FFF;
   font-size: 1.6rem;
 }
-.btn--large button:hover {
+.btn--large button:hover, .btn--large a:hover {
   background-color: #00909A; /* マウスをかざしたときの背景色 */
 }
 .btn--white {
@@ -283,7 +283,7 @@ footer .nav-text {
   height: 48px;
   margin-bottom: 40px;
 }
-.btn--white button {
+.btn--white button, .btn--white a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
@@ -301,7 +301,7 @@ footer .nav-text {
   border: 1px solid #00ABB6;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
-.btn--white button:hover {
+.btn--white button:hover, .btn--white a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
 .btn--red {
@@ -593,6 +593,16 @@ footer .nav-text {
   font-weight: 400;
   margin: 0;
   padding: 16px;
+}
+
+.back-home a {
+  color: #A29C9C;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  text-align: center;
 }
 
 .content__help__group h2 {
@@ -1296,6 +1306,7 @@ label {
   margin: 24px auto 40px auto;
   box-sizing: border-box;
 }
+
 /* 767以下の時のフルスクリーン設定 */
 #loading {
   display: none;
@@ -1305,15 +1316,15 @@ label {
   left: 0;
   height: 100%;
   width: 100%;
-  background: #EEFEFF;  
-  #logo {
-    width: 25%;
-    margin-top: 7%;
-    margin-left: 5%;
-    position: absolute; /* 絶対位置に設定 */
-    top: 0; /* 上端に配置 */
-    left: 0; /* 左端に配置 */
-  }
+  background: #EEFEFF;
+}
+#loading #logo {
+  width: 25%;
+  margin-top: 7%;
+  margin-left: 5%;
+  position: absolute; /* 絶対位置に設定 */
+  top: 0; /* 上端に配置 */
+  left: 0; /* 左端に配置 */
 }
 
 #loading .loading-content {
@@ -1323,11 +1334,11 @@ label {
   transform: translate(-50%, -50%);
   color: rgb(0, 0, 0);
   font-size: 180%;
-
-  #teacat {
-    display: block;
-    width: 55%; /* 幅を100pxに設定 */
-    margin: auto;
-  }
 }
+#loading .loading-content #teacat {
+  display: block;
+  width: 55%; /* 幅を100pxに設定 */
+  margin: auto;
+}
+
 /* ここまで */
