@@ -7,11 +7,7 @@
 
 {% block header %}
 <header>
-    <div class="header__button">
-        <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
-        </div>
-    </div>
+
     {% comment %} <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
         {% if カレンダーから遷移した場合 %}
