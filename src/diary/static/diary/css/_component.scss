@@ -63,6 +63,7 @@
     &--white {
         width: 342px;
         height: 48px;
+        margin-bottom: 40px;
         
         button, a{
             @include button-style;

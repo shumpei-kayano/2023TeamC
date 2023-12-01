@@ -17,7 +17,7 @@ from django.http import JsonResponse
 
 
 # comrehendを使って感情分析を行う関数
-def analyze_sentiment(text, diary,user):
+def analyze_sentiment(text, diary, user):
     # 感情分析の生成
     comprehend = boto3.client('comprehend', 'us-east-1')
     result = comprehend.detect_sentiment(Text=text, LanguageCode='ja')
@@ -29,21 +29,21 @@ def analyze_sentiment(text, diary,user):
     if existing_emotion:
         # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在する場合は上書き保存
         existing_emotion.reasoning = result['Sentiment']
-        existing_emotion.positive = result['SentimentScore']['Positive']
-        existing_emotion.negative = result['SentimentScore']['Negative']
-        existing_emotion.neutral = result['SentimentScore']['Neutral']
-        existing_emotion.mixed = result['SentimentScore']['Mixed']
+        existing_emotion.positive = round(result['SentimentScore']['Positive'] * 100, 1)
+        existing_emotion.negative = round(result['SentimentScore']['Negative'] * 100, 1)
+        existing_emotion.neutral = round(result['SentimentScore']['Neutral'] * 100, 1)
+        existing_emotion.mixed = round(result['SentimentScore']['Mixed'] * 100, 1)
         existing_emotion.save()
-    # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
     else:
+        # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
         new_emotion = Emotion(
             diary=diary,
-            user = user,
+            user=user,
             reasoning=result['Sentiment'],
-            positive=result['SentimentScore']['Positive'],
-            negative=result['SentimentScore']['Negative'],
-            neutral=result['SentimentScore']['Neutral'],
-            mixed=result['SentimentScore']['Mixed'],
+            positive=round(result['SentimentScore']['Positive'] * 100, 1),
+            negative=round(result['SentimentScore']['Negative'] * 100, 1),
+            neutral=round(result['SentimentScore']['Neutral'] * 100, 1),
+            mixed=round(result['SentimentScore']['Mixed'] * 100, 1),
         )
         new_emotion.save()
 

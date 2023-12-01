@@ -1,0 +1,35 @@
+/* 767以下の時のフルスクリーン設定 */
+#loading {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #EEFEFF;  
+    #logo {
+      width: 25%;
+      margin-top: 7%;
+      margin-left: 5%;
+      position: absolute; /* 絶対位置に設定 */
+      top: 0; /* 上端に配置 */
+      left: 0; /* 左端に配置 */
+    }
+  }
+  
+  #loading .loading-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    font-size: 180%;
+  
+    #teacat {
+      display: block;
+      width: 55%; /* 幅を100pxに設定 */
+      margin: auto;
+    }
+  }
+  /* ここまで */
