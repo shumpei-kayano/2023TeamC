@@ -876,7 +876,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 .calendar__month td {
   position: relative;
-  font-size: 16px;
   border: 1px solid #04CAD6;
 }
 .calendar__month td .calendar__month--today-td {
@@ -885,24 +884,30 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   border-radius: 50px;
   color: #ffffff;
 }
-.calendar__month td p {
+.calendar__month td .calendar__month--today-td, .calendar__month td .calendar__month__td {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 10px;
+  margin-top: 5px;
+  font-size: 14px;
 }
-.calendar__month td img {
+.calendar__month td .calendar__month__img {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 0);
   margin-bottom: 10px;
+  max-width: 18px;
 }
 
-@media only screen and (max-width: 960px) {
-  .calendar__month table td {
-    font-size: 18px;
+@media only screen and (min-height: 600px) {
+  .calendar__month--today-td, .calendar__month__td {
+    font-size: 18px !important;
+    margin-top: 10px !important;
+  }
+  .calendar__month__img {
+    max-width: 22px !important;
   }
 }
 main {

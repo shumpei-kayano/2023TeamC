@@ -59,7 +59,6 @@
 
     td {
         position: relative;  // テーブルセルを相対位置に設定
-        font-size: 16px;
         border: 1px solid $header_color;
 
         .calendar__month--today-td{
@@ -68,42 +67,31 @@
             border-radius: 50px;
             color: #ffffff;
         }
-        
-        p{
+        .calendar__month--today-td, .calendar__month__td{
             position: absolute;  // テキストを絶対位置に設定
             top: 0;  // 上部に配置
             left: 50%;  // 水平方向に中央に配置
             transform: translateX(-50%);  // 水平方向に中央に配置
-            margin-top: 10px;
+            margin-top: 5px;
+            font-size: 14px;
         }
-        img{
+        .calendar__month__img{
             position: absolute;
             top: 50%;  // p要素の下部から50%の位置に配置
             left: 50%;
             transform: translate(-50%, 0);
             margin-bottom: 10px;
+            max-width: 18px;
         }
     }
 }
 
-// a {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     text-decoration: none;
-//     color: inherit;
-
-//     img {
-//         margin-bottom: 5px;  // テキストと画像の間に余白を追加
-//     }
-// }
-
-@media only screen and (max-width: 960px) {
-    .calendar__month {
-        table {
-            td {
-                font-size: 18px;
-            }
-        }
+@media only screen and (min-height: 600px) {
+    .calendar__month--today-td, .calendar__month__td {
+        font-size: 18px !important;
+        margin-top: 10px !important;
+    }
+    .calendar__month__img{
+        max-width: 22px !important;
     }
 }
