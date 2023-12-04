@@ -25,6 +25,8 @@ class Diary(models.Model):
 
     # AIコメント
     ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
+    # カウンセリング可否
+    counseling = models.BooleanField(verbose_name='カウンセリング可否', default=False)
 
     def __str__(self):
         return f'Diary by {self.user}'
@@ -82,3 +84,7 @@ class Emotion(models.Model):
 
     def __str__(self):
         return f'Emotion analysis for Diary {self.diary}'
+      
+    @property
+    def month_day(self):
+      return f"{self.created_date.month}月{self.created_date.day}日"

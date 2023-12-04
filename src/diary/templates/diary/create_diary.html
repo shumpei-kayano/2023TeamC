@@ -35,7 +35,7 @@
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
-        <form id = "creatediaryform"method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+        <form id="creatediaryform" method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
 
         {% csrf_token %}
             <div class="content__today-diary">
@@ -126,11 +126,6 @@
 
 {% block js %}
 <script>
-    // 戻るボタンを押したときの処理
-    document.getElementById("header__back__btn").addEventListener("click", function() {
-        // キャッシュをクリアしてからページ遷移
-        location.href = "http://localhost/diary/home/top";
-    });
 
     // 文字数のカウント
     function countCharacters(textarea) {
