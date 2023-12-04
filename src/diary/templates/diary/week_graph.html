@@ -45,17 +45,17 @@
                     <a href="{% url 'diary:week_graph' week_start_up %}">
                       <img src="{% static 'diary/assets/right_arrow.svg' %}">
                     </a>
+                  </div>
                     {% comment %} 今週に戻る {% endcomment %}
+                    <div class="a--blue">
                     <a href="{% url 'diary:week_graph' %}"><img src="{% static 'diary/assets/return_arrow.svg' %}">今週</a>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <!-- グラフの表示 -->
             <div id="emotion__graph">
                 <div class="emotion__graph__img">
-                    <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
-                    {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
                     <canvas id="barChart" width="400" height="85"></canvas><!-- 棒グラフ -->
                     <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
                 </div>

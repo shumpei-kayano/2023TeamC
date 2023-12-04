@@ -35,24 +35,27 @@
         <!-- 月間のページネーション -->
         <div class="col-md-6">
             <div class="text-right">
+              <div class="next__button">
               <a href="{% url 'diary:month_graph' prev_month %}">
                 <img src="{% static 'diary/assets/left_arrow.svg' %}">
               </a>
                 <div calss="text-center">
                     <span id="year-month"></span>
                 </div>
-                <a href="{% url 'diary:month_graph' next_month %}">
+              <a href="{% url 'diary:month_graph' next_month %}">
                   <img src="{% static 'diary/assets/right_arrow.svg' %}">
-                </a>
+              </a>
+            </div>
                 {% comment %} 今月に戻る {% endcomment %}
+                <div class="a--blue">
                     <a href="{% url 'diary:month_graph' %}"><img src="{% static 'diary/assets/return_arrow.svg' %}">今月</a>
+                </div>
             </div>
         </div>
 
         <!-- グラフの表示 -->
             <div id="emotion__graph">
                 <div class="emotion__graph__img">
-                    <img src="{% static 'diary/assets/emotion_graph.svg' %}" alt="感情グラフ">感情グラフ</img>
                     {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
                     <canvas id="barChart" width="400" height="85"></canvas><!-- 棒グラフ -->
                     <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
