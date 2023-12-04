@@ -13,6 +13,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  color: #333;
 }
 
 p {
@@ -153,6 +154,12 @@ footer .menu__list {
 footer .menu__item {
   margin: 0;
 }
+footer .menu__item svg {
+  width: 2.4rem;
+}
+footer .menu__item .footer__home, footer .menu__item .footer__week, footer .menu__item .footer__month, footer .menu__item .footer__setting {
+  fill: #ADADAD;
+}
 footer a {
   display: flex;
   flex-direction: column;
@@ -166,8 +173,14 @@ footer .nav-text {
   color: #ADADAD; /* メニューテキストの色 */
   margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
 }
+footer a:hover .nav-text {
+  color: #007880;
+}
+footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .footer__month, footer a:hover .footer__setting {
+  fill: #00ABB6;
+}
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
   header, .ground, footer {
     width: 100%;
     max-width: none;
@@ -181,13 +194,6 @@ footer .nav-text {
     width: 72px;
     height: 28px;
     font-size: 14px;
-    border: 1px solid #FFF;
-  }
-  header a svg {
-    margin-right: 5px;
-  }
-  header a:hover {
-    background-color: #00A3AE;
   }
   h1 {
     font-size: 20px;
@@ -357,7 +363,6 @@ footer .nav-text {
   stroke-width: 2px;
   stroke: #04CAD6;
   width: 340px;
-  height: 122px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -373,6 +378,7 @@ footer .nav-text {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.8px;
+  margin: 0; /* 余白をリセット */
 }
 .content__home__text::before {
   content: "";
@@ -387,7 +393,7 @@ footer .nav-text {
 .content__home__text::after {
   content: "";
   position: absolute;
-  top: 100%;
+  top: 99%;
   left: 50%;
   transform: translateX(-50%);
   border-width: 18px;
@@ -860,7 +866,7 @@ footer .nav-text {
 }
 .calendar__month th {
   font-size: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .calendar__month .sun {
   color: #FC8686;
@@ -884,25 +890,19 @@ footer .nav-text {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .calendar__month td img {
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 8px;
+  transform: translate(-50%, 0);
+  margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
   .calendar__month table td {
     font-size: 18px;
-  }
-  .calendar__month table td p {
-    margin-top: 25px;
-  }
-  .calendar__month table td img {
-    margin-bottom: 25px;
   }
 }
 main {
@@ -1230,9 +1230,89 @@ label {
 }
 
 .btn--large {
-  margin: 24px auto 40px auto;
+  margin: 10px auto 20px auto;
 }
 
+.content__home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__home__logo img, .content__home__img img {
+  max-width: 100px;
+  height: auto;
+  margin: 1rem auto 0 auto;
+}
+
+.content__home__img img {
+  max-width: 200px;
+}
+
+.content__home__logo {
+  margin-bottom: 1rem;
+}
+
+.content__home__text p {
+  font-size: 1.6rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 960px) {
+  .content-center {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn--large {
+    margin: 24px auto 40px auto;
+  }
+  .content__home__logo img, .content__home__img img {
+    width: auto;
+    height: auto;
+    margin: 24px auto 0 auto;
+  }
+  .content__home__logo {
+    margin-bottom: 24px;
+  }
+  .content__home__text p {
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+@media only screen and (max-height: 599px) {
+  /* 画面の高さが600px未満の場合のスタイル */
+  .btn--large {
+    margin: 10px auto 20px auto;
+  }
+  .content__home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .content__home__logo img, .content__home__img img {
+    max-width: 100px;
+    height: auto;
+    margin: 10px auto 0 auto;
+  }
+  .content__home__img img {
+    max-width: 200px;
+  }
+  .content__home__logo {
+    margin-bottom: 10px;
+  }
+  .content__home__text p {
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
 .content__today-diary__text {
   width: 100%;
   background-color: #FFFFFF;

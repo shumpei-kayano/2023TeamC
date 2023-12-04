@@ -9,6 +9,11 @@
 
 {% block title %}週間カレンダー{% endblock %}
 
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/calendar-week_page.css' %}">
+{% endblock %}
+
 {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->
@@ -40,11 +45,11 @@
         <div class="next__button">
             <!-- 左ボタン -->
             <a href="{% url 'diary:calender_week' week_start %}">
-                <img src="{% static 'diary/assets/left_arrow.png' %}" alt="矢印のアイコン">
+                <img src="{% static 'diary/assets/left_arrow.svg' %}" alt="矢印のアイコン">
             </a>
 
             <a href="{% url 'diary:calender_week' week_start_up %}">
-                <img src="{% static 'diary/assets/right_arrow.png' %}" alt="矢印のアイコン">
+                <img src="{% static 'diary/assets/right_arrow.svg' %}" alt="矢印のアイコン">
             </a>
         </div>
         {% comment %} 年、月 {% endcomment %}

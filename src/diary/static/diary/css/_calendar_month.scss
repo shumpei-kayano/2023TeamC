@@ -36,17 +36,17 @@
     table {
         width: 100%;
         table-layout: fixed; /* テーブルのレイアウトを固定にする */
-        height: calc(100vh - 227px);
+        height: calc(100vh - 227px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
 
     th, td {
         text-align: center;
-        box-sizing: border-box;
+        box-sizing: border-box; // 要素の横幅や高さの計算にボーダーボックスモデルを使用。ボーダーやパディングも横幅や高さに含む。
     }
 
     th {
         font-size: 12px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
 
     .sun {
@@ -74,14 +74,14 @@
             top: 0;  // 上部に配置
             left: 50%;  // 水平方向に中央に配置
             transform: translateX(-50%);  // 水平方向に中央に配置
-            margin-top: 8px;
+            margin-top: 10px;
         }
         img{
             position: absolute;
-            bottom: 0;
+            top: 50%;  // p要素の下部から50%の位置に配置
             left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 8px;
+            transform: translate(-50%, 0);
+            margin-bottom: 10px;
         }
     }
 }
@@ -98,17 +98,11 @@
 //     }
 // }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
     .calendar__month {
         table {
             td {
                 font-size: 18px;
-                p{
-                    margin-top: 25px;
-                }
-                img{
-                    margin-bottom: 25px;
-                }
             }
         }
     }

@@ -122,7 +122,7 @@
     stroke-width: 2px;
     stroke: $header_color;
     width: 340px;
-    height: 122px;
+    // height: 122px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -139,6 +139,8 @@
         font-weight: 400;
         line-height: normal;
         letter-spacing: 0.8px;
+        // 追加
+        margin: 0; /* 余白をリセット */
     }
     
     // 吹き出しの尾部分の枠線を作成
@@ -157,7 +159,8 @@
     &::after {
         content: "";
         position: absolute;
-        top: 100%;
+        // 100%から変更
+        top: 99%;
         left: 50%; // 中央に設置
         transform: translateX(-50%); // 中央揃えの調整        
         border-width: 18px; // ::beforeより2px小さくする

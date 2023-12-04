@@ -1,3 +1,95 @@
 .btn--large{
-    margin: 24px auto 40px auto;
+    margin: 10px auto 20px auto;
+}
+
+.content__home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+
+}
+
+.content__home__logo img, .content__home__img img{
+    max-width: 100px;
+    height: auto;
+    margin: 1rem auto 0 auto;
+}
+
+.content__home__img img{
+    max-width: 200px;
+}
+
+.content__home__logo{
+    margin-bottom: 1rem;
+}
+
+.content__home__text p{
+    font-size: 1.6rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media only screen and (max-width: 960px) {
+    .content-center{
+        display: flex;
+        flex-direction: column;
+        height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
+        justify-content: center; // コンテンツを垂直方向に中央寄せ
+        align-items: center; // コンテンツを水平方向に中央寄せ
+    }
+    .btn--large{
+        margin: 24px auto 40px auto;
+    }
+    .content__home__logo img, .content__home__img img{
+        // 画像を元のサイズに戻す
+        width: auto;
+        height: auto;
+        margin: 24px auto 0 auto;
+    }
+    
+    .content__home__logo{
+        margin-bottom: 24px;
+    }
+    
+    .content__home__text p{
+        font-size: 20px;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-height: 599px) {
+    /* 画面の高さが600px未満の場合のスタイル */
+    .btn--large{
+        margin: 10px auto 20px auto;
+    }
+    
+    .content__home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // コンテンツを垂直方向に中央寄せ
+        align-items: center; // コンテンツを水平方向に中央寄せ
+    
+    }
+    
+    .content__home__logo img, .content__home__img img{
+        max-width: 100px;
+        height: auto;
+        margin: 10px auto 0 auto;
+    }
+    
+    .content__home__img img{
+        max-width: 200px;
+    }
+    
+    .content__home__logo{
+        margin-bottom: 10px;
+    }
+    
+    .content__home__text p{
+        font-size: 16px;
+        margin: 0 auto;
+        text-align: center;
+    }
 }

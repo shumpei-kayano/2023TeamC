@@ -5,6 +5,11 @@
 
 {% block title %}会員情報{% endblock %}
 
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
 {% block header %}
 <header>
     <div class="header__button">

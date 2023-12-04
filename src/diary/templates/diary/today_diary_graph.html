@@ -3,7 +3,12 @@
 
 {% load static %}
 
-{% block title %}グラフ{% endblock %}
+{% block title %}日次グラフ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
 
 {% block header %}
 <header>

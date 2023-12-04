@@ -5,6 +5,11 @@
 
 {% block title %}日記削除{% endblock %}
 
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
 {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->

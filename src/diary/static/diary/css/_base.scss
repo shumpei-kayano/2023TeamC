@@ -12,6 +12,7 @@ body {
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
+    color: #333;
 }
 
 p{
@@ -185,6 +186,13 @@ footer {
     }
     .menu__item {
         margin: 0;
+
+        svg{
+            width: 2.4rem;
+        }
+        .footer__home, .footer__week, .footer__month, .footer__setting{
+            fill: #ADADAD;
+        }
     }
     a {
         display: flex;
@@ -199,9 +207,18 @@ footer {
         color: $footer_text_color; /* メニューテキストの色 */
         margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
     }
+    // a要素をホバーした時、画像とテキストの色を変更
+    a:hover {
+        .nav-text {
+            color: #007880;
+        }
+        .footer__home, .footer__week, .footer__month, .footer__setting{
+            fill: #00ABB6;
+        }
+    }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
     header, .ground, footer {
         width: 100%;
         max-width: none; // 追加
@@ -216,14 +233,14 @@ footer {
             width: 72px;
             height: 28px;
             font-size: 14px;
-            border: 1px solid #FFF;
+            // border: 1px solid #FFF;
 
-            svg {
-            margin-right: 5px;
-            }
-            &:hover {
-            background-color: #00A3AE;
-            }
+            // svg {
+            // margin-right: 5px;
+            // }
+            // &:hover {
+            // background-color: #00A3AE;
+            // }
         }
     }
     h1 {

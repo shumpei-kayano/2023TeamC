@@ -5,6 +5,11 @@
 
 {% block title %}ホームトップ{% endblock %}
 
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
 {% block header %}
 <header>
     <div class="header__spacer--top"></div><!-- 追加 -->
@@ -18,24 +23,24 @@
 
 {% block content %}
 <main class="ground ground--blue"><!-- 追加した要素 -->
-    <div class="scroll--content">
+    <div class="content-center">
 
         <div class="content__home">
             <div class="content__home__logo">
-                <img src="{% static 'diary/assets/logo.svg' %}" alt="ロゴ">
+                <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
             </div>
             <div class="content__home__text">
                 <p>今日はどんな1日ですか？<br>
-                    感じたことを書き残そー。
+                    感じたことを書いてみよー
                 </p>
             </div>
             <div class="content__home__img">
-                <img src="{% static 'diary/assets/home_top_neko.svg' %}" alt="ネコの画像">
+                <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
             </div>
-            <div class="btn--large">
-                {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
-                <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
-            </div>
+        </div>
+        <div class="btn--large">
+            {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+            <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
         </div>
 
         <!-- 天気 -->
