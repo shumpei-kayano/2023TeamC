@@ -24,6 +24,7 @@ urlpatterns = [
     path('help/diary/edit', views.help_diary_edit,name='help_diary_edit'),
     path('help/diary', views.help_diary,name='help_diary'),
     path('help/graph', views.help_graph,name='help_graph'),
+    path('help/fugoo', views.help_fugoo,name='help_fugoo'),
     path('help', views.help,name='help'),
     path('home/top', views.home_top,name='home_top1'),
     path('home/top/<int:pk>', views.home_top2,name='home_top'),
@@ -50,4 +51,5 @@ urlpatterns = [
     path('today/diary/graph/<int:pk>', views.today_diary_graph,name='today_diary_graph'),
     path('week/graph', views.week_graph,name='week_graph'),
     path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
+
 ]

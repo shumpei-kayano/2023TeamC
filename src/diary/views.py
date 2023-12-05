@@ -326,6 +326,10 @@ def help_graph(request):
 @login_required
 def help(request):
     return render(request, 'diary/help.html')
+  
+@login_required
+def help_fugoo(request):
+    return render(request, 'diary/help_fugoo.html')
 
 @login_required
 def home_top(request):
