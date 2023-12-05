@@ -1,21 +1,45 @@
-main {
-background-color: $background_color;
+.setting__menu__img {
+    position: fixed;
+    bottom: 8.4rem;  // 下部の余白を10pxに固定
+    left: 50%;  // 画面の中央に配置するために左端を50%に設定
+    transform: translateX(-50%);  // 中央に配置するために左端を中央に調整
+
+    .setting__menu__img-item{
+        width: 160px;
+        display: block;  // ブロック要素として表示
+    }
+
+    .help__menu__img-item {
+        display: block;  // ブロック要素として表示
+    }
 }
 
-.img-inu {
-    // position: relative;
-    margin-top: 375px;
-    margin-left: 51px;
+@media only screen and (min-height: 600px) {
+    .setting__menu__img {
+        bottom: 10rem;  // 下部の余白を10pxに固定
+        .setting__menu__img-item{
+            width: auto;
+        }
+    }
 }
+// main {
+// background-color: $background_color;
+// }
 
-.counseling-neko {
-    // position: relative;
-    margin-top: 300px;
-    margin-left: 2px;
-}
+// .img-inu {
+//     // position: relative;
+//     margin-top: 375px;
+//     margin-left: 51px;
+// }
 
-.img-neko {
-    // position: relative;
-    margin-top: 300px;
-    margin-left: 4px;
-}
+// .counseling-neko {
+//     // position: relative;
+//     margin-top: 300px;
+//     margin-left: 2px;
+// }
+
+// .img-neko {
+//     // position: relative;
+//     margin-top: 300px;
+//     margin-left: 4px;
+// }

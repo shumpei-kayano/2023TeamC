@@ -411,9 +411,8 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 .setting__menu ul a {
   display: flex;
-  width: 342px;
   height: 60px;
-  padding-bottom: 0px;
+  padding: 0 0.5rem 0 0.5rem;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -445,9 +444,8 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 .help__menu ul a {
   display: flex;
-  width: 342px;
   height: 60px;
-  padding-bottom: 0px;
+  padding: 0 0.5rem 0 0.5rem;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -998,25 +996,28 @@ main {
   left: -20px;
 }
 
-main {
-  background-color: #FFFFFF;
+.setting__menu__img {
+  position: fixed;
+  bottom: 8.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.setting__menu__img .setting__menu__img-item {
+  width: 160px;
+  display: block;
+}
+.setting__menu__img .help__menu__img-item {
+  display: block;
 }
 
-.img-inu {
-  margin-top: 375px;
-  margin-left: 51px;
+@media only screen and (min-height: 600px) {
+  .setting__menu__img {
+    bottom: 10rem;
+  }
+  .setting__menu__img .setting__menu__img-item {
+    width: auto;
+  }
 }
-
-.counseling-neko {
-  margin-top: 300px;
-  margin-left: 2px;
-}
-
-.img-neko {
-  margin-top: 300px;
-  margin-left: 4px;
-}
-
 hr {
   margin-bottom: 16px;
   margin-top: 0px;

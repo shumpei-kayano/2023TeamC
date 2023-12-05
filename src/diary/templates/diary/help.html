@@ -31,15 +31,17 @@
 <main class="ground ground--white">
     <div class="scroll--content">
         <div class="help__menu">
-        <ul>
-            <li class="list_item"><a href="{% url 'diary:help_diary'%}">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="{% url 'diary:help_diary_edit'%}">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="{% url 'diary:help_calender'%}">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-            <li class="list_item"><a href="{% url 'diary:help_graph'%}">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
-        </ul>
-        </div>
+            <ul>
+                <li class="list_item"><a href="{% url 'diary:help_diary'%}">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_diary_edit'%}">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_calender'%}">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_graph'%}">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            </ul>
 
-            <img class="img-dango" img src="{% static 'diary/assets/neko_dango.svg' %}">
+            <div class="setting__menu__img">
+                <img class="help__menu__img-item" img src="{% static 'diary/assets/family_neko.svg' %}">
+            </div>
+        </div>
     </div>
 </main>
 {% endblock %}
