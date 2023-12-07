@@ -18,7 +18,7 @@ body {
 
 p {
   font-size: 16px;
-  line-height: 1.7rem;
+  line-height: 170%;
   letter-spacing: 0.04rem;
 }
 
@@ -609,6 +609,44 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   text-align: center;
 }
 
+.help__group h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 4rem auto 2.4rem auto;
+  border-bottom: solid;
+  border-color: rgba(4, 202, 214, 0.4);
+  border-width: 7px; /*太さ*/
+}
+.help__group .help__help__list_text-wrap {
+  margin: 0 auto;
+  padding: 0 2.4rem 0 4rem;
+  font-size: 1.6rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text {
+  margin-bottom: 1.6rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text p {
+  margin: 0;
+}
+.help__group .help__help__list_text-wrap .help__list_text .help__chart {
+  margin-top: 1.6rem;
+  text-align: center;
+  margin-left: -1.6rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text .help__list_text-red {
+  color: red;
+}
+.help__group .help__help__list_text-wrap .help__list_text .help__chart--last {
+  margin-top: 1.6rem;
+  text-align: center;
+  margin-left: -1.6rem;
+  margin-bottom: 4rem;
+}
+
 .content__help__group h2 {
   font-size: 2rem;
   font-weight: 500;
@@ -640,12 +678,12 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin-right: 1em;
   margin-top: 0.15rem;
 }
-.list_test-wrap .list_test p {
+.list_test-wrap .list_test .help_diary {
   margin: 0;
   line-height: 170%;
   letter-spacing: 0.04rem;
 }
-.list_test-wrap .list_test img {
+.list_test-wrap .list_test .help_diary_img {
   margin: 0 0.3rem;
 }
 .list_test-wrap .list_test .list_test--icon {

@@ -1,3 +1,51 @@
+.help__group{
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+        display: inline-block;
+        // 子要素を直接中央揃えにする
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 4rem auto 2.4rem auto;
+        border-bottom:solid;
+        border-color:rgba(4, 202, 214, 0.40);
+        border-width:7px;/*太さ*/
+    }
+
+    .help__help__list_text-wrap{
+        margin: 0 auto;
+        padding: 0 2.4rem 0 4rem;
+        font-size: 1.6rem;
+    
+        .help__list_text{
+            margin-bottom: 1.6rem;
+
+            p{
+                margin: 0;
+            }
+
+            .help__chart{
+                margin-top: 1.6rem;
+                text-align: center;
+                margin-left: -1.6rem;
+            }
+
+            .help__list_text-red{
+                color: red;
+            }
+
+            .help__chart--last{
+                margin-top: 1.6rem;
+                text-align: center;
+                margin-left: -1.6rem;
+                margin-bottom: 4rem;
+            }
+        }
+    }
+}
+
+
 .content__help__group{
     h2{
         font-size: 2rem;
@@ -37,13 +85,13 @@
             margin-top: 0.15rem;
         }
 
-        p{
+        .help_diary{
             margin: 0;
             line-height: 170%;
             letter-spacing: 0.04rem;
         }
 
-        img{
+        .help_diary_img{
             margin: 0 0.3rem;
         }
         .list_test--icon{
