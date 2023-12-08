@@ -36,8 +36,12 @@
 }
 
  
-.header__back__img {
-    margin-left: 270px;
+// .header__back__img {
+//     margin-left: 270px;
+// }
+
+img.logo-img {
+    transform: translateX(150px); /* ここに移動させたい距離を指定 */
 }
 
 .header__back__img  a{
@@ -71,5 +75,5 @@
 }    
 
 .back-home {
-    padding-top: 170px;
+    margin-top: 140px;
 }
