@@ -632,6 +632,15 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .help__group .help__help__list_text-wrap .help__list_text p {
   margin: 0;
 }
+.help__group .help__help__list_text-wrap .help__list_text .help__tab-btn {
+  border: #00ABB6 1px solid;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+  background: #00ABB6;
+  color: #FFF;
+  font-size: 1.5rem;
+}
 .help__group .help__help__list_text-wrap .help__list_text .help__chart {
   margin-top: 1.6rem;
   text-align: center;
