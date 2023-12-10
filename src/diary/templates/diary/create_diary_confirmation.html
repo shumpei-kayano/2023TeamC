@@ -97,6 +97,7 @@
 <!-- ポップアップ要素 -->
 {% comment %} 悪い言葉があればポップアップを表示 {% endcomment %}
 {% if saved_diary.counseling %}
+
     {% comment %} 1回目のポップアップ {% endcomment %}
     <div class="popup show" id="first-popup">
         <div class="popup__text">
@@ -127,10 +128,11 @@
         </div>
         <div class="button">
             {% comment %} ネココのアドバイスを受ける　{% endcomment %}
-            <a href="{% url 'diary:today_counseling'  %}" class="button-link">ネココのアドバイスを受ける</a>
+            <a href="{% url 'diary:today_diary_detail' saved_diary.pk  %}" class="button-link">ネココのアドバイスを受ける</a>
         </div>
         <div class="gray__button">
             {% comment %} キャンセルを押したら、counselingの値が0になる　{% endcomment %}
+            {% comment %} キャンセルを押したら、ポップアップが消えるようにしたい　{% endcomment %}
             <a href="{% url 'diary:today_diary_detail3' saved_diary.pk %}" class="button-link">
                 <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</a>
             </button>
