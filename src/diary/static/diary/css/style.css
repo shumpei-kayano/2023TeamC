@@ -632,14 +632,44 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .help__group .help__help__list_text-wrap .help__list_text p {
   margin: 0;
 }
-.help__group .help__help__list_text-wrap .help__list_text .help__tab-btn {
+.help__group .help__help__list_text-wrap .help__list_text p .help__btn--blue {
+  border: #00ABB6 1px solid;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  border-radius: 5rem;
+  background: #00ABB6;
+  color: #FFF;
+  font-size: 1.4rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text p .help__btn--white {
+  border: #00ABB6 1px solid;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  border-radius: 5rem;
+  background: #FFF;
+  color: #00ABB6;
+  font-size: 1.4rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text p .help__tab-btn--white {
+  border: #00ABB6 1px solid;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+  background: #FFF;
+  color: #00ABB6;
+  font-size: 1.4rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text p .help__tab-btn {
   border: #00ABB6 1px solid;
   padding: 0 1rem;
   margin: 0 0.5rem;
   border-radius: 0.5rem;
   background: #00ABB6;
   color: #FFF;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+}
+.help__group .help__help__list_text-wrap .help__list_text p #left--4, .help__group .help__help__list_text-wrap .help__list_text p #left--3, .help__group .help__help__list_text-wrap .help__list_text p #left--2, .help__group .help__help__list_text-wrap .help__list_text p #left--1 {
+  margin-left: 0;
 }
 .help__group .help__help__list_text-wrap .help__list_text .help__chart {
   margin-top: 1.6rem;
