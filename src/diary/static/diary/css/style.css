@@ -582,7 +582,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 
 .user-infomation {
   width: 342px;
-  height: 273px;
   margin-left: 24px;
   margin-right: 24px;
   margin-top: 24px;
@@ -1094,25 +1093,41 @@ main {
     width: auto;
   }
 }
+.user-infomation--center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 hr {
   margin-bottom: 16px;
   margin-top: 0px;
 }
 
-.btn--blue--info {
-  margin-left: 24px;
-  margin-right: 24px;
-  margin-top: 50px;
+.user-infomation__image {
+  position: fixed;
+  bottom: 8.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media only screen and (min-height: 600px) {
+  .user-infomation {
+    margin-bottom: 50px;
+  }
+  .user-infomation__image {
+    bottom: 10rem;
+  }
+}
+.user-infomation-edit {
+  margin-top: 24px;
 }
 
 input[type=text], input[type=email] {
   width: 100%;
-  display: flex;
-  width: 342px;
   height: 45px;
   padding: 16px 0px 16px 16px;
-  justify-content: center;
-  align-items: center;
   flex-shrink: 0;
   margin-bottom: 16px;
   font-size: 1.6rem;
@@ -1126,11 +1141,11 @@ label {
   font-size: 1.4rem;
 }
 
-.neko-dango {
-  margin-top: 200px;
-  margin-left: 24px;
+@media only screen and (min-height: 600px) {
+  .user-infomation-edit {
+    margin-bottom: 50px;
+  }
 }
-
 .a {
   display: flex;
   justify-content: center;

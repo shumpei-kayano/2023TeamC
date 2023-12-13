@@ -1,10 +1,27 @@
+.user-infomation--center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+}
+
 hr {
     margin-bottom: 16px;
     margin-top: 0px;
 }
 
-.btn--blue--info {
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-top: 50px;
+.user-infomation__image {
+    position: fixed;
+    bottom: 8.4rem;  // 下部の余白を10pxに固定
+    left: 50%;  // 画面の中央に配置するために左端を50%に設定
+    transform: translateX(-50%);  // 中央に配置するために左端を中央に調整
+}
+
+@media only screen and (min-height: 600px) {
+    .user-infomation{
+        margin-bottom: 50px;
+    }
+    .user-infomation__image {
+        bottom: 10rem;  // 下部の余白を10pxに固定
+    }
 }
