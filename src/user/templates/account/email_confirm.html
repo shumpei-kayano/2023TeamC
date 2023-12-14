@@ -9,15 +9,13 @@
 {% block contents %}
 <section class="section-accounts" id="section-signup">
     <div class="wrapperHeader">
-        <p>ユーザー登録</p>
-    </div>
-    
     {% if confirmation %}
     <div class="wrapper-accounts-form text-align-center">
         <div class="header__back__img">
-            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
         </div>
-            <p class="notion">ユーザー登録を確定するには、以下のボタンを押してください。</p>
+        <p class="signup-text">ユーザー登録</p>
+            <p class="login-text">ユーザー登録を確定するには、以下のボタンを押してください。</p>
             <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
                 {% csrf_token %}
     

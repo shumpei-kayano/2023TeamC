@@ -8,33 +8,49 @@
 {% block contents %}
 <section class="section-accounts" id="section-signup">
     <div class="wrapperHeader">
-        <h2>ログイン</h2>
+        <div class="header__back__img">
+            <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+        </div>
     </div>
     <div class="wrapper-accounts-form">
-        <form method="post" action="{% url 'account_login' %}" class="form-accounts">
-            {% csrf_token %}
+        <p class="signup-text">ログイン</p>
+            <form method="post" action="{% url 'account_login' %}" class="form-accounts">
+                {% csrf_token %}
 
             <div class="form-content">
-                <label>Email</label>
-                <input type="email" name="login" autocomplete="email" required id="id_login">
-            </div>
-            <div class="form-content">
-                <label>Password</label>
-                <input type="password" name="password" autocomplete="current-password" required id="id_password">
-            </div>
-            <div class="radio-btn">
-                <input type="checkbox" name="remember" id="id_remember">
-                <label>ログイン状態を保持する</label>
+                <div class="user-infomation">
+
+                    <div class="content__user-email__text">
+                        <label for="email">メールアドレス</label>
+                        <br><input type="email" name="email" autocomplete="email" required id="id_login">
+                    </div>
+
+                    <div class="content__user-pass__text">
+                        <label for="pass">パスワード</label>
+                        <br><input type="password" name="password" autocomplete="current-password" required id="id_password">
+                    </div>
+
+                    <div class="radio-btn">
+                        <input type="checkbox" name="remember" id="id_remember">
+                        <label>ログイン状態を保持する</label>
+                    </div>
+                </div>
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                {% endif %}
             </div>
 
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-            {% endif %}
 
-            <button class="accounts-btn" type="submit">ログイン</button>
-            <p class="notion"><a href="{% url 'account_reset_password' %}">パスワードをお忘れですか？</a></p>
+        <div class="btn btn--blue">
+            <button type="submit">ログイン</button>
+        </div>
+            <p class="forget-pass"><a href="{% url 'account_reset_password' %}">パスワードをお忘れですか？</a></p>
         </form>
     </div>
-    <a class="backToHome" href="{% url 'user:account_top' %}">＜＜＜ホームに戻る</a>
+    <div class="back-home">
+        <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>    
+    </div>
 </section>
 {% endblock contents %}
