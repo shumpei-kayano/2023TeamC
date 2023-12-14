@@ -1,6 +1,63 @@
 <!--ヘルプ画面（グラフ）-->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ヘルプ/日記の編集・削除{% endblock %}
 
 {% block css %}
 <!-- ページ固有のCSSを読み込み -->
 <link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} help.htmlに遷移させてください {% endcomment %}
+            <a href="{% url 'diary:help' %}">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>ヘルプ</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="ground ground--white">
+    <div class="scroll--content">
+
+        <div class="help__group">
+            <h2>統計グラフ</h2>
+            <ol class="help__help__list_text-wrap">
+                <li class="help__list_text">
+                    <p><img class="help__list_text-icon" src="{% static 'diary/assets/help_month-icon.svg' %}" alt="アイコン">または、<img  class="help__list_text-icon" src="{% static 'diary/assets/help_week-icon.svg' %}" alt="アイコン">ボタンをタップしてカレンダー画面に移動し、<span class="help__tab-btn">グラフ</span>ボタンをタップしてグラフ画面に移動します。</p>
+                    <div class="help__chart">
+                        <img src="{% static 'diary/assets/help_graph-tab-btn.svg' %}" alt="グラフボタンの図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p>グラフ画面では感情の統計グラフとネココの月間・週間コメントを見ることができます。感情の分類については以下の通りです。</p>
+                    <div class="help__chart">
+                        <img src="{% static 'diary/assets/help_face-icon-chart.svg' %}" alt="感情の分類図">
+                    </div>
+                    <div class="help__chart">
+                        <img src="{% static 'diary/assets/help_graph-chart.svg' %}" alt="月間・週間グラフの図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p>日記詳細画面からはその日の統計グラフを閲覧できます。ここでは１日の分析結果をまとめたグラフを見ることができます。</p>
+                    <div class="help__chart--last">
+                        <img src="{% static 'diary/assets/help_today-graph-chart.svg' %}" alt="日次グラフの図">
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</main>
 {% endblock %}

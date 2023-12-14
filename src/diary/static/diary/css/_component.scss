@@ -63,7 +63,7 @@
     &--white {
         width: 342px;
         height: 48px;
-        margin-bottom: 40px;
+        // margin-bottom: 40px;
         
         button, a{
             @include button-style;
@@ -364,7 +364,7 @@
 
 .user-infomation {
     width: 342px;
-    height: 273px;
+    // height: 273px;
     margin-left: 24px;
     margin-right: 24px;
     margin-top: 24px;

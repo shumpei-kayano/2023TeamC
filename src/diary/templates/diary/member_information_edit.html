@@ -25,13 +25,13 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground grounds--white">
-    <div class="scroll--content">
+<main class="ground ground--white">
+    <div class="user-infomation--center">
 
         <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
             {% csrf_token %}
             <!-- ユーザーネームの編集 -->
-            <div class="user-infomation">
+            <div class="user-infomation-edit">
                 <div class="content__user-name__text">
                     <label for="username">ユーザーネーム</label>
                     <br><input type="text" id="username" name="username" value="{{ user.username }}">
@@ -62,8 +62,8 @@
         </div>
         </form>
 
-        <div class="neko__dango.image">
-            <img class="neko-dango" img src="{% static 'diary/assets/neko_dango.svg' %}">
+        <div class="user-infomation__image">
+            <img src="{% static 'diary/assets/neko_dango.svg' %}">
         </div>
 
 

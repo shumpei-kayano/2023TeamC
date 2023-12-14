@@ -23,6 +23,45 @@
 
             p{
                 margin: 0;
+                .help__btn--blue{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 5rem;
+                    background: #00ABB6;
+                    color: #FFF;
+                    font-size: 1.4rem;
+                }
+                .help__btn--white{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 5rem;
+                    background: #FFF;
+                    color: #00ABB6;
+                    font-size: 1.4rem;
+                }
+                .help__tab-btn--white{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 0.5rem;
+                    background: #FFF;
+                    color: #00ABB6;
+                    font-size: 1.4rem;
+                }
+                .help__tab-btn{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 0.5rem;
+                    background: #00ABB6;
+                    color: #FFF;
+                    font-size: 1.4rem;
+                }
+                #left--4, #left--3, #left--2, #left--1{
+                    margin-left: 0;
+                }
             }
 
             .help__chart{
