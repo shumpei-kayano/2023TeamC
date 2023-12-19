@@ -1,81 +1,81 @@
-.content__today-diary__text{
-    width: 100%;
-    background-color: $background_color;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
-    //outline: 0; // フォーカス時の枠線を削除
-    p{
-        text-align: left;
-        margin: 0;
-        margin-bottom: 24px;
-    }
-    .content__today-diary__img{
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap; // 子要素を折り返し、複数行に上から下へ並べる
-        justify-content: space-between; // 子要素を左右に均等に配置
-        align-items: flex-start; // 親要素の開始位置から配置。上揃え
-        align-content: flex-start; // 複数行にした時、上揃え
+// .content__today-diary__text{
+//     width: 100%;
+//     background-color: $background_color;
+//     padding: 24px;
+//     margin-bottom: 24px;
+//     box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+//     //outline: 0; // フォーカス時の枠線を削除
+//     p{
+//         text-align: left;
+//         margin: 0;
+//         margin-bottom: 24px;
+//     }
+//     .content__today-diary__img{
+//         margin-top: 10px;
+//         display: flex;
+//         flex-wrap: wrap; // 子要素を折り返し、複数行に上から下へ並べる
+//         justify-content: space-between; // 子要素を左右に均等に配置
+//         align-items: flex-start; // 親要素の開始位置から配置。上揃え
+//         align-content: flex-start; // 複数行にした時、上揃え
 
-        .content__today-diary__item{
-            // 動画があれば追加　margin-bottom: 10px;
-            flex: 1; /* 各画像が等しい幅になるように設定 */
-            object-fit: cover; /* 画像を正方形にする */
-            height: 78px; /* 任意の高さを設定 */
-            //margin-right: 10px; /* 画像間の余白を調整 */
-        }
-    }
-}
+//         .content__today-diary__item{
+//             // 動画があれば追加　margin-bottom: 10px;
+//             flex: 1; /* 各画像が等しい幅になるように設定 */
+//             object-fit: cover; /* 画像を正方形にする */
+//             height: 78px; /* 任意の高さを設定 */
+//             //margin-right: 10px; /* 画像間の余白を調整 */
+//         }
+//     }
+// }
 
-.content__diary__comment {
-    position: relative; // 追加
-    fill: $background_color;
-    stroke-width: 2px;
-    stroke: $header_color;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    // width: 100%;
-    // height: auto;
-    margin: 0 24px 24px 24px;
-    padding: 20px; // テキストと吹き出しの間に余白を追加
-    background-color: $background_color; // 吹き出しの背景色を白に変更
-    border: 2px solid $header_color; // 枠線を追加    
-    border-radius: 10px; // 吹き出しの角を丸くする
+// .content__diary__comment {
+//     position: relative; // 追加
+//     fill: $background_color;
+//     stroke-width: 2px;
+//     stroke: $header_color;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     gap: 10px;
+//     // width: 100%;
+//     // height: auto;
+//     margin: 0 24px 24px 24px;
+//     padding: 20px; // テキストと吹き出しの間に余白を追加
+//     background-color: $background_color; // 吹き出しの背景色を白に変更
+//     border: 2px solid $header_color; // 枠線を追加    
+//     border-radius: 10px; // 吹き出しの角を丸くする
 
-    p{
-        text-align: left;
-        margin: 0;
-        line-height: 1.7rem;
-        letter-spacing: 0.04rem;
-    }
+//     p{
+//         text-align: left;
+//         margin: 0;
+//         line-height: 1.7rem;
+//         letter-spacing: 0.04rem;
+//     }
     
-    // 吹き出しの尾部分の枠線を作成
-    &::before {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%; // 中央に設置
-        transform: translateX(-50%); // 中央揃えの調整        
-        border-width: 20px; // 尾部分を大きくする
-        border-style: solid;
-        border-color: #04CAD6 transparent transparent transparent;
-    }
+//     // 吹き出しの尾部分の枠線を作成
+//     &::before {
+//         content: "";
+//         position: absolute;
+//         top: 100%;
+//         left: 50%; // 中央に設置
+//         transform: translateX(-50%); // 中央揃えの調整        
+//         border-width: 20px; // 尾部分を大きくする
+//         border-style: solid;
+//         border-color: #04CAD6 transparent transparent transparent;
+//     }
     
-    // 吹き出しの尾部分の中を作成
-    &::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%; // 中央に設置
-        transform: translateX(-50%); // 中央揃えの調整        
-        border-width: 18px; // ::beforeより2px小さくする
-        border-style: solid;
-        border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
-    }
-}
+//     // 吹き出しの尾部分の中を作成
+//     &::after {
+//         content: "";
+//         position: absolute;
+//         top: 100%;
+//         left: 50%; // 中央に設置
+//         transform: translateX(-50%); // 中央揃えの調整        
+//         border-width: 18px; // ::beforeより2px小さくする
+//         border-style: solid;
+//         border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
+//     }
+// }
 
 .btn--blue, .btn--white{
     margin: 24px auto 40px auto;

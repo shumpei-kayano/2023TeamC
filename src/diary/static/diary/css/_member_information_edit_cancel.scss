@@ -1,24 +1,14 @@
-.cancel__neko__img {
-    margin-top: 115px;
-    margin-bottom: 40px;
-}
-
 .content__member-info__cancel-text {
-    color: #000;
-    text-align: center;
-    font-size: 2.0rem;
-    font-style: normal;
-    font-weight: 400;
-
+    font-size: 1.6rem;
     p {
-        margin-bottom: 10px;
+        margin: 0;
+        text-align: center;
+        margin-bottom: 16px;
     }
 }
 
 .account__deleta-text {
-    color: #000;
-    text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
     line-height: 170%; /* 34px */
@@ -28,13 +18,25 @@
 }
 
 .btn--blue--info {
-    margin-bottom: 25px;
-    margin-top: 40px;
+    margin-bottom: 24px;
 }
 
 .btn--white {
-    display: flex;
-    justify-content: center;
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-top: 0;
+}
+
+@media only screen and (min-height: 600px) {
+    .content__member-info__cancel-text {
+        font-size: 20px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .account__deleta-text {
+        font-size: 20px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .btn--blue--info {
+        margin-bottom: 40px !important;;
+    }
 }

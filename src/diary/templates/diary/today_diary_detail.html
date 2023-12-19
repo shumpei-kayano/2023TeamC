@@ -37,164 +37,183 @@
             </div>
         </div>
 
-        <!-- 編集削除ボタン -->
-        <div class="content__diary-diary__group">
-            <div class="a--blue">
-                <div class="icon__button__delete">
-                    {% if diary %}
-                    {% comment %} <ul> {% endcomment %}
-                                {% comment %} <br>作成日時：{{diary.created_date}}</br> {% endcomment %}
-                                <!-- 日記内容 -->
-                                {{ diary.content }}</br>
-                                {% if diary.photo1 %}
-                                    <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
-                                {% endif %}
-                                {% if diary.photo2 %}
-                                    <img src="{{ todya.photo2.url }}" alt="Diary Photo2">
-                                {% endif %}
-                                {% if diary.photo3 %}
-                                    <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
-                                {% endif %}
-                                {% if diary.photo4 %}
-                                    <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
-                                {% endif %}
-                            </div>
-                    {% comment %} </ul> {% endcomment %}
-                {% else %}
-                    <p>今日の日記はありません。</p>
-                {% endif %}
-                    <a href="{% url  'diary:diary_delete' diary.id %}">
-                        <img src="{% static 'diary/assets/delete.svg' %}" >削除</a>
+        <div class="content__today-diary__text">
+            <!-- 編集削除ボタン -->
+            <div class="delete-edit__btn">
+                <div class="delete-edit__btn__spacer">
+                    <a class="icon__delete-btn" href="{% url  'diary:diary_delete' diary.id %}">
+                        <svg class="delete__icon" width="16" height="14" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                        </svg>削除</a>
                 </div>
-                <div class="icon__button__edit">
-                    <a href="{% url  'diary:diary_update' diary.id %}">
-                        <img src="{% static 'diary/assets/edit.svg' %}">編集</a>
+                <div class="delete-edit__btn__spacer">
+                    <a class="icon__edit-btn" href="{% url  'diary:diary_update' diary.id %}">
+                        <svg class="edit__icon" width="17" height="14" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.63083 5.14083L10.3592 5.86917L3.18667 13.0417H2.45833V12.3133L9.63083 5.14083ZM12.4808 0.375C12.2829 0.375 12.0771 0.454167 11.9267 0.604583L10.4779 2.05333L13.4467 5.02208L14.8954 3.57333C15.2042 3.26458 15.2042 2.76583 14.8954 2.45708L13.0429 0.604583C12.8846 0.44625 12.6867 0.375 12.4808 0.375ZM9.63083 2.90042L0.875 11.6562V14.625H3.84375L12.5996 5.86917L9.63083 2.90042Z"/>
+                        </svg>編集</a>
                 </div>
-
-            <!-- ユーザーが保存した日記の表示 -->
-            <div class="content__diary-diary__text">
-                <p>
-                    {% comment %} {{ ユーザーが入力した日記を表示させてください }} {% endcomment %}
-                </p>
             </div>
 
-            <!-- ユーザーが保存した画像の表示 -->
-            {% comment %} {% if 画像があれば %}
-                <div class="content__diary-diary__images">
-                    {% for 画像を表示させてください %}
-                        <div class="content__diary-diary__img">
-                            <a href="#" data-image-id="{{ 画像のid }}">
-                            <img src="{{ ユーザーが保存した画像を表示させてください }}" alt="日記の画像">
-                            </a>
+            {% if diary %}
+                <samll class="created-date">作成日時：{{diary.created_date}}</samll>
+                <!-- 日記内容 -->
+                <p>{{ diary.content }}</p>
+                <div class="content__today-diary__img">
+                    {% if diary.photo1 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button">
+                                <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                            </button>
                         </div>
-                    {% endfor %}
+                    {% endif %}
+                    {% if diary.photo2 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button">
+                                <img src="{{ todya.photo2.url }}" alt="Diary Photo2">
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% if diary.photo3 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button">
+                                <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% if diary.photo4 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button">
+                                <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
+                            </button>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %} {% endcomment %}
-        </div><!-- content__diary-diary__group -->
+            {% else %}
+                <p>日記は記録されていません</p>
+            {% endif %}
+        </div><!-- content__today-diary__text -->
 
-        <!-- ネコココメント -->
-        <div class="content__diary-diary__comment">
-            <p>
-                {{ diary.ai_comment }}
-            </p>
-        </div>
-
-
-        <!-- ネココの画像 -->
         {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
         {% if diary.counseling %}
-        <div class="content__diary-diary__comment__img">
-            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="ネココの画像">
-        </div>
-        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
-        {% else %}
-        <div class="content__diary-diary__comment__img">
-            <img src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
-        </div>
-        {% endif %}
-        
-        <!-- 画像のポップアップ -->
-        <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal-label" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="" id="image-modal-image" class="img-fluid" alt="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                    </div>
+            <!-- ネコココメント -->
+            <div class="content__diary__comment--counseling">
+                <div class="content__diary__ccomment--counseling__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
                 </div>
             </div>
-        </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+            </div>
+        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
+        {% else %}
+            <!-- ネコココメント -->
+            <div class="content__diary__comment">
+                <div class="content__diary__ccomment__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+            </div>
+        {% endif %}
 
     </div><!-- scroll content -->
 </main>
 {% endblock %}
-{% comment %} css
-.modal-footer {
-    text-align: center;
-  } {% endcomment %}
-{% comment %} {% block js%}
+
+{% block js %}
 <script>
-    // 画像をクリックしたときに画像ポップアップを開く
-    $(".content__diary-diary__images a").on("click", function(e) {
-    // 画像ポップアップのコンテンツを取得
-    let image = $(this).data("image-id");
-    let imageUrl = $("#diary-{{ diary.id }}-image-{{ image }}").attr("src");
+// layer要素に付与したjs-modalクラスを取得し変数に格納
+const modal = document.querySelector('.js-modal');
+// button要素に付与したjs-modal-buttonクラスを取得し、変数に格納
+const modalButton = document.querySelector('.button--js-modal-button');
+// button要素に付与したjs-close-buttonクラスを取得し、変数に格納
+const modalClose = document.querySelector('.js-close-button');
 
-    // 画像ポップアップを開く
-    $("#image-modal-image").attr("src", imageUrl);
-    $("#image-modal").modal("show");
+// モーダルボタンをクリックしたときのイベントを登録
+modalButton.addEventListener('click', () => {
+    modal.classList.add('is-open');
+});
 
-    // イベントをキャンセル
-    e.preventDefault();
-    });
+// 閉じるボタンをクリックしたときのイベントを登録
+modalClose.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+});
 </script>
-{% endblock %} {% endcomment %}
-{% comment %} <script src="{% static 'js/image-preview.js' %}">
-
-    function openImage(image) {
-        // 画像の元の比率で表示する
-        let imageWidth = image.width;
-        let imageHeight = image.height;
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
-        let maxWidth = windowWidth - 100;
-        let maxHeight = windowHeight - 100;
-        let ratio = imageWidth / imageHeight;
-        let width = Math.min(maxWidth, imageWidth);
-        let height = width / ratio;
-        if (height > maxHeight) {
-            height = maxHeight;
-          width = height * ratio;
-        }
-    
-        // 画像ポップアップを表示する
-        let imagePreview = document.getElementById("image-preview");
-        imagePreview.style.width = width + "px";
-        imagePreview.style.height = height + "px";
-        imagePreview.style.display = "block";
-    
-        // 画像をポップアップに表示する
-        let imageElement = document.getElementById("image");
-        imageElement.src = image.src;
-    
-        // 閉じるボタンを追加する
-        let closeButton = document.createElement("button");
-        closeButton.textContent = "閉じる";
-        closeButton.onclick = closeImage;
-        closeButton.className = "close-button";
-        imagePreview.appendChild(closeButton);
-        }
-    
-      // 画像ポップアップを閉じる
-        function closeImage() {
-        let imagePreview = document.getElementById("image-preview");
-        imagePreview.style.display = "none";
-    
-        // 画像をポップアップから削除する
-        let imageElement = document.getElementById("image");
-        imageElement.src = "";
-        }
-    
-    </script> {% endcomment %}
+{% endblock %}

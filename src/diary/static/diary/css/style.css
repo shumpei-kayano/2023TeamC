@@ -1195,26 +1195,17 @@ label {
   margin-top: 30px;
 }
 
-.cancel__neko__img {
-  margin-top: 115px;
-  margin-bottom: 40px;
-}
-
 .content__member-info__cancel-text {
-  color: #000;
-  text-align: center;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 400;
+  font-size: 1.6rem;
 }
 .content__member-info__cancel-text p {
-  margin-bottom: 10px;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 .account__deleta-text {
-  color: #000;
-  text-align: center;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
   line-height: 170%; /* 34px */
@@ -1223,17 +1214,26 @@ label {
 }
 
 .btn--blue--info {
-  margin-bottom: 25px;
-  margin-top: 40px;
+  margin-bottom: 24px;
 }
 
 .btn--white {
-  display: flex;
-  justify-content: center;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-top: 0;
 }
 
+@media only screen and (min-height: 600px) {
+  .content__member-info__cancel-text {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  .account__deleta-text {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  .btn--blue--info {
+    margin-bottom: 40px !important;
+  }
+}
 .member__scroll--content {
   display: flex;
   justify-content: center;
@@ -1449,75 +1449,6 @@ label {
     text-align: center;
   }
 }
-.content__today-diary__text {
-  width: 100%;
-  background-color: #FFFFFF;
-  padding: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
-}
-.content__today-diary__text p {
-  text-align: left;
-  margin: 0;
-  margin-bottom: 24px;
-}
-.content__today-diary__text .content__today-diary__img {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-content: flex-start;
-}
-.content__today-diary__text .content__today-diary__img .content__today-diary__item {
-  flex: 1; /* 各画像が等しい幅になるように設定 */
-  -o-object-fit: cover;
-     object-fit: cover; /* 画像を正方形にする */
-  height: 78px; /* 任意の高さを設定 */
-}
-
-.content__diary__comment {
-  position: relative;
-  fill: #FFFFFF;
-  stroke-width: 2px;
-  stroke: #04CAD6;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 0 24px 24px 24px;
-  padding: 20px;
-  background-color: #FFFFFF;
-  border: 2px solid #04CAD6;
-  border-radius: 10px;
-}
-.content__diary__comment p {
-  text-align: left;
-  margin: 0;
-  line-height: 1.7rem;
-  letter-spacing: 0.04rem;
-}
-.content__diary__comment::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 20px;
-  border-style: solid;
-  border-color: #04CAD6 transparent transparent transparent;
-}
-.content__diary__comment::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 18px;
-  border-style: solid;
-  border-color: #FFFFFF transparent transparent transparent;
-}
-
 .btn--blue, .btn--white {
   margin: 24px auto 40px auto;
   box-sizing: border-box;
@@ -1558,3 +1489,277 @@ label {
 }
 
 /* ここまで */
+.content__today-diary__text {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 16px 24px 16px 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid rgba(4, 202, 214, 0.15);
+  box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+}
+.content__today-diary__text .delete-edit__btn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.content__today-diary__text .delete-edit__btn .icon__delete-btn, .content__today-diary__text .delete-edit__btn .icon__edit-btn {
+  cursor: pointer;
+  color: #00ABB6;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+}
+.content__today-diary__text .delete-edit__btn .icon__delete-btn .delete__icon, .content__today-diary__text .delete-edit__btn .icon__delete-btn .edit__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn .delete__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn .edit__icon {
+  margin-right: 5px;
+  fill: #04CAD6;
+}
+.content__today-diary__text .delete-edit__btn .icon__delete-btn:hover, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover {
+  text-decoration: underline;
+  color: #00737A;
+}
+.content__today-diary__text .delete-edit__btn .icon__delete-btn:hover .delete__icon, .content__today-diary__text .delete-edit__btn .icon__delete-btn:hover .edit__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover .delete__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover .edit__icon {
+  fill: #00737A;
+}
+.content__today-diary__text p {
+  text-align: left;
+  margin: 0;
+  margin-bottom: 24px;
+}
+.content__today-diary__text .content__today-diary__img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.content__today-diary__text .content__today-diary__img .content__today-diary__item {
+  margin-right: 1.2%; /* 画像間の余白を調整 */
+  max-width: 23.8095238095%;
+  height: 23.8095238095%;
+}
+
+.content__diary__comment--counseling {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 260px;
+  margin: 0 24px 24px 24px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFD4E0;
+  border-radius: 10px;
+}
+.content__diary__comment--counseling p {
+  text-align: left;
+  margin: 0;
+  line-height: 170%;
+  letter-spacing: 0.04rem;
+}
+.content__diary__comment--counseling::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 20px;
+  border-style: solid;
+  border-color: #FFD4E0 transparent transparent transparent;
+}
+.content__diary__comment--counseling::after {
+  content: "";
+  position: absolute;
+  top: 99%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 18px;
+  border-style: solid;
+  border-color: #FFFFFF transparent transparent transparent;
+}
+
+.content__diary__ccomment--counseling__p {
+  height: 210px;
+  overflow-y: scroll;
+}
+
+.content__diary__ccomment--counseling__p::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+}
+
+.content__diary__ccomment--counseling__p::-webkit-scrollbar-thumb {
+  background-color: #FFD4E0;
+  border-radius: 10px;
+}
+
+.content__diary__ccomment--counseling__p::-webkit-scrollbar-thumb:hover {
+  background-color: #FFD4E0;
+}
+
+.content__diary__comment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 260px;
+  margin: 0 24px 24px 24px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #04CAD6;
+  border-radius: 10px;
+}
+.content__diary__comment p {
+  text-align: left;
+  margin: 0;
+  line-height: 170%;
+  letter-spacing: 0.04rem;
+}
+.content__diary__comment::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 20px;
+  border-style: solid;
+  border-color: #04CAD6 transparent transparent transparent;
+}
+.content__diary__comment::after {
+  content: "";
+  position: absolute;
+  top: 99%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 18px;
+  border-style: solid;
+  border-color: #FFFFFF transparent transparent transparent;
+}
+
+.content__diary__ccomment__p {
+  height: 210px;
+  overflow-y: scroll;
+}
+
+.content__diary__ccomment__p::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+}
+
+.content__diary__ccomment__p::-webkit-scrollbar-thumb {
+  background-color: #53D3DB;
+  border-radius: 10px;
+}
+
+.content__diary__ccomment__p::-webkit-scrollbar-thumb:hover {
+  background-color: #00ABB6;
+}
+
+.content__diary__comment__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+/* グレー背景 */
+.layer {
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s linear, visibility 1s linear, z-index 1s linear;
+}
+
+.layer.is-open {
+  z-index: 999;
+  opacity: 1;
+  visibility: visible;
+}
+
+.layer.is-open .modal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__button-wrap {
+  position: absolute;
+  right: 10px;
+  top: -28px;
+  display: inline-flex;
+}
+
+.close-button {
+  position: relative;
+  width: 39px;
+  height: 39px;
+  background: orange;
+  border-radius: 50%;
+  padding: 0;
+  border: transparent;
+  cursor: pointer;
+}
+
+/* モーダルコンテンツ */
+.modal {
+  position: relative;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.7s linear, opacity 0.7s linear;
+}
+
+.modal__inner {
+  margin-top: 125px;
+  margin-bottom: 125px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  display: block;
+  padding: 21px 8px 21px;
+  height: auto;
+}
+
+.modal__content {
+  padding-top: 15px;
+  padding-bottom: 23px;
+}
+
+.modal__button-area {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 17px;
+  padding-top: 15px;
+}
+
+.button--js-modal-button {
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.button img {
+  width: 100%;
+  height: 100%;
+}
+
+.content__today-diary__graph {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 16px 24px 16px 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid rgba(4, 202, 214, 0.15);
+  box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+}
