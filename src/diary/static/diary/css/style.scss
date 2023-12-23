@@ -5,7 +5,6 @@
 @import "calendar_week";
 @import "create_diary";
 @import "calendar_month";
-@import "month_graph";
 @import "week_graph";
 @import "setting";
 @import "member_information";
@@ -19,3 +18,7 @@
 @import "loading";
 @import "today-diary_detail";
 @import "today_diary_graph";
+@import "diary_delete";
+@import "diary_delete_success";
+@import "diary_update";
+@import "month_graph";

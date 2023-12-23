@@ -58,6 +58,7 @@ header h1 {
   font-weight: 400;
   margin-top: 0;
   margin-bottom: 0;
+  letter-spacing: 0.04em;
 }
 header .header__spacer--top {
   margin-right: auto; /* h1以外の要素を左寄せにする */
@@ -81,7 +82,7 @@ header .header__button a {
   font-weight: bold;
   color: #fff;
   border-radius: 5px;
-  border: 0.1rem solid #FFF;
+  border: 1px solid #FFF;
   background-color: #04CAD6;
 }
 header .header__button a svg {
@@ -172,6 +173,7 @@ footer .nav-text {
   font-size: 1rem; /* テキストのサイズを10%に調整 */
   color: #ADADAD; /* メニューテキストの色 */
   margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
+  letter-spacing: 0.04em;
 }
 footer a:hover .nav-text {
   color: #007880;
@@ -254,9 +256,12 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background: var(--custom-color, #00ABB6);
   color: #FFF;
   font-size: 1.6rem;
+  letter-spacing: 0.04rem;
 }
 .btn--blue button:hover {
   background-color: #00909A; /* マウスをかざしたときの背景色 */
@@ -277,9 +282,12 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background: var(--custom-color, #00ABB6);
   color: #FFF;
   font-size: 1.6rem;
+  letter-spacing: 0.04rem;
 }
 .btn--large button:hover, .btn--large a:hover {
   background-color: #00909A; /* マウスをかざしたときの背景色 */
@@ -300,9 +308,12 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background: var(--custom-color, #FFF);
   color: #00ABB6;
   font-size: 1.6rem;
+  letter-spacing: 0.04rem;
   border: 1px solid #00ABB6;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
@@ -325,9 +336,12 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background: #FF4747;
   color: #FFF;
   font-size: 1.6rem;
+  letter-spacing: 0.04rem;
 }
 .btn--red button:hover, .btn--red a:hover {
   background-color: #E32B2B; /* マウスをかざしたときの背景色 */
@@ -348,6 +362,8 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   background: var(--custom-color, #00ABB6);
   color: #FFF;
   font-size: 1.6rem;
@@ -407,6 +423,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin-top: 24px;
   padding: 0px;
   background-color: #FFFFFF;
+  cursor: pointer;
 }
 .setting__menu ul a {
   display: flex;
@@ -440,6 +457,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin-top: 24px;
   padding: 0px;
   background-color: #FFFFFF;
+  cursor: pointer;
 }
 .help__menu ul a {
   display: flex;
@@ -473,8 +491,9 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   justify-content: center;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
-.a--blue p {
+.a--blue .a--blue-__p {
   color: #00ABB6;
   font-size: 1.6rem;
   font-style: normal;
@@ -485,8 +504,10 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin: 0;
   vertical-align: middle;
   margin-top: 0px;
+  margin-bottom: 5px;
 }
-.a--blue svg {
+.a--blue .a--blue--svg {
+  fill: #00ABB6;
   vertical-align: middle;
   margin-bottom: 5px;
 }
@@ -497,18 +518,20 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   background-size: 90% 4px;
   background-position: 0 calc(100% + 3px);
 }
-.a--blue:hover p {
+.a--blue:hover .a--blue-__p {
   color: #00737A;
 }
-.a--blue:hover img {
+.a--blue:hover .a--blue--svg {
   fill: #00737A;
 }
 
 .a--tab {
   display: flex;
   text-align: center;
+  justify-content: center;
   margin: 16px;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 .a--tab--left, .a--tab--right {
   width: 174px;
@@ -526,6 +549,8 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: inherit; /* 親要素のカーソルスタイルを継承する */
   border-radius: 50px;
   font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
@@ -570,6 +595,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
   border-radius: 5px;
   background-color: #FFF;
+  cursor: pointer;
 }
 .next__button a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -605,6 +631,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   line-height: normal;
   letter-spacing: 0.64px;
   text-align: center;
+  cursor: pointer;
 }
 
 .help__group h2 {
@@ -618,6 +645,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   border-bottom: solid;
   border-color: rgba(4, 202, 214, 0.4);
   border-width: 7px; /*太さ*/
+  letter-spacing: 0.04em;
 }
 .help__group .help__help__list_text-wrap {
   margin: 0 auto;
@@ -892,12 +920,17 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   color: #00737A;
 }
 
+.content__today-diary_samll {
+  font-size: 12px;
+  margin-left: 24px;
+}
+
 .btn--blue {
   margin: 24px auto 40px auto;
   box-sizing: border-box;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
   .FlexTextarea {
     max-width: 100%;
   }
@@ -916,6 +949,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .calendar-header .calendar-header__select-date {
   font-size: 18px;
   font-weight: 700;
+  letter-spacing: 0.04em;
 }
 .calendar-header .a--blue {
   margin-right: 24px;
@@ -962,7 +996,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 5px;
+  margin-top: 4px;
   font-size: 14px;
 }
 .calendar__month td .calendar__month__img {
@@ -983,54 +1017,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     max-width: 22px !important;
   }
 }
-main {
-  background-color: #EEFEFF;
-}
-
-.month-graph-page {
-  justify-content: center;
-  align-items: center;
-}
-.month-graph-page .month-graph-page .a--tab--right.active a {
-  background-color: #00ABB6;
-  color: #FFF;
-}
-
-.content__home__text--pink {
-  justify-content: center;
-  align-items: center;
-}
-.content__home__text--pink .content__today-diary__comment {
-  position: relative;
-  fill: #FFFFFF;
-  stroke-width: 2px;
-  stroke: #04CAD6;
-  width: 342px;
-  height: 216px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 20px;
-  background-color: #FFFFFF;
-  border: 2px solid #FFBBDC;
-  border-radius: 10px;
-  margin-left: 24px;
-  margin-right: 24px;
-}
-.content__home__text--pink .content__today-diary__comment p {
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.8px;
-}
-.content__home__text--pink .content__today-diary__comment .content__today-diary__comment__img {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-}
-
 .week-graph-page .a--tab--right.active a {
   background-color: #00ABB6;
   color: #FFF;
@@ -1321,6 +1307,7 @@ label {
   margin: 0;
   font-size: 1.6rem;
   margin-bottom: 1.6rem;
+  text-align: center;
 }
 .content-center-group .btn--red {
   margin-bottom: 24px;
@@ -1457,12 +1444,13 @@ label {
 /* 767以下の時のフルスクリーン設定 */
 #loading {
   display: none;
-  position: fixed;
   z-index: 1000;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 390px;
   height: 100%;
-  width: 100%;
   background: #EEFEFF;
 }
 #loading #logo {
@@ -1489,6 +1477,11 @@ label {
 }
 
 /* ここまで */
+@media only screen and (min-height: 600px) {
+  #loading {
+    width: 100%;
+  }
+}
 .content__today-diary__text {
   width: 100%;
   background-color: #FFFFFF;
@@ -1501,24 +1494,6 @@ label {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
-}
-.content__today-diary__text .delete-edit__btn .icon__delete-btn, .content__today-diary__text .delete-edit__btn .icon__edit-btn {
-  cursor: pointer;
-  color: #00ABB6;
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 0.04rem;
-}
-.content__today-diary__text .delete-edit__btn .icon__delete-btn .delete__icon, .content__today-diary__text .delete-edit__btn .icon__delete-btn .edit__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn .delete__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn .edit__icon {
-  margin-right: 5px;
-  fill: #04CAD6;
-}
-.content__today-diary__text .delete-edit__btn .icon__delete-btn:hover, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover {
-  text-decoration: underline;
-  color: #00737A;
-}
-.content__today-diary__text .delete-edit__btn .icon__delete-btn:hover .delete__icon, .content__today-diary__text .delete-edit__btn .icon__delete-btn:hover .edit__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover .delete__icon, .content__today-diary__text .delete-edit__btn .icon__edit-btn:hover .edit__icon {
-  fill: #00737A;
 }
 .content__today-diary__text p {
   text-align: left;
@@ -1534,8 +1509,12 @@ label {
 }
 .content__today-diary__text .content__today-diary__img .content__today-diary__item {
   margin-right: 1.2%; /* 画像間の余白を調整 */
-  max-width: 23.8095238095%;
-  height: 23.8095238095%;
+  width: 23%;
+  height: 23%;
+}
+
+.created-date {
+  letter-spacing: 0.04em;
 }
 
 .content__diary__comment--counseling {
@@ -1663,16 +1642,17 @@ label {
 
 /* グレー背景 */
 .layer {
-  background: rgba(0, 0, 0, 0.2);
-  width: 100%;
+  background: rgba(0, 0, 0, 0.701);
+  width: 390px;
   height: 100%;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: -1;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s linear, visibility 1s linear, z-index 1s linear;
+  transition: opacity 0.3s linear, visibility 0.3s linear, z-index 0.3s linear;
 }
 
 .layer.is-open {
@@ -1686,58 +1666,24 @@ label {
   visibility: visible;
 }
 
-.modal__button-wrap {
-  position: absolute;
-  right: 10px;
-  top: -28px;
-  display: inline-flex;
-}
-
-.close-button {
-  position: relative;
-  width: 39px;
-  height: 39px;
-  background: orange;
-  border-radius: 50%;
-  padding: 0;
-  border: transparent;
-  cursor: pointer;
-}
-
 /* モーダルコンテンツ */
 .modal {
   position: relative;
-  width: 100%;
+  max-width: 390px;
   height: auto;
   opacity: 0;
   visibility: hidden;
-  transition: visibility 0.7s linear, opacity 0.7s linear;
-}
-
-.modal__inner {
-  margin-top: 125px;
-  margin-bottom: 125px;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  background: #fff;
-  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 13px;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
   display: block;
-  padding: 21px 8px 21px;
-  height: auto;
-}
-
-.modal__content {
-  padding-top: 15px;
-  padding-bottom: 23px;
-}
-
-.modal__button-area {
   margin-right: auto;
   margin-left: auto;
-  margin-top: 17px;
-  padding-top: 15px;
+}
+
+.modal__content .modal__content__img {
+  margin-top: 50px;
+  width: 390px;
+  height: auto;
+  max-height: 405px;
 }
 
 .button--js-modal-button {
@@ -1755,6 +1701,70 @@ label {
   height: 100%;
 }
 
+.modal__button-wrap {
+  margin-top: 24px;
+  width: 342px;
+  height: 48px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  cursor: pointer;
+}
+.modal__button-wrap .close-button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border: none;
+  background: transparent;
+  cursor: inherit;
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--custom-color, #FFF);
+  color: #00ABB6;
+  font-size: 1.6rem;
+  border: 1px solid #00ABB6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.modal__button-wrap .close-button:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+
+@media only screen and (max-width: 960px) {
+  /* グレー背景 */
+  .layer {
+    width: 100%;
+  }
+  /* モーダルコンテンツ */
+  .modal {
+    max-width: 390px;
+  }
+  .modal__content .modal__content__img {
+    margin-top: 50px;
+    max-width: 390px;
+    max-height: 405px;
+  }
+}
+@media only screen and (min-height: 600px) {
+  /* グレー背景 */
+  .layer {
+    width: 100% !important;
+  }
+  /* モーダルコンテンツ */
+  .modal {
+    width: 100% !important;
+  }
+  .modal__content .modal__content__img {
+    margin-top: 150px !important;
+    width: 100% !important;
+    max-height: 526px !important;
+  }
+  .modal__button-wrap {
+    margin-top: 30px !important;
+  }
+}
 .content__today-diary__graph {
   width: 100%;
   background-color: #FFFFFF;
@@ -1762,4 +1772,185 @@ label {
   margin-bottom: 24px;
   border-top: 1px solid rgba(4, 202, 214, 0.15);
   box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+}
+
+.diary__deleta-text--top {
+  margin: 0;
+  font-size: 1.6rem;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.diary_delete__neko-img {
+  margin-bottom: 16px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.diary__deleta-text {
+  margin: 0;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+@media only screen and (min-height: 600px) {
+  .diary__deleta-text--top {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+  }
+  .diary_delete__neko-img {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .diary__deleta-text {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+}
+.delete__success__title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.delete__success__img {
+  margin-bottom: 30px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media only screen and (min-height: 600px) {
+  .delete__success__title {
+    margin-bottom: 50px;
+  }
+  .delete__success__img {
+    margin-bottom: 50px;
+  }
+}
+.created-date_update {
+  display: block;
+  padding: 10px;
+  background-color: #FFF;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.month-graph-page {
+  justify-content: center;
+  align-items: center;
+}
+.month-graph-page .month-graph-page .a--tab--right.active a {
+  background-color: #00ABB6;
+  color: #FFF;
+}
+
+.emotion__graph__img {
+  width: 100%;
+  background-color: #FFF;
+  padding: 16px 24px 16px 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid rgba(4, 202, 214, 0.15);
+  box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+}
+.emotion__graph__img .emotion__graph__table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph__table-td--right {
+  text-align: right;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph__table-td--left {
+  width: 7.2rem;
+  height: 2.8rem;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph_title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  letter-spacing: 0.04em;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph__btn {
+  cursor: pointer;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: #00ABB6;
+  background-color: #fff;
+  width: 7.2rem;
+  height: 2.8rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #00ABB6;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph__btn .a--blue--svg {
+  fill: #00ABB6;
+  padding-bottom: 1.4px;
+}
+.emotion__graph__img .emotion__graph__table .emotion__graph__btn:hover {
+  background-color: #EAEAEA;
+}
+
+.content__home__text--pink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.content__home__text--pink .content__today-diary__comment {
+  position: relative;
+  fill: #FFFFFF;
+  stroke-width: 2px;
+  stroke: #04CAD6;
+  width: 100%;
+  height: 216px;
+  gap: 10px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFBBDC;
+  border-radius: 10px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.content__home__text--pink .content__today-diary__comment .content__today-diary__comment__img {
+  position: absolute;
+  top: -23px;
+  left: -20px;
+}
+
+.month__diary__comment__item p {
+  margin: 0 !important;
+  text-align: left !important;
+  font-size: 1.6rem !important;
+  line-height: 170% !important;
+  letter-spacing: 0.04rem !important;
+}
+
+.month__diary__comment__item {
+  width: 100%;
+  height: 166px;
+  overflow-y: scroll;
+}
+
+.month__diary__comment__item::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+}
+
+.month__diary__comment__item::-webkit-scrollbar-thumb {
+  background-color: #FFD4E0;
+  border-radius: 10px;
+}
+
+.month__diary__comment__item::-webkit-scrollbar-thumb:hover {
+  background-color: #FFD4E0;
 }

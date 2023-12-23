@@ -40,17 +40,21 @@
         <div class="content__today-diary__text">
             <!-- 編集削除ボタン -->
             <div class="delete-edit__btn">
-                <div class="delete-edit__btn__spacer">
-                    <a class="icon__delete-btn" href="{% url  'diary:diary_delete' diary.id %}">
-                        <svg class="delete__icon" width="16" height="14" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                <!-- 保留 <div class="delete-edit__btn__spacer">
+                    <a class="icon__delete-btn" href="{% url  'diary:diary_delete' diary.id %}"> -->
+                <div class="a--blue">
+                    <a href="{% url  'diary:diary_delete' diary.id %}">
+                        <svg class="a--blue--svg" width="16" height="14" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
-                        </svg>削除</a>
+                        </svg><p class="a--blue-__p">削除</p></a>
                 </div>
-                <div class="delete-edit__btn__spacer">
-                    <a class="icon__edit-btn" href="{% url  'diary:diary_update' diary.id %}">
-                        <svg class="edit__icon" width="17" height="14" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
+                <!-- 保留 <div class="delete-edit__btn__spacer">
+                    <a class="icon__edit-btn" href="{% url  'diary:diary_update' diary.id %}"> -->
+                <div class="a--blue">
+                    <a href="{% url  'diary:diary_update' diary.id %}">
+                        <svg class="a--blue--svg" width="17" height="14" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.63083 5.14083L10.3592 5.86917L3.18667 13.0417H2.45833V12.3133L9.63083 5.14083ZM12.4808 0.375C12.2829 0.375 12.0771 0.454167 11.9267 0.604583L10.4779 2.05333L13.4467 5.02208L14.8954 3.57333C15.2042 3.26458 15.2042 2.76583 14.8954 2.45708L13.0429 0.604583C12.8846 0.44625 12.6867 0.375 12.4808 0.375ZM9.63083 2.90042L0.875 11.6562V14.625H3.84375L12.5996 5.86917L9.63083 2.90042Z"/>
-                        </svg>編集</a>
+                        </svg><p class="a--blue-__p">編集</p></a>
                 </div>
             </div>
 
@@ -62,24 +66,24 @@
                     {% if diary.photo1 %}
                         <div class="content__today-diary__item">
                             <!-- 画像のポップアップ -->
-                            <div class="layer js-modal">
+                            <div class="layer js-modal" id="modal1">
                                 <div class="modal">
                                     <div class="modal__inner">
                                         <div class="modal__contents">
                                             <div class="modal__content">
-                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                                <img id="modalImage1" class="modal__content__img" src="" alt="Diary Photo1">
                                             </div>
                                         </div>
 
                                         <div class="modal__button-wrap">
-                                            <button class="close-button js-close-button">閉じる
+                                            <button class="close-button js-close-button" onclick="closeModal('modal1')">閉じる
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="button button--js-modal-button">
+                            <button class="button button--js-modal-button" onclick="openModal('modal1', '{{ diary.photo1.url }}')">
                                 <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
                             </button>
                         </div>
@@ -87,49 +91,49 @@
                     {% if diary.photo2 %}
                         <div class="content__today-diary__item">
                             <!-- 画像のポップアップ -->
-                            <div class="layer js-modal">
+                            <div class="layer js-modal" id="modal2">
                                 <div class="modal">
                                     <div class="modal__inner">
                                         <div class="modal__contents">
                                             <div class="modal__content">
-                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                                <img id="modalImage2" class="modal__content__img" src="" alt="Diary Photo2">
                                             </div>
                                         </div>
 
                                         <div class="modal__button-wrap">
-                                            <button class="close-button js-close-button">閉じる
+                                            <button class="close-button js-close-button" onclick="closeModal('modal2')">閉じる
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="button button--js-modal-button">
-                                <img src="{{ todya.photo2.url }}" alt="Diary Photo2">
+                            <button class="button button--js-modal-button" onclick="openModal('modal2', '{{ diary.photo2.url }}')">
+                                <img src="{{ diary.photo2.url }}" alt="Diary Photo2">
                             </button>
                         </div>
                     {% endif %}
                     {% if diary.photo3 %}
                         <div class="content__today-diary__item">
                             <!-- 画像のポップアップ -->
-                            <div class="layer js-modal">
+                            <div class="layer js-modal" id="modal3">
                                 <div class="modal">
                                     <div class="modal__inner">
                                         <div class="modal__contents">
                                             <div class="modal__content">
-                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                                <img id="modalImage3" class="modal__content__img" src="" alt="Diary Photo3">
                                             </div>
                                         </div>
 
                                         <div class="modal__button-wrap">
-                                            <button class="close-button js-close-button">閉じる
+                                            <button class="close-button js-close-button" onclick="closeModal('modal3')">閉じる
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="button button--js-modal-button">
+                            <button class="button button--js-modal-button" onclick="openModal('modal3', '{{ diary.photo3.url }}')">
                                 <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
                             </button>
                         </div>
@@ -137,25 +141,25 @@
                     {% if diary.photo4 %}
                         <div class="content__today-diary__item">
                             <!-- 画像のポップアップ -->
-                            <div class="layer js-modal">
+                            <div class="layer js-modal" id="modal4">
                                 <div class="modal">
                                     <div class="modal__inner">
                                         <div class="modal__contents">
                                             <div class="modal__content">
-                                                <img class="content__today-diary__item" src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                                                <img id="modalImage4" class="modal__content__img" src="" alt="Diary Photo4">
                                             </div>
                                         </div>
 
                                         <div class="modal__button-wrap">
-                                            <button class="close-button js-close-button">閉じる
+                                            <button class="close-button js-close-button" onclick="closeModal('modal4')">閉じる
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="button button--js-modal-button">
-                                <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
+                            <button class="button button--js-modal-button" onclick="openModal('modal4', '{{ diary.photo4.url }}')">
+                                <img src="{{ diary.photo4.url }}" alt="Diary Photo4">
                             </button>
                         </div>
                     {% endif %}
@@ -206,14 +210,19 @@ const modalButton = document.querySelector('.button--js-modal-button');
 // button要素に付与したjs-close-buttonクラスを取得し、変数に格納
 const modalClose = document.querySelector('.js-close-button');
 
-// モーダルボタンをクリックしたときのイベントを登録
-modalButton.addEventListener('click', () => {
+// モーダルボタンをクリックしたときのイベント Idと表示する画像のURLを受け取る
+function openModal(modalId, imageUrl) {
+    // 指定されたモーダルのDOM要素を取得
+    const modal = document.getElementById(modalId);
+    // img 要素を取得 Idから末尾の数字を取り出し、対応するidを構築
+    const modalImage = document.getElementById('modalImage' + modalId.slice(-1));
+    modalImage.src = imageUrl;
     modal.classList.add('is-open');
-});
-
-// 閉じるボタンをクリックしたときのイベントを登録
-modalClose.addEventListener('click', () => {
+}
+// 閉じるボタンをクリックしたときのイベント
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
     modal.classList.remove('is-open');
-});
+}
 </script>
 {% endblock %}

@@ -57,6 +57,7 @@ header {
         font-weight: 400;
         margin-top: 0;
         margin-bottom: 0;
+        letter-spacing: 0.04em; // remより広めの文字間隔を設定
     }
 
     .header__spacer--top{
@@ -82,7 +83,7 @@ header {
             font-weight: bold;
             color: #fff;
             border-radius: 5px;
-            border: 0.1rem solid #FFF;
+            border: 1px solid #FFF;
             background-color: $header_color;
 
             svg {
@@ -206,6 +207,7 @@ footer {
         font-size: 1rem; /* テキストのサイズを10%に調整 */
         color: $footer_text_color; /* メニューテキストの色 */
         margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
+        letter-spacing: 0.04em;
     }
     // a要素をホバーした時、画像とテキストの色を変更
     a:hover {

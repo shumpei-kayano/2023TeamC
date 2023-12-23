@@ -165,12 +165,17 @@
     }
 }
 
+.content__today-diary_samll{
+    font-size: 12px;
+    margin-left: 24px;
+}
+
 .btn--blue{
     margin: 24px auto 40px auto;
     box-sizing: border-box; // パディングとボーダーを幅と高さに含める
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 960px) {
     .FlexTextarea {
         max-width: 100%;
     }

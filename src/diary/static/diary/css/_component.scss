@@ -10,6 +10,8 @@
     cursor: inherit; /* 親要素のカーソルスタイルを継承する */
     border-radius: 50px;
     font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em; // remより広めの文字間隔を設定
 }
 
 .btn {
@@ -36,6 +38,7 @@
             background: var(--custom-color, #00ABB6);
             color: #FFF;
             font-size: 1.6rem;
+            letter-spacing: 0.04rem;
 
             &:hover {
                 background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
@@ -53,6 +56,7 @@
             background: var(--custom-color, #00ABB6);
             color: #FFF;
             font-size: 1.6rem;
+            letter-spacing: 0.04rem;
 
             &:hover {
                 background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
@@ -71,6 +75,7 @@
             background: var(--custom-color, #FFF);
             color:#00ABB6;
             font-size: 1.6rem;
+            letter-spacing: 0.04rem;
             border: 1px solid #00ABB6;
             box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
@@ -90,6 +95,7 @@
             background: #FF4747;
             color: #FFF;
             font-size: 1.6rem;
+            letter-spacing: 0.04rem;
 
             &:hover {
                 background-color: $red_btn_hover; /* マウスをかざしたときの背景色 */
@@ -176,6 +182,7 @@
     margin-top: 24px;
     padding: 0px;
     background-color: $background_color; // 背景色を設定
+    cursor: pointer;
 
     a {
         display: flex;
@@ -212,6 +219,7 @@
     margin-top: 24px;
     padding: 0px;
     background-color: $background_color; // 背景色を設定
+    cursor: pointer;
 
     a {
         display: flex;
@@ -249,8 +257,9 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 
-    p {
+    .a--blue-__p {
         color: $a_blue_button;
         font-size: 1.6rem;
         font-style: normal;
@@ -261,15 +270,17 @@
         margin: 0;
         vertical-align: middle;
         margin-top: 0px;
+        margin-bottom: 5px;
     }
 
-    svg {
+    .a--blue--svg {
+        fill: $a_blue_button;
         vertical-align: middle;
         margin-bottom: 5px;  // SVG要素の下側マージンを4pxに設定
     }
 
     &:hover {
-        p {
+        .a--blue-__p{
             color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
         }
         text-decoration: none;
@@ -277,7 +288,7 @@
         background-repeat: no-repeat;
         background-size: 90% 4px;
         background-position: 0 calc(100% + 3px);  
-        img {
+        .a--blue--svg {
             fill: $a_blue_button_hover;
         }
     }
@@ -286,8 +297,10 @@
 .a--tab {
     display: flex; // 追加
     text-align: center; // 追加
+    justify-content: center;
     margin: 16px;
     margin-bottom: 12px;
+    cursor: pointer;
 
     &--left,
     &--right {
@@ -351,6 +364,7 @@
     box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
     border-radius: 5px;
     background-color: #FFF;
+    cursor: pointer;
 
     &:hover {
         background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
@@ -390,4 +404,5 @@
     line-height: normal;
     letter-spacing: 0.64px;
     text-align: center;
+    cursor: pointer;
 }

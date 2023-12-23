@@ -16,6 +16,7 @@
     .calendar-header__select-date{
         font-size: 18px;
         font-weight: 700;
+        letter-spacing: 0.04em; // remより広めの文字間隔を設定
     }
 
     .a--blue{
@@ -72,7 +73,7 @@
             top: 0;  // 上部に配置
             left: 50%;  // 水平方向に中央に配置
             transform: translateX(-50%);  // 水平方向に中央に配置
-            margin-top: 5px;
+            margin-top: 4px;
             font-size: 14px;
         }
         .calendar__month__img{

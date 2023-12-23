@@ -32,65 +32,93 @@
                 </div>
             </div>
 
-        <!-- 月間のページネーション -->
-        <div class="col-md-6">
-            <div class="text-right">
-              <div class="next__button">
-              <a href="{% url 'diary:month_graph' prev_month %}">
-                <img src="{% static 'diary/assets/left_arrow.svg' %}">
-              </a>
-                <div calss="text-center">
-                    <span id="year-month"></span>
+            <!-- 月間のページネーション -->
+            <div class="calendar-week">
+                <div class="calendar-header">
+                    <div class="next__button">
+                        <!-- ボタン -->
+                        <a href="{% url 'diary:month_graph' prev_month %}">
+                            <img src="{% static 'diary/assets/left_arrow.svg' %}">
+                        </a>
+                        <a href="{% url 'diary:month_graph' next_month %}">
+                            <img src="{% static 'diary/assets/right_arrow.svg' %}">
+                        </a>
+                    </div>
+                    <!-- 選択した月を表示 -->
+                    <p class="calendar-header__select-date">{{ selected_date|date:"Y年m月" }}</p>
+                    <!-- 今月に戻る -->
+                    <div class="a--blue">
+                        <a href="{% url 'diary:month_graph' %}">
+                            <svg class="a--blue--svg" id="mySvg" width="16" height="16" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                            </svg>
+                            <p class="a--blue-__p">今月</p></a>
+                    </div>
+                        {% comment %} <div calss="text-center">
+                            <span id="year-month"></span>
+                        </div> {% endcomment %}
                 </div>
-              <a href="{% url 'diary:month_graph' next_month %}">
-                  <img src="{% static 'diary/assets/right_arrow.svg' %}">
-              </a>
             </div>
-                {% comment %} 今月に戻る {% endcomment %}
-                <div class="a--blue">
-                    <a href="{% url 'diary:month_graph' %}"><img src="{% static 'diary/assets/return_arrow.svg' %}">今月</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- グラフの表示 -->
+            <!-- グラフの表示 -->
             <div id="emotion__graph">
                 <div class="emotion__graph__img">
+                    <table class="emotion__graph__table">
+                        <tr class="emotion__graph__table-tr">
+                            <td class="emotion__graph__table-td">
+                                <div class="emotion__graph__table-td--left"></div>
+                            </td>
+                            <td class="emotion__graph__table-td">
+                                <p class="emotion__graph_title">感情グラフ</p>
+                            </td>
+                            <td class="emotion__graph__table-td--right">
+                                <!-- 更新ボタン -->
+                                <form id="form-loading" method="POST" action="{% url 'diary:month_graph' selected_date=selected_date %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <button class="emotion__graph__btn" type="submit" onclick="submitForm()">
+                                        <svg class="a--blue--svg" id="mySvg" width="15" height="14" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                                        </svg>
+                                        更新</button>
+                                    <div id="loading">
+                                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                                        <div class="loading-content">
+                                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                                            読み込み中...
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
                     {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
-                    <canvas id="barChart" width="400" height="85"></canvas><!-- 棒グラフ -->
-                    <canvas id="lineChart" width="400" height="200"></canvas><!-- 折れ線グラフ -->
+                    <canvas id="barChart" style="max-height: 105px; border-bottom: 2px solid rgba(4, 202, 214, 0.15); padding-bottom: 8px;"></canvas><!-- 棒グラフ -->
+                    <canvas id="lineChart" style="max-height: 185px; margin-top: 8px;"></canvas><!-- 折れ線グラフ -->
                 </div>
             </div>
 
-
-        <!-- ネココのカウンセリングコメント -->
-        <div class="content__home__text--pink">
-            <div class="content__today-diary__comment">
-                <p>
-                    {{ ai_comment }}
-                </p>
-            <!-- ネコココメントの画像 -->
-                <div class="content__today-diary__comment__img">
-                    <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+            <!-- ネココのカウンセリングコメント -->
+            <div class="content__home__text--pink">
+                <div class="content__today-diary__comment">
+                    <div class="month__diary__comment__item">
+                        <p>
+                            {{ ai_comment }}
+                        </p>
+                    </div>
+                    <!-- ネコココメントの画像 -->
+                    <div class="content__today-diary__comment__img">
+                        <img src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+                    </div>
                 </div>
             </div>
+
         </div>
-        <form id="form-loading" method="POST" action="{% url 'diary:month_graph' selected_date=selected_date %}" enctype="multipart/form-data">
-          {% csrf_token %}
-          <button type="submit" onclick="submitForm()">更新</button>
-          <div id="loading">
-            <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
-            <div class="loading-content">
-              <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-              読み込み中...
-            </div>
-          </div>
-        </form>
     </div>
 </main>
+{% endblock %}
 
-
-
+{% block js %}
 <script>
   var ctx = document.getElementById('lineChart').getContext('2d');
   var chartData = {{ data|safe }};
@@ -138,8 +166,7 @@
           }
       }
   });
-</script>
-<script>
+
   var ctx = document.getElementById('barChart').getContext('2d');
   var chartData = {{ data|safe }};
 
@@ -204,11 +231,10 @@
         }
     }
   });
-  </script>
-<script>
+
   document.getElementById('form-loading').addEventListener('submit', function (event) {
     // ボタンがクリックされたらローディング画面を表示
     document.getElementById('loading').style.display = 'block';
   });
-  </script>
+</script>
 {% endblock %}

@@ -1,12 +1,17 @@
 /* 767以下の時のフルスクリーン設定 */
 #loading {
     display: none;
-    position: fixed;
     z-index: 1000;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 0;  // 上部に配置
+    // left: 0;
+
+    left: 50%;  // 水平方向に中央に配置
+    transform: translateX(-50%);  // 水平方向に中央に配置
+    width: 390px;
     height: 100%;
-    width: 100%;
+    // width: 100%;
+
     background: #EEFEFF;  
     #logo {
       width: 25%;
@@ -33,3 +38,9 @@
     }
   }
   /* ここまで */
+
+@media only screen and (min-height: 600px) {
+    #loading{
+        width: 100%;
+    }
+}

@@ -28,16 +28,15 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--blue"><!-- 追加した要素 -->
-    <div class="scroll--content">
+<main class="ground ground--blue"><!-- 背景色 -->
+    <div class="content-center"><!-- 要素を中央寄せ -->
 
         {% comment %} <form method="POST" action="{% url 'diary:home_top' diary.pk %}" enctype="multipart/form-data"><!--次のページに遷移させてください--> {% endcomment %}
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
             <!-- ユーザーが保存した日記の表示 -->
-            <div class="content__today-diary__text">
-                <ul>
-                    <br>作成日時：{{diary.created_date}}</br><br>
-                    <br>日記内容：{{ diary.content }}</br><br>
+            {% comment %} <div class="content__today-diary__text">
+                    作成日時：{{diary.created_date}}</br>
+                    日記内容：{{ diary.content }}
                     {% if diary.photo1 %}
                         <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
                     {% endif %}
@@ -53,27 +52,25 @@
                 </div>
             </div>
 
-
-        </div><!-- content__today-diary__group -->
-
-        <!-- ネコココメントの画像 -->
+        <!-- ネコココメント・画像 -->
         <div class="content__today-diary__comment__img">
             {{ diary.ai_comment }}
-            {% comment %} <img src="{% static'diary/assets/neko_comment.svg' %}" alt="ネココの画像"> {% endcomment %}
-        </div>
+            <img src="{% static'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+        </div> {% endcomment %}
 
-        <div class="deleta__diary__comment__text">
-            <p>日記を削除すると感情分析の</p>
-            <p>データも削除されます。</p>
-            <p>日記を削除しますか？</p>
-        </div>
-            <div class="button">
-              <a href="{% url 'diary:diary_delete_success' pk=diary.pk %}" onclick="location">日記を削除</a>
+        <div class="content-center-group">
+            <div class="account__text">
+                <p class="diary__deleta-text--top">日記を削除すると感情分析の<br>データも削除されます。</p>
+                <img class="diary_delete__neko-img" img src="{% static 'diary/assets/cancel_neko.svg' %}">
+                <p  class="diary__deleta-text">日記を削除しますか？</p>
             </div>
-        </form>
-
-        <div class="cancel__button">
-            <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+            <div class="btn--red">
+                <a href="{% url 'diary:diary_delete_success' pk=diary.pk %}" onclick="location">日記を削除</a>
+            </div>
+        {% comment %} </form> {% endcomment %}
+            <div class="btn--white">
+                <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+            </div>
         </div>
 
     </div><!-- scroll content -->

@@ -1,0 +1,25 @@
+.delete__success__title{
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.delete__success__img{
+    margin-bottom: 30px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media only screen and (min-height: 600px) {
+    .delete__success__title{
+        margin-bottom: 50px;
+    }
+    
+    .delete__success__img{
+        margin-bottom: 50px;
+    }
+}
