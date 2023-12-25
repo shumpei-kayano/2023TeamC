@@ -45,112 +45,224 @@
         </div>
     </div>
 
-<!-- 週間カレンダーページネーション -->
-<div class="calendar-week">
-    <div class="calendar-header">
-        {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
-        <div class="next__button">
-            <!-- 左ボタン -->
-            <a href="{% url 'diary:calender_week' week_start %}">
-                <img src="{% static 'diary/assets/left_arrow.svg' %}" alt="矢印のアイコン">
-            </a>
+    <!-- 週間カレンダーページネーション -->
+    <div class="calendar-week">
+        <div class="calendar-header">
+            {% comment %} 週を動的に遡れるようにしてください {% endcomment %}
+            <div class="next__button">
+                <!-- 左ボタン -->
+                <a href="{% url 'diary:calender_week' week_start %}">
+                    <img src="{% static 'diary/assets/left_arrow.svg' %}" alt="矢印のアイコン">
+                </a>
 
-            <a href="{% url 'diary:calender_week' week_start_up %}">
-                <img src="{% static 'diary/assets/right_arrow.svg' %}" alt="矢印のアイコン">
-            </a>
-        </div>
-        {% comment %} 年、月 {% endcomment %}
-        <p class="calendar-header__select-date">{{ selected_date|date:"Y年n月" }}</p>
+                <a href="{% url 'diary:calender_week' week_start_up %}">
+                    <img src="{% static 'diary/assets/right_arrow.svg' %}" alt="矢印のアイコン">
+                </a>
+            </div>
+            {% comment %} 年、月 {% endcomment %}
+            <p class="calendar-header__select-date">{{ selected_date|date:"Y年n月" }}</p>
 
-        <div class="a--blue">
-            <a href="{% url 'diary:calender_week'%}">
-                <svg id="mySvg" width="16" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z" fill="#00ABB6"/>
-                </svg>
-                <p>今週</p>
-            </a>
+            <div class="a--blue">
+                <a href="{% url 'diary:calender_week'%}">
+                    <svg class="a--blue--svg" id="mySvg" width="16" height="16" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                    </svg>
+                    <p class="a--blue-__p">今週</p>
+                </a>
+            </div>
         </div>
     </div>
-    
-        <!-- 週間カレンダー一覧 -->
-        <div class="week-calendar">
-          <table>
-            <tbody>
-                <tr>
-                    {% for day in week_dates %}
-                    <td>
-                        {% comment %} 今日の日記 {% endcomment %}
-                        {% if today == day %}
-                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                            {% for diary_entry in diary %}
-                                {% if diary_entry.created_date == day %}
-                                    {% for emotion_entry in emotion %}
-                                        {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a  style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                {{ diary_entry.content }}
-                                            </a>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                            {% comment %} ここまで {% endcomment %}
 
-                        {% elif day < selected_date %}
-                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                            {% for diary_entry in diary %}
-                                {% if diary_entry.created_date == day %}
-                                    {% for emotion_entry in emotion %}
-                                        {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a  style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                {{ diary_entry.content }}
+    <!-- 週間カレンダー一覧 -->
+    <div class="week-calendar">
+    <table class="week-calendar__table">
+        <tbody>
+            {% for day in week_dates %}
+                {% comment %} 今日の日記 {% endcomment %}
+                {% if today == day %}
+                    <tr class="week-calendar__today__tr">
+                        <td class="week-calendar__today">
+                            {{ day.month }}/{{ day.day }}
+                        </td>
+                        {% for diary_entry in diary %}
+                            {% if diary_entry.created_date == day %}
+                                {% for emotion_entry in emotion %}
+                                    {% if emotion_entry.diary_id == diary_entry.id %}
+                                        <td rowspan = "2" class="week-calendar__diary">
+                                            <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                {% comment %} {{ diary_entry.content }} {% endcomment %}
+                                                <div class="week-calendar__diary__flex-box">
+                                                    <div>
+                                                        <img class="week-calendar__emotion-img" src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    </div>
+                                                    <div>
+                                                        <!-- 10文字以上の場合は10文字まで表示し、それ以降は「…」と表示 -->
+                                                        {{ diary_entry.content|slice:":9" }}
+                                                        {% if diary_entry.content|length > 9 %}&hellip;{% endif %}
+                                                    </div>
+                                                    <div>
+                                                        <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                                    </div>
+                                                </div>
                                             </a>
-                                        {% endif %}
-                                    {% endfor %}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="week-calendar__week__today">
+                            <div
+                                {% if day|date:"w" == "0" %} class="sun"
+                                {% elif day|date:"w" == "6" %} class="sat"
                                 {% endif %}
-                            {% endfor %}
+                            >
+                                {{day|date:"D"}}
+                            </div>
+                        </td>
+                    </tr>
+                    {% comment %} ここまで {% endcomment %}
 
-                        {% elif day == selected_date %}
-                            {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}
-                            {% for diary_entry in diary %}
-                                {% if diary_entry.created_date == day %}
-                                    {% for emotion_entry in emotion %}
-                                        {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a style="width:100%; height:100%; display:block;" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                {{ diary_entry.content }}
+                {% elif day < selected_date %}
+                    <tr>
+                        <td class="week-calendar__date">
+                            {{ day.month }}/{{ day.day }}
+                        </td>
+                        {% for diary_entry in diary %}
+                            {% if diary_entry.created_date == day %}
+                                {% for emotion_entry in emotion %}
+                                    {% if emotion_entry.diary_id == diary_entry.id %}
+                                        <td rowspan = "2" class="week-calendar__diary">
+                                            <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <div class="week-calendar__diary__flex-box">
+                                                    <div>
+                                                        <img class="week-calendar__emotion-img" src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    </div>
+                                                    <div>
+                                                        <!-- 10文字以上の場合は10文字まで表示し、それ以降は「…」と表示 -->
+                                                        {{ diary_entry.content|slice:":9" }}
+                                                        {% if diary_entry.content|length > 9 %}&hellip;{% endif %}
+                                                    </div>
+                                                    <div>
+                                                        <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                                    </div>
+                                                </div>
                                             </a>
-                                        {% endif %}
-                                    {% endfor %}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="week-calendar__week">
+                            <div
+                                {% if day|date:"w" == "0" %} class="sun"
+                                {% elif day|date:"w" == "6" %} class="sat"
                                 {% endif %}
-                            {% endfor %}
+                            >
+                                {{day|date:"D"}}
+                            </div>
+                        </td>
+                    </tr>
 
-                        {% else %}
-                            <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span>
-                            {% for diary_entry in diary %}
-                                {% if diary_entry.created_date == day %}
-                                    {% for emotion_entry in emotion %}
-                                        {% if emotion_entry.diary_id == diary_entry.id %}
-                                            <a style="width:100%; height:100%; display:block;"  href="{% url 'diary:today_diary_detail' diary_entry.id %}">
-                                                <img src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
-                                                {{ diary_entry.content }}
+                {% elif day == selected_date %}
+                    <tr>
+                        <td class="week-calendar__date">
+                            {{ day.month }}/{{ day.day }}
+                        </td>
+                        {% comment %} {{ day.month }}/{{ day.day }}<br>{{day|date:"D"}} {% endcomment %}
+                        {% for diary_entry in diary %}
+                            {% if diary_entry.created_date == day %}
+                                {% for emotion_entry in emotion %}
+                                    {% if emotion_entry.diary_id == diary_entry.id %}
+                                        <td rowspan = "2" class="week-calendar__diary">
+                                            <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <div class="week-calendar__diary__flex-box">
+                                                    <div>
+                                                        <img class="week-calendar__emotion-img" src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    </div>
+                                                    <div>
+                                                        <!-- 10文字以上の場合は10文字まで表示し、それ以降は「…」と表示 -->
+                                                        {{ diary_entry.content|slice:":9" }}
+                                                        {% if diary_entry.content|length > 9 %}&hellip;{% endif %}
+                                                    </div>
+                                                    <div>
+                                                        <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                                    </div>
+                                                </div>
                                             </a>
-                                        {% endif %}
-                                    {% endfor %}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="week-calendar__week">
+                            <div
+                                {% if day|date:"w" == "0" %} class="sun"
+                                {% elif day|date:"w" == "6" %} class="sat"
                                 {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </td>
-                {% endfor %}
-                
-                </tr>
-                
-            </tbody>
-        </table>
-        </div>
-    </main>
-</div>
+                            >
+                                {{day|date:"D"}}
+                            </div>
+                        </td>
+                    </tr>
+
+                {% else %}
+                    <tr>
+                        <td class="week-calendar__date">
+                            {{ day.month }}/{{ day.day }}
+                        </td>
+                        {% comment %} <span class="future-day">{{ day.month }}/{{ day.day }}<br>{{day|date:"D"}}</span> {% endcomment %}
+                        {% for diary_entry in diary %}
+                            {% if diary_entry.created_date == day %}
+                                {% for emotion_entry in emotion %}
+                                    {% if emotion_entry.diary_id == diary_entry.id %}
+                                        <td rowspan = "2" class="week-calendar__diary">
+                                            <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
+                                                <div class="week-calendar__diary__flex-box">
+                                                    <div>
+                                                        <img class="week-calendar__emotion-img" src="{% static 'diary/assets/' %}{{ emotion_entry.reasoning }}.svg" alt="{{ emotion_entry.reasoning }}">
+                                                    </div>
+                                                    <div>
+                                                        <!-- 10文字以上の場合は10文字まで表示し、それ以降は「…」と表示 -->
+                                                        {{ diary_entry.content|slice:":9" }}
+                                                        {% if diary_entry.content|length > 9 %}&hellip;{% endif %}
+                                                    </div>
+                                                    <div>
+                                                        <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="week-calendar__week">
+                            <div
+                                {% if day|date:"w" == "0" %} class="sun"
+                                {% elif day|date:"w" == "6" %} class="sat"
+                                {% endif %}
+                            >
+                                {{day|date:"D"}}
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+{% endblock %}
+
+{% block js %}
 <script>
   document.getElementById('week_graph').addEventListener('click', function (event) {
     // ボタンがクリックされたらローディング画面を表示

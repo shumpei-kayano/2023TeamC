@@ -12,11 +12,13 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 8px;
 
     .calendar-header__select-date{
         font-size: 18px;
         font-weight: 700;
         letter-spacing: 0.04em; // remより広めの文字間隔を設定
+        margin: 0;
     }
 
     .a--blue{
@@ -37,7 +39,7 @@
     table {
         width: 100%;
         table-layout: fixed; /* テーブルのレイアウトを固定にする */
-        height: calc(100vh - 227px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+        height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
 
     th, td {
@@ -53,7 +55,6 @@
     .sun {
         color: #FC8686;
     }
-
     .sat {
         color: #0094FF;
     }
@@ -61,11 +62,12 @@
     td {
         position: relative;  // テーブルセルを相対位置に設定
         border: 1px solid $header_color;
+        height: 52.6px; // クリック範囲を追加後、行が潰れたため追加
 
         .calendar__month--today-td{
             background-color: $header_color;
-            width: 80%;
-            border-radius: 50px;
+            width: 100%;
+            // border-radius: 50px;
             color: #ffffff;
         }
         .calendar__month--today-td, .calendar__month__td{
@@ -73,16 +75,29 @@
             top: 0;  // 上部に配置
             left: 50%;  // 水平方向に中央に配置
             transform: translateX(-50%);  // 水平方向に中央に配置
-            margin-top: 4px;
-            font-size: 14px;
+            margin: 0;
+            // margin-top: 2px;
+            font-size: 12px;
+        }
+        // クリック範囲を追加
+        a {
+            display: block;
+            position: relative;  // img要素を中央に配置するため
+            height: 100%;  // 高さを固定
+            padding: 22px;  // クリック範囲を広げるため追加
+            box-sizing: border-box;  // paddingを含めたサイズを元のサイズとする
+            &:hover{
+                background-color: rgba(217, 217, 217, 0.43);;
+            }
         }
         .calendar__month__img{
             position: absolute;
             top: 50%;  // p要素の下部から50%の位置に配置
             left: 50%;
             transform: translate(-50%, 0);
-            margin-bottom: 10px;
+            // margin-bottom: 10px;// クリック範囲を追加したしたため削除
             max-width: 18px;
+            max-height: 18px;  // 画像の高さを制限
         }
     }
 }

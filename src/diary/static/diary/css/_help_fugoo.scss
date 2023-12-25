@@ -1,0 +1,176 @@
+.container{
+    // font-family: 'Arial', sans-serif;
+    // margin: 0;
+    // padding: 0;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    width: 100%;
+    height: calc(100vh - 11rem);
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 500%; /* スライドの数に応じて調整 */
+}
+
+.slide {
+    flex: 0 0 20%; /* スライドの数に応じて調整 */
+    padding: 20px;
+    padding-top: 24px;
+    padding-bottom: 130px; /* ボタンの高さとマージンに合わせて調整 */
+    visibility: hidden;
+    transition: visibility 1s ease-in-out;
+
+    h1{
+        color: #fff;
+        text-align: center;
+        margin: 0 0 14px 0;
+        width: 100%;
+        padding: 10px 0 10px 0;
+        border-radius: 3px;
+        // border: 1px solid var(--, #04CAD6);
+        background: #04CAD6;
+        letter-spacing: 0.04rem;
+    }
+    p{
+        margin: 0;
+        font-size: 1.6rem;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .slid__span{
+        color: #04CAD6;
+        letter-spacing: 0.04rem;
+        font-weight: 500;
+    }
+    img{
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.slid__img--1{
+    padding-top: 24px;
+    width: 250px;
+    height: auto;
+}
+.slid2__img--1, .slid2__img--2{
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 192px;
+    height: auto;
+}
+
+.slide.active {
+    visibility: visible;
+}
+
+.controls {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot-container {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.dot {
+    height: 15px;
+    width: 15px;
+    // padding: 15px; ボタンごとでかくなるので削除
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    // margin: 24px;
+    cursor: pointer;
+}
+
+.pagination__btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+.prev-btn{
+    padding: 12px 32px;
+    background: var(--custom-color, #FFF);
+    color:#00ABB6;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 50px;
+    border: 1px solid #00ABB6;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+        background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
+            }
+}
+.next-btn, .complete-btn{
+    padding: 12px 32px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    background: #00ABB6;
+    color: #FFF;
+
+    &:hover {
+        background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+    }
+}
+
+.dot.active {
+    background-color: #04CAD6;
+}
+
+.complete-btn {
+    display: none;
+}
+
+@media only screen and (min-height: 600px) {
+    .slider-container {
+        height: 100%;
+    }
+    .slide {
+        // padding-top: 0;
+        padding-bottom: 0;
+    }
+    .slid__img--1{
+        padding-top: 50px;
+    }
+    .slid2__img--1, .slid2__img--2 {
+        padding-top: 35px;
+        padding-bottom: 30px;
+    }
+}
