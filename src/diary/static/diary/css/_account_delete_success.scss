@@ -1,0 +1,27 @@
+.account__delete__success__title{
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.account__delete__success__img{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (min-height: 600px) {
+    .account__delete__success__title{
+        margin-top: 40px;
+        margin-bottom: 50px;
+    }
+    .account__delete__success__img{
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+}

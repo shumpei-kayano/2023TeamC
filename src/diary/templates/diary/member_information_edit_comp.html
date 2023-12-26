@@ -24,16 +24,16 @@
 
         <h3 class="member__header-text">会員情報を変更しました</h3>
 
-        <p class="member__content-text">メールをご確認ください</p>
-
         <p class="member__content-text">ご登録されたメールアドレス宛に<br><span class="highlight">変更完了メール</span>をお送りしています。</p>
 
-        <p class="member__red-text">メールが届いているか、<br>メール受信ボックスを確認してください。</p>
+        <p class="member__red-text">メールが届いているか<br>メール受信ボックスご確認ください。</p>
 
         {% comment %} メール認証が終わってない {% endcomment %}
-        <div class="info__date">
-            <p>ユーザーネーム: {{ user.username }}</p>
-            <p>メールアドレス: {{ user.email }}</p>
+        <div class="content__home">
+            <div class="content__home__text">
+                <p><small>ユーザーネーム</small><br>{{ user.username }}</p>
+                <p><small>メールアドレス</small><br> {{ user.email }}</p>
+            </div>
         </div>
         <!--メールを送信してください-->
         
@@ -41,7 +41,7 @@
         <img class="member__neko" img src="{% static 'diary/assets/member_neko.svg' %}">
         
 
-        <p class="member-text__content">入力いただいたメールアドレスが<br>間違っていたと予想される場合は、変更手続きを<br>初めからやり直してください。</p>
+        <p class="member-text__content">入力いただいたメールアドレスが<br>間違っていたと予想される場合は、変更手続きを<br>はじめからやり直してください。</p>
     {% comment %} 
         <form method="POST" action="{% url 'setting.html' %}"><!--次のページに遷移させてください-->
             {% csrf_token %}

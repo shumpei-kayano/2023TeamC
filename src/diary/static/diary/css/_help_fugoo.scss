@@ -43,7 +43,7 @@
     p{
         margin: 0;
         font-size: 1.6rem;
-        margin-top: 10px;
+        margin-top: 15px;
         text-align: center;
     }
     .slid__span{
@@ -54,6 +54,18 @@
     img{
         display: block;
         margin: 0 auto;
+    }
+    .slid__samll{
+        font-size: 1rem;
+        display: block;
+        margin: 0 auto;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .slid__span__border{
+        letter-spacing: 0.04rem;
+        font-weight: 700;
+        background:linear-gradient(transparent 60%, rgba(4, 202, 214, 0.40) 60%); // マーカー
     }
 }
 
@@ -67,6 +79,9 @@
     padding-bottom: 24px;
     width: 192px;
     height: auto;
+}
+.slid3__img--1, .slid4__img--1, .slid5__img--1{
+    padding-top: 24px;
 }
 
 .slide.active {

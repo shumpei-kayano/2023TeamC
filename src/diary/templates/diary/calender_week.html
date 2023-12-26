@@ -35,11 +35,12 @@
             <div class="a--tab--right {% if request.path == week_graph_url %}active{% endif %}">
                 <a id = "week_graph" href="{{ week_graph_url }}">週間グラフ</a>
                 <div id="loading">
-                  <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
-                  <div class="loading-content">
-                    <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                    読み込み中...
-                  </div>
+                    <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                    <div class="loading-content">
+                        <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                        <p class="loading__text">読み込み中</P>
+                        <span class="dli-loading-1"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,9 +265,11 @@
 
 {% block js %}
 <script>
-  document.getElementById('week_graph').addEventListener('click', function (event) {
-    // ボタンがクリックされたらローディング画面を表示
-    document.getElementById('loading').style.display = 'block';
-  });
-  </script>
+    document.getElementById('week_graph').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+</script>
 {% endblock %}

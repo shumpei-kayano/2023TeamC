@@ -1139,7 +1139,7 @@ hr {
   margin-bottom: 24px;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 599px) {
   .user-infomation {
     margin-bottom: 50px;
   }
@@ -1171,7 +1171,7 @@ label {
   font-size: 1.4rem;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 599px) {
   .user-infomation-edit {
     margin-bottom: 50px;
   }
@@ -1251,7 +1251,7 @@ label {
   margin-top: 0;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 599px) {
   .content__member-info__cancel-text {
     font-size: 20px !important;
     margin-bottom: 24px !important;
@@ -1273,25 +1273,20 @@ label {
 }
 
 .member__header-text {
-  color: #000;
   text-align: center;
   font-size: 2rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   letter-spacing: 0.8px;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
-.member__content-text {
-  color: #000;
+.member__content-text, .member__red-text {
   font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  line-height: 170%;
   letter-spacing: 0.64px;
-  margin-bottom: 24px;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 .highlight {
@@ -1300,11 +1295,7 @@ label {
 
 .member__red-text {
   color: #F00;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 170%;
-  letter-spacing: 0.64px;
+  margin-bottom: 24px;
 }
 
 .member__neko {
@@ -1327,15 +1318,19 @@ label {
 }
 
 .member-text__content {
-  color: #000;
   text-align: center;
   font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 400;
   line-height: 170%; /* 23.8px */
   letter-spacing: 0.28px;
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 
+@media only screen and (min-height: 599px) {
+  .member__scroll--content {
+    height: 100%;
+  }
+}
 .content-center-group {
   display: flex;
   flex-direction: column;
@@ -1485,7 +1480,6 @@ label {
   box-sizing: border-box;
 }
 
-/* 767以下の時のフルスクリーン設定 */
 #loading {
   display: none;
   z-index: 1000;
@@ -1493,7 +1487,8 @@ label {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 390px;
+  width: 39rem;
+  max-width: 100%;
   height: 100%;
   background: #EEFEFF;
 }
@@ -1519,11 +1514,43 @@ label {
   width: 55%; /* 幅を100pxに設定 */
   margin: auto;
 }
+#loading .loading-content .loading__text {
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding-top: 30px;
+}
 
-/* ここまで */
-@media only screen and (min-height: 600px) {
+#loading .loading-content .dli-loading-1 {
+  display: inline-block;
+  vertical-align: middle;
+  color: #666;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+  border: 0.2em solid currentColor;
+  border-top-color: rgba(102, 102, 102, 0.3);
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.rotate-animation {
+  animation: rotate 1s linear infinite;
+}
+
+@media only screen and (max-width: 960px) {
   #loading {
     width: 100%;
+    max-width: none;
   }
 }
 .content__today-diary__text {
@@ -1919,6 +1946,7 @@ label {
 .emotion__graph__img .emotion__graph__table .emotion__graph_title {
   text-align: center;
   font-size: 1.4rem;
+  font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
   letter-spacing: 0.04em;
@@ -2037,7 +2065,7 @@ label {
 .slide p {
   margin: 0;
   font-size: 1.6rem;
-  margin-top: 10px;
+  margin-top: 15px;
   text-align: center;
 }
 .slide .slid__span {
@@ -2048,6 +2076,18 @@ label {
 .slide img {
   display: block;
   margin: 0 auto;
+}
+.slide .slid__samll {
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+.slide .slid__span__border {
+  letter-spacing: 0.04rem;
+  font-weight: 700;
+  background: linear-gradient(transparent 60%, rgba(4, 202, 214, 0.4) 60%);
 }
 
 .slid__img--1 {
@@ -2061,6 +2101,10 @@ label {
   padding-bottom: 24px;
   width: 192px;
   height: auto;
+}
+
+.slid3__img--1, .slid4__img--1, .slid5__img--1 {
+  padding-top: 24px;
 }
 
 .slide.active {
@@ -2164,5 +2208,59 @@ button {
   .slid2__img--1, .slid2__img--2 {
     padding-top: 35px;
     padding-bottom: 30px;
+  }
+}
+.account__delete__success__title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.account__delete__success__img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-height: 600px) {
+  .account__delete__success__title {
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+  .account__delete__success__img {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+}
+.logout__success__title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.logout__success__img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-height: 600px) {
+  .logout__success__title {
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+  .logout__success__img {
+    margin-top: 50px;
+    margin-bottom: 30px;
   }
 }
