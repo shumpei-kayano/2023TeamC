@@ -29,6 +29,7 @@
     transform: translate(-50%, -50%);
     color: rgb(0, 0, 0);
     font-size: 180%;
+    text-align: center; /* 中央寄せを追加 */
 
     #teacat {
         display: block;
@@ -39,7 +40,6 @@
     .loading__text{
         font-size: 2rem;
         letter-spacing: 0.04em;
-        text-align: center;
         padding-top: 30px;
     }
 }
@@ -47,6 +47,7 @@
 // アニメーション
 #loading .loading-content .dli-loading-1 {
     display: inline-block;
+    text-align: center;
     vertical-align: middle;
     color: #666;
     line-height: 1;

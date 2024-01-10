@@ -732,3 +732,17 @@ img.img__logo {
   line-height: normal;
   letter-spacing: 0.64px;
 }
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.tutorial-page {
+  animation: slide-in 1s ease-out;
+}
