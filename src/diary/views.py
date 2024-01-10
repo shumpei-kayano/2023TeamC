@@ -293,9 +293,10 @@ def receive_nekoko_advice(request, pk):
       diary.ai_comment = ai_comment
       diary.save()
 
-      return render(request, 'diary/today_diary_detail.html', {'pk':pk, 'diary':diary})
+      return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
+
 @login_required
 def create_diary(request):
     today = date.today()
