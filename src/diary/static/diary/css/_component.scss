@@ -298,8 +298,7 @@
     display: flex; // 追加
     text-align: center; // 追加
     justify-content: center;
-    margin: 16px;
-    margin-bottom: 12px;
+    margin: 10px;
     cursor: pointer;
 
     &--left,
@@ -354,7 +353,7 @@
 
 .next__button a {
     display: flex;
-    margin: 5px;
+    margin-right: 10px;
     justify-content: center;
     align-items: center;
     border: 1px solid $a_blue_button; /* 四角の枠線 */

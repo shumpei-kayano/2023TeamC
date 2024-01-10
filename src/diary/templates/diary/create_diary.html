@@ -115,7 +115,8 @@
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
                             <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                            読み込み中...
+                            <p class="loading__text">読み込み中</P>
+                            <span class="dli-loading-1"></span>
                         </div>
                     </div>
                 </div>
@@ -245,6 +246,8 @@
     document.getElementById('creatediaryform').addEventListener('submit', function (event) {
       // ボタンがクリックされたらローディング画面を表示
       document.getElementById('loading').style.display = 'block';
+      // アニメーションを開始
+      document.querySelector('.dli-loading-1').classList.add('rotate-animation');
   });
 </script>
 {% endblock %}

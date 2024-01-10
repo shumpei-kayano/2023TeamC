@@ -33,7 +33,15 @@
                 <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
             </div>
             <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
-                <a href="{{ today_diary_graph_url }}">グラフ</a>
+                <a id="today_graph" href="{{ today_diary_graph_url }}">グラフ</a>
+                <div id="loading">
+                    <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                    <div class="loading-content">
+                        <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                        <p class="loading__text">読み込み中</P>
+                        <span class="dli-loading-1"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -51,7 +59,15 @@
                 <!-- 保留 <div class="delete-edit__btn__spacer">
                     <a class="icon__edit-btn" href="{% url  'diary:diary_update' diary.id %}"> -->
                 <div class="a--blue">
-                    <a href="{% url  'diary:diary_update' diary.id %}">
+                    <a id="edit" href="{% url  'diary:diary_update' diary.id %}">
+                        <div id="loading">
+                            <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                            <div class="loading-content">
+                                <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                                <p class="loading__text">読み込み中</P>
+                                <span class="dli-loading-1"></span>
+                            </div>
+                        </div>
                         <svg class="a--blue--svg" width="17" height="14" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.63083 5.14083L10.3592 5.86917L3.18667 13.0417H2.45833V12.3133L9.63083 5.14083ZM12.4808 0.375C12.2829 0.375 12.0771 0.454167 11.9267 0.604583L10.4779 2.05333L13.4467 5.02208L14.8954 3.57333C15.2042 3.26458 15.2042 2.76583 14.8954 2.45708L13.0429 0.604583C12.8846 0.44625 12.6867 0.375 12.4808 0.375ZM9.63083 2.90042L0.875 11.6562V14.625H3.84375L12.5996 5.86917L9.63083 2.90042Z"/>
                         </svg><p class="a--blue-__p">編集</p></a>
@@ -224,5 +240,16 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     modal.classList.remove('is-open');
 }
+
+document.getElementById('today_graph').addEventListener('click', function (event) {
+    // ボタンがクリックされたらローディング画面を表示
+    document.getElementById('loading').style.display = 'block';
+    // アニメーションを開始
+    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+});
+document.getElementById('edit').addEventListener('click', function (event) {
+    document.getElementById('loading').style.display = 'block';
+    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+});
 </script>
 {% endblock %}

@@ -39,13 +39,16 @@
                 <p class="user-info">{{ user.email }}</p>
             <hr>
             </div>
+            {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
+            <div class="content__user-info__password">
+                <p class="user-label">パスワード</p>
+                <p class="user-info">
+                    ***************************************
+                    {% comment %} {{ user.password }} {% endcomment %}
+                </p>
+            <hr>
+            </div>
         </div>
-        {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
-        {% comment %} <div class="content__user-info__password">
-            <p>パスワード</p>
-            <p>{{ user.password }}</p>
-        <hr>
-        </div> {% endcomment %}
 
             {% csrf_token %}
             <div class="btn--blue--info">

@@ -1,10 +1,9 @@
 <!--ログアウト実行画面 -->
-
 {% extends "base_diary.html" %}
 
 {% load static %}
 
-{% block title %}設定{% endblock %}
+{% block title %}ログアウト{% endblock %}
 
 {% block css %}
 <!-- ページ固有のCSSを読み込み -->
@@ -14,29 +13,30 @@
 {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->
-    <h1>ログアウト</h1>
+    <h1>設定</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--white">
-    <div class="scroll--content">
+<main class="ground ground--white"><!-- 追加した要素 -->
+    <div class="content-center">
 
-        <h1 class="logout__success__title">ログアウトしました</h1>
+        <div class="content__home">
+            <p class="logout__success__title">ログアウトしました</p>
 
-        <!-- ネコココメント -->
-        <div class="logout__success-text">
-            <p>ログイン画面を表示する場合は、<br>「トップページへ」ボタンを<br>クリックしてくださいにゃ</p>
+            <div class="content__home__text">
+                <p>再ログインする場合は<br>
+                    「トップページへ」ボタンを<br>
+                    クリックしてくださいにゃ</p>
+            </div>
+
+            <!-- ネココの画像 -->
+            <img class="logout__success__img" src="{% static 'diary/assets/delete_sussess_neko.svg' %}" alt="ネココの画像">
         </div>
 
-        <!-- ネココの画像 -->
-        <div class="content__today-diary__comment__img">
-            <img src="{% static'diary/assets/member_neko.svg' %}" alt="ネココの画像">
-        </div>
-
-        <div class="button">
-            <button id="save-button" type="submit" onclick="location.href='{% url 'diary:home_top.htmlへ遷移お願いします' %}'">トップページへ</button>
+        <div class="btn--large">
+            <a href="{% url 'user:account_top' %}">トップページへ</a>
         </div>
 
     </div>

@@ -1,10 +1,9 @@
 <!--アカウント削除実行画面-->
-
 {% extends "base_diary.html" %}
 
 {% load static %}
 
-{% block title %}設定{% endblock %}
+{% block title %}アカウント削除完了{% endblock %}
 
 {% block css %}
 <!-- ページ固有のCSSを読み込み -->
@@ -14,33 +13,30 @@
 {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->
-    <h1>アカウント削除</h1>
+    <h1>設定</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--white">
-<div class="scroll--content">
+<main class="ground ground--white"><!-- 追加した要素 -->
+    <div class="content-center">
 
-    <p class="deleta__success__title">アカウントが削除されました</p>
+        <div class="content__home">
+            <p class="account__delete__success__title">アカウントを削除しました</p>
 
-    <!-- ネコココメント -->
-    <div class="deleta__success-text">
-        <p>ご利用ありがとうございましたにゃ</p>
+            <div class="content__home__text">
+                <p>またのご利用を待ってるにゃ</p>
+            </div>
+
+            <!-- ネココの画像 -->
+            <img class="account__delete__success__img" src="{% static 'diary/assets/delete_sussess_neko.svg' %}" alt="ネココの画像">
+        </div>
+
+        <div class="btn--large">
+            <a href="{% url 'user:account_top' %}">トップページへ</a>
+        </div>
+
     </div>
-
-    <!-- ネココの画像 -->
-    <div class="content__today-diary__comment__img">
-        <img src="{% static'diary/assets/member_neko.svg' %}" alt="ネココの画像">
-    </div>
-
-    <div class="button">
-        {% comment %} user/account_top.htmlに遷移させてください {% endcomment %}
-        <button id="save-button" type="submit" onclick="location.href='{% url '' %}'">トップページへ</button>
-        <a href="{% url 'user:account_top' %}">トップページへ</a>
-    </div>
-</div>
 </main>
-    
 {% endblock %}

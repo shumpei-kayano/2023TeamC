@@ -212,6 +212,7 @@ footer {
     // a要素をホバーした時、画像とテキストの色を変更
     a:hover {
         .nav-text {
+            text-decoration: none;
             color: #007880;
         }
         .footer__home, .footer__week, .footer__month, .footer__setting{

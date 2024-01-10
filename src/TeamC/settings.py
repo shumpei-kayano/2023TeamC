@@ -198,8 +198,8 @@ SOCIALACCOUNT_FORMS = {
 #--------------------allauthの基本設定--------------------
 
 # APIキーの読み込み
-def read_api_key():
-    with open('api_key.txt', 'r') as file:
-        return file.read().strip()
+# def read_api_key():
+#     with open('api_key.txt', 'r') as file:
+#         return file.read().strip()
 
-OPENAI_API_KEY = read_api_key()
+OPENAI_API_KEY = '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'

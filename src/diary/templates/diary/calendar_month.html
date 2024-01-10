@@ -31,13 +31,13 @@
                 </div>
                 <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
                     <a id = "month_graph" href="{{ month_graph_url }}">月間グラフ</a>
-                      <div id="loading">
+                    <div id="loading">
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
-                          <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                          読み込み中...
+                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                            <p class="loading__text">読み込み中</P>
+                            <span class="dli-loading-1"></span>
                         </div>
-                      </div>
                     </div>
                 </div>
             </div>
@@ -114,15 +114,17 @@
         </div><!-- calendar  background -->
 
     </div><!-- scroll  content -->
-    
+
 </main>
 {% endblock %}
 
 {% block js %}
 <script>
-document.getElementById('month_graph').addEventListener('click', function (event) {
-  // ボタンがクリックされたらローディング画面を表示
-  document.getElementById('loading').style.display = 'block';
-});
+    document.getElementById('month_graph').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
 </script>
 {% endblock %}
