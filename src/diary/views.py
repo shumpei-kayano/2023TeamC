@@ -272,26 +272,30 @@ def create_diary_confirmation2(request, pk):
 @login_required
 def receive_nekoko_advice(request, pk):
     diary = get_object_or_404(Diary, id=pk)
-
-    # ここにネココのアドバイスを受けるための処理を追加する
-    openai.api_key = settings.OPENAI_API_KEY
-
-    user_diary = "以下は日記のコンテンツです。貴方はカウンセラーです。日記に対して心理学に基づいたコメントを返してください。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学を心得ている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。 \n" + diary.content
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages= [
-                {   "role"      : "user",
-                    "content"   : user_diary
-                }
-            ]
-    )
-    ai_comment = response["choices"][0]["message"]["content"]
-    # データベースへの保存
-    diary.ai_comment = ai_comment
+    # ここでcounselingをFalseに設定
+    diary.counseling = 2
     diary.save()
+    if diary:
+      # ここにネココのアドバイスを受けるための処理を追加する
+      openai.api_key = settings.OPENAI_API_KEY
 
-    return render(request, 'diary/today_diary_detail.html', {'pk':pk, 'diary':diary})
+      user_diary = "以下は日記のコンテンツです。貴方はカウンセラーです。日記に対して心理学に基づいたコメントを返してください。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学を心得ている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。 \n" + diary.content
+      response = openai.ChatCompletion.create(
+          model="gpt-3.5-turbo",
+          messages= [
+                  {   "role"      : "user",
+                      "content"   : user_diary
+                  }
+              ]
+      )
+      ai_comment = response["choices"][0]["message"]["content"]
+      # データベースへの保存
+      diary.ai_comment = ai_comment
+      diary.save()
 
+      return render(request, 'diary/today_diary_detail.html', {'pk':pk, 'diary':diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form})
 @login_required
 def create_diary(request):
     today = date.today()
@@ -569,18 +573,6 @@ def today_diary_detail2(request,pk):
     diary = get_object_or_404(Diary, id=pk)
     if diary:
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
-    form = DiaryCreateForm()
-    return render(request, 'diary/create_diary.html', {'Diary': form})
-
-@login_required
-def counseling_red(request,pk):
-    diary = get_object_or_404(Diary, id=pk)
-    # ここでcounselingをFalseに設定
-    diary.counseling = 2
-    diary.save()
-
-    if diary:
-        return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
