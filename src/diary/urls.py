@@ -52,5 +52,8 @@ urlpatterns = [
     path('today/diary/graph/<int:pk>', views.today_diary_graph,name='today_diary_graph'),
     path('week/graph', views.week_graph,name='week_graph'),
     path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
+    # ネココのアドバイスを受けるための URL パターン
+    path('receive_nekoko_advice/<int:pk>/', views.receive_nekoko_advice, name='receive_nekoko_advice'),
+
 
 ]
