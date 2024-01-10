@@ -5,6 +5,114 @@
 
 
 {% block contents %}
-<h1>チュートリアル画面です</h1>
-<p class="notion"><a href="{% url 'account_signup' %}">新規登録画面へ</a></p>
+    <div id="tutorial-page-1" class="tutorial-page">
+        <!-- チュートリアルの内容 -->
+        <div class="title-1">
+            <p class="title-1-text">Fugooとは</p>
+        </div>
+
+        <div class="title_text-1">
+            <p class="title_text-1-text">Fugoo（ファグー）とは<br>
+                FunでGoodな日記アプリ！<br>
+                この日記アプリはAIを活用して<br>
+                感情分析やポジティブな文章変換、<br>
+                AI ネココによるコメントを<br>
+                見ることができます。<br>
+                また、感情分析の統計データで<br>
+                感情の変化を可視化することができ、<br>
+                思考の整理やストレス管理などの<br>
+                ポジティブな習慣の形成を支援します。<br></p>
+        </div>
+
+    </div>
+    <div id="tutorial-page-2" class="tutorial-page" style="display: none;">
+        <!-- チュートリアルの内容 -->
+        <div class="title_text-2">
+            <p class="title_text-2-text">Fugoo（ファグー）とは<br>
+                FunでGoodな日記アプリ！<br>
+                この日記アプリはAIを活用して<br>
+                感情分析やポジティブな文章変換、<br>
+                AI ネココによるコメントを<br>
+                見ることができます。<br>
+                また、感情分析の統計データで<br>
+                感情の変化を可視化することができ、<br>
+                思考の整理やストレス管理などの<br>
+                ポジティブな習慣の形成を支援します。<br></p>
+        </div>
+    </div>
+
+    <div id="tutorial-page-3" class="tutorial-page" style="display: none;">
+        <!-- チュートリアルの内容 -->
+        <p class="title-3">3</p>
+    </div>
+
+    <div id="tutorial-page-4" class="tutorial-page" style="display: none;">
+        <!-- チュートリアルの内容 -->
+        <p class="title-4">4</p>
+    </div>
+
+    <div id="tutorial-page-5" class="tutorial-page" style="display: none;">
+        <!-- チュートリアルの内容 -->
+        <p class="title-5">5</p>
+    </div>
+
+    <div class="btn btn--blue">
+        <button id="next-button">次へ</button>
+    </div>
+    {% comment %} <p class="notion"><a href="{% url 'account_signup' %}">新規登録画面へ</a></p> {% endcomment %}
 {% endblock contents %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let tutorialPages = Array.from(document.querySelectorAll('.tutorial-page'));
+        let nextButton = document.getElementById('next-button');
+        
+        let currentPage = 0;
+        
+        // 初期状態の設定
+        tutorialPages.forEach((page, index) => {
+            page.style.display = index === currentPage ? 'block' : 'none';
+        });
+        
+        nextButton.addEventListener('click', () => {
+            tutorialPages[currentPage].style.display = 'none';
+            currentPage++;
+            if (currentPage < tutorialPages.length) {
+                tutorialPages[currentPage].style.display = 'block';
+                tutorialPages[currentPage].style.animation = 'none'; // アニメーションをリセット
+                void tutorialPages[currentPage].offsetWidth; // レンダリングを強制
+                tutorialPages[currentPage].style.animation = null; // アニメーションを再設定
+            } else {
+                currentPage = 0; // ページが最後まで達したら最初に戻る
+                tutorialPages[currentPage].style.display = 'block';
+                tutorialPages[currentPage].style.animation = 'none'; // アニメーションをリセット
+                void tutorialPages[currentPage].offsetWidth; // レンダリングを強制
+                tutorialPages[currentPage].style.animation = null; // アニメーションを再設定
+            }
+        });
+    });
+</script>
+{% endblock script %}
+{% comment %} {% block script %}
+<script>
+    window.onload = function() {
+        let currentPage = 1;
+        const maxPage = 5;
+        const nextButton = document.getElementById('next-button');
+        nextButton.addEventListener('click', () => {
+          if (currentPage < maxPage) {
+            document.getElementById(`tutorial-page-${currentPage}`).style.display = 'none';
+            currentPage++;
+            document.getElementById(`tutorial-page-${currentPage}`).style.display = 'block';
+            if (currentPage === maxPage) {
+              nextButton.textContent = '新規登録画面へ';
+              nextButton.addEventListener('click', () => {
+                window.location.href = "{% url 'account_signup' %}";
+              });
+            }
+          }
+        });
+    }
+</script>
+{% endblock script %} {% endcomment %}
