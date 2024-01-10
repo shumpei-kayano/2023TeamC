@@ -1508,6 +1508,7 @@ label {
   transform: translate(-50%, -50%);
   color: rgb(0, 0, 0);
   font-size: 180%;
+  text-align: center; /* 中央寄せを追加 */
 }
 #loading .loading-content #teacat {
   display: block;
@@ -1517,12 +1518,12 @@ label {
 #loading .loading-content .loading__text {
   font-size: 2rem;
   letter-spacing: 0.04em;
-  text-align: center;
   padding-top: 30px;
 }
 
 #loading .loading-content .dli-loading-1 {
   display: inline-block;
+  text-align: center;
   vertical-align: middle;
   color: #666;
   line-height: 1;
@@ -2263,4 +2264,28 @@ button {
     margin-top: 50px;
     margin-bottom: 30px;
   }
+}
+.content__positive-diary__text {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 24px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(4, 202, 214, 0.15);
+  box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+}
+.content__positive-diary__text p {
+  text-align: left;
+  margin: 0;
+}
+
+.content__positive-diary__img {
+  display: block;
+  margin: 0 auto;
+  width: 102px;
+  height: auto;
+}
+
+.content__positive-diary__p {
+  margin: 24px auto;
+  text-align: center;
 }
