@@ -126,7 +126,7 @@ def contains_forbidden_word(content,user):
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         if word in content:
-            return word
+            return 1
     return None
 
 @login_required
@@ -251,6 +251,10 @@ def create_diary_confirmation2(request, pk):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
+            # 特定のワード実行関数
+            contains_forbidden= contains_forbidden_word(diary.content,request.user)
+            # counselingに関数の実行結果をセット
+            diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
             diary.ai_comment = ai_comment
             diary.save()
@@ -260,13 +264,7 @@ def create_diary_confirmation2(request, pk):
 
     # 感情分析の実行関数
     analyze_sentiment(diary.content, diary,request.user)
-    
-    # 特定のワード実行関数
-    contains_forbidden= contains_forbidden_word(diary.content,request.user)
-    # counselingに関数の実行結果をセット
-    diary.counseling = contains_forbidden is not None
-    # データベースへの保存
-    diary.save()
+
 
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
@@ -575,14 +573,25 @@ def today_diary_detail2(request,pk):
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
-def today_diary_detail3(request,pk):
+def counseling_red(request,pk):
     diary = get_object_or_404(Diary, id=pk)
     # ここでcounselingをFalseに設定
-    diary.counseling = False
+    diary.counseling = 2
     diary.save()
 
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form})
+  
+@login_required
+def counseling_yellow(request,pk):
+    diary = get_object_or_404(Diary, id=pk)
+    # ここでcounselingをFalseに設定
+    diary.counseling = 0
+    diary.save()
+    if diary:
+        return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
