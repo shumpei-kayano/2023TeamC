@@ -26,7 +26,7 @@ class Diary(models.Model):
     # AIコメント
     ai_comment = models.CharField(verbose_name='AIコメント', max_length=1000)
     # カウンセリング可否
-    counseling = models.BooleanField(verbose_name='カウンセリング可否', default=False)
+    counseling = models.IntegerField(verbose_name='カウンセリング可否', default=0)
 
     def __str__(self):
         return f'Diary by {self.user}'

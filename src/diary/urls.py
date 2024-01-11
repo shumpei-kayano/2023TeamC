@@ -1,6 +1,7 @@
 from django.urls import path
 from diary import views
 from .views import calender_week
+from django.urls import path, include
 
 app_name = 'diary'
 urlpatterns = [
@@ -48,9 +49,10 @@ urlpatterns = [
     path('today/counseling/graph', views.today_counseling_graph,name='today_counseling_graph'),
     path('today/diary/detail', views.today_diary_detail,name='today_diary_detail'),
     path('today/diary/detail/<int:pk>', views.today_diary_detail2,name='today_diary_detail'),
-    path('today/diary/detail3/<int:pk>', views.today_diary_detail3,name='today_diary_detail3'),
+    path('today/counseling_yellow/<int:pk>', views.counseling_yellow,name='counseling_yellow'),
     path('today/diary/graph/<int:pk>', views.today_diary_graph,name='today_diary_graph'),
     path('week/graph', views.week_graph,name='week_graph'),
     path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
-
+    # ネココのアドバイスを受けるための URL パターン
+    path('receive_nekoko_advice/<int:pk>/', views.receive_nekoko_advice, name='receive_nekoko_advice'),
 ]

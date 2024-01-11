@@ -14,6 +14,7 @@ from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
 import json
 from django.http import JsonResponse
+from .forms import CustomUserChangeForm
 
 
 # comrehendを使って感情分析を行う関数
@@ -122,14 +123,12 @@ def aicomment_month(emotion):
     return None
 
 # 特定のワードが含まれているか確認する関数
-def contains_forbidden_word(content,user):
+def contains_forbidden_word(content):
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         if word in content:
-            return word
-    return None
-
-
+            return 1
+    return 0
 
 @login_required
 def account_delete(request):
@@ -219,14 +218,18 @@ def create_diary_confirmation(request):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
+            # 特定のワード実行関数
+            contains_forbidden= contains_forbidden_word(new_diary.content)
+            # counselingに関数の実行結果をセット
+            new_diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
             new_diary.ai_comment = ai_comment
             new_diary.save()
-            
+
             # 一旦カレンダーが出来るまで----------------------------------------------------------
             saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
-            
+
             return redirect('diary:create_diary_confirmation',pk=saved_diary.id)
     else:
         form = DiaryCreateForm()
@@ -253,6 +256,10 @@ def create_diary_confirmation2(request, pk):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
+            # 特定のワード実行関数
+            contains_forbidden= contains_forbidden_word(diary.content)
+            # counselingに関数の実行結果をセット
+            diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
             diary.ai_comment = ai_comment
             diary.save()
@@ -262,17 +269,38 @@ def create_diary_confirmation2(request, pk):
 
     # 感情分析の実行関数
     analyze_sentiment(diary.content, diary,request.user)
-    
-    # 特定のワード実行関数
-    contains_forbidden= contains_forbidden_word(diary.content,request.user)
-    # counselingに関数の実行結果をセット
-    diary.counseling = contains_forbidden is not None
-    # データベースへの保存
-    diary.save()
+
 
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
+@login_required
+def receive_nekoko_advice(request, pk):
+    diary = get_object_or_404(Diary, id=pk)
+    # ここでcounselingをFalseに設定
+    diary.counseling = 2
+    diary.save()
+    if diary:
+      # ここにネココのアドバイスを受けるための処理を追加する
+      openai.api_key = settings.OPENAI_API_KEY
+
+      user_diary = "以下は日記のコンテンツです。貴方はカウンセラーです。日記に対して心理学に基づいたコメントを返してください。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学を心得ている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。 \n" + diary.content
+      response = openai.ChatCompletion.create(
+          model="gpt-3.5-turbo",
+          messages= [
+                  {   "role"      : "user",
+                      "content"   : user_diary
+                  }
+              ]
+      )
+      ai_comment = response["choices"][0]["message"]["content"]
+      # データベースへの保存
+      diary.ai_comment = ai_comment
+      diary.save()
+
+      return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
 def create_diary(request):
@@ -369,14 +397,20 @@ def logout(request):
 def member_information_edit_cancel(request):
     return render(request, 'diary/member_information_edit_cancel.html')
 
+
 @login_required
 def member_information_edit_check(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        request.session['username'] =username
-        request.session['email'] =email
-    return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email':email})
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            username = form['username'].value()
+            email = form['email'].value()
+            # 成功した場合のリダイレクト先を指定
+            return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email': email})
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    return render(request, 'diary/member_information_edit.html', {'form': form})
 
 @login_required
 def member_information_edit_comp(request):
@@ -406,7 +440,8 @@ def member_information_edit_comp(request):
 
 @login_required
 def member_information_edit(request):
-    return render(request, 'diary/member_information_edit.html')
+    form = CustomUserChangeForm(instance=request.user)
+    return render(request, 'diary/member_information_edit.html',{'form': form})
 
 @login_required
 def member_information(request):
@@ -510,7 +545,7 @@ def positive_conversion2(request, pk):
     diary.content = new_aicntent
     #更新したcontentをgptに送る
     openai.api_key = settings.OPENAI_API_KEY
-    user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はせず、{キャラクター}が会話しているようにする}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n"+ diary.content
+    user_diary = "以下は日記のコンテンツです。ポジティブで前向きになれるよう、ネガティブな言葉を変換し、書き換えてください。あなたのセリフはいりません。\n" + diary.content
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -540,6 +575,7 @@ def today_counseling(request):
 def today_diary_detail(request):
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
+
     if diary:
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()
@@ -552,15 +588,15 @@ def today_diary_detail2(request,pk):
         return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
-
+  
 @login_required
-def today_diary_detail3(request,pk):
+def counseling_yellow(request,pk):
     diary = get_object_or_404(Diary, id=pk)
     # ここでcounselingをFalseに設定
-    diary.counseling = False
+    diary.counseling = 0
     diary.save()
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
