@@ -211,31 +211,30 @@ button {
 //     background-color: white;
 // }
 
-.ground-white {
-    background-color: white;
-}
 
 // header {
 //     background-color: white;
 //     margin-top: 0;
 // }
 
-// footer {
-//     background-color: white;
-//     margin-bottom: 0;
-// }
-
 .ground.ground--white {
     background-color: white;
-    // flex-grow: 1;
+    flex-grow: 1;
 }
 
 .tutorial1-page header {
     background-color: white;
-    margin-top: 0;
 }
 
 .tutorial1-page footer {
     background-color: white;
-    margin-bottom: 0;
 }
+
+.ground.ground--white {
+    padding-bottom: 45px;
+}
+
+// .ground--white {
+//     // ground--whiteに特有のプロパティをここに記述します
+//     background-color: white;
+// }
