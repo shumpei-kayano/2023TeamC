@@ -561,6 +561,7 @@ def positive_conversion2(request, pk):
     ai_comment = response["choices"][0]["message"]["content"]
     #ai_commentを更新
     diary.ai_comment = ai_comment
+    analyze_sentiment(diary.content, diary,request.user)
     # データベースの保存
     diary.save()
     # セッション削除
