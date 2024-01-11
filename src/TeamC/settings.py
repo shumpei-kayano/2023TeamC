@@ -203,3 +203,4 @@ SOCIALACCOUNT_FORMS = {
 #         return file.read().strip()
 
 OPENAI_API_KEY = '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'
+

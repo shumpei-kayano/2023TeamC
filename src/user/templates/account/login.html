@@ -13,14 +13,26 @@
             <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
         </div>
     </div>
+
+
     <div class="wrapper-accounts-form">
         <p class="signup-text">ログイン</p>
             <form method="post" action="{% url 'account_login' %}" class="form-accounts">
                 {% csrf_token %}
 
+            {% if form.non_field_errors %}
+            <div class="error-message">
+                <p>エラーが発生しました:</p>
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
             <div class="form-content">
                 <div class="user-infomation">
-
                     <div class="content__user-email__text">
                         <label for="email">メールアドレス</label>
                         <br><input type="email" name="login" autocomplete="email" required id="id_login">
@@ -36,6 +48,7 @@
                         <label>ログイン状態を保持する</label>
                     </div>
                 </div>
+                
 
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
