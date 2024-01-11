@@ -39,6 +39,11 @@ header, .ground, footer {
   margin: 0 auto;
 }
 
+.tutorial1-page header,
+.tutorial1-page footer {
+  background-color: white;
+}
+
 header {
   padding-left: 2.4rem;
   padding-right: 2.4rem;
@@ -174,6 +179,10 @@ footer {
 .ground.ground--blue {
   background-color: #EEFEFF;
   flex-grow: 1;
+}
+
+.tutorial1-page footer margin {
+  background-color: white;
 }
 
 .btn {
@@ -916,20 +925,19 @@ button {
     padding-bottom: 30px;
   }
 }
-.ground-white {
-  background-color: white;
-}
-
 .ground.ground--white {
   background-color: white;
+  flex-grow: 1;
 }
 
 .tutorial1-page header {
   background-color: white;
-  margin-top: 0;
 }
 
 .tutorial1-page footer {
   background-color: white;
-  margin-bottom: 0;
+}
+
+.ground.ground--white {
+  padding-bottom: 45px;
 }
