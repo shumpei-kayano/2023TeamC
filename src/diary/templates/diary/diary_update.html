@@ -15,7 +15,7 @@
     <div class="header__button">
         <div class="header__back__img">
             {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
-            <a href="">
+            <a href="#" onclick="history.back(); ">
                 <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
                 </svg>
@@ -65,28 +65,28 @@
                         <!-- <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br> -->
 
                         <!-- 画像のファイル名を表示させてください -->
-                        <span id="file_name_photo1"><!-- 画像のファイル名 --></span>
+                        <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
                     </div>
                     <div class="custom-file-upload" id="container_photo1">
                         <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                             {{ Diary.photo2 }}
                             <!-- <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br> -->
                             <!-- 画像のファイル名を表示させてください -->
-                            <span id="file_name_photo2"><!-- 画像のファイル名 --></span>
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
                         </div>
                         <div class="custom-file-upload" id="container_photo1">
                             <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                 {{ Diary.photo3 }}
                                 <!-- <img src="{{ diary.photo3.url }}" alt="Diary Photo3" style="width: 100px; height: auto;"><br> -->
                                 <!-- 画像のファイル名を表示させてください -->
-                                <span id="file_name_photo3"><!-- 画像のファイル名 --></span>
+                                <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
                             </div>
                                 <div class="custom-file-upload" id="container_photo1">
                                 <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                     {{ Diary.photo4 }}
                                     <!-- <img src="{{ diary.photo4.url }}" alt="Diary Photo4" style="width: 100px; height: auto;"><br> -->
                                     <!-- 画像のファイル名を表示させてください -->
-                                    <span id="file_name_photo4"><!-- 画像のファイル名 --></span>
+                                    <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
                                 </div>
 
                             {% comment %} photoが3枚のとき {% endcomment %}
@@ -96,27 +96,27 @@
                                 {{ Diary.photo1 }}
                                 <!-- <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br> -->
                                 <!-- 画像のファイル名を表示させてください -->
-                                <span id="file_name_photo1"><!-- 画像のファイル名 --></span>
+                                <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
                             </div>
                             <div class="custom-file-upload" id="container_photo1">
                                 <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                     {{ Diary.photo2 }}
                                     <!-- <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br> -->
                                     <!-- 画像のファイル名を表示させてください -->
-                                    <span id="file_name_photo2"><!-- 画像のファイル名 --></span>
+                                    <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
                                 </div>
                                 <div class="custom-file-upload" id="container_photo1">
                                     <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                         {{ Diary.photo3 }}
                                         <!-- <img src="{{ diary.photo3.url }}" alt="Diary Photo3" style="width: 100px; height: auto;"><br> -->
                                         <!-- 画像のファイル名を表示させてください -->
-                                        <span id="file_name_photo3"><!-- 画像のファイル名 --></span>
+                                        <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
                                     </div>
                                         <div class="custom-file-upload" id="container_photo1">
                                         <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                             {{ Diary.photo4 }}
                                             <!-- 画像のファイル名を表示させてください -->
-                                            <span id="file_name_photo4"><!-- 画像のファイル名 --></span>
+                                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
                                         </div>
                                 {% comment %} photoが2枚のとき {% endcomment %}
                                 {% elif diary.photo2 %}
@@ -125,26 +125,26 @@
                                     {{ Diary.photo1 }}
                                     <!-- <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br> -->
                                     <!-- 画像のファイル名を表示させてください -->
-                                    <span id="file_name_photo1"><!-- 画像のファイル名 --></span>
+                                    <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
                                 </div>
                                 <div class="custom-file-upload" id="container_photo1">
                                     <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                         {{ Diary.photo2 }}
                                         <!-- <img src="{{ diary.photo2.url }}" alt="Diary Photo2" style="width: 100px; height: auto;"><br> -->
                                         <!-- 画像のファイル名を表示させてください -->
-                                        <span id="file_name_photo2"><!-- 画像のファイル名 --></span>
+                                        <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
                                     </div>
                                     <div class="custom-file-upload" id="container_photo1">
                                         <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                             {{ Diary.photo3 }}
                                             <!-- 画像のファイル名を表示させてください -->
-                                            <span id="file_name_photo3"><!-- 画像のファイル名 --></span>
+                                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
                                         </div>
                                             <div class="custom-file-upload" id="container_photo4">
                                             <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                 {{ Diary.photo4 }}
                                                 <!-- 画像のファイル名を表示させてください -->
-                                                <span id="file_name_photo4"><!-- 画像のファイル名 --></span>
+                                                <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
                                             </div>
 
                                     {% comment %} photoが1枚の時 {% endcomment %}
@@ -154,25 +154,25 @@
                                         {{ Diary.photo1 }}
                                         <!-- <img src="{{ diary.photo1.url }}" alt="Diary Photo1" style="width: 100px; height: auto;"><br> -->
                                         <!-- 画像のファイル名を表示させてください -->
-                                        <span id="file_name_photo1"><!-- 画像のファイル名 --></span>
+                                        <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
                                     </div>
                                     <div class="custom-file-upload" id="container_photo1">
                                         <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                             {{ Diary.photo2 }}
                                             <!-- 画像のファイル名を表示させてください -->
-                                            <span id="file_name_photo2"><!-- 画像のファイル名 --></span>
+                                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
                                         </div>
                                         <div class="custom-file-upload" id="container_photo3">
                                             <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                 {{ Diary.photo3 }}
                                                 <!-- 画像のファイル名を表示させてください -->
-                                                <span id="file_name_photo3"><!-- 画像のファイル名 --></span>
+                                                <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
                                             </div>
                                                 <div class="custom-file-upload" id="container_photo4">
                                                 <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                     {{ Diary.photo4 }}
                                                     <!-- 画像のファイル名を表示させてください -->
-                                                    <span id="file_name_photo4"><!-- 画像のファイル名 --></span>
+                                                    <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
                                                 </div>
 
                                             {% comment %} 0枚の時 {% endcomment %}
@@ -181,24 +181,24 @@
                                             <label id="label_photo1"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                 {{ Diary.photo1 }}
                                                 <!-- 画像のファイル名を表示させてください -->
-                                                <span id="file_name_photo1"><!-- 画像のファイル名 --></span>
+                                                <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
                                             </div>
                                             <div class="custom-file-upload" id="container_photo2">
                                                 <label id="label_photo2"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                     {{ Diary.photo2 }}
-                                                    <span id="file_name_photo2"></span>
+                                                    <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
                                                 </div>
                                                 <div class="custom-file-upload" id="container_photo3">
                                                     <label id="label_photo3"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                         {{ Diary.photo3 }}
                                                         <!-- 画像のファイル名を表示させてください -->
-                                                        <span id="file_name_photo3"><!-- 画像のファイル名 --></span>
+                                                        <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
                                                     </div>
                                                         <div class="custom-file-upload" id="container_photo4">
                                                         <label id="label_photo4"><img src="{% static 'diary/assets/img_icon.svg' %}" alt="画像アイコン">写真を選択
                                                             {{ Diary.photo4 }}
                                                             <!-- 画像のファイル名を表示させてください -->
-                                                            <span id="file_name_photo4"><!-- 画像のファイル名 --></span>
+                                                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
                                                         </div>
                                             {% endif  %}
                     <div class="custom-file-upload" id="container_movie1">
