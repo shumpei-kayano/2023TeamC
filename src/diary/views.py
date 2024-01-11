@@ -403,8 +403,12 @@ def member_information_edit_check(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
+            # formからデータを取得
             username = form['username'].value()
             email = form['email'].value()
+            # セッション保存
+            request.session['username'] = username
+            request.session['email'] = email
             # 成功した場合のリダイレクト先を指定
             return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email': email})
     else:
