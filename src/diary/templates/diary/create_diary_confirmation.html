@@ -82,6 +82,7 @@
                 </div>
 
         </div><!-- content__form-group -->
+
         <div id="loading">
           <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
           <div class="loading-content">
@@ -112,7 +113,7 @@
         </div>
         <div class="gray__button">
             {% comment %} キャンセルを押したら、2回目のポップアップを表示 {% endcomment %}
-            <button class="close-button" onclick="closePopup('first-popup')">
+            <button id="close-button" onclick="closePopup('first-popup')">
                 <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル
             </button>
         </div>
@@ -155,19 +156,28 @@
 {% block js %}
 <script>
     document.getElementById('submitButton').addEventListener('click', function () {
-      console.log('ボタンがクリックされました');
       // ボタンがクリックされたらローディング画面を表示
       document.getElementById('loading').style.display = 'block';
+      document.getElementById('first-popup').style.display = 'none';
+      document.getElementById('second-popup').style.display = 'none';
       // アニメーションを開始
       document.querySelector('.dli-loading-1').classList.add('rotate-animation');
   });
   document.getElementById('submitButton2').addEventListener('click', function () {
-    console.log('ボタンがクリックされました');
     // ボタンがクリックされたらローディング画面を表示
     document.getElementById('loading').style.display = 'block';
+    document.getElementById('first-popup').style.display = 'none';
+    document.getElementById('second-popup').style.display = 'none';
     // アニメーションを開始
     document.querySelector('.dli-loading-1').classList.add('rotate-animation');
 });
+
+  document.getElementById('close-button').addEventListener('click', function () {
+    // ボタンがクリックされたら画面非表示
+    document.getElementById('first-popup').style.display = 'none';
+    // ボタンがクリックされたら画面表示
+    document.getElementById('second-popup').style.display = 'block';
+  });
 </script>
 {% endblock %}
 
