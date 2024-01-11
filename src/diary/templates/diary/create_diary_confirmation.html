@@ -75,7 +75,6 @@
 
                 <div class="btn--blue">
                     <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
-                    {% comment %} <button type="submit" id="submit-button" onclick="showLoadingScreenAndRedirect1('{% url 'diary:positive_conversion' %}')">日記をポジティブに変換</button> {% endcomment %}
                 </div>
                 <div class="btn--white">
                     <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
