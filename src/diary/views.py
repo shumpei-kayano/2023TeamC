@@ -123,12 +123,12 @@ def aicomment_month(emotion):
     return None
 
 # 特定のワードが含まれているか確認する関数
-def contains_forbidden_word(content,user):
+def contains_forbidden_word(content):
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         if word in content:
             return 1
-    return None
+    return 0
 
 @login_required
 def account_delete(request):
@@ -218,6 +218,10 @@ def create_diary_confirmation(request):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
+            # 特定のワード実行関数
+            contains_forbidden= contains_forbidden_word(new_diary.content)
+            # counselingに関数の実行結果をセット
+            new_diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
             new_diary.ai_comment = ai_comment
             new_diary.save()
@@ -253,7 +257,7 @@ def create_diary_confirmation2(request, pk):
             )
             ai_comment = response["choices"][0]["message"]["content"]
             # 特定のワード実行関数
-            contains_forbidden= contains_forbidden_word(diary.content,request.user)
+            contains_forbidden= contains_forbidden_word(diary.content)
             # counselingに関数の実行結果をセット
             diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
