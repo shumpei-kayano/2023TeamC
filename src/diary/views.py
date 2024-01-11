@@ -14,6 +14,7 @@ from calendar import monthcalendar, setfirstweekday, SUNDAY
 from dateutil.relativedelta import relativedelta
 import json
 from django.http import JsonResponse
+from .forms import CustomUserChangeForm
 
 
 # comrehendを使って感情分析を行う関数
@@ -392,14 +393,20 @@ def logout(request):
 def member_information_edit_cancel(request):
     return render(request, 'diary/member_information_edit_cancel.html')
 
+
 @login_required
 def member_information_edit_check(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        request.session['username'] =username
-        request.session['email'] =email
-    return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email':email})
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            username = form['username'].value()
+            email = form['email'].value()
+            # 成功した場合のリダイレクト先を指定
+            return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email': email})
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    return render(request, 'diary/member_information_edit.html', {'form': form})
 
 @login_required
 def member_information_edit_comp(request):
@@ -429,7 +436,8 @@ def member_information_edit_comp(request):
 
 @login_required
 def member_information_edit(request):
-    return render(request, 'diary/member_information_edit.html')
+    form = CustomUserChangeForm(instance=request.user)
+    return render(request, 'diary/member_information_edit.html',{'form': form})
 
 @login_required
 def member_information(request):

@@ -1,6 +1,10 @@
 from django import forms
 from .models import Diary
 
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
+
+
 class DiaryCreateForm(forms.ModelForm):
     class Meta:
         model = Diary
@@ -27,3 +31,12 @@ class DiaryCreateForm(forms.ModelForm):
                     # 'movie2': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     # 'movie3': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     # 'movie4': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
+                    
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email']  # ユーザーの編集可能なフィールドを指定
+        labels = {
+        'username': 'ユーザーネーム',
+        'email': 'メールアドレス',
+    }
