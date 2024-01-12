@@ -74,8 +74,11 @@ def account_delete_success(request):
     # 日記に関連する感情分析データを削除
     for diary in user_diaries:
         Emotion.objects.filter(diary=diary).delete()
-
-    # 日記を削除
+    month = Month_AI.objects.filter(user=user)
+    week = Week_AI.objects.filter(user=user)
+    # アカウントを削除
+    month.delete()
+    week.delete()
     user_diaries.delete()
 
     # ユーザを削除
@@ -425,13 +428,11 @@ def member_information_edit_check(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             # formからデータを取得
-            username = form['username'].value()
             email = form['email'].value()
             # セッション保存
-            request.session['username'] = username
             request.session['email'] = email
             # 成功した場合のリダイレクト先を指定
-            return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email': email})
+            return render(request, 'diary/member_information_edit_check.html', {'email': email})
     else:
         form = CustomUserChangeForm(instance=request.user)
 

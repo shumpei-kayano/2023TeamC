@@ -1029,3 +1029,265 @@ button {
     margin-bottom: 40px !important;
   }
 }
+.form-content p input {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+input[type=username], input[type=email], input[type=password], input[type=password] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.change-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.change-text {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-home {
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.form-content p input {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+input[type=username], input[type=email], input[type=password], input[type=password] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.change-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.form__password {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-home {
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.form__email {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.form__password {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form__email {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
