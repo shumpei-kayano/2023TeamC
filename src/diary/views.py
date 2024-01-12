@@ -72,8 +72,11 @@ def account_delete_success(request):
     # 日記に関連する感情分析データを削除
     for diary in user_diaries:
         Emotion.objects.filter(diary=diary).delete()
-
-    # 日記を削除
+    month = Month_AI.objects.filter(user=user)
+    week = Week_AI.objects.filter(user=user)
+    # アカウントを削除
+    month.delete()
+    week.delete()
     user_diaries.delete()
 
     # ユーザを削除
