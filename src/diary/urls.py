@@ -21,7 +21,6 @@ urlpatterns = [
     path('diary/graph', views.diary_graph,name='diary_graph'),
     path('diary/home', views.diary_home,name='diary_home'),
     path('diary/update/<int:pk>', views.diary_update,name='diary_update'),
-    path('diary/update/<int:pk>', views.diary_update,name='diary_update'),
     path('help/calender', views.help_calender,name='help_calender'),
     path('help/diary/edit', views.help_diary_edit,name='help_diary_edit'),
     path('help/diary', views.help_diary,name='help_diary'),

@@ -16,6 +16,8 @@ import json
 from django.http import JsonResponse
 from .forms import CustomUserChangeForm
 from allauth.account.models import EmailAddress
+from .forms import ImageDeleteForm
+
 
 
 # comrehendを使って感情分析を行う関数
@@ -243,6 +245,7 @@ def create_diary_confirmation2(request, pk):
     # 編集した時の処理
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
+        form2 = ImageDeleteForm(request.POST)
         if form.is_valid():
             form.save()
             openai.api_key = settings.OPENAI_API_KEY
@@ -261,11 +264,27 @@ def create_diary_confirmation2(request, pk):
             contains_forbidden= contains_forbidden_word(diary.content)
             # counselingに関数の実行結果をセット
             diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
-            # データベースへの保存
             diary.ai_comment = ai_comment
+            
+            # チェックボックスの内容を受け取る
+            if form2.is_valid():
+                photo1_delete = form2.cleaned_data['photo1_delete']
+                photo2_delete = form2.cleaned_data['photo2_delete']
+                photo3_delete = form2.cleaned_data['photo3_delete']
+                photo4_delete = form2.cleaned_data['photo4_delete']
+                
+                # フィールドに関連するファイルを削除
+                if photo1_delete == True :
+                        diary.photo1.delete()
+                if photo2_delete == True :
+                        diary.photo2.delete()
+                if photo3_delete == True :
+                        diary.photo3.delete()
+                if photo4_delete == True :
+                        diary.photo4.delete()
+                
+            # 保存
             diary.save()
-
-
             return redirect('diary:create_diary_confirmation', pk=pk)
 
     # 感情分析の実行関数
@@ -338,8 +357,9 @@ def diary_home(request,pk):
 @login_required
 def diary_update(request, pk):
     diary = get_object_or_404(Diary, id=pk)
+    form2 = ImageDeleteForm(request.POST)
     form = DiaryCreateForm(instance=diary)
-    return render(request, 'diary/diary_update.html',{'diary': diary,'Diary':form})
+    return render(request, 'diary/diary_update.html',{'diary': diary,'Diary':form,'form': form2})
 
 @login_required
 def help_calender(request):

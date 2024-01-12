@@ -40,3 +40,8 @@ class CustomUserChangeForm(UserChangeForm):
         'username': 'ユーザーネーム',
         'email': 'メールアドレス',
     }
+class ImageDeleteForm(forms.Form):
+    photo1_delete = forms.BooleanField(required=False)
+    photo2_delete = forms.BooleanField(required=False)
+    photo3_delete = forms.BooleanField(required=False)
+    photo4_delete = forms.BooleanField(required=False)
