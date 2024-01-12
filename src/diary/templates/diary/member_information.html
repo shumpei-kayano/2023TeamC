@@ -30,17 +30,20 @@
         <!-- ユーザーの会員情報の表示 -->
         <div class="user-infomation">
             <div class="content__user-info__name">
+                <button type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">変更</button>
                 <p class="user-label">ユーザーネーム</p>
                 <p class="user-info">{{ user.username }}</p>
             <hr>
             </div>
             <div class="content__user-info__email">
+                <button type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">変更</button>
                 <p class="user-label">メールアドレス</p>
                 <p class="user-info">{{ user.email }}</p>
             <hr>
             </div>
             {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
             <div class="content__user-info__password">
+                <button type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">変更</button>
                 <p class="user-label">パスワード</p>
                 <p class="user-info">
                     ***************************************
