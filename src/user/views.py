@@ -32,3 +32,9 @@ class CustomSignupView(SignupView):
 
         # メールアドレスが一意であれば通常のフォーム処理を継続
         return super().form_valid(form)
+
+def email(request):
+    return render(request, 'email.html')
+
+def password_reset(request):
+    return render(request, 'password_reset.html')
