@@ -15,6 +15,7 @@ from dateutil.relativedelta import relativedelta
 import json
 from django.http import JsonResponse
 from .forms import CustomUserChangeForm
+from allauth.account.models import EmailAddress
 
 
 # comrehendを使って感情分析を行う関数
@@ -71,8 +72,11 @@ def account_delete_success(request):
     # 日記に関連する感情分析データを削除
     for diary in user_diaries:
         Emotion.objects.filter(diary=diary).delete()
-
-    # 日記を削除
+    month = Month_AI.objects.filter(user=user)
+    week = Week_AI.objects.filter(user=user)
+    # アカウントを削除
+    month.delete()
+    week.delete()
     user_diaries.delete()
 
     # ユーザを削除
@@ -404,13 +408,11 @@ def member_information_edit_check(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             # formからデータを取得
-            username = form['username'].value()
             email = form['email'].value()
             # セッション保存
-            request.session['username'] = username
             request.session['email'] = email
             # 成功した場合のリダイレクト先を指定
-            return render(request, 'diary/member_information_edit_check.html', {'username': username, 'email': email})
+            return render(request, 'diary/member_information_edit_check.html', {'email': email})
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -432,6 +434,19 @@ def member_information_edit_comp(request):
     # メールアドレスを更新
     if new_email:
         user.email = new_email
+       # メールアドレスを更新
+    if new_email:
+        user.email = new_email
+
+        # 関連するEmailAddressを取得
+        email_address, created = EmailAddress.objects.get_or_create(
+            user=user,
+            email=new_email
+        )
+
+        # プライマリメールアドレスを更新
+        if created:
+            email_address.set_as_primary()
 
     # セーブ
     user.save()

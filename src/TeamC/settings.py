@@ -152,9 +152,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 #---------------------メール送信設定-------------------------
-# EMAIL_BACKENDをSMTPバックエンドに変更
-
-
 # 以下はSMTPサーバーの設定
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -162,7 +159,6 @@ EMAIL_HOST_USER = 'ryougaharada@gmail.com'
 EMAIL_HOST_PASSWORD = 'ssnc deay womq kvaf'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'ryougaharada@gmail.com'
-
 #---------------------メール送信設定-------------------------
 
 

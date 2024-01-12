@@ -169,7 +169,9 @@ const weatherCode = {
   427: ["weather3.png", "雪一時みぞれ"],
   450: ["weather3.png", "雪で雷を伴う"],
 };
-
+function initMap() {
+  return getLocation();
+}
 function getLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
@@ -222,7 +224,7 @@ function getLocation() {
 }
 
 async function getareacode() {
-  const location = await getLocation();//async function内でPromiseの結果（resolve、reject）が返されるまで待機する（処理を一時停止する）
+  const location = await initMap();//async function内でPromiseの結果（resolve、reject）が返されるまで待機する（処理を一時停止する）
   const areacode = area_dic[location];
   return areacode;//エリアコードが返ってくる
 }
@@ -230,10 +232,8 @@ async function getareacode() {
 async function main() {
   const areacode = await getareacode();
   const url = `https://www.jma.go.jp/bosai/forecast/data/forecast/${areacode}.json`;
-  console.log(url)
   return url;
 }
-
 
 const dayList = ["日", "月", "火", "水", "木", "金", "土"];
 
