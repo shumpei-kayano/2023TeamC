@@ -152,13 +152,13 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 #---------------------メール送信設定-------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.example.com'  # あなたのSMTPホスト
-EMAIL_PORT = 587  # ポート番号
-EMAIL_HOST_USER = 'your_email@example.com'  # 送信元メールアドレス
-EMAIL_HOST_PASSWORD = 'your_password'  # パスワード
-EMAIL_USE_TLS = True  # TLSを使用する場合はTrueに設定
-DEFAULT_FROM_EMAIL = 'your_email@example.com'  # デフォルトの送信元メールアドレス
+# 以下はSMTPサーバーの設定
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ryougaharada@gmail.com'
+EMAIL_HOST_PASSWORD = 'ssnc deay womq kvaf'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'ryougaharada@gmail.com'
 #---------------------メール送信設定-------------------------
 
 
