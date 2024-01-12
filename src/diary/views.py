@@ -15,6 +15,7 @@ from dateutil.relativedelta import relativedelta
 import json
 from django.http import JsonResponse
 from .forms import CustomUserChangeForm
+from allauth.account.models import EmailAddress
 
 
 # comrehendを使って感情分析を行う関数
@@ -432,6 +433,19 @@ def member_information_edit_comp(request):
     # メールアドレスを更新
     if new_email:
         user.email = new_email
+       # メールアドレスを更新
+    if new_email:
+        user.email = new_email
+
+        # 関連するEmailAddressを取得
+        email_address, created = EmailAddress.objects.get_or_create(
+            user=user,
+            email=new_email
+        )
+
+        # プライマリメールアドレスを更新
+        if created:
+            email_address.set_as_primary()
 
     # セーブ
     user.save()
