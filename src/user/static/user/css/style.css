@@ -270,6 +270,30 @@ footer {
 .btn--white button:hover, .btn--white a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
 }
+.btn--red {
+  width: 342px;
+  height: 48px;
+}
+.btn--red button, .btn--red a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: #FF4747;
+  color: #FFF;
+  font-size: 1.6rem;
+  letter-spacing: 0.04rem;
+}
+.btn--red button:hover, .btn--red a:hover {
+  background-color: #E32B2B; /* マウスをかざしたときの背景色 */
+}
 .btn--back {
   width: 96px;
   height: 48px;
@@ -940,4 +964,68 @@ button {
 
 .ground.ground--white {
   padding-bottom: 45px;
+}
+
+.content-center-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.content-center-group .cancel__neko {
+  margin-top: 16rem;
+  margin-bottom: 1.6rem;
+}
+.content-center-group .logout-text {
+  margin: 0;
+  font-size: 1.6rem;
+  margin-bottom: 1.6rem;
+  text-align: center;
+}
+.content-center-group .btn--red {
+  margin-bottom: 24px;
+  margin-left: 20px;
+  margin-top: 2rem;
+}
+.content-center-group .btn--white {
+  margin-top: 0;
+  margin-right: 14px;
+}
+
+@media only screen and (max-height: 599px) {
+  /* 画面の高さが600px未満の場合のスタイル */
+  .content-center-group {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .content-center-group .cancel__neko {
+    margin-bottom: 1.6rem;
+  }
+  .content-center-group .logout-text {
+    margin: 0;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+  .content-center-group .btn--red {
+    margin-bottom: 24px;
+  }
+  .content-center-group .btn--white {
+    margin-top: 0;
+  }
+}
+@media only screen and (min-height: 600px) {
+  .cancel__neko {
+    margin-bottom: 24px !important;
+  }
+  .logout-text {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  .btn--red {
+    margin-bottom: 40px !important;
+  }
 }
