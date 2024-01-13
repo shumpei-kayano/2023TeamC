@@ -20,7 +20,8 @@ body {
 }
 
 p{
-    line-height: 1.7rem;
+    // line-height: 1.7rem;
+    line-height: 170%;
     letter-spacing: 0.04rem;
 }
 
@@ -39,7 +40,10 @@ header, .ground, footer {
     margin: 0 auto; // 中央に配置
 }
 
-
+.tutorial1-page header,
+.tutorial1-page footer {
+    background-color: white;
+}
 
 header {
     padding-left: 2.4rem;
@@ -277,24 +281,14 @@ footer {
     background-color: $main_background_color;
     flex-grow: 1;
 }
-// footer {
-//     margin-top: 0; 
-//     margin-bottom: 0; // 追加：フッターの下のマージンを0に設定
-//     // 以下省略
+
+// .ground.ground--white {
+//     background-color: white;
+//     flex-grow: 1;
 // }
 
-// .ground {
-//     margin-top: 0; 
-//     margin-bottom: 0; // 追加：フッターの下のマージンを0に設定
-// }
+.tutorial1-page footer margin {
+    background-color: white;
+}
 
-// body {
-//     display: flex;
-//     flex-direction: column;
-//     min-height: 100vh;
-// }
-
-// footer {
-//     margin-top: auto;
-// }
 

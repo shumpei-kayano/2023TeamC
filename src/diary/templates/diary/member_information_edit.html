@@ -28,53 +28,35 @@
 <main class="ground ground--white">
     <div class="user-infomation--center">
 
-        <form method="POST" action="{% url 'diary:member_information_edit_check' %}" ><!--次のページに遷移させてください-->
+ 
+        <form method="POST" action="{% url 'diary:member_information_edit_check' %}">
             {% csrf_token %}
-            <!-- ユーザーネームの編集 -->
-            <div class="user-infomation-edit">
-                <div class="content__user-name__text">
-                    <label for="username">ユーザーネーム</label>
-                    <br><input type="text" id="username" name="username" value="{{ user.username }}">
-                </div>
-
-                <!-- メールアドレスの編集 -->
-                <div class="content__user-email__text">
-                    <label for="email">メールアドレス</label>
-                    <br><input type="email" id="email" name="email" value="{{ user.email }}">
-                    <!--エラー-->
-                    <div class="error-message" id="email-error"></div>
-                </div>
+            
+            <!-- エラーメッセージを一括表示 -->
+            {% for field in form %}
+            <div class="form-field">
+                {{ field.errors }}
             </div>
+            {% endfor %}
+            <!-- 各フィールドのラベル、入力欄、エラーメッセージを表示 -->
+                <div class="form-field">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                </div>
 
-
-    {% comment %} 検討中
-            <!-- パスワードの編集 -->
-            <div class="content__user-password__text">
-                <label for="password">パスワード</label>
-                <br><input type="password" id="password" name="password">
-                <!--エラー-->
-                <div class="error-message" id="password-error"></div>
-            </div> {% endcomment %}
-
-            <!-- 送信ボタン -->
         <div class="btn--blue--info">
             <button type="submit">確認する</button>
         </div>
         </form>
-
+        
         <div class="user-infomation__image">
             <img src="{% static 'diary/assets/neko_dango.svg' %}">
         </div>
 
-
-        {% comment %} パスワードが8文字以上の半角英数字でない場合とメールアドレスの書式が正しくない場合は
-    テキストボックスの下にエラーメッセージを表示{% endcomment %}
-
     </div>
 </main>
 {% endblock %}
-
-{% block script %}
+{% comment %} {% block script %}
 <script>
     const form = document.querySelector('form');
 
@@ -103,4 +85,4 @@
     });
 </script>
 
-{% endblock %}
+{% endblock %} {% endcomment %}

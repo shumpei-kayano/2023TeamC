@@ -2373,4 +2373,27 @@ article.appear .content {
     width: 260px !important;
     margin-bottom: 70px !important;
   }
+#first-popup {
+  display: block;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 39rem;
+  max-width: 100%;
+  height: 100%;
+  background: #EEFEFF;
+}
+#second-popup {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 39rem;
+  max-width: 100%;
+  height: 100%;
+  background: #EEFEFF;
 }

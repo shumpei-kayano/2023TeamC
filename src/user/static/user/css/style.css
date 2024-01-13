@@ -20,7 +20,7 @@ body {
 }
 
 p {
-  line-height: 1.7rem;
+  line-height: 170%;
   letter-spacing: 0.04rem;
 }
 
@@ -37,6 +37,11 @@ header, .ground, footer {
   width: 39rem;
   max-width: 100%;
   margin: 0 auto;
+}
+
+.tutorial1-page header,
+.tutorial1-page footer {
+  background-color: white;
 }
 
 header {
@@ -176,6 +181,10 @@ footer {
   flex-grow: 1;
 }
 
+.tutorial1-page footer margin {
+  background-color: white;
+}
+
 .btn {
   display: flex;
   justify-content: center;
@@ -260,6 +269,30 @@ footer {
 }
 .btn--white button:hover, .btn--white a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+.btn--red {
+  width: 342px;
+  height: 48px;
+}
+.btn--red button, .btn--red a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: #FF4747;
+  color: #FFF;
+  font-size: 1.6rem;
+  letter-spacing: 0.04rem;
+}
+.btn--red button:hover, .btn--red a:hover {
+  background-color: #E32B2B; /* マウスをかざしたときの背景色 */
 }
 .btn--back {
   width: 96px;
@@ -733,16 +766,528 @@ img.img__logo {
   letter-spacing: 0.64px;
 }
 
-@keyframes slide-in {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
+.container {
+  width: 100%;
+  height: calc(100vh - 11rem);
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 500%; /* スライドの数に応じて調整 */
+}
+
+.slide {
+  flex: 0 0 20%; /* スライドの数に応じて調整 */
+  padding: 20px;
+  padding-top: 24px;
+  padding-bottom: 130px; /* ボタンの高さとマージンに合わせて調整 */
+  visibility: hidden;
+  transition: visibility 1s ease-in-out;
+}
+.slide h1 {
+  color: #fff;
+  text-align: center;
+  margin: 0 0 14px 0;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  border-radius: 3px;
+  background: #04CAD6;
+  letter-spacing: 0.04rem;
+}
+.slide p {
+  margin: 0;
+  font-size: 1.6rem;
+  margin-top: 15px;
+  text-align: center;
+}
+.slide .slid__span {
+  color: #04CAD6;
+  letter-spacing: 0.04rem;
+  font-weight: 500;
+}
+.slide img {
+  display: block;
+  margin: 0 auto;
+}
+.slide .slid__samll {
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+.slide .slid__span__border {
+  letter-spacing: 0.04rem;
+  font-weight: 700;
+  background: linear-gradient(transparent 60%, rgba(4, 202, 214, 0.4) 60%);
+}
+
+.slid__img--1 {
+  padding-top: 24px;
+  width: 250px;
+  height: auto;
+}
+
+.slid2__img--1, .slid2__img--2 {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: 192px;
+  height: auto;
+}
+
+.slid3__img--1, .slid4__img--1, .slid5__img--1 {
+  padding-top: 24px;
+}
+
+.slide.active {
+  visibility: visible;
+}
+
+.controls {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot-container {
+  height: 44px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+}
+
+.prev-btn {
+  padding: 12px 32px;
+  background: var(--custom-color, #FFF);
+  color: #00ABB6;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 50px;
+  border: 1px solid #00ABB6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.prev-btn:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
+
+.next-btn, .complete-btn {
+  padding: 12px 32px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  background: #00ABB6;
+  color: #FFF;
+}
+.next-btn:hover, .complete-btn:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+
+.dot.active {
+  background-color: #04CAD6;
+}
+
+.complete-btn {
+  display: none;
+}
+
+@media only screen and (min-height: 600px) {
+  .slider-container {
+    height: 100%;
   }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
+  .slide {
+    padding-bottom: 0;
+  }
+  .slid__img--1 {
+    padding-top: 50px;
+  }
+  .slid2__img--1, .slid2__img--2 {
+    padding-top: 35px;
+    padding-bottom: 30px;
   }
 }
-.tutorial-page {
-  animation: slide-in 1s ease-out;
+.ground.ground--white {
+  background-color: white;
+  flex-grow: 1;
+}
+
+.tutorial1-page header {
+  background-color: white;
+}
+
+.tutorial1-page footer {
+  background-color: white;
+}
+
+.ground.ground--white {
+  padding-bottom: 45px;
+}
+
+.content-center-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.content-center-group .cancel__neko {
+  margin-top: 16rem;
+  margin-bottom: 1.6rem;
+}
+.content-center-group .logout-text {
+  margin: 0;
+  font-size: 1.6rem;
+  margin-bottom: 1.6rem;
+  text-align: center;
+}
+.content-center-group .btn--red {
+  margin-bottom: 24px;
+  margin-left: 20px;
+  margin-top: 2rem;
+}
+.content-center-group .btn--white {
+  margin-top: 0;
+  margin-right: 14px;
+}
+
+@media only screen and (max-height: 599px) {
+  /* 画面の高さが600px未満の場合のスタイル */
+  .content-center-group {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .content-center-group .cancel__neko {
+    margin-bottom: 1.6rem;
+  }
+  .content-center-group .logout-text {
+    margin: 0;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+  .content-center-group .btn--red {
+    margin-bottom: 24px;
+  }
+  .content-center-group .btn--white {
+    margin-top: 0;
+  }
+}
+@media only screen and (min-height: 600px) {
+  .cancel__neko {
+    margin-bottom: 24px !important;
+  }
+  .logout-text {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  .btn--red {
+    margin-bottom: 40px !important;
+  }
+}
+.form-content p input {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+input[type=username], input[type=email], input[type=password], input[type=password] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.change-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.change-text {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-home {
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.form-content p input {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+input[type=username], input[type=email], input[type=password], input[type=password] {
+  width: 100%;
+  display: flex;
+  width: 342px;
+  height: 45px;
+  padding: 16px 0px 16px 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+  border-radius: 8.876px;
+  border: 1px solid #A29C9C;
+  background: #FFF;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.change-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.form__password {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-home {
+  margin-left: 109px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.form__email {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
+}
+
+label {
+  font-size: 1.4rem;
+}
+
+.header__back__img a {
+  margin-left: 24px;
+  display: flex;
+  width: 96px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #FFF;
+  background: #00ABB6;
+  color: #FFF;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.56px;
+}
+.header__back__img a:hover {
+  background-color: #008999;
+}
+.header__back__img a img {
+  margin-right: 8px;
+  margin-top: 2px;
+}
+.header__back__img a logo-img {
+  margin-left: 170px;
+}
+
+.btn--blue {
+  margin-top: 40px;
+  margin-left: 24px;
+}
+
+.form__password {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form__email {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
 }

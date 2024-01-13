@@ -1,0 +1,10 @@
+#footer__setting-active{
+    fill: #00ABB6; /* ホームページのSVGの色 */
+}
+#text-setting {
+    color: #007880; /* ホームページのテキストの色 */
+}
+
+.ground--white {
+    background-color: #ffffff;
+}

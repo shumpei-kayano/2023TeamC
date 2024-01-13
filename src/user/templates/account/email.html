@@ -1,15 +1,24 @@
-{% comment %} 
-ユーザーのメールアドレス管理ページ
-データベース操作が謎の為保留 
-{% endcomment %}
+{% extends "base_diary.html" %}
 
-{% comment %} {% extends "base.html" %}
-
+{% load static %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Account" %}{% endblock %}
 
-{% block contents %}
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} setting.htmlに遷移させてください {% endcomment %}
+            <a href="{% url 'diary:setting' %}"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</a>
+        </div>
+    </div>
+    <h1>メールアドレス管理</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
     <h1>{% trans "E-mail Addresses" %}</h1>
 {% if user.emailaddress_set.all %}
 <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
@@ -75,4 +84,4 @@
   }
 })();
 </script>
-{% endblock %} {% endcomment %}
+{% endblock %} 

@@ -79,6 +79,24 @@
         }
     }
 
+    &--red {
+        width: 342px;
+        height: 48px;
+
+        button, a{
+            @include button-style;
+            
+            background: #FF4747;
+            color: #FFF;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+
+            &:hover {
+                background-color: $red_btn_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
     // 戻るボタン
     &--back {
         width: 96px;

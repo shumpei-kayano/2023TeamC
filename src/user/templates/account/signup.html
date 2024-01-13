@@ -4,8 +4,9 @@
 
 {% block title %}サインアップ{% endblock title %}
 
-{% block contents %}
+{% block content %}
 <section class="section-accounts" id="section-signup">
+    <header></header>
     <div class="wrapperHeader">
         <div class="header__back__img">
             <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
@@ -18,6 +19,18 @@
         <form method="post" action="{% url 'account_signup' %}" class="form-accounts">
             {% csrf_token %}
 
+            {% if form.errors %}
+            <div class="error-message">
+                <p>新しいエラーメッセージが発生しました:</p>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+          {% endif %}
             <div class="form-content">
                 <div class="user-infomation">
                     <div class="content__user-name__text">
@@ -54,4 +67,4 @@
         </div>
     </div>
 </section>
-{% endblock contents %}
+{% endblock content %}
