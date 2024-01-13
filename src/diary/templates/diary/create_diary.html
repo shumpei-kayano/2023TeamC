@@ -21,12 +21,12 @@
                 </svg>
                 戻る</a>
             {% comment %} <div id="animation-slideout" class="animation-bg"> {% endcomment %}
-                <div id="animation-slideout">
+                {% comment %} <div id="animation-slideout">
                 <div id="animation-bg__flex-box">
                     <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
                     <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 
@@ -39,8 +39,9 @@
 {% endblock %}
 
 {% block content %}
-<article class="move rtl">
-<div class="content">
+<section>
+{% comment %} <article class="move--rtl">
+<div class="content"> {% endcomment %}
 
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
@@ -136,8 +137,9 @@
     </div>
 </main>
 
-</div>
-</article>
+{% comment %} </div>
+</article> {% endcomment %}
+</section>
 {% endblock %}
 
 {% block js %}
@@ -159,14 +161,6 @@
             });
         });
     }); {% endcomment %}
-
-    // フェードイン
-    (function ($) {
-        'use strict';
-        $(window).on('load',function(){
-            $('article').addClass('appear');
-        });
-    })(jQuery);
 
     // 文字数のカウント
     function countCharacters(textarea) {

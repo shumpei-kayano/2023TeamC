@@ -244,6 +244,9 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   height: 48px;
   margin-top: 24px;
   margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
 }
 .btn--blue button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -270,6 +273,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .btn--large {
   width: 342px;
   height: 56px;
+  cursor: pointer;
 }
 .btn--large button, .btn--large a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -296,6 +300,9 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .btn--white {
   width: 342px;
   height: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
 }
 .btn--white button, .btn--white a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -324,6 +331,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .btn--red {
   width: 342px;
   height: 48px;
+  cursor: pointer;
 }
 .btn--red button, .btn--red a {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -350,6 +358,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .btn--blue--info {
   width: 342px;
   height: 48px;
+  cursor: pointer;
 }
 .btn--blue--info button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -1492,6 +1501,119 @@ label {
   box-sizing: border-box;
 }
 
+.popup__inner {
+  margin: auto;
+  margin-right: 24px;
+  margin-left: 24px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.popup__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 131px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #FFD4E0;
+  border-radius: 10px;
+}
+.popup__text p, .popup__text .popup__text--second {
+  text-align: center;
+  margin: 0 auto;
+  line-height: 170%;
+  letter-spacing: 0.04rem;
+}
+.popup__text .popup__text--second {
+  font-size: 1.4rem;
+}
+.popup__text .popup__text--second .popup__text--second__border {
+  letter-spacing: 0.04rem;
+  font-weight: 700;
+  background: linear-gradient(transparent 90%, #FF5B5B 60%);
+}
+.popup__text::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 20px;
+  border-style: solid;
+  border-color: #FFD4E0 transparent transparent transparent;
+}
+.popup__text::after {
+  content: "";
+  position: absolute;
+  top: 99%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 18px;
+  border-style: solid;
+  border-color: #FFFFFF transparent transparent transparent;
+}
+
+.popup__img {
+  display: block;
+  margin: 24px auto;
+  width: 124px;
+  height: auto;
+}
+
+.btn--popup button {
+  width: 100%;
+  margin: 0 0 40px 0;
+  padding: 10px 0;
+  cursor: pointer;
+  border: none;
+  background-color: #00ABB6;
+  border-radius: 50px;
+  color: #FFF;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+}
+.btn--popup button:hover {
+  background-color: #00909A;
+}
+
+.gray__button {
+  cursor: pointer;
+  text-align: center;
+}
+.gray__button button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 10px;
+  margin: 0 auto;
+  color: #A29C9C;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.64px;
+}
+.gray__button button:hover {
+  color: #797979;
+  text-decoration: underline;
+  text-decoration-color: #797979;
+}
+.gray__button button .gray__button--icon {
+  margin-right: 5px;
+  margin-bottom: 3px;
+  fill: #A29C9C;
+}
+.gray__button button:hover .gray__button--icon {
+  fill: #797979;
+}
+
 #loading {
   display: none;
   z-index: 1000;
@@ -2373,27 +2495,19 @@ article.appear .content {
     width: 260px !important;
     margin-bottom: 70px !important;
   }
-#first-popup {
-  display: block;
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 39rem;
-  max-width: 100%;
-  height: 100%;
-  background: #EEFEFF;
 }
-#second-popup {
-  display: none;
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 39rem;
-  max-width: 100%;
-  height: 100%;
-  background: #EEFEFF;
+/* スライドインアニメーション*/
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* タグ内のすべての要素にアニメーションを適用 */
+section {
+  animation: slideIn 0.5s ease-out;
 }

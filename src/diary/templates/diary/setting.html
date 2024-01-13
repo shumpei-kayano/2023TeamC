@@ -56,10 +56,7 @@
 <script>
     // フェードイン
     $(document).ready(function () {
-        var target = window.location.hash.substring(1);
-        if (target) {
-            $('#' + target).addClass('appear');
-        }
+        $('article').addClass('appear');
     });
 </script>
 {% endblock %}
