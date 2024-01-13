@@ -830,8 +830,8 @@ th, td {
   color: #ffffff;
 }
 
-.week-calendar__week, .week-calendar__diary {
-  border-bottom: 2px solid rgba(4, 202, 214, 0.15);
+.week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
+  border-bottom: 3px solid #EEFEFF;
 }
 
 .week-calendar__table__a {
@@ -857,6 +857,9 @@ th, td {
 @media only screen and (min-height: 600px) {
   .week-calendar__table {
     height: calc(100vh - 215px);
+  }
+  .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
+    border-bottom: 5px solid #EEFEFF;
   }
 }
 .FlexTextarea {
@@ -1054,10 +1057,19 @@ th, td {
 @media only screen and (min-height: 600px) {
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
-    margin-top: 10px !important;
+    padding: 8px 0 !important;
   }
   .calendar__month__img {
     max-width: 22px !important;
+    max-height: 22px !important;
+  }
+  .calendar__month__img {
+    top: 55% !important;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .calendar__month--today-td, .calendar__month__td {
+    padding: 0 !important;
   }
 }
 .week-graph-page .a--tab--right.active a {
@@ -2288,4 +2300,77 @@ button {
 .content__positive-diary__p {
   margin: 24px auto;
   text-align: center;
+}
+
+/* 共通の記述 */
+.content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+article.appear .content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.animation .content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#animation-slideout {
+  display: none;
+}
+#animation-slideout #animation-bg__flex-box {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#animation-slideout #animation-bg__flex-box .animation-bg__logo {
+  width: 200px;
+  height: auto;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+#animation-slideout #animation-bg__flex-box .animation-bg__img {
+  width: 221px;
+  height: auto;
+}
+
+.animation-bg {
+  background: #04CAD6;
+  content: "";
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  animation: PageAnime-slide 3s forwards;
+}
+
+@keyframes PageAnime-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@media only screen and (max-width: 960px) {
+  #animation-slideout {
+    width: 100%;
+    max-width: none;
+  }
+}
+@media only screen and (min-height: 599px) {
+  .animation-bg__logo {
+    width: 260px !important;
+    margin-bottom: 70px !important;
+  }
 }

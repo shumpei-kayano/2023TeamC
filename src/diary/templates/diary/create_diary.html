@@ -20,6 +20,13 @@
                     <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
                 </svg>
                 戻る</a>
+            {% comment %} <div id="animation-slideout" class="animation-bg"> {% endcomment %}
+                <div id="animation-slideout">
+                <div id="animation-bg__flex-box">
+                    <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+                    <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -32,6 +39,9 @@
 {% endblock %}
 
 {% block content %}
+<article class="move rtl">
+<div class="content">
+
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
@@ -125,10 +135,38 @@
 
     </div>
 </main>
+
+</div>
+</article>
 {% endblock %}
 
 {% block js %}
 <script>
+    {% comment %} document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#header__back__btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var animationBg = document.querySelector('.animation-bg');
+            animationBg.style.display = 'block';  // 要素を表示
+
+            // slide-inクラスの追加を次の描画フレームまで遅延させる
+            requestAnimationFrame(function() {
+                animationBg.classList.add('slide-in');  // アニメーションを開始
+
+                setTimeout(function() {
+                    animationBg.style.display = 'none';  // アニメーションが終了したら要素を非表示にする
+                    location.href = 'http://localhost/diary/home/top#Article__home';  // アニメーションの完了後にページ遷移
+                }, 3000);
+            });
+        });
+    }); {% endcomment %}
+
+    // フェードイン
+    (function ($) {
+        'use strict';
+        $(window).on('load',function(){
+            $('article').addClass('appear');
+        });
+    })(jQuery);
 
     // 文字数のカウント
     function countCharacters(textarea) {
@@ -249,5 +287,28 @@
       // アニメーションを開始
       document.querySelector('.dli-loading-1').classList.add('rotate-animation');
   });
+
+    // スライドアウト
+    document.addEventListener('DOMContentLoaded', function() {
+        const backButton = document.querySelector('#header__back__btn');
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault(); // デフォルトの遷移を防ぐ
+            const slideOut = document.querySelector('#animation-slideout');
+            slideOut.classList.add('animation-bg'); // animation-bgクラスを追加
+
+            // アニメーションが終わった後に遷移
+            setTimeout(function() {
+                window.location.href = backButton.href; // ボタンのリンク先に遷移
+            }, 3000); // ここでは3秒後に遷移するように設定
+        });
+    });
+    {% comment %} document.addEventListener('DOMContentLoaded', function() {
+        const backButton = document.querySelector('#header__back__btn');
+        backButton.addEventListener('click', function() {
+            const slideOut = document.querySelector('#animation-slideout');
+            slideOut.style.display = 'block';
+            document.querySelector('#animation-slideout').classList.add('animation-bg');
+        });
+    }); {% endcomment %}
 </script>
 {% endblock %}

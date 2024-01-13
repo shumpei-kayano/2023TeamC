@@ -19,6 +19,17 @@
 {% endblock %}
 
 {% block content %}
+<!-- 背景色のフェードイン -->
+<article id="myArticle" class="move fade">
+    <div class="animation-bg">
+        {% comment %} <div class="animation-bg__flex-box"> {% endcomment %}
+            {% comment %} <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ"> {% endcomment %}
+            {% comment %} <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像"> {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+    </div>
+    <div class="content">
+
+<!-- メインコンテンツ -->
 <main class="ground ground--white">
     <div class="setting__menu__group">
         <div class="setting__menu">
@@ -36,7 +47,19 @@
         </div>
     </div>
 </main>
+
+</div>
+</article>
 {% endblock %}
 
-{% comment %} counseling_request.svg
-cancel_neko.svg {% endcomment %}
+{% block js %}
+<script>
+    // フェードイン
+    $(document).ready(function () {
+        var target = window.location.hash.substring(1);
+        if (target) {
+            $('#' + target).addClass('appear');
+        }
+    });
+</script>
+{% endblock %}
