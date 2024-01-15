@@ -83,13 +83,39 @@
 }
 
 // ポップアップのスタイル
+#first-popup, #second-popup{
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    // left: 0;
+    left: 50%;  // 水平方向に中央に配置
+    transform: translateX(-50%);  // 水平方向に中央に配置
+    width: 39rem;
+    max-width: 100%; // ビューポートの幅を超えないように設定
+    height: 100%;
+    background: rgba(0, 0, 0, 0.701);
+}
 .popup__inner{
-    margin: auto; // いったん
-    margin-right: 24px;
-    margin-left: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
     padding: 24px;
     background-color: #fff;
     border-radius: 10px;
+    animation: fadeInUp 0.4s ease-out;
+}
+@keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
 }
 // 吹き出し
 .popup__text{
@@ -202,5 +228,12 @@
                 fill: #797979;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    #first-popup, #second-popup{
+        width: 100%;
+        max-width: none; // 追加
     }
 }

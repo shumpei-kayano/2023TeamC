@@ -78,14 +78,6 @@
                     <a id="positive_conversion__btn" href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">
                         <button type="button">ポジティブ変換する</button>
                     </a>
-                    <div id="loading">
-                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
-                        <div class="loading-content">
-                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                            <p class="loading__text">読み込み中</P>
-                            <span class="dli-loading-1"></span>
-                        </div>
-                    </div>
                 </div>
                 <div class="btn--white">
                     <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
@@ -102,12 +94,17 @@
           </div>
         </div>
 
+    </div><!-- scroll content -->
+</main>
+</section>
+
 <!-- ポップアップ要素 -->
 {% comment %} 悪い言葉があればポップアップを表示 {% endcomment %}
 {% if saved_diary.counseling == 1 %}
 
     {% comment %} 1回目のポップアップ {% endcomment %}
-    <div class="popup show" id="first-popup">
+    <div class="popup show" id="first-popup" data-counseling="1">
+        <div class="popup__flex-box">
         <div class="popup__inner">
             <div class="popup__text">
                 <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
@@ -132,10 +129,12 @@
                 </button>
             </div>
         </div>
+        </div>
     </div>
 
     {% comment %} 2回目のポップアップ {% endcomment %}
-    <div class="popup" id="second-popup">
+    <div class="popup" id="second-popup" data-counseling="2">
+        <div class="popup__flex-box">
         <div class="popup__inner">
             <div class="popup__text">
                 <p class="popup__text--second">キャンセルすると<span class="popup__text--second__border">カウンセリングを</span><br>
@@ -156,7 +155,7 @@
                 {% comment %} キャンセルを押したら、ポップアップが消えるようにしたい　{% endcomment %}
                 <a href="{% url 'diary:counseling_yellow' saved_diary.pk %}" class="button-link">
                 <button>
-                    <svg class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="close-button2" class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.05 13.6501L0 12.6001L5.6 7.0001L0 1.4001L1.05 0.350098L6.65 5.9501L12.25 0.350098L13.3 1.4001L7.7 7.0001L13.3 12.6001L12.25 13.6501L6.65 8.0501L1.05 13.6501Z"/>
                     </svg>
                     キャンセル
@@ -164,17 +163,30 @@
             </a>
             </div>
         </div>
+        </div>
     </div>
 {% endif %}
-
-    
-    </div><!-- scroll content -->
-</main>
-</section>
 {% endblock %}
 
 {% block js %}
 <script>
+    window.onload = function() {
+        if ({{ saved_diary.counseling }} == 1) {
+            document.getElementById('first-popup').style.display = 'block';
+            document.getElementById('second-popup').style.display = 'none';
+
+            document.getElementById('close-button').onclick = function() {
+                document.getElementById('first-popup').style.display = 'none';
+                document.getElementById('second-popup').style.display = 'block';
+            }
+        }
+    }
+    {% comment %} if (counselingValue === "1") {
+        // ページが読み込まれたときに1回目のポップアップを表示
+        document.getElementById('second-popup').style.display = 'none';
+        document.getElementById('first-popup').style.display = 'block';
+      } {% endcomment %}
+    // ポジ変ボタンを押したらローディング画面を表示
     document.getElementById('positive_conversion__btn').addEventListener('click', function (event) {
         // ボタンがクリックされたらローディング画面を表示
         document.getElementById('loading').style.display = 'block';
@@ -198,13 +210,21 @@
     // アニメーションを開始
     document.querySelector('.dli-loading-1').classList.add('rotate-animation');
 });
+    document.getElementById('close-button2').addEventListener('click', function () {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('first-popup').style.display = 'none';
+        document.getElementById('second-popup').style.display = 'none';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
 
-  document.getElementById('close-button').addEventListener('click', function () {
+  {% comment %} document.getElementById('close-button').addEventListener('click', function () {
     // ボタンがクリックされたら画面非表示
     document.getElementById('first-popup').style.display = 'none';
     // ボタンがクリックされたら画面表示
     document.getElementById('second-popup').style.display = 'block';
-  });
+  }); {% endcomment %}
 </script>
 {% endblock %}
 

@@ -1443,6 +1443,14 @@ label {
   text-align: center;
 }
 
+.content-center {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 @media only screen and (max-width: 960px) {
   .content-center {
     display: flex;
@@ -1501,15 +1509,41 @@ label {
   box-sizing: border-box;
 }
 
+#first-popup, #second-popup {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 39rem;
+  max-width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.701);
+}
+
 .popup__inner {
-  margin: auto;
-  margin-right: 24px;
-  margin-left: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
   padding: 24px;
   background-color: #fff;
   border-radius: 10px;
+  animation: fadeInUp 0.4s ease-out;
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 .popup__text {
   position: relative;
   display: flex;
@@ -1614,6 +1648,12 @@ label {
   fill: #797979;
 }
 
+@media only screen and (max-width: 960px) {
+  #first-popup, #second-popup {
+    width: 100%;
+    max-width: none;
+  }
+}
 #loading {
   display: none;
   z-index: 1000;
@@ -1640,7 +1680,7 @@ label {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgb(0, 0, 0);
+  color: #333;
   font-size: 180%;
   text-align: center; /* 中央寄せを追加 */
 }
