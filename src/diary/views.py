@@ -17,7 +17,6 @@ from django.http import JsonResponse
 from .forms import CustomUserChangeForm
 from allauth.account.models import EmailAddress
 
-
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
     # 感情分析の生成

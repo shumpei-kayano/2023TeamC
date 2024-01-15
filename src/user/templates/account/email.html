@@ -1,27 +1,23 @@
-{% extends "base_diary.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Account" %}{% endblock %}
+{% block head_title %}メールアドレス管理{% endblock %}
 
 {% block header %}
 <header>
-    <div class="header__button">
-        <div class="header__back__img">
-            {% comment %} setting.htmlに遷移させてください {% endcomment %}
-            <a href="{% url 'diary:setting' %}"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</a>
-        </div>
-    </div>
-    <h1>メールアドレス管理</h1>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>会員情報変更</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
+
 {% block content %}
-    <h1>{% trans "E-mail Addresses" %}</h1>
+    <h1>メールアドレス</h1>
 {% if user.emailaddress_set.all %}
-<p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+<p>次のメールアドレスはあなたのアカウントに関連付けられています</p>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
 {% csrf_token %}
@@ -45,28 +41,28 @@
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="secondaryAction" type="submit" name="action_primary" >メインにする</button>
+      <button class="secondaryAction" type="submit" name="action_send" >確認メールを再送する</button>
+      <button class="primaryAction" type="submit" name="action_remove" >削除</button>
 </div>
 
 </fieldset>
 </form>
 
 {% else %}
-<p><strong>{% trans 'Warning:'%}</strong> {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}</p>
+<p><strong>注意</strong>現在、Eメールアドレスが設定されていません。通知を受け取ったり、パスワードをリセットしたりするためには、本当にEメールアドレスを追加するべきです</p>
 
 {% endif %}
 
 
-    <h2>{% trans "Add E-mail Address" %}</h2>
+    <h2>メールアドレスの追加</h2>
 
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
         {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+        <button name="action_add" type="submit">追加</button>
     </form>
-
+    
 {% endblock %}
 
 

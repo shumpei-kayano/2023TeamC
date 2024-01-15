@@ -55,4 +55,5 @@ urlpatterns = [
     path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
     # ネココのアドバイスを受けるための URL パターン
     path('receive_nekoko_advice/<int:pk>/', views.receive_nekoko_advice, name='receive_nekoko_advice'),
+
 ]
