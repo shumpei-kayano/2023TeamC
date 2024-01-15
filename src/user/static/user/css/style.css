@@ -1291,3 +1291,110 @@ label {
   margin-right: 24px;
   margin-top: 24px;
 }
+
+label {
+  font-size: 1.4rem;
+}
+
+.wrapperHeader {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.change-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.form__login {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+img.img__logo {
+  display: flex;
+  width: 96px;
+  height: 48px;
+}
+
+img.img__logo {
+  transform: translateX(280px); /* ここに移動させたい距離を指定 */
+}
+
+.forget-pass a {
+  text-align: center;
+  margin-left: 40px;
+  display: flex;
+  width: 318px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: #A29C9C;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+.wrapperHeader {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.signup-text {
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-align: center;
+}
+
+.login-text {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+img.img__logo {
+  display: flex;
+  width: 96px;
+  height: 48px;
+}
+
+img.img__logo {
+  transform: translateX(280px); /* ここに移動させたい距離を指定 */
+}
