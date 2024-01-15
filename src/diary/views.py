@@ -19,7 +19,6 @@ from allauth.account.models import EmailAddress
 from .forms import ImageDeleteForm
 
 
-
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
     # 感情分析の生成
