@@ -19,8 +19,19 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--white"><!-- 追加した要素 -->
-    <div class="scroll--content"><!-- 追加した要素 -->
+<!-- 背景色のフェードイン -->
+<article id="Article__month" class="move fade">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+    <div class="content">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--white">
+    <div class="scroll--content">
         <div class="calendar--background calender-month-page">
             <!-- タブ -->
             {% url 'diary:calendar_month' selected_date as calendar_month_url %}
@@ -114,12 +125,19 @@
         </div><!-- calendar  background -->
 
     </div><!-- scroll  content -->
-
 </main>
+
+</div>
+</article>
 {% endblock %}
 
 {% block js %}
 <script>
+    // フェードイン
+    $(document).ready(function () {
+        $('article').addClass('appear');
+    });
+
     document.getElementById('month_graph').addEventListener('click', function (event) {
         // ボタンがクリックされたらローディング画面を表示
         document.getElementById('loading').style.display = 'block';

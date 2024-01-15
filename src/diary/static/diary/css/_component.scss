@@ -31,6 +31,9 @@
         height: 48px;
         margin-top: 24px;
         margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
 
         button {
             @include button-style;
@@ -49,6 +52,7 @@
     &--large {
         width: 342px;
         height: 56px;
+        cursor: pointer;
 
         button, a{
             @include button-style;
@@ -67,7 +71,10 @@
     &--white {
         width: 342px;
         height: 48px;
+        margin-left: auto;
+        margin-right: auto;
         // margin-bottom: 40px;
+        cursor: pointer;
         
         button, a{
             @include button-style;
@@ -88,6 +95,7 @@
     &--red {
         width: 342px;
         height: 48px;
+        cursor: pointer;
 
         button, a{
             @include button-style;
@@ -107,6 +115,7 @@
     &--blue--info {
         width: 342px;
         height: 48px;
+        cursor: pointer;
 
         button {
             @include button-style;

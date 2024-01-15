@@ -105,9 +105,18 @@
 @media only screen and (min-height: 600px) {
     .calendar__month--today-td, .calendar__month__td {
         font-size: 18px !important;
-        margin-top: 10px !important;
+        padding: 8px 0 !important;
     }
     .calendar__month__img{
         max-width: 22px !important;
+        max-height: 22px !important;
+    }
+    .calendar__month__img{
+        top: 55%  !important;  // p要素の下部から50%の位置に配置
+    }
+}
+@media only screen and (max-width: 376px) {
+    .calendar__month--today-td, .calendar__month__td {
+        padding: 0 !important;
     }
 }
