@@ -23,7 +23,18 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--blue"><!-- 追加した要素 -->
+<!-- 背景色のフェードイン -->
+<article id="Article__week" class="move fade">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+    <div class="content">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--blue">
     <div class="calendar--background calender-week-page">
         <!-- タブ -->
         {% url 'diary:calender_week' selected_date as calender_week_url %}
@@ -261,10 +272,18 @@
     </table>
 
 </main>
+
+</div>
+</article>
 {% endblock %}
 
 {% block js %}
 <script>
+    // フェードイン
+    $(document).ready(function () {
+        $('article').addClass('appear');
+    });
+
     document.getElementById('week_graph').addEventListener('click', function (event) {
         // ボタンがクリックされたらローディング画面を表示
         document.getElementById('loading').style.display = 'block';

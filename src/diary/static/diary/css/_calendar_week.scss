@@ -126,8 +126,9 @@ th, td {
 }
 
 // 下線
-.week-calendar__week,.week-calendar__diary {
-    border-bottom: 2px solid rgba(4, 202, 214, 0.15);
+.week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
+    border-bottom: 3px solid $main_background_color;
+    // border-bottom: 3px solid #e4fbfd;
 }
 
 // リンク
@@ -157,5 +158,9 @@ th, td {
 @media only screen and (min-height: 600px) {
     .week-calendar__table{
         height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+    }
+    // 下線
+    .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
+        border-bottom: 5px solid $main_background_color;
     }
 }

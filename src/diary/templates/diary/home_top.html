@@ -22,7 +22,18 @@
 {% endblock %}
 
 {% block content %}
-<main class="ground ground--blue"><!-- 追加した要素 -->
+<!-- 背景色のフェードイン -->
+<article id="Article__home" class="move">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+    <div class="content">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--blue">
     <div class="content-center">
 
         <div class="content__home">
@@ -59,4 +70,17 @@
     </div>
 </main>
 
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        var target = window.location.hash.substring(1);
+        if (target) {
+            $('#' + target).addClass('appear');
+        }
+    });
+</script>
 {% endblock %}

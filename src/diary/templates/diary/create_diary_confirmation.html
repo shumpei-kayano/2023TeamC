@@ -11,9 +11,7 @@
 {% endblock %}
 
 {% block header %}
-
 <header>
-
     {% comment %} <div class="header__nowdate">
         <!-- 日付の表示 書式は0000/00/00(月) -->
         {% if カレンダーから遷移した場合 %}
@@ -25,10 +23,10 @@
     <!-- 天気アイコン・気温の表示  -->
     <div class="header__button">
         <div class="header__back__img">
-            {% comment %} 戻るボタンは削除しました {% endcomment %}
+            {% comment %} 戻るボタンは削除しました
         </div>
-    </div>
-
+    </div> {% endcomment %}
+    <div class="header__spacer--top"></div><!-- 追加 -->
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
@@ -38,6 +36,7 @@
 {% endblock %}
 
 {% block content %}
+<section>
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
@@ -56,7 +55,7 @@
                             <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2" class="content__today-diary__item">
                         {% endif %}
                         {% if saved_diary.photo3 %}
-                            <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3" class="content__today-diary__item">
+                                <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3" class="content__today-diary__item">
                         {% endif %}
                         {% if saved_diary.photo4 %}
                             <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4" class="content__today-diary__item">
@@ -66,15 +65,27 @@
 
                 <!-- ネコココメント -->
                 <div class="content__diary__comment">
-                    <p>{{ saved_diary.ai_comment }}</p>
+                    <div class="content__diary__ccomment__p">
+                        <p>{{ saved_diary.ai_comment }}</p>
+                    </div>
                 </div>
                 <!-- ネココの画像 ここの画像を変更する-->
                 <div class="content__diary__comment__img">
-                    <img src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                    <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
                 </div>
 
                 <div class="btn--blue">
-                    <a href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">ポジティブ変換する</a>
+                    <a id="positive_conversion__btn" href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">
+                        <button type="button">ポジティブ変換する</button>
+                    </a>
+                    <div id="loading">
+                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                        <div class="loading-content">
+                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                            <p class="loading__text">読み込み中</P>
+                            <span class="dli-loading-1"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="btn--white">
                     <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
@@ -97,51 +108,61 @@
 
     {% comment %} 1回目のポップアップ {% endcomment %}
     <div class="popup show" id="first-popup">
-        <div class="popup__text">
-            <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
-        </div>
-        <div class="popup__img">
-            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-        </div>
+        <div class="popup__inner">
+            <div class="popup__text">
+                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
 
-        {% comment %} ネココのアドバイスを受ける　{% endcomment %}
-        <div class="btn--blue">
-          <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
-            <button id="submitButton" type="submit">ネココのアドバイスを受ける</button>
-          </a>
-        </div>
-        <div class="gray__button">
-            {% comment %} キャンセルを押したら、2回目のポップアップを表示 {% endcomment %}
-            <button id="close-button" onclick="closePopup('first-popup')">
-                <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル
-            </button>
+            {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+            <div class="btn--popup">
+                <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
+                    <button id="submitButton" type="submit">ネココのアドバイスを受ける</button>
+                </a>
+            </div>
+            <div class="gray__button">
+                {% comment %} キャンセルを押したら、2回目のポップアップを表示 {% endcomment %}
+                <button id="close-button" onclick="closePopup('first-popup')">
+                    <svg class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.05 13.6501L0 12.6001L5.6 7.0001L0 1.4001L1.05 0.350098L6.65 5.9501L12.25 0.350098L13.3 1.4001L7.7 7.0001L13.3 12.6001L12.25 13.6501L6.65 8.0501L1.05 13.6501Z"/>
+                    </svg>
+                    キャンセル
+                </button>
+            </div>
         </div>
     </div>
 
     {% comment %} 2回目のポップアップ {% endcomment %}
     <div class="popup" id="second-popup">
-        <div class="popup__text">
-            <p>キャンセルするとカウンセリングを<br>
-                受けることができなくなります。<br>
-                キャンセルしますか？</p>
-        </div>
-        <div class="popup__img">
-            <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-        </div>
-            {% comment %} ネココのアドバイスを受ける　{% endcomment %}
-            <div class="btn--blue">
-              <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
-                <button id="submitButton2" type="submit">ネココのアドバイスを受ける</button>
-              </a>
+        <div class="popup__inner">
+            <div class="popup__text">
+                <p class="popup__text--second">キャンセルすると<span class="popup__text--second__border">カウンセリングを</span><br>
+                    <span class="popup__text--second__border">受けることができなくなります。</span><br>
+                    キャンセルしますか？</p>
             </div>
-        <div class="gray__button">
-            {% comment %} キャンセルを押したら、counselingの値が0になる　{% endcomment %}
-            {% comment %} キャンセルを押したら、ポップアップが消えるようにしたい　{% endcomment %}
-            <a href="{% url 'diary:counseling_yellow' saved_diary.pk %}" class="button-link">
-              <button>
-                  <img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル
-              </button>
-          </a>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+                {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+            <div class="btn--popup">
+                <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
+                    <button id="submitButton2" type="submit">ネココのアドバイスを受ける</button>
+                </a>
+            </div>
+            <div class="gray__button">
+                {% comment %} キャンセルを押したら、counselingの値が0になる　{% endcomment %}
+                {% comment %} キャンセルを押したら、ポップアップが消えるようにしたい　{% endcomment %}
+                <a href="{% url 'diary:counseling_yellow' saved_diary.pk %}" class="button-link">
+                <button>
+                    <svg class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.05 13.6501L0 12.6001L5.6 7.0001L0 1.4001L1.05 0.350098L6.65 5.9501L12.25 0.350098L13.3 1.4001L7.7 7.0001L13.3 12.6001L12.25 13.6501L6.65 8.0501L1.05 13.6501Z"/>
+                    </svg>
+                    キャンセル
+                </button>
+            </a>
+            </div>
         </div>
     </div>
 {% endif %}
@@ -149,11 +170,18 @@
     
     </div><!-- scroll content -->
 </main>
-
+</section>
 {% endblock %}
 
 {% block js %}
 <script>
+    document.getElementById('positive_conversion__btn').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
     document.getElementById('submitButton').addEventListener('click', function () {
       // ボタンがクリックされたらローディング画面を表示
       document.getElementById('loading').style.display = 'block';

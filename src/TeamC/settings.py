@@ -153,16 +153,17 @@ DEBUG_TOOLBAR_CONFIG = {
 
 #---------------------メール送信設定-------------------------
 # 以下はSMTPサーバーの設定
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ryougaharada@gmail.com'
 EMAIL_HOST_PASSWORD = 'ssnc deay womq kvaf'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'ryougaharada@gmail.com'
-#---------------------メール送信設定-------------------------
+DEFAULT_FROM_EMAIL = 'Fugoo Customer Support <noreply@example.com>'
 
+# ---------------------メール送信設定-------------------------
 
-#--------------------allauthの基本設定--------------------
+# --------------------allauthの基本設定--------------------
 # allauthのモデルじゃなくて独自のカスタムユーザーがログイン認証になる
 AUTH_USER_MODEL = 'user.CustomUser' 
 #django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
@@ -186,10 +187,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_LOGOUT_ON_GET =True
 #django-allauthが送信するメールの件名に自動付与される接頭語をブランクに設定
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
-#デフォルトのメール送信元を設定
-DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
-# Allauthのメール確認を無効にする
-# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 SOCIALACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm'

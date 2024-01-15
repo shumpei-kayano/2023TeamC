@@ -28,6 +28,9 @@
 {% endblock %}
 
 {% block content %}
+<article class="move">
+<div class="content">
+
 <main class="ground ground--white">
     <div class="scroll--content">
         <div class="help__menu">
@@ -44,4 +47,19 @@
         </div>
     </div>
 </main>
+
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script>
+     // フェードイン
+(function ($) {
+    'use strict';
+    $(window).on('load',function(){
+        $('article').addClass('appear');
+    });
+})(jQuery);
+</script>
 {% endblock %}
