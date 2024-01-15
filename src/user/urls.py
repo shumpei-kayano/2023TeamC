@@ -11,5 +11,4 @@ urlpatterns = [
     path('accounts/signup/', CustomSignupView.as_view(), name='account_signup'),
     path('email', views.email,name='email'),
     path('password_reset', views.password_reset,name='password_reset'),
-
     ]    
