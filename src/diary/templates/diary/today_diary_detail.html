@@ -24,6 +24,13 @@
 {% block content %}
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
+        <style>
+            video{  
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        </style>
 
         <!-- タブ -->
         {% url 'diary:today_diary_detail'  pk=diary.id as today_diary_detail_url %}
@@ -179,6 +186,104 @@
                             </button>
                         </div>
                     {% endif %}
+
+                    {% if diary.movie1 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video1">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement1" class="modal__content__img" src="" alt="Diary Movie1"   controls autoplay></video>
+                                        </div>
+                                    </div>
+                
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video1')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <button class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
+                            <video src="{{ diary.movie1.url }}" alt="Diary Movie1"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    {% if diary.movie2 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video2">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement2" class="modal__content__img" src="" alt="Diary Movie2" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video2')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
+                            <video src="{{ diary.movie2.url }}" alt="Diary Movie2"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    {% if diary.movie3 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video3">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement3" class="modal__content__img" src="" alt="Diary Movie3" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video3')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
+                            <video src="{{ diary.movie3.url }}" alt="Diary Movie3"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    {% if diary.movie4 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video4">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement4" class="modal__content__img" src="" alt="Diary Movie4" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video4')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
+                            <video src="{{ diary.movie4.url }}" alt="Diary Movie4"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
                 </div>
             {% else %}
                 <p>日記は記録されていません</p>
@@ -240,6 +345,21 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     modal.classList.remove('is-open');
 }
+
+function openvideo(videoId, mediaUrl) {
+    const video = document.getElementById(videoId);
+    const videoElement = video.querySelector('video');
+    videoElement.src = mediaUrl;
+    video.classList.add('is-open');
+}
+
+function closeVideo(videoId) {
+    const video = document.getElementById(videoId);
+    const videoElement = video.querySelector('video');
+    video.classList.remove('is-open');
+    videoElement.pause(); // モーダルを閉じる際に動画を停止
+}
+
 
 document.getElementById('today_graph').addEventListener('click', function (event) {
     // ボタンがクリックされたらローディング画面を表示
