@@ -403,7 +403,6 @@ def home_top2(request,pk):
         diary.delete()
         return redirect('diary:home_top1')
 
-
 @login_required
 def loading(request):
     return render(request, 'diary/loading.html')
@@ -420,18 +419,17 @@ def logout(request):
 def member_information_edit_cancel(request):
     return render(request, 'diary/member_information_edit_cancel.html')
 
-
 @login_required
 def member_information_edit_check(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             # formからデータを取得
-            email = form['email'].value()
+            username = form['username'].value()
             # セッション保存
-            request.session['email'] = email
+            request.session['username'] = username
             # 成功した場合のリダイレクト先を指定
-            return render(request, 'diary/member_information_edit_check.html', {'email': email})
+            return render(request, 'diary/member_information_edit_check.html', {'username': username})
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -453,7 +451,7 @@ def member_information_edit_comp(request):
     # メールアドレスを更新
     if new_email:
         user.email = new_email
-       # メールアドレスを更新
+        # メールアドレスを更新
     if new_email:
         user.email = new_email
 
@@ -483,7 +481,14 @@ def member_information_edit(request):
 
 @login_required
 def member_information(request):
-    return render(request, 'diary/member_information.html')
+  user = request.user
+  new_username = request.session.get('username')
+  if new_username:
+        user.username = new_username
+        user.save()
+    # セッションを削除
+        request.session.pop('username', None)
+        return render(request, 'diary/member_information.html')
 
 @login_required
 def month_graph(request,selected_date=None):
