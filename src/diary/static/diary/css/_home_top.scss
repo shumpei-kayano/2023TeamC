@@ -29,7 +29,13 @@
     margin: 0 auto;
     text-align: center;
 }
-
+.content-center{
+    display: flex;
+    flex-direction: column;
+    height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+}
 @media only screen and (max-width: 960px) {
     .content-center{
         display: flex;
