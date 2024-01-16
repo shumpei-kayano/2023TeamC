@@ -488,7 +488,7 @@ def member_information(request):
         user.save()
     # セッションを削除
         request.session.pop('username', None)
-        return render(request, 'diary/member_information.html')
+  return render(request, 'diary/member_information.html')
 
 @login_required
 def month_graph(request,selected_date=None):
