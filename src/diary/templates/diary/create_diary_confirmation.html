@@ -60,6 +60,18 @@
                         {% if saved_diary.photo4 %}
                             <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4" class="content__today-diary__item">
                         {% endif %}
+                        {% if saved_diary.movie1 %}
+                            <video src="{{ saved_diary.movie1.url }}" alt="Diary Movie1" class="content__today-diary__item"></video>
+                        {% endif %}
+                        {% if saved_diary.movie2 %}
+                            <video src="{{ saved_diary.movie2.url }}" alt="Diary Movie2" class="content__today-diary__item"></video>
+                        {% endif %}
+                        {% if saved_diary.movie3 %}
+                                <video src="{{ saved_diary.movie3.url }}" alt="Diary Movie3" class="content__today-diary__item"></video>
+                        {% endif %}
+                        {% if saved_diary.movie4 %}
+                            <video src="{{ saved_diary.movie4.url }}" alt="Diary Movie4" class="content__today-diary__item"></video>
+                        {% endif %}
                     </div>
                 </div>
 

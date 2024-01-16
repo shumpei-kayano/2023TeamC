@@ -46,3 +46,7 @@ class ImageDeleteForm(forms.Form):
     photo2_delete = forms.BooleanField(required=False)
     photo3_delete = forms.BooleanField(required=False)
     photo4_delete = forms.BooleanField(required=False)
+    movie1_delete = forms.BooleanField(required=False)
+    movie2_delete = forms.BooleanField(required=False)
+    movie3_delete = forms.BooleanField(required=False)
+    movie4_delete = forms.BooleanField(required=False)

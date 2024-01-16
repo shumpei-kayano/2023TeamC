@@ -274,6 +274,10 @@ def create_diary_confirmation2(request, pk):
                 photo2_delete = form2.cleaned_data['photo2_delete']
                 photo3_delete = form2.cleaned_data['photo3_delete']
                 photo4_delete = form2.cleaned_data['photo4_delete']
+                movie1_delete = form2.cleaned_data['movie1_delete']
+                movie2_delete = form2.cleaned_data['movie2_delete']
+                movie3_delete = form2.cleaned_data['movie3_delete']
+                movie4_delete = form2.cleaned_data['movie4_delete']
                 
                 # フィールドに関連するファイルを削除
                 if photo1_delete == True :
@@ -284,6 +288,14 @@ def create_diary_confirmation2(request, pk):
                         diary.photo3.delete()
                 if photo4_delete == True :
                         diary.photo4.delete()
+                if movie1_delete == True :
+                        diary.movie1.delete()
+                if movie2_delete == True :
+                        diary.movie2.delete()
+                if movie3_delete == True :
+                        diary.movie3.delete()
+                if movie4_delete == True :
+                        diary.movie4.delete()
                 
             # 保存
             diary.save()
