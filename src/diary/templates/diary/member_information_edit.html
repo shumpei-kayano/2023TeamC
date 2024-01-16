@@ -37,11 +37,9 @@
             {% csrf_token %}
             
             <!-- エラーメッセージを一括表示 -->
-            {% for field in form %}
             <div class="form-field">
-                {{ field.errors }}
+                {{ form.errors }}
             </div>
-            {% endfor %}
             <!-- 各フィールドのラベル、入力欄、エラーメッセージを表示 -->
                 <div class="form-field">
                     <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>

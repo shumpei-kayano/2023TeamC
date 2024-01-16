@@ -129,7 +129,7 @@ def aicomment_month(emotion):
 
 # 特定のワードが含まれているか確認する関数
 def contains_forbidden_word(content):
-    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
+    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "怒", "鬱", "嫌", "悪","疲"]
     for word in forbidden_words:
         if word in content:
             return 1
@@ -206,7 +206,7 @@ def calender_week(request, selected_date=None):
 @login_required
 def create_diary_confirmation(request):
 
-    if request.method == 'POST':
+    if request.method == 'POST':#新規作成の時のみに動く
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
@@ -245,7 +245,7 @@ def create_diary_confirmation2(request, pk):
     diary = get_object_or_404(Diary, id=pk)
 
     # 編集した時の処理
-    if request.method == 'POST':
+    if request.method == 'POST':#アップデートの時のみに動く
         form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
         form2 = ImageDeleteForm(request.POST)
         if form.is_valid():
@@ -274,6 +274,10 @@ def create_diary_confirmation2(request, pk):
                 photo2_delete = form2.cleaned_data['photo2_delete']
                 photo3_delete = form2.cleaned_data['photo3_delete']
                 photo4_delete = form2.cleaned_data['photo4_delete']
+                movie1_delete = form2.cleaned_data['movie1_delete']
+                movie2_delete = form2.cleaned_data['movie2_delete']
+                movie3_delete = form2.cleaned_data['movie3_delete']
+                movie4_delete = form2.cleaned_data['movie4_delete']
                 
                 # フィールドに関連するファイルを削除
                 if photo1_delete == True :
@@ -284,12 +288,21 @@ def create_diary_confirmation2(request, pk):
                         diary.photo3.delete()
                 if photo4_delete == True :
                         diary.photo4.delete()
+                if movie1_delete == True :
+                        diary.movie1.delete()
+                if movie2_delete == True :
+                        diary.movie2.delete()
+                if movie3_delete == True :
+                        diary.movie3.delete()
+                if movie4_delete == True :
+                        diary.movie4.delete()
                 
             # 保存
             diary.save()
             return redirect('diary:create_diary_confirmation', pk=pk)
 
-    # 感情分析の実行関数
+    # 感情分析の実行関数(AWSでEmotion作成
+    # )
     analyze_sentiment(diary.content, diary,request.user)
 
 
@@ -403,7 +416,6 @@ def home_top2(request,pk):
         diary.delete()
         return redirect('diary:home_top1')
 
-
 @login_required
 def loading(request):
     return render(request, 'diary/loading.html')
@@ -420,18 +432,17 @@ def logout(request):
 def member_information_edit_cancel(request):
     return render(request, 'diary/member_information_edit_cancel.html')
 
-
 @login_required
 def member_information_edit_check(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             # formからデータを取得
-            email = form['email'].value()
+            username = form['username'].value()
             # セッション保存
-            request.session['email'] = email
+            request.session['username'] = username
             # 成功した場合のリダイレクト先を指定
-            return render(request, 'diary/member_information_edit_check.html', {'email': email})
+            return render(request, 'diary/member_information_edit_check.html', {'username': username})
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -453,7 +464,7 @@ def member_information_edit_comp(request):
     # メールアドレスを更新
     if new_email:
         user.email = new_email
-       # メールアドレスを更新
+        # メールアドレスを更新
     if new_email:
         user.email = new_email
 
@@ -483,7 +494,14 @@ def member_information_edit(request):
 
 @login_required
 def member_information(request):
-    return render(request, 'diary/member_information.html')
+  user = request.user
+  new_username = request.session.get('username')
+  if new_username:
+        user.username = new_username
+        user.save()
+    # セッションを削除
+        request.session.pop('username', None)
+  return render(request, 'diary/member_information.html')
 
 @login_required
 def month_graph(request,selected_date=None):
