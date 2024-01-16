@@ -7,6 +7,30 @@
     letter-spacing: 0.04em;
 }
 
+.custom-file-upload__btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#custom-file-upload__delete-btn{
+    padding-right: 0;
+}
+
+.backcolor{
+    padding: 3px 10px 5px 10px;
+}
 .backcolor.checked {
-    background-color:  #808080; 
+    background-color:  #808080;
+    border-radius: 5px;
+    padding: 3px 10px 5px 10px;
+    #custom-file-upload__delete-btn, .a--blue--svg{
+        color: #FFF;
+        fill: #fff;
+        &:hover{
+            text-decoration: underline; // ホバー時に下線を表示
+            color: #FFF;
+            fill: #fff;
+        }
+    }
 }

@@ -38,7 +38,7 @@
             {% url 'diary:month_graph' selected_date as month_graph_url %}
             <div class="tab__button a--tab">
                 <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
-                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                    <a id="a--tab--left--color" href="{{ calendar_month_url }}">月間カレンダー</a>
                 </div>
                 <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
                     <a id = "month_graph" href="{{ month_graph_url }}">月間グラフ</a>

@@ -13,6 +13,11 @@ body {
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
     color: #333;
+    // 背景画像を設定
+    background-image: url("http://localhost/static/diary/assets/html_groud.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
 }
 
 p{

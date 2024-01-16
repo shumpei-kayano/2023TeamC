@@ -355,6 +355,10 @@
         }
     }
 }
+#a--tab--left--color, #a--tab--right--color{
+    color: #fff;
+    background-color: #00ABB6;
+}
 
 .next__button {
     display: flex;
@@ -401,6 +405,7 @@
             font-weight: 400;
             margin: 0;
             padding: 16px;
+            border-bottom: 1px solid #333;
     }
 }
 

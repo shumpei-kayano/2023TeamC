@@ -40,6 +40,10 @@ class CustomUserChangeForm(UserChangeForm):
         'username': 'ユーザーネーム',
         'email': 'メールアドレス',
     }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = 'ユーザーネームを入力してください'
+        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスを入力してください'
 class ImageDeleteForm(forms.Form):
     photo1_delete = forms.BooleanField(required=False)
     photo2_delete = forms.BooleanField(required=False)
