@@ -32,14 +32,15 @@ class DiaryCreateForm(forms.ModelForm):
                     # 'movie3': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     # 'movie4': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeFormBase(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email']  # ユーザーの編集可能なフィールドを指定
+        fields = ['username']  # ユーザーの編集可能なフィールドを指定
         labels = {
         'username': 'ユーザーネーム',
-        'email': 'メールアドレス',
     }
+class CustomUserChangeForm(CustomUserChangeFormBase):
+  pass
 class ImageDeleteForm(forms.Form):
     photo1_delete = forms.BooleanField(required=False)
     photo2_delete = forms.BooleanField(required=False)

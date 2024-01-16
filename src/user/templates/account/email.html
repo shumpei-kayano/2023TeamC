@@ -3,21 +3,33 @@
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}メールアドレス管理{% endblock %}
+{% block title %}メールアドレス管理{% endblock %}
 
 {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->
-    <h1>会員情報変更</h1>
+    {% comment %} <h1>会員情報変更</h1> {% endcomment %}
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
 
 {% block content %}
-    <h1>メールアドレス</h1>
+<div class="wrapperHeader">
+  <div class="header__back__img">
+    <a href="{% url 'diary:member_information' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+    <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+  </div>
+</div>
+
+  <div class="title-text">
+    <p>会員情報変更</p>
+  </div>
+
+    <p class="change-text">メールアドレス</p>
 {% if user.emailaddress_set.all %}
-<p>次のメールアドレスはあなたのアカウントに関連付けられています</p>
+
+  <p class="if__change-text">次のメールアドレスはあなたのアカウントに関連付けられています</p>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
 {% csrf_token %}
@@ -55,12 +67,16 @@
 {% endif %}
 
 
-    <h2>メールアドレスの追加</h2>
+    <p class="email-add-text">メールアドレスの追加</p>
 
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">追加</button>
+        <div class="form-email">
+          {{ form.as_p }}
+        </div>
+        <div class="btn btn--blue">
+          <button name="action_add" type="submit">追加</button>
+        </div>
     </form>
     
 {% endblock %}
