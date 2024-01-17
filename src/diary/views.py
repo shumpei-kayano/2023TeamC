@@ -207,13 +207,8 @@ def calender_week(request, selected_date=None):
 
 @login_required
 def create_diary_confirmation(request):
-<<<<<<< HEAD
     # 新規作成した時の処理
     if request.method == 'POST':
-=======
-
-    if request.method == 'POST':#新規作成の時のみに動く
->>>>>>> 7ba2701b383155a9543acf7f1e0625deaeb938dc
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
