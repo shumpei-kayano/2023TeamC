@@ -519,6 +519,48 @@
                                                         </div>
                                                 {% endif  %}
 
+                            {% comment %} 0枚の時 {% endcomment %}
+                            {% else %}
+                            <div class="custom-file-upload" id="container_photo1">
+                            <label id="label_photo1">
+                                <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                </svg>
+                                写真を選択
+                                {{ Diary.photo1 }}
+                                <!-- 画像のファイル名を表示させてください -->
+                                <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                            </div>
+                            <div class="custom-file-upload" id="container_photo2">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo2 }}
+                                    <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                                </div>
+                                <div class="custom-file-upload" id="container_photo3">
+                                    <label id="label_photo3">
+                                        <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                        </svg>
+                                        写真を選択
+                                        {{ Diary.photo3 }}
+                                        <!-- 画像のファイル名を表示させてください -->
+                                        <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                                    </div>
+                                        <div class="custom-file-upload" id="container_photo4">
+                                        <label id="label_photo4">
+                                            <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                            </svg>
+                                            写真を選択
+                                            {{ Diary.photo4 }}
+                                            <!-- 画像のファイル名を表示させてください -->
+                                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                                        </div>
+                            {% endif %}
 
                             <div class='photomv'>
                                 {% comment %} movieが4枚の時 {% endcomment %}
