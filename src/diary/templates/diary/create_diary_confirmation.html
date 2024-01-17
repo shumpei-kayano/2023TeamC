@@ -76,16 +76,29 @@
                 </div>
 
                 <!-- ネコココメント -->
-                <div class="content__diary__comment">
-                    <div class="content__diary__ccomment__p">
-                        <p>{{ saved_diary.ai_comment }}</p>
+                {% if saved_diary.counseling == 2 %}
+                    <!-- カウンセリングボタンを押した時のネコッココ -->
+                    <div class="content__diary__comment">
+                        <div class="content__diary__ccomment__p">
+                            <p>{{ saved_diary.ai_comment }}</p>
+                        </div>
                     </div>
-                </div>
-                <!-- ネココの画像 ここの画像を変更する-->
-                <div class="content__diary__comment__img">
-                    <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
-                </div>
-
+                    <div class="content__diary__comment__img">
+                        <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                    </div>
+                <!-- それ以外だと黄色ネコちゃん -->
+                {% else %}
+                    <!-- ネコココメント -->
+                    <div class="content__diary__comment">
+                        <div class="content__diary__ccomment__p">
+                            <p>{{ saved_diary.ai_comment }}</p>
+                        </div>
+                    </div>
+                    <div class="content__diary__comment__img">
+                        <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                    </div>
+                {% endif %}
+                
                 <div class="btn--blue">
                     <a id="positive_conversion__btn" href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">
                         <button type="button">ポジティブ変換する</button>
@@ -113,7 +126,6 @@
 <!-- ポップアップ要素 -->
 {% comment %} 悪い言葉があればポップアップを表示 {% endcomment %}
 {% if saved_diary.counseling == 1 %}
-
     {% comment %} 1回目のポップアップ {% endcomment %}
     <div class="popup show" id="first-popup" data-counseling="1">
         <div class="popup__flex-box">
