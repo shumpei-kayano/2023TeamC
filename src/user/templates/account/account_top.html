@@ -7,6 +7,7 @@
 
 {% block content %}
 {% comment %} 新規登録orログイン {% endcomment %}
+<section>
 <header></header>
     <div class="logo__img">
         <img class="img-icon" img src="{% static 'user/assets/fugoo.svg' %}" alt="logo">
@@ -24,4 +25,5 @@
         <a href="{% url 'account_login' %}">ログイン</a>
     </div>
 </main>
+</section>
 {% endblock content %}

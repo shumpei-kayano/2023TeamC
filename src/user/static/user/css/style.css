@@ -766,6 +766,18 @@ img.img__logo {
   letter-spacing: 0.64px;
 }
 
+.error-message {
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .container {
   width: 100%;
   height: calc(100vh - 11rem);
@@ -1202,7 +1214,7 @@ label {
   margin-left: 24px;
 }
 
-.change-text {
+.change-text p {
   color: #000;
   font-size: 2rem;
   font-style: normal;
@@ -1478,4 +1490,70 @@ img.img__logo {
 .btn--blue {
   margin-top: 40px;
   margin-left: 24px;
+}
+
+.blockLabels {
+  border: 0;
+}
+.blockLabels label {
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%; /* 23.8px */
+  letter-spacing: 0.56px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.errorlist {
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.buttonHolder {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.buttonHolder button {
+  font-family: "Noto Sans JP", sans-serif;
+  display: inline-flex;
+  padding: 5px 7px 5px 7px;
+  align-items: center;
+  border-radius: 5px;
+  background: #00ABB6;
+  color: #FFF;
+  border: none;
+}
+.buttonHolder button:hover {
+  background-color: #00909A; /* マウスをかざしたときの背景色 */
+}
+
+.secondAction {
+  margin-left: 17px;
+}
+
+.primaryAction {
+  margin-left: 17px;
+}
+
+/* スライドインアニメーション*/
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* タグ内のすべての要素にアニメーションを適用 */
+body {
+  animation: slideIn 0.5s ease-out;
 }

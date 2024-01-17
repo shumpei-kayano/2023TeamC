@@ -1,0 +1,16 @@
+/* スライドインアニメーション*/
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* タグ内のすべての要素にアニメーションを適用 */
+body {
+    animation: slideIn 0.5s ease-out;
+}
