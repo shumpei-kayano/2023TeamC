@@ -128,7 +128,8 @@ def aicomment_month(emotion):
     return None
 
 # 特定のワードが含まれているか確認する関数
-def contains_forbidden_word(content):
+def contains_forbidden_word(content,emotion):
+    # 特定のワードをリストに格納
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         # 特定のワードが含まれていたら、感情分析でnegativeが70%以上だったら
@@ -206,8 +207,13 @@ def calender_week(request, selected_date=None):
 
 @login_required
 def create_diary_confirmation(request):
-
+<<<<<<< HEAD
+    # 新規作成した時の処理
     if request.method == 'POST':
+=======
+
+    if request.method == 'POST':#新規作成の時のみに動く
+>>>>>>> 7ba2701b383155a9543acf7f1e0625deaeb938dc
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
