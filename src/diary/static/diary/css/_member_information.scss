@@ -4,10 +4,38 @@
     justify-content: center; // コンテンツを垂直方向に中央寄せ
     align-items: center; // コンテンツを水平方向に中央寄せ
 }
+.content__user-info__list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ccc;
 
-hr {
-    margin-bottom: 16px;
-    margin-top: 0px;
+    .content__user-info__list__btn{
+        cursor: pointer;
+        border: none;
+        color: #FFF;
+        font-weight: 700;
+        letter-spacing: 0.04rem;
+        min-width: 7.2rem;
+        min-height: 2.8rem;
+        font-size: 1.4rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+        background-color: $header_color;
+        padding: 5px 10px 3px 10px;
+
+        .content__user-info__list__svg {
+            fill: #FFF;
+            margin-left: 5px;
+            margin-bottom: 3px;
+        }
+        &:hover {
+            background-color: $btn_large_button_hover;
+        }
+    }
 }
 
 .user-infomation__image {

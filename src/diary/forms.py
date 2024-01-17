@@ -32,16 +32,25 @@ class DiaryCreateForm(forms.ModelForm):
                     # 'movie3': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     # 'movie4': forms.TextInput(attrs={'class': 'content__movie-btn', 'type': 'button'}),
                     
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeFormBase(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email']  # ユーザーの編集可能なフィールドを指定
+        fields = ['username']  # ユーザーの編集可能なフィールドを指定
         labels = {
         'username': 'ユーザーネーム',
-        'email': 'メールアドレス',
     }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = 'ユーザーネームを入力してください'
+        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスを入力してください'
+class CustomUserChangeForm(CustomUserChangeFormBase):
+  pass
 class ImageDeleteForm(forms.Form):
     photo1_delete = forms.BooleanField(required=False)
     photo2_delete = forms.BooleanField(required=False)
     photo3_delete = forms.BooleanField(required=False)
     photo4_delete = forms.BooleanField(required=False)
+    movie1_delete = forms.BooleanField(required=False)
+    movie2_delete = forms.BooleanField(required=False)
+    movie3_delete = forms.BooleanField(required=False)
+    movie4_delete = forms.BooleanField(required=False)

@@ -16,7 +16,11 @@
     <div class="header__button">
         <div class="header__back__img">
             {% comment %} member_information_edit_cancel.htmlに遷移させてください {% endcomment %}
-            <a href="{% url 'diary:member_information_edit_cancel' %}"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</a>
+            <a href="{% url 'diary:member_information_edit_cancel' %}">
+                <svg width="8" height="12" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
         </div>
     </div>
     <h1>会員情報変更</h1>
@@ -29,16 +33,13 @@
 <main class="ground ground--white">
     <div class="user-infomation--center">
 
- 
         <form method="POST" action="{% url 'diary:member_information_edit_check' %}">
             {% csrf_token %}
             
             <!-- エラーメッセージを一括表示 -->
-            {% for field in form %}
             <div class="form-field">
-                {{ field.errors }}
+                {{ form.errors }}
             </div>
-            {% endfor %}
             <!-- 各フィールドのラベル、入力欄、エラーメッセージを表示 -->
                 <div class="form-field">
                     <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
@@ -46,7 +47,7 @@
                 </div>
 
         <div class="btn--blue--info">
-            <button type="submit">確認する</button>
+            <button class="btn--blue--info--space" type="submit">確認する</button>
         </div>
         </form>
         

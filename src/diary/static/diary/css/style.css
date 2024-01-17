@@ -14,6 +14,10 @@ body {
   display: flex;
   flex-direction: column;
   color: #333;
+  background-image: url("http://localhost/static/diary/assets/html_groud.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
 }
 
 p {
@@ -588,6 +592,11 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   color: #FFF;
 }
 
+#a--tab--left--color, #a--tab--right--color {
+  color: #fff;
+  background-color: #00ABB6;
+}
+
 .next__button {
   display: flex;
 }
@@ -630,6 +639,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   font-weight: 400;
   margin: 0;
   padding: 16px;
+  border-bottom: 1px solid #333;
 }
 
 .back-home a {
@@ -799,7 +809,7 @@ th, td {
 
 .week-calendar__today, .week-calendar__date {
   vertical-align: bottom;
-  min-width: 80px;
+  width: 80px;
   height: 38px;
   padding-bottom: 5px;
   font-size: 1.4rem;
@@ -954,13 +964,19 @@ th, td {
   cursor: pointer;
   text-decoration: none;
 }
-.custom-file-upload label img {
-  margin-right: 5px;
-  padding-bottom: 2px;
-}
 .custom-file-upload label:hover {
   text-decoration: underline;
   color: #00737A;
+  fill: #00737A;
+}
+
+.label_photo-icon {
+  margin-right: 5px;
+  padding-bottom: 2px;
+  fill: #00ABB6;
+}
+.label_photo-icon:hover {
+  fill: #00737A;
 }
 
 .content__today-diary_samll {
@@ -1150,9 +1166,36 @@ th, td {
   align-items: center;
 }
 
-hr {
-  margin-bottom: 16px;
-  margin-top: 0px;
+.content__user-info__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ccc;
+}
+.content__user-info__list .content__user-info__list__btn {
+  cursor: pointer;
+  border: none;
+  color: #FFF;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  min-width: 7.2rem;
+  min-height: 2.8rem;
+  font-size: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #04CAD6;
+  padding: 5px 10px 3px 10px;
+}
+.content__user-info__list .content__user-info__list__btn .content__user-info__list__svg {
+  fill: #FFF;
+  margin-left: 5px;
+  margin-bottom: 3px;
+}
+.content__user-info__list .content__user-info__list__btn:hover {
+  background-color: #00909A;
 }
 
 .user-infomation__image {
@@ -1180,6 +1223,7 @@ input[type=text], input[type=email] {
   height: 45px;
   padding: 16px 0px 16px 16px;
   flex-shrink: 0;
+  margin-top: 10px;
   margin-bottom: 16px;
   font-size: 1.6rem;
   border-radius: 8.876px;
@@ -1187,9 +1231,20 @@ input[type=text], input[type=email] {
   background: #FFF;
   box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
 }
+input[type=text]:focus, input[type=email]:focus {
+  outline: none;
+  outline: #FFC700 2px solid;
+  box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+}
 
-label {
+.form-field {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.form-field label {
   font-size: 1.4rem;
+  margin: 10px;
 }
 
 @media only screen and (min-height: 599px) {
@@ -1265,6 +1320,10 @@ label {
 }
 
 .btn--blue--info {
+  margin-bottom: 24px;
+}
+
+.member-info__cancel__btn--space {
   margin-bottom: 24px;
 }
 
@@ -2088,6 +2147,35 @@ label {
   margin: 0 auto;
   text-align: center;
   letter-spacing: 0.04em;
+}
+
+.custom-file-upload__btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#custom-file-upload__delete-btn {
+  padding-right: 0;
+}
+
+.backcolor {
+  padding: 3px 10px 5px 10px;
+}
+
+.backcolor.checked {
+  background-color: #808080;
+  border-radius: 5px;
+  padding: 3px 10px 5px 10px;
+}
+.backcolor.checked #custom-file-upload__delete-btn, .backcolor.checked .a--blue--svg {
+  color: #FFF;
+  fill: #fff;
+}
+.backcolor.checked #custom-file-upload__delete-btn:hover, .backcolor.checked .a--blue--svg:hover {
+  text-decoration: underline;
+  color: #FFF;
+  fill: #fff;
 }
 
 .month-graph-page {

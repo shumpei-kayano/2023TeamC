@@ -145,14 +145,10 @@
     // デフォルトでは下線を非表示
     text-decoration: none;
 
-    img{
-        margin-right: 5px;
-        padding-bottom: 2px;
-    }
-
     &:hover{
         text-decoration: underline; // ホバー時に下線を表示
         color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
+        fill: $a_blue_button_hover;
         // content: '\00a0'; // 空白の文字列を追加
         // position: absolute;
         // left: 0;
@@ -162,6 +158,14 @@
         // z-index: -1; /* テキストの下に配置 */
         // color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
         // display: block; // 追加
+    }
+}
+.label_photo-icon{
+    margin-right: 5px;
+    padding-bottom: 2px;
+    fill: $a_blue_button;
+    &:hover{
+        fill: $a_blue_button_hover;
     }
 }
 
