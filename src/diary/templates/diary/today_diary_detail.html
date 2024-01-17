@@ -24,13 +24,6 @@
 {% block content %}
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
-        <style>
-            video{  
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        </style>
 
         <!-- タブ -->
         {% url 'diary:today_diary_detail'  pk=diary.id as today_diary_detail_url %}
@@ -186,7 +179,9 @@
                             </button>
                         </div>
                     {% endif %}
+                </div>
 
+                <div class="content__today-diary__img">
                     {% if diary.movie1 %}
                     <div class="content__today-diary__item">
                         <!-- 動画のポップアップ -->

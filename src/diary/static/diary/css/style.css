@@ -2182,7 +2182,7 @@ input[type=text]:focus, input[type=email]:focus {
 }
 
 .backcolor.checked {
-  background-color: #808080;
+  background-color: rgba(128, 128, 128, 0.5215686275);
   border-radius: 5px;
   padding: 3px 10px 5px 10px;
 }
