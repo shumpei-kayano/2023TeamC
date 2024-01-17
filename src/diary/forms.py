@@ -39,6 +39,10 @@ class CustomUserChangeFormBase(UserChangeForm):
         labels = {
         'username': 'ユーザーネーム',
     }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = 'ユーザーネームを入力してください'
+        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスを入力してください'
 class CustomUserChangeForm(CustomUserChangeFormBase):
   pass
 class ImageDeleteForm(forms.Form):

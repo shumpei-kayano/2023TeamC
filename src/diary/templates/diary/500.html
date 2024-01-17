@@ -1,0 +1,12 @@
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block content %}
+<h1>想定外のエラーが発生しました</h1>
+<p>お手数ですが、再度トップページからやり直してください。</p>
+<div class="btn--large">
+    <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">トップに戻る</button>
+</div>
+{% endblock %}
+

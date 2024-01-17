@@ -128,8 +128,7 @@ def aicomment_month(emotion):
     return None
 
 # 特定のワードが含まれているか確認する関数
-def contains_forbidden_word(content,emotion):
-    # 特定のワードをリストに格納
+def contains_forbidden_word(content):
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         # 特定のワードが含まれていたら、感情分析でnegativeが70%以上だったら
@@ -207,7 +206,7 @@ def calender_week(request, selected_date=None):
 
 @login_required
 def create_diary_confirmation(request):
-    # 新規作成した時の処理
+
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
@@ -243,7 +242,7 @@ def create_diary_confirmation2(request, pk):
     diary = get_object_or_404(Diary, id=pk)
 
     # 編集した時の処理
-    if request.method == 'POST':
+    if request.method == 'POST':#アップデートの時のみに動く
         form = DiaryCreateForm(request.POST, request.FILES, instance=diary)
         form2 = ImageDeleteForm(request.POST)
         if form.is_valid():
@@ -295,7 +294,8 @@ def create_diary_confirmation2(request, pk):
             diary.save()
             return redirect('diary:create_diary_confirmation', pk=pk)
 
-    # 感情分析の実行関数
+    # 感情分析の実行関数(AWSでEmotion作成
+    # )
     analyze_sentiment(diary.content, diary,request.user)
     
     # diaryに関連するemorionを取得
