@@ -970,12 +970,12 @@ th, td {
   fill: #00737A;
 }
 
-.label_photo-icon {
+.label_photo-icon, .label_movie-icon {
   margin-right: 5px;
   padding-bottom: 2px;
   fill: #00ABB6;
 }
-.label_photo-icon:hover {
+.label_photo-icon:hover, .label_movie-icon:hover {
   fill: #00737A;
 }
 
@@ -1790,7 +1790,7 @@ input[type=text]:focus, input[type=email]:focus {
 .content__today-diary__text {
   width: 100%;
   background-color: #FFFFFF;
-  padding: 16px 24px 16px 24px;
+  padding: 16px 24px 1px 24px;
   margin-bottom: 24px;
   border-top: 1px solid rgba(4, 202, 214, 0.15);
   box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
@@ -1813,9 +1813,42 @@ input[type=text]:focus, input[type=email]:focus {
   align-content: flex-start;
 }
 .content__today-diary__text .content__today-diary__img .content__today-diary__item {
-  margin-right: 1.2%; /* 画像間の余白を調整 */
-  width: 23%;
-  height: 23%;
+  position: relative;
+  width: 24%;
+  padding-top: 18.5%;
+  margin-right: 1%; /* 画像間の余白を調整 */
+  margin-bottom: 15px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.button--js-modal-button {
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.button img, .button video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.button img:hover, .button video:hover {
+  filter: brightness(50%);
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .created-date {
@@ -1989,21 +2022,6 @@ input[type=text]:focus, input[type=email]:focus {
   width: 390px;
   height: auto;
   max-height: 405px;
-}
-
-.button--js-modal-button {
-  padding: 0;
-  border: none;
-  outline: none;
-  font: inherit;
-  color: inherit;
-  background: none;
-  display: inline-block;
-  cursor: pointer;
-}
-.button img {
-  width: 100%;
-  height: 100%;
 }
 
 .modal__button-wrap {
