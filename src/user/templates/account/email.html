@@ -29,7 +29,7 @@
     <p class="change-text">メールアドレス</p>
 {% if user.emailaddress_set.all %}
 
-  <p class="if__change-text">次のメールアドレスはあなたのアカウントに関連付けられています</p>
+  <p class="if__change-text">次のメールアドレスはあなたのアカウントに<br>関連付けられています</p>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
 {% csrf_token %}
@@ -54,7 +54,7 @@
 
 <div class="buttonHolder">
       <button class="secondaryAction" type="submit" name="action_primary" >メインにする</button>
-      <button class="secondaryAction" type="submit" name="action_send" >確認メールを再送する</button>
+      <button class="secondAction" type="submit" name="action_send" >確認メールを再送する</button>
       <button class="primaryAction" type="submit" name="action_remove" >削除</button>
 </div>
 

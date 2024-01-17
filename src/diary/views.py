@@ -128,10 +128,12 @@ def aicomment_month(emotion):
     return None
 
 # 特定のワードが含まれているか確認する関数
-def contains_forbidden_word(content):
-    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "怒", "鬱", "嫌", "悪","疲"]
+def contains_forbidden_word(content,emotion):
+    # 特定のワードをリストに格納
+    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
-        if word in content:
+        # 特定のワードが含まれていたら、感情分析でnegativeが70%以上だったら
+        if word in content and emotion.negative >= 70 :
             return 1
     return 0
 
@@ -205,8 +207,8 @@ def calender_week(request, selected_date=None):
 
 @login_required
 def create_diary_confirmation(request):
-
-    if request.method == 'POST':#新規作成の時のみに動く
+    # 新規作成した時の処理
+    if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
@@ -223,10 +225,6 @@ def create_diary_confirmation(request):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
-            # 特定のワード実行関数
-            contains_forbidden= contains_forbidden_word(new_diary.content)
-            # counselingに関数の実行結果をセット
-            new_diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             # データベースへの保存
             new_diary.ai_comment = ai_comment
             new_diary.save()
@@ -262,13 +260,9 @@ def create_diary_confirmation2(request, pk):
                     ]
             )
             ai_comment = response["choices"][0]["message"]["content"]
-            # 特定のワード実行関数
-            contains_forbidden= contains_forbidden_word(diary.content)
-            # counselingに関数の実行結果をセット
-            diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
             diary.ai_comment = ai_comment
             
-            # チェックボックスの内容を受け取る
+            # diary_updateからチェックボックスの内容を受け取る
             if form2.is_valid():
                 photo1_delete = form2.cleaned_data['photo1_delete']
                 photo2_delete = form2.cleaned_data['photo2_delete']
@@ -279,7 +273,7 @@ def create_diary_confirmation2(request, pk):
                 movie3_delete = form2.cleaned_data['movie3_delete']
                 movie4_delete = form2.cleaned_data['movie4_delete']
                 
-                # フィールドに関連するファイルを削除
+                # チェックボックスに関連するファイルを削除
                 if photo1_delete == True :
                         diary.photo1.delete()
                 if photo2_delete == True :
@@ -304,8 +298,17 @@ def create_diary_confirmation2(request, pk):
     # 感情分析の実行関数(AWSでEmotion作成
     # )
     analyze_sentiment(diary.content, diary,request.user)
-
-
+    
+    # diaryに関連するemorionを取得
+    emorion=Emotion.objects.get(diary=diary)
+    # diaryから特定のワードを探す関数
+    contains_forbidden= contains_forbidden_word(diary.content,emorion)
+    # counselingに特定のワードを探す関数の実行結果をセット
+    diary.counseling = contains_forbidden #1が入っているカウンセリング状態の初期
+    
+    # 実行内容をデータベースに保存
+    diary.save()
+    # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
@@ -333,7 +336,7 @@ def receive_nekoko_advice(request, pk):
       diary.ai_comment = ai_comment
       diary.save()
 
-      return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': diary})
+      return render(request, 'diary/today_diary_detail.html', {'diary': diary})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
