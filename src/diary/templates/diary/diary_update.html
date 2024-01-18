@@ -954,7 +954,7 @@
             }
         }
 
-        // photoまたはmovieのファイルが選択されたときに次の要素を表示するイベントを設定
+        // photoのファイルが選択されたときに次の要素を表示するイベントを設定
         function handleFileInput(type, index) {
             const input = document.getElementById(`id_${type}${index}`);
             const label = document.getElementById(`label_${type}${index}`);
@@ -970,12 +970,36 @@
                     }
                 });
             }
-            //if (input && label && fileNameSpan) {
-                //label.addEventListener('click', function() {
-                    //input.click();
-                //});
         }
+        
+        // movieのファイルが選択されたときに次の要素を表示するイベントを設定
+        function handleFileInputMovie(type, index) {
+            const input = document.getElementById(`id_${type}${index}`);
+            const label = document.getElementById(`label_${type}${index}`);
+            const fileNameSpan = document.getElementById(`file_name_${type}${index}`);
+            //動画の拡張子を配列で定義
+            const videoExtensions = ['.mp4', '.avi', '.mov','.wmv','.flv','.swf','.mkv','.webm','.mpeg','.3gp','.m4v'];
 
+            if (input && label && fileNameSpan) {
+                input.addEventListener('change', function() {
+                    if (input.files.length > 0) {
+                        fileNameSpan.textContent = input.files[0].name;
+                        //動画の拡張子が含まれているかどうかを判定
+                        if (videoExtensions.some(ext => fileNameSpan.textContent.endsWith(ext))) {
+                            showNextElement(type, index);
+                        //含まれていたら要素を空にする
+                        }else{
+                            alert('動画を選択してください')
+                            fileNameSpan.textContent = '選択されていません';
+                            input.value = '';
+                        };
+                    } else {
+                        fileNameSpan.textContent = '選択されていません';
+                    }
+                });
+            }
+        }
+        
         //handleFileInput関数を使用して、各photoおよびmovieフィールドに対してファイルが選択されたときの
         // 動的な表示を設定
         // photoファイルの処理
@@ -985,7 +1009,7 @@
 
         // movieファイルの処理
         for (let i = 1; i <= 4; i++) {
-            handleFileInput('movie', i);
+            handleFileInputMovie('movie', i);
         }
 
         // 添付ファイルを選択後、ファイル名を更新する関数
