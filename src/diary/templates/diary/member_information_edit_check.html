@@ -14,19 +14,22 @@
 <header>
     <div class="header__button">
         <div class="header__back__img">
-            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
+            <a href="" onclick="history.back()">
+                <svg width="8" height="12" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
         </div>
     </div>
-    <div class="header__text">
-        <h1>会員情報変更</h1>
-    </div>
+    <h1>会員情報変更</h1>
+    <div class="header__spacer"></div>
 </header>
 {% endblock %}
 
 {% block content %}
 <section>
 <main class="ground ground--white">
-    <div class="scroll--content">
+    <div class="user-infomation--center">
 
         <div class="member-info__check-text">
             <p>入力内容をご確認ください</p>
@@ -36,30 +39,27 @@
             <div class="content__user-info__name">
                 <p class="user-label">ユーザーネーム</p>
                 <p class="user-info">{{ username }}</p>
-                <hr>
             </div>
             {% comment %} <div class="content__user-info__email">
                 <p class="user-label">メールアドレス</p>
                 <p class="user-info">{{ email }}</p>
-                <hr>
+            </div> {% endcomment %}
+            <!-- 保留
+            <div class="content__user-info__password">
+                <p>パスワード</p>
+                <p>{{ 新しく入力されたパスワードを表示させてください }}</p>
             </div>
-        </div> {% endcomment %}
-        <!-- 保留
-        <div class="content__user-info__password">
-            <p>パスワード</p>
-            <p>{{ 新しく入力されたパスワードを表示させてください }}</p>
-            <hr>
+            -->
         </div>
-        -->
         {% csrf_token %}
         {% with username=request.session.username email=request.session.email %}
-        <div class="a">
-            <div class="--button">
-            <a href="{% url 'diary:member_information' %}">登録</a>
-            </div>
+        <div class="btn--blue--info">
+            <button id="user-info_edit-check_btn-space" type="button"onclick="location.href='{% url 'diary:member_information' %}'">変更</button>
         </div>
         {% endwith %}
-            <img class="dango_neko_member" img src="{% static 'diary/assets/neko_dango.svg' %}">
+        <div class="user-infomation__image">
+            <img id="user-info_edit-check_dango-img-space" img src="{% static 'diary/assets/neko_dango.svg' %}">
+        </div>
     </div>
 </main>
 </section>
