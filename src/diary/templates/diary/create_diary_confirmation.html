@@ -47,32 +47,50 @@
                 <div class="content__today-diary__text">
                     <p>{{ saved_diary.content }}</p>
 
-                    <div class="content__today-diary__img">
+                    <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.photo1 %}
+                        <div class="content__today-diary-confirmation__item">
                             <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1" class="content__today-diary__item">
+                        </div>
                         {% endif %}
                         {% if saved_diary.photo2 %}
+                        <div class="content__today-diary-confirmation__item">
                             <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2" class="content__today-diary__item">
+                        </div>
                         {% endif %}
                         {% if saved_diary.photo3 %}
-                                <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3" class="content__today-diary__item">
+                        <div class="content__today-diary-confirmation__item">
+                            <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3" class="content__today-diary__item">
+                        </div>
                         {% endif %}
                         {% if saved_diary.photo4 %}
+                        <div class="content__today-diary-confirmation__item">
                             <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4" class="content__today-diary__item">
+                        </div>
                         {% endif %}
+                    </div>
+                    <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.movie1 %}
+                        <div class="content__today-diary-confirmation__item">
                             <video src="{{ saved_diary.movie1.url }}" alt="Diary Movie1" class="content__today-diary__item"></video>
                         {% endif %}
                         {% if saved_diary.movie2 %}
+                        <div class="content__today-diary-confirmation__item">
                             <video src="{{ saved_diary.movie2.url }}" alt="Diary Movie2" class="content__today-diary__item"></video>
+                        </div>
                         {% endif %}
                         {% if saved_diary.movie3 %}
+                        <div class="content__today-diary-confirmation__item">
                                 <video src="{{ saved_diary.movie3.url }}" alt="Diary Movie3" class="content__today-diary__item"></video>
+                            </div>
                         {% endif %}
                         {% if saved_diary.movie4 %}
+                        <div class="content__today-diary-confirmation__item">
                             <video src="{{ saved_diary.movie4.url }}" alt="Diary Movie4" class="content__today-diary__item"></video>
+                        </div>
                         {% endif %}
                     </div>
+                </div>
                 </div>
 
                 <!-- ネコココメント -->
@@ -114,7 +132,7 @@
           <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
           <div class="loading-content">
               <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-              <p class="loading__text">読み込み中</P>
+              <p class="loading__text">感情分析中にゃ</P>
               <span class="dli-loading-1"></span>
           </div>
         </div>

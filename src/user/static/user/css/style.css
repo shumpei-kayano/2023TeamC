@@ -17,6 +17,10 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  background-image: url("http://localhost/static/user/assets/html_groud.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
 }
 
 p {
@@ -471,8 +475,9 @@ input[type=text], input[type=email] input[type=password] input[type=password2] {
 }
 
 .img-icon {
-  margin-top: 90px;
   margin-left: 48px;
+  width: 294px;
+  height: auto;
 }
 
 .login__text {

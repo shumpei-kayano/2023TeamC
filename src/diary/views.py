@@ -390,6 +390,9 @@ def diary_delete(request, pk):
 @login_required
 def  diary_delete_success(request,pk):
     diary = get_object_or_404(Diary, id=pk)
+    emotion = Emotion.objects.get(diary=diary)
+    emotion.delete()
+    diary.delete()
     return render(request, 'diary/diary_delete_success.html',{'diary': diary})
 
 @login_required
@@ -440,13 +443,6 @@ def home_top(request):
         return redirect('diary:today_diary_detail')
     return render(request, 'diary/home_top.html')
     
-@login_required
-def home_top2(request,pk):
-        diary = get_object_or_404(Diary, id=pk)
-        emotion = Emotion.objects.get(diary=diary)
-        emotion.delete()
-        diary.delete()
-        return redirect('diary:home_top1')
 
 @login_required
 def loading(request):

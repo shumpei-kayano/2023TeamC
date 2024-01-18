@@ -28,7 +28,6 @@ urlpatterns = [
     path('help/fugoo', views.help_fugoo,name='help_fugoo'),
     path('help', views.help,name='help'),
     path('home/top', views.home_top,name='home_top1'),
-    path('home/top/<int:pk>', views.home_top2,name='home_top'),
     path('loading', views.loading,name='loading'),
     path('logout/success', views.logout_success,name='logout_success'),
     path('logout',views.logout,name='logout'),
