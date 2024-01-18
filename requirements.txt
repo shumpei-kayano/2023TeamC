@@ -11,6 +11,5 @@ geocoder
 openai==0.28
 awscli
 boto3
-matplotlib seaborn
 faker
 django_seed
