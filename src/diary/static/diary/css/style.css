@@ -1480,7 +1480,7 @@ input[type=text]:focus, input[type=email]:focus {
   }
 }
 .btn--large {
-  margin: 10px auto 20px auto;
+  margin: 15px auto 20px auto;
 }
 
 .content__home {
@@ -1518,6 +1518,26 @@ input[type=text]:focus, input[type=email]:focus {
   align-items: center;
 }
 
+.home-img_animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+}
+
+.keyframe0 {
+  animation-name: jump;
+  animation-duration: 0.6s;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(0%, 40px) rotateX(30deg);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
 @media only screen and (max-width: 960px) {
   .content-center {
     display: flex;
@@ -1525,9 +1545,6 @@ input[type=text]:focus, input[type=email]:focus {
     height: 100%;
     justify-content: center;
     align-items: center;
-  }
-  .btn--large {
-    margin: 24px auto 40px auto;
   }
   .content__home__logo img, .content__home__img img {
     width: auto;
@@ -1546,7 +1563,7 @@ input[type=text]:focus, input[type=email]:focus {
 @media only screen and (max-height: 599px) {
   /* 画面の高さが600px未満の場合のスタイル */
   .btn--large {
-    margin: 10px auto 20px auto;
+    margin: 30px auto 20px auto;
   }
   .content__home {
     display: flex;
@@ -1569,6 +1586,23 @@ input[type=text]:focus, input[type=email]:focus {
     font-size: 16px;
     margin: 0 auto;
     text-align: center;
+  }
+}
+@media only screen and (min-height: 600px) {
+  .btn--large {
+    margin: 40px auto 24px auto !important;
+  }
+  .keyframe0 {
+    animation-name: jump;
+    animation-duration: 0.6s;
+  }
+  @keyframes jump {
+    0% {
+      transform: translate(0%, 60px) rotateX(50deg);
+    }
+    100% {
+      transform: translate(0%, 0%);
+    }
   }
 }
 .content__today-diary-confirmation__img {
