@@ -28,7 +28,7 @@
 
       {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
 
-      {% if today == diary.created_date%}
+      {% if today != diary.created_date %}
 
       <div class="header__button">
         <div class="header__back__img">
