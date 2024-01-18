@@ -17,7 +17,8 @@ SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# EC2のパブリックIPを設定
+ALLOWED_HOSTS = ['3.239.229.107']
 
 # Application definition
 
