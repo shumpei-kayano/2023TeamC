@@ -669,9 +669,12 @@ def today_diary_detail(request):
 
 @login_required
 def today_diary_detail2(request,pk):
+    # 今日の日付を取得
+    today = date.today()
     diary = get_object_or_404(Diary, id=pk)
+    
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
