@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ホーム{% endblock title %}
+
+
+{% block content %}
+{% comment %} 新規登録orログイン {% endcomment %}
+<section>
+<header></header>
+    <div class="logo__img">
+        <img class="img-icon" img src="{% static 'user/assets/fugoo.svg' %}" alt="logo">
+    </div>
+
+    <div class="btn--large">
+        <a href="{% url 'user:tutorial1' %}">ここからスタートです</a>
+    </div>
+
+    <div class="login__text">
+        <p>登録済みの方はこちらへ</p>
+    </div>
+
+    <div class="btn--white">
+        <a href="{% url 'account_login' %}">ログイン</a>
+    </div>
+</main>
+</section>
+{% endblock content %}

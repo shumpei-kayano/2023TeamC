@@ -1,0 +1,51 @@
+.user-infomation-edit{
+    margin-top: 24px;
+}
+
+input[type="text"], input[type="email"] {
+    width: 100%;  // テキストボックスの幅を親要素の100%に設定
+    // display: flex;
+    // width: 342px;
+    height: 45px;
+    padding: 16px 0px 16px 16px;
+    // justify-content: center;
+    // align-items: center;
+    // gap: 8.876px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+
+    border-radius: 8.876px;
+    border: 1px solid #A29C9C;
+    background: #FFF;
+    box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+    
+    &:focus {
+        outline: none; // 輪郭線を消す
+        outline: #FFC700 2px solid;
+        box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25); // フォーカス時の影を追加
+    }
+}
+
+.form-field{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.form-field{
+    label {
+        font-size: 1.4rem;
+        margin: 10px;
+    }
+}
+
+// .neko-dango {
+//     margin-top: 200px;
+//     margin-left: 24px;
+// }
+
+@media only screen and (min-height: 599px) {
+    .user-infomation-edit{
+        margin-bottom: 50px;
+    }
+}

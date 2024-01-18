@@ -1,0 +1,1049 @@
+<!-- 日記編集画面 -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日記編集{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+            <a href="#" onclick="history.back(); ">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>日記編集</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    
+    <div class="scroll--content">
+
+        <form id="updateform" method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data">
+            {% comment %} {% csrf_token %}
+            <div class="content__today-diary__text">
+                <img src="透過画像のパス" alt="透過画像" class="follow-image">
+                <div class="content__diary__text">
+                    <p>
+                        <!-- 保存されている日記を表示お願いします -->
+                    </p>
+                </div>
+            </div>
+            <!-- Javascriptでテキストボックス内にネココを透過させた画像を追従させます -->
+            <!-- Javascriptで文字数をカウントします --> {% endcomment %}
+
+            {% comment %} create_diaryのコピー {% endcomment %}
+            {% csrf_token %}
+            <samll class="created-date_update">作成日時：{{diary.created_date}}</samll>
+            <div class="content__today-diary">
+                <div class="FlexTextarea"><!-- CSSのため追加 -->
+                    <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.svg' %}" alt="テキストエリア背景画像">
+                    {{ Diary.content }}
+                </div>
+
+                <!-- 文字数をカウントする要素 -->
+                <div id="characterCount" class="content__text-count">0/1000</div>
+
+                <div class='photomv'>
+                    {% comment %} photoが4枚の時 {% endcomment %}
+                    {% if diary.photo4 %}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo1">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo1 %}
+                                <label id="custom-file-upload__delete-btn" for="photo1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo1_delete" id="photo1_delete" onchange="changeBackgroundColor(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo2 }}
+                                <!-- 削除ボタン -->
+                                </label>
+                                {% if diary.photo2 %}
+                                <label id="custom-file-upload__delete-btn" for="photo2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo2_delete" id="photo2_delete" onchange="changeBackgroundColor(2)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo3">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo3">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo3 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo3 %}
+                                <label id="custom-file-upload__delete-btn" for="photo3_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo3_delete" id="photo3_delete" onchange="changeBackgroundColor(3)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo4">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo4">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                {{ Diary.photo4 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo4 %}
+                                <label id="custom-file-upload__delete-btn" for="photo4_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo4_delete" id="photo4_delete" onchange="changeBackgroundColor(4)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    {% comment %} photoが3枚のとき {% endcomment %}
+                    {% elif diary.photo3 %}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo1">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo1 %}
+                                <label id="custom-file-upload__delete-btn" for="photo1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo1_delete" id="photo1_delete" onchange="changeBackgroundColor(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo2 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo2 %}
+                                <label id="custom-file-upload__delete-btn" for="photo2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo2_delete" id="photo2_delete" onchange="changeBackgroundColor(2)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo3">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo3">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo3 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo3 %}
+                                <label id="custom-file-upload__delete-btn" for="photo3_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo3_delete" id="photo3_delete" onchange="changeBackgroundColor(3)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                            <label id="label_photo4">
+                                <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                </svg>
+                                写真を選択
+                                {{ Diary.photo4 }}
+                            </label>
+                            </div>
+                        </div>
+                        <!-- 画像のファイル名を表示させてください -->
+                        <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                    </div>
+
+                    {% comment %} photoが2枚のとき {% endcomment %}
+                    {% elif diary.photo2 %}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo1">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                {{ Diary.photo1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.photo1 %}
+                                <label id="custom-file-upload__delete-btn" for="photo1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo1_delete" id="photo1_delete" onchange="changeBackgroundColor(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                {{ Diary.photo2 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                <label id="custom-file-upload__delete-btn" for="photo2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo2_delete" id="photo2_delete" onchange="changeBackgroundColor(2)">
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                            <label id="label_photo3">
+                                <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                </svg>
+                                写真を選択
+                                {{ Diary.photo3 }}
+                            </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                            <label id="label_photo4">
+                                <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                </svg>
+                                写真を選択
+                                    {{ Diary.photo4 }}
+                            </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} photoが1枚の時 {% endcomment %}
+                    {% elif diary.photo1 %}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor" id="backcolor_photo1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo1">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                {{ Diary.photo1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                <label id="custom-file-upload__delete-btn" for="photo1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="photo1_delete" id="photo1_delete" onchange="changeBackgroundColor(1)">
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo2 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo3">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo3">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo3 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo4">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} 0枚の時 {% endcomment %}
+                    {% else %}
+                    <div class="custom-file-upload" id="container_photo1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                            <label id="label_photo1">
+                                <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                </svg>
+                                写真を選択
+                                {{ Diary.photo1 }}
+                            </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo1">{{  diary.photo1|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo2">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo2">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo2 }}
+                                </label>
+                            </div>
+                            <span id="file_name_photo2">{{  diary.photo2|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo3">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo3">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo3 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo3">{{  diary.photo3|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_photo4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_photo4">
+                                    <svg class="label_photo-icon" width="21" height="16" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.1667 14V2C24.1667 0.9 23.0792 0 21.75 0H7.25C5.92083 0 4.83333 0.9 4.83333 2V14C4.83333 15.1 5.92083 16 7.25 16H21.75C23.0792 16 24.1667 15.1 24.1667 14ZM10.875 10L13.3279 12.71L16.9167 9L21.75 14H7.25L10.875 10ZM0 4V18C0 19.1 1.0875 20 2.41667 20H19.3333V18H2.41667V4H0Z"/>
+                                    </svg>
+                                    写真を選択
+                                    {{ Diary.photo4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_photo4">{{  diary.photo4|cut:"diary_photos/"}}</span>
+                        </div>
+                    </div>
+                    {% endif  %}
+
+                    {% comment %} movieが4枚の時 {% endcomment %}
+                    {% if diary.movie4 %}
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie1">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie1 %}
+                                <label id="custom-file-upload__delete-btn" for="movie1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie1_delete" id="movie1_delete" onchange="changeBackgroundColorMovie(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie1">{{  diary.movie1|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie2">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie2 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie2 %}
+                                <label id="custom-file-upload__delete-btn" for="movie2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie2_delete" id="movie2_delete" onchange="changeBackgroundColorMovie(2)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie2">{{  diary.movie2|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie3">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie3">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie3 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie3 %}
+                                <label id="custom-file-upload__delete-btn" for="movie3_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie3_delete" id="movie3_delete" onchange="changeBackgroundColorMovie(3)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie3">{{  diary.movie3|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie4">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie4">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie4 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie4 %}
+                                <label id="custom-file-upload__delete-btn" for="movie4_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie4_delete" id="movie4_delete" onchange="changeBackgroundColorMovie(4)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie4">{{  diary.movie4|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} movieが3枚の時 {% endcomment %}
+                    {% elif diary.movie3 %}
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie1">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie1 %}
+                                <label id="custom-file-upload__delete-btn" for="movie1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie1_delete" id="movie1_delete" onchange="changeBackgroundColorMovie(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie1">{{  diary.movie1|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie2">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie2 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie2 %}
+                                <label id="custom-file-upload__delete-btn" for="movie2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie2_delete" id="movie2_delete" onchange="changeBackgroundColorMovie(2)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie2">{{  diary.movie2|cut:"diary_movie/"}}</span>                                        
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie3">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie3">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie3 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie3 %}
+                                <label id="custom-file-upload__delete-btn" for="movie3_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie3_delete" id="movie3_delete" onchange="changeBackgroundColorMovie(3)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie3">{{  diary.movie3|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie4">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie4">{{  diary.movie4|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} movieが2枚の時 {% endcomment %}
+                    {% elif diary.movie2 %}
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie1">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie1 %}
+                                <label id="custom-file-upload__delete-btn" for="movie1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie1_delete" id="movie1_delete" onchange="changeBackgroundColorMovie(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie1">{{  diary.movie1|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie2">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie2">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie2 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie2 %}
+                                <label id="custom-file-upload__delete-btn" for="movie2_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie2_delete" id="movie2_delete" onchange="changeBackgroundColorMovie(2)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie2">{{  diary.movie2|cut:"diary_movie/"}}</span>                                        
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie3">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie3 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie3">{{  diary.movie3|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie4">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie4">{{  diary.movie4|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} movieが1枚の時 {% endcomment %}
+                    {% elif diary.movie1 %}
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor" id="backcolor_movie1">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie1">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie1 }}
+                                </label>
+                                <!-- 削除ボタン -->
+                                {% if diary.movie1 %}
+                                <label id="custom-file-upload__delete-btn" for="movie1_delete">
+                                    <svg class="a--blue--svg" width="21" height="18" style="margin-bottom: 4px;" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                                    </svg>
+                                    削除</label>
+                                <input type="checkbox" name="movie1_delete" id="movie1_delete" onchange="changeBackgroundColorMovie(1)">
+                                {% endif %}
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie1">{{  diary.movie1|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie2">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie2 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie2">{{  diary.movie2|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie3">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie3">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie3 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie3">{{  diary.movie3|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie4">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie4">{{  diary.movie4|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+
+                    {% comment %} movieが0枚の時 {% endcomment %}
+                    {% else %}
+                    <div class="custom-file-upload" id="container_movie1">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie1">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie1 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie1">{{  diary.movie1|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie2">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie2">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie2 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie2">{{  diary.movie2|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie3">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie3">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie3 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie3">{{  diary.movie3|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-file-upload" id="container_movie4">
+                        <div class="backcolor">
+                            <div class="custom-file-upload__btn">
+                                <label id="label_movie4">
+                                    <svg class="label_movie-icon" width="21" height="16" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 1.10333C0.00201305 0.811531 0.11759 0.532242 0.321764 0.325797C0.525938 0.119353 0.802318 0.00232739 1.0912 0H20.9088C21.5116 0 22 0.494445 22 1.10333V18.8967C21.998 19.1885 21.8824 19.4678 21.6782 19.6742C21.4741 19.8806 21.1977 19.9977 20.9088 20H1.0912C0.801695 19.9997 0.524147 19.8833 0.319538 19.6764C0.11493 19.4696 -1.46801e-07 19.1891 0 18.8967V1.10333ZM9.4842 6.01667C9.418 5.97205 9.34106 5.94641 9.26157 5.94247C9.18208 5.93853 9.10302 5.95644 9.03281 5.99429C8.9626 6.03214 8.90387 6.08852 8.86287 6.15742C8.82188 6.22632 8.80015 6.30517 8.8 6.38556V13.6144C8.80015 13.6948 8.82188 13.7737 8.86287 13.8426C8.90387 13.9115 8.9626 13.9679 9.03281 14.0057C9.10302 14.0436 9.18208 14.0615 9.26157 14.0575C9.34106 14.0536 9.418 14.0279 9.4842 13.9833L14.8511 10.37C14.9112 10.3293 14.9605 10.2742 14.9946 10.2097C15.0286 10.1451 15.0464 10.0731 15.0464 10C15.0464 9.92687 15.0286 9.85486 14.9946 9.79034C14.9605 9.72581 14.9112 9.67074 14.8511 9.63L9.4842 6.01667Z"/>
+                                    </svg>
+                                    動画を選択
+                                    {{ Diary.movie4 }}
+                                </label>
+                            </div>
+                            <!-- 画像のファイル名を表示させてください -->
+                            <span id="file_name_movie4">{{  diary.movie4|cut:"diary_movie/"}}</span>
+                        </div>
+                    </div>
+                    {% endif  %}
+                </div>
+            </div><!-- content__today-diary -->
+
+            <div class="btn--blue">
+                <button id="submitButton" type="submit">保 存</button>
+                <div id="loading">
+                    <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                    <div class="loading-content">
+                        <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                        <p class="loading__text">読み込み中</P>
+                        <span class="dli-loading-1"></span>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</main>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    // 文字数のカウント
+    function countCharacters(textarea) {
+        let count = $(textarea).val().length;
+        let maxLength = 1000;
+        let countDisplay = count + '/' + maxLength;
+        $('#characterCount').text(countDisplay);
+
+        if (count > maxLength) {
+            $('#characterCount').addClass('error'); // スタイリング用のクラスを追加
+            $('#characterCount').text('入力できる文字数を超えています。' + countDisplay);
+        } else {
+            $('#characterCount').removeClass('error'); // エラーがない場合はクラスを削除
+        }
+    }
+
+    // Enterキーが押されたときの処理
+    function checkEnter(event) {
+        // テキストエリア要素を取得
+        let textarea = $('#diaryContent')[0];
+        // テキストエリア内の文字数を取得
+        let count = textarea.value.length;
+        // テキストエリアの最大文字数
+        let maxLength = 1000;
+
+        // Enterキーが押され、かつテキストエリア内の文字数が最大文字数以上の場合
+        if (event.key === 'Enter' && count >= maxLength) {
+            // Enterキーのデフォルトの動作をキャンセル
+            event.preventDefault();
+            // テキストエリアに改行を追加
+            textarea.value += '\n';
+            // 文字数を再計算して表示
+            countCharacters(textarea);
+            // イベントの伝播を停止
+            return false;
+        }
+        // Enter以外の場合は何もしない
+        return true;
+    }
+
+    // ページのDOMが完全に読み込まれたときに実行、ボタンを動的に表示させる
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初期表示では2つ目以降のphotoとmovieの要素を非表示にするための関数を呼び出す
+        hideElements('photo', 2);
+        hideElements('movie', 2);
+
+        // 指定されたタイプ（photoまたはmovie）と開始インデックスから4までの要素を非表示
+        function hideElements(type, start) {
+            for (let i = start; i <= 4; i++) {
+                // id属性に id_ を付与
+                const container = document.getElementById(`container_${type}${i}`);
+                if (container) {
+                    // 非表示
+                    container.style.display = 'none';
+                }
+            }
+        }
+
+        // 指定されたタイプとインデックスの次の要素を表示する関数
+        function showNextElement(type, index) {
+            const nextIndex = index + 1;
+            const nextContainer = document.getElementById(`container_${type}${nextIndex}`);
+            if (nextContainer) {
+                // 次の要素を表示
+                nextContainer.style.display = 'block';
+            }
+        }
+
+        // photoのファイルが選択されたときに次の要素を表示するイベントを設定
+        function handleFileInput(type, index) {
+            const input = document.getElementById(`id_${type}${index}`);
+            const label = document.getElementById(`label_${type}${index}`);
+            const fileNameSpan = document.getElementById(`file_name_${type}${index}`);
+
+            if (input && label && fileNameSpan) {
+                input.addEventListener('change', function() {
+                    if (input.files.length > 0) {
+                        fileNameSpan.textContent = input.files[0].name;
+                        showNextElement(type, index);
+                    } else {
+                        fileNameSpan.textContent = '選択されていません';
+                    }
+                });
+            }
+        }
+        
+        // movieのファイルが選択されたときに次の要素を表示するイベントを設定
+        function handleFileInputMovie(type, index) {
+            const input = document.getElementById(`id_${type}${index}`);
+            const label = document.getElementById(`label_${type}${index}`);
+            const fileNameSpan = document.getElementById(`file_name_${type}${index}`);
+            //動画の拡張子を配列で定義
+            const videoExtensions = ['.mp4', '.avi', '.mov','.wmv','.flv','.swf','.mkv','.webm','.mpeg','.3gp','.m4v'];
+
+            if (input && label && fileNameSpan) {
+                input.addEventListener('change', function() {
+                    if (input.files.length > 0) {
+                        fileNameSpan.textContent = input.files[0].name;
+                        //動画の拡張子が含まれているかどうかを判定
+                        if (videoExtensions.some(ext => fileNameSpan.textContent.endsWith(ext))) {
+                            showNextElement(type, index);
+                        //含まれていたら要素を空にする
+                        }else{
+                            alert('動画を選択してください')
+                            fileNameSpan.textContent = '選択されていません';
+                            input.value = '';
+                        };
+                    } else {
+                        fileNameSpan.textContent = '選択されていません';
+                    }
+                });
+            }
+        }
+        
+        //handleFileInput関数を使用して、各photoおよびmovieフィールドに対してファイルが選択されたときの
+        // 動的な表示を設定
+        // photoファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInput('photo', i);
+        }
+
+        // movieファイルの処理
+        for (let i = 1; i <= 4; i++) {
+            handleFileInputMovie('movie', i);
+        }
+
+        // 添付ファイルを選択後、ファイル名を更新する関数
+        function updateFileName(input, fileNameSpanId) {
+            const fileNameSpan = document.getElementById(fileNameSpanId);
+            if (fileNameSpan) {
+                if (input.files.length > 0) {
+                    fileNameSpan.textContent = input.files[0].name;
+                } else {
+                    fileNameSpan.textContent = '選択されていません';
+                }
+            }
+        }
+    });
+    document.getElementById('updateform').addEventListener('submit', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
+    // 削除ボタンを押したときに画像の背景色を変更する関数
+    function changeBackgroundColor(photoNumber) {
+        var checkbox = document.getElementById("photo" + photoNumber + "_delete");
+        var container = document.getElementById("backcolor_photo" + photoNumber + "");
+    
+        container.classList.toggle("checked", checkbox.checked);
+    }
+    // 削除ボタンを押したときに動画の背景色を変更する関数
+    function changeBackgroundColorMovie(movieNumber) {
+        var checkbox = document.getElementById("movie" + movieNumber + "_delete");
+        var container = document.getElementById("backcolor_movie" + movieNumber + "");
+    
+        container.classList.toggle("checked", checkbox.checked);
+    }
+</script>
+{% endblock %}

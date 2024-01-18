@@ -1,0 +1,56 @@
+<!--アカウント削除画面-->
+
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}設定{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <a href="{% url 'diary:setting' %}"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</a>
+        </div>
+    </div>
+    <h1>アカウント削除</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--white">
+    <div class="content-center">
+
+        <div class="content-center-group">
+
+            <img class="cancel__neko" img src="{% static 'diary/assets/cancel_neko.svg' %}">
+            
+
+            <div class="account__text">
+                <p class="account__deleta-text">アカウントを削除すると<br>すべてのデータが削除されます。<br>アカウントを削除しますか？</p>
+            </div>
+
+            <!--アカウント削除完了画面に遷移-->
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="btn--red">
+                    <a href="{% url 'diary:account_delete_success' %}">アカウントを削除</a>
+                </div>
+            </form>
+
+            <div class="btn--white">
+                <a href="{% url 'diary:setting' %}">キャンセル</a>
+            </div>
+        </div>
+
+    </div>
+</main>
+</section>
+{% endblock %}

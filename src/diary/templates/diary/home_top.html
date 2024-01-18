@@ -1,0 +1,86 @@
+<!-- ログイン後トップ画面（ホーム）のち日記詳細画面 -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ホームトップ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div><!-- 追加 -->
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- 背景色のフェードイン -->
+<article id="Article__home" class="move">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+    <div class="content">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--blue">
+    <div class="content-center">
+
+        <div class="content__home">
+            <div class="content__home__logo">
+                <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            </div>
+            <div class="content__home__text">
+                <p>今日はどんな1日ですか？<br>
+                    感じたことを書いてみよー
+                </p>
+            </div>
+            <div class="content__home__img">
+                <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+            </div>
+        </div>
+        <div class="btn--large">
+            {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+            <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
+        </div>
+
+        <!-- 天気 -->
+        {% comment %}
+        <div id="location"></div>
+        <div class="weatherForecast">
+        <div class="weather">
+            <div class="date">--/--(-)</div>
+            <img class="weatherImg">
+            <div class="weatherTelop">--</div>
+            <div><span class="tempMax">-℃</span></div>
+        </div>
+        </div>
+        {% endcomment %}
+
+    </div>
+</main>
+
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        var target = window.location.hash.substring(1);
+        if (target) {
+            $('#' + target).addClass('appear');
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}サインアップの確定{% endblock title %}
+
+{% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
+
+{% block content %}
+<section class="section-accounts" id="section-signup">
+    <header></header>
+    <div class="wrapperHeader">
+    {% if confirmation %}
+    <div class="wrapper-accounts-form text-align-center">
+        <div class="header__back__img">
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
+        </div>
+        <p class="signup-text">ユーザー登録</p>
+            <p class="login-text">ユーザー登録を確定するには、以下のボタンを押してください。</p>
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
+                {% csrf_token %}
+    
+                <div class="btn--blue">
+                    <button class="accounts-btn" type="submit">確定</button>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        {% url 'account_email' as email_url %}
+
+        <div class="text-align-center">
+            <p>リンクの有効期限が過ぎています。<a href="{{ email_url }}">再申請</a>.</p>
+        </div>
+    {% endif %}
+    <div class="back-home">
+        <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,56 @@
+.user-infomation--center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+}
+.content__user-info__list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ccc;
+
+    .content__user-info__list__btn{
+        cursor: pointer;
+        border: none;
+        color: #FFF;
+        font-weight: 700;
+        letter-spacing: 0.04rem;
+        min-width: 7.2rem;
+        min-height: 2.8rem;
+        font-size: 1.4rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+        background-color: $header_color;
+        padding: 5px 10px 3px 10px;
+
+        .content__user-info__list__svg {
+            fill: #FFF;
+            margin-left: 5px;
+            margin-bottom: 3px;
+        }
+        &:hover {
+            background-color: $btn_large_button_hover;
+        }
+    }
+}
+
+.user-infomation__image {
+    margin-top: 30px;
+    margin-bottom: 24px;
+}
+
+@media only screen and (min-height: 599px) {
+    .user-infomation{
+        margin-bottom: 50px;
+    }
+    .user-infomation__image {
+        position: fixed;
+        left: 50%;  // 画面の中央に配置するために左端を50%に設定
+        transform: translateX(-50%);  // 中央に配置するために左端を中央に調整
+        bottom: 10rem;  // 下部の余白を10pxに固定
+    }
+}

@@ -1,0 +1,64 @@
+<!--ヘルプ画面（日記の編集・削除）-->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ヘルプ/日記の編集・削除{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} help.htmlに遷移させてください {% endcomment %}
+            <a href="{% url 'diary:help' %}">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>ヘルプ</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--white">
+    <div class="scroll--content">
+
+        <div class="help__group">
+            <h2>日記の編集・削除</h2>
+            <ol class="help__help__list_text-wrap">
+                <li class="help__list_text">
+                    <p>日記を保存後、ホームトップ画面から編集・削除することができます。</p>
+                    <p>また、月間・週間カレンダーの日付をクリックすると編集・削除ボタンが表示されます。</p>
+                    <div class="help__chart">
+                        <img src="{% static 'diary/assets/help__edit-delete_chart.svg' %}" alt="日記編集・削除の図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p>編集後は保存ボタンをクリックして日記を保存してください。</p>
+                    <div class="help__chart">
+                        <img src="{% static 'diary/assets/help__edit-delete_save_chart.svg' %}" alt="日記編集・削除の図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p>削除ボタンをクリックすると確認画面が表示されます。日記を削除する場合、改めて「日記を削除する」ボタンをクリックしてください。</p>
+                    <p class="help__list_text-red">※日記を削除するとその日の感情分析データも削除されます。</p>
+                    <div class="help__chart--last">
+                        <img src="{% static 'diary/assets/help__delete_chart.svg' %}" alt="日記編集・削除の図">
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</main>
+</section>
+{% endblock %}

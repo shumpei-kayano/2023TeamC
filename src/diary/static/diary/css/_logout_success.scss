@@ -1,0 +1,28 @@
+.logout__success__title{
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logout__success__img{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-height: 600px) {
+    .logout__success__title{
+        margin-top: 40px;
+        margin-bottom: 50px;
+    }
+    
+    .logout__success__img{
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+}

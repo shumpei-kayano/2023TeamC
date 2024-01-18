@@ -1,0 +1,67 @@
+.member__scroll--content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column; // 子要素を縦方向に並べる
+}
+
+.member__header-text {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+.member__content-text, .member__red-text {
+    font-size: 1.6rem;
+    line-height: 170%;
+    letter-spacing: 0.64px;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.highlight {
+    font-weight: 700;
+}
+
+.member__red-text {
+    color: #F00;
+    margin-bottom: 24px;
+}
+
+.member__neko {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.info__date {
+    color: #000;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    margin-top: 20px;
+}
+
+.info__date p {
+    margin-bottom: 10px; // ここに希望の間隔を指定します
+}
+
+.member-text__content {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: 0.28px;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+@media only screen and (min-height: 599px) {
+    .member__scroll--content {
+        height: 100%; // 垂直に中央揃えするために必要
+    }
+}

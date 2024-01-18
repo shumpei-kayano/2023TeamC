@@ -1,0 +1,66 @@
+<!--会員情報編集確認画面-->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}会員情報変更{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <button type="button" onclick="history.back()"><img src="{% static 'diary/assets/back_arrow.svg' %}">戻る</button>
+        </div>
+    </div>
+    <div class="header__text">
+        <h1>会員情報変更</h1>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--white">
+    <div class="scroll--content">
+
+        <div class="member-info__check-text">
+            <p>入力内容をご確認ください</p>
+        </div>
+        <!-- ユーザーの会員情報の表示 -->
+        <div class="user-infomation">
+            <div class="content__user-info__name">
+                <p class="user-label">ユーザーネーム</p>
+                <p class="user-info">{{ username }}</p>
+                <hr>
+            </div>
+            {% comment %} <div class="content__user-info__email">
+                <p class="user-label">メールアドレス</p>
+                <p class="user-info">{{ email }}</p>
+                <hr>
+            </div>
+        </div> {% endcomment %}
+        <!-- 保留
+        <div class="content__user-info__password">
+            <p>パスワード</p>
+            <p>{{ 新しく入力されたパスワードを表示させてください }}</p>
+            <hr>
+        </div>
+        -->
+        {% csrf_token %}
+        {% with username=request.session.username email=request.session.email %}
+        <div class="a">
+            <div class="--button">
+            <a href="{% url 'diary:member_information' %}">登録</a>
+            </div>
+        </div>
+        {% endwith %}
+            <img class="dango_neko_member" img src="{% static 'diary/assets/neko_dango.svg' %}">
+    </div>
+</main>
+</section>
+{% endblock %}

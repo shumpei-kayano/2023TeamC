@@ -1,0 +1,24 @@
+.content__positive-diary__text{
+    width: 100%;
+    background-color: $background_color;
+    padding: 24px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(4, 202, 214, 0.15);
+    box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+    //outline: 0; // フォーカス時の枠線を削除
+
+    p{
+        text-align: left;
+        margin: 0;
+    }
+}
+.content__positive-diary__img{
+    display: block;
+    margin: 0 auto;
+    width: 102px;
+    height: auto;
+}
+.content__positive-diary__p{
+    margin: 24px auto;
+    text-align: center;
+}

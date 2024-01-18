@@ -1,0 +1,45 @@
+.content__member-info__cancel-text {
+    font-size: 1.6rem;
+    p {
+        margin: 0;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+}
+
+.account__deleta-text {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 34px */
+    letter-spacing: 0.8px;
+    margin-bottom: 24px;// ここに希望の間隔を指定します
+
+}
+
+.btn--blue--info {
+    margin-bottom: 24px;
+}
+.member-info__cancel__btn--space{
+    margin-bottom: 24px;
+}
+
+.btn--white {
+    margin-top: 0;
+}
+
+@media only screen and (min-height: 599px) {
+    .content__member-info__cancel-text {
+        font-size: 20px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .account__deleta-text {
+        font-size: 20px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .btn--blue--info {
+        margin-bottom: 40px !important;;
+    }
+}

@@ -1,0 +1,373 @@
+<!-- 日記詳細画面 ネココポジティブコメント画面（ホーム） -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}日記詳細{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div>
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+
+        <!-- タブ -->
+        {% url 'diary:today_diary_detail'  pk=diary.id as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph'  pk=diary.id as today_diary_graph_url %}
+        <div class="tab__button a--tab">
+            <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
+                <a id="a--tab--left--color" href="{{ today_diary_detail_url }}">日記詳細画面</a>
+            </div>
+            <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
+                <a id="today_graph" href="{{ today_diary_graph_url }}">グラフ</a>
+                <div id="loading">
+                    <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                    <div class="loading-content">
+                        <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                        <p class="loading__text">読み込み中</P>
+                        <span class="dli-loading-1"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content__today-diary__text">
+            <!-- 編集削除ボタン -->
+            <div class="delete-edit__btn">
+                <!-- 保留 <div class="delete-edit__btn__spacer">
+                    <a class="icon__delete-btn" href="{% url  'diary:diary_delete' diary.id %}"> -->
+                <div class="a--blue">
+                    <a href="{% url  'diary:diary_delete' diary.id %}">
+                        <svg class="a--blue--svg" width="16" height="14" viewBox="0 0 12 15" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.25004 13.0417C1.25004 13.9125 1.96254 14.625 2.83337 14.625H9.16671C10.0375 14.625 10.75 13.9125 10.75 13.0417V3.54167H1.25004V13.0417ZM3.19754 7.405L4.31379 6.28875L6.00004 7.96708L7.67837 6.28875L8.79462 7.405L7.11629 9.08333L8.79462 10.7617L7.67837 11.8779L6.00004 10.1996L4.32171 11.8779L3.20546 10.7617L4.88379 9.08333L3.19754 7.405ZM8.77087 1.16667L7.97921 0.375H4.02087L3.22921 1.16667H0.458374V2.75H11.5417V1.16667H8.77087Z"/>
+                        </svg><p class="a--blue-__p">削除</p></a>
+                </div>
+                <!-- 保留 <div class="delete-edit__btn__spacer">
+                    <a class="icon__edit-btn" href="{% url  'diary:diary_update' diary.id %}"> -->
+                <div class="a--blue">
+                    <a id="edit" href="{% url  'diary:diary_update' diary.id %}">
+                        <div id="loading">
+                            <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                            <div class="loading-content">
+                                <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                                <p class="loading__text">読み込み中</P>
+                                <span class="dli-loading-1"></span>
+                            </div>
+                        </div>
+                        <svg class="a--blue--svg" width="17" height="14" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.63083 5.14083L10.3592 5.86917L3.18667 13.0417H2.45833V12.3133L9.63083 5.14083ZM12.4808 0.375C12.2829 0.375 12.0771 0.454167 11.9267 0.604583L10.4779 2.05333L13.4467 5.02208L14.8954 3.57333C15.2042 3.26458 15.2042 2.76583 14.8954 2.45708L13.0429 0.604583C12.8846 0.44625 12.6867 0.375 12.4808 0.375ZM9.63083 2.90042L0.875 11.6562V14.625H3.84375L12.5996 5.86917L9.63083 2.90042Z"/>
+                        </svg><p class="a--blue-__p">編集</p></a>
+                </div>
+            </div>
+
+            {% if diary %}
+                <samll class="created-date">作成日時：{{diary.created_date}}</samll>
+                <!-- 日記内容 -->
+                <p>{{ diary.content }}</p>
+                <div class="content__today-diary__img">
+                    {% if diary.photo1 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal" id="modal1">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img id="modalImage1" class="modal__content__img" src="" alt="Diary Photo1">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button" onclick="closeModal('modal1')">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button" onclick="openModal('modal1', '{{ diary.photo1.url }}')">
+                                <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% if diary.photo2 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal" id="modal2">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img id="modalImage2" class="modal__content__img" src="" alt="Diary Photo2">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button" onclick="closeModal('modal2')">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button" onclick="openModal('modal2', '{{ diary.photo2.url }}')">
+                                <img src="{{ diary.photo2.url }}" alt="Diary Photo2">
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% if diary.photo3 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal" id="modal3">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img id="modalImage3" class="modal__content__img" src="" alt="Diary Photo3">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button" onclick="closeModal('modal3')">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button" onclick="openModal('modal3', '{{ diary.photo3.url }}')">
+                                <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% if diary.photo4 %}
+                        <div class="content__today-diary__item">
+                            <!-- 画像のポップアップ -->
+                            <div class="layer js-modal" id="modal4">
+                                <div class="modal">
+                                    <div class="modal__inner">
+                                        <div class="modal__contents">
+                                            <div class="modal__content">
+                                                <img id="modalImage4" class="modal__content__img" src="" alt="Diary Photo4">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal__button-wrap">
+                                            <button class="close-button js-close-button" onclick="closeModal('modal4')">閉じる
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="button button--js-modal-button" onclick="openModal('modal4', '{{ diary.photo4.url }}')">
+                                <img src="{{ diary.photo4.url }}" alt="Diary Photo4">
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="content__today-diary__img">
+                    {% if diary.movie1 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video1">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement1" class="modal__content__img" src="" alt="Diary Movie1"   controls autoplay></video>
+                                        </div>
+                                    </div>
+                
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video1')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <button id="video__btn" class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
+                            <video src="{{ diary.movie1.url }}" alt="Diary Movie1"></video>
+                            <svg class="play-button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 0C6.7125 0 0 6.7125 0 15C0 23.2875 6.7125 30 15 30C23.2875 30 30 23.2875 30 15C30 6.7125 23.2875 0 15 0ZM11.25 7.5L22.5 15L11.25 22.5V7.5Z" fill="white"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    {% if diary.movie2 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video2">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement2" class="modal__content__img" src="" alt="Diary Movie2" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video2')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
+                            <video src="{{ diary.movie2.url }}" alt="Diary Movie2"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    {% if diary.movie3 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video3">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement3" class="modal__content__img" src="" alt="Diary Movie3" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video3')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
+                            <video src="{{ diary.movie3.url }}" alt="Diary Movie3"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    {% if diary.movie4 %}
+                    <div class="content__today-diary__item">
+                        <!-- 動画のポップアップ -->
+                        <div class="layer js-video" id="video4">
+                            <div class="modal">
+                                <div class="modal__inner">
+                                    <div class="modal__contents">
+                                        <div class="modal__content">
+                                            <video id="videoElement4" class="modal__content__img" src="" alt="Diary Movie4" controls autoplay></video>
+                                        </div>
+                                    </div>
+                                    <div class="modal__button-wrap">
+                                        <button class="close-button js-close-button" onclick="closeVideo('video4')">閉じる</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
+                            <video src="{{ diary.movie4.url }}" alt="Diary Movie4"></video>
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            {% else %}
+                <p>日記は記録されていません</p>
+            {% endif %}
+        </div><!-- content__today-diary__text -->
+
+        {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
+        {% if diary.counseling == 2 %}
+            <!-- ネコココメント -->
+            <div class="content__diary__comment--counseling">
+                <div class="content__diary__ccomment--counseling__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+            </div>
+        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
+        {% else %}
+            <!-- ネコココメント -->
+            <div class="content__diary__comment">
+                <div class="content__diary__ccomment__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+            </div>
+        {% endif %}
+
+    </div><!-- scroll content -->
+</main>
+{% endblock %}
+
+{% block js %}
+<script>
+// layer要素に付与したjs-modalクラスを取得し変数に格納
+const modal = document.querySelector('.js-modal');
+// button要素に付与したjs-modal-buttonクラスを取得し、変数に格納
+const modalButton = document.querySelector('.button--js-modal-button');
+// button要素に付与したjs-close-buttonクラスを取得し、変数に格納
+const modalClose = document.querySelector('.js-close-button');
+
+// モーダルボタンをクリックしたときのイベント Idと表示する画像のURLを受け取る
+function openModal(modalId, imageUrl) {
+    // 指定されたモーダルのDOM要素を取得
+    const modal = document.getElementById(modalId);
+    // img 要素を取得 Idから末尾の数字を取り出し、対応するidを構築
+    const modalImage = document.getElementById('modalImage' + modalId.slice(-1));
+    modalImage.src = imageUrl;
+    modal.classList.add('is-open');
+}
+// 閉じるボタンをクリックしたときのイベント
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.remove('is-open');
+}
+
+function openvideo(videoId, mediaUrl) {
+    const video = document.getElementById(videoId);
+    const videoElement = video.querySelector('video');
+    videoElement.src = mediaUrl;
+    video.classList.add('is-open');
+}
+
+function closeVideo(videoId) {
+    const video = document.getElementById(videoId);
+    const videoElement = video.querySelector('video');
+    video.classList.remove('is-open');
+    videoElement.pause(); // モーダルを閉じる際に動画を停止
+}
+
+
+document.getElementById('today_graph').addEventListener('click', function (event) {
+    // ボタンがクリックされたらローディング画面を表示
+    document.getElementById('loading').style.display = 'block';
+    // アニメーションを開始
+    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+});
+document.getElementById('edit').addEventListener('click', function (event) {
+    document.getElementById('loading').style.display = 'block';
+    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+});
+</script>
+{% endblock %}

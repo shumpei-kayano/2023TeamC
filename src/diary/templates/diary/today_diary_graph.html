@@ -1,0 +1,133 @@
+<!-- ネココポジティブコメント画面（グラフ） -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日次グラフ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div>
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+
+        <!-- タブ -->
+        {% url 'diary:today_diary_detail' pk=diary.id as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph' pk=diary.id as today_diary_graph_url %}
+        <div class="tab__button a--tab">
+            <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
+                <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
+            </div>
+            <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
+                <a id="a--tab--right--color" href="{{ today_diary_graph_url }}">グラフ</a>
+            </div>
+        </div>
+
+        <!-- グラフの表示 -->
+        <div  class="content__today-diary__graph">
+            <!-- グラフの表示 -->
+            <div id="circle__graph">
+                <div class="circle__graph__img">
+                    {% comment %} <div style="position: relative;"> {% endcomment %}
+                    <!-- グラフの親要素の大きさを指定 -->
+                    <div id="myPieChart_with" style="width: 52%; margin: 0 auto;"><!--width 60%がアプリに合うが、ブラウザに合わせて52%に指定 -->
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                        <div id="popup"></div>
+                        {% comment %} <div id="popup" style="position: absolute; display none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ネコココメント -->
+        {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
+        {% if diary.counseling %}
+            <div class="content__diary__comment--counseling">
+                <div class="content__diary__ccomment--counseling__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+            </div>
+        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
+        {% else %}
+            <!-- ネコココメント -->
+            <div class="content__diary__comment">
+                <div class="content__diary__ccomment__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+            </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock %}
+
+{% block js %}
+<script>
+var ctx = document.getElementById('myPieChart').getContext('2d');
+var Data = {{ data|safe }};
+
+var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        // ラベル名変更
+        labels: ['好調', '不調', '普通', '複雑'],
+        datasets: [{
+            data: [Data.positive, Data.negative, Data.neutral, Data.mixed],
+            backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)', 'rgba(128, 128, 128, 0.2)'] , // カラーコードを指定
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)', 'rgba(128, 128, 128, 1)'],
+            borderWidth: [1, 1, 1, 1]
+        }]
+    }
+});
+
+// 円グラフのクリックイベント処理
+
+canvas.onclick = function(evt) {
+    var activePoint = myPieChart.getElementsAtEvent(evt)[0];
+    if (activePoint) {
+        // クリックした項目に関連付けられた詳細情報を取得
+        var itemIndex = activePoint._index;
+        var itemLabel = data.labels[itemIndex];
+        var itemValue = data.values[itemIndex];
+
+        // クリック位置に詳細情報を表示
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        popup.style.left = (evt.clientX - canvas.getBoundingClientRect().left) + 'px';
+        popup.style.top = (evt.clientY - canvas.getBoundingClientRect().top) + 'px';
+        popup.innerHTML = `<p>項目: ${itemLabel}</p><p>値: ${itemValue}</p>`;
+
+        // クリックした項目の詳細情報を非表示にするために、別の場所をクリックした際にポップアップを非表示にするコードを追加
+        document.body.onclick = function() {
+            popup.style.display = 'none';
+        };
+    }
+};
+
+</script>
+{% endblock %}

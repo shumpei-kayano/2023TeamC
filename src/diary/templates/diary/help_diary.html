@@ -1,0 +1,100 @@
+<!-- ヘルプ画面（日記作成）-->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ヘルプ/日記作成{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} help.htmlに遷移させてください {% endcomment %}
+            <a href="{% url 'diary:help' %}">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>ヘルプ</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--white">
+    <div class="scroll--content">
+
+        <div class="help__group">
+            <h2>日記作成</h2>
+            <ol class="help__help__list_text-wrap">
+                <li class="help__list_text">
+                    <p><img class="help__list_text-icon" src="{% static 'diary/assets/help_home_icon.svg' %}" alt="ホームの画像">
+                        ボタンから、ホームトップ画面の</p>
+                    <p><span id="left--1" class="help__btn--blue">日記を書く</span>ボタン
+                        をタップして日記作成画面に移動します。</p>
+                </li>
+                <li class="help__list_text">
+                    <p>日記作成画面では日記の入力と写真、動画を添付することができます。（各4枚まで）</p>
+                </li>
+                <li class="help__list_text">
+                    <p>日記を入力したら<span class="help__btn--blue">保存</span>ボタンをタップしてください。</p>
+                    <div class="help__chart">
+                        <img class="help_diary_img" src="{% static 'diary/assets/help_create_diary_chart.svg' %}" alt="日記作成の図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p>日記を保存した際にネココがアドバイスをしてくれることがあります。</p>
+                    <div class="help__chart">
+                        <img class="help_diary_img" src="{% static 'diary/assets/counseling_chart.svg' %}" alt="カウンセリングポップアップの図">
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="help__group">
+            <h2>日記のポジティブ変換</h2>
+            <ol class="help__help__list_text-wrap">
+                <li class="help__list_text">
+                    <p>日記を保存後、</p>
+                    <p><span id="left--2" class="help__btn--blue">日記をポジティブに変換</span>ボタンを
+                        タップすると入力内容をポジティブな文章に変換することができます。</p>
+                </li>
+                <li class="help__list_text">
+                    <p><span id="left--3" class="help__btn--white">変換しない</span>ボタンをタップすると変換せずに日記を保存します。</p>
+                </li>
+            </ol>
+        </div>
+
+        <div class="help__group">
+            <h2>日記詳細</h2>
+            <ol class="help__help__list_text-wrap">
+                <li class="help__list_text">
+                    <p>日記作成後、ホームトップ画面に日記詳細が表示されます。日記の削除や編集、ネココのコメント
+                        を閲覧することができます。</p>
+                    <p>詳しくはヘルプの「日記の編集・削除」ページをご覧ください。</p>
+                    <div class="help__chart">
+                        <img class="help_diary_img" src="{% static 'diary/assets/help_diary_detail_chart.svg' %}" alt="日記詳細の図">
+                    </div>
+                </li>
+                <li class="help__list_text">
+                    <p><span id="left--4" class="help__tab-btn--white">グラフ</span>ボタンをタップしてその日の感情の合
+                        計グラフを閲覧できます。</p>
+                    <div class="help__chart--last">
+                        <img class="help_diary_img" src="{% static 'diary/assets/help_graph_chart.svg' %}" alt="日記詳細の図">
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</main>
+</section>
+{% endblock %}

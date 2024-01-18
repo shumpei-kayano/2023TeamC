@@ -1,0 +1,57 @@
+<!--会員情報編集完了画面-->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}会員情報変更{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>会員情報変更</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--white">
+    <div class="member__scroll--content">
+
+        <h3 class="member__header-text">会員情報を変更しました</h3>
+
+        <p class="member__content-text">ご登録されたメールアドレス宛に<br><span class="highlight">変更完了メール</span>をお送りしています。</p>
+
+        <p class="member__red-text">メールが届いているか<br>メール受信ボックスご確認ください。</p>
+
+        {% comment %} メール認証が終わってない {% endcomment %}
+        <div class="content__home">
+            <div class="content__home__text">
+                <p><small>ユーザーネーム</small><br>{{ user.username }}</p>
+                <p><small>メールアドレス</small><br> {{ user.email }}</p>
+            </div>
+        </div>
+        <!--メールを送信してください-->
+        
+        
+        <img class="member__neko" img src="{% static 'diary/assets/member_neko.svg' %}">
+        
+
+        <p class="member-text__content">入力いただいたメールアドレスが<br>間違っていたと予想される場合は、変更手続きを<br>はじめからやり直してください。</p>
+    {% comment %} 
+        <form method="POST" action="{% url 'setting.html' %}"><!--次のページに遷移させてください-->
+            {% csrf_token %}
+            <div class="cancel__button">
+                <button type="button">設定トップへ</button>
+            </div>
+        </form>
+    {% endcomment %}
+    </div>
+</main>
+</section>
+{% endblock %}

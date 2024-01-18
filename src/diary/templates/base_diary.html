@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="AI×ネコの日記アプリ">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'diary/assets/icon.svg' %}" />
+    <!--mystyle-->
+    <link rel="stylesheet" href="{% static 'diary/css/sanitize.css' %}">
+    <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
+    <!-- footerのスタイル追加 -->
+    {% block css %}{% endblock %}
+    <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA&language=ja&callback=initMap"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>const STATIC_URL = "{% static 'diary/assets/' %}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    {% block header %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="menu">
+            <nav>
+                <ul class="menu__list">
+                    <li class="menu__item" data-target="section-home">
+                        <a href="{% url 'diary:home_top1' %}#Article__home">
+                            {% comment %} <img src="{% static 'diary/assets/home.svg' %}" alt="ホームの画像"> {% endcomment %}
+                            <svg id="footer__home-active" class="footer__home" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0L0 10.2857H3V24H9V17.1429H15V24H21V10.1829L24 10.2857L12 0Z"/>
+                            </svg>
+                            <div id="text-home" class="nav-text">ホーム</div>
+                        </a>
+                    </li>
+                    <li class="menu__item" data-target="section-month">
+                        <a href="{% url 'diary:calendar_month' %}#Article__month">
+                            {% comment %} <img src="{% static 'diary/assets/month.svg' %}" alt="月間カレンダーの画像"> {% endcomment %}
+                            <svg id="footer__month-active" class="footer__month" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.6 2.18182H20.4V0H18V2.18182H6V0H3.6V2.18182H2.4C1.08 2.18182 0 3.16364 0 4.36364V21.8182C0 23.0182 1.08 24 2.4 24H21.6C22.92 24 24 23.0182 24 21.8182V4.36364C24 3.16364 22.92 2.18182 21.6 2.18182ZM21.6 21.8182H2.4V7.63636H21.6V21.8182Z"/>
+                            </svg>
+                            <div id="text-month" class="nav-text">月</div>
+                        </a>
+                    </li>
+                    <li class="menu__item" data-target="section-week">
+                        <a href="{% url 'diary:calender_week' %}#Article__week">
+                            {% comment %} <img src="{% static 'diary/assets/week.svg' %}" alt="週間カレンダーの画像"> {% endcomment %}
+                            <svg id="footer__week-active" class="footer__week" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.41176 15.4286H4.23529C5.01177 15.4286 5.64706 14.6571 5.64706 13.7143V10.2857C5.64706 9.34286 5.01177 8.57143 4.23529 8.57143H1.41176C0.635294 8.57143 0 9.34286 0 10.2857V13.7143C0 14.6571 0.635294 15.4286 1.41176 15.4286ZM1.41176 24H4.23529C5.01177 24 5.64706 23.2286 5.64706 22.2857V18.8571C5.64706 17.9143 5.01177 17.1429 4.23529 17.1429H1.41176C0.635294 17.1429 0 17.9143 0 18.8571V22.2857C0 23.2286 0.635294 24 1.41176 24ZM1.41176 6.85714H4.23529C5.01177 6.85714 5.64706 6.08571 5.64706 5.14286V1.71429C5.64706 0.771429 5.01177 0 4.23529 0H1.41176C0.635294 0 0 0.771429 0 1.71429V5.14286C0 6.08571 0.635294 6.85714 1.41176 6.85714ZM8.47059 15.4286H22.5882C23.3647 15.4286 24 14.6571 24 13.7143V10.2857C24 9.34286 23.3647 8.57143 22.5882 8.57143H8.47059C7.69412 8.57143 7.05882 9.34286 7.05882 10.2857V13.7143C7.05882 14.6571 7.69412 15.4286 8.47059 15.4286ZM8.47059 24H22.5882C23.3647 24 24 23.2286 24 22.2857V18.8571C24 17.9143 23.3647 17.1429 22.5882 17.1429H8.47059C7.69412 17.1429 7.05882 17.9143 7.05882 18.8571V22.2857C7.05882 23.2286 7.69412 24 8.47059 24ZM7.05882 1.71429V5.14286C7.05882 6.08571 7.69412 6.85714 8.47059 6.85714H22.5882C23.3647 6.85714 24 6.08571 24 5.14286V1.71429C24 0.771429 23.3647 0 22.5882 0H8.47059C7.69412 0 7.05882 0.771429 7.05882 1.71429Z"/>
+                            </svg>
+                            <div id="text-week" class="nav-text">週</div>
+                        </a>
+                    </li>
+                    <li class="menu__item" data-target="section-setting">
+                        <a href="{% url 'diary:setting' %}#myArticle">
+                            {% comment %} <img src="{% static 'diary/assets/setting.svg' %}" alt="設定の画像"> {% endcomment %}
+                            <svg id="footer__setting-active" class="footer__setting" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.5037 0L9.00748 3.5611C8.70823 3.65087 8.4389 3.8005 8.16958 3.95012L4.60848 2.45387L2.45387 4.60848L3.95012 8.16958C3.8005 8.46883 3.6808 8.70823 3.5611 9.00748L0 10.5037V13.4963L3.5611 14.9925C3.6808 15.2918 3.8005 15.5312 3.95012 15.8304L2.45387 19.3915L4.60848 21.5461L8.16958 20.0499C8.4389 20.1696 8.70823 20.3192 9.00748 20.4389L10.5037 24H13.4963L14.9925 20.4389C15.2618 20.3192 15.5611 20.1995 15.8304 20.0499L19.3915 21.5461L21.5461 19.3915L20.0499 15.8304C20.1696 15.5611 20.3192 15.2618 20.4389 14.9925L24 13.4963V10.5037L20.4389 9.00748C20.3491 8.73815 20.1995 8.4389 20.0499 8.16958L21.5461 4.60848L19.3915 2.45387L15.8304 3.95012C15.5611 3.83042 15.2618 3.6808 14.9925 3.5611L13.4963 0L10.5037 0ZM12 7.4813C14.4838 7.4813 16.4888 9.48628 16.4888 11.9701C16.4888 14.4539 14.4838 16.4589 12 16.4589C9.51621 16.4589 7.51122 14.4539 7.51122 11.9701C7.51122 9.48628 9.51621 7.4813 12 7.4813Z"/>
+                            </svg>
+                            <div id="text-setting" class="nav-text">設定</div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+{% comment %} <script>
+    function changeColor(id) {
+        const element = document.getElementById(id);
+        element.classList.add('active');
+    }
+<script src="{% static 'js/main.js' %}"></script>
+</script> {% endcomment %}
+
+{% comment %} <script>
+    // ナビゲーションバーのクリックイベント
+    (function ($) {
+        'use strict';
+        $(document).ready(function () {
+            $('nav ul li').on('click', function () {
+                let target = $(this).data('target');
+                $('article').removeClass('appear');
+                $('#' + target).addClass('appear');
+            });
+        });
+    })(jQuery);
+</script> {% endcomment %}
+<script>
+    // ナビゲーションバーのクリックイベント
+    (function ($) {
+        'use strict';
+        $(document).ready(function () {
+            $('nav ul li').on('click', function () {
+                if (!$('article').hasClass('appear')) {
+                    $('article').addClass('appear');
+                }
+                setTimeout(function() {
+                    $('.content').css('opacity', '1');
+                }, 300); // 300ms is the duration of your animation
+            });
+        });
+    })(jQuery);
+</script>
+
+<script src="{% static 'diary/js/weather.js' %}"></script>
+
+{% block js %}{% endblock %}
+
+</body>
+</html>

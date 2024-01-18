@@ -1,0 +1,209 @@
+<!-- ポジティブ変換画面とカウンセリング催促ポップアップ -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}日記のポジティブ変換{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+<style>
+    /* ポップアップの初期状態は非表示 */
+    .popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div><!-- 追加 -->
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header>
+{% comment %} <header>
+    <div class="header__button">
+        <div class="header__back__img">
+            create_diary_confirmation.htmlに遷移
+            <a href="{% url  'diary:diary_update' diary.id %}">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<section>
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+
+        <!-- ユーザーが入力した日記の表示 -->
+        <div class="content__positive-diary__text">
+            <p>
+                {{ diary.content }}
+            </p>
+        </div>
+
+        <!-- ネコ画像 -->
+        {% comment %} <div class="content__today-diary__positive-img"> {% endcomment %}
+            <img class="content__positive-diary__img" src="{% static 'diary/assets/positive_neko.png' %}" alt="ポジティブな猫の画像">
+        {% comment %} </div> {% endcomment %}
+
+        <!-- ポジティブ変換した日記の表示 -->
+            <!-- enctype='multipart/form-data'でファイルアップロード -->
+            <form method="POST" action="{% url 'diary:positive_conversion2' diary.pk %}" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="content__positive-diary__text">
+                    <p>
+                        {{ save_content }}
+                    </p>
+                </div>
+                <p class="content__positive-diary__p">日記の内容を上記に変更しますか？</p>
+                <div class="btn--blue">
+                    <button type="submit" id="save-button">保 存</button>
+                    <div id="loading">
+                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                        <div class="loading-content">
+                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                            <p class="loading__text">読み込み中</P>
+                            <span class="dli-loading-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+
+        <div class="btn--white">
+            <a href="{% url  'diary:diary_update' diary.id %}">キャンセル</a>
+        </div>
+
+        <!-- ポップアップ要素
+        <div class="popup" id="popup">
+            <p>特定の条件に合致しました。メッセージを表示します。</p>
+        </div> -->
+
+        <!-- ポップアップ要素 -->
+        {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
+        <div class="popup" id="first-popup">
+            <div class="popup__text">
+                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
+        </div>
+
+        <div class="popup" id="second-popup">
+            <div class="popup__text">
+                <p>キャンセルするとカウンセリングを<br>
+                    受けることができなくなります。<br>
+                    キャンセルしますか？</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+            <div class="button">
+                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
+            </div>
+            <div class="gray__button">
+                <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</main>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById('save-button').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
+    // キャンセルボタンを押したときの処理
+    document.getElementById("back-button").addEventListener("click", function() {
+        history.back();
+    });
+
+    // カウンセリング催促ポップアップの表示
+    $(function(){
+        $('.popup').fadeIn();
+    });
+
+    $(document).ready(function() {
+        // ポップアップを下からスライドして表示
+        $('.popup').slideDown();
+
+        // キャンセルボタンをクリックした時の処理
+        $('.cancel-button').click(function() {
+            $('.popup').slideUp();
+        });
+    });
+
+    function closePopup(id) {
+        document.getElementById(id).classList.remove("show");
+    }
+
+      // 保存ボタンをクリックしたときに最初のポップアップを表示する
+    document.getElementById("save-button").addEventListener("click", function() {
+    document.getElementById("first-popup").classList.add("show");
+    });
+
+      // 最初のポップアップのキャンセルボタンをクリックしたときに2番目のポップアップを表示する
+    document.getElementById("first-popup").querySelector(".close-button").addEventListener("click", function() {
+    document.getElementById("second-popup").classList.add("show");
+    });
+
+      // 2番目のポップアップのキャンセルボタンをクリックしたときにポップアップを閉じる
+    document.getElementById("second-popup").querySelector(".close-button").addEventListener("click", function() {
+        document.getElementById("first-popup").classList.remove("show");
+        document.getElementById("second-popup").classList.remove("show");
+    });
+    {% comment %} document.getElementById("text-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        var userText = document.getElementById("user-text").value;
+
+        // 特定の条件が満たされた場合にポップアップを表示
+        if (userText.includes("特定のワード")) {
+            // ポップアップを表示
+            document.getElementById("popup").style.display = "block";
+        } else {
+            // 特定の条件に該当しない場合はフォームを通常の方法で送信
+            this.submit();
+        }
+    }); {% endcomment %}
+</script>
+{% endblock %}
