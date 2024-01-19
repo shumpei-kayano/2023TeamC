@@ -160,6 +160,7 @@ def base(request):
 
 @login_required
 def calendar_month(request,selected_date=None):
+
     today = date.today()
     # パラメータが指定されていない場合は今日の日付を使用
     if selected_date:
@@ -189,7 +190,10 @@ def calendar_month(request,selected_date=None):
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
-
+    
+    #特定のカレンダーに戻るために必要なurl情報
+    request.session['cal'] = 'diary:calendar_month'
+    request.session['cale'] = str(selected_date)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
     return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
@@ -216,6 +220,10 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
+    
+    #特定のカレンダーに戻るために必要なurl情報
+    request.session['cal'] = 'diary:calender_week'
+    request.session['cale'] = str(selected_date)
     return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
@@ -671,19 +679,26 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request):
+    # 今日の日付を取得
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
 
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
 def today_diary_detail2(request,pk):
+    # 今日の日付を取得
+    today = date.today()
     diary = get_object_or_404(Diary, id=pk)
+    
+    #セッションを受け取る
+    cal = request.session.get('cal')
+    cale = request.session.get('cale')
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'cale':cale,'cal':cal})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
@@ -786,9 +801,10 @@ def today_diary_graph(request, pk):
     data = chart_data_day(request,pk)
     # JsonResponseを使用してJSONデータを返す
     circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
-    print(data)
-    print(circle_data_json)
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json})
+    #セッションを受け取る
+    cal = request.session.get('cal')
+    cale = request.session.get('cale')
+    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':cal,'cale':cale})
 
 @login_required
 def today_counseling_graph(request):
