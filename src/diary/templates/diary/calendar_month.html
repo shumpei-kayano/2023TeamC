@@ -100,21 +100,27 @@
                             <tr>
                                 {% for day in week %}
                                     <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
-                                        {% if day.day %}
+                                        
                                         {%if today == day %}
                                         {% comment %} ここが当日の日記です {% endcomment %}
                                         <p class="calendar__month--today-td">{{ day.day }}</p> 
                                         {% else %}
                                         <p class="calendar__month__td">{{ day.day }}</p>
                                         {% endif %}
+                                        {% comment %} 感情分析がなかったら日記作成のリンク {% endcomment %}
                                             {%for emotion in emotion %}
+                                            {% if not emotion %}
+                                            <a style="display: block;" href="{% url 'diary:create_diary' day|date:'Y-m-d' %}">
+                                              
+                                            </a>
+                                          {% endif %}
                                               {%if emotion.created_date == day%}
                                                 <a style="display: block;" href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
                                                     <img class="calendar__month__img" src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
                                                 </a>
                                               {% endif %}
                                             {% endfor %}
-                                        {% endif %}
+                                        
                                     </td>
                                 {% endfor %}
                             </tr>
