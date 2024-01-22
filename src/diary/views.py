@@ -84,7 +84,7 @@ def account_delete_success(request):
     user.delete()
     return render(request, 'diary/account_delete_success.html')
 
-def aicomment_week(emotion):
+def aicomment_week(emotion,request):
     if len(emotion) > 3:#週４つ以上だったら
         positive = emotion.order_by('-positive').first()
         negative = emotion.order_by('-negative').first()
@@ -92,14 +92,20 @@ def aicomment_week(emotion):
         negative_diary = Diary.objects.get(id = negative.diary_id)
 
         openai.api_key = settings.OPENAI_API_KEY
-        user_diary = """以下の設定を遵守して今週の日記に対する感想とアドバイスをチャット相手にしてください。
-                            #あなたの名前はネココ。
-                            #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
-                            #自分自身を仮想実体として振る舞ってください。
-                            #日記の内容に関係ないことは、話さないでください。
-                            #出力は日本語を正しく使用し、文章で出力してください。
-                            #出力は可能な限り、３００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
-                            以下の文章はチャット相手の日記の内容です。\n"""+"・"+ positive_diary.content + "\n"+"・"+ negative_diary.content
+        # ユーザーがログイン中であるか確認
+        if request.user.is_authenticated:
+            # ログイン中のユーザーからusernameを取得
+            username = request.user.username
+
+        user_diary = """以下の設定を遵守して一週間分の日記に対する感想とアドバイスをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n"+"・"+ negative_diary.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -111,9 +117,10 @@ def aicomment_week(emotion):
         return ai_comment
     return None
 
-def aicomment_month(emotion):
+def aicomment_month(emotion, request):
 
     if len(emotion) > 14:#月15以上だったら
+        
         positive = emotion.order_by('-positive')[:2]
         negative = emotion.order_by('-negative')[:2]
         positive_diary = Diary.objects.get(id = positive[0].diary_id)
@@ -122,13 +129,20 @@ def aicomment_month(emotion):
         negative_diary1 = Diary.objects.get(id = negative[1].diary_id)
 
         openai.api_key = settings.OPENAI_API_KEY
-        user_diary = """以下の設定を遵守して今月の日記に対する感想とアドバイスをチャット相手にしてください。
-                            #あなたの名前はネココ。
-                            #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
-                            #自分自身を仮想実体として振る舞ってください。
-                            #日記の内容に関係ないことは、話さないでください。
-                            #出力は日本語を正しく使用し、文章で出力してください。
-                            以下の文章はチャット相手の日記の内容です。\n"""+ positive_diary.content + "\n\n" + positive_diary1.content + "\n\n" + negative_diary.content + "\n\n" + negative_diary1.content
+        # ユーザーがログイン中であるか確認
+        if request.user.is_authenticated:
+            # ログイン中のユーザーからusernameを取得
+            username = request.user.username
+
+        user_diary = """以下の設定を遵守して一ヶ月分の日記に対する感想とアドバイスをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n" +"・"+ positive_diary1.content + "\n"+ "・"+ negative_diary.content + "\n" + "・"+ negative_diary1.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -236,14 +250,20 @@ def create_diary_confirmation(request):
             new_diary.user = request.user
             openai.api_key = settings.OPENAI_API_KEY
 
+            # ユーザーがログイン中であるか確認
+            if request.user.is_authenticated:
+                # ログイン中のユーザーからusernameを取得
+                username = request.user.username
             user_diary ="""以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
                             #あなたの名前はネココ。
+                            #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
                             #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
                             #自分自身を仮想実体として振る舞ってください。
                             #日記の内容に関係ないことは、話さないでください。
                             #出力は日本語を正しく使用し、文章で出力してください。
                             #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
-                            以下の文章はチャット相手の日記の内容です。\n"""+ new_diary.content
+                            #チャット相手の名前を適切に使用ください。
+                            以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+new_diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [
@@ -277,15 +297,21 @@ def create_diary_confirmation2(request, pk):
         if form.is_valid():
             form.save()
             openai.api_key = settings.OPENAI_API_KEY
+            # ユーザーがログイン中であるか確認
+            if request.user.is_authenticated:
+                # ログイン中のユーザーからusernameを取得
+                username = request.user.username
 
             user_diary = """以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
-                            #あなたの名前はネココ。
+                            #あなたの名前はネココです。
+                            #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
                             #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
                             #自分自身を仮想実体として振る舞ってください。
                             #日記の内容に関係ないことは、話さないでください。
                             #出力は日本語を正しく使用し、文章で出力してください。
                             #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
-                            以下の文章はチャット相手の日記の内容です。\n"""+ diary.content
+                            #チャット相手の名前を適切に使用ください。
+                            以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [
@@ -356,16 +382,23 @@ def receive_nekoko_advice(request, pk):
     if diary:
       # ここにネココのアドバイスを受けるための処理を追加する
       openai.api_key = settings.OPENAI_API_KEY
+      # ユーザーがログイン中であるか確認
+      if request.user.is_authenticated:
+        # ログイン中のユーザーからusernameを取得
+        username = request.user.username
 
-      user_diary = """以下の設定を遵守して日記に対するカウンセリングをチャット相手にしてください。
-                    #あなたの名前はネココ。
-                    #あなたの役割はカウンセラーです。
-                    #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
-                    #自分自身を仮想実体として振る舞ってください。
-                    #日記の内容に関係ないことは、話さないでください。
-                    #出力は日本語を正しく使用し、文章で出力してください。
-                    #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
-                    以下の文章はチャット相手の日記の内容です。\n"""+ diary.content
+        user_diary = """以下の設定を遵守して日記に対するカウンセリングをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #あなたはカウンセラーです。
+                        #あなたの知り得る心理学を基にカウンセリングしてください。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
       response = openai.ChatCompletion.create(
           model="gpt-3.5-turbo",
           messages= [
@@ -582,7 +615,7 @@ def month_graph(request,selected_date=None):
     month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     #月の総評がなかったら、月の日記が存在したら
     if not month_ai and diary:
-        ai_comment = aicomment_month(emotion)
+        ai_comment = aicomment_month(emotion,request)
         # ai_commentの中身があれば
         if ai_comment:
             # 月の総評を保存
@@ -600,7 +633,7 @@ def month_graph(request,selected_date=None):
         ai_comment = month_ai.ai_comment
         if request.method == "POST":
           month_ai.delete()
-          ai_comment = aicomment_week(emotion)
+          ai_comment = aicomment_month(emotion,request)
           comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
           comment_save.save()
     elif month_ai:
@@ -643,14 +676,21 @@ def positive_conversion2(request, pk):
     diary.content = new_aicntent
     #更新したcontentをgptに送る
     openai.api_key = settings.OPENAI_API_KEY
+    # ユーザーがログイン中であるか確認
+    if request.user.is_authenticated:
+        # ログイン中のユーザーからusernameを取得
+        username = request.user.username
+
     user_diary = """以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
-                            #あなたの名前はネココ。
-                            #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
-                            #自分自身を仮想実体として振る舞ってください。
-                            #日記の内容に関係ないことは、話さないでください。
-                            #出力は日本語を正しく使用し、文章で出力してください。
-                            #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
-                            以下の文章はチャット相手の日記の内容です。\n"""+ diary.content
+                    #あなたの名前はネココです。
+                    #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                    #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                    #自分自身を仮想実体として振る舞ってください。
+                    #日記の内容に関係ないことは、話さないでください。
+                    #出力は日本語を正しく使用し、文章で出力してください。
+                    #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                    #チャット相手の名前を適切に使用ください。
+                    以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -747,7 +787,7 @@ def week_graph(request,selected_date=None):
     week_ai=Week_AI.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #週の総評がなかったら、週の日記が存在したら
     if not week_ai and diary:
-        ai_comment = aicomment_week(emotions)
+        ai_comment = aicomment_week(emotions,request)
         # ai_commentの中身があれば
         if ai_comment:
             # 週の総評を保存
@@ -765,7 +805,7 @@ def week_graph(request,selected_date=None):
         ai_comment = week_ai.ai_comment
         if request.method == "POST":
           week_ai.delete()
-          ai_comment = aicomment_week(emotions)
+          ai_comment = aicomment_week(emotions,request)
           comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
           comment_save.save()
     elif week_ai:
