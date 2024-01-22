@@ -123,6 +123,18 @@
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
+                        
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     <tr>
                         <td class="week-calendar__week__today">
@@ -168,16 +180,22 @@
                                         </td>
                                         {% endif %}
                                 {% endfor %}
-                            {% elif not diary_entry.created_date == day %}
-                            <td rowspan = "2" class="week-calendar__diary">
-                              <a class="week-calendar__table__a" href="{% url 'diary:create_diary' %}">
-                                新規作成
-                              </a>
-                            </td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                    <tr>
+                                {% endif %}
+                                {% endfor %}
+
+                                <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                                {% for missing_date in dates_without_diary %}
+                                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                                        {% if day == missing_date and today > day %}
+                                            <td rowspan = "2" class="week-calendar__diary">
+                                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                                新規作成
+                                                </a>
+                                            </td>
+                                            {% endif %}
+                                        {% endfor %}
+                            </tr>
+                            <tr>
                         <td class="week-calendar__week">
                             <div
                                 {% if day|date:"w" == "0" %} class="sun"
@@ -218,6 +236,17 @@
                                         </td>
                                     {% endif %}
                                 {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date and today >= day  %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
                             {% endif %}
                         {% endfor %}
                     </tr>
@@ -262,6 +291,18 @@
                                         </td>
                                     {% endif %}
                                 {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date and today > day %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
                             {% endif %}
                         {% endfor %}
                     </tr>

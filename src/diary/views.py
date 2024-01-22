@@ -222,10 +222,24 @@ def calender_week(request, selected_date=None):
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
     
+    # diaryオブジェクトから日付のリストを作成
+    diary_dates = [entry.created_date for entry in diary]
+
+    selected_week_dates = []
+    for i in range(7):
+        date_to_check = selected_date + timedelta(days=i)
+        # 日記が存在しない場合に、日付を格納
+        if date_to_check not in diary_dates:
+            selected_week_dates.append(date_to_check)
+            
+    # week_datesからdiaryに日記がない日付を取得
+    dates_without_diary = [day for day in week_dates if day not in diary_dates]
+
+
     #特定のカレンダーに戻るために必要なurl情報
     request.session['cal'] = 'diary:calender_week'
     request.session['cale'] = str(selected_date)
-    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
+    return render(request, 'diary/calender_week.html' ,{'dates_without_diary':dates_without_diary,'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
 def create_diary_confirmation(request,old=None):
