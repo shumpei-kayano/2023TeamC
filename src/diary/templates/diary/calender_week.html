@@ -90,7 +90,7 @@
     <table class="week-calendar__table">
         <tbody>
             {% for day in week_dates %}
-                {% comment %} 今日の日記 {% endcomment %}
+                {% comment %} 今日の日記の色付け{% endcomment %}
                 {% if today == day %}
                     <tr class="week-calendar__today__tr">
                         <td class="week-calendar__today">
@@ -99,6 +99,7 @@
                         {% for diary_entry in diary %}
                             {% if diary_entry.created_date == day %}
                                 {% for emotion_entry in emotion %}
+                                {% comment %} 日記があったらの処理 {% endcomment %}
                                     {% if emotion_entry.diary_id == diary_entry.id %}
                                         <td rowspan = "2" class="week-calendar__diary">
                                             <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
@@ -136,6 +137,7 @@
                     </tr>
                     {% comment %} ここまで {% endcomment %}
 
+                    {% comment %} 当時よりも前の日記の作成 {% endcomment %}
                 {% elif day < selected_date %}
                     <tr>
                         <td class="week-calendar__date">
@@ -162,8 +164,14 @@
                                                 </div>
                                             </a>
                                         </td>
-                                    {% endif %}
+                                        {% endif %}
                                 {% endfor %}
+                            {% elif not diary_entry.created_date == day %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                              <a class="week-calendar__table__a" href="{% url 'diary:create_diary' %}">
+                                新規作成
+                              </a>
+                            </td>
                             {% endif %}
                         {% endfor %}
                     </tr>
@@ -222,7 +230,7 @@
                             </div>
                         </td>
                     </tr>
-
+                {% comment %} 未来のカレンダー {% endcomment %}
                 {% else %}
                     <tr>
                         <td class="week-calendar__date">
