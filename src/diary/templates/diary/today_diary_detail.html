@@ -12,12 +12,32 @@
 
 {% block header %}
 <header>
+    {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
+
+    {% if today != diary.created_date %}
+    <div class="header__button">
+      <div class="header__back__img">
+          {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+          <a href="{% url cal cale %}">
+              <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  
+                  <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+              </svg>
+              カレンダーへ</a>
+      </div>
+  </div>
+    {% endif %}
+
+    {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
+    {% if today == diary.created_date %}
     <div class="header__spacer--top"></div>
+    {% endif %}
     <h1 class="date">--/--(-)</h1>
     <div class="header__weather">
         <img class="weatherImg">
         <span class="tempMax">-℃</span>
     </div>
+    
 </header>
 {% endblock %}
 
@@ -359,15 +379,5 @@ function closeVideo(videoId) {
 }
 
 
-document.getElementById('today_graph').addEventListener('click', function (event) {
-    // ボタンがクリックされたらローディング画面を表示
-    document.getElementById('loading').style.display = 'block';
-    // アニメーションを開始
-    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
-});
-document.getElementById('edit').addEventListener('click', function (event) {
-    document.getElementById('loading').style.display = 'block';
-    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
-});
 </script>
 {% endblock %}
