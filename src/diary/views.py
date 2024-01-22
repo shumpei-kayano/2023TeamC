@@ -192,12 +192,18 @@ def calendar_month(request,selected_date=None):
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
     
+    # 日記の日付のリストを作成
+    diary_dates = [entry.created_date for entry in diary]
+
+    # diaryがない日付をリストに追加
+    dates_without_diary = [day for week in weeks for day in week if day and day not in diary_dates]
+    
     #特定のカレンダーに戻るために必要なurl情報
     request.session['cal'] = 'diary:calendar_month'
     request.session['cale'] = str(selected_date)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
+    return render(request, 'diary/calendar_month.html', {'dates_without_diary':dates_without_diary ,'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -234,7 +240,6 @@ def calender_week(request, selected_date=None):
             
     # week_datesからdiaryに日記がない日付を取得
     dates_without_diary = [day for day in week_dates if day not in diary_dates]
-
 
     #特定のカレンダーに戻るために必要なurl情報
     request.session['cal'] = 'diary:calender_week'

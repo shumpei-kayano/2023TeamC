@@ -96,6 +96,7 @@
                     </thead>
                     <tbody>
                         <!-- 月にある週間の数 -->
+
                         {% for week in weeks %}
                             <tr>
                                 {% for day in week %}
@@ -109,18 +110,20 @@
                                         {% endif %}
                                         {% comment %} 感情分析がなかったら日記作成のリンク {% endcomment %}
                                             {%for emotion in emotion %}
-                                            {% if not emotion %}
-                                            <a style="display: block;" href="{% url 'diary:create_diary' day|date:'Y-m-d' %}">
-                                              
-                                            </a>
-                                          {% endif %}
-                                              {%if emotion.created_date == day%}
-                                                <a style="display: block;" href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
-                                                    <img class="calendar__month__img" src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
-                                                </a>
-                                              {% endif %}
+                                                {%if emotion.created_date == day%}
+                                                    <a style="display: block;" href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
+                                                        <img class="calendar__month__img" src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
+                                                    </a>
+                                                {% endif %}
                                             {% endfor %}
-                                        
+
+                                            <!-- 日記が存在しないときに新規作成ボタンを表示 -->
+                                            {% for missing_date in dates_without_diary %}
+                                                <!-- dayとmissing_dateが一致した場合の処理 -->
+                                                {% if day == missing_date and today >= day %}
+                                                        <a style="display: block;" href="{% url 'diary:create_diary' day %}"></a>
+                                                {% endif %}
+                                            {% endfor %}
                                     </td>
                                 {% endfor %}
                             </tr>
@@ -128,6 +131,7 @@
                     </tbody>
                 </table>
             </div>
+
         </div><!-- calendar  background -->
 
     </div><!-- scroll  content -->
