@@ -46,7 +46,7 @@
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
-        <form id="creatediaryform" method="POST" action="{% url 'diary:create_diary_confirmation' %}" enctype="multipart/form-data">
+        <form id="creatediaryform" method="POST" action="{% url 'diary:create_diary_confirmation' old %}" enctype="multipart/form-data">
 
         {% csrf_token %}
             <div class="content__today-diary">
