@@ -130,10 +130,12 @@
                                 {% elif day|date:"w" == "6" %} class="sat"
                                 {% endif %}
                             >
+                            
                                 {{day|date:"D"}}
                             </div>
                         </td>
                     </tr>
+                    
                     {% comment %} ここまで {% endcomment %}
 
                 {% elif day < selected_date %}

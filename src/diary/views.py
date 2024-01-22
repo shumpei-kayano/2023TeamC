@@ -42,6 +42,7 @@ def analyze_sentiment(text, diary, user):
         new_emotion = Emotion(
             diary=diary,
             user=user,
+            created_date=diary.created_date,
             reasoning=result['Sentiment'],
             positive=round(result['SentimentScore']['Positive'] * 100, 1),
             negative=round(result['SentimentScore']['Negative'] * 100, 1),
@@ -214,12 +215,18 @@ def calender_week(request, selected_date=None):
     return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
-def create_diary_confirmation(request):
+def create_diary_confirmation(request,old=None):
     # 新規作成した時の処理
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
+            # 受け取ったoldを保存
+            if old:
+                new_diary.created_date=  datetime.strptime(old, "%Y-%m-%d").date()
+            # 無かったら今日の日付を保存
+            else:
+                new_diary.created_date= date.today()
             new_diary.user = request.user
             openai.api_key = settings.OPENAI_API_KEY
 
@@ -245,10 +252,10 @@ def create_diary_confirmation(request):
             new_diary.save()
 
             # 一旦カレンダーが出来るまで----------------------------------------------------------
-            saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
+            saved_diary = Diary.objects.filter(user=request.user,created_date=new_diary.created_date).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
 
-            return redirect('diary:create_diary_confirmation',pk=saved_diary.id)
+            return redirect('diary:create_diary_confirmation2',pk=saved_diary.id)
     else:
         form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
@@ -377,6 +384,7 @@ def receive_nekoko_advice(request, pk):
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
+
 @login_required
 def create_diary(request):
     today = date.today()
@@ -385,9 +393,22 @@ def create_diary(request):
     #-------------------------------------------------------------------------------------
     if diary:
       return render(request, 'diary/today_diary_detail.html', {'diary': diary})
-
+    # dateを今日の日付で送信
+    old=today
     form = DiaryCreateForm()
-    return render(request, 'diary/create_diary.html', {'Diary': form, 'today': today})
+    return render(request, 'diary/create_diary.html', {'Diary': form, 'old': old})
+
+# カレンダーから過去の日記を作成
+@login_required
+def create_diary2(request,old=None):
+    old=  datetime.strptime(old, "%Y-%m-%d").date()
+    # 一旦カレンダーが出来るまで----------------------------------------------------------
+    diary = Diary.objects.filter(user=request.user,created_date=old).order_by('-created_date').first()
+    #-------------------------------------------------------------------------------------
+    if diary:
+      return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form, 'old': old})
 
 
 @login_required
