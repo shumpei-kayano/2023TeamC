@@ -7,21 +7,39 @@
 {% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
 
 {% block content %}
-<section class="section-accounts" id="section-signup">
-    <header></header>
+<section>
+    <main class="ground ground--blue">
+
     <div class="wrapperHeader">
         <div class="header__back__img">
-            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+            <div class="header__spacer--top"></div><!-- 追加 -->
+            </div>
+            <img id="password__reset__done__img" src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
         </div>
+    </div>
 
-        <p class="mail-text">メールアドレスを確認してください</p>
-        <p class="mail-text2">確認のメールを送信しました。</p>
+    <article id="height__center">
+        <ul class="progressbar">
+            <li class="complete">ご入力</li>
+            <li class="active">ご確認</li>
+            <li>完了</li>
+        </ul>
+
+        <p class="signup-text">ユーザー登録</p>
+        <p class="mail-text">メールをご確認ください</p>
+        <p class="mail-text2">ユーザー情報確認のメールを送信しました。</p>
         <p class="mail-text3">
-            メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。<br>数分経っても確認のメールが届かない場合はご連絡ください。
+            メールに記載されたリンクをクリックして<br>ユーザー登録を完了させてください。
+        </p>
+        <p class="mail-text3">
+            数分経っても確認のメールが届かない場合はご連絡ください。
         </p>
     </div>
     <div class="back-home">
         <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>
     </div>
+
+    </article>
+    </main>
 </section>
 {% endblock content %}

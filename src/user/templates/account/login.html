@@ -6,18 +6,18 @@
 
 
 {% block content %}
+{% comment %} <section class="section-accounts" id="section-signup"> {% endcomment %}
 <section>
-<section class="section-accounts" id="section-signup">
-    <header></header>
+    <main class="ground ground--blue">
 
     <div class="wrapperHeader">
         <div class="header__back__img">
             <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
-            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
         </div>
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
     </div>
 
-
+    <article>
     <div class="wrapper-accounts-form">
         <p class="signup-text">ログイン</p>
             <form method="post" action="{% url 'account_login' %}" class="form-accounts">
@@ -25,7 +25,7 @@
 
             {% if form.non_field_errors %}
             <div class="error-message">
-                <p>エラーが発生しました:</p>
+                <p>エラーが発生しました</p>
                 <ul>
                     {% for error in form.non_field_errors %}
                         <li>{{ error }}</li>
@@ -35,20 +35,24 @@
             {% endif %}
             
             <div class="form-content">
-                <div class="user-infomation">
+                <div class="user-infomation__container">
                     <div class="content__user-email__text">
                         <label for="email">メールアドレス</label>
-                        <br><input type="email" name="login" autocomplete="email" required id="id_login">
+                        <br><input type="email" name="login" autocomplete="email" required id="id_login" placeholder="メールアドレス">
                     </div>
 
                     <div class="content__user-pass__text">
                         <label for="pass">パスワード</label>
-                        <br><input type="password" name="password" autocomplete="current-password" required id="id_password">
+                        <div class="password-wrapper">
+                            <br><input class="password__input" type="password" name="password" autocomplete="current-password" required id="id_password" placeholder="パスワード">
+                            <span class="password__toggle">
+                                <!-- 目のアイコン -->
+                            </span>
+                        </div>
                     </div>
 
                     <div class="radio-btn">
-                        <input type="checkbox" name="remember" id="id_remember">
-                        <label>ログイン状態を保持する</label>
+                        <label><input type="checkbox" name="remember" id="id_remember">ログイン状態を保持する</label>
                     </div>
                 </div>
                 
@@ -59,7 +63,7 @@
             </div>
 
 
-        <div class="btn btn--blue">
+        <div id="login__btn--blue" class="btn btn--blue">
             <button type="submit">ログイン</button>
         </div>
             <p class="forget-pass"><a href="{% url 'account_reset_password' %}">パスワードをお忘れですか？</a></p>
@@ -68,6 +72,24 @@
     <div class="back-home">
         <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>    
     </div>
-</section>
+
+</article>
+</main>
 </section>
 {% endblock content %}
+
+{% block js %}
+<script>
+    // パスワード表示
+    const passwordToggles = document.querySelectorAll('.password__toggle');
+
+    passwordToggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const type = input.getAttribute('type');
+            input.setAttribute('type', type === 'password' ? 'text' : 'password');
+            this.classList.toggle('is-visible');
+        });
+    });
+</script>
+{% endblock js %}

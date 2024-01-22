@@ -4,12 +4,13 @@
     height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
     justify-content: center; // コンテンツを垂直方向に中央寄せ
     align-items: center; // コンテンツを水平方向に中央寄せ
+}
 
     .cancel__neko {
-        margin-top: 16rem;
+        // margin-top: 16rem;
         margin-bottom: 1.6rem;
     }
-    
+
     .logout-text {
         margin: 0;
         font-size: 1.6rem;
@@ -26,14 +27,13 @@
         margin-top: 0;
         margin-right: 14px;
     }
-}
 
 @media only screen and (max-height: 599px) {
     /* 画面の高さが600px未満の場合のスタイル */
     .content-center-group{
         display: flex;
         flex-direction: column;
-        height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
+        height: 100vh; // コンテンツが親要素（.ground）の高さを占めるようにする
         justify-content: center; // コンテンツを垂直方向に中央寄せ
         align-items: center; // コンテンツを水平方向に中央寄せ
     

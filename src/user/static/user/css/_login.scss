@@ -5,17 +5,21 @@ label {
 }
 
 .wrapperHeader {
-    color: #000;
+    color: #333;
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 1.12px;
     text-align: center; // テキストを中央揃えにする
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .signup-text {
-    color: #000;
+    color: #333;
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
@@ -26,7 +30,7 @@ label {
 
 .login-text {
     text-align: center; // テキストを中央揃えにする
-    color: #000;
+    color: #333;
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 400;
@@ -36,16 +40,16 @@ label {
     margin-right: 20px;
 }
 
-img.img__logo {
-    // margin-left: 24px;
-    display: flex;
-    width: 96px;
-    height: 48px;
-}   
+// img.img__logo {
+//     // margin-left: 24px;
+//     display: flex;
+//     width: 96px;
+//     height: 48px;
+// }   
 
-img.img__logo {
-    transform: translateX(280px); /* ここに移動させたい距離を指定 */
-}
+// img.img__logo {
+//     transform: translateX(280px); /* ここに移動させたい距離を指定 */
+// }
 
 // .back-home {
 //     margin-top: 350px;
@@ -55,7 +59,6 @@ img.img__logo {
     text-align: center; // テキストを中央揃えにする
     margin-left: 40px;
     display: flex;
-    width: 318px;
     height: 24px;
     justify-content: center;
     align-items: center;
@@ -72,7 +75,7 @@ img.img__logo {
 
 .error-message {
     text-align: center; // テキストを中央揃えにする
-    color: #000;
+    color: #333;
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 400;
@@ -80,4 +83,174 @@ img.img__logo {
     letter-spacing: 0.56px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.user-infomation__container{
+    margin: 24px;
+}
+
+main{
+    // margin-top: 0rem; /*上に空白を追加*/
+    // height: calc(100vh - 5rem - 15px ); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+}
+// スクロールバー背景色
+main::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 3px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+main::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+main::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#height__center{
+    margin-top: 0;
+    height: calc(100vh - 7.2rem);
+}
+@media only screen and (min-height: 600px) {
+    .ground{
+        height: 100vh !important;
+    }
+    .wrapperHeader{
+        padding-top: 50px;
+    }
+    article{
+        margin-top: 30px;
+    }
+    #height__center{
+        margin-top: 0;
+        height: calc(100vh - 9.8rem);
+    }
+
+    // スクロールバー背景色
+    main::-webkit-scrollbar {
+        background-color: transparent;
+        // スクロールバーの幅を調整
+        width: 3px;
+        // height: 2px;
+        // 角丸を指定
+        border-radius: 20px;
+    }
+    
+    .back-home {
+        margin-top: 50px !important;
+    }
+}
+
+// 追加
+.back-home {
+    margin-top: 30px;
+}
+.btn--white {
+    margin-right: 0;
+}
+.btn--red {
+    margin-left: 0;
+    cursor: pointer;
+}
+// .signup-text{
+//     font-weight: 500;
+// }
+.btn--blue {
+    margin-left: 0;
+}
+#login__btn--blue{
+    display: block;
+    margin: 30px auto;
+}
+.forget-pass a{
+    display: block;
+    margin: 0 auto;
+    &:hover{
+        text-decoration: underline;
+        color: #797979;
+    }
+}
+button {
+    cursor: pointer;
+    font-weight: 700;
+}
+.btn--large a, #account_top__btn--white a{
+    cursor: pointer;
+    font-weight: 700;
+}
+.ground{
+    &--white{
+        padding-bottom: 0;
+    }
+}
+.ground.ground--white {
+    padding-bottom: 0;
+}
+.error-message{
+    color: red;
+    li{
+        color: red;
+    }
+}
+[type="checkbox"]{
+    margin-right: 10px;
+}
+.accounts-link{
+    color: #00ABB6;
+    text-decoration: underline;
+    // クリック範囲を拡大
+    padding: 10px 10px;
+    &:hover{
+        text-decoration: underline;
+        color: #00737A;
+    }
+}
+article{
+    background-color: $main_background_color;
+}
+.login-text {
+    font-size: 1.6rem;
+}
+#user-passwd_reset_form{
+    height: 180px;
+}
+.user-infomation__container {
+    margin: 24px 0 24px 0;
+}
+.form__login{
+    margin-bottom: 20px;
+}
+.form-email {
+    padding: 0px 0px 16px 0;
+}
+#ctrlHolder__verified{
+    margin-left: 38px;
+}
+.buttonHolder {
+    margin-left: 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ccc;
+}
+.user-infomation__signup{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+@media only screen and (max-height: 599px){
+    #ground__login {
+        height: 100%;
+    }
 }

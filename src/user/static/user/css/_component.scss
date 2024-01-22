@@ -121,7 +121,6 @@
 // ユーザー情報
 .user-infomation {
     width: 342px;
-    height: 310px;
     margin-left: 24px;
     margin-right: 24px;
     margin-top: 24px;
@@ -157,9 +156,10 @@
     border: 1px solid #A29C9C;
     background: #FFF;
     box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 5px;
 }
 
-input[type="text"], input[type="email"] input[type="password"] input[type="password2"]{
+#id_username, input[type="email"]{
     @include input-style;
 }
 
@@ -299,11 +299,11 @@ input[type="text"], input[type="email"] input[type="password"] input[type="passw
     // justify-content: center;
     // align-items: center;
     flex-shrink: 0;
-    margin-left: 225px;
+    margin-right: 24px;
 }
 
 .back-home {
-    margin-left: 109px;
+    margin-left: -11px;
     margin-top: 50px;
     margin-bottom: 20px;
 }

@@ -42,11 +42,11 @@
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    animation-duration: 1.5s;
+    animation-duration: 1.5s; // 1回のアニメーションにかける時間
 }
 .keyframe0 {
     animation-name: jump;
-    animation-duration: .6s;
+    animation-duration: 1.5s;
 }
 
 @keyframes jump{
@@ -121,7 +121,7 @@
     }
     .keyframe0 {
         animation-name: jump;
-        animation-duration: .6s;
+        animation-duration: 1.5s;
     }
     
     @keyframes jump{
