@@ -53,13 +53,5 @@
 {% endblock %}
 
 {% block js %}
-<script>
-     // フェードイン
-(function ($) {
-    'use strict';
-    $(window).on('load',function(){
-        $('article').addClass('appear');
-    });
-})(jQuery);
-</script>
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
 {% endblock %}

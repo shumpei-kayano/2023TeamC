@@ -5,26 +5,30 @@
 
 {% block title %}メールアドレス管理{% endblock %}
 
-{% block header %}
+{% comment %} {% block header %}
 <header>
     <div class="header__spacer--top"></div> <!-- 追加した要素 -->
-    {% comment %} <h1>会員情報変更</h1> {% endcomment %}
+    <h1>会員情報変更</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 
 {% block content %}
+<section>
+    <main id="ground__login" class="ground ground--blue">
+
 <div class="wrapperHeader">
-  <div class="header__back__img">
+    <div class="header__back__img">
     <a href="{% url 'diary:member_information' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+    </div>
     <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
-  </div>
 </div>
 
-  <div class="title-text">
-    <p>会員情報変更</p>
-  </div>
+<article>
+    <div class="title-text">
+        <p>会員情報変更</p>
+    </div>
 
     <p class="change-text">メールアドレス</p>
 {% if user.emailaddress_set.all %}
@@ -43,7 +47,7 @@
 
 {{ emailaddress.email }}
     {% if emailaddress.verified %}
-    <span class="verified">{% trans "Verified" %}</span>
+    <br><span id="ctrlHolder__verified" class="verified">{% trans "Verified" %}</span>
     {% else %}
     <span class="unverified">{% trans "Unverified" %}</span>
     {% endif %}
@@ -55,7 +59,7 @@
 <div class="buttonHolder">
       <button class="secondaryAction" type="submit" name="action_primary" >メインにする</button>
       <button class="secondAction" type="submit" name="action_send" >確認メールを再送する</button>
-      <button class="primaryAction" type="submit" name="action_remove" >削除</button>
+      <button id="buttonHolder__remove-btn" class="primaryAction" type="submit" name="action_remove" >削除</button>
 </div>
 
 </fieldset>
@@ -73,13 +77,16 @@
         {% csrf_token %}
         <div class="form-email">
           {{ form.email.errors }}
-          <label for="id_email">メールアドレス:</label>
-          <input type="email" name="email" placeholder="メールアドレス" required="" id="id_email">        </div>
-        <div class="btn btn--blue">
+          <label for="id_email">メールアドレス</label>
+          <input type="email" name="email" placeholder="メールアドレスの追加" required="" id="id_email">        </div>
+        <div id="login__btn--blue" class="btn btn--blue">
           <button name="action_add" type="submit">追加</button>
         </div>
     </form>
     
+</article>
+</main>
+</section>
 {% endblock %}
 
 

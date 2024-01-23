@@ -1,8 +1,6 @@
 <!-- ウォークスルー画面 -->
 {% extends "base.html" %}
 
-
-
 {% load static%}
 
 {% block title %}Fugooとは{% endblock %}
@@ -12,16 +10,9 @@
 <link rel="stylesheet" href="{% static 'user/css/user_page.css' %}">
 {% endblock %}
 
-
-
 {% block content %}
+<section>
 <main class="ground ground--white"><!-- 背景色 -->
-    <div class="tutorial1-page">
-        <header></header>
-        <footer></footer>
-        {% comment %} <footer></footer> {% endcomment %}
-    {% comment %} <div class="content-center"> {% endcomment %}
-    <div class="scroll--content">
 
         <div class="container">
             <div class="slider-container">
@@ -106,12 +97,9 @@
                 </div>
             </div>
         </div>
-
-    </div>
-</div>
 </main>
-
-{% endblock content %}
+</section>
+{% endblock %}
 {% block js %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -145,7 +133,7 @@
         }
 
         completeBtn.addEventListener('click', function () {
-            window.location.href = '{% url "account_login" %}'; // 遷移先のHTMLファイル名に置き換えてください
+            window.location.href = 'http://localhost/accounts/signup/'; // 遷移先のHTMLファイル名に置き換えてください
         });
     
         function updatePagination() {

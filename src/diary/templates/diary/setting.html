@@ -53,10 +53,6 @@
 {% endblock %}
 
 {% block js %}
-<script>
-    // フェードイン
-    $(document).ready(function () {
-        $('article').addClass('appear');
-    });
-</script>
+<!-- フェードイン -->
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
 {% endblock %}

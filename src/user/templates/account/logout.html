@@ -14,14 +14,14 @@
 {% endblock %}
 
 {% block content %}
-<header></header>
-
+<section>
+<main class="ground ground--blue">
 <div class="content-center-group">
     {% comment %} <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header bg-primary"> {% endcomment %}
 
-              <img class="cancel__neko" img src="{% static 'user/assets/cancel_neko.svg' %}">
+              <img id="logout_cancel__neko_img" class="cancel__neko" img src="{% static 'user/assets/cancel_neko.svg' %}">
 
               <div class="logout__text">
                 <p class="logout-text">ログアウトしますか？</p>
@@ -50,5 +50,6 @@
         </div>
     </div> {% endcomment %}
 </div>
-
+</main>
+</section>
 {% endblock %}

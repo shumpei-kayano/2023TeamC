@@ -20,14 +20,14 @@
     {% block header %}{% endblock %}
 {% comment %} <header>
 </header> {% endcomment %}
-    <main class="ground ground--blue">
-        <div class="scroll--content">
+    {% comment %} <main class="ground ground--blue"> {% endcomment %}
+        {% comment %} <div class="scroll--content"> {% endcomment %}
             {% block content %}
             <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
             {% endblock %}
 
-        </div>
-    </main>
+        {% comment %} </div> {% endcomment %}
+    {% comment %} </main> {% endcomment %}
 
     {% comment %} <footer>
         <small>&copy; 発行年</small>
