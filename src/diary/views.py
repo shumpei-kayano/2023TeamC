@@ -649,7 +649,8 @@ def month_graph(request,selected_date=None):
         weeks.append(week_dates)
     year = start_of_month.year
     month = start_of_month.month
-    emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    #感情を日付順に並び替える
+    emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month).order_by('created_date')
     # 日記・AIコメントがあるかフィルター
     diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
@@ -820,7 +821,7 @@ def week_graph(request,selected_date=None):
     one_week = start_of_week + timedelta(days=6)
     one_week_str = one_week
     # データをフィルタリング
-    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
+    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str]).order_by('created_date')  # または必要な条件に基づいてフィルタリング
     diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #---------------------------------------------------------
     # AIコメントがあるかフィルター
