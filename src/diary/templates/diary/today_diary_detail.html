@@ -15,6 +15,7 @@
     {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
 
     {% if today != diary.created_date %}
+    {% if cal %}
     <div class="header__button">
       <div class="header__back__img">
           {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
@@ -27,9 +28,10 @@
       </div>
   </div>
     {% endif %}
+    {% endif %}
 
     {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
-    {% if today == diary.created_date %}
+    {% if not cal or today == diary.created_date  %}
     <div class="header__spacer--top"></div>
     {% endif %}
     <h1 class="date">--/--(-)</h1>

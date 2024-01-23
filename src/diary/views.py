@@ -380,7 +380,7 @@ def create_diary_confirmation2(request, pk):
                 
             # 保存
             diary.save()
-            return redirect('diary:create_diary_confirmation', pk=pk)
+            return redirect('diary:create_diary_confirmation2', pk=pk)
 
     # 感情分析の実行関数(AWSでEmotion作成
     # )
@@ -875,6 +875,7 @@ def chart_data_day(request, pk):
 def today_diary_graph(request, pk):
     # Diary モデルから特定の日記データを取得
     diary = get_object_or_404(Diary, id=pk)
+    today = date.today()
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
@@ -884,7 +885,7 @@ def today_diary_graph(request, pk):
     #セッションを受け取る
     cal = request.session.get('cal')
     cale = request.session.get('cale')
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':cal,'cale':cale})
+    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':cal,'cale':cale})
 
 @login_required
 def today_counseling_graph(request):
