@@ -35,7 +35,7 @@
     
     <div class="scroll--content">
 
-        <form id="updateform" method="POST" action="{% url 'diary:create_diary_confirmation' diary.pk %}" enctype="multipart/form-data">
+        <form id="updateform" method="POST" action="{% url 'diary:create_diary_confirmation2' pk=diary.pk %}" enctype="multipart/form-data">
             {% comment %} {% csrf_token %}
             <div class="content__today-diary__text">
                 <img src="透過画像のパス" alt="透過画像" class="follow-image">
