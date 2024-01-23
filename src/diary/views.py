@@ -213,7 +213,6 @@ def calendar_month(request,selected_date=None):
     dates_without_diary = [day for week in weeks for day in week if day and day not in diary_dates]
     
     #特定のカレンダーに戻るために必要なurl情報
-    request.session['cal'] = 'diary:calendar_month'
     request.session['cale'] = str(selected_date)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
@@ -256,7 +255,6 @@ def calender_week(request, selected_date=None):
     dates_without_diary = [day for day in week_dates if day not in diary_dates]
 
     #特定のカレンダーに戻るために必要なurl情報
-    request.session['cal'] = 'diary:calender_week'
     request.session['cale'] = str(selected_date)
     return render(request, 'diary/calender_week.html' ,{'dates_without_diary':dates_without_diary,'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
@@ -776,10 +774,12 @@ def today_diary_detail2(request,pk):
     diary = get_object_or_404(Diary, id=pk)
     
     #セッションを受け取る
-    cal = request.session.get('cal')
-    cale = request.session.get('cale')
+    cal = Diary.objects.get(id=pk)
+    created_date = cal.created_date
+    month = 'diary:calendar_month'
+    week = 'diary:calender_week'
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'cale':cale,'cal':cal})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
@@ -884,9 +884,11 @@ def today_diary_graph(request, pk):
     # JsonResponseを使用してJSONデータを返す
     circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
     #セッションを受け取る
-    cal = request.session.get('cal')
-    cale = request.session.get('cale')
-    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':cal,'cale':cale})
+    cal = Diary.objects.get(id=pk)
+    created_date = cal.created_date
+    month = 'diary:calendar_month'
+    week = 'diary:calender_week'
+    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
 
 @login_required
 def today_counseling_graph(request):
