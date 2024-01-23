@@ -1173,7 +1173,6 @@ label {
 }
 
 #password_reset__back-home {
-  display: block;
   margin: 0 auto;
 }
 
@@ -1632,6 +1631,7 @@ article {
 }
 .back-home {
   margin-top: 30px;
+  margin-left: 0;
 }
 
 .btn--white {

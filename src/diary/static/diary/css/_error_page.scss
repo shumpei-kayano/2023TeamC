@@ -1,0 +1,74 @@
+#error__page {
+    width: 39rem; // 任意の幅を設定
+    max-width: 100%; // ビューポートの幅を超えないように設定
+    margin: 0 auto; // 中央に配置
+    height: 100vh;
+    background-color: #EEFEFF;
+
+    #error__page__logo{
+        position: absolute; /* 絶対位置に設定 */
+        top: 0; /* 上端に配置 */
+        width: 90px;
+        margin: 24px auto 0 24px;
+    }
+
+    #error__page__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+
+        #error__page__logo {
+            width: 113px;
+            margin: 40px auto 40px 24px;
+        }
+
+        .error__page__h1{
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 30px 24px 24px 24px;
+            line-height: 170%;
+        }
+
+        .error__page__text{
+            font-size: 1.6rem;
+            letter-spacing: 0.04em;
+            margin: 24px 24px;
+        }
+
+        #error__page__btn--large{
+            margin: 0 auto !important;
+        }
+    }
+}
+
+// スクロールバー背景色
+#error__page::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+#error__page::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+#error__page::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+}
+
+
+@media only screen and (max-width: 960px) {
+    #error__page{
+        width: 100%;
+        max-width: none; // 追加
+    }
+}
