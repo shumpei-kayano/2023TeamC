@@ -1859,7 +1859,7 @@ input[type=text]:focus, input[type=email]:focus {
   }
 }
 #calendar__back-btn {
-  margin-right: 8px;
+  margin-right: 8px !important;
 }
 
 .content__today-diary__text {
