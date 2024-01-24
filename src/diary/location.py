@@ -3,7 +3,7 @@ from geopy.geocoders import Nominatim
 
 geolocator = Nominatim(user_agent="my_geocoder")
 
-location = geolocator.geocode("東京タワー")
+location = geolocator.geocode("東京タワー")#ここに現在地の住所の名前
 print("緯度:", location.latitude)
 print("経度:", location.longitude)
 
@@ -35,8 +35,8 @@ def get_location(api_key, latitude, longitude):
 
 # APIキー、緯度、経度を設定
 api_key = "AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA"
-latitude = # 現在位置の緯度
-longitude = # 現在位置の経度
+latitude = location.latitude
+longitude = location.longitude
 
 result = get_location(api_key, latitude, longitude)
 
