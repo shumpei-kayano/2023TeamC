@@ -831,10 +831,9 @@ th, td {
 }
 
 .week-calendar__diary {
+  position: relative;
   height: 76px;
   text-align: left;
-  padding-left: 24px;
-  padding-right: 24px;
   font-size: 1.6rem;
   color: #A29C9C;
 }
@@ -855,6 +854,17 @@ th, td {
 }
 
 .week-calendar__table__a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
   text-decoration: none;
   color: #A29C9C;
 }
