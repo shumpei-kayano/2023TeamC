@@ -7,7 +7,9 @@
 
 {% block content %}
 {% comment %} 新規登録orログイン {% endcomment %}
-<section>
+<article>
+    <div class="article__content">
+
     <main class="ground ground--blue">
         <div class="container__center">
             <div class="logo__img">
@@ -27,5 +29,19 @@
             </div>
         </div>
 </main>
-</section>
+
+    </div>
+</article>
 {% endblock content %}
+
+{% block js %}
+<script>
+    // フェードイン
+    (function ($) {
+        'use strict';
+        $(window).on('load',function(){
+            $('article').addClass('appear');
+        });
+    })(jQuery);
+</script>
+{% endblock js %}
