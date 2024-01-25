@@ -19,3 +19,86 @@
         transform: translate(0, 0) rotateZ(0deg);
     }
 }
+
+// コメント時アニメーション
+.diary-detail-img--animation{
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-duration: 1.5s;
+}
+.content__diary__comment__img-item, .graph__img--keyframe{
+    animation-name: anim_sc;
+    transform: scale(0.85,0.85);
+}
+@keyframes anim_sc {
+    100% {
+      transform: scale(1,1);
+    }
+}
+
+// 会員情報ページのアニメーション
+.user-infomation__image--dango {
+    animation: purupuru 0.8s linear 0s 1;
+}
+@keyframes purupuru {
+    0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+    20%  { transform: scale(1.0, 1.06) translate(-5%, -4%) skew(6deg, 0deg); }
+    50%  { transform: scale(1.0, 0.94) translate(5%, 4%) skew(-6deg, 0deg); }
+    65%  { transform: scale(1.0, 1.03) translate(2%, -2%) skew(-3deg, 0deg); }
+    80%  { transform: scale(1.0, 0.97) translate(-2%, 2%) skew(3deg, 0deg); }
+    100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+
+// 設定画面のアニメーション
+.setting__menu__img-item--left, .setting__menu__img-item--center, .setting__menu__img-item--right, .setting-help__menu__img-item--left, .setting-help__menu__img-item--center, .setting-help__menu__img-item--right {
+	animation: bikkuri 10s both infinite; /* アニメーションの長さを10秒に設定 */
+}
+@keyframes bikkuri {
+    0%,9% {
+        transform: translateY(0); // 最初の9%（0.9秒）要素は元の位置
+    }
+    10% {
+        transform: translateY(-10px); // 10%（1秒）10px上に移動
+    }
+    11% {
+        transform: translateY(0); // 11%（1.1秒）元の位置に戻る
+    }
+    12% {
+        transform: translateY(-5px); // 12%（1.2秒）5px上に移動
+    }
+    13%,50% {
+        transform: translateY(0); // 13%（1.3秒）元の位置に戻る
+    }
+    51% {
+        transform: translateY(-10px);
+    }
+    52% {
+        transform: translateY(0);
+    }
+    53% {
+        transform: translateY(-5px);
+    }
+    54%, 100% {
+        transform: translateY(0px);
+    }
+}
+
+// テキストのアニメーション
+.content__home__text__anime:nth-child(1),
+.content__home__text__anime:nth-child(2) {
+    clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+}
+.content__home__text__anime:nth-child(1) {
+    animation: textAnime 0.7s steps(12) forwards; // アニメーションが終了した後も最終フレームの状態が保持
+    animation-delay: 1s; /* アニメーションを1秒遅延させる */
+}
+.content__home__text__anime:nth-child(2) {
+    animation: textAnime 0.7s steps(12) forwards;
+    animation-delay: 1.7s; /* 2行目のアニメーションを2秒遅延させる */
+}
+@keyframes textAnime {
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
