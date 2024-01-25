@@ -17,9 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+
 
 # Application definition
 
@@ -66,6 +67,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.normpath(os.path.join(BASE_DIR, 'user/templates/account')),
+            os.path.normpath(os.path.join(BASE_DIR, 'diary/templates/diary')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -149,15 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-def show_debug_toolbar(request):
-    return request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS
 
-DEBUG_TOOLBAR_CALLBACK = show_debug_toolbar
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-    'STATIC_URL': '/debug_toolbar/',
-}
 
 #---------------------メール送信設定-------------------------
 # 以下はSMTPサーバーの設定
