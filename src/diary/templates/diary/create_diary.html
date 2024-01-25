@@ -30,11 +30,9 @@
         </div>
     </div>
 
-    <h1 class="date">--/--(-)</h1>
-    <div class="header__weather">
-        <img class="weatherImg">
-        <span class="tempMax">-℃</span>
-    </div>
+    <h1>日記作成</h1>
+    <div class="header__spacer--top"></div>
+
 </header>
 {% endblock %}
 
@@ -51,7 +49,7 @@
         {% csrf_token %}
             <div class="content__today-diary">
                 {% comment %}  {{today}}<br>        現在の日付を取得 {% endcomment %}
-                <div class="FlexTextarea"><!-- CSSのため追加 -->
+                <div class="FlexTextarea">
                     <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.png' %}" alt="テキストエリア背景画像">
                     {{ Diary.content }}
                 </div>
@@ -153,7 +151,7 @@
                 <samll class="content__today-diary_samll">※各４枚まで</samll>
 
                 <div class="btn--blue">
-                    <button id="submitButton" type="submit">保存</button>
+                    <button id="submitButton" type="submit" onclick="saveText()">保存</button>
                     <div id="loading">
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
@@ -176,23 +174,6 @@
 
 {% block js %}
 <script>
-    {% comment %} document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('#header__back__btn').addEventListener('click', function(event) {
-            event.preventDefault();
-            var animationBg = document.querySelector('.animation-bg');
-            animationBg.style.display = 'block';  // 要素を表示
-
-            // slide-inクラスの追加を次の描画フレームまで遅延させる
-            requestAnimationFrame(function() {
-                animationBg.classList.add('slide-in');  // アニメーションを開始
-
-                setTimeout(function() {
-                    animationBg.style.display = 'none';  // アニメーションが終了したら要素を非表示にする
-                    location.href = 'http://localhost/diary/home/top#Article__home';  // アニメーションの完了後にページ遷移
-                }, 3000);
-            });
-        });
-    }); {% endcomment %}
 
     // 文字数のカウント
     function countCharacters(textarea) {
@@ -201,10 +182,14 @@
         let countDisplay = count + '/' + maxLength;
         $('#characterCount').text(countDisplay);
 
-        if (count > maxLength) {
+        if (count >= maxLength) {
             $('#characterCount').addClass('error'); // スタイリング用のクラスを追加
             $('#characterCount').text('入力できる文字数を超えています。' + countDisplay);
+            // 1000文字超えてたら保存ボタンを押せなくする
+            submitButton.disabled = true;
         } else {
+            // 1000文字下回ってたら保存ボタンを押せるようにする
+            submitButton.disabled = false;
             $('#characterCount').removeClass('error'); // エラーがない場合はクラスを削除
         }
     }

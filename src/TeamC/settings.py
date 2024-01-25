@@ -89,6 +89,10 @@ DATABASES = {
         'PASSWORD': 'o-hara',
         'HOST': 'mysql_db', # dbのコンテナ名
         'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
