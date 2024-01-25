@@ -67,17 +67,21 @@
         <div  class="content__today-diary__graph">
             <!-- グラフの表示 -->
             <div id="circle__graph">
-                <div class="circle__graph__img">
-                    {% comment %} <div style="position: relative;"> {% endcomment %}
-                    <!-- グラフの親要素の大きさを指定 -->
-                    <div id="myPieChart_with" style="width: 52%; margin: 0 auto;"><!--width 60%がアプリに合うが、ブラウザに合わせて52%に指定 -->
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                        <div id="popup"></div>
-                        {% comment %} <div id="popup" style="position: absolute; display none; background-color: rgba(255, 255, 255, 0.7); border: 1px solid #000; padding: 10px;"></div> {% endcomment %}
-                    </div>
-                </div>
+              <div class="circle__graph__img">
+                  <div style="display: flex;">
+                      <!-- グラフの親要素の大きさを指定 -->
+                      <div id="myPieChart_with" style="flex: 1; margin: auto; width: 60%;">
+                          <!-- width 60%がアプリに合うが、ブラウザに合わせて52%に指定 -->
+                          <canvas id="myGraph"></canvas>
+                      </div>
+                      <div id="myPieChart_with_labels" style="flex: 1; margin: auto;">
+                          <canvas id="myLabels"></canvas>
+                      </div>
+                  </div>
+                  <div id="popup"></div>
+              </div>
             </div>
+
         </div>
 
         <!-- ネコココメント -->
@@ -114,23 +118,65 @@
 
 {% block js %}
 <script>
-var ctx = document.getElementById('myPieChart').getContext('2d');
-var Data = {{ data|safe }};
+  var graphCanvas = document.getElementById('myGraph').getContext('2d');
+  var labelCanvas = document.getElementById('myLabels').getContext('2d');
+  graphCanvas.imageSmoothingEnabled = true;
+  labelCanvas.imageSmoothingEnabled = true;
 
-var myPieChart = new Chart(ctx, {
+  var Data = {{ data|safe }};
+  
+  var options = {
+    layout: {
+      padding: {
+        left: 0,
+        right: 0
+      }
+    },
+    plugins: {
+      datalabels: {
+        align: 'center',
+        anchor: 'center',
+        display: function(context) {
+          return context.dataset.data[context.dataIndex] > 10;
+        },
+        formatter: function(value, context) {
+          return context.chart.data.labels[context.dataIndex] + ': ' + value;
+        },
+        color: 'black'
+      }
+    }
+  };
+  
+  var myPieChart = new Chart(graphCanvas, {
     type: 'doughnut',
     data: {
-        // ラベル名変更
-        labels: ['好調', '不調', '普通', '複雑'],
-        datasets: [{
-            data: [Data.positive, Data.negative, Data.neutral, Data.mixed],
-            backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)', 'rgba(128, 128, 128, 0.2)'] , // カラーコードを指定
-            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)', 'rgba(128, 128, 128, 1)'],
-            borderWidth: [1, 1, 1, 1]
-        }]
-    }
-});
-
+      labels: ['好調', '不調', '普通', '複雑'],
+      datasets: [{
+        data: [Data.positive, Data.negative, Data.neutral, Data.mixed],
+        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)', 'rgba(128, 128, 128, 0.2)'],
+        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)', 'rgba(128, 128, 128, 1)'],
+        borderWidth: [1, 1, 1, 1]
+      }]
+    },
+    options: options,
+    plugins: [ChartDataLabels],
+    plugins: [{
+      afterDraw: function(chart) {
+        var ctx = labelCanvas;
+        ctx.clearRect(0, 0, labelCanvas.width, labelCanvas.height);
+  
+        var fontSize = 14;
+        var fontFamily = 'MS Mincho';
+        ctx.font = fontSize + 'px ' + fontFamily;
+        ctx.fillStyle = 'blue';
+  
+        chart.data.labels.forEach(function(label, index) {
+          var yPos = (index + 1) * (fontSize + 5);
+          ctx.fillText(label + ': ' + chart.data.datasets[0].data[index], 10, yPos);
+        });
+      }
+    }]
+  });
 // 円グラフのクリックイベント処理
 
 canvas.onclick = function(evt) {
