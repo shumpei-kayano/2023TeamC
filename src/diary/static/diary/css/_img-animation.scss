@@ -1,0 +1,21 @@
+// ログアウト・削除ページのアニメーション
+.cancel__neko, .diary_delete__neko-img {
+	animation: buruburu .1s  infinite;
+}
+@keyframes buruburu {
+    0% {
+        transform: translate(0, 2px) rotateZ(0deg);
+    }
+    25% {
+        transform: translate(2px, 0) rotateZ(1deg);
+    }
+    50% {
+        transform: translate(2px, 2px) rotateZ(0deg);
+    }
+    75% {
+        transform: translate(2px, 0) rotateZ(-1deg);
+    }
+    100% {
+        transform: translate(0, 0) rotateZ(0deg);
+    }
+}

@@ -13,31 +13,26 @@
 {% block header %}
 <header>
     {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
-
     {% if today != diary.created_date %}
     {% if cal %}
     <div class="header__button">
-      <div class="header__back__img">
-          {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
-          <a href="{% url month cal %}">
-              <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  
-                  <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
-              </svg>
-              月</a>
-      </div>
-  </div>
-  <div class="header__button">
-    <div class="header__back__img">
-        {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
-        <a href="{% url week cal %}">
-            <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                
-                <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
-            </svg>
-            週</a>
+        <div id="calendar__back-btn" class="header__back__img">
+            {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+            <a href="{% url month cal %}">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.6 1.27273H11.9V0H10.5V1.27273H3.5V0H2.1V1.27273H1.4C0.63 1.27273 0 1.84545 0 2.54545V12.7273C0 13.4273 0.63 14 1.4 14H12.6C13.37 14 14 13.4273 14 12.7273V2.54545C14 1.84545 13.37 1.27273 12.6 1.27273ZM12.6 12.7273H1.4V4.45455H12.6V12.7273Z" fill="white"/>
+                </svg>
+                月</a>
+        </div>
+        <div class="header__back__img">
+            {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+            <a href="{% url week cal %}">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.794118 8.67857H2.38235C2.81912 8.67857 3.17647 8.24464 3.17647 7.71429V5.78571C3.17647 5.25536 2.81912 4.82143 2.38235 4.82143H0.794118C0.357353 4.82143 0 5.25536 0 5.78571V7.71429C0 8.24464 0.357353 8.67857 0.794118 8.67857ZM0.794118 13.5H2.38235C2.81912 13.5 3.17647 13.0661 3.17647 12.5357V10.6071C3.17647 10.0768 2.81912 9.64286 2.38235 9.64286H0.794118C0.357353 9.64286 0 10.0768 0 10.6071V12.5357C0 13.0661 0.357353 13.5 0.794118 13.5ZM0.794118 3.85714H2.38235C2.81912 3.85714 3.17647 3.42321 3.17647 2.89286V0.964286C3.17647 0.433929 2.81912 0 2.38235 0H0.794118C0.357353 0 0 0.433929 0 0.964286V2.89286C0 3.42321 0.357353 3.85714 0.794118 3.85714ZM4.76471 8.67857H12.7059C13.1426 8.67857 13.5 8.24464 13.5 7.71429V5.78571C13.5 5.25536 13.1426 4.82143 12.7059 4.82143H4.76471C4.32794 4.82143 3.97059 5.25536 3.97059 5.78571V7.71429C3.97059 8.24464 4.32794 8.67857 4.76471 8.67857ZM4.76471 13.5H12.7059C13.1426 13.5 13.5 13.0661 13.5 12.5357V10.6071C13.5 10.0768 13.1426 9.64286 12.7059 9.64286H4.76471C4.32794 9.64286 3.97059 10.0768 3.97059 10.6071V12.5357C3.97059 13.0661 4.32794 13.5 4.76471 13.5ZM3.97059 0.964286V2.89286C3.97059 3.42321 4.32794 3.85714 4.76471 3.85714H12.7059C13.1426 3.85714 13.5 3.42321 13.5 2.89286V0.964286C13.5 0.433929 13.1426 0 12.7059 0H4.76471C4.32794 0 3.97059 0.433929 3.97059 0.964286Z" fill="white"/>
+                </svg>
+                週</a>
+        </div>
     </div>
-</div>
     {% endif %}
     {% endif %}
 
@@ -45,12 +40,8 @@
     {% if not cal or today == diary.created_date  %}
     <div class="header__spacer--top"></div>
     {% endif %}
-    <h1 class="date">--/--(-)</h1>
-    <div class="header__weather">
-        <img class="weatherImg">
-        <span class="tempMax">-℃</span>
-    </div>
-    
+    <h1>日記詳細</h1>
+    <div class="header__spacer--top"></div>
 </header>
 {% endblock %}
 
@@ -122,12 +113,16 @@
                                             <div class="modal__content">
                                                 <img id="modalImage1" class="modal__content__img" src="" alt="Diary Photo1">
                                             </div>
+                                            <div class="modal__button-wrap">
+                                                <button class="close-button js-close-button" onclick="closeModal('modal1')">閉じる
+                                                </button>
+                                            </div>
                                         </div>
 
-                                        <div class="modal__button-wrap">
+                                        {% comment %} <div class="modal__button-wrap">
                                             <button class="close-button js-close-button" onclick="closeModal('modal1')">閉じる
                                             </button>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +258,9 @@
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
                             <video src="{{ diary.movie2.url }}" alt="Diary Movie2"></video>
+                            <svg class="play-button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 0C6.7125 0 0 6.7125 0 15C0 23.2875 6.7125 30 15 30C23.2875 30 30 23.2875 30 15C30 6.7125 23.2875 0 15 0ZM11.25 7.5L22.5 15L11.25 22.5V7.5Z" fill="white"/>
+                            </svg>
                         </button>
                     </div>
                     {% endif %}
@@ -287,6 +285,9 @@
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
                             <video src="{{ diary.movie3.url }}" alt="Diary Movie3"></video>
+                            <svg class="play-button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 0C6.7125 0 0 6.7125 0 15C0 23.2875 6.7125 30 15 30C23.2875 30 30 23.2875 30 15C30 6.7125 23.2875 0 15 0ZM11.25 7.5L22.5 15L11.25 22.5V7.5Z" fill="white"/>
+                            </svg>
                         </button>
                     </div>
                     {% endif %}
@@ -311,6 +312,9 @@
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
                             <video src="{{ diary.movie4.url }}" alt="Diary Movie4"></video>
+                            <svg class="play-button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 0C6.7125 0 0 6.7125 0 15C0 23.2875 6.7125 30 15 30C23.2875 30 30 23.2875 30 15C30 6.7125 23.2875 0 15 0ZM11.25 7.5L22.5 15L11.25 22.5V7.5Z" fill="white"/>
+                            </svg>
                         </button>
                     </div>
                     {% endif %}
@@ -332,7 +336,7 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
-                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
             </div>
         {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
         {% else %}
@@ -345,7 +349,7 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
-                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
             </div>
         {% endif %}
 

@@ -30,11 +30,9 @@
         </div>
     </div>
 
-    <h1 class="date">--/--(-)</h1>
-    <div class="header__weather">
-        <img class="weatherImg">
-        <span class="tempMax">-℃</span>
-    </div>
+    <h1>日記作成</h1>
+    <div class="header__spacer--top"></div>
+
 </header>
 {% endblock %}
 
@@ -153,7 +151,7 @@
                 <samll class="content__today-diary_samll">※各４枚まで</samll>
 
                 <div class="btn--blue">
-                    <button id="submitButton" type="submit">保 存</button>
+                    <button id="submitButton" type="submit">保存</button>
                     <div id="loading">
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">

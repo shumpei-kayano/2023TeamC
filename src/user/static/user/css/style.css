@@ -1173,7 +1173,6 @@ label {
 }
 
 #password_reset__back-home {
-  display: block;
   margin: 0 auto;
 }
 
@@ -1632,6 +1631,7 @@ article {
 }
 .back-home {
   margin-top: 30px;
+  margin-left: 0;
 }
 
 .btn--white {
@@ -1818,4 +1818,40 @@ article {
     width: 100%;
     max-width: none;
   }
+}
+.cancel__neko {
+  animation: buruburu 0.1s infinite;
+}
+
+@keyframes buruburu {
+  0% {
+    transform: translate(0, 2px) rotateZ(0deg);
+  }
+  25% {
+    transform: translate(2px, 0) rotateZ(1deg);
+  }
+  50% {
+    transform: translate(2px, 2px) rotateZ(0deg);
+  }
+  75% {
+    transform: translate(2px, 0) rotateZ(-1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotateZ(0deg);
+  }
+}
+.article__content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+article.appear .article__content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.animation .article__content {
+  opacity: 1;
+  pointer-events: auto;
 }
