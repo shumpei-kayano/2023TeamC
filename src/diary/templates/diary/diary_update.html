@@ -50,7 +50,7 @@
 
             {% comment %} create_diaryのコピー {% endcomment %}
             {% csrf_token %}
-            <samll class="created-date_update">作成日時：{{diary.created_date}}</samll>
+            <samll class="created-date_update">作成日：{{diary.created_date}}</samll>
             <div class="content__today-diary">
                 <div class="FlexTextarea"><!-- CSSのため追加 -->
                     <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.svg' %}" alt="テキストエリア背景画像">
@@ -875,7 +875,7 @@
                     <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                     <div class="loading-content">
                         <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                        <p class="loading__text">読み込み中</P>
+                        <p class="loading__text">保存中にゃ</P>
                         <span class="dli-loading-1"></span>
                     </div>
                 </div>
@@ -894,10 +894,14 @@
         let countDisplay = count + '/' + maxLength;
         $('#characterCount').text(countDisplay);
 
-        if (count > maxLength) {
+        if (count >= maxLength) {
             $('#characterCount').addClass('error'); // スタイリング用のクラスを追加
             $('#characterCount').text('入力できる文字数を超えています。' + countDisplay);
+            // 1000文字超えてたら保存ボタンを押せなくする
+            submitButton.disabled = true;
         } else {
+            // 1000文字下回ってたら保存ボタンを押せるようにする
+            submitButton.disabled = false;
             $('#characterCount').removeClass('error'); // エラーがない場合はクラスを削除
         }
     }
