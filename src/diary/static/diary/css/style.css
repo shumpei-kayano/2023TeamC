@@ -1153,21 +1153,38 @@ th, td {
   bottom: 8.4rem;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-.setting__menu__img .setting__menu__img-item {
-  width: 160px;
-  display: block;
+.setting__menu__img .setting__menu__img-item--left, .setting__menu__img .setting__menu__img-item--right {
+  width: 80px;
 }
-.setting__menu__img .help__menu__img-item {
-  display: block;
+.setting__menu__img .setting__menu__img-item--center {
+  width: 40px;
+}
+.setting__menu__img .setting-help__menu__img-item--left, .setting__menu__img .setting-help__menu__img-item--right {
+  width: 120px;
+}
+.setting__menu__img .setting-help__menu__img-item--center {
+  width: 55px;
 }
 
 @media only screen and (min-height: 600px) {
   .setting__menu__img {
     bottom: 10rem;
   }
-  .setting__menu__img .setting__menu__img-item {
-    width: auto;
+  .setting__menu__img .setting__menu__img-item--left, .setting__menu__img .setting__menu__img-item--right {
+    width: 110px;
+  }
+  .setting__menu__img .setting__menu__img-item--center {
+    width: 60px;
+  }
+  .setting__menu__img .setting-help__menu__img-item--left, .setting__menu__img .setting-help__menu__img-item--right {
+    width: 110px;
+  }
+  .setting__menu__img .setting-help__menu__img-item--center {
+    width: 60px;
   }
 }
 .user-infomation--center {
@@ -1595,7 +1612,7 @@ input[type=text]:focus, input[type=email]:focus {
     max-width: 200px;
   }
   .content__home__logo {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   .content__home__text p {
     font-size: 16px;
@@ -2063,23 +2080,6 @@ input[type=text]:focus, input[type=email]:focus {
   margin-bottom: 24px;
 }
 
-.diary-detail-img--animation {
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1.5s;
-}
-
-.content__diary__comment__img-item, .graph__img--keyframe {
-  animation-name: anim_sc;
-  transform: scale(0.85, 0.85);
-}
-
-@keyframes anim_sc {
-  100% {
-    transform: scale(1, 1);
-  }
-}
 /* グレー背景 */
 .layer {
   background: rgba(0, 0, 0, 0.701);
@@ -2660,6 +2660,15 @@ button {
   margin: 0;
 }
 
+#content__positive-diary__title {
+  text-align: center;
+  color: #04CAD6;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
 .content__positive-diary__img {
   display: block;
   margin: 0 auto;
@@ -2840,5 +2849,101 @@ section {
   }
   100% {
     transform: translate(0, 0) rotateZ(0deg);
+  }
+}
+.diary-detail-img--animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+}
+
+.content__diary__comment__img-item, .graph__img--keyframe {
+  animation-name: anim_sc;
+  transform: scale(0.85, 0.85);
+}
+
+@keyframes anim_sc {
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.user-infomation__image--dango {
+  animation: purupuru 0.8s linear 0s 1;
+}
+
+@keyframes purupuru {
+  0% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  20% {
+    transform: scale(1, 1.06) translate(-5%, -4%) skew(6deg, 0deg);
+  }
+  50% {
+    transform: scale(1, 0.94) translate(5%, 4%) skew(-6deg, 0deg);
+  }
+  65% {
+    transform: scale(1, 1.03) translate(2%, -2%) skew(-3deg, 0deg);
+  }
+  80% {
+    transform: scale(1, 0.97) translate(-2%, 2%) skew(3deg, 0deg);
+  }
+  100% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+}
+.setting__menu__img-item--left, .setting__menu__img-item--center, .setting__menu__img-item--right, .setting-help__menu__img-item--left, .setting-help__menu__img-item--center, .setting-help__menu__img-item--right {
+  animation: bikkuri 10s both infinite; /* アニメーションの長さを10秒に設定 */
+}
+
+@keyframes bikkuri {
+  0%, 9% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-10px);
+  }
+  11% {
+    transform: translateY(0);
+  }
+  12% {
+    transform: translateY(-5px);
+  }
+  13%, 50% {
+    transform: translateY(0);
+  }
+  51% {
+    transform: translateY(-10px);
+  }
+  52% {
+    transform: translateY(0);
+  }
+  53% {
+    transform: translateY(-5px);
+  }
+  54%, 100% {
+    transform: translateY(0px);
+  }
+}
+.content__home__text__anime:nth-child(1),
+.content__home__text__anime:nth-child(2) {
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+}
+
+.content__home__text__anime:nth-child(1) {
+  animation: textAnime 0.7s steps(12) forwards;
+  animation-delay: 1s; /* アニメーションを1秒遅延させる */
+}
+
+.content__home__text__anime:nth-child(2) {
+  animation: textAnime 0.7s steps(12) forwards;
+  animation-delay: 1.7s; /* 2行目のアニメーションを2秒遅延させる */
+}
+
+@keyframes textAnime {
+  100% {
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
   }
 }

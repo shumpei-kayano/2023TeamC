@@ -13,3 +13,4 @@ awscli
 boto3
 faker
 django_seed
+django-axes
