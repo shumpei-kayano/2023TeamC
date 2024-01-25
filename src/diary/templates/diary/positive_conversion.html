@@ -96,49 +96,13 @@
             
 
         <div class="btn--white">
-            <a href="{% url  'diary:diary_update' diary.id %}">キャンセル</a>
+            <a href="{% url  'diary:today_diary_detail' diary.id %}">キャンセル</a>
         </div>
 
         <!-- ポップアップ要素
         <div class="popup" id="popup">
             <p>特定の条件に合致しました。メッセージを表示します。</p>
         </div> -->
-
-        <!-- ポップアップ要素 -->
-        {% if 特定の条件でカウンセリング催促ポップアップを表示させる %}
-        <div class="popup" id="first-popup">
-            <div class="popup__text">
-                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを受けるにゃ。</p>
-            </div>
-            <div class="popup__img">
-                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-            </div>
-            <div class="button">
-                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-            </div>
-            <div class="gray__button">
-                <button class="close-button" onclick="closePopup('first-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
-            </div>
-        </div>
-
-        <div class="popup" id="second-popup">
-            <div class="popup__text">
-                <p>キャンセルするとカウンセリングを<br>
-                    受けることができなくなります。<br>
-                    キャンセルしますか？</p>
-            </div>
-            <div class="popup__img">
-                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
-            </div>
-            <div class="button">
-                <button type="button" onclick="location.href='{% url 'today_counseling.htmlに遷移させてください' %}'">ネココのアドバイスを受ける</button>
-            </div>
-            <div class="gray__button">
-                <button class="close-button" onclick="closePopup('second-popup')"><img src="{% static 'diary/assets/close.svg' %}" alt="アイコン">キャンセル</button>
-            </div>
-        </div>
-        {% endif %}
-
     </div>
 </main>
 </section>

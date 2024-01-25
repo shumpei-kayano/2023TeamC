@@ -525,7 +525,21 @@ def home_top(request):
     diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
         return redirect('diary:today_diary_detail')
-    return render(request, 'diary/home_top.html')
+
+    openai.api_key = settings.OPENAI_API_KEY
+    short = """豆知識を一言ください。"""
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages= [
+                {   "role"      : "user",
+                    "content"   : short
+                }
+            ]
+    )
+    ai_comment = response["choices"][0]["message"]["content"]
+    shortstory = ai_comment
+
+    return render(request, 'diary/home_top.html', {'shortstory':shortstory})
     
 
 @login_required
@@ -901,3 +915,11 @@ def record_diary_detail(request):
 def record_diary_graph(request):
   return render(request,'diary/record_diary_graph.html')
 
+
+from django.core.exceptions import PermissionDenied
+
+def forbidden_view(request):
+    raise PermissionDenied("You don't have permission to access this resource.")
+def internal_server_error_view(request):
+    # 何らかのエラーが発生したと仮定
+    raise Exception("Something went wrong!")

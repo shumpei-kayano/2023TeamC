@@ -7,7 +7,7 @@ class Diary(models.Model):
     # ユーザーへの外部キー
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     # 日記の内容
-    content = models.TextField(verbose_name='内容', max_length=1000, blank=False, null=False)
+    content = models.TextField(verbose_name='内容', max_length=1050, blank=False, null=False)
     # 作成日時
     created_date = models.DateField(verbose_name='作成日時', null=True)
     # 写真へのリンク (空であることも許可)
