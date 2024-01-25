@@ -75,6 +75,7 @@
             <form method="POST" action="{% url 'diary:positive_conversion2' diary.pk %}" enctype='multipart/form-data'>
                 {% csrf_token %}
                 <div class="content__positive-diary__text">
+                    <p id="content__positive-diary__title">ポジティブ変換後</p>
                     <p>
                         {{ save_content }}
                     </p>
@@ -86,7 +87,7 @@
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
                             <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
-                            <p class="loading__text">読み込み中</P>
+                            <p class="loading__text">保存中にゃ</P>
                             <span class="dli-loading-1"></span>
                         </div>
                     </div>
