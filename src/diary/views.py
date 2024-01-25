@@ -525,7 +525,21 @@ def home_top(request):
     diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
         return redirect('diary:today_diary_detail')
-    return render(request, 'diary/home_top.html')
+
+    openai.api_key = settings.OPENAI_API_KEY
+    short = """豆知識を一言ください。"""
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages= [
+                {   "role"      : "user",
+                    "content"   : short
+                }
+            ]
+    )
+    ai_comment = response["choices"][0]["message"]["content"]
+    shortstory = ai_comment
+
+    return render(request, 'diary/home_top.html', {'shortstory':shortstory})
     
 
 @login_required
