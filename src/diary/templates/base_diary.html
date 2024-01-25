@@ -91,6 +91,35 @@
 
 <script src="{% static 'diary/js/weather.js' %}"></script>
 
+<!-- 背景画像の切り替え -->
+<script>
+    let images = [
+        "http://localhost/static/diary/assets/html_groud_A.svg",
+        "http://localhost/static/diary/assets/html_groud_B.svg",
+        "http://localhost/static/diary/assets/html_groud_C.svg",
+        "http://localhost/static/diary/assets/html_groud_D.svg",
+        "http://localhost/static/diary/assets/html_groud_E.svg",
+    ];
+    let defaultImage = "http://localhost/static/diary/assets/html_groud.png";
+
+    let count = localStorage.getItem('loadCount') || 0;
+    count++;
+
+    // カウントが1000に達したら0にリセット
+    if (count > 1000) {
+        count = 0;
+    }
+
+    let backgroundImage = defaultImage;
+    if (count % 10 === 0) {
+        let imageIndex = (count / 10 - 1) % images.length;
+        backgroundImage = images[imageIndex];
+    }
+    document.body.style.backgroundImage = `url(${backgroundImage})`;
+
+    localStorage.setItem('loadCount', count);
+</script>
+
 {% block js %}{% endblock %}
 
 </body>
