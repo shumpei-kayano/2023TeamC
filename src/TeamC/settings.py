@@ -2,6 +2,8 @@ from pathlib import Path
 import os
 # debug_toolbarの設定
 import mimetypes
+import datetime
+
 mimetypes.add_type("application/javascript", ".js", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'axes',
 ]
 
 
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'allauth.account.middleware.AccountMiddleware',#追加
+    'axes.middleware.AxesMiddleware',#追加
 ]
 
 INTERNAL_IPS = ['127.0.0.1', '::1', 'localhost', '0.0.0.0']
@@ -205,3 +209,6 @@ SOCIALACCOUNT_FORMS = {
 
 OPENAI_API_KEY = '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'
 
+AXES_FAILURE_LIMIT = 5  # 5回の失敗後にロックアウト
+
+AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # hours=24とかもできる
