@@ -894,10 +894,14 @@
         let countDisplay = count + '/' + maxLength;
         $('#characterCount').text(countDisplay);
 
-        if (count > maxLength) {
+        if (count >= maxLength) {
             $('#characterCount').addClass('error'); // スタイリング用のクラスを追加
             $('#characterCount').text('入力できる文字数を超えています。' + countDisplay);
+            // 1000文字超えてたら保存ボタンを押せなくする
+            submitButton.disabled = true;
         } else {
+            // 1000文字下回ってたら保存ボタンを押せるようにする
+            submitButton.disabled = false;
             $('#characterCount').removeClass('error'); // エラーがない場合はクラスを削除
         }
     }
