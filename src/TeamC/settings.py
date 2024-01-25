@@ -209,6 +209,10 @@ SOCIALACCOUNT_FORMS = {
 
 OPENAI_API_KEY = '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'
 
+#--------------------アカウントロック設定--------------------
 AXES_FAILURE_LIMIT = 5  # 5回の失敗後にロックアウト
 
-AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # hours=24とかもできる
+AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # 30秒間ロック
+
+ACCOUNT_LOCKED_URL = '/accounts/login/'
+
