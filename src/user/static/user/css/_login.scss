@@ -250,6 +250,10 @@ article{
     margin-top: 20px;
     margin-bottom: 40px;
 }
+.user-infomation__style--center{
+    margin: 0 auto;
+    max-width: 342px;
+}
 @media only screen and (max-height: 599px){
     #ground__login {
         height: 100%;
