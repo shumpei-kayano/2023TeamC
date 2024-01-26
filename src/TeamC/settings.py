@@ -23,6 +23,9 @@ DEBUG = False
 ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.']
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
