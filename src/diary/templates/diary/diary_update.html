@@ -50,7 +50,7 @@
 
             {% comment %} create_diaryのコピー {% endcomment %}
             {% csrf_token %}
-            <samll class="created-date_update">作成日：{{diary.created_date}}</samll>
+            <samll class="created-date_update">{{diary.created_date}}の日記</samll>
             <div class="content__today-diary">
                 <div class="FlexTextarea"><!-- CSSのため追加 -->
                     <img class="content__textarea__img" src="{% static 'diary/assets/textarea_img.svg' %}" alt="テキストエリア背景画像">

@@ -1849,6 +1849,7 @@ input[type=text]:focus, input[type=email]:focus {
 #loading .loading-content .loading__text {
   font-size: 2rem;
   letter-spacing: 0.04em;
+  font-weight: 400;
   padding-top: 30px;
 }
 
@@ -2946,4 +2947,7 @@ section {
     -webkit-clip-path: inset(0 0 0 0);
             clip-path: inset(0 0 0 0);
   }
+}
+.loading__text {
+  font-weight: 400;
 }
