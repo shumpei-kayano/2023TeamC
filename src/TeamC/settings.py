@@ -16,11 +16,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# デバック
+DEBUG = False
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+# 本番環境だと変える
+ALLOWED_HOSTS = ['35.168.23.108', 'teamc.o-hara-oita.click']
 
 
 # Application definition
