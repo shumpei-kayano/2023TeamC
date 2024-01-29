@@ -1,11 +1,42 @@
-{% extends "base_diary.html" %}
-
+<!-- 過去の日記詳細 -->
 {% load static %}
 
-{% block content %}
-<h1>ページが見つかりませんでした</h1>
-<p>お手数ですが、再度トップページからやり直してください。</p>
-<div class="btn--large">
-    <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">トップに戻る</button>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="AI×ネコの日記アプリ">
+    <title>404エラー</title>
+    <link rel="icon" href="{% static 'diary/assets/icon.svg' %}" />
+    <!--mystyle-->
+    <link rel="stylesheet" href="{% static 'diary/css/sanitize.css' %}">
+    <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
+    <!-- footerのスタイル追加 -->
+    {% block css %}{% endblock %}
+    <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummV9aw8Ned2gn7EwN-SgkIyuV0RdLSA&language=ja&callback=initMap"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>const STATIC_URL = "{% static 'diary/assets/' %}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div id="error__page">
+    <img id="error__page__logo" src="{% static 'diary/assets/logo.svg'%}" alt="Neko Image">
+    <div id="error__page__content">
+        <h1 class="error__page__h1">404 エラー<br>ページが見つかりません</h1>
+        <img class="error__page__content__img" src="{% static 'diary/assets/cancel_neko.svg'%}" alt="Loading Image">
+        <p class="error__page__text">アクセスしようとしたページは削除、変更されたか、現在利用できない可能性があります。
+        <br>お手数ですが、トップページからやり直してください。</p>
+        <div id="error__page__btn--large" class="btn--large">
+            <button type="button" onclick="location.href='{% url 'user:account_top' %}'">トップに戻る</button>
+        </div>
+    </div>
 </div>
-{% endblock %}
+
+</body>
+</html>

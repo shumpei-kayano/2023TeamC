@@ -6,26 +6,31 @@
     // justify-content: center;
     // align-items: center;
     width: 100%;
-    height: calc(100vh - 11rem);
+    height: 100%;
 }
 
 .slider-container {
     position: relative;
     width: 100%;
     overflow: hidden;
+
+    // height: 100%;
 }
 
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 500%; /* スライドの数に応じて調整 */
+    background-color: #fff;
+
+    // align-items: center;
 }
 
 .slide {
     flex: 0 0 20%; /* スライドの数に応じて調整 */
     padding: 20px;
-    padding-top: 24px;
-    padding-bottom: 130px; /* ボタンの高さとマージンに合わせて調整 */
+    padding-top: 40px;
+    padding-bottom: 134px; /* ボタンの高さとマージンに合わせて調整 */
     visibility: hidden;
     transition: visibility 1s ease-in-out;
 
@@ -94,8 +99,6 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    align-items: center;
-    justify-content: center;
 }
 
 button {
@@ -132,7 +135,7 @@ button {
     justify-content: space-between;
     margin-left: 24px;
     margin-right: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
 }
 .prev-btn{
     padding: 12px 32px;
@@ -189,7 +192,47 @@ button {
         padding-bottom: 30px;
     }
 }
-
+@media only screen and (max-height: 599px) {
+    .slid__img--1 {
+        padding-top: 30px !important;
+        width: 278px !important;
+    }
+    .slid2__img--1, .slid2__img--2 {
+        width: 215px !important;
+    }
+}
+// SE
+@media only screen and (max-width: 376px){
+    .slide {
+        padding-top: 20px !important;
+    }
+    .slid__img--1 {
+        padding-top: 24px !important;
+        width: 210px !important;
+    }
+    .slid2__img--1, .slid2__img--2 {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .slid3__img--1, .slid4__img--1, .slid5__img--1 {
+        padding-top: 10px !important;
+        width: 226px !important;
+    }
+}
+@media only screen and (min-height: 800px){
+    .slide {
+        padding-top: 60px !important;
+    }
+    .pagination__btn {
+        margin-bottom: 60px !important;
+    }
+    .pagination {
+        margin-bottom: 30px !important;
+    }
+    .slide p {
+        margin-top: 20px !important;
+    }
+}
 // footer {
 //     display: none;
 // }
@@ -216,23 +259,6 @@ button {
 //     background-color: white;
 //     margin-top: 0;
 // }
-
-.ground.ground--white {
-    background-color: white;
-    flex-grow: 1;
-}
-
-.tutorial1-page header {
-    background-color: white;
-}
-
-.tutorial1-page footer {
-    background-color: white;
-}
-
-.ground.ground--white {
-    padding-bottom: 45px;
-}
 
 // .ground--white {
 //     // ground--whiteに特有のプロパティをここに記述します

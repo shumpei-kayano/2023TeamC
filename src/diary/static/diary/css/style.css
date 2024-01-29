@@ -251,6 +251,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+  font-weight: 700;
 }
 .btn--blue button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
@@ -830,10 +831,9 @@ th, td {
 }
 
 .week-calendar__diary {
+  position: relative;
   height: 76px;
   text-align: left;
-  padding-left: 24px;
-  padding-right: 24px;
   font-size: 1.6rem;
   color: #A29C9C;
 }
@@ -854,6 +854,17 @@ th, td {
 }
 
 .week-calendar__table__a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
   text-decoration: none;
   color: #A29C9C;
 }
@@ -1142,21 +1153,38 @@ th, td {
   bottom: 8.4rem;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-.setting__menu__img .setting__menu__img-item {
-  width: 160px;
-  display: block;
+.setting__menu__img .setting__menu__img-item--left, .setting__menu__img .setting__menu__img-item--right {
+  width: 80px;
 }
-.setting__menu__img .help__menu__img-item {
-  display: block;
+.setting__menu__img .setting__menu__img-item--center {
+  width: 40px;
+}
+.setting__menu__img .setting-help__menu__img-item--left, .setting__menu__img .setting-help__menu__img-item--right {
+  width: 120px;
+}
+.setting__menu__img .setting-help__menu__img-item--center {
+  width: 55px;
 }
 
 @media only screen and (min-height: 600px) {
   .setting__menu__img {
     bottom: 10rem;
   }
-  .setting__menu__img .setting__menu__img-item {
-    width: auto;
+  .setting__menu__img .setting__menu__img-item--left, .setting__menu__img .setting__menu__img-item--right {
+    width: 110px;
+  }
+  .setting__menu__img .setting__menu__img-item--center {
+    width: 60px;
+  }
+  .setting__menu__img .setting-help__menu__img-item--left, .setting__menu__img .setting-help__menu__img-item--right {
+    width: 110px;
+  }
+  .setting__menu__img .setting-help__menu__img-item--center {
+    width: 60px;
   }
 }
 .user-infomation--center {
@@ -1196,6 +1224,10 @@ th, td {
 }
 .content__user-info__list .content__user-info__list__btn:hover {
   background-color: #00909A;
+}
+
+#user-info-password {
+  font-size: 1.4rem;
 }
 
 .user-infomation__image {
@@ -1480,7 +1512,7 @@ input[type=text]:focus, input[type=email]:focus {
   }
 }
 .btn--large {
-  margin: 10px auto 20px auto;
+  margin: 15px auto 20px auto;
 }
 
 .content__home {
@@ -1518,6 +1550,26 @@ input[type=text]:focus, input[type=email]:focus {
   align-items: center;
 }
 
+.home-img_animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+}
+
+.keyframe0 {
+  animation-name: jump;
+  animation-duration: 1.5s;
+}
+
+@keyframes jump {
+  0% {
+    transform: translate(0%, 40px) rotateX(30deg);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
 @media only screen and (max-width: 960px) {
   .content-center {
     display: flex;
@@ -1525,9 +1577,6 @@ input[type=text]:focus, input[type=email]:focus {
     height: 100%;
     justify-content: center;
     align-items: center;
-  }
-  .btn--large {
-    margin: 24px auto 40px auto;
   }
   .content__home__logo img, .content__home__img img {
     width: auto;
@@ -1546,7 +1595,7 @@ input[type=text]:focus, input[type=email]:focus {
 @media only screen and (max-height: 599px) {
   /* 画面の高さが600px未満の場合のスタイル */
   .btn--large {
-    margin: 10px auto 20px auto;
+    margin: 30px auto 20px auto;
   }
   .content__home {
     display: flex;
@@ -1563,12 +1612,29 @@ input[type=text]:focus, input[type=email]:focus {
     max-width: 200px;
   }
   .content__home__logo {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   .content__home__text p {
     font-size: 16px;
     margin: 0 auto;
     text-align: center;
+  }
+}
+@media only screen and (min-height: 600px) {
+  .btn--large {
+    margin: 40px auto 24px auto !important;
+  }
+  .keyframe0 {
+    animation-name: jump;
+    animation-duration: 1.5s;
+  }
+  @keyframes jump {
+    0% {
+      transform: translate(0%, 60px) rotateX(50deg);
+    }
+    100% {
+      transform: translate(0%, 0%);
+    }
   }
 }
 .content__today-diary-confirmation__img {
@@ -1783,6 +1849,7 @@ input[type=text]:focus, input[type=email]:focus {
 #loading .loading-content .loading__text {
   font-size: 2rem;
   letter-spacing: 0.04em;
+  font-weight: 400;
   padding-top: 30px;
 }
 
@@ -1790,12 +1857,12 @@ input[type=text]:focus, input[type=email]:focus {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  color: #666;
+  color: #04CAD6;
   line-height: 1;
   width: 3rem;
   height: 3rem;
   border: 0.2em solid currentColor;
-  border-top-color: rgba(102, 102, 102, 0.3);
+  border-top-color: rgba(4, 202, 214, 0.27);
   border-radius: 50%;
   box-sizing: border-box;
   animation: rotate 1s linear infinite;
@@ -1819,6 +1886,10 @@ input[type=text]:focus, input[type=email]:focus {
     max-width: none;
   }
 }
+#calendar__back-btn {
+  margin-right: 8px !important;
+}
+
 .content__today-diary__text {
   width: 100%;
   background-color: #FFFFFF;
@@ -2029,6 +2100,7 @@ input[type=text]:focus, input[type=email]:focus {
   z-index: 999;
   opacity: 1;
   visibility: visible;
+  overflow-y: scroll;
 }
 
 .layer.is-open .modal {
@@ -2036,24 +2108,47 @@ input[type=text]:focus, input[type=email]:focus {
   visibility: visible;
 }
 
+.layer::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.layer::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.layer::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
 /* モーダルコンテンツ */
 .modal {
   position: relative;
   max-width: 390px;
-  height: auto;
+  height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0.3s linear, opacity 0.3s linear;
   display: block;
+  margin-top: 24px;
+  margin-bottom: 24px;
   margin-right: auto;
   margin-left: auto;
 }
 
+.modal__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .modal__content .modal__content__img {
-  margin-top: 50px;
-  width: 390px;
+  width: 100%;
   height: auto;
-  max-height: 405px;
 }
 
 .modal__button-wrap {
@@ -2094,12 +2189,10 @@ input[type=text]:focus, input[type=email]:focus {
   }
   /* モーダルコンテンツ */
   .modal {
-    max-width: 390px;
+    width: 100%;
   }
-  .modal__content .modal__content__img {
-    margin-top: 50px;
-    max-width: 390px;
-    max-height: 405px;
+  .modal__contents .modal__content__img {
+    width: 100%;
   }
 }
 @media only screen and (min-height: 600px) {
@@ -2112,9 +2205,7 @@ input[type=text]:focus, input[type=email]:focus {
     width: 100% !important;
   }
   .modal__content .modal__content__img {
-    margin-top: 150px !important;
     width: 100% !important;
-    max-height: 526px !important;
   }
   .modal__button-wrap {
     margin-top: 30px !important;
@@ -2590,6 +2681,15 @@ button {
   margin: 0;
 }
 
+#content__positive-diary__title {
+  text-align: center;
+  color: #04CAD6;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
 .content__positive-diary__img {
   display: block;
   margin: 0 auto;
@@ -2688,4 +2788,186 @@ article.appear .content {
 /* タグ内のすべての要素にアニメーションを適用 */
 section {
   animation: slideIn 0.5s ease-out;
+}
+
+#error__page {
+  width: 39rem;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: #EEFEFF;
+}
+#error__page #error__page__logo {
+  position: absolute; /* 絶対位置に設定 */
+  top: 0; /* 上端に配置 */
+  width: 90px;
+  margin: 24px auto 0 24px;
+}
+#error__page #error__page__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+#error__page #error__page__content #error__page__logo {
+  width: 113px;
+  margin: 40px auto 40px 24px;
+}
+#error__page #error__page__content .error__page__h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 30px 24px 24px 24px;
+  line-height: 170%;
+}
+#error__page #error__page__content .error__page__text {
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  margin: 24px 24px;
+}
+#error__page #error__page__content #error__page__btn--large {
+  margin: 0 auto !important;
+}
+
+#error__page::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+#error__page::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+#error__page::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
+@media only screen and (max-width: 960px) {
+  #error__page {
+    width: 100%;
+    max-width: none;
+  }
+}
+.cancel__neko, .diary_delete__neko-img {
+  animation: buruburu 0.1s infinite;
+}
+
+@keyframes buruburu {
+  0% {
+    transform: translate(0, 2px) rotateZ(0deg);
+  }
+  25% {
+    transform: translate(2px, 0) rotateZ(1deg);
+  }
+  50% {
+    transform: translate(2px, 2px) rotateZ(0deg);
+  }
+  75% {
+    transform: translate(2px, 0) rotateZ(-1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotateZ(0deg);
+  }
+}
+.diary-detail-img--animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1.5s;
+}
+
+.content__diary__comment__img-item, .graph__img--keyframe {
+  animation-name: anim_sc;
+  transform: scale(0.85, 0.85);
+}
+
+@keyframes anim_sc {
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.user-infomation__image--dango {
+  animation: purupuru 0.8s linear 0s 1;
+}
+
+@keyframes purupuru {
+  0% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  20% {
+    transform: scale(1, 1.06) translate(-5%, -4%) skew(6deg, 0deg);
+  }
+  50% {
+    transform: scale(1, 0.94) translate(5%, 4%) skew(-6deg, 0deg);
+  }
+  65% {
+    transform: scale(1, 1.03) translate(2%, -2%) skew(-3deg, 0deg);
+  }
+  80% {
+    transform: scale(1, 0.97) translate(-2%, 2%) skew(3deg, 0deg);
+  }
+  100% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+}
+.setting__menu__img-item--left, .setting__menu__img-item--center, .setting__menu__img-item--right, .setting-help__menu__img-item--left, .setting-help__menu__img-item--center, .setting-help__menu__img-item--right {
+  animation: bikkuri 10s both infinite; /* アニメーションの長さを10秒に設定 */
+}
+
+@keyframes bikkuri {
+  0%, 9% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-10px);
+  }
+  11% {
+    transform: translateY(0);
+  }
+  12% {
+    transform: translateY(-5px);
+  }
+  13%, 50% {
+    transform: translateY(0);
+  }
+  51% {
+    transform: translateY(-10px);
+  }
+  52% {
+    transform: translateY(0);
+  }
+  53% {
+    transform: translateY(-5px);
+  }
+  54%, 100% {
+    transform: translateY(0px);
+  }
+}
+.content__home__text__anime:nth-child(1),
+.content__home__text__anime:nth-child(2) {
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+}
+
+.content__home__text__anime:nth-child(1) {
+  animation: textAnime 0.7s steps(12) forwards;
+  animation-delay: 1s; /* アニメーションを1秒遅延させる */
+}
+
+.content__home__text__anime:nth-child(2) {
+  animation: textAnime 0.7s steps(12) forwards;
+  animation-delay: 1.7s; /* 2行目のアニメーションを2秒遅延させる */
+}
+
+@keyframes textAnime {
+  100% {
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+  }
+}
+.loading__text {
+  font-weight: 400;
 }

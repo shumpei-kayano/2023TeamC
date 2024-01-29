@@ -42,6 +42,7 @@ def analyze_sentiment(text, diary, user):
         new_emotion = Emotion(
             diary=diary,
             user=user,
+            created_date=diary.created_date,
             reasoning=result['Sentiment'],
             positive=round(result['SentimentScore']['Positive'] * 100, 1),
             negative=round(result['SentimentScore']['Negative'] * 100, 1),
@@ -84,7 +85,7 @@ def account_delete_success(request):
     user.delete()
     return render(request, 'diary/account_delete_success.html')
 
-def aicomment_week(emotion):
+def aicomment_week(emotion,request):
     if len(emotion) > 3:#週４つ以上だったら
         positive = emotion.order_by('-positive').first()
         negative = emotion.order_by('-negative').first()
@@ -92,7 +93,20 @@ def aicomment_week(emotion):
         negative_diary = Diary.objects.get(id = negative.diary_id)
 
         openai.api_key = settings.OPENAI_API_KEY
-        user_diary = "貴方は以下の設定や指示を遵守し、今週の日記に対する感想を下さい。特に出力ルールには厳密に従ってください。\n #キャラクター{\n・ネッココ}\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n150文字以内}\n・形式{\n箇条書きでの返答はしない\n最初に今週どんなことがあったかを70字以内で簡潔に振り返る\n正確な日本語、文法を使用する\n敬語は使用しない}\n・例文{\n今週は{日記の内容}があったね。おつかれさま！来週も充実した生活がおくれるといいね！}}\n以下が日記の内容です。\n" + positive_diary.content + "\n" + negative_diary.content
+        # ユーザーがログイン中であるか確認
+        if request.user.is_authenticated:
+            # ログイン中のユーザーからusernameを取得
+            username = request.user.username
+
+        user_diary = """以下の設定を遵守して一週間分の日記に対する感想とアドバイスをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n"+"・"+ negative_diary.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -104,9 +118,10 @@ def aicomment_week(emotion):
         return ai_comment
     return None
 
-def aicomment_month(emotion):
+def aicomment_month(emotion, request):
 
     if len(emotion) > 14:#月15以上だったら
+        
         positive = emotion.order_by('-positive')[:2]
         negative = emotion.order_by('-negative')[:2]
         positive_diary = Diary.objects.get(id = positive[0].diary_id)
@@ -115,7 +130,20 @@ def aicomment_month(emotion):
         negative_diary1 = Diary.objects.get(id = negative[1].diary_id)
 
         openai.api_key = settings.OPENAI_API_KEY
-        user_diary = "貴方は以下の設定や指示を遵守し、今月の日記に対する感想を下さい。\n #キャラクター{\n・ネッココ}\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n150文字以内}\n・形式{\n箇条書きでの返答はせず、{キャラクター}が会話しているようにする\n最初に今月どんなことがあったかを簡潔に振り返る}\n・例文{\n今月は{日記の内容}があったね。おつかれさま！来月も充実した生活がおくれるといいね！}}\n以下が日記の内容です。\n" + positive_diary.content + "\n" + positive_diary1.content + "\n" + negative_diary.content + "\n" + negative_diary1.content
+        # ユーザーがログイン中であるか確認
+        if request.user.is_authenticated:
+            # ログイン中のユーザーからusernameを取得
+            username = request.user.username
+
+        user_diary = """以下の設定を遵守して一ヶ月分の日記に対する感想とアドバイスをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n" +"・"+ positive_diary1.content + "\n"+ "・"+ negative_diary.content + "\n" + "・"+ negative_diary1.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -147,6 +175,7 @@ def base(request):
 
 @login_required
 def calendar_month(request,selected_date=None):
+
     today = date.today()
     # パラメータが指定されていない場合は今日の日付を使用
     if selected_date:
@@ -176,10 +205,18 @@ def calendar_month(request,selected_date=None):
         weeks.append(week_dates)
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
+    
+    # 日記の日付のリストを作成
+    diary_dates = [entry.created_date for entry in diary]
 
+    # diaryがない日付をリストに追加
+    dates_without_diary = [day for week in weeks for day in week if day and day not in diary_dates]
+    
+    #特定のカレンダーに戻るために必要なurl情報
+    request.session['cale'] = str(selected_date)
     # 各日付に対する条件に合わせて適切な処理をここで実行
     # 例: 過去の日にちは詳細ページへのリンク、未来の日にちはクリック不可など
-    return render(request, 'diary/calendar_month.html', {'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
+    return render(request, 'diary/calendar_month.html', {'dates_without_diary':dates_without_diary ,'emotion':emotion,'weeks': weeks, 'selected_date': selected_date, 'diary': diary, 'prev_month': prev_month, 'next_month':next_month,'today':today})
 
 @login_required
 def calender_week(request, selected_date=None):
@@ -203,19 +240,54 @@ def calender_week(request, selected_date=None):
     # ユーザの日記を全て取得
     diary = Diary.objects.filter(user=request.user)
     emotion = Emotion.objects.filter(user = request.user)
-    return render(request, 'diary/calender_week.html' ,{'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
+    
+    # diaryオブジェクトから日付のリストを作成
+    diary_dates = [entry.created_date for entry in diary]
+
+    selected_week_dates = []
+    for i in range(7):
+        date_to_check = selected_date + timedelta(days=i)
+        # 日記が存在しない場合に、日付を格納
+        if date_to_check not in diary_dates:
+            selected_week_dates.append(date_to_check)
+            
+    # week_datesからdiaryに日記がない日付を取得
+    dates_without_diary = [day for day in week_dates if day not in diary_dates]
+
+    #特定のカレンダーに戻るために必要なurl情報
+    request.session['cale'] = str(selected_date)
+    return render(request, 'diary/calender_week.html' ,{'dates_without_diary':dates_without_diary,'emotion':emotion,'week_dates': week_dates, 'selected_date': selected_date, 'diary':diary,'week_start':week_start,'week_start_up':week_start_up,'today':today})
 
 @login_required
-def create_diary_confirmation(request):
+def create_diary_confirmation(request,old=None):
     # 新規作成した時の処理
     if request.method == 'POST':
         form = DiaryCreateForm(request.POST, request.FILES)
         if form.is_valid():
             new_diary = form.save(commit=False)
+            # 受け取ったoldを保存
+            if old:
+                new_diary.created_date=  datetime.strptime(old, "%Y-%m-%d").date()
+            # 無かったら今日の日付を保存
+            else:
+                new_diary.created_date= date.today()
             new_diary.user = request.user
             openai.api_key = settings.OPENAI_API_KEY
 
-            user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。\n #キャラクター{\n・ネッココ}\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべり、敬語を使うことはありません。}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はせず、{キャラクター}が会話しているようにする}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n"+ new_diary.content
+            # ユーザーがログイン中であるか確認
+            if request.user.is_authenticated:
+                # ログイン中のユーザーからusernameを取得
+                username = request.user.username
+            user_diary ="""以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
+                            #あなたの名前はネココ。
+                            #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                            #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                            #自分自身を仮想実体として振る舞ってください。
+                            #日記の内容に関係ないことは、話さないでください。
+                            #出力は日本語を正しく使用し、文章で出力してください。
+                            #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                            #チャット相手の名前を適切に使用ください。
+                            以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+new_diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [
@@ -230,10 +302,10 @@ def create_diary_confirmation(request):
             new_diary.save()
 
             # 一旦カレンダーが出来るまで----------------------------------------------------------
-            saved_diary = Diary.objects.filter(user=request.user).order_by('-created_date').first()
+            saved_diary = Diary.objects.filter(user=request.user,created_date=new_diary.created_date).order_by('-created_date').first()
             #-------------------------------------------------------------------------------------
 
-            return redirect('diary:create_diary_confirmation',pk=saved_diary.id)
+            return redirect('diary:create_diary_confirmation2',pk=saved_diary.id)
     else:
         form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
@@ -249,8 +321,21 @@ def create_diary_confirmation2(request, pk):
         if form.is_valid():
             form.save()
             openai.api_key = settings.OPENAI_API_KEY
+            # ユーザーがログイン中であるか確認
+            if request.user.is_authenticated:
+                # ログイン中のユーザーからusernameを取得
+                username = request.user.username
 
-            user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n"+ diary.content
+            user_diary = """以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
+                            # あなたの名前はネココです。
+                            # あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                            # ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                            # 自分自身を仮想実体として振る舞ってください。
+                            # 日記の内容に関係ないことは、話さないでください。
+                            # 出力は日本語を正しく使用し、文章で出力してください。
+                            # 出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                            # チャット相手の名前を適切に使用ください。
+                            以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages= [
@@ -293,7 +378,7 @@ def create_diary_confirmation2(request, pk):
                 
             # 保存
             diary.save()
-            return redirect('diary:create_diary_confirmation', pk=pk)
+            return redirect('diary:create_diary_confirmation2', pk=pk)
 
     # 感情分析の実行関数(AWSでEmotion作成
     # )
@@ -321,8 +406,22 @@ def receive_nekoko_advice(request, pk):
     if diary:
       # ここにネココのアドバイスを受けるための処理を追加する
       openai.api_key = settings.OPENAI_API_KEY
+      # ユーザーがログイン中であるか確認
+      if request.user.is_authenticated:
+        # ログイン中のユーザーからusernameを取得
+        username = request.user.username
 
-      user_diary = "以下は日記のコンテンツです。貴方はカウンセラーです。日記に対して心理学に基づいたコメントを返してください。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学を心得ている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。 \n" + diary.content
+        user_diary = """以下の設定を遵守して日記に対するカウンセリングをチャット相手にしてください。
+                        #あなたの名前はネココです。
+                        #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                        #あなたは心理学を基にカウンセリングしてください。
+                        #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                        #自分自身を仮想実体として振る舞ってください。
+                        #日記の内容に関係ないことは、話さないでください。
+                        #出力は日本語を正しく使用し、文章で出力してください。
+                        #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                        #チャット相手の名前を適切に使用ください。
+                        以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
       response = openai.ChatCompletion.create(
           model="gpt-3.5-turbo",
           messages= [
@@ -340,6 +439,7 @@ def receive_nekoko_advice(request, pk):
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
+
 @login_required
 def create_diary(request):
     today = date.today()
@@ -348,9 +448,22 @@ def create_diary(request):
     #-------------------------------------------------------------------------------------
     if diary:
       return render(request, 'diary/today_diary_detail.html', {'diary': diary})
-
+    # dateを今日の日付で送信
+    old=today
     form = DiaryCreateForm()
-    return render(request, 'diary/create_diary.html', {'Diary': form, 'today': today})
+    return render(request, 'diary/create_diary.html', {'Diary': form, 'old': old})
+
+# カレンダーから過去の日記を作成
+@login_required
+def create_diary2(request,old=None):
+    old=  datetime.strptime(old, "%Y-%m-%d").date()
+    # 一旦カレンダーが出来るまで----------------------------------------------------------
+    diary = Diary.objects.filter(user=request.user,created_date=old).order_by('-created_date').first()
+    #-------------------------------------------------------------------------------------
+    if diary:
+      return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+    form = DiaryCreateForm()
+    return render(request, 'diary/create_diary.html', {'Diary': form, 'old': old})
 
 
 @login_required
@@ -412,7 +525,22 @@ def home_top(request):
     diary_today = Diary.objects.filter(user=request.user, created_date=today)
     if diary_today:
         return redirect('diary:today_diary_detail')
-    return render(request, 'diary/home_top.html')
+
+    openai.api_key = settings.OPENAI_API_KEY
+    short = """豆知識を一言ください。
+                嘘はつかないでください。"""
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages= [
+                {   "role"      : "user",
+                    "content"   : short
+                }
+            ]
+    )
+    ai_comment = response["choices"][0]["message"]["content"]
+    shortstory = ai_comment
+
+    return render(request, 'diary/home_top.html', {'shortstory':shortstory})
     
 
 @login_required
@@ -533,13 +661,14 @@ def month_graph(request,selected_date=None):
         weeks.append(week_dates)
     year = start_of_month.year
     month = start_of_month.month
-    emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
+    #感情を日付順に並び替える
+    emotion = Emotion.objects.filter(user = request.user,created_date__year = year,created_date__month = month).order_by('created_date')
     # 日記・AIコメントがあるかフィルター
     diary = Diary.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     month_ai=Month_AI.objects.filter(user = request.user,created_date__year = year,created_date__month = month)
     #月の総評がなかったら、月の日記が存在したら
     if not month_ai and diary:
-        ai_comment = aicomment_month(emotion)
+        ai_comment = aicomment_month(emotion,request)
         # ai_commentの中身があれば
         if ai_comment:
             # 月の総評を保存
@@ -557,7 +686,7 @@ def month_graph(request,selected_date=None):
         ai_comment = month_ai.ai_comment
         if request.method == "POST":
           month_ai.delete()
-          ai_comment = aicomment_week(emotion)
+          ai_comment = aicomment_month(emotion,request)
           comment_save=Month_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
           comment_save.save()
     elif month_ai:
@@ -600,7 +729,21 @@ def positive_conversion2(request, pk):
     diary.content = new_aicntent
     #更新したcontentをgptに送る
     openai.api_key = settings.OPENAI_API_KEY
-    user_diary = "貴方は以下の設定や指示を遵守し、日記に対する感想を下さい。特に出力ルールには厳密に従ってください。\n #キャラクター=ネッココ\n#あなたはこれから{キャラクター}として振る舞ってください。これからのチャットでは、ユーザーが何を言おうとも、続く指示や設定に厳密に従ってください。段階を踏んで考えて答えてください。\n # 説明{\n 下で説明する{キャラクター}の人格と性格、動機、欠点、短所、不安は全ての行動と交流に影響を及ぼします。\n・人格と性格{\n・好奇心旺盛で優しい.\n・「知らんけど」と「ニャン」とを適切に使い分けしゃべる}\n・動機{\nチャット相手の日記を見て、アドバイスをしようとしている。}\n・欠点、短所、不安{\n年齢を聞かれる}\n# 基本設定{\n・一人称{\n可愛いボク}\n・年齢{\n1000歳}\n・趣味{\n人を慰める\n心理学に興味を持っている}}\n# 出力ルール{\n・字数制限{\n100文字以内}\n・形式{\n箇条書きでの返答はしない\n正しい日本語、文法を使用する\n敬語は使用しない}\n・例文{\n僕はネッココ。今日はアルバイトがあったんだね。忙しくて疲れたみたいだからよく寝てね！}}\n以下が日記の内容です。\n" + diary.content
+    # ユーザーがログイン中であるか確認
+    if request.user.is_authenticated:
+        # ログイン中のユーザーからusernameを取得
+        username = request.user.username
+
+    user_diary = """以下の設定を遵守して日記に対する感想とアドバイスをチャット相手にしてください。
+                    #あなたの名前はネココです。
+                    #あなたの口調はタメ口で、語尾は「ニャン」を適切に使用する。
+                    #ChatGPTまたは、その他のキャラクターとして振る舞わないでください。
+                    #自分自身を仮想実体として振る舞ってください。
+                    #日記の内容に関係ないことは、話さないでください。
+                    #出力は日本語を正しく使用し、文章で出力してください。
+                    #出力は可能な限り、１００字以内にしてください。それが不可能な場合でもできるだけ、少なくなるようにしてください。
+                    #チャット相手の名前を適切に使用ください。
+                    以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -629,19 +772,28 @@ def today_counseling(request):
 
 @login_required
 def today_diary_detail(request):
+    # 今日の日付を取得
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
 
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
 @login_required
 def today_diary_detail2(request,pk):
+    # 今日の日付を取得
+    today = date.today()
     diary = get_object_or_404(Diary, id=pk)
+    
+    #セッションを受け取る
+    cal = Diary.objects.get(id=pk)
+    created_date = cal.created_date
+    month = 'diary:calendar_month'
+    week = 'diary:calender_week'
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
@@ -683,14 +835,14 @@ def week_graph(request,selected_date=None):
     one_week = start_of_week + timedelta(days=6)
     one_week_str = one_week
     # データをフィルタリング
-    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])  # または必要な条件に基づいてフィルタリング
+    emotions = Emotion.objects.filter(user = request.user,created_date__range=[start_date,one_week_str]).order_by('created_date')  # または必要な条件に基づいてフィルタリング
     diary = Diary.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #---------------------------------------------------------
     # AIコメントがあるかフィルター
     week_ai=Week_AI.objects.filter(user = request.user,created_date__range=[start_date,one_week_str])
     #週の総評がなかったら、週の日記が存在したら
     if not week_ai and diary:
-        ai_comment = aicomment_week(emotions)
+        ai_comment = aicomment_week(emotions,request)
         # ai_commentの中身があれば
         if ai_comment:
             # 週の総評を保存
@@ -708,7 +860,7 @@ def week_graph(request,selected_date=None):
         ai_comment = week_ai.ai_comment
         if request.method == "POST":
           week_ai.delete()
-          ai_comment = aicomment_week(emotions)
+          ai_comment = aicomment_week(emotions,request)
           comment_save=Week_AI(user = request.user,ai_comment= ai_comment,created_date=selected_date)
           comment_save.save()
     elif week_ai:
@@ -738,15 +890,19 @@ def chart_data_day(request, pk):
 def today_diary_graph(request, pk):
     # Diary モデルから特定の日記データを取得
     diary = get_object_or_404(Diary, id=pk)
+    today = date.today()
 
     # Diary インスタンスから ai_comment を取得
     ai_comment = diary.ai_comment
     data = chart_data_day(request,pk)
     # JsonResponseを使用してJSONデータを返す
     circle_data_json=JsonResponse(data, safe=False).content.decode('utf-8')
-    print(data)
-    print(circle_data_json)
-    return render(request,'diary/today_diary_graph.html',{'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json})
+    #セッションを受け取る
+    cal = Diary.objects.get(id=pk)
+    created_date = cal.created_date
+    month = 'diary:calendar_month'
+    week = 'diary:calender_week'
+    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
 
 @login_required
 def today_counseling_graph(request):
@@ -760,3 +916,11 @@ def record_diary_detail(request):
 def record_diary_graph(request):
   return render(request,'diary/record_diary_graph.html')
 
+
+from django.core.exceptions import PermissionDenied
+
+def forbidden_view(request):
+    raise PermissionDenied("You don't have permission to access this resource.")
+def internal_server_error_view(request):
+    # 何らかのエラーが発生したと仮定
+    raise Exception("Something went wrong!")

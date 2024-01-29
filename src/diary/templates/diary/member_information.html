@@ -67,8 +67,8 @@
                         </svg>
                         </button>
                 </div>
-                <p class="user-info">
-                    ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+                <p id="user-info-password" class="user-info">
+                    セキュリティ上の理由から非表示にしています
                     {% comment %} {{ user.password }} {% endcomment %}
                 </p>
             </div>
@@ -81,7 +81,7 @@
         </form>
 
         <div class="user-infomation__image">
-            <img src="{% static 'diary/assets/neko_dango.svg' %}">
+            <img class="user-infomation__image--dango" src="{% static 'diary/assets/neko_dango.svg' %}">
         </div>
     
     </div>

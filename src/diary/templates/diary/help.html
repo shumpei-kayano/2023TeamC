@@ -42,7 +42,9 @@
             </ul>
 
             <div class="setting__menu__img">
-                <img class="help__menu__img-item" img src="{% static 'diary/assets/family_neko.svg' %}">
+                <img class="setting-help__menu__img-item--left" data-delay="2" img src="{% static 'diary/assets/setting_img_left.svg' %}">
+                <img class="setting-help__menu__img-item--center" data-delay="8" img src="{% static 'diary/assets/setting_img_center.svg' %}">
+                <img class="setting-help__menu__img-item--right" data-delay="0" img src="{% static 'diary/assets/setting_img_right.svg' %}">
             </div>
         </div>
     </div>
@@ -53,13 +55,24 @@
 {% endblock %}
 
 {% block js %}
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
+
 <script>
-     // フェードイン
-(function ($) {
-    'use strict';
-    $(window).on('load',function(){
-        $('article').addClass('appear');
+    // アニメーションの遅延時間を設定
+    const elements1 = document.querySelectorAll('.setting-help__menu__img-item--left');
+    const elements2 = document.querySelectorAll('.setting-help__menu__img-item--center');
+    const elements3 = document.querySelectorAll('.setting-help__menu__img-item--right');
+    elements1.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
     });
-})(jQuery);
+    elements2.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
+    });
+    elements3.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
+    });
 </script>
 {% endblock %}

@@ -2,6 +2,8 @@ from pathlib import Path
 import os
 # debug_toolbarの設定
 import mimetypes
+import datetime
+
 mimetypes.add_type("application/javascript", ".js", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,11 +16,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# デバック
+DEBUG = False
 
-# EC2のパブリックIPを設定
-ALLOWED_HOSTS = ['3.239.229.107']
+# 本番環境だと変える
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+
+
+
+
 
 # Application definition
 
@@ -38,6 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'axes',
 ]
 
 
@@ -51,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'allauth.account.middleware.AccountMiddleware',#追加
+    'axes.middleware.AxesMiddleware',#追加
 ]
 
 INTERNAL_IPS = ['127.0.0.1', '::1', 'localhost', '0.0.0.0']
@@ -63,6 +71,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.normpath(os.path.join(BASE_DIR, 'user/templates/account')),
+            os.path.normpath(os.path.join(BASE_DIR, 'diary/templates/diary')),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -90,6 +99,10 @@ DATABASES = {
         'PASSWORD': 'o-hara',
         'HOST': 'mysql_db', # dbのコンテナ名
         'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -142,15 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-def show_debug_toolbar(request):
-    return request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS
 
-DEBUG_TOOLBAR_CALLBACK = show_debug_toolbar
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-    'STATIC_URL': '/debug_toolbar/',
-}
 
 #---------------------メール送信設定-------------------------
 # 以下はSMTPサーバーの設定
@@ -202,3 +207,12 @@ SOCIALACCOUNT_FORMS = {
 
 OPENAI_API_KEY = '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'
 
+#--------------------アカウントロック設定--------------------
+AXES_FAILURE_LIMIT = 5  # 5回の失敗後にロックアウト
+
+AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # 30秒間ロック
+
+ACCOUNT_LOCKED_URL = '/accounts/login/'
+
+AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
+AWS_SECRET_ACCESS_KEY = '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'

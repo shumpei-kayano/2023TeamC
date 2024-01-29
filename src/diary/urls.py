@@ -2,7 +2,7 @@ from django.urls import path
 from diary import views
 from .views import calender_week
 from django.urls import path, include
-
+from .views import forbidden_view, internal_server_error_view
 app_name = 'diary'
 urlpatterns = [
     path('account/delete/success', views.account_delete_success, name='account_delete_success'),
@@ -12,9 +12,10 @@ urlpatterns = [
     path('calendar/month/<str:selected_date>/', views.calendar_month,name='calendar_month'),
     path('calender/week', views.calender_week,name='calender_week'),
     path('calender/week/<str:selected_date>/', views.calender_week, name='calender_week'),
-    path('create/diary/confirmation', views.create_diary_confirmation,name='create_diary_confirmation'),
-    path('create/diary/confirmation/<int:pk>', views.create_diary_confirmation2,name='create_diary_confirmation'),
+    path('create/diary/confirmation2/<int:pk>', views.create_diary_confirmation2,name='create_diary_confirmation2'),
+    path('create/diary/confirmation/<str:old>', views.create_diary_confirmation,name='create_diary_confirmation'),
     path('create/diary', views.create_diary,name='create_diary'),
+    path('create/diary/<str:old>', views.create_diary2,name='create_diary'),
     path('create/diary/<int:pk>', views.create_diary,name='create_diary'),
     path('diary/delete/<int:pk>', views.diary_delete,name='diary_delete'),
     path('diary/delete/success/<int:pk>', views.diary_delete_success,name='diary_delete_success'),
@@ -53,5 +54,7 @@ urlpatterns = [
     path('week/graph/<str:selected_date>', views.week_graph,name='week_graph'),
     # ネココのアドバイスを受けるための URL パターン
     path('receive_nekoko_advice/<int:pk>/', views.receive_nekoko_advice, name='receive_nekoko_advice'),
+    path('a/', forbidden_view, name='forbidden'),
+    path('b/', internal_server_error_view, name='internal_error'),
 
 ]

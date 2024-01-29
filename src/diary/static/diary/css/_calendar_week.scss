@@ -105,11 +105,9 @@ th, td {
     height: 36px;
 }
 .week-calendar__diary{
-    // position: relative;  // 追加
+    position: relative;  // 子要素の位置指定の基準点
     height: 76px;
     text-align: left;
-    padding-left: 24px;
-    padding-right: 24px;
     font-size: 1.6rem;
     color: #A29C9C;
 }
@@ -133,11 +131,17 @@ th, td {
 
 // リンク
 .week-calendar__table__a{
-    // position: absolute;  // 追加
-    // top: 0;  // 追加
-    // right: 0;  // 追加
-    // bottom: 0;  // 追加
-    // left: 0;  // 追加
+    position: absolute;  // 親要素（.week-calendar__diary）に対して絶対位置指定
+    top: 0;  // クリック範囲を親要素全体にするために親要素の上下左右の位置を0
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex; // 垂直方向に中央寄せ
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; // 親要素.week-calendar__diaryの全高さを占める
+    padding-left: 24px;
+    padding-right: 24px;
     text-decoration: none;
     color: #A29C9C;
 }

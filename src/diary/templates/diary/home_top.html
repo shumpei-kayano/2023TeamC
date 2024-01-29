@@ -41,12 +41,10 @@
                 <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
             </div>
             <div class="content__home__text">
-                <p>今日はどんな1日ですか？<br>
-                    感じたことを書いてみよー
-                </p>
+                <div class="content__home__text__annime">{{shortstory}}</div>
             </div>
             <div class="content__home__img">
-                <img src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+                <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
             </div>
         </div>
         <div class="btn--large">
@@ -75,12 +73,6 @@
 {% endblock %}
 
 {% block js %}
-<script>
-    $(document).ready(function () {
-        var target = window.location.hash.substring(1);
-        if (target) {
-            $('#' + target).addClass('appear');
-        }
-    });
-</script>
+<!-- フェードイン -->
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
 {% endblock %}

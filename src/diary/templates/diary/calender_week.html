@@ -90,7 +90,7 @@
     <table class="week-calendar__table">
         <tbody>
             {% for day in week_dates %}
-                {% comment %} 今日の日記 {% endcomment %}
+                {% comment %} 今日の日記の色付け{% endcomment %}
                 {% if today == day %}
                     <tr class="week-calendar__today__tr">
                         <td class="week-calendar__today">
@@ -99,6 +99,7 @@
                         {% for diary_entry in diary %}
                             {% if diary_entry.created_date == day %}
                                 {% for emotion_entry in emotion %}
+                                {% comment %} 日記があったらの処理 {% endcomment %}
                                     {% if emotion_entry.diary_id == diary_entry.id %}
                                         <td rowspan = "2" class="week-calendar__diary">
                                             <a class="week-calendar__table__a" href="{% url 'diary:today_diary_detail' diary_entry.id %}">
@@ -122,6 +123,18 @@
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
+                        
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     <tr>
                         <td class="week-calendar__week__today">
@@ -130,12 +143,15 @@
                                 {% elif day|date:"w" == "6" %} class="sat"
                                 {% endif %}
                             >
+                            
                                 {{day|date:"D"}}
                             </div>
                         </td>
                     </tr>
+                    
                     {% comment %} ここまで {% endcomment %}
 
+                    {% comment %} 当時よりも前の日記の作成 {% endcomment %}
                 {% elif day < selected_date %}
                     <tr>
                         <td class="week-calendar__date">
@@ -162,12 +178,24 @@
                                                 </div>
                                             </a>
                                         </td>
-                                    {% endif %}
+                                        {% endif %}
                                 {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                    <tr>
+                                {% endif %}
+                                {% endfor %}
+
+                                <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                                {% for missing_date in dates_without_diary %}
+                                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                                        {% if day == missing_date and today > day %}
+                                            <td rowspan = "2" class="week-calendar__diary">
+                                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                                新規作成
+                                                </a>
+                                            </td>
+                                            {% endif %}
+                                        {% endfor %}
+                            </tr>
+                            <tr>
                         <td class="week-calendar__week">
                             <div
                                 {% if day|date:"w" == "0" %} class="sun"
@@ -210,6 +238,17 @@
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date and today >= day  %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     <tr>
                         <td class="week-calendar__week">
@@ -222,7 +261,7 @@
                             </div>
                         </td>
                     </tr>
-
+                {% comment %} 未来のカレンダー {% endcomment %}
                 {% else %}
                     <tr>
                         <td class="week-calendar__date">
@@ -252,6 +291,18 @@
                                         </td>
                                     {% endif %}
                                 {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- 日記が作成されてない日付をに新規登録ボタンを表示 -->
+                        {% for missing_date in dates_without_diary %}
+                        <!-- dayとmissing_dateが一致した場合の処理 -->
+                        {% if day == missing_date and today > day %}
+                            <td rowspan = "2" class="week-calendar__diary">
+                                <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
+                                新規作成
+                                </a>
+                            </td>
                             {% endif %}
                         {% endfor %}
                     </tr>

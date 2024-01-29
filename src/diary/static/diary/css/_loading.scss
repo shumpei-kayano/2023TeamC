@@ -40,6 +40,7 @@
     .loading__text{
         font-size: 2rem;
         letter-spacing: 0.04em;
+        font-weight: 400;
         padding-top: 30px;
     }
 }
@@ -49,12 +50,12 @@
     display: inline-block;
     text-align: center;
     vertical-align: middle;
-    color: #666;
+    color: #04CAD6;
     line-height: 1;
     width: 3rem;
     height: 3rem;
     border: 0.2em solid currentColor;
-    border-top-color: rgba(102, 102, 102, 0.3);
+    border-top-color: rgba(4, 202, 214, 0.27);
     border-radius: 50%;
     box-sizing: border-box;
     animation: rotate 1s linear infinite;

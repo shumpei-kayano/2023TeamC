@@ -1,14 +1,18 @@
-.ground--blue {
-    background-color: $main_background_color;
+.container__center{
+    display: flex;
+    flex-direction: column;
+    height: 100vh; // コンテンツが親要素（.ground）の高さを占めるようにする
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
 }
 
 .img-icon {
-    margin-top: 90px;
-    margin-left: 48px;
+    width: 294px;
+    height: auto;
 } 
 
 .login__text{
-    color: #000;
+    color: #333;
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 400;
@@ -17,25 +21,19 @@
     text-align: center; // テキストを中央揃えにする
 }
 
-.html {
-    display: flex; // フレックスボックスを有効にする
-    justify-content: center; // 横方向に中央揃え
-    align-items: center; // 縦方向に中央揃え
-}
-
 .btn--large {
     margin-top: 70px;
-    margin-left: 24px;
 }
 
 .login__text {
     margin-top: 30px;
 }
 
-.btn--white {
-    margin-left: 24px;
-}
-
 .text-login {
     text-align: center;
+}
+
+#account_top__btn--white{
+    // logoのmargin-top分の余白を追加
+    margin-bottom: 46px;
 }

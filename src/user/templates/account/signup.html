@@ -5,66 +5,119 @@
 {% block title %}サインアップ{% endblock title %}
 
 {% block content %}
-<section class="section-accounts" id="section-signup">
-    <header></header>
+<section>
+    <main class="ground ground--blue">
+
     <div class="wrapperHeader">
         <div class="header__back__img">
             <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
-            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
         </div>
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+    </div>
+
+        <article>
+            <ul class="progressbar">
+                <li class="active">ご入力</li>
+                <li>ご確認</li>
+                <li>完了</li>
+            </ul>
+
         <p class="signup-text">ユーザー登録</p>
             <p class="login-text">すでにアカウントをお持ちであれば、<br>こちらから<a href="{% url 'account_login' %}"><span class="accounts-link">ログイン</span></a>してください。</p>
-    </div>
-    <div class="wrapper-accounts-form">
-        <form method="post" action="{% url 'account_signup' %}" class="form-accounts">
-            {% csrf_token %}
 
-            {% if form.errors %}
-            <div class="error-message">
-                <p>新しいエラーメッセージが発生しました:</p>
-                <ul>
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <li> {{ error }}</li>
+            <form method="post" action="{% url 'account_signup' %}" class="form-accounts">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                <div class="error-message">
+                    <p>新しいエラーメッセージが発生しました</p>
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li> {{ error }}</li>
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                </ul>
-            </div>
-          {% endif %}
-            <div class="form-content">
-                <div class="user-infomation">
-                    <div class="content__user-name__text">
-                        <label for="username">ユーザーネーム</label>
-                        <br><input type="username" name="username" autocomplete="username" required id=" id_username">
-                    </div>
+                    </ul>
+                </div>
+            {% endif %}
+                <div class="user-infomation__signup">
+                    <div class="user-infomation__style--center">
+                        <div class="content__user-name__text">
+                            <label for="username">ユーザーネーム<span class="user-infomation__span">必須</span></label>
+                            <input type="username" name="username" autocomplete="username" required id="id_username" placeholder="例）田中　太郎">
+                        </div>
 
-                    <div class="content__user-email__text">
-                        <label for="email">メールアドレス</label>
-                        <br><input type="email" name="email" autocomplete="email" required id="id_email">
-                    </div>
+                        <div class="content__user-email__text">
+                            <label for="email">メールアドレス<span class="user-infomation__span">必須</span></label>
+                            <input type="email" name="email" autocomplete="email" required id="id_email" placeholder="例）sample@mail.com">
+                        </div>
 
-                    <div class="content__user-pass__text">
-                        <label for="pass">パスワード</label>
-                        <br><input type="password" name="password1" autocomplete="new-password" required id="id_password1">
-                    </div>
+                        <div class="content__user-pass__text">
+                            <label for="pass">パスワード<span class="user-infomation__span">必須</span></label>
+                            <p class="form-password__input__label">10文字以上の半角英数字または記号を入力</p>
+                            <div class="password-wrapper">
+                                <input class="password__input" type="password" name="password1" autocomplete="new-password" required id="id_password1" placeholder="半角英数字を１０文字以上">
+                                <span class="password__toggle">
+                                </span>
+                            </div>
+                        </div>
 
-                    <div class="content__user-pass2__text">
-                        <label for="pass2">パスワード（確認用）</label>
-                        <br><input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+                        <div class="content__user-pass2__text">
+                            <label for="pass2">パスワード（確認）<span class="user-infomation__span">必須</span></label>
+                            <div class="password-wrapper">
+                                <input class="password__input" type="password" name="password2" autocomplete="new-password" required id="id_password2" placeholder="もう１度入力してください">
+                                <span class="password__toggle">
+                            </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                 {% endif %}
+
+                <div id="login__btn--blue" class="btn btn--blue">
+                    <button type="submit" id="reset-button">登録申請メールを送信</button>
+                    <!-- 入力に不備があってもロード画面が表示してしまう -->
+                    {% comment %} <div id="loading">
+                        <img id = "logo" src="{% static 'user/assets/logo.svg'%}" alt="Loading Image">
+                        <div class="loading-content">
+                            <img id = "teacat" src="{% static 'user/assets/tea_neko.svg'%}" alt="Loading Image">
+                            <p class="loading__text">メール送信中にゃ</P>
+                            <span class="dli-loading-1"></span>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </form>
+            <div class="back-home">
+                <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>    
             </div>
-            <div class="btn btn--blue">
-                <button type="submit">登録</button>
-            </div>
-        </form>
-        <div class="back-home">
-            <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>    
-        </div>
-    </div>
+
+    </article>
+    </main>
 </section>
 {% endblock content %}
+
+{% block js %}
+<script>
+    {% comment %} document.getElementById('reset-button').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    }); {% endcomment %}
+
+    // パスワード表示
+    const passwordToggles = document.querySelectorAll('.password__toggle');
+
+    passwordToggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const type = input.getAttribute('type');
+            input.setAttribute('type', type === 'password' ? 'text' : 'password');
+            this.classList.toggle('is-visible');
+        });
+    });
+</script>
+{% endblock %}

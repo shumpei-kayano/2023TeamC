@@ -7,33 +7,52 @@
 {% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
 
 {% block content %}
-<section class="section-accounts" id="section-signup">
-    <header></header>
+<section>
+    <main class="ground ground--blue">
+
     <div class="wrapperHeader">
     {% if confirmation %}
-    <div class="wrapper-accounts-form text-align-center">
+
         <div class="header__back__img">
-            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
+            <div class="header__spacer--top"></div><!-- 追加 -->
+            </div>
+            <img id="password__reset__done__img" src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
         </div>
+    </div>
+
+    <article id="height__center">
+        <ul class="progressbar">
+            <li class="complete">ご入力</li>
+            <li class="complete">ご確認</li>
+            <li class="active">完了</li>
+        </ul>
+
         <p class="signup-text">ユーザー登録</p>
-            <p class="login-text">ユーザー登録を確定するには、以下のボタンを押してください。</p>
-            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
-                {% csrf_token %}
-    
-                <div class="btn--blue">
-                    <button class="accounts-btn" type="submit">確定</button>
-                </div>
-            </form>
-        </div>
+        <p class="login-text">ユーザー登録を確定するには<br>以下のボタンを押してください。</p>
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
+            {% csrf_token %}
+
+            <div id="login__btn--blue" class="btn btn--blue">
+                <button class="accounts-btn" type="submit">確定</button>
+            </div>
+        </form>
+        <p class="login-text">確定後ログインしてください。</p>
+
     {% else %}
         {% url 'account_email' as email_url %}
 
         <div class="text-align-center">
-            <p>リンクの有効期限が過ぎています。<a href="{{ email_url }}">再申請</a>.</p>
+            <p class="login-text">リンクの有効期限が過ぎています。</p>
+            <a href="{{ email_url }}"><div id="login__btn--blue" class="btn btn--blue">
+                <button type="button">再申請</button>
+            </a>
         </div>
     {% endif %}
     <div class="back-home">
         <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る</a>
     </div>
+
+    </article>
+    </main>
 </section>
 {% endblock content %}

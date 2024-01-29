@@ -1,3 +1,8 @@
+// 戻るボタン
+#calendar__back-btn{
+    margin-right: 8px !important;
+}
+
 .content__today-diary__text{
     width: 100%;
     background-color: $background_color;
@@ -68,6 +73,7 @@
         }
     }
 }
+
 .button {
     &--js-modal-button{
         // 日記に保存された画像のボタンのスタイルをリセット
@@ -267,10 +273,32 @@
     z-index: 999;
     opacity: 1;
     visibility: visible;
+
+    overflow-y: scroll;
 }
 .layer.is-open .modal{
     opacity: 1;
     visibility: visible;
+}
+// スクロールバー背景色
+.layer::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.layer::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+.layer::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
 }
 
 // モーダル閉じるボタン（右上に配置する場合のスタイル）
@@ -295,7 +323,8 @@
 .modal {
     position: relative;
     max-width: 390px;
-    height: auto;
+        // height: auto;
+    height: 100%;
     // display: inline-block;
     // vertical-align: middle; // 要素を縦方向の中央に配置
     // 画面初期表示時 モーダル非表示
@@ -304,12 +333,20 @@
     transition:  visibility .3s linear, opacity .3s linear;
     // 中央揃え
     display: block;
+    margin-top: 24px;
+    margin-bottom: 24px;
     margin-right: auto;
     margin-left: auto;
 }
 
 // モーダルウィンドウの中身 画像に背景色を付与する場合のスタイル
-// .modal__inner {
+.modal__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
 //     margin-top: 125px;
 //     margin-bottom: 125px;
 //     position: relative;
@@ -321,14 +358,13 @@
 //     display: block;
 //     padding: 21px 8px 21px;
 //     height: auto;
-// }
+}
 
 .modal__content {
     .modal__content__img{
-        margin-top: 50px; // 画面の高さの位置に表示
-        width: 390px;
+        width: 100%;
         height: auto;
-        max-height: 405px;
+        // max-height: 405px;
     }
 }
 
@@ -374,14 +410,15 @@
 
     /* モーダルコンテンツ */
     .modal {
-        max-width: 390px;
+        // max-width: 390px;
+        width: 100%;
     }
 
-    .modal__content {
+    .modal__contents {
         .modal__content__img{
-            margin-top: 50px;
-            max-width: 390px;
-            max-height: 405px;
+            width: 100%;
+            // max-width: 390px;
+            // max-height: 405px;
         }
     }
 }
@@ -400,9 +437,9 @@
 
     .modal__content {
         .modal__content__img{
-            margin-top: 150px !important;
+            // margin-top: 150px !important;
             width: 100% !important;
-            max-height: 526px !important;
+            // max-height: 526px !important;
         }
     }
 
