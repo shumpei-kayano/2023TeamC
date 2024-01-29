@@ -126,20 +126,10 @@
               anchor: 'center',
               offset: 10,
               display: function(context) {
-                var dataset = context.dataset.data;
-                var totalDataSum = dataset.reduce((a, b) => a + b, 0);
-                console.log (dataset)
-                if (totalDataSum === 0) {
-                    return false;  // データがすべて非表示の場合はdatalabelsを非表示にする
-                }
-                
-                var currentDataValue = dataset[context.dataIndex];
-                var currentDataPercentage = (currentDataValue / totalDataSum) * 100;
-  
-                return currentDataPercentage >= 25;
+                return context.dataset.data[context.dataIndex] > 30;
             },
               formatter: function(value, context) {
-                  return context.dataset.label + ': ' + value +'%';
+                  return value +'%';
               },
               color: 'black'
           }
