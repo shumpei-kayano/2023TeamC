@@ -1849,6 +1849,7 @@ input[type=text]:focus, input[type=email]:focus {
 #loading .loading-content .loading__text {
   font-size: 2rem;
   letter-spacing: 0.04em;
+  font-weight: 400;
   padding-top: 30px;
 }
 
@@ -2099,6 +2100,7 @@ input[type=text]:focus, input[type=email]:focus {
   z-index: 999;
   opacity: 1;
   visibility: visible;
+  overflow-y: scroll;
 }
 
 .layer.is-open .modal {
@@ -2106,24 +2108,47 @@ input[type=text]:focus, input[type=email]:focus {
   visibility: visible;
 }
 
+.layer::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.layer::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.layer::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
 /* モーダルコンテンツ */
 .modal {
   position: relative;
   max-width: 390px;
-  height: auto;
+  height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0.3s linear, opacity 0.3s linear;
   display: block;
+  margin-top: 24px;
+  margin-bottom: 24px;
   margin-right: auto;
   margin-left: auto;
 }
 
+.modal__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .modal__content .modal__content__img {
-  margin-top: 50px;
-  width: 390px;
+  width: 100%;
   height: auto;
-  max-height: 405px;
 }
 
 .modal__button-wrap {
@@ -2164,12 +2189,10 @@ input[type=text]:focus, input[type=email]:focus {
   }
   /* モーダルコンテンツ */
   .modal {
-    max-width: 390px;
+    width: 100%;
   }
-  .modal__content .modal__content__img {
-    margin-top: 50px;
-    max-width: 390px;
-    max-height: 405px;
+  .modal__contents .modal__content__img {
+    width: 100%;
   }
 }
 @media only screen and (min-height: 600px) {
@@ -2182,9 +2205,7 @@ input[type=text]:focus, input[type=email]:focus {
     width: 100% !important;
   }
   .modal__content .modal__content__img {
-    margin-top: 150px !important;
     width: 100% !important;
-    max-height: 526px !important;
   }
   .modal__button-wrap {
     margin-top: 30px !important;
@@ -2946,4 +2967,7 @@ section {
     -webkit-clip-path: inset(0 0 0 0);
             clip-path: inset(0 0 0 0);
   }
+}
+.loading__text {
+  font-weight: 400;
 }

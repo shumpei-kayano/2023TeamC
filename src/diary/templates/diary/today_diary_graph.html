@@ -68,21 +68,10 @@
             <!-- グラフの表示 -->
             <div id="circle__graph">
               <div class="circle__graph__img">
-                  <div style="display: flex;">
-                      <!-- グラフの親要素の大きさを指定 -->
-                      <div id="myPieChart_with" style="flex: 1; margin: auto; width: 60%;">
-                          <!-- width 60%がアプリに合うが、ブラウザに合わせて52%に指定 -->
-                          <canvas id="myGraph"></canvas>
-                      </div>
-                      <div id="myPieChart_with_labels" style="flex: 1; margin: auto;">
-                          <canvas id="myLabels"></canvas>
-                      </div>
-                  </div>
-                  <div id="popup"></div>
+                  <canvas id="barChart" style="max-height: 105px; border-bottom: 2px solid rgba(4, 202, 214, 0.15); padding-bottom: 8px;"></canvas>
               </div>
             </div>
-
-        </div>
+          </div>
 
         <!-- ネコココメント -->
         {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
@@ -118,88 +107,85 @@
 
 {% block js %}
 <script>
-  var graphCanvas = document.getElementById('myGraph').getContext('2d');
-  var labelCanvas = document.getElementById('myLabels').getContext('2d');
-  graphCanvas.imageSmoothingEnabled = true;
-  labelCanvas.imageSmoothingEnabled = true;
-
-  var Data = {{ data|safe }};
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
   
   var options = {
-    layout: {
-      padding: {
-        left: 0,
-        right: 0
+      indexAxis: 'y', 
+      scales: {
+          x: {
+              stacked: true
+          },
+          y: {
+              stacked: true
+          }
+      },
+      plugins: {
+          datalabels: {
+              align: 'center',
+              anchor: 'center',
+              offset: 10,
+              display: function(context) {
+                var dataset = context.dataset.data;
+                var totalDataSum = dataset.reduce((a, b) => a + b, 0);
+                console.log (dataset)
+                if (totalDataSum === 0) {
+                    return false;  // データがすべて非表示の場合はdatalabelsを非表示にする
+                }
+                
+                var currentDataValue = dataset[context.dataIndex];
+                var currentDataPercentage = (currentDataValue / totalDataSum) * 100;
+  
+                return currentDataPercentage >= 25;
+            },
+              formatter: function(value, context) {
+                  return context.dataset.label + ': ' + value +'%';
+              },
+              color: 'black'
+          }
       }
-    },
-    plugins: {
-      datalabels: {
-        align: 'center',
-        anchor: 'center',
-        display: function(context) {
-          return context.dataset.data[context.dataIndex] > 10;
-        },
-        formatter: function(value, context) {
-          return context.chart.data.labels[context.dataIndex] + ': ' + value;
-        },
-        color: 'black'
-      }
-    }
   };
   
-  var myPieChart = new Chart(graphCanvas, {
-    type: 'doughnut',
-    data: {
-      labels: ['好調', '不調', '普通', '複雑'],
-      datasets: [{
-        data: [Data.positive, Data.negative, Data.neutral, Data.mixed],
-        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)', 'rgba(128, 128, 128, 0.2)'],
-        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)', 'rgba(128, 128, 128, 1)'],
-        borderWidth: [1, 1, 1, 1]
-      }]
-    },
-    options: options,
-    plugins: [ChartDataLabels],
-    plugins: [{
-      afterDraw: function(chart) {
-        var ctx = labelCanvas;
-        ctx.clearRect(0, 0, labelCanvas.width, labelCanvas.height);
-  
-        var fontSize = 14;
-        var fontFamily = 'MS Mincho';
-        ctx.font = fontSize + 'px ' + fontFamily;
-        ctx.fillStyle = 'blue';
-  
-        chart.data.labels.forEach(function(label, index) {
-          var yPos = (index + 1) * (fontSize + 5);
-          ctx.fillText(label + ': ' + chart.data.datasets[0].data[index], 10, yPos);
-        });
-      }
-    }]
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [""],
+          datasets: [
+              {
+                  label: '好調',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: '不調',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: '普通',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                  borderColor: 'rgba(255, 255, 0, 1)',
+                  borderWidth: 1,
+              },
+              {
+                  label: '複雑',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                  borderColor: 'rgba(128, 128, 128, 1)',
+                  borderWidth: 1,
+              }
+          ]
+      },
+      plugins: [ChartDataLabels],
+      options: options
   });
 // 円グラフのクリックイベント処理
 
-canvas.onclick = function(evt) {
-    var activePoint = myPieChart.getElementsAtEvent(evt)[0];
-    if (activePoint) {
-        // クリックした項目に関連付けられた詳細情報を取得
-        var itemIndex = activePoint._index;
-        var itemLabel = data.labels[itemIndex];
-        var itemValue = data.values[itemIndex];
-
-        // クリック位置に詳細情報を表示
-        var popup = document.getElementById('popup');
-        popup.style.display = 'block';
-        popup.style.left = (evt.clientX - canvas.getBoundingClientRect().left) + 'px';
-        popup.style.top = (evt.clientY - canvas.getBoundingClientRect().top) + 'px';
-        popup.innerHTML = `<p>項目: ${itemLabel}</p><p>値: ${itemValue}</p>`;
-
-        // クリックした項目の詳細情報を非表示にするために、別の場所をクリックした際にポップアップを非表示にするコードを追加
-        document.body.onclick = function() {
-            popup.style.display = 'none';
-        };
-    }
-};
 
 </script>
 {% endblock %}

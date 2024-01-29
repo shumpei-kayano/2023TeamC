@@ -1185,9 +1185,6 @@ label {
   header, .ground, footer {
     height: 100vh;
   }
-  #password_reset__article {
-    margin-top: 85px;
-  }
 }
 label {
   font-size: 1.4rem;
@@ -1737,6 +1734,11 @@ article {
 .user-infomation__signup {
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+.user-infomation__style--center {
+  margin: 0 auto;
+  max-width: 342px;
 }
 
 @media only screen and (max-height: 599px) {

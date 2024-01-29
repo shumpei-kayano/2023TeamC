@@ -916,3 +916,11 @@ def record_diary_detail(request):
 def record_diary_graph(request):
   return render(request,'diary/record_diary_graph.html')
 
+
+from django.core.exceptions import PermissionDenied
+
+def forbidden_view(request):
+    raise PermissionDenied("You don't have permission to access this resource.")
+def internal_server_error_view(request):
+    # 何らかのエラーが発生したと仮定
+    raise Exception("Something went wrong!")
