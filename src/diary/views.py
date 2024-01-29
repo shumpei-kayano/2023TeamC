@@ -527,7 +527,8 @@ def home_top(request):
         return redirect('diary:today_diary_detail')
 
     openai.api_key = settings.OPENAI_API_KEY
-    short = """豆知識を一言ください。"""
+    short = """豆知識を一言ください。
+                嘘はつかないでください。"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
