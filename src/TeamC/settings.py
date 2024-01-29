@@ -219,3 +219,7 @@ AWS_SECRET_ACCESS_KEY = '9CTcFM+N4vsfeIhAbl91qbDg1CAx1eniN6ULoh40'
 
 SESSION_COOKIE_SECURE = True 
 CSRF_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.o-hara-oita.click',
+]
