@@ -120,20 +120,20 @@
               stacked: true
           }
       },
-      plugins: {
-          datalabels: {
-              align: 'center',
-              anchor: 'center',
-              offset: 10,
-              display: function(context) {
-                return context.dataset.data[context.dataIndex] > 30;
-            },
-              formatter: function(value, context) {
-                  return value +'%';
-              },
-              color: 'black'
-          }
-      }
+//      plugins: {
+//          datalabels: {
+//              align: 'center',
+//              anchor: 'start',
+//              offset: 10,
+//              display: function(context) {
+//                return context.dataset.data[context.dataIndex] > 0;
+//            },
+//              formatter: function(value, context) {
+//                  return value +'%';
+//              },
+//              color: 'black'
+//          }
+//      }
   };
   
   var myChart = new Chart(ctx, {
@@ -171,7 +171,7 @@
               }
           ]
       },
-      plugins: [ChartDataLabels],
+//      plugins: [ChartDataLabels],
       options: options
   });
 // 円グラフのクリックイベント処理
