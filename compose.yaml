@@ -27,8 +27,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./src/diary/static:/usr/share/nginx/html/diary/static  # 追加
-      - ./src/user/static:/usr/share/nginx/html/user/static #追加
+      - ./src/diary/static:/usr/share/nginx/html/static/diary  # 追加
+      - ./src/user/static:/usr/share/nginx/html/static/user #追加
       - ./src/media:/usr/share/nginx/html/media
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2.0
