@@ -393,6 +393,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   stroke-width: 2px;
   stroke: #04CAD6;
   width: 340px;
+  height: 122px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
