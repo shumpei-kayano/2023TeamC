@@ -20,7 +20,10 @@ SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@
 DEBUG = False
 
 # 本番環境だと変える
-ALLOWED_HOSTS = ['35.168.23.108', 'teamc.o-hara-oita.click']
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+
+
+
 
 
 # Application definition
@@ -211,3 +214,5 @@ AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # 30秒間ロック
 
 ACCOUNT_LOCKED_URL = '/accounts/login/'
 
+AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
+AWS_SECRET_ACCESS_KEY = '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'

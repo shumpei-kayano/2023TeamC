@@ -12,26 +12,9 @@
 
 {% block header %}
 <header>
-    {% comment %} <div class="header__nowdate">
-        <!-- 日付の表示 書式は0000/00/00(月) -->
-        {% if カレンダーから遷移した場合 %}
-            {{ 選択された日付を表示する }}
-        {% else %}
-            {{ 現在の日付を表示する }}
-        {% endif %}
-    </div>
-    <!-- 天気アイコン・気温の表示  -->
-    <div class="header__button">
-        <div class="header__back__img">
-            {% comment %} 戻るボタンは削除しました
-        </div>
-    </div> {% endcomment %}
-    <div class="header__spacer--top"></div><!-- 追加 -->
-    <h1 class="date">--/--(-)</h1>
-    <div class="header__weather">
-        <img class="weatherImg">
-        <span class="tempMax">-℃</span>
-    </div>
+  <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+  <h1>日記確認画面</h1>
+  <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
 {% endblock %}
 
