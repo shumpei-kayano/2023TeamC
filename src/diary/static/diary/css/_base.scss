@@ -120,7 +120,7 @@ header {
 
 .ground{
     margin-top: 50px; /*上に空白を追加*/
-    padding-bottom: 60px;
+    // padding-bottom: 60px;
     height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
 
@@ -257,9 +257,6 @@ footer {
         font-size: 20px;
     }
 
-    .ground{
-        height: calc(100vh - 165px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
-    }
     // スクロールバー背景色
     .ground::-webkit-scrollbar {
         width: 5px;
@@ -285,5 +282,11 @@ footer {
             font-size: 10px; /* テキストのサイズを10%に調整 */
             margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
         }
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    .ground{
+        height: calc(100vh - 165px) !important; /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     }
 }
