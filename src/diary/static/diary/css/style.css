@@ -9,7 +9,7 @@ body {
   font-weight: 400;
   background-color: #FFFDF3;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -393,7 +393,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   stroke-width: 2px;
   stroke: #04CAD6;
   width: 340px;
-  height: 122px;
+  max-height: 122px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
