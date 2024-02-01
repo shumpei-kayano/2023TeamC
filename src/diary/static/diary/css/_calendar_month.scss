@@ -103,6 +103,12 @@
 }
 
 @media only screen and (min-height: 600px) {
+    .calendar__month {
+        table {
+            height: calc(100vh - 240px) !important;
+        }
+    }
+
     .calendar__month--today-td, .calendar__month__td {
         font-size: 18px !important;
         padding: 8px 0 !important;
