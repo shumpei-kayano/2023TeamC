@@ -123,8 +123,8 @@ header .header__weather span {
     max-width: none;
   }
   article {
-    width: 100%;
-    max-width: none;
+    width: 100% !important;
+    max-width: none !important;
   }
   header {
     height: 50px;

@@ -135,8 +135,8 @@ header {
         max-width: none; // 追加
     }
     article{
-        width: 100%;
-        max-width: none; // 追加
+        width: 100% !important;
+        max-width: none !important; // 追加
     }
 
     header {
