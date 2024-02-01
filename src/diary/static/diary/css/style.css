@@ -883,7 +883,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .week-calendar__table {
-    height: calc(100vh - 215px);
+    height: calc(100vh - 280px);
   }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
