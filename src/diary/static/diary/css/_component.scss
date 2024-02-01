@@ -138,7 +138,8 @@
     stroke-width: 2px;
     stroke: $header_color;
     width: 340px;
-    // height: 122px;
+    max-height: 122px;
+    // max-height: ;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -184,6 +185,22 @@
         border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
     }
 }
+// スクロールバーつけたいとき
+// .content__home__text__scroll{
+//     height: 210px;
+//     overflow-y: scroll; // 縦スクロールバーを表示
+// }
+// .content__home__text__scroll::-webkit-scrollbar {
+//     background-color: transparent;
+//     width: 2px;
+// }
+// .content__home__text__scroll::-webkit-scrollbar-thumb {
+//     background-color: #53D3DB;
+//     border-radius: 10px;
+// }
+// .content__home__text__scroll::-webkit-scrollbar-thumb:hover {
+//     background-color: #00ABB6;
+// }
 
 .setting__menu ul{
     list-style: none; /* リストアイテムのマーカーを非表示にする */

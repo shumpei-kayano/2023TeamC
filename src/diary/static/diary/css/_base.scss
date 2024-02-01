@@ -8,7 +8,8 @@ body {
     font-weight: 400;
     background-color: $web_background_color;
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    height: 100vh;
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする

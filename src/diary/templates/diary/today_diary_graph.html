@@ -65,11 +65,12 @@
 
         <!-- グラフの表示 -->
         <div  class="content__today-diary__graph">
+            <samll class="today-diary__graph__created-date">{{diary.created_date}}の感情グラフ</samll>
             <!-- グラフの表示 -->
             <div id="circle__graph">
-              <div class="circle__graph__img">
-                  <canvas id="barChart" style="max-height: 105px; border-bottom: 2px solid rgba(4, 202, 214, 0.15); padding-bottom: 8px;"></canvas>
-              </div>
+                <div class="circle__graph__img">
+                    <canvas id="barChart" style="max-height: 105px; padding-bottom: 8px;"></canvas>
+                </div>
             </div>
           </div>
 
@@ -120,30 +121,20 @@
               stacked: true
           }
       },
-      plugins: {
-          datalabels: {
-              align: 'center',
-              anchor: 'center',
-              offset: 10,
-              display: function(context) {
-                var dataset = context.dataset.data;
-                var totalDataSum = dataset.reduce((a, b) => a + b, 0);
-                console.log (dataset)
-                if (totalDataSum === 0) {
-                    return false;  // データがすべて非表示の場合はdatalabelsを非表示にする
-                }
-                
-                var currentDataValue = dataset[context.dataIndex];
-                var currentDataPercentage = (currentDataValue / totalDataSum) * 100;
-  
-                return currentDataPercentage >= 25;
-            },
-              formatter: function(value, context) {
-                  return context.dataset.label + ': ' + value +'%';
-              },
-              color: 'black'
-          }
-      }
+//      plugins: {
+//          datalabels: {
+//              align: 'center',
+//              anchor: 'start',
+//              offset: 10,
+//              display: function(context) {
+//                return context.dataset.data[context.dataIndex] > 0;
+//            },
+//              formatter: function(value, context) {
+//                  return value +'%';
+//              },
+//              color: 'black'
+//          }
+//      }
   };
   
   var myChart = new Chart(ctx, {
@@ -181,7 +172,7 @@
               }
           ]
       },
-      plugins: [ChartDataLabels],
+//      plugins: [ChartDataLabels],
       options: options
   });
 // 円グラフのクリックイベント処理
