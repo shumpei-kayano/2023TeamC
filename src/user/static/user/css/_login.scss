@@ -120,6 +120,9 @@ article{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 39rem;
+    max-width: 100%;
+    margin: 0 auto;
 }
 #height__center{
     margin-top: 0;
@@ -132,9 +135,7 @@ article{
     .wrapperHeader{
         padding-top: 50px;
     }
-    article{
-        margin-top: 30px;
-    }
+
     #height__center{
         margin-top: 0;
         height: calc(100vh - 9.8rem);
