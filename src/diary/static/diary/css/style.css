@@ -113,7 +113,7 @@ header .header__weather span {
 
 .ground {
   margin-top: 50px; /*上に空白を追加*/
-  margin-bottom: 60px;
+  padding-bottom: 60px;
   overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
 }
 
@@ -1089,7 +1089,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .calendar__month table {
-    height: calc(100vh - 240px) !important;
+    height: calc(100vh - 265px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
