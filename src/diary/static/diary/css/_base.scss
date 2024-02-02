@@ -9,7 +9,7 @@ body {
     background-color: $web_background_color;
     width: 100%;
     // height: 100%;
-    height: 100vh;
+    height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
@@ -121,7 +121,7 @@ header {
 .ground{
     margin-top: 50px; /*上に空白を追加*/
     // padding-bottom: 60px;
-    height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
 
     // overflow-x: hidden; /* オーバーフローしたコンテンツを非表示にする */
