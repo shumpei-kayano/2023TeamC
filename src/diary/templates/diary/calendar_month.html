@@ -30,8 +30,8 @@
     <div class="content">
 
 <!-- メインコンテンツ -->
-{% comment %} <main class="ground ground--white"> {% endcomment %}
-    <div class="calendar__scroll--content">
+<main class="ground ground--white">
+    <div class="scroll--content">
         <div class="calendar--background calender-month-page">
             <!-- タブ -->
             {% url 'diary:calendar_month' selected_date as calendar_month_url %}
@@ -135,7 +135,7 @@
         </div><!-- calendar  background -->
 
     </div><!-- scroll  content -->
-{% comment %} </main> {% endcomment %}
+</main>
 
 </div>
 </article>
@@ -154,5 +154,23 @@
         // アニメーションを開始
         document.querySelector('.dli-loading-1').classList.add('rotate-animation');
     });
+
+    window.addEventListener('resize', adjustTableRowHeight);
+
+    function adjustTableRowHeight() {
+        var viewportHeight = window.innerHeight;
+        var addressBarHeight = estimateAddressBarHeight(); // アドレスバーの高さを推定する関数
+        var tabBarHeight = estimateTabBarHeight(); // タブバーの高さを推定する関数
+        var tableHeight = viewportHeight - addressBarHeight - tabBarHeight;
+
+        var tableRows = document.querySelectorAll('table tr');
+        var rowHeight = tableHeight / tableRows.length;
+        tableRows.forEach(function(row) {
+            row.style.height = rowHeight + 'px';
+        });
+    }
+
+    // 初回の高さ調整
+    adjustTableRowHeight();
 </script>
 {% endblock %}

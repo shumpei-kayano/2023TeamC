@@ -9,7 +9,7 @@ body {
   font-weight: 400;
   background-color: #FFFDF3;
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -188,7 +188,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 
 @media only screen and (max-width: 960px) {
-  header, .ground, footer, .calendar__scroll--content {
+  header, .ground, footer {
     width: 100%;
     max-width: none;
   }
@@ -1024,12 +1024,11 @@ th, td {
 }
 
 .calendar__month {
-  overflow-x: auto; /* カレンダーが横に広がった場合に横スクロール可能にする */
+  overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
 }
 .calendar__month table {
   width: 100%;
   table-layout: fixed; /* テーブルのレイアウトを固定にする */
-  height: calc(100vh - 215px);
 }
 .calendar__month th, .calendar__month td {
   text-align: center;
@@ -1100,30 +1099,6 @@ th, td {
     padding: 0 !important;
   }
 }
-.calendar__scroll--content {
-  width: 39rem;
-  max-width: 100%;
-  margin: 0 auto;
-  margin-top: 50px; /*上に空白を追加*/
-  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
-  background-color: #FFFFFF;
-}
-
-.calendar__scroll--content::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.calendar__scroll--content::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.calendar__scroll--content::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
-}
-
 .week-graph-page .a--tab--right.active a {
   background-color: #00ABB6;
   color: #FFF;

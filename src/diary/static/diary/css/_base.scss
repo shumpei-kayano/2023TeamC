@@ -9,7 +9,8 @@ body {
     background-color: $web_background_color;
     width: 100%;
     // height: 100%;
-    height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
+    height: 100vh;
+    // height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
@@ -229,7 +230,7 @@ footer {
 }
 
 @media only screen and (max-width: 960px) {
-    header, .ground, footer, .calendar__scroll--content {
+    header, .ground, footer {
         width: 100%;
         max-width: none; // 追加
     }
