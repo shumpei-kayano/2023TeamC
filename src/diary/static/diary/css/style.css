@@ -1000,6 +1000,10 @@ th, td {
     max-width: 100%;
   }
 }
+.calendar__ground {
+  margin-top: 16px;
+}
+
 .calender-month-page .a--tab--left a {
   background-color: #00ABB6;
   color: #FFF;
@@ -1032,6 +1036,7 @@ th, td {
 .calendar__month table {
   width: 100%;
   table-layout: fixed; /* テーブルのレイアウトを固定にする */
+  height: calc(100vh - 215px);
 }
 .calendar__month th, .calendar__month td {
   text-align: center;
