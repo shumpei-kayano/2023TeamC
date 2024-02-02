@@ -229,7 +229,7 @@ footer {
 }
 
 @media only screen and (max-width: 960px) {
-    header, .ground, footer {
+    header, .ground, footer, .calendar__scroll--content {
         width: 100%;
         max-width: none; // 追加
     }

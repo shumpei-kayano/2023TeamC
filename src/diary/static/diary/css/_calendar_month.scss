@@ -126,3 +126,33 @@
         padding: 0 !important;
     }
 }
+
+
+.calendar__scroll--content{
+    width: 39rem; // 任意の幅を設定
+    max-width: 100%; // ビューポートの幅を超えないように設定
+    margin: 0 auto; // 中央に配置
+    margin-top: 50px; /*上に空白を追加*/
+    overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+    background-color: $background_color;
+}
+// スクロールバー背景色
+.calendar__scroll--content::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.calendar__scroll--content::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+.calendar__scroll--content::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+}
