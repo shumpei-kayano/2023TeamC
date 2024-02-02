@@ -155,9 +155,9 @@
         document.querySelector('.dli-loading-1').classList.add('rotate-animation');
     });
 
-    window.addEventListener('resize', adjustTableRowHeight);
+    window.addEventListener('resize', adjustTableCellHeight);
 
-    function adjustTableRowHeight() {
+    function adjustTableCellHeight() {
         var viewportHeight = window.innerHeight;
         var addressBarHeight = estimateAddressBarHeight(); // アドレスバーの高さを推定する関数
         var tabBarHeight = estimateTabBarHeight(); // タブバーの高さを推定する関数
@@ -165,12 +165,13 @@
 
         var tableRows = document.querySelectorAll('table tr');
         var rowHeight = tableHeight / tableRows.length;
-        tableRows.forEach(function(row) {
-            row.style.height = rowHeight + 'px';
+        var tableCells = document.querySelectorAll('table td');
+        tableCells.forEach(function(cell) {
+            cell.style.height = rowHeight + 'px';
         });
     }
 
     // 初回の高さ調整
-    adjustTableRowHeight();
+    adjustTableCellHeight();
 </script>
 {% endblock %}
