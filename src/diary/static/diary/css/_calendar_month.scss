@@ -1,3 +1,7 @@
+.calendar__ground{
+    margin-top: 16px;
+}
+
 .calender-month-page {
     .a--tab--left {
         a {
@@ -39,7 +43,7 @@
     table {
         width: 100%;
         table-layout: fixed; /* テーブルのレイアウトを固定にする */
-        // height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+        height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
 
     th, td {
