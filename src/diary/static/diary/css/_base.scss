@@ -155,6 +155,17 @@ main{
     background-color: rgb(173, 173, 173);
 }
 
+.content{
+    &--white{
+        background-color: $background_color;
+        height: 100dvh;
+    }
+    &--blue{
+        background-color: $main_background_color;
+        height: 100dvh;
+    }
+}
+
 .ground{
     &--white{
         background-color: $background_color;

@@ -181,11 +181,25 @@ button {
         // padding-top: 0;
         padding-bottom: 0;
     }
-    .slid__img--1{
-        padding-top: 50px;
+    // .slid__img--1{
+    //     padding-top: 50px;
+    // }
+    // .slid2__img--1, .slid2__img--2 {
+    //     padding-top: 35px;
+    //     padding-bottom: 30px;
+    // }
+    .slid__samll{
+        margin-top: 8px;
     }
-    .slid2__img--1, .slid2__img--2 {
-        padding-top: 35px;
-        padding-bottom: 30px;
+    .slid__img--1{
+        padding-top: 16px;
+    }
+    .slid2__img--1, .slid2__img--2{
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .slid3__img--1, .slid4__img--1, .slid5__img--1{
+        width: 250px;
+        height: auto;
     }
 }
