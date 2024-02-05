@@ -247,6 +247,11 @@
                                 新規作成
                                 </a>
                             </td>
+                            
+                        <!-- 日記がないときにtbを作る処理 -->
+                        {%elif day == missing_date and today < day%}
+                            <td rowspan = "2" class="week-calendar__diary"  >
+                            </td>
                             {% endif %}
                         {% endfor %}
                     </tr>
@@ -302,6 +307,10 @@
                                 <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
                                 新規作成
                                 </a>
+                            </td>
+                        <!-- 日記がないときにtbを作る処理 -->
+                        {%elif day == missing_date and today < day%}
+                            <td rowspan = "2" class="week-calendar__diary"  >
                             </td>
                             {% endif %}
                         {% endfor %}
