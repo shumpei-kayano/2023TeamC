@@ -17,7 +17,7 @@ from django.http import JsonResponse
 from .forms import CustomUserChangeForm
 from allauth.account.models import EmailAddress
 from .forms import ImageDeleteForm
-
+import math
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -32,10 +32,10 @@ def analyze_sentiment(text, diary, user):
     if existing_emotion:
         # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在する場合は上書き保存
         existing_emotion.reasoning = result['Sentiment']
-        existing_emotion.positive = round(result['SentimentScore']['Positive'] * 100, 1)
-        existing_emotion.negative = round(result['SentimentScore']['Negative'] * 100, 1)
-        existing_emotion.neutral = round(result['SentimentScore']['Neutral'] * 100, 1)
-        existing_emotion.mixed = round(result['SentimentScore']['Mixed'] * 100, 1)
+        existing_emotion.positive = math.floor(result['SentimentScore']['Positive'] * 1000)/10
+        existing_emotion.negative = math.floor(result['SentimentScore']['Negative'] * 1000)/10
+        existing_emotion.neutral = math.floor(result['SentimentScore']['Neutral'] * 1000)/10
+        existing_emotion.mixed = math.floor(result['SentimentScore']['Mixed'] * 1000)/10
         existing_emotion.save()
     else:
         # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
@@ -44,10 +44,10 @@ def analyze_sentiment(text, diary, user):
             user=user,
             created_date=diary.created_date,
             reasoning=result['Sentiment'],
-            positive=round(result['SentimentScore']['Positive'] * 100, 1),
-            negative=round(result['SentimentScore']['Negative'] * 100, 1),
-            neutral=round(result['SentimentScore']['Neutral'] * 100, 1),
-            mixed=round(result['SentimentScore']['Mixed'] * 100, 1),
+            positive=math.floor(result['SentimentScore']['Positive'] * 1000)/10,
+            negative=math.floor(result['SentimentScore']['Negative'] * 1000)/10,
+            neutral=math.floor(result['SentimentScore']['Neutral'] * 1000)/10,
+            mixed=math.floor(result['SentimentScore']['Mixed'] * 1000)/10,
         )
         new_emotion.save()
 
@@ -527,9 +527,10 @@ def home_top(request):
         return redirect('diary:today_diary_detail')
 
     openai.api_key = settings.OPENAI_API_KEY
-    short = """豆知識を一言ください。
-                嘘はつかないでください。
-                文字数は可能な限り短くしてください。"""
+    short = """以下の設定を遵守して豆知識を一言ください。
+                #豆知識は再検索して、その豆知識が正しくなかった場合は別の豆知識を返してください。
+                #文字数は可能な限り短くしてください。
+                #豆知識のみレスポンスしてください。"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -707,13 +708,12 @@ def month_graph(request,selected_date=None):
 def positive_conversion(request, pk,):
     diary = get_object_or_404(Diary, id=pk)
     openai.api_key = settings.OPENAI_API_KEY
-    user_diary ="""以下設定を遵守し、日記の内容をポジティブに変換してください。
-                    #あなたは自我を出さないでください。
+    user_diary ="""以下設定を遵守し、日記の内容をポジティブな内容に変換してください。
                     #あなたはアプリのコンテンツです。
                     #あなたの言葉はいりません。
                     #日記の内容と関係ないことはしゃべらないでください。
-                    #同じ文字が連続で続いたり、理解できないものには「ちゃんと書けカス」と返してください。
-                    #ユーザーとは会話をしない。
+                    #質問や同じ文字が連続で続いたり、コードには「読み取れませんでした」と返してください。
+                    #レスポンスは、日記のポジティブ変換内容のみ返すこと。
                     以下が日記の内容です。\n""" + diary.content
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
