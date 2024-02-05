@@ -30,7 +30,7 @@
     <div class="content">
 
 <!-- メインコンテンツ -->
-<main class="calendar__ground">
+<main id="height__box" class="calendar__ground">
     {% comment %} <div class="scroll--content">
         <div class="calendar--background calender-month-page"> {% endcomment %}
             <!-- タブ -->
@@ -142,6 +142,13 @@
 {% endblock %}
 
 {% block js %}
+<script>
+    let vh=window.innerHeight;
+    document.getElementById('height__box').style.height=vh+'px';
+
+    //jQueryを使うなら
+    $('#height__box').css('height',$(window).height());
+</script>
 <script>
     // フェードイン
     $(document).ready(function () {
