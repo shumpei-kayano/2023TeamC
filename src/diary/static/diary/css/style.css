@@ -230,6 +230,11 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
+@media only screen and (min-height: 600px) {
+  .ground {
+    height: calc(100vh - 316px) !important;
+  }
+}
 .btn {
   display: flex;
   justify-content: center;
@@ -1000,27 +1005,6 @@ th, td {
     max-width: 100%;
   }
 }
-.calendar__ground {
-  margin-top: 60px;
-  overflow-y: scroll;
-  background-color: #FFFFFF;
-}
-
-.calendar__ground::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.calendar__ground::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.calendar__ground::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
-}
-
 .calender-month-page .a--tab--left a {
   background-color: #00ABB6;
   color: #FFF;
@@ -1107,6 +1091,9 @@ th, td {
 }
 
 @media only screen and (min-height: 600px) {
+  .calendar__month table {
+    height: calc(100vh - 330px) !important;
+  }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
     padding: 8px 0 !important;

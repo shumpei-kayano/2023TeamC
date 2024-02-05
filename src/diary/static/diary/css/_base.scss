@@ -289,8 +289,8 @@ footer {
     }
 }
 
-// @media only screen and (min-height: 600px){
-//     .ground{
-//         height: calc(100vh - 316px) !important; // アドレスバー 206px
-//     }
-// }
+@media only screen and (min-height: 600px){
+    .ground{
+        height: calc(100vh - 316px) !important; // アドレスバー 206px
+    }
+}
