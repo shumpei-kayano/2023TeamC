@@ -86,8 +86,8 @@ th, td {
     vertical-align: bottom;
     width: 80px;
     // height: 38px;
-    // padding-top: 10px;
-    padding-bottom: 5px;
+    padding-top: 8px;
+    padding-bottom: 0;
     font-size: 1.4rem;
     letter-spacing: 0.04em;
 }
@@ -99,6 +99,8 @@ th, td {
     // padding-bottom: 10px;
     font-size: 1.8rem;
     font-weight: 500;
+    padding-top: 0;
+    padding-bottom: 8px;
 }
 
 .week-calendar__emotion-img{
@@ -112,6 +114,7 @@ th, td {
     font-size: 1.6rem;
     color: #A29C9C;
 }
+
 .week-calendar__diary__flex-box{
     display: flex;
     align-items: center;
@@ -125,7 +128,7 @@ th, td {
 }
 
 // 下線
-.week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
+.week-calendar__week,.week-calendar__diary,.week-calendar__week__today, .week-calendar__diary__missing_date {
     border-bottom: 3px solid $main_background_color;
     // border-bottom: 3px solid #e4fbfd;
 }
@@ -161,9 +164,9 @@ th, td {
 }
 
 @media only screen and (min-height: 600px) {
-    // .week-calendar__table{
-    //     height: calc(100vh - 280px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
-    // }
+    .week-calendar__table{
+        height: calc(100vh - 320px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+    }
     // 下線
     .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
         border-bottom: 5px solid $main_background_color;

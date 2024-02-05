@@ -826,7 +826,8 @@ th, td {
 .week-calendar__today, .week-calendar__date {
   vertical-align: bottom;
   width: 80px;
-  padding-bottom: 5px;
+  padding-top: 8px;
+  padding-bottom: 0;
   font-size: 1.4rem;
   letter-spacing: 0.04em;
 }
@@ -836,6 +837,8 @@ th, td {
   min-width: 80px;
   font-size: 1.8rem;
   font-weight: 500;
+  padding-top: 0;
+  padding-bottom: 8px;
 }
 
 .week-calendar__emotion-img {
@@ -861,7 +864,7 @@ th, td {
   color: #ffffff;
 }
 
-.week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
+.week-calendar__week, .week-calendar__diary, .week-calendar__week__today, .week-calendar__diary__missing_date {
   border-bottom: 3px solid #EEFEFF;
 }
 
@@ -897,6 +900,9 @@ th, td {
 }
 
 @media only screen and (min-height: 600px) {
+  .week-calendar__table {
+    height: calc(100vh - 320px);
+  }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
   }
