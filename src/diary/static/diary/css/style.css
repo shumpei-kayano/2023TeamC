@@ -241,7 +241,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 @media only screen and (min-height: 600px) {
   .ground {
-    height: calc(100vh - 210px) !important;
+    height: calc(100vh - 200px) !important;
   }
 }
 .btn {
@@ -1101,7 +1101,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .calendar__month table {
-    height: calc(100vh - 330px) !important;
+    height: calc(100vh - 320px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
@@ -2637,7 +2637,7 @@ button {
     padding-bottom: 16px;
   }
   .slid3__img--1, .slid4__img--1, .slid5__img--1 {
-    width: 250px;
+    width: 230px;
     height: auto;
   }
 }
