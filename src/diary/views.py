@@ -707,13 +707,12 @@ def month_graph(request,selected_date=None):
 def positive_conversion(request, pk,):
     diary = get_object_or_404(Diary, id=pk)
     openai.api_key = settings.OPENAI_API_KEY
-    user_diary ="""以下設定を遵守し、日記の内容をポジティブに変換してください。
-                    #あなたは自我を出さないでください。
+    user_diary ="""以下設定を遵守し、日記の内容をポジティブな内容に変換してください。
                     #あなたはアプリのコンテンツです。
                     #あなたの言葉はいりません。
                     #日記の内容と関係ないことはしゃべらないでください。
-                    #同じ文字が連続で続いたり、理解できないものには「ちゃんと書けカス」と返してください。
-                    #ユーザーとは会話をしない。
+                    #質問や同じ文字が連続で続いたり、コードには「ちゃんと書けカス」と返してください。
+                    #レスポンスは、日記のポジティブ変換内容のみ返すこと。
                     以下が日記の内容です。\n""" + diary.content
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
