@@ -17,7 +17,7 @@ from django.http import JsonResponse
 from .forms import CustomUserChangeForm
 from allauth.account.models import EmailAddress
 from .forms import ImageDeleteForm
-
+import math
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -32,10 +32,10 @@ def analyze_sentiment(text, diary, user):
     if existing_emotion:
         # 特定のDiaryとユーザーに関連するEmotionオブジェクトが存在する場合は上書き保存
         existing_emotion.reasoning = result['Sentiment']
-        existing_emotion.positive = round(result['SentimentScore']['Positive'] * 100, 1)
-        existing_emotion.negative = round(result['SentimentScore']['Negative'] * 100, 1)
-        existing_emotion.neutral = round(result['SentimentScore']['Neutral'] * 100, 1)
-        existing_emotion.mixed = round(result['SentimentScore']['Mixed'] * 100, 1)
+        existing_emotion.positive = math.floor(result['SentimentScore']['Positive'] * 1000)/10
+        existing_emotion.negative = math.floor(result['SentimentScore']['Negative'] * 1000)/10
+        existing_emotion.neutral = math.floor(result['SentimentScore']['Neutral'] * 1000)/10
+        existing_emotion.mixed = math.floor(result['SentimentScore']['Mixed'] * 1000)/10
         existing_emotion.save()
     else:
         # Emotionオブジェクトが存在しない場合は新しいEmotionオブジェクトを作成して保存
@@ -44,10 +44,10 @@ def analyze_sentiment(text, diary, user):
             user=user,
             created_date=diary.created_date,
             reasoning=result['Sentiment'],
-            positive=round(result['SentimentScore']['Positive'] * 100, 1),
-            negative=round(result['SentimentScore']['Negative'] * 100, 1),
-            neutral=round(result['SentimentScore']['Neutral'] * 100, 1),
-            mixed=round(result['SentimentScore']['Mixed'] * 100, 1),
+            positive=math.floor(result['SentimentScore']['Positive'] * 1000)/10,
+            negative=math.floor(result['SentimentScore']['Negative'] * 1000)/10,
+            neutral=math.floor(result['SentimentScore']['Neutral'] * 1000)/10,
+            mixed=math.floor(result['SentimentScore']['Mixed'] * 1000)/10,
         )
         new_emotion.save()
 
