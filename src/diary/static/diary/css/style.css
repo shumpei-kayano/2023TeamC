@@ -242,7 +242,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 @media only screen and (min-height: 600px) {
   .ground {
-    height: calc(100vh - 195px) !important;
+    height: calc(100vh - 197px) !important;
   }
 }
 .btn {
@@ -930,7 +930,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .week-calendar__table {
-    height: calc(100vh - 310px);
+    height: calc(100vh - 300px);
   }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
@@ -1136,7 +1136,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .calendar__month table {
-    height: calc(100vh - 310px) !important;
+    height: calc(100vh - 300px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
@@ -2488,7 +2488,7 @@ input[type=text]:focus, input[type=email]:focus {
 
 .container {
   width: 100%;
-  height: calc(100vh - 11rem);
+  height: calc(100vh - 197px);
 }
 
 .slider-container {
