@@ -138,7 +138,7 @@
     stroke-width: 2px;
     stroke: $header_color;
     width: 340px;
-    max-height: 122px;
+    max-height: 90px;
     // max-height: ;
     display: flex;
     flex-direction: column;
@@ -436,4 +436,15 @@
     letter-spacing: 0.64px;
     text-align: center;
     cursor: pointer;
+}
+
+@media only screen and (min-height: 600px) {
+    .content__home__text {
+        height: 120px;
+        padding: 20px; // テキストと吹き出しの間に余白を追加
+    }
+    // スクロールバーつけたいとき
+    .content__home__text__scroll{
+        height: 60px;
+    }
 }

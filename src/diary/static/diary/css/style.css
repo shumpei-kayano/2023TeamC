@@ -407,7 +407,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   stroke-width: 2px;
   stroke: #04CAD6;
   width: 340px;
-  max-height: 122px;
+  max-height: 90px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -688,6 +688,15 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   cursor: pointer;
 }
 
+@media only screen and (min-height: 600px) {
+  .content__home__text {
+    height: 120px;
+    padding: 20px;
+  }
+  .content__home__text__scroll {
+    height: 60px;
+  }
+}
 .help__group h2 {
   font-size: 2rem;
   font-weight: 500;
