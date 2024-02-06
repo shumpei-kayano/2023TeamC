@@ -37,7 +37,7 @@ a{
     list-style: none;
 }
 
-header, main, footer {
+header, main, footer, .content {
     width: 39rem; // 任意の幅を設定
     max-width: 100%; // ビューポートの幅を超えないように設定
     margin: 0 auto; // 中央に配置
@@ -156,6 +156,7 @@ main{
 }
 
 .content{
+    height: 100%;
     &--white{
         background-color: $background_color;
         // height: 100dvh;
@@ -244,7 +245,7 @@ footer {
 }
 
 @media only screen and (max-width: 960px) {
-    header, main, footer {
+    header, main, footer, .content {
         width: 100%;
         max-width: none; // 追加
     }

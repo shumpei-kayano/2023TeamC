@@ -35,7 +35,7 @@ a {
   list-style: none;
 }
 
-header, main, footer {
+header, main, footer, .content {
   width: 39rem;
   max-width: 100%;
   margin: 0 auto;
@@ -135,6 +135,9 @@ main {
   background-color: rgb(173, 173, 173);
 }
 
+.content {
+  height: 100%;
+}
 .content--white {
   background-color: #FFFFFF;
 }
@@ -198,7 +201,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 
 @media only screen and (max-width: 960px) {
-  header, main, footer {
+  header, main, footer, .content {
     width: 100%;
     max-width: none;
   }
