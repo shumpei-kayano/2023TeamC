@@ -2407,8 +2407,8 @@ input[type=text]:focus, input[type=email]:focus {
   letter-spacing: 0.04em;
   color: #00ABB6;
   background-color: #fff;
-  width: 7.2rem;
-  height: 2.8rem;
+  min-width: 7.2rem;
+  min-height: 2.8rem;
   font-weight: bold;
   border-radius: 5px;
   border: 1px solid #00ABB6;
