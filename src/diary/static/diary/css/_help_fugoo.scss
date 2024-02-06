@@ -20,26 +20,6 @@
     transition: transform 0.5s ease-in-out;
     width: 500%; /* スライドの数に応じて調整 */
 }
-// スクロールバー背景色
-.slider::-webkit-scrollbar {
-    background-color: transparent;
-    // スクロールバーの幅を調整
-    width: 2px;
-    // height: 2px;
-    // 角丸を指定
-    border-radius: 20px;
-}
-// スクロールボタン
-.slider::-webkit-scrollbar-thumb {
-    background-color: rgb(216, 216, 216);
-    // 角丸を指定
-    border-radius: 20px;
-    // padding-left: 2.4rem;
-}
-// スクロールバー（hover時）
-.slider::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(173, 173, 173);
-}
 
 .slide {
     flex: 0 0 20%; /* スライドの数に応じて調整 */
@@ -117,7 +97,7 @@
     align-items: center;
     justify-content: center;
 
-    overflow: hidden; // 高さを超える内容を非表示にする
+    // overflow: hidden; // 高さを超える内容を非表示にする
 }
 
 button {
@@ -195,7 +175,7 @@ button {
     display: none;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 600px) and (max-height: 845px) {
     .slider-container {
         height: 100%;
     }
@@ -203,25 +183,25 @@ button {
         // padding-top: 0;
         padding-bottom: 0;
     }
-    // .slid__img--1{
-    //     padding-top: 50px;
-    // }
-    // .slid2__img--1, .slid2__img--2 {
-    //     padding-top: 35px;
-    //     padding-bottom: 30px;
-    // }
     .slid__samll{
         margin-top: 8px;
     }
     .slid__img--1{
-        padding-top: 16px;
+        width: 195px;
+        padding-top: 10px;
     }
     .slid2__img--1, .slid2__img--2{
-        padding-top: 16px;
-        padding-bottom: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
     .slid3__img--1, .slid4__img--1, .slid5__img--1{
-        width: 230px;
+        width: 215px;
         height: auto;
+    }
+
+    .slide {
+        p{
+            margin-top: 10px;
+        }
     }
 }

@@ -242,7 +242,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 @media only screen and (min-height: 600px) {
   .ground {
-    height: calc(100vh - 200px) !important;
+    height: calc(100vh - 195px) !important;
   }
 }
 .btn {
@@ -902,7 +902,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .week-calendar__table {
-    height: calc(100vh - 320px);
+    height: calc(100vh - 310px);
   }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
@@ -1108,7 +1108,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .calendar__month table {
-    height: calc(100vh - 320px) !important;
+    height: calc(100vh - 310px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
@@ -2475,21 +2475,6 @@ input[type=text]:focus, input[type=email]:focus {
   width: 500%; /* スライドの数に応じて調整 */
 }
 
-.slider::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.slider::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.slider::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
-}
-
 .slide {
   flex: 0 0 20%; /* スライドの数に応じて調整 */
   padding: 20px;
@@ -2565,7 +2550,6 @@ input[type=text]:focus, input[type=email]:focus {
   transform: translateX(-50%);
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 button {
@@ -2642,7 +2626,7 @@ button {
   display: none;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (min-height: 600px) and (max-height: 845px) {
   .slider-container {
     height: 100%;
   }
@@ -2653,15 +2637,19 @@ button {
     margin-top: 8px;
   }
   .slid__img--1 {
-    padding-top: 16px;
+    width: 195px;
+    padding-top: 10px;
   }
   .slid2__img--1, .slid2__img--2 {
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .slid3__img--1, .slid4__img--1, .slid5__img--1 {
-    width: 230px;
+    width: 215px;
     height: auto;
+  }
+  .slide p {
+    margin-top: 10px;
   }
 }
 .account__delete__success__title {
