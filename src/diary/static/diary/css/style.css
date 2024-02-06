@@ -412,7 +412,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  padding: 20px;
+  padding: 15px;
   background-color: #FFFFFF;
   border: 2px solid #04CAD6;
   border-radius: 10px;
@@ -444,6 +444,25 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   border-width: 18px;
   border-style: solid;
   border-color: #FFFFFF transparent transparent transparent;
+}
+
+.content__home__text__scroll {
+  height: 56px;
+  overflow-y: scroll;
+}
+
+.content__home__text__scroll::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+}
+
+.content__home__text__scroll::-webkit-scrollbar-thumb {
+  background-color: #53D3DB;
+  border-radius: 10px;
+}
+
+.content__home__text__scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #00ABB6;
 }
 
 .setting__menu ul {
