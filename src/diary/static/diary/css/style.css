@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   color: #333;
-  background-image: url("http://3.88.229.124/static/diary/assets/html_groud.png");
+  background-image: url("http://54.90.172.227/static/diary/assets/html_groud.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center top;
@@ -2472,6 +2472,21 @@ input[type=text]:focus, input[type=email]:focus {
   width: 500%; /* スライドの数に応じて調整 */
 }
 
+.slider::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.slider::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
 .slide {
   flex: 0 0 20%; /* スライドの数に応じて調整 */
   padding: 20px;
@@ -2547,6 +2562,7 @@ input[type=text]:focus, input[type=email]:focus {
   transform: translateX(-50%);
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 button {
