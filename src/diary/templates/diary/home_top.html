@@ -56,18 +56,6 @@
             <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
         </div>
 
-        <!-- 天気 -->
-        {% comment %}
-        <div id="location"></div>
-        <div class="weatherForecast">
-        <div class="weather">
-            <div class="date">--/--(-)</div>
-            <img class="weatherImg">
-            <div class="weatherTelop">--</div>
-            <div><span class="tempMax">-℃</span></div>
-        </div>
-        </div>
-        {% endcomment %}
     </div>
 </main>
 
@@ -79,9 +67,6 @@
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
 <script>
-    {% comment %} document.addEventListener("DOMContentLoaded", function() {
-        var musicUrl = "";
-        var music = new Audio(musicUrl); {% endcomment %}
 
         document.getElementById("playButton").addEventListener("click", function() {
             var value = document.getElementById("playButton").getAttribute("data-value");

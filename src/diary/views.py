@@ -787,9 +787,10 @@ def today_diary_detail(request):
     # 今日の日付を取得
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
-
+    shortstory = diary.ai_comment
+    yomiage = sound(shortstory)
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'yomiage':yomiage})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
@@ -798,6 +799,9 @@ def today_diary_detail2(request,pk):
     # 今日の日付を取得
     today = date.today()
     diary = get_object_or_404(Diary, id=pk)
+  #日記の内容のボイスボックスでの読み上げ
+    shortstory = diary.ai_comment
+    yomiage = sound(shortstory)
     
     #セッションを受け取る
     cal = Diary.objects.get(id=pk)
@@ -805,7 +809,7 @@ def today_diary_detail2(request,pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date,'yomiage':yomiage})
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
