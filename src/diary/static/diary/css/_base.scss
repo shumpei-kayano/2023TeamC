@@ -59,6 +59,8 @@ header {
     align-items: center;
     margin: 0 auto;
 
+    overflow: hidden; // 高さを超える内容を非表示にする
+
     h1 {
         font-size: 2rem;
         font-weight: 400;
