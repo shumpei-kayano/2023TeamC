@@ -528,10 +528,10 @@ def home_top(request):
 
     openai.api_key = settings.OPENAI_API_KEY
     short = """以下の設定を遵守して豆知識を一言ください。
-                #豆知識は再検索して、その豆知識が正しくなかった場合は別の豆知識を返してください。
+                #豆知識は再検索して、正しくなかった場合は別の豆知識を繰り返し再検索して、正しい豆知識を返してください。
                 #文字数は可能な限り短くしてください。
                 #豆知識のみレスポンスしてください。
-                #対象年齢12歳までの内容。"""
+                #対象年齢は１２歳です。"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
