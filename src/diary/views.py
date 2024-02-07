@@ -918,7 +918,9 @@ def today_diary_graph(request, pk):
     created_date = cal.created_date
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
-    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
+    # ai_commenを音声に変換
+    yomiage = sound(diary.ai_comment)
+    return render(request,'diary/today_diary_graph.html',{'yomiage':yomiage,'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
 
 @login_required
 def today_counseling_graph(request):

@@ -67,7 +67,7 @@
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
 <script>
-
+        // ネコを押したらしゃべる
         document.getElementById("playButton").addEventListener("click", function() {
             var value = document.getElementById("playButton").getAttribute("data-value");
             var music = new Audio(value);
