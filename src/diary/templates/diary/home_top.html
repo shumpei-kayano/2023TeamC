@@ -35,7 +35,6 @@
 <!-- メインコンテンツ -->
 <main class="ground ground--blue">
     <div class="content-center">
-
         <div class="content__home">
             <div class="content__home__logo">
                 <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
@@ -46,7 +45,10 @@
                 </div>
             </div>
             <div class="content__home__img">
+                <!-- ネコを押したらしゃべる -->
+                <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
                 <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+                </button>
             </div>
         </div>
         <div class="btn--large">
@@ -66,7 +68,6 @@
         </div>
         </div>
         {% endcomment %}
-
     </div>
 </main>
 
@@ -77,4 +78,15 @@
 {% block js %}
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
+<script>
+    {% comment %} document.addEventListener("DOMContentLoaded", function() {
+        var musicUrl = "";
+        var music = new Audio(musicUrl); {% endcomment %}
+
+        document.getElementById("playButton").addEventListener("click", function() {
+            var value = document.getElementById("playButton").getAttribute("data-value");
+            var music = new Audio(value);
+            music.play();
+        });
+</script>
 {% endblock %}

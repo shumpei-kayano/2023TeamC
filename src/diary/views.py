@@ -18,6 +18,8 @@ from .forms import CustomUserChangeForm
 from allauth.account.models import EmailAddress
 from .forms import ImageDeleteForm
 import math
+import time
+import requests
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -541,7 +543,8 @@ def home_top(request):
     ai_comment = response["choices"][0]["message"]["content"]
     shortstory = ai_comment
 
-    return render(request, 'diary/home_top.html', {'shortstory':shortstory})
+    yomiage = sound(shortstory)
+    return render(request, 'diary/home_top.html', {'shortstory':shortstory,'yomiage':yomiage})
     
 
 @login_required
@@ -931,3 +934,18 @@ def forbidden_view(request):
 def internal_server_error_view(request):
     # 何らかのエラーが発生したと仮定
     raise Exception("Something went wrong!")
+
+def sound(ai_comment):
+    # 音素データ生成
+    text=ai_comment
+    response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
+    # 28:後鬼(ぬいぐるみver)
+    # 42:チヴィジイ
+    # 64:中国うさぎ(ヘラヘラver)
+    # 70:元気な女の子
+    
+    if response.status_code == 200:
+        data = response.json()
+        wav_download_url = data.get("mp3StreamingUrl")
+        print(data)
+        return wav_download_url
