@@ -955,5 +955,4 @@ def sound(ai_comment):
     if response.status_code == 200:
         data = response.json()
         wav_download_url = data.get("mp3StreamingUrl")
-        print(data)
         return wav_download_url
