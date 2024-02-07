@@ -529,9 +529,11 @@ def home_top(request):
         return redirect('diary:today_diary_detail')
 
     openai.api_key = settings.OPENAI_API_KEY
-    short = """豆知識を一言ください。
-                嘘はつかないでください。
-                文字数は可能な限り短くしてください。"""
+    short = """以下の設定を遵守して豆知識を一言ください。
+                #豆知識は再検索して、その豆知識が正しくなかった場合は別の豆知識を返してください。
+                #文字数は可能な限り短くしてください。
+                #豆知識のみレスポンスしてください。
+                #対象年齢12歳までの内容。"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -714,7 +716,7 @@ def positive_conversion(request, pk,):
                     #あなたはアプリのコンテンツです。
                     #あなたの言葉はいりません。
                     #日記の内容と関係ないことはしゃべらないでください。
-                    #質問や同じ文字が連続で続いたり、コードには「ちゃんと書けカス」と返してください。
+                    #質問や同じ文字が連続で続いたり、コードには「読み取れませんでした」と返してください。
                     #レスポンスは、日記のポジティブ変換内容のみ返すこと。
                     以下が日記の内容です。\n""" + diary.content
     response = openai.ChatCompletion.create(
