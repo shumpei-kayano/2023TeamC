@@ -79,10 +79,7 @@
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
 <script>
-    {% comment %} document.addEventListener("DOMContentLoaded", function() {
-        var musicUrl = "";
-        var music = new Audio(musicUrl); {% endcomment %}
-
+        // ネコを押したらしゃべる
         document.getElementById("playButton").addEventListener("click", function() {
             var value = document.getElementById("playButton").getAttribute("data-value");
             var music = new Audio(value);
