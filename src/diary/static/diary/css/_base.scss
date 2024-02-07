@@ -16,7 +16,7 @@ body {
     flex-direction: column; // 縦並びにする
     color: #333;
     // 背景画像を設定
-    background-image: url("http://54.90.172.227/static/diary/assets/html_groud.png");
+    background-image: url("http://54.234.5.14/static/diary/assets/html_groud.png");
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
@@ -303,6 +303,6 @@ footer {
 
 @media only screen and (min-height: 600px){
     .ground{
-        height: calc(100vh - 197px) !important; // アドレスバー 206px
+        height: calc(100vh - 195px) !important; // アドレスバー 206px
     }
 }

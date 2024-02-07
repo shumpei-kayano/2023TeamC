@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   color: #333;
-  background-image: url("http://54.90.172.227/static/diary/assets/html_groud.png");
+  background-image: url("http://54.234.5.14/static/diary/assets/html_groud.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center top;
@@ -242,7 +242,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 @media only screen and (min-height: 600px) {
   .ground {
-    height: calc(100vh - 197px) !important;
+    height: calc(100vh - 195px) !important;
   }
 }
 .btn {
@@ -930,7 +930,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
   .week-calendar__table {
-    height: calc(100vh - 300px);
+    height: calc(100vh - 290px);
   }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
@@ -1134,9 +1134,24 @@ th, td {
   max-height: 18px;
 }
 
+table::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+table::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+table::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
+}
+
 @media only screen and (min-height: 600px) {
   .calendar__month table {
-    height: calc(100vh - 300px) !important;
+    height: calc(100vh - 290px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
@@ -2488,7 +2503,7 @@ input[type=text]:focus, input[type=email]:focus {
 
 .container {
   width: 100%;
-  height: calc(100vh - 197px);
+  height: calc(100vh - 195px);
 }
 
 .slider-container {
@@ -2574,8 +2589,8 @@ input[type=text]:focus, input[type=email]:focus {
   width: 100%;
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: none;
   align-items: center;
   justify-content: center;
 }
@@ -2659,7 +2674,7 @@ button {
     height: 100%;
   }
   .slide {
-    padding-bottom: 0;
+    padding-bottom: 50px;
   }
   .slid__samll {
     margin-top: 8px;
@@ -2678,6 +2693,33 @@ button {
   }
   .slide p {
     margin-top: 10px;
+  }
+  .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .slider-container::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+    border-radius: 20px;
+  }
+  .slider-container::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    border-radius: 20px;
+  }
+  .slider-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+  }
+  .controls {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    transform: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
   }
 }
 .account__delete__success__title {
