@@ -35,7 +35,6 @@
 <!-- メインコンテンツ -->
 <main class="ground ground--blue">
     <div class="content-center">
-
         <div class="content__home">
             <div class="content__home__logo">
                 <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
@@ -46,26 +45,16 @@
                 </div>
             </div>
             <div class="content__home__img">
+                <!-- ネコを押したらしゃべる -->
+                <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
                 <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+                </button>
             </div>
         </div>
         <div class="btn--large">
             {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
             <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
         </div>
-
-        <!-- 天気 -->
-        {% comment %}
-        <div id="location"></div>
-        <div class="weatherForecast">
-        <div class="weather">
-            <div class="date">--/--(-)</div>
-            <img class="weatherImg">
-            <div class="weatherTelop">--</div>
-            <div><span class="tempMax">-℃</span></div>
-        </div>
-        </div>
-        {% endcomment %}
 
     </div>
 </main>
@@ -77,4 +66,12 @@
 {% block js %}
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
+<script>
+        // ネコを押したらしゃべる
+        document.getElementById("playButton").addEventListener("click", function() {
+            var value = document.getElementById("playButton").getAttribute("data-value");
+            var music = new Audio(value);
+            music.play();
+        });
+</script>
 {% endblock %}
