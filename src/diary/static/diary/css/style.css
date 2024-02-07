@@ -241,7 +241,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 @media only screen and (min-height: 600px) {
   .ground {
-    height: calc(100vh - 195px) !important;
+    height: calc(100vh - 193px) !important;
   }
 }
 .btn {
@@ -2673,18 +2673,19 @@ button {
     height: 100%;
   }
   .slide {
-    padding-bottom: 50px;
+    padding-bottom: 80px;
   }
   .slid__samll {
     margin-top: 8px;
   }
   .slid__img--1 {
-    width: 195px;
-    padding-top: 10px;
+    width: 225px;
+    padding-top: 40px;
   }
   .slid2__img--1, .slid2__img--2 {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 230px;
   }
   .slid3__img--1, .slid4__img--1, .slid5__img--1 {
     width: 215px;

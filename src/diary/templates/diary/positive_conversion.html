@@ -31,28 +31,12 @@
     <h1>ポジティブ変換</h1>
     <div class="header__spacer"></div> <!-- 追加した要素 -->
 </header>
-{% comment %} <header>
-    <div class="header__button">
-        <div class="header__back__img">
-            create_diary_confirmation.htmlに遷移
-            <a href="{% url  'diary:diary_update' diary.id %}">
-                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
-                </svg>
-                戻る</a>
-        </div>
-    </div>
-
-    <h1 class="date">--/--(-)</h1>
-    <div class="header__weather">
-        <img class="weatherImg">
-        <span class="tempMax">-℃</span>
-    </div>
-</header> {% endcomment %}
 {% endblock %}
 
 {% block content %}
 <section>
+<div class="content__back-color content__back-color--blue">
+
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
@@ -103,6 +87,8 @@
         </div> -->
     </div>
 </main>
+
+</div>
 </section>
 {% endblock %}
 

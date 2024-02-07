@@ -229,11 +229,9 @@ footer {
         height: 100%;
         &--white{
             background-color: $background_color;
-            // height: 100dvh;
         }
         &--blue{
             background-color: $main_background_color;
-            // height: 100dvh;
         }
     }
 
@@ -246,14 +244,6 @@ footer {
             width: 72px;
             height: 28px;
             font-size: 14px;
-            // border: 1px solid #FFF;
-
-            // svg {
-            // margin-right: 5px;
-            // }
-            // &:hover {
-            // background-color: #00A3AE;
-            // }
         }
     }
     h1 {
@@ -290,6 +280,6 @@ footer {
 
 @media only screen and (min-height: 600px){
     .ground{
-        height: calc(100vh - 195px) !important; // アドレスバー 206px
+        height: calc(100vh - 193px) !important; // アドレスバー 206px
     }
 }
