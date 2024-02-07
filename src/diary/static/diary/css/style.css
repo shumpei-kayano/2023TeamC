@@ -35,7 +35,7 @@ a {
   list-style: none;
 }
 
-header, main, footer, .content {
+header, main, footer {
   width: 39rem;
   max-width: 100%;
   margin: 0 auto;
@@ -135,16 +135,6 @@ main {
   background-color: rgb(173, 173, 173);
 }
 
-.content {
-  height: 100%;
-}
-.content--white {
-  background-color: #FFFFFF;
-}
-.content--blue {
-  background-color: #EEFEFF;
-}
-
 .ground--white {
   background-color: #FFFFFF;
 }
@@ -201,9 +191,18 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 }
 
 @media only screen and (max-width: 960px) {
-  header, main, footer, .content {
+  header, main, footer, .content, .content__back-color {
     width: 100%;
     max-width: none;
+  }
+  .content, .content__back-color {
+    height: 100%;
+  }
+  .content--white, .content__back-color--white {
+    background-color: #FFFFFF;
+  }
+  .content--blue, .content__back-color--blue {
+    background-color: #EEFEFF;
   }
   header {
     height: 50px;
