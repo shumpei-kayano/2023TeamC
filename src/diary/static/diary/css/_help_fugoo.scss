@@ -195,8 +195,13 @@ button {
         padding-bottom: 16px;
         width: 200px;
     }
-    .slid3__img--1, .slid4__img--1, .slid5__img--1{
-        padding-top: 16px !important;
+    .slid3__img--1{
+        padding-top: 16px;
+        width: 235px;
+        height: auto;
+    }
+    .slid4__img--1, .slid5__img--1{
+        padding-top: 16px;
         width: 215px;
         height: auto;
     }
