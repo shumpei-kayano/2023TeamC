@@ -109,7 +109,7 @@
                         </div>
                         <div>
                             <button class="next-btn">次へ</button>
-                            <button class="complete-btn">設定トップへ</button>
+                            <a href="{% url 'diary:setting' %}" class="complete-btn">設定トップへ</a>
                         </div>
                     </div>
                 </div>
@@ -152,10 +152,6 @@
             }
         }
 
-        completeBtn.addEventListener('click', function () {
-            window.location.href = 'http://localhost/diary/setting'; // 遷移先のHTMLファイル名に置き換えてください
-        });
-    
         function updatePagination() {
             dots.forEach((dotContainer, index) => {
                 const dot = dotContainer.querySelector('.dot');

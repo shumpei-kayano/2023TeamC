@@ -340,8 +340,10 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
+              <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
                 <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
-            </div>
+              </button>
+              </div>
         {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
         {% else %}
             <!-- ネコココメント -->

@@ -945,14 +945,24 @@ def internal_server_error_view(request):
 
 def sound(ai_comment):
     # 音素データ生成
-    text=ai_comment
-    response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
-    # 28:後鬼(ぬいぐるみver)
-    # 42:チヴィジイ
-    # 64:中国うさぎ(ヘラヘラver)
-    # 70:元気な女の子
-    
-    if response.status_code == 200:
-        data = response.json()
-        wav_download_url = data.get("mp3StreamingUrl")
-        return wav_download_url
+    text = ai_comment
+    try:
+        response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
+        # 28:後鬼(ぬいぐるみver)
+        # 42:チヴィジイ
+        # 64:中国うさぎ(ヘラヘラver)
+        # 70:元気な女の子
+
+        if response.status_code == 200:
+            data = response.json()
+            wav_download_url = data.get("mp3StreamingUrl")
+            print(data)
+            return wav_download_url
+        else:
+            # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
+            print("エラー: HTTPステータスコード", response.status_code)
+            return None
+    except Exception as e:
+        # エラーが発生した場合はエラーメッセージを出力するか、Noneなど適切な値を返す
+        print("エラー:", e)
+        return None
