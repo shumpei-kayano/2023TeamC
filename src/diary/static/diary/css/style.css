@@ -2691,8 +2691,8 @@ button {
     width: 200px;
   }
   .slid3__img--1, .slid4__img--1, .slid5__img--1 {
-    padding-top: 16px;
-    width: 230px;
+    padding-top: 16px !important;
+    width: 215px;
     height: auto;
   }
   .slide p {
