@@ -530,10 +530,10 @@ def home_top(request):
 
     openai.api_key = settings.OPENAI_API_KEY
     short = """以下の設定を遵守して豆知識を一言ください。
-                #豆知識は再検索して、その豆知識が正しくなかった場合は別の豆知識を返してください。
+                #豆知識は再検索して、正しくなかった場合は別の豆知識を繰り返し再検索して、正しい豆知識を返してください。
                 #文字数は可能な限り短くしてください。
                 #豆知識のみレスポンスしてください。
-                #対象年齢12歳までの内容。"""
+                #対象年齢は１２歳です。"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages= [
@@ -945,14 +945,24 @@ def internal_server_error_view(request):
 
 def sound(ai_comment):
     # 音素データ生成
-    text=ai_comment
-    response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
-    # 28:後鬼(ぬいぐるみver)
-    # 42:チヴィジイ
-    # 64:中国うさぎ(ヘラヘラver)
-    # 70:元気な女の子
-    
-    if response.status_code == 200:
-        data = response.json()
-        wav_download_url = data.get("mp3StreamingUrl")
-        return wav_download_url
+    text = ai_comment
+    try:
+        response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
+        # 28:後鬼(ぬいぐるみver)
+        # 42:チヴィジイ
+        # 64:中国うさぎ(ヘラヘラver)
+        # 70:元気な女の子
+
+        if response.status_code == 200:
+            data = response.json()
+            wav_download_url = data.get("mp3StreamingUrl")
+            print(data)
+            return wav_download_url
+        else:
+            # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
+            print("エラー: HTTPステータスコード", response.status_code)
+            return None
+    except Exception as e:
+        # エラーが発生した場合はエラーメッセージを出力するか、Noneなど適切な値を返す
+        print("エラー:", e)
+        return None
