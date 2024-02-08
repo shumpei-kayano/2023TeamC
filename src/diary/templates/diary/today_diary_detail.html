@@ -397,11 +397,22 @@ function closeVideo(videoId) {
     videoElement.pause(); // モーダルを閉じる際に動画を停止
 }
 
-document.getElementById("playButton").addEventListener("click", function() {
-  var value = document.getElementById("playButton").getAttribute("data-value");
-  var music = new Audio(value);
-  music.play();
-});
+    // ネコを押したらしゃべる
+    document.getElementById("playButton").addEventListener("click", function() {
+        // ボタンを無効化する
+        document.getElementById("playButton").disabled = true;
+
+        var value = document.getElementById("playButton").getAttribute("data-value");
+        var music = new Audio(value);
+
+        // 音声再生終了時のイベントを追加
+        music.addEventListener('ended', function() {
+            // ボタンを有効化する
+            document.getElementById("playButton").disabled = false;
+        });
+
+        music.play();
+    });
 
 </script>
 {% endblock %}
