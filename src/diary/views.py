@@ -946,6 +946,7 @@ def internal_server_error_view(request):
 def sound(ai_comment):
     # 音素データ生成
     text = ai_comment
+    
     try:
         response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
         # 28:後鬼(ぬいぐるみver)
@@ -959,6 +960,7 @@ def sound(ai_comment):
             print(data)
             return wav_download_url
         else:
+            voice = ['']
             # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
             print("エラー: HTTPステータスコード", response.status_code)
             return None
