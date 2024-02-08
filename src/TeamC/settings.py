@@ -20,7 +20,7 @@ SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@
 DEBUG = False
 
 # 本番環境だと変える
-ALLOWED_HOSTS = ['54.234.5.14', 'localhost']
+ALLOWED_HOSTS = ['44.223.51.18', 'localhost']
 
 
 
