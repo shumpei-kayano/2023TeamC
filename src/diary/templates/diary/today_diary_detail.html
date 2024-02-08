@@ -353,8 +353,10 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
+              <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
                 <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
-            </div>
+              </button>
+              </div>
         {% endif %}
 
     </div><!-- scroll content -->
@@ -405,6 +407,11 @@ function closeVideo(videoId) {
     videoElement.pause(); // モーダルを閉じる際に動画を停止
 }
 
+document.getElementById("playButton").addEventListener("click", function() {
+  var value = document.getElementById("playButton").getAttribute("data-value");
+  var music = new Audio(value);
+  music.play();
+});
 
 </script>
 {% endblock %}
