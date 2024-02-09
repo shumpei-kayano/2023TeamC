@@ -37,7 +37,7 @@ services:
     image: phpmyadmin/phpmyadmin:5.2.0
     container_name: phpmyadmin
     environment:
-      PMA_HOST: db
+      PMA_HOST: teamc-rds.c1qk6u2go7a0.us-east-1.rds.amazonaws.com
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: root_password
     ports:
