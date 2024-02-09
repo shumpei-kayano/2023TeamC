@@ -96,8 +96,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'o-hara_db',
         'USER': 'admin',
-        'PASSWORD': 'o-hara',
-        'HOST': 'mysql_db', # dbのコンテナ名
+        'PASSWORD': 'ohara2023', # RDS作成時のパスワード
+        'HOST': os.environ.get('DB_HOST'),  # 環境変数からHOSTを読み込む
+        # 'PASSWORD': 'o-hara',
+        # 'HOST': 'mysql_db', # dbのコンテナ名
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
@@ -105,7 +107,6 @@ DATABASES = {
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
