@@ -44,10 +44,6 @@
                     <p class="content__home__text__anime">{{shortstory}}</p>
                 </div>
             </div>
-            <audio controls>
-                <source src="{% static 'diary/voice/ai_voice.wav' %}"  type="audio/wav">
-                Your browser does not support the audio element.
-              </audio>
             <div class="content__home__img">
                 <!-- ネコを押したらしゃべる -->
                 <!-- yomiageが１だったら保存した音声 -->
@@ -55,8 +51,8 @@
                 <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
                 <!-- それ以外だったらしゃべる -->
                 {% else %}
-                <button id="playButton"  data-value="{% static 'diary/voice/ai_voice.wav' %}"  style="border: none; background-color: transparent; padding: 0; margin: 0;">
-                {% endif %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                    {% endif %}
                 <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
                 </button>
             </div>

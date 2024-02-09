@@ -22,6 +22,8 @@ import time
 import requests
 from django.conf import settings
 import os
+import string
+import random
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -921,7 +923,10 @@ def today_diary_graph(request, pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     # ai_commenを音声に変換
-    yomiage = sound(diary.ai_comment)
+    path = 'diary/static/diary/voice/'
+    for file_name in os.listdir(path):
+        if file_name.startswith('a'):
+            yomiage = os.path.join(file_name)
     return render(request,'diary/today_diary_graph.html',{'yomiage':yomiage,'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
 
 @login_required
@@ -957,11 +962,24 @@ def sound(ai_comment):
         # 音声合成データの作成
         res2 = requests.post('http://host.docker.internal:50021/synthesis',params = {'speaker': 70},data=json.dumps(res1.json()))
         # ファイルの保存先パスを指定
-        path = os.path.join('diary/static/diary/voice/ai_voice.wav')
+        path = 'diary/static/diary/voice/'
+        for file_name in os.listdir(path):
+            if file_name.startswith('a'):
+                file_path = os.path.join(path, file_name)
+                os.remove(file_path)
+        # 頭にaを付けて新しいファイル名を生成
+        new_file_name = 'a' + ''.join(random.choices(string.digits, k=4)) + '.wav'
         
-        # wavデータの生成
-        with open(path, mode='wb') as f:
+        # path名を取得
+        new_file_path = os.path.join(path, new_file_name) # wavデータの生成
+        # ファイル名を取得
+        yomiage =os.path.join(new_file_name)
+        # ファイルを保存
+        with open(new_file_path, mode='wb') as f:
             f.write(res2.content)
+        
+        # ファイル名を返す
+        return yomiage
 
         # if response.status_code == 200:
         #     data = response.json()
