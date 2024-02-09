@@ -41,7 +41,16 @@ services:
       - "8080:80"
     depends_on:
       - db
-
+  voicevox:
+    image: "voicevox/voicevox_engine:cpu-ubuntu20.04-latest"
+    container_name: voicevox
+    ports:
+      - "50021:50021"
+    volumes:
+      - ./voicevox:/root/voicevox
+    environment:
+      - VOICEVOX_API_PORT=50021
+      - VOICEVOX_API_HOST=localhost
 volumes:
   db_data:
   static_volume:  # 追加

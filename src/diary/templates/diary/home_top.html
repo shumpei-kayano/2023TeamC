@@ -46,7 +46,13 @@
             </div>
             <div class="content__home__img">
                 <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
                 <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                {% endif %}
                 <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
                 </button>
             </div>

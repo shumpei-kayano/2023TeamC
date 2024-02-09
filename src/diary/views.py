@@ -948,23 +948,25 @@ def sound(ai_comment):
     text = ai_comment
     
     try:
-        response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
-        # 28:後鬼(ぬいぐるみver)
-        # 42:チヴィジイ
-        # 64:中国うさぎ(ヘラヘラver)
-        # 70:元気な女の子
+        # 音声合成クエリの作成28:後鬼(ぬいぐるみver)42:チヴィジイ64:中国うさぎ(ヘラヘラver)70:元気な女の子
+        # 音声合成クエリの作成
+        res1 = requests.post('http://localhost:50021/audio_query',params = {'text': text, 'speaker': 1})
+        # 音声合成データの作成
+        res2 = requests.post('http://localhost:50021/synthesis',params = {'speaker': 1},data=json.dumps(res1.json()))
+        print(json.dumps(res1.json()))
+        # wavデータの生成
+        with open('ai_voice.wav', mode='wb') as f:
+            f.write(res2.content)
 
-        if response.status_code == 200:
-            data = response.json()
-            wav_download_url = data.get("mp3StreamingUrl")
-            print(data)
-            return wav_download_url
-        else:
-            voice = ['']
-            # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
-            print("エラー: HTTPステータスコード", response.status_code)
-            return None
+        # if response.status_code == 200:
+        #     data = response.json()
+        #     wav_download_url = data.get("mp3StreamingUrl")
+        #     return wav_download_url
+        # else:
+        #     # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
+        #     # print("エラー: HTTPステータスコード", response.status_code)
+        #     return 1
     except Exception as e:
         # エラーが発生した場合はエラーメッセージを出力するか、Noneなど適切な値を返す
         print("エラー:", e)
-        return None
+        return 1
