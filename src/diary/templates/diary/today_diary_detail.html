@@ -340,9 +340,16 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
-              <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
-                <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
-              </button>
+                <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                {% endif %}
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                </button>
               </div>
         {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
         {% else %}
@@ -355,9 +362,16 @@
                 </div>
             </div>
             <div class="content__diary__comment__img">
-              <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
-                <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
-              </button>
+                <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                    {% endif %}
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                </button>
               </div>
         {% endif %}
 
@@ -409,11 +423,22 @@ function closeVideo(videoId) {
     videoElement.pause(); // モーダルを閉じる際に動画を停止
 }
 
-document.getElementById("playButton").addEventListener("click", function() {
-  var value = document.getElementById("playButton").getAttribute("data-value");
-  var music = new Audio(value);
-  music.play();
-});
+    // ネコを押したらしゃべる
+    document.getElementById("playButton").addEventListener("click", function() {
+        // ボタンを無効化する
+        document.getElementById("playButton").disabled = true;
+
+        var value = document.getElementById("playButton").getAttribute("data-value");
+        var music = new Audio(value);
+
+        // 音声再生終了時のイベントを追加
+        music.addEventListener('ended', function() {
+            // ボタンを有効化する
+            document.getElementById("playButton").disabled = false;
+        });
+
+        music.play();
+    });
 
 </script>
 {% endblock %}

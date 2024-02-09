@@ -48,7 +48,13 @@
             </div>
             <div class="content__home__img">
                 <!-- ネコを押したらしゃべる -->
-                <button id="playButton"  data-value="{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                    {% endif %}
                 <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
                 </button>
             </div>
@@ -96,8 +102,17 @@
 
         // ネコを押したらしゃべる
         document.getElementById("playButton").addEventListener("click", function() {
-            let value = document.getElementById("playButton").getAttribute("data-value");
-            let music = new Audio(value);
+            // ボタンを無効化する
+            document.getElementById("playButton").disabled = true;
+            var value = document.getElementById("playButton").getAttribute("data-value");
+            var music = new Audio(value);
+    
+            // 音声再生終了時のイベントを追加
+            music.addEventListener('ended', function() {
+                // ボタンを有効化する
+                document.getElementById("playButton").disabled = false;
+            });
+    
             music.play();
         });
 </script>

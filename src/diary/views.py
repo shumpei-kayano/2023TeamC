@@ -20,6 +20,10 @@ from .forms import ImageDeleteForm
 import math
 import time
 import requests
+from django.conf import settings
+import os
+import string
+import random
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -919,7 +923,10 @@ def today_diary_graph(request, pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     # ai_commenを音声に変換
-    yomiage = sound(diary.ai_comment)
+    path = 'diary/static/diary/voice/'
+    for file_name in os.listdir(path):
+        if file_name.startswith('a'):
+            yomiage = os.path.join(file_name)
     return render(request,'diary/today_diary_graph.html',{'yomiage':yomiage,'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
 
 @login_required
@@ -946,23 +953,43 @@ def internal_server_error_view(request):
 def sound(ai_comment):
     # 音素データ生成
     text = ai_comment
+    
     try:
-        response = requests.post("https://api.tts.quest/v3/voicevox/synthesis?text=" + text + "&speaker=70")
-        # 28:後鬼(ぬいぐるみver)
-        # 42:チヴィジイ
-        # 64:中国うさぎ(ヘラヘラver)
-        # 70:元気な女の子
+        # 音声合成クエリの作成28:後鬼(ぬいぐるみver)42:チヴィジイ64:中国うさぎ(ヘラヘラver)70:元気な女の子
+        # 音声合成クエリの作成
 
-        if response.status_code == 200:
-            data = response.json()
-            wav_download_url = data.get("mp3StreamingUrl")
-            print(data)
-            return wav_download_url
-        else:
-            # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
-            print("エラー: HTTPステータスコード", response.status_code)
-            return None
+        res1 = requests.post('http://host.docker.internal:50021/audio_query',params = {'text': text, 'speaker': 70})
+        # 音声合成データの作成
+        res2 = requests.post('http://host.docker.internal:50021/synthesis',params = {'speaker': 70},data=json.dumps(res1.json()))
+        # ファイルの保存先パスを指定
+        path = 'diary/static/diary/voice/'
+        for file_name in os.listdir(path):
+            if file_name.startswith('a'):
+                file_path = os.path.join(path, file_name)
+                os.remove(file_path)
+        # 頭にaを付けて新しいファイル名を生成
+        new_file_name = 'a' + ''.join(random.choices(string.digits, k=4)) + '.wav'
+        
+        # path名を取得
+        new_file_path = os.path.join(path, new_file_name) # wavデータの生成
+        # ファイル名を取得
+        yomiage =os.path.join(new_file_name)
+        # ファイルを保存
+        with open(new_file_path, mode='wb') as f:
+            f.write(res2.content)
+        
+        # ファイル名を返す
+        return yomiage
+
+        # if response.status_code == 200:
+        #     data = response.json()
+        #     wav_download_url = data.get("mp3StreamingUrl")
+        #     return wav_download_url
+        # else:
+        #     # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
+        #     # print("エラー: HTTPステータスコード", response.status_code)
+        #     return 1
     except Exception as e:
         # エラーが発生した場合はエラーメッセージを出力するか、Noneなど適切な値を返す
         print("エラー:", e)
-        return None
+        return 1
