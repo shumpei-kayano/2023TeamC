@@ -1655,7 +1655,7 @@ input[type=text]:focus, input[type=email]:focus {
   .content__home__text p {
     font-size: 20px;
     margin: 0 auto;
-    text-align: center;
+    text-align: justify;
   }
 }
 @media only screen and (max-height: 599px) {
@@ -1683,7 +1683,7 @@ input[type=text]:focus, input[type=email]:focus {
   .content__home__text p {
     font-size: 16px;
     margin: 0 auto;
-    text-align: center;
+    text-align: justify;
   }
 }
 @media only screen and (min-height: 600px) {
@@ -2989,23 +2989,6 @@ section {
   }
   100% {
     transform: translate(0, 0) rotateZ(0deg);
-  }
-}
-.diary-detail-img--animation {
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1.5s;
-}
-
-.content__diary__comment__img-item, .graph__img--keyframe {
-  animation-name: anim_sc;
-  transform: scale(0.85, 0.85);
-}
-
-@keyframes anim_sc {
-  100% {
-    transform: scale(1, 1);
   }
 }
 .user-infomation__image--dango {
