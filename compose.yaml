@@ -31,8 +31,8 @@ services:
       - ./src/diary/static/diary:/usr/share/nginx/html/static/diary  # 追加
       - ./src/user/static/user:/usr/share/nginx/html/static/user #追加
       - ./src/media:/usr/share/nginx/html/media
-      # - /etc/letsencrypt/live/teamc.o-hara-oita.click/fullchain.pem:/etc/nginx/ssl/fullchain.pem #追記
-      # - /etc/letsencrypt/live/teamc.o-hara-oita.click/privkey.pem:/etc/nginx/ssl/privkey.pem #追記
+      - ${VOLUME_PATH}:/etc/nginx/ssl/fullchain.pem #追記
+      - ${VOLUME_PATH2}:/etc/nginx/ssl/privkey.pem #追記
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2.0
     container_name: phpmyadmin

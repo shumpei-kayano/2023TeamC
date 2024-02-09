@@ -217,9 +217,9 @@ ACCOUNT_LOCKED_URL = '/accounts/login/'
 AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
 AWS_SECRET_ACCESS_KEY = '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'
 
-# SESSION_COOKIE_SECURE = True 
-# CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://*.o-hara-oita.click',
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.o-hara-oita.click',
+]
