@@ -225,3 +225,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.o-hara-oita.click',
 ]
 
+# settings.py
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'my_session_cookie'
