@@ -20,6 +20,8 @@ from .forms import ImageDeleteForm
 import math
 import time
 import requests
+from django.conf import settings
+import os
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -950,12 +952,15 @@ def sound(ai_comment):
     try:
         # 音声合成クエリの作成28:後鬼(ぬいぐるみver)42:チヴィジイ64:中国うさぎ(ヘラヘラver)70:元気な女の子
         # 音声合成クエリの作成
-        res1 = requests.post('http://localhost:50021/audio_query',params = {'text': text, 'speaker': 1})
+
+        res1 = requests.post('http://host.docker.internal:50021/audio_query',params = {'text': text, 'speaker': 70})
         # 音声合成データの作成
-        res2 = requests.post('http://localhost:50021/synthesis',params = {'speaker': 1},data=json.dumps(res1.json()))
-        print(json.dumps(res1.json()))
+        res2 = requests.post('http://host.docker.internal:50021/synthesis',params = {'speaker': 70},data=json.dumps(res1.json()))
+        # ファイルの保存先パスを指定
+        path = os.path.join('diary/static/diary/voice/ai_voice.wav')
+        
         # wavデータの生成
-        with open('ai_voice.wav', mode='wb') as f:
+        with open(path, mode='wb') as f:
             f.write(res2.content)
 
         # if response.status_code == 200:
