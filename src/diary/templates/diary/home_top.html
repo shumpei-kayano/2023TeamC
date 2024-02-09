@@ -42,6 +42,7 @@
             <div class="content__home__text">
                 <div class="content__home__text__scroll">
                     {% comment %} <p class="content__home__text__anime">{{shortstory}}</p> {% endcomment %}
+                                                                                            <!-- JavaScript内で使用するためにエスケープしてshortstory変数に適用 -->
                     <p class="content__home__text__anime" id="animatedText" data-shortstory="{{ shortstory|escapejs }}"></p>
                 </div>
             </div>
@@ -65,44 +66,38 @@
 {% endblock %}
 
 {% block js %}
-<script>
-    // テキストが表示される要素の取得
-    var animatedText = document.getElementById("animatedText");
-
-    // Djangoから取得した文章をJavaScript変数に取得
-    var shortstory = animatedText.getAttribute("data-shortstory");
-
-    // 文字を一文字ずつ表示する関数
-    function animateText(text, index) {
-      // 改行文字があれば、次の行に移動する
-      if (text[index] === "\n") {
-        animatedText.innerHTML += "<br>";
-        index++;
-      }
-
-      // テキストを一文字ずつ表示
-      animatedText.innerHTML += text[index];
-
-      // 最後の文字でなければ、次の文字を表示するために再帰呼び出し
-      if (index < text.length - 1) {
-        setTimeout(function() {
-          animateText(text, index + 1);
-        }, 50); // 50ミリ秒ごとに表示（調整可能）
-      }
-    }
-
-    // ページ読み込み後にアニメーションを開始
-    window.onload = function() {
-      animateText(shortstory, 0);
-    };
-  </script>
 <!-- フェードイン -->
 <script src="{% static 'diary/js/fade-in.js' %}"></script>
 <script>
+        // テキストが表示される要素の取得
+        let animatedText = document.getElementById("animatedText");
+        // Djangoから取得した文章をJavaScript変数に取得
+        let shortstory = animatedText.getAttribute("data-shortstory");
+        // 文字を一文字ずつ表示する関数
+        function animateText(text, index) {
+            // 改行文字があれば、次の行に移動する
+            if (text[index] === "\n") {
+                animatedText.innerHTML += "<br>";
+                index++;
+            }
+            // テキストを一文字ずつ表示
+            animatedText.innerHTML += text[index];
+          // 最後の文字でなければ、次の文字を表示するために再帰呼び出し
+            if (index < text.length - 1) {
+                setTimeout(function() {
+                animateText(text, index + 1);
+                }, 50); // 50ミリ秒ごとに表示（調整可能）
+            }
+        }
+        // ページ読み込み後にアニメーションを開始
+        window.onload = function() {
+            animateText(shortstory, 0);
+        };
+
         // ネコを押したらしゃべる
         document.getElementById("playButton").addEventListener("click", function() {
-            var value = document.getElementById("playButton").getAttribute("data-value");
-            var music = new Audio(value);
+            let value = document.getElementById("playButton").getAttribute("data-value");
+            let music = new Audio(value);
             music.play();
         });
 </script>
