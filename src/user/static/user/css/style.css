@@ -1656,6 +1656,15 @@ article {
     margin-top: 50px !important;
   }
 }
+.user__next-arrow {
+  width: 9px;
+  height: auto;
+  fill: #A29C9C;
+}
+.user__next-arrow:hover {
+  fill: #797979;
+}
+
 .back-home {
   margin-top: 30px;
   margin-left: 0;
