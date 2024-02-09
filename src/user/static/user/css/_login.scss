@@ -157,6 +157,14 @@ article{
     }
 }
 
+// next-arrowのスタイル
+.user__next-arrow{
+    fill:  #A29C9C;
+    &:hover{
+        fill: #797979;
+    }
+}
+
 // 追加
 .back-home {
     margin-top: 30px;
