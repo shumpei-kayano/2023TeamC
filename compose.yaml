@@ -39,7 +39,8 @@ services:
     environment:
       PMA_HOST: teamc-rds.c1qk6u2go7a0.us-east-1.rds.amazonaws.com
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: ohara2023
+      MYSQL_USERNAME: admin
+      MYSQL_PASSWORD: ohara2023
     ports:
       - "8080:80"
     depends_on:
