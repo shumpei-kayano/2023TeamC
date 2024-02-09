@@ -60,6 +60,7 @@
 .calendar__month {
     overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
     //height: auto; /* コンテンツに基づいて高さを調整できるように固定の高さを削除 */
+    -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 
 
     table {

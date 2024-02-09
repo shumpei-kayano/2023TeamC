@@ -1603,6 +1603,7 @@ label {
 
 main {
   overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+  -webkit-overflow-scrolling: touch;
 }
 
 main::-webkit-scrollbar {

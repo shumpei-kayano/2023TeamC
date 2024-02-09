@@ -93,6 +93,7 @@ main{
     // margin-top: 0rem; /*上に空白を追加*/
     // height: calc(100vh - 5rem - 15px ); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+    -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 }
 // スクロールバー背景色
 main::-webkit-scrollbar {

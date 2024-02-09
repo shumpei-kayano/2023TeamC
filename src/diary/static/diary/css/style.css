@@ -119,6 +119,7 @@ main {
 .ground {
   height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+  -webkit-overflow-scrolling: touch;
 }
 
 .ground::-webkit-scrollbar {
@@ -1079,6 +1080,7 @@ th, td {
 
 .calendar__month {
   overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
+  -webkit-overflow-scrolling: touch;
 }
 .calendar__month table {
   width: 100%;

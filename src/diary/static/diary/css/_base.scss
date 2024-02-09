@@ -129,6 +129,7 @@ main{
     // padding-bottom: 60px;
     height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+    -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 
     // overflow-x: hidden; /* オーバーフローしたコンテンツを非表示にする */
     // .scroll--content {
