@@ -1657,6 +1657,8 @@ article {
   }
 }
 .user__next-arrow {
+  width: 9px;
+  height: auto;
   fill: #A29C9C;
 }
 .user__next-arrow:hover {
