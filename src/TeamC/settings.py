@@ -1,8 +1,12 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # debug_toolbarの設定
 import mimetypes
 import datetime
+
+# .envファイルを読み込む
+load_dotenv()
 
 mimetypes.add_type("application/javascript", ".js", True)
 
@@ -94,12 +98,11 @@ WSGI_APPLICATION = 'TeamC.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'o-hara_db',
-        'USER': 'admin',
-        'PASSWORD': 'ohara2023', # RDS作成時のパスワード
-        'HOST': os.environ.get('DB_HOST'),  # 環境変数からHOSTを読み込む
-        # 'PASSWORD': 'o-hara',
-        # 'HOST': 'mysql_db', # dbのコンテナ名
+        # envからHOSTを読み込む
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'), # RDS作成時のパスワード
+        'HOST': os.getenv('DB_HOST'), 
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
