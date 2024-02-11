@@ -8,18 +8,18 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      # - db
+      - db
       - nginx
-  # db:
-  #   image: mysql:8.0.28
-  #   container_name: mysql_db
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root_password
-  #     MYSQL_DATABASE: o-hara_db
-  #     MYSQL_USER: admin
-  #     MYSQL_PASSWORD: o-hara
-  #   volumes:
-  #     - db_data:/var/lib/mysql
+  db:
+    image: mysql:8.0.28
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: o-hara_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: o-hara
+    volumes:
+      - db_data:/var/lib/mysql
   nginx:
     image: nginx:1.21.1
     container_name: nginx_server
@@ -44,8 +44,8 @@ services:
       PMA_PORT: 3306
     ports:
       - "8080:80"
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
   voicevox:
     image: "voicevox/voicevox_engine:cpu-ubuntu20.04-latest"
     container_name: voicevox
@@ -57,5 +57,5 @@ services:
       - VOICEVOX_API_PORT=50021
       - VOICEVOX_API_HOST=localhost
 volumes:
-  # db_data:
+  db_data:
   static_volume:  # 追加
