@@ -48,8 +48,8 @@
             letter-spacing: 0.04em;
             color: #00ABB6;
             background-color: #fff;
-            width: 7.2rem;
-            height: 2.8rem;
+            min-width: 7.2rem;
+            min-height: 2.8rem;
             // align-items: center;
             // justify-content: center;
             // text-align: center;
@@ -106,7 +106,7 @@
 .month__diary__comment__item {
     p{
         margin: 0 !important;
-        text-align: left !important;
+        text-align: justify !important;
         font-size: 1.6rem !important;
         line-height: 170% !important;
         letter-spacing: 0.04rem !important;

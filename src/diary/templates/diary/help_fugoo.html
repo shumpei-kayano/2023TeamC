@@ -30,7 +30,7 @@
 {% block content %}
 <section>
 <main class="ground ground--white"><!-- 背景色 -->
-    <div class="content-center">
+    {% comment %} <div class="content-center"> {% endcomment %}
 
         <div class="container">
             <div class="slider-container">
@@ -41,22 +41,21 @@
                             <span class="slid__span">Fun</span>で<span class="slid__span">Good</span>な日記アプリ！</p>
                         <p>この日記アプリはAIを活用して
                             <span class="slid__span">感情分析</span>やポジティブな<span class="slid__span">文章変換</span>、
-                            AI ネココによる<span class="slid__span">コメント</span>を
-                            見ることができます。</p>
+                            AI ネココによる<span class="slid__span">コメント</span>を見ることができます。</p>
                         <p>また、感情分析の<span class="slid__span">統計データ</span>で
                             感情の変化を可視化することができ、
                             思考の整理やストレス管理などの
                             <span class="slid__span">ポジティブな</span>習慣の形成を支援します。</p>
-                        <img class="slid__img--1" src="{% static 'diary/assets/slide1_neko.png' %}" alt="AIネココ">
+                        <img class="slid__img--1" src="{% static 'diary/assets/slide1_neko.svg' %}" alt="AIネココ">
                     </div>
                     <div class="slide">
                         <h1>AI ネココ</h1>
-                        <img class="slid2__img--1" src="{% static 'diary/assets/slide1_neko.png' %}" alt="AIネココ">
+                        <img class="slid2__img--1" src="{% static 'diary/assets/slide1_neko.svg' %}" alt="AIネココ">
                         <p>ネココは好奇心旺盛で優しい猫型AI。<br>
-                            相手の日記を読んで感想を送ることが大好き。
-                            年齢を聞かれることが苦手。</p>
-                        <p>カウンセラーモード時はピンク色になる。</p>
-                        <img class="slid2__img--2" src="{% static 'diary/assets/slide2_neko.png' %}" alt="AIネココ">
+                            日記を読んで感想を送ることが大好き。
+                            カウンセラーモード時はピンク色になる。</p>
+                        <p>ネココをクリックすると<span class="slid__span">話しかけるよ！</span></p>
+                        <img class="slid2__img--2" src="{% static 'diary/assets/slide2_neko.svg' %}" alt="AIネココ">
                     </div>
                     <div class="slide">
                         <h1>AIネココと日記の記録</h1>
@@ -116,7 +115,7 @@
             </div>
         </div>
 
-    </div>
+    {% comment %} </div> {% endcomment %}
 </main>
 </section>
 {% endblock %}

@@ -23,15 +23,9 @@
 {% endblock %}
 
 {% block content %}
-<!-- 背景色のフェードイン -->
+<!-- フェードイン -->
 <article id="Article__week" class="move fade">
-    {% comment %} <div class="animation-bg">
-        <div class="animation-bg__flex-box">
-            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
-            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
-        </div>
-    </div> {% endcomment %}
-    <div class="content">
+<div class="content content--blue">
 
 <!-- メインコンテンツ -->
 <main class="ground ground--blue">
@@ -130,7 +124,14 @@
                         {% if day == missing_date %}
                             <td rowspan = "2" class="week-calendar__diary">
                                 <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
-                                新規作成
+                                    <div class="week-calendar__diary__flex-box">
+                                        <div>
+                                            <p>新規作成</p>
+                                        </div>
+                                        <div>
+                                            <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                        </div>
+                                    </div>
                                 </a>
                             </td>
                             {% endif %}
@@ -189,7 +190,14 @@
                                         {% if day == missing_date and today > day %}
                                             <td rowspan = "2" class="week-calendar__diary">
                                                 <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
-                                                新規作成
+                                                    <div class="week-calendar__diary__flex-box">
+                                                        <div>
+                                                            <p>新規作成</p>
+                                                        </div>
+                                                        <div>
+                                                            <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                                        </div>
+                                                    </div>
                                                 </a>
                                             </td>
                                             {% endif %}
@@ -244,13 +252,20 @@
                         {% if day == missing_date and today >= day  %}
                             <td rowspan = "2" class="week-calendar__diary">
                                 <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
-                                新規作成
+                                    <div class="week-calendar__diary__flex-box">
+                                        <div>
+                                            <p>新規作成</p>
+                                        </div>
+                                        <div>
+                                            <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                        </div>
+                                    </div>
                                 </a>
                             </td>
                             
                         <!-- 日記がないときにtbを作る処理 -->
                         {%elif day == missing_date and today < day%}
-                            <td rowspan = "2" class="week-calendar__diary"  >
+                            <td rowspan = "2" class="week-calendar__diary__missing_date"  >
                             </td>
                             {% endif %}
                         {% endfor %}
@@ -305,12 +320,19 @@
                         {% if day == missing_date and today > day %}
                             <td rowspan = "2" class="week-calendar__diary">
                                 <a class="week-calendar__table__a" href="{% url 'diary:create_diary' day %}">
-                                新規作成
+                                    <div class="week-calendar__diary__flex-box">
+                                        <div>
+                                            <p>新規作成</p>
+                                        </div>
+                                        <div>
+                                            <img class="week-calendar__link-arrow" src="{% static 'diary/assets/arrow.svg' %}">
+                                        </div>
+                                    </div>
                                 </a>
                             </td>
                         <!-- 日記がないときにtbを作る処理 -->
                         {%elif day == missing_date and today < day%}
-                            <td rowspan = "2" class="week-calendar__diary"  >
+                            <td rowspan = "2" class="week-calendar__diary__missing_date"  >
                             </td>
                             {% endif %}
                         {% endfor %}

@@ -46,6 +46,10 @@
 {% endblock %}
 
 {% block content %}
+<!-- フェードイン -->
+<article class="move">
+<div class="content content--blue">
+
 <main class="ground ground--blue"><!-- 追加した要素 -->
     <div class="scroll--content">
 
@@ -373,9 +377,15 @@
 
     </div><!-- scroll content -->
 </main>
+
+</div><!-- content -->
+</article>
 {% endblock %}
 
 {% block js %}
+<!-- フェードイン -->
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
+
 <script>
 // layer要素に付与したjs-modalクラスを取得し変数に格納
 const modal = document.querySelector('.js-modal');

@@ -27,12 +27,12 @@
             <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
         </div>
     </div> {% endcomment %}
-    <div class="content">
+<div class="content content--white">
 
 <!-- メインコンテンツ -->
 <main class="ground ground--white">
-    <div class="scroll--content">
-        <div class="calendar--background calender-month-page">
+    {% comment %} <div class="scroll--content">
+        <div class="calendar--background calender-month-page"> {% endcomment %}
             <!-- タブ -->
             {% url 'diary:calendar_month' selected_date as calendar_month_url %}
             {% url 'diary:month_graph' selected_date as month_graph_url %}
@@ -132,9 +132,9 @@
                 </table>
             </div>
 
-        </div><!-- calendar  background -->
+        {% comment %} </div><!-- calendar  background -->
 
-    </div><!-- scroll  content -->
+    </div><!-- scroll  content --> {% endcomment %}
 </main>
 
 </div>

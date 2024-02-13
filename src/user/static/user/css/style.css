@@ -9,11 +9,11 @@ body {
   font-weight: 400;
   background-color: #FFFDF3;
   width: 100%;
-  height: 100vh; /* height: 100% を min-height: 100vh に変更 */
+  height: 100dvh;
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("http://localhost/static/user/assets/html_groud.png");
+  background-image: url("https://teamc.o-hara-oita.click/static/user/assets/html_groud.png");
   background-size: cover;
   background-attachment: fixed;
   background-position: center top;
@@ -121,6 +121,10 @@ header .header__weather span {
   header, .ground, footer {
     width: 100%;
     max-width: none;
+  }
+  article {
+    width: 100% !important;
+    max-width: none !important;
   }
   header {
     height: 50px;
@@ -889,6 +893,31 @@ button {
     padding-top: 35px;
     padding-bottom: 30px;
   }
+  .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .slider-container::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+    border-radius: 20px;
+  }
+  .slider-container::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    border-radius: 20px;
+  }
+  .slider-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+  }
+  .controls {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transform: none;
+  }
 }
 @media only screen and (max-height: 599px) {
   .slid__img--1 {
@@ -1315,14 +1344,14 @@ label {
   margin-top: 11px;
   margin-right: 5px;
   border: none;
-  background: url("http://localhost/static/user/assets/visibility_off.svg");
+  background: url("https://teamc.o-hara-oita.click/static/user/assets/visibility_off.svg");
   background-size: 100% auto;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 
 .password__toggle.is-visible {
-  background-image: url("http://localhost/static/user/assets/visibility.svg");
+  background-image: url("https://teamc.o-hara-oita.click/static/user/assets/visibility.svg");
 }
 
 @media (any-hover: hover) {
@@ -1574,6 +1603,7 @@ label {
 
 main {
   overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+  -webkit-overflow-scrolling: touch;
 }
 
 main::-webkit-scrollbar {
@@ -1596,6 +1626,9 @@ article {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 39rem;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 #height__center {
@@ -1610,9 +1643,6 @@ article {
   .wrapperHeader {
     padding-top: 50px;
   }
-  article {
-    margin-top: 30px;
-  }
   #height__center {
     margin-top: 0;
     height: calc(100vh - 9.8rem);
@@ -1626,6 +1656,16 @@ article {
     margin-top: 50px !important;
   }
 }
+.user__next-arrow {
+  width: 9px;
+  height: auto;
+  fill: #A29C9C;
+  padding-bottom: 3px;
+}
+.user__next-arrow:hover {
+  fill: #797979;
+}
+
 .back-home {
   margin-top: 30px;
   margin-left: 0;

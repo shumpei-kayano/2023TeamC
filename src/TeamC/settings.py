@@ -1,8 +1,12 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # debug_toolbarの設定
 import mimetypes
 import datetime
+
+# .envファイルを読み込む
+load_dotenv()
 
 mimetypes.add_type("application/javascript", ".js", True)
 
@@ -17,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@'
 
 # デバック
-DEBUG = False
+DEBUG = True
 
 # 本番環境だと変える
-ALLOWED_HOSTS = ['yourdomain.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['34.233.79.231','52.201.75.237','teamc.o-hara-oita.click','teamc-sub.o-hara-oita.click', 'localhost']
 
 
 
@@ -94,10 +98,11 @@ WSGI_APPLICATION = 'TeamC.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'o-hara_db',
-        'USER': 'admin',
-        'PASSWORD': 'o-hara',
-        'HOST': 'mysql_db', # dbのコンテナ名
+        # envからHOSTを読み込む
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'), # RDS作成時のパスワード
+        'HOST': os.getenv('DB_HOST'), 
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
@@ -105,7 +110,6 @@ DATABASES = {
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -216,3 +220,15 @@ ACCOUNT_LOCKED_URL = '/accounts/login/'
 
 AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
 AWS_SECRET_ACCESS_KEY = '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'
+
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.o-hara-oita.click',
+]
+
+# settings.py
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'my_session_cookie'

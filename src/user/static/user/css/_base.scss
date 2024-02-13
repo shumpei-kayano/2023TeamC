@@ -9,12 +9,12 @@ body {
     background-color: $web_background_color;
     width: 100%;
     // height: 100%;
-    height: 100vh; /* height: 100% を min-height: 100vh に変更 */
+    height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする    
     // 背景画像を設定
-    background-image: url("http://localhost/static/user/assets/html_groud.png");
+    background-image: url("https://teamc.o-hara-oita.click/static/user/assets/html_groud.png");
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
@@ -133,6 +133,10 @@ header {
     header, .ground, footer {
         width: 100%;
         max-width: none; // 追加
+    }
+    article{
+        width: 100% !important;
+        max-width: none !important; // 追加
     }
 
     header {

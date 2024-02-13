@@ -73,6 +73,7 @@
     width: 100%;
     // table-layout: fixed; /* テーブルのレイアウトを固定にする */
     table-layout: auto; // 可変にする
+    height: calc(100vh - 215px);
     background-color: #fff;
 }
 th, td {
@@ -84,33 +85,36 @@ th, td {
 .week-calendar__today, .week-calendar__date{
     vertical-align: bottom;
     width: 80px;
-    height: 38px;
-    // padding-top: 10px;
-    padding-bottom: 5px;
+    // height: 38px;
+    padding-top: 8px;
+    padding-bottom: 0;
     font-size: 1.4rem;
     letter-spacing: 0.04em;
 }
 .week-calendar__week, .week-calendar__week__today{
     vertical-align: top;
     min-width: 80px;
-    height: 38px;
+    // height: 38px;
     // padding-top: 5px;
     // padding-bottom: 10px;
     font-size: 1.8rem;
     font-weight: 500;
+    padding-top: 0;
+    padding-bottom: 8px;
 }
 
 .week-calendar__emotion-img{
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
 }
 .week-calendar__diary{
     position: relative;  // 子要素の位置指定の基準点
-    height: 76px;
+    // height: 76px;
     text-align: left;
     font-size: 1.6rem;
     color: #A29C9C;
 }
+
 .week-calendar__diary__flex-box{
     display: flex;
     align-items: center;
@@ -124,7 +128,7 @@ th, td {
 }
 
 // 下線
-.week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
+.week-calendar__week,.week-calendar__diary,.week-calendar__week__today, .week-calendar__diary__missing_date {
     border-bottom: 3px solid $main_background_color;
     // border-bottom: 3px solid #e4fbfd;
 }
@@ -161,7 +165,7 @@ th, td {
 
 @media only screen and (min-height: 600px) {
     .week-calendar__table{
-        height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+        height: calc(100vh - 290px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
     // 下線
     .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {

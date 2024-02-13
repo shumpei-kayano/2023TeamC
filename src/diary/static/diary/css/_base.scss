@@ -9,13 +9,14 @@ body {
     background-color: $web_background_color;
     width: 100%;
     // height: 100%;
-    height: 100vh;
+    // height: 100vh;
+    height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
     color: #333;
     // 背景画像を設定
-    background-image: url("http://localhost/static/diary/assets/html_groud.png");
+    background-image: url("https://teamc.o-hara-oita.click/static/diary/assets/html_groud.png");
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
@@ -36,7 +37,7 @@ a{
     list-style: none;
 }
 
-header, .ground, footer {
+header, main, footer {
     width: 39rem; // 任意の幅を設定
     max-width: 100%; // ビューポートの幅を超えないように設定
     margin: 0 auto; // 中央に配置
@@ -57,6 +58,8 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+
+    overflow: hidden; // 高さを超える内容を非表示にする
 
     h1 {
         font-size: 2rem;
@@ -118,10 +121,15 @@ header {
     }
 }
 
+main{
+    margin-top: 50px; /*上に空白を追加*/
+}
 .ground{
-    margin-top: 5rem; /*上に空白を追加*/
-    height: calc(100vh - 11rem); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
+    // margin-top: 50px; /*上に空白を追加*/
+    // padding-bottom: 60px;
+    height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+    -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 
     // overflow-x: hidden; /* オーバーフローしたコンテンツを非表示にする */
     // .scroll--content {
@@ -158,18 +166,6 @@ header {
         background-color: $main_background_color;
     }
 }
-
-// .camera__area {
-//     height: 50px;
-//     background-color: $background_color;
-// }
-
-// .header__nowdate {
-//     font-size: 20% !important;
-//     color: $header_text_color;
-//     text-align: center;
-//     margin: 11px;
-// }
 
 footer {
     padding-right: 2.4rem;
@@ -228,9 +224,19 @@ footer {
 }
 
 @media only screen and (max-width: 960px) {
-    header, .ground, footer {
+    header, main, footer, .content, .content__back-color {
         width: 100%;
         max-width: none; // 追加
+    }
+    .content, .content__back-color{
+        height: 100dvh;
+        overflow-y: hidden;
+        &--white{
+            background-color: $background_color;
+        }
+        &--blue{
+            background-color: $main_background_color;
+        }
     }
 
     header {
@@ -242,24 +248,12 @@ footer {
             width: 72px;
             height: 28px;
             font-size: 14px;
-            // border: 1px solid #FFF;
-
-            // svg {
-            // margin-right: 5px;
-            // }
-            // &:hover {
-            // background-color: #00A3AE;
-            // }
         }
     }
     h1 {
         font-size: 20px;
     }
 
-    .ground{
-        margin-top: 50px; /*上に空白を追加*/
-        height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
-    }
     // スクロールバー背景色
     .ground::-webkit-scrollbar {
         width: 5px;
@@ -285,5 +279,11 @@ footer {
             font-size: 10px; /* テキストのサイズを10%に調整 */
             margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
         }
+    }
+}
+
+@media only screen and (min-height: 600px){
+    .ground{
+        height: calc(100vh - 193px) !important; // アドレスバー 206px
     }
 }
