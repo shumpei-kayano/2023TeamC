@@ -265,6 +265,7 @@
     z-index: -1;
     opacity: 0;
     visibility: hidden; // 要素を不可視にする
+    overflow: scroll; // スクロールバーを表示
     transition: opacity 0.3s linear, visibility 0.3s linear, z-index 0.3s linear; // アニメーション効果を設定
 }
 
@@ -273,8 +274,6 @@
     z-index: 999;
     opacity: 1;
     visibility: visible;
-
-    overflow-y: scroll;
 }
 .layer.is-open .modal{
     opacity: 1;
@@ -361,9 +360,15 @@
 }
 
 .modal__content {
+    max-width: 100%;
+    height: auto;
+    position: relative;
     .modal__content__img{
-        width: 100%;
+        display: block;
+        max-width: 100%;
         height: auto;
+        // width: 100%;
+        // height: auto;
         // max-height: 405px;
     }
 }
