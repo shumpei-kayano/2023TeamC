@@ -14,6 +14,7 @@ body {
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
     flex-direction: column; // 縦並びにする
+	overflow: hidden;
     color: #333;
     // 背景画像を設定
     background-image: url("https://teamc.o-hara-oita.click/static/diary/assets/html_groud.png");
@@ -59,6 +60,7 @@ header {
     align-items: center;
     margin: 0 auto;
 
+	z-index: 1;
     overflow: hidden; // 高さを超える内容を非表示にする
 
     h1 {

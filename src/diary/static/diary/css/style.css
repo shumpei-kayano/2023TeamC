@@ -13,6 +13,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   color: #333;
   background-image: url("https://teamc.o-hara-oita.click/static/diary/assets/html_groud.png");
   background-size: cover;
@@ -56,6 +57,7 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  z-index: 1;
   overflow: hidden;
 }
 header h1 {
