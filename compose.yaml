@@ -55,8 +55,7 @@ services:
       - ./voicevox:/root/voicevox
     environment:
       - VOICEVOX_API_PORT=50021
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - VOICEVOX_API_HOST=localhost
 volumes:
   db_data:
   static_volume:  # 追加
