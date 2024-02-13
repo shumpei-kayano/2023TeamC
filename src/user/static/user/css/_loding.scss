@@ -10,7 +10,6 @@
     width: 39rem;
     max-width: 100%; // ビューポートの幅を超えないように設定
     height: 100dvh;
-
     background: #EEFEFF;  
     #logo {
       width: 25%;
@@ -21,6 +20,7 @@
       left: 0; /* 左端に配置 */
     }
 }
+
 
 #loading .loading-content {
     position: absolute;

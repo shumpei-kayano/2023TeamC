@@ -1815,7 +1815,7 @@ article {
   transform: translateX(-50%);
   width: 39rem;
   max-width: 100%;
-  height: 100%;
+  height: 100dvh;
   background: #EEFEFF;
 }
 #loading #logo {
