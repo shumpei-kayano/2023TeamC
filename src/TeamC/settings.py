@@ -218,6 +218,8 @@ AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # 30秒間ロック
 
 ACCOUNT_LOCKED_URL = '/accounts/login/'
 
+AXES_LOCKOUT_TEMPLATE ='/accounts/login/'
+
 AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
 AWS_SECRET_ACCESS_KEY = '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'
 
