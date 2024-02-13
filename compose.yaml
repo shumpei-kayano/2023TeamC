@@ -55,7 +55,7 @@ services:
       - ./voicevox:/root/voicevox
     environment:
       - VOICEVOX_API_PORT=50021
-      - VOICEVOX_API_HOST=localhost
+      - VOICEVOX_API_HOST=52.201.75.237
 volumes:
   db_data:
   static_volume:  # 追加
