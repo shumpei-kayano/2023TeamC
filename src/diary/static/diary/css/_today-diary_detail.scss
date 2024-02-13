@@ -360,16 +360,15 @@
 }
 
 .modal__content {
-    max-width: 100%;
-    height: auto;
-    position: relative;
+    max-height: 500px; /* 適切な最大高さを設定 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
     .modal__content__img{
-        display: block;
-        max-width: 100%;
-        height: auto;
         // width: 100%;
         // height: auto;
-        // max-height: 405px;
+        max-width: 100%; /* 幅は親要素に合わせる */
+        height: auto; /* 高さは比率を保つために自動調整 */
+        display: block;
+        margin: 0 auto; /* センタリング（必要に応じて） */
     }
 }
 
@@ -438,6 +437,7 @@
     /* モーダルコンテンツ */
     .modal {
         width: 100% !important;
+        // height: calc(100vh - 193px) !important;
     }
 
     .modal__content {

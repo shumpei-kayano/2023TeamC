@@ -2216,14 +2216,14 @@ input[type=text]:focus, input[type=email]:focus {
 }
 
 .modal__content {
-  max-width: 100%;
-  height: auto;
-  position: relative;
+  max-height: 500px; /* 適切な最大高さを設定 */
+  overflow-y: auto; /* 縦スクロールを有効にする */
 }
 .modal__content .modal__content__img {
+  max-width: 100%; /* 幅は親要素に合わせる */
+  height: auto; /* 高さは比率を保つために自動調整 */
   display: block;
-  max-width: 100%;
-  height: auto;
+  margin: 0 auto; /* センタリング（必要に応じて） */
 }
 
 .modal__button-wrap {
