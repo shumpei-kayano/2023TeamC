@@ -300,23 +300,23 @@
     background-color: rgb(173, 173, 173);
 }
 
-モーダル閉じるボタン（右上に配置する場合のスタイル）
-.modal__button-wrap {
-    position: absolute;
-    right: 10px;
-    top: -28px;
-    display: inline-flex;
-}
-.close-button {
-    position: relative;
-    width: 39px;
-    height: 39px;
-    background: orange;
-    border-radius: 50%;
-    padding: 0;
-    border: transparent;
-    cursor: pointer;
-}
+// モーダル閉じるボタン（右上に配置する場合のスタイル）
+// .modal__button-wrap {
+//     position: absolute;
+//     right: 10px;
+//     top: -28px;
+//     display: inline-flex;
+// }
+// .close-button {
+//     position: relative;
+//     width: 39px;
+//     height: 39px;
+//     background: orange;
+//     border-radius: 50%;
+//     padding: 0;
+//     border: transparent;
+//     cursor: pointer;
+// }
 
 /* モーダルコンテンツ */
 .modal {
@@ -462,6 +462,7 @@
     }
 
     .modal__content {
+        max-height: 400px; /* 適切な最大高さを設定 */
         .modal__content__img{
             // margin-top: 150px !important;
             width: 100% !important;
