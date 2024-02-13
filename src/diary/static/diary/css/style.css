@@ -148,6 +148,13 @@ main {
   background-color: rgb(173, 173, 173);
 }
 
+.ground--white {
+  background-color: #FFFFFF;
+}
+.ground--blue {
+  background-color: #EEFEFF;
+}
+
 footer {
   padding-right: 2.4rem;
   padding-left: 2.4rem;

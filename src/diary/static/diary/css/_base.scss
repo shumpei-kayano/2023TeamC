@@ -165,14 +165,14 @@ main{
     background-color: rgb(173, 173, 173);
 }
 
-// .ground{
-//     &--white{
-//         background-color: $background_color;
-//     }
-//     &--blue{
-//         background-color: $main_background_color;
-//     }
-// }
+.ground{
+    &--white{
+        background-color: $background_color;
+    }
+    &--blue{
+        background-color: $main_background_color;
+    }
+}
 
 footer {
     padding-right: 2.4rem;
