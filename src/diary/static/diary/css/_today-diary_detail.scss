@@ -448,6 +448,11 @@
     }
 }
 
+@media only screen and (max-height: 599px) {
+    .modal__content {
+        max-height: 400px !important; /* 適切な最大高さを設定 */
+    }
+}
 @media only screen and (min-height: 600px) {
     // モーダルウィンドウ
     /* グレー背景 */
