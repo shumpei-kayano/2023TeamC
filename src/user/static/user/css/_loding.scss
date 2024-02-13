@@ -10,6 +10,7 @@
     width: 39rem;
     max-width: 100%; // ビューポートの幅を超えないように設定
     height: 100dvh;
+    min-height: -webkit-fill-available; /* Safari向けの指定 */
     background: #EEFEFF;  
     #logo {
       width: 25%;
