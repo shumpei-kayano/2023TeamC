@@ -462,7 +462,7 @@
     }
 
     .modal__content {
-        max-height: 400px; /* 適切な最大高さを設定 */
+        max-height: 400px !important; /* 適切な最大高さを設定 */
         .modal__content__img{
             // margin-top: 150px !important;
             width: 100% !important;
