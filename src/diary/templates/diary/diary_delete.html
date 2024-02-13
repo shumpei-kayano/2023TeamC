@@ -65,7 +65,7 @@
             <div class="account__text">
                 <p class="diary__deleta-text--top">日記を削除すると感情分析の<br>データも削除されます。</p>
                 <img class="diary_delete__neko-img" img src="{% static 'diary/assets/cancel_neko.svg' %}">
-                <p  class="diary__deleta-text">日記を削除しますか？</p>
+                <p class="diary__deleta-text">日記を削除しますか？</p>
             </div>
             <div class="btn--red">
                 <a href="{% url 'diary:diary_delete_success' pk=diary.pk %}" onclick="location">日記を削除</a>

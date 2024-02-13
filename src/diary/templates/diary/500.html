@@ -30,8 +30,7 @@
     <div id="error__page__content">
         <h1 class="error__page__h1">500 エラー<br>サーバーエラー</h1>
         <img class="error__page__content__img" src="{% static 'diary/assets/cancel_neko.svg'%}" alt="Loading Image">
-        <p class="error__page__text">サーバーでエラーが発生しました。
-        <br>しばらく時間をおいてから再度アクセスしてください。または、管理者にお問い合わせください。</p>
+        <p class="error__page__text">サーバーでエラーが発生しました。<br>しばらく時間をおいてから再度アクセスしてください。または、管理者にお問い合わせください。</p>
         <div id="error__page__btn--large" class="btn--large">
             <button type="button" onclick="location.href='{% url 'user:account_top' %}'">トップに戻る</button>
         </div>
