@@ -926,11 +926,11 @@ def today_diary_graph(request, pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     # ai_commenを音声に変換
-    path = 'diary/static/diary/voice/'
-    for file_name in os.listdir(path):
-        if file_name.startswith('a'):
-            yomiage = os.path.join(file_name)
-    return render(request,'diary/today_diary_graph.html',{'yomiage':yomiage,'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
+    # path = 'diary/static/diary/voice/'
+    # for file_name in os.listdir(path):
+    #     if file_name.startswith('a'):
+    #         yomiage = os.path.join(file_name)
+    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})#'yomiage':yomiage,
 
 @login_required
 def today_counseling_graph(request):
