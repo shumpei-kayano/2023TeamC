@@ -22,7 +22,7 @@
     flex-shrink: 0;
     border-radius: 50px;
     font-weight: 700;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     text-align: center; /* 中央寄せを追加 */
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
@@ -85,7 +85,7 @@
             font-size: 1.6rem;
             letter-spacing: 0.04rem;
             border: 1px solid #00ABB6;
-            box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+            // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
             &:hover {
                 background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */

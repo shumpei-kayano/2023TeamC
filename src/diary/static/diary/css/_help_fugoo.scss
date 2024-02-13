@@ -89,11 +89,11 @@
 }
 
 .controls {
-    width: 100%;
+    width: 360px;
     position: absolute;
     bottom: 0;
-    left: 0;
-    transform: none;
+    left: 50%; // 中央揃え
+    transform: translateX(-50%); // 水平方向で再配置
     align-items: center;
     justify-content: center;
 
@@ -145,7 +145,7 @@ button {
     letter-spacing: 0.04em;
     border-radius: 50px;
     border: 1px solid #00ABB6;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
     &:hover {
         background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
@@ -158,7 +158,7 @@ button {
     letter-spacing: 0.04em;
     border-radius: 50px;
     border: none;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     background: #00ABB6;
     color: #FFF;
 
@@ -244,8 +244,8 @@ button {
     .controls {
         position: fixed;
         bottom: 60px;
-        left: 0;
-        transform: none;
+        left: 50%; // 中央揃え
+        transform: translateX(-50%); // 水平方向で再配置
         align-items: center;
         justify-content: center;
         background-color: #fff;

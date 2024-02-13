@@ -155,7 +155,6 @@ header .header__weather span {
   flex-shrink: 0;
   border-radius: 50px;
   font-weight: 700;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   text-align: center; /* 中央寄せを追加 */
   cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
@@ -227,7 +226,6 @@ header .header__weather span {
   color: #00ABB6;
   font-size: 1.6rem;
   border: 1px solid #00ABB6;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .btn--white button:hover, .btn--white a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -714,13 +712,29 @@ img.img__logo {
 
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .slider-container {
   position: relative;
   width: 100%;
   overflow: hidden;
+  overflow-y: scroll;
+}
+
+.slider-container::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.slider-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
 }
 
 .slider {
@@ -798,7 +812,7 @@ img.img__logo {
 }
 
 .controls {
-  width: 100%;
+  width: 360px;
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -850,7 +864,6 @@ button {
   letter-spacing: 0.04em;
   border-radius: 50px;
   border: 1px solid #00ABB6;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .prev-btn:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -863,7 +876,6 @@ button {
   letter-spacing: 0.04em;
   border-radius: 50px;
   border: none;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   background: #00ABB6;
   color: #FFF;
 }
@@ -887,11 +899,18 @@ button {
     padding-bottom: 0;
   }
   .slid__img--1 {
-    padding-top: 50px;
+    padding-top: 24px;
   }
   .slid2__img--1, .slid2__img--2 {
-    padding-top: 35px;
-    padding-bottom: 30px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .slid3__img--1, .slid4__img--1 {
+    width: 250px;
+    padding-top: 16px;
+  }
+  .slid5__img--1 {
+    width: 240px;
   }
   .slider-container {
     position: relative;
@@ -912,11 +931,11 @@ button {
     background-color: rgb(173, 173, 173);
   }
   .controls {
-    width: 100%;
+    width: 360px;
     position: fixed;
     bottom: 0;
-    left: 0;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media only screen and (max-height: 599px) {

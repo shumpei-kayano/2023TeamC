@@ -112,6 +112,17 @@ header .header__weather span {
   text-align: right;
 }
 
+.content, .content__back-color {
+  height: 100dvh;
+  overflow-y: hidden;
+}
+.content--white, .content__back-color--white {
+  background-color: #FFFFFF;
+}
+.content--blue, .content__back-color--blue {
+  background-color: #EEFEFF;
+}
+
 main {
   margin-top: 50px; /*上に空白を追加*/
 }
@@ -135,13 +146,6 @@ main {
 
 .ground::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
-}
-
-.ground--white {
-  background-color: #FFFFFF;
-}
-.ground--blue {
-  background-color: #EEFEFF;
 }
 
 footer {
@@ -197,16 +201,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     width: 100%;
     max-width: none;
   }
-  .content, .content__back-color {
-    height: 100dvh;
-    overflow-y: hidden;
-  }
-  .content--white, .content__back-color--white {
-    background-color: #FFFFFF;
-  }
-  .content--blue, .content__back-color--blue {
-    background-color: #EEFEFF;
-  }
   header {
     height: 50px;
     padding-left: 24px;
@@ -255,7 +249,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   flex-shrink: 0;
   border-radius: 50px;
   font-weight: 700;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   text-align: center; /* 中央寄せを追加 */
   cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 }
@@ -344,7 +337,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   font-size: 1.6rem;
   letter-spacing: 0.04rem;
   border: 1px solid #00ABB6;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .btn--white button:hover, .btn--white a:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -2591,11 +2583,11 @@ input[type=text]:focus, input[type=email]:focus {
 }
 
 .controls {
-  width: 100%;
+  width: 360px;
   position: absolute;
   bottom: 0;
-  left: 0;
-  transform: none;
+  left: 50%;
+  transform: translateX(-50%);
   align-items: center;
   justify-content: center;
 }
@@ -2645,7 +2637,6 @@ button {
   letter-spacing: 0.04em;
   border-radius: 50px;
   border: 1px solid #00ABB6;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .prev-btn:hover {
   background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
@@ -2658,7 +2649,6 @@ button {
   letter-spacing: 0.04em;
   border-radius: 50px;
   border: none;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
   background: #00ABB6;
   color: #FFF;
 }
@@ -2727,8 +2717,8 @@ button {
   .controls {
     position: fixed;
     bottom: 60px;
-    left: 0;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
     align-items: center;
     justify-content: center;
     background-color: #fff;
