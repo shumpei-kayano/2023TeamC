@@ -121,21 +121,28 @@ header {
     }
 }
 
+// 背景色
+.content, .content__back-color{
+    height: 100dvh;
+    overflow-y: hidden;
+    &--white{
+        background-color: $background_color;
+    }
+    &--blue{
+        background-color: $main_background_color;
+    }
+}
+
 main{
     margin-top: 50px; /*上に空白を追加*/
 }
+
 .ground{
     // margin-top: 50px; /*上に空白を追加*/
     // padding-bottom: 60px;
     height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
     -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
-
-    // overflow-x: hidden; /* オーバーフローしたコンテンツを非表示にする */
-    // .scroll--content {
-    //     height: 100%; /* スクロールコンテンツが100%の高さを占めるように設定 */
-    //     overflow-y: auto; /* 必要に応じてコンテンツがはみ出た場合にのみ縦スクロールを追加 */
-    // }
 }
 // スクロールバー背景色
 .ground::-webkit-scrollbar {
@@ -158,14 +165,14 @@ main{
     background-color: rgb(173, 173, 173);
 }
 
-.ground{
-    &--white{
-        background-color: $background_color;
-    }
-    &--blue{
-        background-color: $main_background_color;
-    }
-}
+// .ground{
+//     &--white{
+//         background-color: $background_color;
+//     }
+//     &--blue{
+//         background-color: $main_background_color;
+//     }
+// }
 
 footer {
     padding-right: 2.4rem;
@@ -227,16 +234,6 @@ footer {
     header, main, footer, .content, .content__back-color {
         width: 100%;
         max-width: none; // 追加
-    }
-    .content, .content__back-color{
-        height: 100dvh;
-        overflow-y: hidden;
-        &--white{
-            background-color: $background_color;
-        }
-        &--blue{
-            background-color: $main_background_color;
-        }
     }
 
     header {

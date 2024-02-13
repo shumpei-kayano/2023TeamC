@@ -6,15 +6,34 @@
     // justify-content: center;
     // align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
 }
 
 .slider-container {
     position: relative;
     width: 100%;
     overflow: hidden;
-
-    // height: 100%;
+    overflow-y: scroll;
+}
+// スクロールバー背景色
+.slider-container::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.slider-container::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+.slider-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
 }
 
 .slider {
@@ -94,11 +113,11 @@
 }
 
 .controls {
-    width: 100%;
+    width: 360px;
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 50%; // 中央揃え
+    transform: translateX(-50%); // 水平方向で再配置
 }
 
 button {
@@ -146,7 +165,7 @@ button {
     letter-spacing: 0.04em;
     border-radius: 50px;
     border: 1px solid #00ABB6;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
     &:hover {
         background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
@@ -159,7 +178,7 @@ button {
     letter-spacing: 0.04em;
     border-radius: 50px;
     border: none;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     background: #00ABB6;
     color: #FFF;
 
@@ -185,11 +204,18 @@ button {
         padding-bottom: 0;
     }
     .slid__img--1{
-        padding-top: 50px;
+        padding-top: 24px;
     }
     .slid2__img--1, .slid2__img--2 {
-        padding-top: 35px;
-        padding-bottom: 30px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+    .slid3__img--1, .slid4__img--1{
+        width: 250px;
+        padding-top: 16px;
+    }
+    .slid5__img--1{
+        width: 240px;
     }
 
     .slider-container {
@@ -219,11 +245,11 @@ button {
         background-color: rgb(173, 173, 173);
     }
     .controls {
-        width: 100%;
+        width: 360px;
         position: fixed;
         bottom: 0;
-        left: 0;
-        transform: none;
+        left: 50%; // 中央揃え
+        transform: translateX(-50%);
     }
 }
 @media only screen and (max-height: 599px) {
