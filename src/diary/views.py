@@ -163,11 +163,14 @@ def aicomment_month(emotion, request):
 
 # 特定のワードが含まれているか確認する関数
 def contains_forbidden_word(content,emotion):
+    count ==0
     # 特定のワードをリストに格納
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
         # 特定のワードが含まれていたら、感情分析でnegativeが70%以上だったら
-        if word in content and emotion.negative >= 70 :
+        if word in content:
+          count +=1
+          if count == 3 and emotion.negative >= 70 :
             return 1
     return 0
 

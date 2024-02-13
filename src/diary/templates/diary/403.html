@@ -30,8 +30,7 @@
     <div id="error__page__content">
         <h1 class="error__page__h1">403 エラー<br>このページへのアクセスは<br>禁止されています</h1>
         <img class="error__page__content__img" src="{% static 'diary/assets/cancel_neko.svg'%}" alt="Loading Image">
-        <p class="error__page__text">入力禁止文字列が入力されたか、禁止箇所にアクセスした可能性があります。
-        <br>お手数ですが、トップページからやり直してください。</p>
+        <p class="error__page__text">入力禁止文字列が入力されたか、禁止箇所にアクセスした可能性があります。<br>お手数ですが、トップページからやり直してください。</p>
         <div id="error__page__btn--large" class="btn--large">
             <button type="button" onclick="location.href='{% url 'user:account_top' %}'">トップに戻る</button>
         </div>
