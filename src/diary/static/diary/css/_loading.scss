@@ -9,7 +9,8 @@
     transform: translateX(-50%);  // 水平方向に中央に配置
     width: 39rem;
     max-width: 100%; // ビューポートの幅を超えないように設定
-    height: 100dvh;
+    height: 100vh;
+    min-height: -webkit-fill-available; /* Safari向けの指定 */
 
     background: #EEFEFF;  
     #logo {
