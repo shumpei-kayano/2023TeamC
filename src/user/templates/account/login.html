@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ログイン{% endblock title %}
+
+
+{% block content %}
+{% comment %} <section class="section-accounts" id="section-signup"> {% endcomment %}
+<section>
+    <main class="ground ground--blue">
+
+    <div class="wrapperHeader">
+        <div class="header__back__img">
+            <a href="{% url 'user:account_top' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+        </div>
+            <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+    </div>
+
+    <article>
+    <div class="wrapper-accounts-form">
+        <p class="signup-text">ログイン</p>
+            <form method="post" action="{% url 'account_login' %}" class="form-accounts">
+                {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="error-message">
+                <p>エラーが発生しました</p>
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <div class="form-content">
+                <div class="user-infomation__container">
+                    <div class="user-infomation__style--center">
+                        <div class="content__user-email__text">
+                            <label for="email">メールアドレス</label>
+                            <br><input type="email" name="login" autocomplete="email" required id="id_login" placeholder="メールアドレス">
+                        </div>
+
+                        <div class="content__user-pass__text">
+                            <label for="pass">パスワード</label>
+                            <div class="password-wrapper">
+                                <br><input class="password__input" type="password" name="password" autocomplete="current-password" required id="id_password" placeholder="パスワード">
+                                <span class="password__toggle">
+                                    <!-- 目のアイコン -->
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="radio-btn">
+                            <label><input type="checkbox" name="remember" id="id_remember">ログイン状態を保持する</label>
+                        </div>
+                    </div>
+                </div>
+                
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                {% endif %}
+            </div>
+
+
+        <div id="login__btn--blue" class="btn btn--blue">
+            <button type="submit">ログイン</button>
+        </div>
+            <p class="forget-pass"><a href="{% url 'account_reset_password' %}">パスワードをお忘れですか？
+                <svg class="user__next-arrow" width="9" height="12" viewBox="0 0 9 12" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.91155 6.00367L1.27849 1.35873C1.08689 1.20073 0.994154 1.01367 1.00029 0.797541C1.00642 0.581408 1.10554 0.394557 1.29765 0.236987C1.48925 0.0789957 1.71611 0 1.97822 0C2.24033 0 2.46693 0.0789957 2.65802 0.236987L8.54016 5.10312C8.69344 5.22952 8.8084 5.37171 8.88504 5.5297C8.96168 5.68769 9 5.84568 9 6.00367C9 6.16167 8.96168 6.31966 8.88504 6.47765C8.8084 6.63564 8.69344 6.77783 8.54016 6.90423L2.63885 11.7704C2.44725 11.9284 2.22372 12.0048 1.96825 11.9998C1.71278 11.9947 1.48925 11.913 1.29765 11.7546C1.10605 11.5966 1.01025 11.4095 1.01025 11.1934C1.01025 10.9772 1.10605 10.7904 1.29765 10.6328L6.91155 6.00367Z"/>
+                </svg>
+            </a></p>
+        </form>
+    </div>
+    <div class="back-home">
+        <a class="backToHome" href="{% url 'user:account_top' %}">
+            トップページに戻る
+            <svg class="user__next-arrow" width="9" height="12" viewBox="0 0 9 12" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.91155 6.00367L1.27849 1.35873C1.08689 1.20073 0.994154 1.01367 1.00029 0.797541C1.00642 0.581408 1.10554 0.394557 1.29765 0.236987C1.48925 0.0789957 1.71611 0 1.97822 0C2.24033 0 2.46693 0.0789957 2.65802 0.236987L8.54016 5.10312C8.69344 5.22952 8.8084 5.37171 8.88504 5.5297C8.96168 5.68769 9 5.84568 9 6.00367C9 6.16167 8.96168 6.31966 8.88504 6.47765C8.8084 6.63564 8.69344 6.77783 8.54016 6.90423L2.63885 11.7704C2.44725 11.9284 2.22372 12.0048 1.96825 11.9998C1.71278 11.9947 1.48925 11.913 1.29765 11.7546C1.10605 11.5966 1.01025 11.4095 1.01025 11.1934C1.01025 10.9772 1.10605 10.7904 1.29765 10.6328L6.91155 6.00367Z"/>
+            </svg>
+        </a>
+    </div>
+
+</article>
+</main>
+</section>
+{% endblock content %}
+
+{% block js %}
+<script>
+    // パスワード表示
+    const passwordToggles = document.querySelectorAll('.password__toggle');
+
+    passwordToggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const type = input.getAttribute('type');
+            input.setAttribute('type', type === 'password' ? 'text' : 'password');
+            this.classList.toggle('is-visible');
+        });
+    });
+</script>
+{% endblock js %}

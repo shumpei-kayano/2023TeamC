@@ -1,0 +1,94 @@
+<!--会員情報画面-->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}会員情報{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            <a href="{% url 'diary:setting' %}">
+                <svg width="8" height="12" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>会員情報</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="content__back-color content__back-color--white">
+
+<main class="ground ground--white">
+    <div class="user-infomation--center">
+
+        <!-- ユーザーの会員情報の表示 -->
+        <div class="user-infomation">
+            <div class="content__user-info__name">
+                <div class="content__user-info__list">
+                    <p class="user-label">ユーザーネーム</p>
+                    <button class="content__user-info__list__btn" type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">変更
+                        <svg class="content__user-info__list__svg" width="8" height="12" viewBox="0 0 14 23" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Arrow 8" d="M13.0607 12.5607C13.6464 11.9749 13.6464 11.0251 13.0607 10.4393L3.51472 0.893398C2.92893 0.307611 1.97919 0.307611 1.3934 0.893398C0.807611 1.47919 0.807611 2.42893 1.3934 3.01472L9.87868 11.5L1.3934 19.9853C0.807611 20.5711 0.807611 21.5208 1.3934 22.1066C1.97919 22.6924 2.92893 22.6924 3.51472 22.1066L13.0607 12.5607ZM11 13H12V10H11V13Z"/>
+                        </svg>
+                        </button>
+                </div>
+                <p class="user-info">{{ user.username }}</p>
+            
+            </div>
+            <div class="content__user-info__email">
+                <div class="content__user-info__list">
+                    <p class="user-label">メールアドレス</p>
+                    <button class="content__user-info__list__btn" type="button" onclick="location.href='{% url 'user:email' %}'">変更
+                        <svg class="content__user-info__list__svg" width="8" height="12" viewBox="0 0 14 23" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Arrow 8" d="M13.0607 12.5607C13.6464 11.9749 13.6464 11.0251 13.0607 10.4393L3.51472 0.893398C2.92893 0.307611 1.97919 0.307611 1.3934 0.893398C0.807611 1.47919 0.807611 2.42893 1.3934 3.01472L9.87868 11.5L1.3934 19.9853C0.807611 20.5711 0.807611 21.5208 1.3934 22.1066C1.97919 22.6924 2.92893 22.6924 3.51472 22.1066L13.0607 12.5607ZM11 13H12V10H11V13Z"/>
+                        </svg>
+                        </button>
+                </div>
+                <p class="user-info">{{ user.email }}</p>
+            
+            </div>
+            {% comment %} ハッシュ化されて表示できないので検討 {% endcomment %}
+            <div class="content__user-info__password">
+                <div class="content__user-info__list">
+                    <p class="user-label">パスワード</p>
+                    <button class="content__user-info__list__btn" type="button" onclick="location.href='{% url 'user:password_reset' %}'">変更
+                        <svg class="content__user-info__list__svg" width="8" height="12" viewBox="0 0 14 23" xmlns="http://www.w3.org/2000/svg">
+                            <path id="Arrow 8" d="M13.0607 12.5607C13.6464 11.9749 13.6464 11.0251 13.0607 10.4393L3.51472 0.893398C2.92893 0.307611 1.97919 0.307611 1.3934 0.893398C0.807611 1.47919 0.807611 2.42893 1.3934 3.01472L9.87868 11.5L1.3934 19.9853C0.807611 20.5711 0.807611 21.5208 1.3934 22.1066C1.97919 22.6924 2.92893 22.6924 3.51472 22.1066L13.0607 12.5607ZM11 13H12V10H11V13Z"/>
+                        </svg>
+                        </button>
+                </div>
+                <p id="user-info-password" class="user-info">
+                    セキュリティ上の理由から非表示にしています
+                    {% comment %} {{ user.password }} {% endcomment %}
+                </p>
+            </div>
+        </div>
+
+            {% csrf_token %}
+            {% comment %} <div class="btn--blue--info">
+                <button type="button" onclick="location.href='{% url 'diary:member_information_edit' %}'">会員情報を変更する</button>
+            </div> {% endcomment %}
+        </form>
+
+        <div class="user-infomation__image">
+            <img class="user-infomation__image--dango" src="{% static 'diary/assets/neko_dango.svg' %}">
+        </div>
+    
+    </div>
+</main>
+
+</div>
+</section>
+{% endblock %}

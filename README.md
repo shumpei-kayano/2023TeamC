@@ -135,3 +135,42 @@ docker exec -it django_gunicorn /bin/bash
 python manage.py collectstatic --noinput
 ```
 ※即時反映されます。shift + F5でスーパーリロードしてください。
+
+## デプロイ時（TeamC）
+テストデータの反映
+```bash
+python manage.py db_seed
+```
+Comprehendの利用
+
+グニコーンコンテナに入る
+```bash
+docker exec -it django_gunicorn /bin/bash
+ ```
+
+最初はaws cliのインストール
+```bash
+pip install awscli --upgrade
+```
+インストールできたかの確認
+```bash
+aws --version
+ ```
+
+boto3のインストール
+```bash
+pip install boto3
+ ```
+
+aws configureコマンドを入力。
+```bash
+aws configure
+ ```
+・アクセスキー
+AKIA3VIVOLKQTWBJ5RPH
+・シークレットアクセスキー
+9CTcFM+N4vsfeIhAbl91qbDg1CAx1eniN6ULoh40
+・リージョン
+us-east-1
+・出力形式
+json

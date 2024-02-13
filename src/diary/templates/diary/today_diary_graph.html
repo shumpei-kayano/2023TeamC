@@ -1,0 +1,214 @@
+<!-- ネココポジティブコメント画面（グラフ） -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日次グラフ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+
+    {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
+
+    {% if today != diary.created_date  %}
+    <div class="header__button">
+        <div id="calendar__back-btn" class="header__back__img">
+            {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+            <a href="{% url month cal %}">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.6 1.27273H11.9V0H10.5V1.27273H3.5V0H2.1V1.27273H1.4C0.63 1.27273 0 1.84545 0 2.54545V12.7273C0 13.4273 0.63 14 1.4 14H12.6C13.37 14 14 13.4273 14 12.7273V2.54545C14 1.84545 13.37 1.27273 12.6 1.27273ZM12.6 12.7273H1.4V4.45455H12.6V12.7273Z" fill="white"/>
+                </svg>
+                月</a>
+        </div>
+        <div class="header__button">
+            <div class="header__back__img">
+            {% comment %} 選択された日付のtoday_diary_detail.htmlに遷移させてください {% endcomment %}
+                <a href="{% url week cal %}">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.794118 8.67857H2.38235C2.81912 8.67857 3.17647 8.24464 3.17647 7.71429V5.78571C3.17647 5.25536 2.81912 4.82143 2.38235 4.82143H0.794118C0.357353 4.82143 0 5.25536 0 5.78571V7.71429C0 8.24464 0.357353 8.67857 0.794118 8.67857ZM0.794118 13.5H2.38235C2.81912 13.5 3.17647 13.0661 3.17647 12.5357V10.6071C3.17647 10.0768 2.81912 9.64286 2.38235 9.64286H0.794118C0.357353 9.64286 0 10.0768 0 10.6071V12.5357C0 13.0661 0.357353 13.5 0.794118 13.5ZM0.794118 3.85714H2.38235C2.81912 3.85714 3.17647 3.42321 3.17647 2.89286V0.964286C3.17647 0.433929 2.81912 0 2.38235 0H0.794118C0.357353 0 0 0.433929 0 0.964286V2.89286C0 3.42321 0.357353 3.85714 0.794118 3.85714ZM4.76471 8.67857H12.7059C13.1426 8.67857 13.5 8.24464 13.5 7.71429V5.78571C13.5 5.25536 13.1426 4.82143 12.7059 4.82143H4.76471C4.32794 4.82143 3.97059 5.25536 3.97059 5.78571V7.71429C3.97059 8.24464 4.32794 8.67857 4.76471 8.67857ZM4.76471 13.5H12.7059C13.1426 13.5 13.5 13.0661 13.5 12.5357V10.6071C13.5 10.0768 13.1426 9.64286 12.7059 9.64286H4.76471C4.32794 9.64286 3.97059 10.0768 3.97059 10.6071V12.5357C3.97059 13.0661 4.32794 13.5 4.76471 13.5ZM3.97059 0.964286V2.89286C3.97059 3.42321 4.32794 3.85714 4.76471 3.85714H12.7059C13.1426 3.85714 13.5 3.42321 13.5 2.89286V0.964286C13.5 0.433929 13.1426 0 12.7059 0H4.76471C4.32794 0 3.97059 0.433929 3.97059 0.964286Z" fill="white"/>
+                    </svg>
+                週</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% comment %} 当日以外の日にちの時にカレンダーに戻る {% endcomment %}
+    {% if today == diary.created_date %}
+    <div class="header__spacer--top"></div>
+    {% endif %}
+    <h1>日記詳細</h1>
+    <div class="header__spacer--top"></div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+
+        <!-- タブ -->
+        {% url 'diary:today_diary_detail' pk=diary.id as today_diary_detail_url %}
+        {% url 'diary:today_diary_graph' pk=diary.id as today_diary_graph_url %}
+        <div class="tab__button a--tab">
+            <div class="a--tab--left {% if request.path == today_diary_detail_url %}active{% endif %}">
+                <a href="{{ today_diary_detail_url }}">日記詳細画面</a>
+            </div>
+            <div class="a--tab--right {% if request.path == today_diary_graph_url %}active{% endif %}">
+                <a id="a--tab--right--color" href="{{ today_diary_graph_url }}">グラフ</a>
+            </div>
+        </div>
+
+        <!-- グラフの表示 -->
+        <div  class="content__today-diary__graph">
+            <samll class="today-diary__graph__created-date">{{diary.created_date}}の感情グラフ</samll>
+            <!-- グラフの表示 -->
+            <div id="circle__graph">
+                <div class="circle__graph__img">
+                    <canvas id="barChart" style="max-height: 130px;"></canvas>
+                </div>
+            </div>
+          </div>
+
+        <!-- ネコココメント -->
+        {% comment %} 特定のワードが含まれていたらピンクのネコちゃん {% endcomment %}
+        {% if diary.counseling %}
+            <div class="content__diary__comment--counseling">
+                <div class="content__diary__ccomment--counseling__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                {% endif %}
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                </button>
+            </div>
+        {% comment %} それ以外だと黄色ネコちゃん {% endcomment %}
+        {% else %}
+            <!-- ネコココメント -->
+            <div class="content__diary__comment">
+                <div class="content__diary__ccomment__p">
+                    <p>
+                        {{ diary.ai_comment }}
+                    </p>
+                </div>
+            </div>
+            <div class="content__diary__comment__img">
+                <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                {% endif %}
+                <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                </button>
+            </div>
+        {% endif %}
+
+    </div>
+</main>
+{% endblock %}
+
+{% block js %}
+<script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var options = {
+      indexAxis: 'y', 
+      scales: {
+          x: {
+              stacked: true
+          },
+          y: {
+              stacked: true
+          }
+      },
+//      plugins: {
+//          datalabels: {
+//              align: 'center',
+//              anchor: 'start',
+//              offset: 10,
+//              display: function(context) {
+//                return context.dataset.data[context.dataIndex] > 0;
+//            },
+//              formatter: function(value, context) {
+//                  return value +'%';
+//              },
+//              color: 'black'
+//          }
+//      }
+  };
+  
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [""],
+          datasets: [
+              {
+                  label: '好調',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(97, 255, 0, 0.2)', // 前 rgba(0, 255, 0, 0.2)
+                  borderColor: 'rgba(0, 255, 26, 1)', // 前 rgba(0, 255, 0, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '不調',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(77, 202, 255, 0.2)', // 前 rgba(75, 150, 200, 0.2)
+                  borderColor: 'rgba(74, 201, 255, 1)', // 前 rgba(75, 150, 200, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '普通',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)', // 前 rgba(255, 255, 0, 0.2)
+                  borderColor: 'rgba(255, 246, 0, 1)', // 前 rgba(255, 255, 0, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '複雑',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(170, 170, 170, 0.2)', // 前 rgba(128, 128, 128, 0.2)
+                  borderColor: 'rgba(160, 160, 160, 1)', // 前 rgba(128, 128, 128, 1)
+                  borderWidth: 1,
+              }
+          ]
+      },
+//      plugins: [ChartDataLabels],
+      options: options
+  });
+
+        // ネコを押したらしゃべる
+        document.getElementById("playButton").addEventListener("click", function() {
+            // ボタンを無効化する
+            document.getElementById("playButton").disabled = true;
+    
+            var value = document.getElementById("playButton").getAttribute("data-value");
+            var music = new Audio(value);
+    
+            // 音声再生終了時のイベントを追加
+            music.addEventListener('ended', function() {
+                // ボタンを有効化する
+                document.getElementById("playButton").disabled = false;
+            });
+    
+            music.play();
+        });
+</script>
+{% endblock %}

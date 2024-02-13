@@ -1,0 +1,155 @@
+// input[type="username"], input[type="email"], input[type="password"], input[type="password"] {
+//     width: 100%;  // テキストボックスの幅を親要素の100%に設定
+//     display: flex;
+//     width: 342px;
+//     height: 45px;
+//     padding: 16px 0px 16px 16px;
+//     justify-content: center;
+//     align-items: center;
+//     // gap: 8.876px;
+//     flex-shrink: 0;
+//     margin-bottom: 16px;
+//     font-size: 1.6rem;
+
+//     border-radius: 8.876px;
+//     border: 1px solid #A29C9C;
+//     background: #FFF;
+//     box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
+// }
+
+.title-text {
+    color: #333;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.12px;
+    text-align: center; // テキストを中央揃えにする
+}
+
+.change-text {
+    text-align: center; // テキストを中央揃えにする
+    color: #333;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: 0.56px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+img.img__logo {
+    // margin-left: 24px;
+    display: flex;
+    width: 96px;
+    height: 48px;
+}   
+
+.form-email {
+    padding: 0px 0px 16px 25px;
+    justify-content: center;
+    align-items: center;
+    // gap: 8.876px;
+    flex-shrink: 0;
+}
+
+.if__change-text {
+    text-align: center; // テキストを中央揃えにする
+    color: #333;
+    text-align: center;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: 0.56px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.email-add-text {
+    text-align: center; // テキストを中央揃えにする
+    color: #333;
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: 0.56px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+// .add-button {
+
+// }
+
+
+.btn--blue {
+    margin-top: 40px;
+}
+
+.blockLabels {
+    // background-color: red;
+    border: 0;
+
+    label {
+        text-align: center; // テキストを中央揃えにする
+        color: #333;
+        text-align: center;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 170%; /* 23.8px */
+        letter-spacing: 0.56px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+.errorlist {
+    color: #333;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.buttonHolder {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.buttonHolder button {
+    font-family: 'Noto Sans JP', sans-serif;
+    display: inline-flex;
+    padding: 5px 7px 5px 7px;
+    align-items: center;
+    border-radius: 5px;
+    // border: 1px solid #FFF;
+    background: #00ABB6;
+    color: #FFF;
+    border: none;
+
+    &:hover {
+        background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+    }
+}
+#buttonHolder__remove-btn{
+    background: #FF4747;
+    &:hover {
+        background-color: #E32B2B; /* マウスをかざしたときの背景色 */
+    }
+}
+
+// .secondaryAction {
+//     margin-left: 24px;
+// }
+
+.secondAction {
+    margin-left: 17px;
+}
+
+.primaryAction {
+    margin-left: 17px;
+}

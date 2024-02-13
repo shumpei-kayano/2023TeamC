@@ -1,0 +1,259 @@
+<!-- 日記内容確認画面 -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日記内容確認{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+  <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+  <h1>日記確認画面</h1>
+  <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="content__back-color content__back-color--blue">
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+
+        <!-- 入力されたテキストの表示 -->
+        <div class="content__form-group">
+
+                {% csrf_token %}
+                <div class="content__today-diary__text">
+                    <p>{{ saved_diary.content }}</p>
+
+                    <div class="content__today-diary-confirmation__img">
+                        {% if saved_diary.photo1 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <img src="{{ saved_diary.photo1.url }}" alt="Diary Photo1">
+                        </div>
+                        {% endif %}
+                        {% if saved_diary.photo2 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <img src="{{ saved_diary.photo2.url }}" alt="Diary Photo2">
+                        </div>
+                        {% endif %}
+                        {% if saved_diary.photo3 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <img src="{{ saved_diary.photo3.url }}" alt="Diary Photo3">
+                        </div>
+                        {% endif %}
+                        {% if saved_diary.photo4 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <img src="{{ saved_diary.photo4.url }}" alt="Diary Photo4">
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="content__today-diary-confirmation__img">
+                        {% if saved_diary.movie1 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <video src="{{ saved_diary.movie1.url }}" alt="Diary Movie1"></video>
+                        </div>
+                        {% endif %}
+                        {% if saved_diary.movie2 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <video src="{{ saved_diary.movie2.url }}" alt="Diary Movie2"></video>
+                        </div>
+                        {% endif %}
+                        {% if saved_diary.movie3 %}
+                        <div class="content__today-diary-confirmation__item">
+                                <video src="{{ saved_diary.movie3.url }}" alt="Diary Movie3"></video>
+                            </div>
+                        {% endif %}
+                        {% if saved_diary.movie4 %}
+                        <div class="content__today-diary-confirmation__item">
+                            <video src="{{ saved_diary.movie4.url }}" alt="Diary Movie4"></video>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                </div> <!-- content__today-diary__text -->
+
+                <!-- ネコココメント -->
+                {% if saved_diary.counseling == 2 %}
+                    <!-- カウンセリングボタンを押した時のネコッココ -->
+                    <div class="content__diary__comment">
+                        <div class="content__diary__ccomment__p">
+                            <p>{{ saved_diary.ai_comment }}</p>
+                        </div>
+                    </div>
+                    <div class="content__diary__comment__img">
+                        <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/counselor_neko.svg' %}" alt="ネココの画像">
+                    </div>
+                <!-- それ以外だと黄色ネコちゃん -->
+                {% else %}
+                    <!-- ネコココメント -->
+                    <div class="content__diary__comment">
+                        <div class="content__diary__ccomment__p">
+                            <p>{{ saved_diary.ai_comment }}</p>
+                        </div>
+                    </div>
+                    <div class="content__diary__comment__img">
+                        <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+                    </div>
+                {% endif %}
+                
+                <div class="btn--blue">
+                    <a id="positive_conversion__btn" href="{% url 'diary:positive_conversion' saved_diary.pk %}" class="button-link">
+                        <button type="button">ポジティブ変換する</button>
+                    </a>
+                </div>
+                <div class="btn--white">
+                    <a href="{% url 'diary:today_diary_detail' saved_diary.pk %}" class="button-link">ポジティブ変換しない</a>
+                </div>
+
+        </div><!-- content__form-group -->
+
+        <div id="loading">
+          <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+          <div class="loading-content">
+              <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+              <p class="loading__text">感情分析中にゃ</P>
+              <span class="dli-loading-1"></span>
+          </div>
+        </div>
+
+    </div><!-- scroll content -->
+</main>
+</div>
+</section>
+
+<!-- ポップアップ要素 -->
+{% comment %} 悪い言葉があればポップアップを表示 {% endcomment %}
+{% if saved_diary.counseling == 1 %}
+    {% comment %} 1回目のポップアップ {% endcomment %}
+    <div class="popup show" id="first-popup" data-counseling="1">
+        <div class="popup__flex-box">
+        <div class="popup__inner">
+            <div class="popup__text">
+                <p>ネガティブが続いているにゃ。<br>ネココのカウンセリングを<br>受けるにゃ。</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+
+            {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+            <div class="btn--popup">
+                <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
+                    <button id="submitButton" type="submit">ネココのアドバイスを受ける</button>
+                </a>
+            </div>
+            <div class="gray__button">
+                {% comment %} キャンセルを押したら、2回目のポップアップを表示 {% endcomment %}
+                <button id="close-button" onclick="closePopup('first-popup')">
+                    <svg class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.05 13.6501L0 12.6001L5.6 7.0001L0 1.4001L1.05 0.350098L6.65 5.9501L12.25 0.350098L13.3 1.4001L7.7 7.0001L13.3 12.6001L12.25 13.6501L6.65 8.0501L1.05 13.6501Z"/>
+                    </svg>
+                    キャンセル
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    {% comment %} 2回目のポップアップ {% endcomment %}
+    <div class="popup" id="second-popup" data-counseling="2">
+        <div class="popup__flex-box">
+        <div class="popup__inner">
+            <div class="popup__text">
+                <p class="popup__text--second">キャンセルすると<span class="popup__text--second__border">カウンセリングを</span><br>
+                    <span class="popup__text--second__border">受けることができなくなります。</span><br>
+                    キャンセルしますか？</p>
+            </div>
+            <div class="popup__img">
+                <img src="{% static 'diary/assets/counseling_request.svg' %}" alt="カウンセリングを薦める猫の画像">
+            </div>
+                {% comment %} ネココのアドバイスを受ける　{% endcomment %}
+            <div class="btn--popup">
+                <a href="{% url 'diary:receive_nekoko_advice' saved_diary.pk %}" class="button-link">
+                    <button id="submitButton2" type="submit">ネココのアドバイスを受ける</button>
+                </a>
+            </div>
+            <div class="gray__button">
+                {% comment %} キャンセルを押したら、counselingの値が0になる　{% endcomment %}
+                {% comment %} キャンセルを押したら、ポップアップが消えるようにしたい　{% endcomment %}
+                <a href="{% url 'diary:counseling_yellow' saved_diary.pk %}" class="button-link">
+                <button>
+                    <svg id="close-button2" class="gray__button--icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.05 13.6501L0 12.6001L5.6 7.0001L0 1.4001L1.05 0.350098L6.65 5.9501L12.25 0.350098L13.3 1.4001L7.7 7.0001L13.3 12.6001L12.25 13.6501L6.65 8.0501L1.05 13.6501Z"/>
+                    </svg>
+                    キャンセル
+                </button>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+    window.onload = function() {
+        if ({{ saved_diary.counseling }} == 1) {
+            document.getElementById('first-popup').style.display = 'block';
+            document.getElementById('second-popup').style.display = 'none';
+
+            document.getElementById('close-button').onclick = function() {
+                document.getElementById('first-popup').style.display = 'none';
+                document.getElementById('second-popup').style.display = 'block';
+            }
+        }
+    }
+    {% comment %} if (counselingValue === "1") {
+        // ページが読み込まれたときに1回目のポップアップを表示
+        document.getElementById('second-popup').style.display = 'none';
+        document.getElementById('first-popup').style.display = 'block';
+      } {% endcomment %}
+    // ポジ変ボタンを押したらローディング画面を表示
+    document.getElementById('positive_conversion__btn').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
+    document.getElementById('submitButton').addEventListener('click', function () {
+      // ボタンがクリックされたらローディング画面を表示
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('first-popup').style.display = 'none';
+      document.getElementById('second-popup').style.display = 'none';
+      // アニメーションを開始
+      document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+  });
+  document.getElementById('submitButton2').addEventListener('click', function () {
+    // ボタンがクリックされたらローディング画面を表示
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('first-popup').style.display = 'none';
+    document.getElementById('second-popup').style.display = 'none';
+    // アニメーションを開始
+    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+});
+    document.getElementById('close-button2').addEventListener('click', function () {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('first-popup').style.display = 'none';
+        document.getElementById('second-popup').style.display = 'none';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
+  {% comment %} document.getElementById('close-button').addEventListener('click', function () {
+    // ボタンがクリックされたら画面非表示
+    document.getElementById('first-popup').style.display = 'none';
+    // ボタンがクリックされたら画面表示
+    document.getElementById('second-popup').style.display = 'block';
+  }); {% endcomment %}
+</script>
+{% endblock %}
+
+

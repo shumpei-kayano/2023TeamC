@@ -1,0 +1,243 @@
+<!--月間統計グラフと総評画面-->
+{% extends "base_diary.html" %}
+{% load static %}
+{% block title %}月間グラフ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/calendar-month_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>月間グラフ</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="content__back-color content__back-color--blue">
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="scroll--content">
+        <div class="calendar--background month-graph-page">
+            <!-- タブ -->
+            {% url 'diary:calendar_month' selected_date as calendar_month_url %}
+            {% url 'diary:month_graph' selected_date as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a id="a--tab--right--color" href="{{ month_graph_url }}">月間グラフ</a>
+                </div>
+            </div>
+
+            <!-- 月間のページネーション -->
+            <div class="calendar-week">
+                <div class="calendar-header">
+                    <div class="next__button">
+                        <!-- ボタン -->
+                        <a href="{% url 'diary:month_graph' prev_month %}">
+                            <img src="{% static 'diary/assets/left_arrow.svg' %}">
+                        </a>
+                        <a href="{% url 'diary:month_graph' next_month %}">
+                            <img src="{% static 'diary/assets/right_arrow.svg' %}">
+                        </a>
+                    </div>
+                    <!-- 選択した月を表示 -->
+                    <p class="calendar-header__select-date">{{ selected_date|date:"Y年m月" }}</p>
+                    <!-- 今月に戻る -->
+                    <div class="a--blue">
+                        <a href="{% url 'diary:month_graph' %}">
+                            <svg class="a--blue--svg" id="mySvg" width="16" height="16" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                            </svg>
+                            <p class="a--blue-__p">今月</p></a>
+                    </div>
+                        {% comment %} <div calss="text-center">
+                            <span id="year-month"></span>
+                        </div> {% endcomment %}
+                </div>
+            </div>
+
+            <!-- グラフの表示 -->
+            <div id="emotion__graph">
+                <div class="emotion__graph__img">
+                    <table class="emotion__graph__table">
+                        <tr class="emotion__graph__table-tr">
+                            <td class="emotion__graph__table-td">
+                                <div class="emotion__graph__table-td--left"></div>
+                            </td>
+                            <td class="emotion__graph__table-td">
+                                <p class="emotion__graph_title">感情グラフ</p>
+                            </td>
+                            <td class="emotion__graph__table-td--right">
+                                <!-- 更新ボタン -->
+                                <form id="form-loading" method="POST" action="{% url 'diary:month_graph' selected_date=selected_date %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <button class="emotion__graph__btn" type="submit" onclick="submitForm()">
+                                        <svg class="a--blue--svg" id="mySvg" width="15" height="14" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                                        </svg>
+                                        更新</button>
+                                        <div id="loading">
+                                            <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                                            <div class="loading-content">
+                                                <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                                                <p class="loading__text">更新中にゃ</P>
+                                                <span class="dli-loading-1"></span>
+                                            </div>
+                                        </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
+                    {% comment %} 月間感情グラフ　棒グラフと折れ線グラフを表示 {% endcomment %}
+                    <canvas id="barChart" style="max-height: 105px; border-bottom: 2px solid rgba(4, 202, 214, 0.15); padding-bottom: 8px;"></canvas><!-- 棒グラフ -->
+                    <canvas id="lineChart" style="max-height: 185px; margin-top: 8px;"></canvas><!-- 折れ線グラフ -->
+                </div>
+            </div>
+
+            <!-- ネココのカウンセリングコメント -->
+            <div class="content__home__text--pink">
+                <div class="content__today-diary__comment">
+                    <div class="month__diary__comment__item">
+                        <p>
+                            {{ ai_comment }}
+                        </p>
+                    </div>
+                    <!-- ネコココメントの画像 -->
+                    <div class="content__today-diary__comment__img">
+                        <img class="graph__img--keyframe diary-detail-img--animation" src="{% static 'diary/assets/pink_iconneko.svg' %}" alt="カウンセラーネココの画像">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  var ctx = document.getElementById('lineChart').getContext('2d');
+  var chartData = {{ data|safe }};
+  
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: chartData.date ,
+          datasets: [
+              {
+                  label: '好調',
+                  data: chartData.positive,
+                  backgroundColor: 'rgba(97, 255, 0, 0.2)', // 前 rgba(0, 255, 0, 0.2)
+                  borderColor: 'rgba(0, 255, 26, 1)', // 前 rgba(0, 255, 0, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '不調',
+                  data: chartData.negative,
+                  backgroundColor: 'rgba(77, 202, 255, 0.2)', // 前 rgba(75, 150, 200, 0.2)
+                  borderColor: 'rgba(74, 201, 255, 1)', // 前 rgba(75, 150, 200, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '普通',
+                  data: chartData.neutral,
+                  backgroundColor: 'rgba(255, 255, 0, 0.2)', // 前 rgba(255, 255, 0, 0.2)
+                  borderColor: 'rgba(255, 246, 0, 1)', // 前 rgba(255, 255, 0, 1)
+                  borderWidth: 1,
+              },
+              {
+                  label: '複雑',
+                  data: chartData.mixed,
+                  backgroundColor: 'rgba(170, 170, 170, 0.2)', // 前 rgba(128, 128, 128, 0.2)
+                  borderColor: 'rgba(160, 160, 160, 1)', // 前 rgba(128, 128, 128, 1)
+                  borderWidth: 1,
+              }
+          ]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var chartData = {{ data|safe }};
+
+  // 平均を計算する関数
+  function calculateAverage(dataArray) {
+    if (dataArray.length === 0) {
+      return 0;
+    }
+    var sum = dataArray.reduce((total, value) => total + value, 0);
+    return Math.floor(sum / dataArray.length);
+  }
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [''], // ラベルを設定
+        datasets: [
+            {
+                label: '好調',
+                data: [calculateAverage(chartData.positive)],
+                backgroundColor: 'rgba(97, 255, 0, 0.2)', // rgba(0, 255, 0, 0.2)
+                borderColor: 'rgba(0, 255, 26, 1)', // rgba(0, 255, 0, 1)
+                borderWidth: 1,
+              },
+            {
+                label: '不調',
+                data: [calculateAverage(chartData.negative)],
+                backgroundColor: 'rgba(77, 202, 255, 0.2)', // rgba(75, 150, 200, 0.2)
+                borderColor: 'rgba(74, 201, 255, 1)',   // rgba(75, 150, 200, 1)
+                borderWidth: 1,
+            },
+            {
+                label: '普通',
+                data: [calculateAverage(chartData.neutral)],
+                backgroundColor: 'rgba(255, 255, 0, 0.2)',
+                borderColor: 'rgba(255, 246, 0, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: '複雑',
+                data: [calculateAverage(chartData.mixed)],
+                backgroundColor: 'rgba(170, 170, 170, 0.2)',
+                borderColor: 'rgba(160, 160, 160, 1)',
+                borderWidth: 1,
+            }
+        ]
+    },
+    options: {
+        indexAxis: 'y', 
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        },
+//        elements: {
+//            bar: {
+//                borderRadius: 10 // ゼロのスタート地点も丸くする設定
+//            }
+//        }
+    }
+  });
+
+  document.getElementById('form-loading').addEventListener('submit', function (event) {
+    // ボタンがクリックされたらローディング画面を表示
+    document.getElementById('loading').style.display = 'block';
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,146 @@
+label {
+    font-size: 1.4rem;
+}
+
+.header__back__img  a{
+    margin-left: 24px;
+    display: flex;
+    width: 96px;
+    height: 48px;
+    // padding: 18px 28px 10px 28px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid #FFF;
+    background:#00ABB6;
+
+    color: #FFF;
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.56px;
+
+    &:hover {
+        background-color: #008999;
+    }
+
+    img {
+        margin-right: 8px;
+        margin-top: 2px;
+    }
+        logo-img {
+        margin-left: 170px;  // 中央揃え
+    }
+}    
+
+.btn--blue {
+    margin-top: 40px;
+    margin-left: 24px;
+}
+
+.signup-text {
+    color: #333;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.12px;
+    text-align: center; // テキストを中央揃えにする
+}
+
+.login-text {
+    text-align: center; // テキストを中央揃えにする
+    color: #333;
+    text-align: center;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 23.8px */
+    letter-spacing: 0.56px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.user-infomation__span{
+    margin-left: 24px;
+    font-size: 1.4rem;
+    color: red;
+    font-weight: 500;
+}
+
+// 登録ステップ
+.progressbar {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.progressbar li {
+    position: relative;
+    list-style-type: none;
+    text-align: center;
+    text-transform: uppercase;
+    width: 33.333%;
+    color: #999999;
+    font-weight: bold;
+    counter-increment: steps;
+}
+.progressbar li:before {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 7px auto;
+    content: '';
+    line-height: 26px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #ccc;
+    content: counter(steps);
+}
+.progressbar li:after {
+    position: absolute;
+    z-index: 1;
+    top: 19px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: #ccc;
+}
+.progressbar li:first-child:after {
+    content: none;
+}
+.progressbar li.active,
+.progressbar li.complete{
+    color: #04CAD6;
+}
+.progressbar li.active:before,
+.progressbar li.complete:before {
+    background-color: #04CAD6;
+    color: #FFF;
+}
+.progressbar li.active:after,
+.progressbar li.complete:after {
+    background-color: #04CAD6;
+}
+
+@media only screen and (min-height: 600px){
+    // 登録ステップ
+    .progressbar {
+        padding-top: 0;
+    }
+}
+
+/* 装飾 */
+// ul{
+//   margin: 40px 0 !important;
+// }

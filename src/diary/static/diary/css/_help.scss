@@ -1,0 +1,161 @@
+.help__group{
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+        display: inline-block;
+        // 子要素を直接中央揃えにする
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 4rem auto 2.4rem auto;
+        border-bottom:solid;
+        border-color:rgba(4, 202, 214, 0.40);
+        border-width:7px;/*太さ*/
+        letter-spacing: 0.04em; // remより広めの文字間隔を設定
+    }
+
+    .help__help__list_text-wrap{
+        margin: 0 auto;
+        padding: 0 2.4rem 0 4rem;
+        font-size: 1.6rem;
+    
+        .help__list_text{
+            margin-bottom: 1.6rem;
+
+            p{
+                margin: 0;
+                text-align: justify;
+                .help__btn--blue{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 5rem;
+                    background: #00ABB6;
+                    color: #FFF;
+                    font-size: 1.4rem;
+                }
+                .help__btn--white{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 5rem;
+                    background: #FFF;
+                    color: #00ABB6;
+                    font-size: 1.4rem;
+                }
+                .help__tab-btn--white{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 0.5rem;
+                    background: #FFF;
+                    color: #00ABB6;
+                    font-size: 1.4rem;
+                }
+                .help__tab-btn{
+                    border:#00ABB6 1px solid;
+                    padding: 0 1rem;
+                    margin: 0 0.5rem;
+                    border-radius: 0.5rem;
+                    background: #00ABB6;
+                    color: #FFF;
+                    font-size: 1.4rem;
+                }
+                #left--4, #left--3, #left--2, #left--1{
+                    margin-left: 0;
+                }
+            }
+
+            .help__chart{
+                margin-top: 1.6rem;
+                text-align: center;
+                margin-left: -1.6rem;
+            }
+
+            .help__list_text-red{
+                color: red;
+            }
+
+            .help__chart--last{
+                margin-top: 1.6rem;
+                text-align: center;
+                margin-left: -1.6rem;
+                margin-bottom: 4rem;
+            }
+        }
+    }
+}
+
+
+.content__help__group{
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+        display: inline-block;
+        // 子要素を直接中央揃えにする
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 4rem auto 2.4rem auto;
+        border-bottom:solid;
+        border-color:rgba(4, 202, 214, 0.40);
+        border-width:7px;/*太さ*/
+    }
+}
+
+.list_test-wrap{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    // リストアイテムに番号を表示させる
+    .list_test {
+        font-size:  1.4rem;
+        margin-bottom: 1.6rem;
+
+        counter-increment: my-counter; // カウンターをインクリメント
+        display: flex; // Flexboxを使用して横に揃える
+        margin-left: 2.4rem;
+
+        &::before {
+            content: counter(my-counter); // カウンターの値を表示
+            display: inline-block;
+            // width: 1.5em; // 適切な幅に調整
+            // text-align: right; // 右寄せ
+            margin-right: 1em; // 番号とテキストの間隔
+            margin-top: 0.15rem;
+        }
+
+        .help_diary{
+            margin: 0;
+            line-height: 170%;
+            letter-spacing: 0.04rem;
+        }
+
+        .help_diary_img{
+            margin: 0 0.3rem;
+        }
+        .list_test--icon{
+            margin: 0 1rem 1.5rem 0;
+        }
+    }
+
+    .content__help__list__chart, .content__help__list__chart--last{
+        img{
+            display: block;
+            margin: 0 auto;
+            // margin-left: -40px;
+            margin-bottom: 1.6rem;
+        }
+    }
+
+    .content__help__list__chart--last{
+        margin-bottom: 4rem;
+    }
+}
+
+.img-dango {
+    // position: relative;
+    margin-top: 340px;
+    margin-left: 24px;
+}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}メールアドレス管理{% endblock %}
+
+{% comment %} {% block header %}
+<header>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>会員情報変更</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+<section>
+    <main id="ground__login" class="ground ground--blue">
+
+<div class="wrapperHeader">
+    <div class="header__back__img">
+    <a href="{% url 'diary:member_information' %}"><img src="{% static 'user/assets/back_arrow.svg' %}"><span>戻る</span></a>
+    </div>
+    <img src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="logo-img">
+</div>
+
+<article>
+    <div class="title-text">
+        <p>会員情報変更</p>
+    </div>
+
+    <p class="change-text">メールアドレス</p>
+{% if user.emailaddress_set.all %}
+
+  <p class="if__change-text">次のメールアドレスはあなたのアカウントに<br>関連付けられています</p>
+
+<form action="{% url 'account_email' %}" class="email_list" method="post">
+{% csrf_token %}
+<fieldset class="blockLabels">
+
+  {% for emailaddress in user.emailaddress_set.all %}
+<div class="ctrlHolder">
+      <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
+
+      <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+
+{{ emailaddress.email }}
+    {% if emailaddress.verified %}
+    <br><span id="ctrlHolder__verified" class="verified">{% trans "Verified" %}</span>
+    {% else %}
+    <span class="unverified">{% trans "Unverified" %}</span>
+    {% endif %}
+      {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+</label>
+</div>
+  {% endfor %}
+
+<div class="buttonHolder">
+      <button class="secondaryAction" type="submit" name="action_primary" >メインにする</button>
+      <button class="secondAction" type="submit" name="action_send" >確認メールを再送する</button>
+      <button id="buttonHolder__remove-btn" class="primaryAction" type="submit" name="action_remove" >削除</button>
+</div>
+
+</fieldset>
+</form>
+
+{% else %}
+<p><strong>注意</strong>現在、Eメールアドレスが設定されていません。通知を受け取ったり、パスワードをリセットしたりするためには、本当にEメールアドレスを追加するべきです</p>
+
+{% endif %}
+
+
+    <p class="email-add-text">メールアドレスの追加</p>
+
+    <form method="post" action="{% url 'account_email' %}" class="add_email">
+        {% csrf_token %}
+        <div class="form-email">
+          {{ form.email.errors }}
+          <label for="id_email">メールアドレス</label>
+          <input type="email" name="email" placeholder="メールアドレスの追加" required="" id="id_email">        </div>
+        <div id="login__btn--blue" class="btn btn--blue">
+          <button name="action_add" type="submit">追加</button>
+        </div>
+    </form>
+    
+</article>
+</main>
+</section>
+{% endblock %}
+
+
+{% block extra_body %}
+<script type="text/javascript">
+(function() {
+  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+  var actions = document.getElementsByName('action_remove');
+  if (actions.length) {
+    actions[0].addEventListener("click", function(e) {
+      if (! confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  }
+})();
+</script>
+{% endblock %} 

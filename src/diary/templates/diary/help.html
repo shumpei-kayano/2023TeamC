@@ -1,0 +1,78 @@
+<!--ヘルプ一覧画面-->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}ヘルプ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/setting_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__button">
+        <div class="header__back__img">
+            {% comment %} help.htmlに遷移させてください {% endcomment %}
+            <a href="{% url 'diary:setting' %}">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.292893 8.70711C-0.097631 8.31658 -0.097631 7.68342 0.292893 7.29289L6.65685 0.928932C7.04738 0.538408 7.68054 0.538408 8.07107 0.928932C8.46159 1.31946 8.46159 1.95262 8.07107 2.34315L2.41421 8L8.07107 13.6569C8.46159 14.0474 8.46159 14.6805 8.07107 15.0711C7.68054 15.4616 7.04738 15.4616 6.65685 15.0711L0.292893 8.70711ZM2 9L1 9L1 7L2 7L2 9Z" fill="white"/>
+                </svg>
+                戻る</a>
+        </div>
+    </div>
+    <h1>ヘルプ</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<article class="move">
+<div class="content content--white">
+
+<main class="ground ground--white">
+    <div class="scroll--content">
+        <div class="help__menu">
+            <ul>
+                <li class="list_item"><a href="{% url 'diary:help_diary'%}">日記作成<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_diary_edit'%}">日記の編集・削除<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_calender'%}">月間・週間カレンダー<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+                <li class="list_item"><a href="{% url 'diary:help_graph'%}">統計グラフ<img src="{% static 'diary/assets/arrow.svg' %}"></a></li>
+            </ul>
+
+            <div class="setting__menu__img">
+                <img class="setting-help__menu__img-item--left" data-delay="2" img src="{% static 'diary/assets/setting_img_left.svg' %}">
+                <img class="setting-help__menu__img-item--center" data-delay="8" img src="{% static 'diary/assets/setting_img_center.svg' %}">
+                <img class="setting-help__menu__img-item--right" data-delay="0" img src="{% static 'diary/assets/setting_img_right.svg' %}">
+            </div>
+        </div>
+    </div>
+</main>
+
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
+
+<script>
+    // アニメーションの遅延時間を設定
+    const elements1 = document.querySelectorAll('.setting-help__menu__img-item--left');
+    const elements2 = document.querySelectorAll('.setting-help__menu__img-item--center');
+    const elements3 = document.querySelectorAll('.setting-help__menu__img-item--right');
+    elements1.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
+    });
+    elements2.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
+    });
+    elements3.forEach((element) => {
+        const delay = element.getAttribute('data-delay');
+        element.style.animationDelay = `${delay}s`;
+    });
+</script>
+{% endblock %}

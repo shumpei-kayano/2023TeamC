@@ -1,0 +1,119 @@
+<!-- ログイン後トップ画面（ホーム）のち日記詳細画面 -->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}ホームトップ{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div><!-- 追加 -->
+    <h1 class="date">--/--(-)</h1>
+    <div class="header__weather">
+        <img class="weatherImg">
+        <span class="tempMax">-℃</span>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- フェードイン -->
+<article id="Article__home" class="move">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+<div class="content content--blue">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--blue">
+    <div class="content-center">
+        <div class="content__home">
+            <div class="content__home__logo">
+                <img src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            </div>
+            <div class="content__home__text">
+                <div class="content__home__text__scroll">
+                    {% comment %} <p class="content__home__text__anime">{{shortstory}}</p> {% endcomment %}
+                                                                                            <!-- JavaScript内で使用するためにエスケープしてshortstory変数に適用 -->
+                    <p class="content__home__text__anime" id="animatedText" data-shortstory="{{ shortstory|escapejs }}"></p>
+                </div>
+            </div>
+            <div class="content__home__img">
+                <!-- ネコを押したらしゃべる -->
+                <!-- yomiageが１だったら保存した音声 -->
+                {% if yomiage == 1 %}
+                <button id="playButton"  data-value="{% static 'diary/voice/yomiage.wav' %}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                <!-- それ以外だったらしゃべる -->
+                {% else %}
+                <button id="playButton"  data-value="{% static 'diary/voice/' %}{{ yomiage }}" style="border: none; background-color: transparent; padding: 0; margin: 0;">
+                    {% endif %}
+                <img class="keyframe0 home-img_animation" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+                </button>
+            </div>
+        </div>
+        <div class="btn--large">
+            {% comment %} create_diary.htmlに遷移させてください {% endcomment %}
+            <button type="button" onclick="location.href='{% url 'diary:create_diary' %}'">日記を書く</button>
+        </div>
+
+    </div>
+</main>
+
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<!-- フェードイン -->
+<script src="{% static 'diary/js/fade-in.js' %}"></script>
+<script>
+        // テキストが表示される要素の取得
+        let animatedText = document.getElementById("animatedText");
+        // Djangoから取得した文章をJavaScript変数に取得
+        let shortstory = animatedText.getAttribute("data-shortstory");
+        // 文字を一文字ずつ表示する関数
+        function animateText(text, index) {
+            // 改行文字があれば、次の行に移動する
+            if (text[index] === "\n") {
+                animatedText.innerHTML += "<br>";
+                index++;
+            }
+            // テキストを一文字ずつ表示
+            animatedText.innerHTML += text[index];
+          // 最後の文字でなければ、次の文字を表示するために再帰呼び出し
+            if (index < text.length - 1) {
+                setTimeout(function() {
+                animateText(text, index + 1);
+                }, 50); // 50ミリ秒ごとに表示（調整可能）
+            }
+        }
+        // ページ読み込み後にアニメーションを開始
+        window.onload = function() {
+            animateText(shortstory, 0);
+        };
+
+        // ネコを押したらしゃべる
+        document.getElementById("playButton").addEventListener("click", function() {
+            // ボタンを無効化する
+            document.getElementById("playButton").disabled = true;
+            var value = document.getElementById("playButton").getAttribute("data-value");
+            var music = new Audio(value);
+    
+            // 音声再生終了時のイベントを追加
+            music.addEventListener('ended', function() {
+                // ボタンを有効化する
+                document.getElementById("playButton").disabled = false;
+            });
+    
+            music.play();
+        });
+</script>
+{% endblock %}

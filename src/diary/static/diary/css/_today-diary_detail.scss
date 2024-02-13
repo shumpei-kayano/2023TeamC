@@ -1,0 +1,449 @@
+// 戻るボタン
+#calendar__back-btn{
+    margin-right: 8px !important;
+}
+
+.content__today-diary__text{
+    width: 100%;
+    background-color: $background_color;
+    padding: 16px 24px 1px 24px;
+    margin-bottom: 24px;
+    border-top: 1px solid rgba(4, 202, 214, 0.15);
+    box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
+    //outline: 0; // フォーカス時の枠線を削除
+
+    .delete-edit__btn{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+
+        // 編集・削除ボタン 文字のみ下線する場合のスタイル
+        // .icon__delete-btn,.icon__edit-btn{
+        //     cursor: pointer;
+        //     color: $a_blue_button;
+        //     font-size: 1.6rem;
+        //     font-weight: 700;
+        //     letter-spacing: 0.04rem;
+        //     .delete__icon, .edit__icon {
+        //         margin-right: 5px;
+        //         fill: $header_color;
+        //     }
+        // }
+        // .icon__delete-btn:hover,.icon__edit-btn:hover {
+        //     text-decoration: underline; // ホバー時に下線を表示
+        //     color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
+        //     // // text-decoration: none;
+        //     // background-repeat: no-repeat;
+        //     // background-size: 99% 4px; // 横幅100%、縦幅4pxの線を引く
+        //     // background-position: 0 calc(100% + 3px); // 下側に3pxの余白を設ける
+        //     .delete__icon, .edit__icon{
+        //         fill: $a_blue_button_hover;
+        //     }
+        // }
+    }
+  
+    p{
+        text-align: justify;
+        margin: 0;
+        margin-bottom: 24px;
+    }
+    .content__today-diary__img{
+        display: flex;
+        flex-wrap: wrap; // 子要素を折り返し、複数行に上から下へ並べる
+        justify-content: flex-start; // 子要素を左から配置
+        align-items: flex-start; // 親要素の開始位置から配置。上揃え
+        align-content: flex-start; // 複数行にした時、上揃え
+
+        .content__today-diary__item{
+            // 最大幅を余白に応じて可変させる
+            // max-width: calc(100% - 20px); /* 画像間の余白を調整 */
+            // height: calc(100% - 20px); /* 任意の高さを設定 */
+            // max-width: calc(100% / 4.2);
+            //margin-right: 10px; /* 画像間の余白を調整 */
+
+            position: relative;
+            width: 24%;
+            padding-top: 18.5%;
+            margin-right: 1%; /* 画像間の余白を調整 */
+            margin-bottom: 15px;
+            // width: 24%;
+            // height: 24%;
+            // object-fit: cover;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+        }
+    }
+}
+
+.button {
+    &--js-modal-button{
+        // 日記に保存された画像のボタンのスタイルをリセット
+        padding: 0;
+        border: none;
+        outline: none;
+        font: inherit;
+        color: inherit;
+        background: none;
+        display: inline-block;
+        cursor: pointer; // カーソルをポインターに変更
+    }
+    // 日記に保存された画像のスタイル
+    img, video {
+        // 親要素がmax-width: calc(100% / 4.2);なので、画像のサイズを100%にする
+        // width: 100%;
+        // height: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        &:hover{
+            filter: brightness(50%); // 明るさを50%に減少
+        }
+    }
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.created-date{
+    letter-spacing: 0.04em;
+}
+
+// カウンセリングネココの吹き出し
+.content__diary__comment--counseling {
+    position: relative; // 追加
+    display: flex;
+    flex-direction: column; // 子要素を縦に並べる
+    align-items: flex-start;
+    max-height: 260px;
+    margin: 0 24px 24px 24px;
+    padding: 20px; // テキストと吹き出しの間に余白を追加
+    background-color: $background_color; // 吹き出しの背景色を白に変更
+    border: 2px solid #FFD4E0; // 枠線を追加    
+    border-radius: 10px; // 吹き出しの角を丸くする
+
+    p{
+        text-align: justify;
+        margin: 0;
+        line-height: 170%;
+        letter-spacing: 0.04rem;
+    }
+    
+    // 吹き出しの尾部分の枠線を作成
+    &::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 20px; // 尾部分を大きくする
+        border-style: solid;
+        border-color: #FFD4E0 transparent transparent transparent;
+    }
+    
+    // 吹き出しの尾部分の中を作成
+    &::after {
+        content: "";
+        position: absolute;
+        // 100%から変更
+        top: 99%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 18px; // ::beforeより2px小さくする
+        border-style: solid;
+        border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
+    }
+}
+
+.content__diary__ccomment--counseling__p{
+    height: 210px;
+    overflow-y: scroll; // 縦スクロールバーを表示
+}
+.content__diary__ccomment--counseling__p::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+}
+.content__diary__ccomment--counseling__p::-webkit-scrollbar-thumb {
+    background-color: #FFD4E0;
+    border-radius: 10px;
+}
+.content__diary__ccomment--counseling__p::-webkit-scrollbar-thumb:hover {
+    background-color: #FFD4E0;
+}
+
+// 通常の吹き出し
+.content__diary__comment {
+    position: relative; // 追加
+    // fill: $background_color;
+    // stroke-width: 2px; // 枠線の太さを2pxに変更
+    // stroke: $header_color; // 枠線の色を変更
+    display: flex;
+    flex-direction: column; // 子要素を縦に並べる
+    align-items: flex-start;
+    // gap: 10px; // 子要素の間隔を10pxに設定
+    // width: 100%;
+    max-height: 260px;
+    margin: 0 24px 24px 24px;
+    padding: 20px; // テキストと吹き出しの間に余白を追加
+    background-color: $background_color; // 吹き出しの背景色を白に変更
+    border: 2px solid $header_color; // 枠線を追加    
+    border-radius: 10px; // 吹き出しの角を丸くする
+
+    p{
+        text-align: justify;
+        margin: 0;
+        line-height: 170%;
+        letter-spacing: 0.04rem;
+    }
+    
+    // 吹き出しの尾部分の枠線を作成
+    &::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 20px; // 尾部分を大きくする
+        border-style: solid;
+        border-color: #04CAD6 transparent transparent transparent;
+    }
+    
+    // 吹き出しの尾部分の中を作成
+    &::after {
+        content: "";
+        position: absolute;
+        // 100%から変更
+        top: 99%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 18px; // ::beforeより2px小さくする
+        border-style: solid;
+        border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
+    }
+}
+
+.content__diary__ccomment__p{
+    height: 210px;
+    overflow-y: scroll; // 縦スクロールバーを表示
+}
+.content__diary__ccomment__p::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+}
+.content__diary__ccomment__p::-webkit-scrollbar-thumb {
+    background-color: #53D3DB;
+    border-radius: 10px;
+}
+.content__diary__ccomment__p::-webkit-scrollbar-thumb:hover {
+    background-color: #00ABB6;
+}
+
+.content__diary__comment__img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+// モーダルウィンドウ
+/* グレー背景 */
+.layer {
+    background: rgba(0, 0, 0, 0.701);
+    width: 390px;
+    height: 100%;
+    position: fixed;
+    top: 0;  // 上部に配置
+    left: 50%;  // 水平方向に中央に配置
+    transform: translateX(-50%);  // 水平方向に中央に配置
+    // 画面初期表示時 モーダル非表示
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden; // 要素を不可視にする
+    transition: opacity 0.3s linear, visibility 0.3s linear, z-index 0.3s linear; // アニメーション効果を設定
+}
+
+// モーダルボタンをクリックしたら、layer要素にクラスを付与
+.layer.is-open {
+    z-index: 999;
+    opacity: 1;
+    visibility: visible;
+
+    overflow-y: scroll;
+}
+.layer.is-open .modal{
+    opacity: 1;
+    visibility: visible;
+}
+// スクロールバー背景色
+.layer::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.layer::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+.layer::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
+}
+
+// モーダル閉じるボタン（右上に配置する場合のスタイル）
+// .modal__button-wrap {
+//     position: absolute;
+//     right: 10px;
+//     top: -28px;
+//     display: inline-flex;
+// }
+// .close-button {
+//     position: relative;
+//     width: 39px;
+//     height: 39px;
+//     background: orange;
+//     border-radius: 50%;
+//     padding: 0;
+//     border: transparent;
+//     cursor: pointer;
+// }
+
+/* モーダルコンテンツ */
+.modal {
+    position: relative;
+    max-width: 390px;
+        // height: auto;
+    height: 100%;
+    // display: inline-block;
+    // vertical-align: middle; // 要素を縦方向の中央に配置
+    // 画面初期表示時 モーダル非表示
+    opacity: 0;
+    visibility: hidden;
+    transition:  visibility .3s linear, opacity .3s linear;
+    // 中央揃え
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+// モーダルウィンドウの中身 画像に背景色を付与する場合のスタイル
+.modal__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+//     margin-top: 125px;
+//     margin-bottom: 125px;
+//     position: relative;
+//     margin-left: auto;
+//     margin-right: auto;
+//     background: #fff;
+//     box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+//     border-radius: 13px;
+//     display: block;
+//     padding: 21px 8px 21px;
+//     height: auto;
+}
+
+.modal__content {
+    .modal__content__img{
+        width: 100%;
+        height: auto;
+        // max-height: 405px;
+    }
+}
+
+// .modal__button-area {
+//     // max-width: 843px;
+//     margin-right: auto;
+//     margin-left: auto;
+//     margin-top: 17px;
+//     padding-top: 15px;
+// }
+
+.modal__button-wrap {
+    margin-top: 24px;
+    width: 342px;
+    height: 48px;
+    // 中央揃え
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+
+   .close-button{
+        @include button-style;
+        
+        background: var(--custom-color, #FFF);
+        color:#00ABB6;
+        font-size: 1.6rem;
+        border: 1px solid #00ABB6;
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
+        }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+// モーダルウィンドウ
+    /* グレー背景 */
+    .layer {
+        width: 100%;
+    }
+
+    /* モーダルコンテンツ */
+    .modal {
+        // max-width: 390px;
+        width: 100%;
+    }
+
+    .modal__contents {
+        .modal__content__img{
+            width: 100%;
+            // max-width: 390px;
+            // max-height: 405px;
+        }
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    // モーダルウィンドウ
+    /* グレー背景 */
+    .layer {
+        width: 100% !important;
+    }
+
+    /* モーダルコンテンツ */
+    .modal {
+        width: 100% !important;
+    }
+
+    .modal__content {
+        .modal__content__img{
+            // margin-top: 150px !important;
+            width: 100% !important;
+            // max-height: 526px !important;
+        }
+    }
+
+    .modal__button-wrap {
+        margin-top: 30px !important;
+    }
+}

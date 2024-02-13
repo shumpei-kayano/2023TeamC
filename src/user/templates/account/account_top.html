@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ホーム{% endblock title %}
+
+
+{% block content %}
+{% comment %} 新規登録orログイン {% endcomment %}
+<article>
+    <div class="article__content">
+
+    <main class="ground ground--blue">
+        <div class="container__center">
+            <div class="logo__img">
+                <img class="img-icon" img src="{% static 'user/assets/fugoo.svg' %}" alt="logo">
+            </div>
+
+            <div class="btn--large">
+                <a href="{% url 'user:tutorial1' %}">ここからスタートです</a>
+            </div>
+
+            <div class="login__text">
+                <p>登録済みの方はこちらへ</p>
+            </div>
+
+            <div id="account_top__btn--white" class="btn--white">
+                <a href="{% url 'account_login' %}">ログイン</a>
+            </div>
+        </div>
+</main>
+
+    </div>
+</article>
+{% endblock content %}
+
+{% block js %}
+<script>
+    // フェードイン
+    (function ($) {
+        'use strict';
+        $(window).on('load',function(){
+            $('article').addClass('appear');
+        });
+    })(jQuery);
+</script>
+{% endblock js %}

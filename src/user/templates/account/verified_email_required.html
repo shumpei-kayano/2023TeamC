@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block head_title %}メールアドレスの確認{% endblock %}
+
+{% block content %}
+<h1>貴方のメールアドレスの確認をしてください</h1>
+
+{% url 'account_email' as email_url %}
+
+<p>確認のメールを送信しました。</p>
+
+<p>メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。
+  数分経っても確認のメールが届かない場合はご連絡ください</p>
+
+<p><strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.</p>
+
+
+{% endblock %}

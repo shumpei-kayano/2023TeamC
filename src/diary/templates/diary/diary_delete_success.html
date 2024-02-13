@@ -1,0 +1,42 @@
+<!-- 日記削除実行画面 -->
+{% extends "base_diary.html" %}
+
+{% load static %}
+
+{% block title %}日記削除{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/home-page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>日記削除</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<section>
+<div class="content__back-color content__back-color--blue">
+
+<main class="ground ground--blue"><!-- 追加した要素 -->
+    <div class="content-center">
+
+        <p class="delete__success__title">日記を削除しました</p>
+
+        <!-- ネココの画像 -->
+        <img class="delete__success__img" src="{% static 'diary/assets/delete_sussess_neko.svg' %}" alt="ネココの画像">
+
+        <div class="btn--large">
+            <button id="save-button" type="button" onclick="location.href='{% url 'diary:home_top1' %}'">ホームトップへ</button>
+        </div>
+
+    </div>
+</main>
+
+</div>
+</section>
+{% endblock %}

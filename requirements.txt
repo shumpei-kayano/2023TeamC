@@ -7,3 +7,12 @@ django-allauth
 django-extensions
 django-cleanup
 django-sass-processor
+geocoder
+openai==0.28
+awscli
+boto3
+faker
+django_seed
+django-axes
+psycopg2
+python-dotenv

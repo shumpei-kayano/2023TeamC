@@ -1,0 +1,450 @@
+@mixin button-style {
+    width: 100%; /* ボタンを親要素と同じ幅に広げる */
+    height: 100%; /* ボタンを親要素と同じ高さに広げる */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 32px; /* パディングをここに移動 */
+    border: none; /* ボタンのデフォルトのボーダーを削除 */
+    background: transparent; /* 背景を透明にする */
+    cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+    border-radius: 50px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em; // remより広めの文字間隔を設定
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    font-weight: 700;
+    // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    text-align: center; /* 中央寄せを追加 */
+    cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+
+    &--blue {
+        width: 342px;
+        height: 48px;
+        margin-top: 24px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+        font-weight: 700;
+
+        button {
+            @include button-style;
+            
+            background: var(--custom-color, #00ABB6);
+            color: #FFF;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+
+            &:hover {
+                background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    &--large {
+        width: 342px;
+        height: 56px;
+        cursor: pointer;
+
+        button, a{
+            @include button-style;
+            
+            background: var(--custom-color, #00ABB6);
+            color: #FFF;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+
+            &:hover {
+                background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    &--white {
+        width: 342px;
+        height: 48px;
+        margin-left: auto;
+        margin-right: auto;
+        // margin-bottom: 40px;
+        cursor: pointer;
+        
+        button, a{
+            @include button-style;
+            
+            background: var(--custom-color, #FFF);
+            color:#00ABB6;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+            border: 1px solid #00ABB6;
+            // box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+            &:hover {
+                background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    &--red {
+        width: 342px;
+        height: 48px;
+        cursor: pointer;
+
+        button, a{
+            @include button-style;
+            
+            background: #FF4747;
+            color: #FFF;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+
+            &:hover {
+                background-color: $red_btn_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    
+    &--blue--info {
+        width: 342px;
+        height: 48px;
+        cursor: pointer;
+
+        button {
+            @include button-style;
+            
+            background: var(--custom-color, #00ABB6);
+            color: #FFF;
+            font-size: 1.6rem;
+
+            &:hover {
+                background-color: $btn_large_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+}
+
+.content__home__text {
+    position: relative; // 追加
+    fill: $background_color;
+    stroke-width: 2px;
+    stroke: $header_color;
+    width: 340px;
+    height: 90px;
+    // max-height: ;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px; // テキストと吹き出しの間に余白を追加
+    background-color: $background_color; // 吹き出しの背景色を白に変更
+    border: 2px solid $header_color; // 枠線を追加    
+    border-radius: 10px; // 吹き出しの角を丸くする
+
+  // 吹き出しの中のpタグにスタイルを適用
+    p {
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.8px;
+        // 追加
+        margin: 0; /* 余白をリセット */
+    }
+    
+    // 吹き出しの尾部分の枠線を作成
+    &::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 20px; // 尾部分を大きくする
+        border-style: solid;
+        border-color: #04CAD6 transparent transparent transparent;
+    }
+    
+    // 吹き出しの尾部分の中を作成
+    &::after {
+        content: "";
+        position: absolute;
+        // 100%から変更
+        top: 99%;
+        left: 50%; // 中央に設置
+        transform: translateX(-50%); // 中央揃えの調整        
+        border-width: 18px; // ::beforeより2px小さくする
+        border-style: solid;
+        border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
+    }
+}
+// スクロールバーつけたいとき
+.content__home__text__scroll{
+    height: 56px;
+    overflow-y: scroll; // 縦スクロールバーを表示
+}
+.content__home__text__scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+}
+.content__home__text__scroll::-webkit-scrollbar-thumb {
+    background-color: #53D3DB;
+    border-radius: 10px;
+}
+.content__home__text__scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #00ABB6;
+}
+
+.setting__menu ul{
+    list-style: none; /* リストアイテムのマーカーを非表示にする */
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+    padding: 0px;
+    background-color: $background_color; // 背景色を設定
+    cursor: pointer;
+
+    a {
+        display: flex;
+        // width: 342px;
+        height: 60px;
+        padding: 0 0.5rem 0 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        border-bottom: 1px solid #A29C9C;
+        background: #FFF;
+        color: #000;
+        font-size: 1.6rem;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+        cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+
+            img {
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
+            
+        }
+    }
+}
+.setting__menu ul li a:hover {
+    background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
+}
+
+.help__menu ul{
+    list-style: none; /* リストアイテムのマーカーを非表示にする */
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+    padding: 0px;
+    background-color: $background_color; // 背景色を設定
+    cursor: pointer;
+
+    a {
+        display: flex;
+        // width: 342px;
+        height: 60px;
+        padding: 0 0.5rem 0 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        border-bottom: 1px solid #A29C9C;
+        background: #FFF;
+        color: #000;
+        font-size: 1.6rem;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+        cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
+
+            img {
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
+            
+        }
+    }
+}
+
+.help__menu ul li a:hover {
+    background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
+}
+
+.a--blue {
+    display: flex;
+    width: 72px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    .a--blue-__p {
+        color: $a_blue_button;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: 0.64px;
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    .a--blue--svg {
+        fill: $a_blue_button;
+        vertical-align: middle;
+        margin-bottom: 5px;  // SVG要素の下側マージンを4pxに設定
+    }
+
+    &:hover {
+        .a--blue-__p{
+            color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
+        }
+        text-decoration: none;
+        background-image: linear-gradient($a_blue_button_hover, $a_blue_button_hover);
+        background-repeat: no-repeat;
+        background-size: 90% 4px;
+        background-position: 0 calc(100% + 3px);  
+        .a--blue--svg {
+            fill: $a_blue_button_hover;
+        }
+    }
+}
+
+.a--tab {
+    display: flex; // 追加
+    text-align: center; // 追加
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+
+    &--left,
+    &--right {
+        width: 174px;
+        height: 33px;
+
+        a {
+            @include button-style;
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.24px;
+            box-shadow: inset 0 0 0 2px $button_hover_color; // 内側に2pxの線を追加
+            background: $button_hover_color;
+
+            &:hover {
+                background-color: rgba(65, 60, 60, 0.078)/* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
+    &--left {
+        a {
+            cursor: pointer; // カーソルをポインターに設定
+            border-radius: 9.057px 0 0 9.057px; // 左側だけに角丸を設定
+            color: #00ABB6; // 左側のボタンのテキスト色を#00ABB6に設定
+            background-color: #FFF; // 左側のボタンの背景色を白に設定
+        }
+    }
+
+    &--right {
+        a {
+            cursor: pointer; // カーソルをポインターに設定
+            border-radius: 0 9.057px 9.057px 0; // 右側だけに角丸を設定
+            color: #00ABB6; // 右側のボタンのテキスト色を#00ABB6に設定
+            background-color: #FFF; // 右側のボタンの背景色を白に設定
+        }
+        &.active {
+            a {
+                background-color: #00ABB6; // active時の右側のボタンの背景色を#00ABB6に設定
+                color: #FFF; // active時の右側のボタンのテキスト色を白に設定
+            }
+        }
+    }
+}
+#a--tab--left--color, #a--tab--right--color{
+    color: #fff;
+    background-color: #00ABB6;
+}
+
+.next__button {
+    display: flex;
+}
+
+.next__button a {
+    display: flex;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $a_blue_button; /* 四角の枠線 */
+    text-decoration: none; /* リンクの下線を消す */
+    width: 44px; /* ボタンの幅 */
+    height: 44px; /* ボタンの高さ */
+    box-sizing: border-box; /* paddingとborderをwidthとheightに含める */
+    border-radius: 5px;
+    background-color: #FFF;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
+    }
+}
+
+.next__button a img {
+    display: block;
+    height: auto; /* 高さは自動 */
+}
+
+.user-infomation {
+    width: 342px;
+    // height: 273px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+
+    .user-label{
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+        .user-info {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 0;
+            padding: 16px;
+            border-bottom: 1px solid #333;
+    }
+}
+
+.back-home a {
+    color: #A29C9C;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    text-align: center;
+    cursor: pointer;
+}
+
+@media only screen and (min-height: 600px) {
+    .content__home__text {
+        height: 120px;
+        padding: 20px; // テキストと吹き出しの間に余白を追加
+    }
+    // スクロールバーつけたいとき
+    .content__home__text__scroll{
+        height: 75px;
+    }
+}

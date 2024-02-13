@@ -25,21 +25,37 @@ services:
     container_name: nginx_server
     ports:
       - "80:80"
+      - "443:443"  # SSL対応のために443ポートを追加
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - static_volume:/usr/share/nginx/html/static  # 追加
+      - ./src/diary/static/diary:/usr/share/nginx/html/static/diary  # 追加
+      - ./src/user/static/user:/usr/share/nginx/html/static/user #追加
+      - ./src/media:/usr/share/nginx/html/media
+      - ${VOLUME_PATH}:/etc/nginx/ssl/fullchain.pem #追記
+      - ${VOLUME_PATH2}:/etc/nginx/ssl/privkey.pem #追記
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.2.0
     container_name: phpmyadmin
     environment:
-      PMA_HOST: db
+      PMA_HOST: ${PMA_HOST}
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+      PMA_ARBITRARY: 1
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: root_password
     ports:
       - "8080:80"
     depends_on:
       - db
-
+  voicevox:
+    image: "voicevox/voicevox_engine:cpu-ubuntu20.04-latest"
+    container_name: voicevox
+    ports:
+      - "50021:50021"
+    volumes:
+      - ./voicevox:/root/voicevox
+    environment:
+      - VOICEVOX_API_PORT=50021
+      - VOICEVOX_API_HOST=localhost
 volumes:
   db_data:
   static_volume:  # 追加

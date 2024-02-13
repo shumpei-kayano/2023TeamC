@@ -1,0 +1,132 @@
+.btn--large{
+    margin: 15px auto 20px auto;
+}
+
+
+.content__home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+}
+
+.content__home__logo img, .content__home__img img{
+    max-width: 100px;
+    height: auto;
+    margin: 1rem auto 0 auto;
+}
+
+.content__home__img img{
+    max-width: 200px;
+}
+
+.content__home__logo{
+    margin-bottom: 1rem;
+}
+
+.content__home__text p{
+    font-size: 1.6rem;
+    margin: 0 auto;
+    text-align: justify; // テキストを両端寄せ
+}
+.content-center{
+    display: flex;
+    flex-direction: column;
+    height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
+    justify-content: center; // コンテンツを垂直方向に中央寄せ
+    align-items: center; // コンテンツを水平方向に中央寄せ
+}
+
+// アニメーション
+.home-img_animation{
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-duration: 1.5s; // 1回のアニメーションにかける時間
+}
+.keyframe0 {
+    animation-name: jump;
+    animation-duration: 1.5s;
+}
+
+@keyframes jump{
+    0%   { transform:translate(0%, 40px) rotateX(30deg); } // 0%の時の位置
+    100% { transform:translate(0%, 0%); }
+}
+
+@media only screen and (max-width: 960px) {
+    .content-center{
+        display: flex;
+        flex-direction: column;
+        height: 100%; // コンテンツが親要素（.ground）の高さを占めるようにする
+        justify-content: center; // コンテンツを垂直方向に中央寄せ
+        align-items: center; // コンテンツを水平方向に中央寄せ
+    }
+
+    .content__home__logo img, .content__home__img img{
+        // 画像を元のサイズに戻す
+        width: auto;
+        height: auto;
+        margin: 24px auto 0 auto;
+    }
+    
+    .content__home__logo{
+        margin-bottom: 24px;
+    }
+    
+    .content__home__text p{
+        font-size: 20px;
+        margin: 0 auto;
+        text-align: justify; // テキストを両端寄せ
+    }
+}
+
+@media only screen and (max-height: 599px) {
+    /* 画面の高さが600px未満の場合のスタイル */
+    .btn--large{
+        margin: 30px auto 20px auto;
+    }
+    
+    .content__home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // コンテンツを垂直方向に中央寄せ
+        align-items: center; // コンテンツを水平方向に中央寄せ
+    
+    }
+    
+    .content__home__logo img, .content__home__img img{
+        max-width: 100px;
+        height: auto;
+        margin: 10px auto 0 auto;
+    }
+    .content__home__img img{
+        max-width: 200px;
+    }
+    
+    .content__home__logo{
+        // margin-bottom: 10px;
+        margin-bottom: 0;
+    }
+    
+    .content__home__text p{
+        font-size: 16px;
+        margin: 0 auto;
+        text-align: justify; // テキストを両端寄せ
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    .btn--large{
+        margin: 40px auto 24px auto !important;
+    }
+    .keyframe0 {
+        animation-name: jump;
+        animation-duration: 1.5s;
+    }
+    
+    @keyframes jump{
+        0%   { transform:translate(0%, 60px) rotateX(50deg); } // 0%の時の位置
+        100% { transform:translate(0%, 0%); }
+    }
+}

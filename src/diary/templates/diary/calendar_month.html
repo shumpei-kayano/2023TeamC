@@ -1,0 +1,158 @@
+<!--カレンダー月-->
+{% extends "base_diary.html" %}
+
+{% load static%}
+
+{% block title %}月間カレンダー{% endblock %}
+
+{% block css %}
+<!-- ページ固有のCSSを読み込み -->
+<link rel="stylesheet" href="{% static 'diary/css/calendar-month_page.css' %}">
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="header__spacer--top"></div> <!-- 追加した要素 -->
+    <h1>月間カレンダー</h1>
+    <div class="header__spacer"></div> <!-- 追加した要素 -->
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- 背景色のフェードイン -->
+<article id="Article__month" class="move fade">
+    {% comment %} <div class="animation-bg">
+        <div class="animation-bg__flex-box">
+            <img class="animation-bg__logo" src="{% static 'diary/assets/logo.png' %}" alt="ロゴ">
+            <img class="animation-bg__img" src="{% static 'diary/assets/home_top_neko.png' %}" alt="ネコの画像">
+        </div>
+    </div> {% endcomment %}
+<div class="content content--white">
+
+<!-- メインコンテンツ -->
+<main class="ground ground--white">
+    {% comment %} <div class="scroll--content">
+        <div class="calendar--background calender-month-page"> {% endcomment %}
+            <!-- タブ -->
+            {% url 'diary:calendar_month' selected_date as calendar_month_url %}
+            {% url 'diary:month_graph' selected_date as month_graph_url %}
+            <div class="tab__button a--tab">
+                <div class="a--tab--left {% if request.path == calendar_month_url %}active{% endif %}">
+                    <a id="a--tab--left--color" href="{{ calendar_month_url }}">月間カレンダー</a>
+                </div>
+                <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
+                    <a id = "month_graph" href="{{ month_graph_url }}">月間グラフ</a>
+                    <div id="loading">
+                        <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
+                        <div class="loading-content">
+                            <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
+                            <p class="loading__text">読み込み中にゃ</P>
+                            <span class="dli-loading-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 月間カレンダーページネーション -->
+            <div class="calendar-week">
+                <div class="calendar-header">
+                    {% comment %} 月を動的に遡れるようにしてください {% endcomment %}
+                    <div class="next__button">
+                        <!-- 左ボタン -->
+                        <a href="{% url 'diary:calendar_month' prev_month %}">
+                            <img src="{% static 'diary/assets/left_arrow.svg' %}" alt="矢印のアイコン">
+                        </a>
+
+                        {% comment %} 月を動的に進められるようにしてください {% endcomment %}
+                        <a href="{% url 'diary:calendar_month' next_month %}">
+                            <img src="{% static 'diary/assets/right_arrow.svg' %}" alt="矢印のアイコン">
+                        </a>
+                    </div>
+                    {% comment %} 現在の月を表示させてください {% endcomment %}
+                    <p class="calendar-header__select-date">{{ selected_date|date:"Y年m月" }}</p>
+                    <div class="a--blue">
+                        <a href="{% url 'diary:calendar_month'%}">
+                            <svg class="a--blue--svg" id="mySvg" width="16" height="16" viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6775 2.35146C12.0475 0.721457 9.73749 -0.218543 7.19749 0.0414571C3.52749 0.411457 0.507487 3.39146 0.0974871 7.06146C-0.452513 11.9115 3.29749 16.0015 8.02749 16.0015C11.2175 16.0015 13.9575 14.1315 15.2375 11.4415C15.5575 10.7715 15.0775 10.0015 14.3375 10.0015C13.9675 10.0015 13.6175 10.2015 13.4575 10.5315C12.3275 12.9615 9.61749 14.5015 6.65749 13.8415C4.43749 13.3515 2.64749 11.5415 2.17749 9.32146C1.33749 5.44146 4.28749 2.00146 8.02749 2.00146C9.68749 2.00146 11.1675 2.69146 12.2475 3.78146L10.7375 5.29146C10.1075 5.92146 10.5475 7.00146 11.4375 7.00146H15.0275C15.5775 7.00146 16.0275 6.55146 16.0275 6.00146V2.41146C16.0275 1.52146 14.9475 1.07146 14.3175 1.70146L13.6775 2.35146Z"/>
+                            </svg>
+                            <p class="a--blue-__p">今月</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- カレンダー -->
+            <div id="calendar" class="calendar__month">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sun">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="sat">土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 月にある週間の数 -->
+
+                        {% for week in weeks %}
+                            <tr>
+                                {% for day in week %}
+                                    <td class="{% if day.month != selected_date.month %}out-of-month{% endif %}">
+                                        
+                                        {%if today == day %}
+                                        {% comment %} ここが当日の日記です {% endcomment %}
+                                        <p class="calendar__month--today-td">{{ day.day }}</p> 
+                                        {% else %}
+                                        <p class="calendar__month__td">{{ day.day }}</p>
+                                        {% endif %}
+                                        {% comment %} 感情分析がなかったら日記作成のリンク {% endcomment %}
+                                            {%for emotion in emotion %}
+                                                {%if emotion.created_date == day%}
+                                                    <a style="display: block;" href="{% url 'diary:today_diary_detail' emotion.diary_id %}">
+                                                        <img class="calendar__month__img" src="{% static 'diary/assets/' %}{{ emotion.reasoning }}.svg" alt="{{ emotion.reasoning }}">
+                                                    </a>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <!-- 日記が存在しないときに新規作成ボタンを表示 -->
+                                            {% for missing_date in dates_without_diary %}
+                                                <!-- dayとmissing_dateが一致した場合の処理 -->
+                                                {% if day == missing_date and today >= day %}
+                                                        <a style="display: block;" href="{% url 'diary:create_diary' day %}"></a>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        {% comment %} </div><!-- calendar  background -->
+
+    </div><!-- scroll  content --> {% endcomment %}
+</main>
+
+</div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script>
+    // フェードイン
+    $(document).ready(function () {
+        $('article').addClass('appear');
+    });
+
+    document.getElementById('month_graph').addEventListener('click', function (event) {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+</script>
+{% endblock %}

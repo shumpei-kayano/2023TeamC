@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}サインアップの確定{% endblock title %}
+
+{% block head %}<link type="text/css" rel="stylesheet" href="{% static 'css/accounts-style.css' %}">{% endblock head %}
+
+{% block content %}
+<section>
+    <main class="ground ground--blue">
+
+    <div class="wrapperHeader">
+    {% if confirmation %}
+
+        <div class="header__back__img">
+            <div class="header__spacer--top"></div><!-- 追加 -->
+            </div>
+            <img id="password__reset__done__img" src="{% static 'user/assets/fugoo.svg' %}" alt="logo" class="img__logo">
+        </div>
+    </div>
+
+    <article id="height__center">
+        <ul class="progressbar">
+            <li class="complete">ご入力</li>
+            <li class="complete">ご確認</li>
+            <li class="active">完了</li>
+        </ul>
+
+        <p class="signup-text">ユーザー登録</p>
+        <p class="login-text">ユーザー登録を確定するには<br>以下のボタンを押してください。</p>
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form-accounts">
+            {% csrf_token %}
+
+            <div id="login__btn--blue" class="btn btn--blue">
+                <button class="accounts-btn" type="submit">確定</button>
+            </div>
+        </form>
+        <p class="login-text">確定後ログインしてください。</p>
+
+    {% else %}
+        {% url 'account_email' as email_url %}
+
+        <div class="text-align-center">
+            <p class="login-text">リンクの有効期限が過ぎています。</p>
+            <a href="{{ email_url }}"><div id="login__btn--blue" class="btn btn--blue">
+                <button type="button">再申請</button>
+            </a>
+        </div>
+    {% endif %}
+    <div class="back-home">
+        <a class="backToHome" href="{% url 'user:account_top' %}">トップページに戻る
+            <svg class="user__next-arrow" width="9" height="12" viewBox="0 0 9 12" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.91155 6.00367L1.27849 1.35873C1.08689 1.20073 0.994154 1.01367 1.00029 0.797541C1.00642 0.581408 1.10554 0.394557 1.29765 0.236987C1.48925 0.0789957 1.71611 0 1.97822 0C2.24033 0 2.46693 0.0789957 2.65802 0.236987L8.54016 5.10312C8.69344 5.22952 8.8084 5.37171 8.88504 5.5297C8.96168 5.68769 9 5.84568 9 6.00367C9 6.16167 8.96168 6.31966 8.88504 6.47765C8.8084 6.63564 8.69344 6.77783 8.54016 6.90423L2.63885 11.7704C2.44725 11.9284 2.22372 12.0048 1.96825 11.9998C1.71278 11.9947 1.48925 11.913 1.29765 11.7546C1.10605 11.5966 1.01025 11.4095 1.01025 11.1934C1.01025 10.9772 1.10605 10.7904 1.29765 10.6328L6.91155 6.00367Z"/>
+            </svg>
+        </a>
+    </div>
+
+    </article>
+    </main>
+</section>
+{% endblock content %}

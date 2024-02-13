@@ -1,0 +1,43 @@
+.setting__menu__img {
+    position: fixed;
+    bottom: 8.4rem;  // 下部の余白を10pxに固定
+    left: 50%;  // 画面の中央に配置するために左端を50%に設定
+    transform: translateX(-50%);  // 中央に配置するために左端を中央に調整
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .setting__menu__img-item--left, .setting__menu__img-item--right{
+        width: 80px;
+    }
+    .setting__menu__img-item--center{
+        width: 40px;
+    }
+    // ヘルプ一覧画面
+    .setting-help__menu__img-item--left, .setting-help__menu__img-item--right{
+        width: 120px;
+    }
+    .setting-help__menu__img-item--center{
+        width: 55px;
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    .setting__menu__img {
+        bottom: 10rem;  // 下部の余白を10pxに固定
+        .setting__menu__img-item--left, .setting__menu__img-item--right{
+            width: 110px;
+        }
+        .setting__menu__img-item--center{
+            width: 60px;
+        }
+        // ヘルプ一覧画面
+        .setting-help__menu__img-item--left, .setting-help__menu__img-item--right{
+            width: 110px;
+        }
+        .setting-help__menu__img-item--center{
+            width: 60px;
+        }
+    }
+}

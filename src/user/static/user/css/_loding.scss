@@ -1,0 +1,81 @@
+#loading {
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 0;  // 上部に配置
+    // left: 0;
+
+    left: 50%;  // 水平方向に中央に配置
+    transform: translateX(-50%);  // 水平方向に中央に配置
+    width: 39rem;
+    max-width: 100%; // ビューポートの幅を超えないように設定
+    height: 100%;
+
+    background: #EEFEFF;  
+    #logo {
+      width: 25%;
+      margin-top: 7%;
+      margin-left: 5%;
+      position: absolute; /* 絶対位置に設定 */
+      top: 0; /* 上端に配置 */
+      left: 0; /* 左端に配置 */
+    }
+}
+
+#loading .loading-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-size: 180%;
+    text-align: center; /* 中央寄せを追加 */
+
+    #teacat {
+        display: block;
+        width: 55%; /* 幅を100pxに設定 */
+        margin: auto;
+    }
+
+    .loading__text{
+        font-size: 2rem;
+        letter-spacing: 0.04em;
+        padding-top: 30px;
+        font-weight: 400;
+    }
+}
+
+// アニメーション
+#loading .loading-content .dli-loading-1 {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    color: #04CAD6;
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+    border: 0.2em solid currentColor;
+    border-top-color: rgba(4, 202, 214, 0.27);
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.rotate-animation {
+    animation: rotate 1s linear infinite;
+}
+
+
+@media only screen and (max-width: 960px) {
+    #loading{
+        width: 100%;
+        max-width: none; // 追加
+    }
+}
