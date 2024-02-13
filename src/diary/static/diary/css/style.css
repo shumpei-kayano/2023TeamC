@@ -35,7 +35,7 @@ a {
   list-style: none;
 }
 
-header, main, footer {
+header, main, footer, .content, .content__back-color {
   width: 39rem;
   max-width: 100%;
   margin: 0 auto;
