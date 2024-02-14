@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^kcmqusi%2#6(yl+c3f(7d36c10ak$)2f9)-)qa0nu*@^41pm@'
 
 # デバック
-DEBUG = False
+DEBUG = True
 
 # 本番環境だと変える
 ALLOWED_HOSTS = ['34.233.79.231','52.201.75.237','teamc.o-hara-oita.click','teamc-sub.o-hara-oita.click', 'localhost']
@@ -217,7 +217,7 @@ AXES_FAILURE_LIMIT = 5  # 5回の失敗後にロックアウト
 AXES_COOLOFF_TIME = datetime.timedelta(seconds=30) # 30秒間ロック
 
 ACCOUNT_LOCKED_URL = '/accounts/login/'
-AXES_LOCKOUT_TEMPLATE='/accounts/login/'
+AXES_LOCKOUT_TEMPLATE='/accounts/login.html'
 
 AWS_ACCESS_KEY_ID = 'AKIA3VIVOLKQTWBJ5RPH'
 AWS_SECRET_ACCESS_KEY = '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'
