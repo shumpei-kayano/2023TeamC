@@ -934,7 +934,8 @@ th, td {
 
 @media only screen and (max-width: 480px) {
   .week-calendar__table {
-    height: calc(100vh - 290px);
+    margin-bottom: 10px;
+    height: calc(100vh - 285px);
   }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
@@ -1157,7 +1158,8 @@ table::-webkit-scrollbar-thumb:hover {
 
 @media only screen and (max-width: 480px) {
   .calendar__month table {
-    height: calc(100vh - 290px) !important;
+    margin-bottom: 10px;
+    height: calc(100vh - 285px) !important;
   }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 18px !important;
