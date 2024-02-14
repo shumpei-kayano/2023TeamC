@@ -133,17 +133,21 @@
         }
     
         function updateButtons() {
-            prevBtn.disabled = currentSlide === 0;
-            if (currentSlide === 0) {
-                prevBtn.disabled = true;
-            } else if (currentSlide === slides.length - 1) {
-                nextBtn.style.display = 'none';
-                completeBtn.style.display = 'block';
-            } else {
-                nextBtn.style.display = 'block';
-                completeBtn.style.display = 'none';
-            }
-        }
+          prevBtn.disabled = currentSlide === 0;
+          if (currentSlide === slides.length - 1) {
+              nextBtn.style.display = 'none';
+              completeBtn.style.display = 'block';
+              prevBtn.style.display = 'block'
+          } 
+          else if(currentSlide === 0){
+            prevBtn.style.display = 'none'
+          }
+          else {
+              nextBtn.style.display = 'block';
+              completeBtn.style.display = 'none';
+              prevBtn.style.display = 'block'
+          }
+      }
         
 
         function updatePagination() {
