@@ -163,7 +163,8 @@ th, td {
     color: #0094FF;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (max-width: 480px){
+// @media only screen and (min-height: 600px) {
     .week-calendar__table{
         height: calc(100vh - 290px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }

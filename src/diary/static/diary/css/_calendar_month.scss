@@ -150,7 +150,8 @@ table::-webkit-scrollbar-thumb:hover {
     background-color: rgb(173, 173, 173);
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (max-width: 480px){
+// @media only screen and (min-height: 600px) {
     .calendar__month {
         table {
             height: calc(100vh - 290px) !important; // 421px?

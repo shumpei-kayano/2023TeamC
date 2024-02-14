@@ -245,7 +245,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
-@media only screen and (min-height: 600px) {
+@media only screen and (max-width: 480px) {
   .ground {
     height: calc(100vh - 193px) !important;
   }
@@ -932,7 +932,7 @@ th, td {
   color: #0094FF;
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (max-width: 480px) {
   .week-calendar__table {
     height: calc(100vh - 290px);
   }
@@ -1155,7 +1155,7 @@ table::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
 }
 
-@media only screen and (min-height: 600px) {
+@media only screen and (max-width: 480px) {
   .calendar__month table {
     height: calc(100vh - 290px) !important;
   }
@@ -2162,6 +2162,7 @@ input[type=text]:focus, input[type=email]:focus {
   z-index: -1;
   opacity: 0;
   visibility: hidden;
+  overflow-y: scroll;
   transition: opacity 0.3s linear, visibility 0.3s linear, z-index 0.3s linear;
 }
 
@@ -2169,7 +2170,6 @@ input[type=text]:focus, input[type=email]:focus {
   z-index: 999;
   opacity: 1;
   visibility: visible;
-  overflow-y: scroll;
 }
 
 .layer.is-open .modal {
@@ -2201,10 +2201,7 @@ input[type=text]:focus, input[type=email]:focus {
   visibility: hidden;
   transition: visibility 0.3s linear, opacity 0.3s linear;
   display: block;
-  margin-top: 24px;
-  margin-bottom: 24px;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
 }
 
 .modal__inner {
@@ -2215,9 +2212,30 @@ input[type=text]:focus, input[type=email]:focus {
   height: 100%;
 }
 
+.modal__content {
+  max-height: 500px; /* 適切な最大高さを設定 */
+  overflow-y: auto; /* 縦スクロールを有効にする */
+}
 .modal__content .modal__content__img {
-  width: 100%;
-  height: auto;
+  max-width: 100%; /* 幅は親要素に合わせる */
+  height: auto; /* 高さは比率を保つために自動調整 */
+  display: block;
+  margin: 0 auto; /* センタリング（必要に応じて） */
+}
+
+.modal__content::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+.modal__content::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
 }
 
 .modal__button-wrap {
@@ -2264,6 +2282,11 @@ input[type=text]:focus, input[type=email]:focus {
     width: 100%;
   }
 }
+@media only screen and (max-height: 599px) {
+  .modal__content {
+    max-height: 400px !important; /* 適切な最大高さを設定 */
+  }
+}
 @media only screen and (min-height: 600px) {
   /* グレー背景 */
   .layer {
@@ -2272,6 +2295,9 @@ input[type=text]:focus, input[type=email]:focus {
   /* モーダルコンテンツ */
   .modal {
     width: 100% !important;
+  }
+  .modal__content {
+    max-height: 400px !important; /* 適切な最大高さを設定 */
   }
   .modal__content .modal__content__img {
     width: 100% !important;

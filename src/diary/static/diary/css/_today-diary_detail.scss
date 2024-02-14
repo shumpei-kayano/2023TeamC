@@ -265,6 +265,7 @@
     z-index: -1;
     opacity: 0;
     visibility: hidden; // 要素を不可視にする
+    overflow-y: scroll; // スクロールバーを表示
     transition: opacity 0.3s linear, visibility 0.3s linear, z-index 0.3s linear; // アニメーション効果を設定
 }
 
@@ -273,8 +274,6 @@
     z-index: 999;
     opacity: 1;
     visibility: visible;
-
-    overflow-y: scroll;
 }
 .layer.is-open .modal{
     opacity: 1;
@@ -333,10 +332,11 @@
     transition:  visibility .3s linear, opacity .3s linear;
     // 中央揃え
     display: block;
-    margin-top: 24px;
-    margin-bottom: 24px;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
+    // margin-top: 24px;
+    // margin-bottom: 24px;
+    // margin-right: auto;
+    // margin-left: auto;
 }
 
 // モーダルウィンドウの中身 画像に背景色を付与する場合のスタイル
@@ -361,11 +361,36 @@
 }
 
 .modal__content {
+    max-height: 500px; /* 適切な最大高さを設定 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
     .modal__content__img{
-        width: 100%;
-        height: auto;
-        // max-height: 405px;
+        // width: 100%;
+        // height: auto;
+        max-width: 100%; /* 幅は親要素に合わせる */
+        height: auto; /* 高さは比率を保つために自動調整 */
+        display: block;
+        margin: 0 auto; /* センタリング（必要に応じて） */
     }
+}
+// スクロールバー背景色
+.modal__content::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+.modal__content::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+.modal__content::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
 }
 
 // .modal__button-area {
@@ -423,6 +448,11 @@
     }
 }
 
+@media only screen and (max-height: 599px) {
+    .modal__content {
+        max-height: 400px !important; /* 適切な最大高さを設定 */
+    }
+}
 @media only screen and (min-height: 600px) {
     // モーダルウィンドウ
     /* グレー背景 */
@@ -433,9 +463,11 @@
     /* モーダルコンテンツ */
     .modal {
         width: 100% !important;
+        // height: calc(100vh - 193px) !important;
     }
 
     .modal__content {
+        max-height: 400px !important; /* 適切な最大高さを設定 */
         .modal__content__img{
             // margin-top: 150px !important;
             width: 100% !important;
