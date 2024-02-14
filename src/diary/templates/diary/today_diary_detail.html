@@ -234,7 +234,7 @@
                         </div>
                 
                         <button id="video__btn" class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
-                          <video poster="{{ diary.movie1.poster }}" controlsList="nodownload" preload="metadata">
+                          <video poster="{{ diary.movie1.poster }}" controlsList="nodownload" preload="none">
                             <source src="{{ diary.movie1.url }}" type="{{ diary.movie1.mime_type }}">
                           </video>                                                 
                             <svg class="play-button" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
