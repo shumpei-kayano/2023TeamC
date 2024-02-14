@@ -36,7 +36,7 @@
                 </div>
                 <div class="a--tab--right {% if request.path == month_graph_url %}active{% endif %}">
                     <a id = "month_graph" href="{{ month_graph_url }}">月間グラフ</a>
-                    <div id="loading">
+                    <div id="loading"  style="height: 100vh;">
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
                             <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
