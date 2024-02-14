@@ -163,7 +163,7 @@ def aicomment_month(emotion, request):
 
 # 特定のワードが含まれているか確認する関数
 def contains_forbidden_word(content,emotion):
-    count ==0
+    count=0
     # 特定のワードをリストに格納
     forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
     for word in forbidden_words:
