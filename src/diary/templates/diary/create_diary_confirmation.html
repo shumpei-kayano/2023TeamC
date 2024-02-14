@@ -56,22 +56,22 @@
                     <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.movie1 %}
                         <div class="content__today-diary-confirmation__item">
-                            <video src="{{ saved_diary.movie1.url }}" alt="Diary Movie1"></video>
+                            <img src="{% static 'diary/assets/movie_icon.svg' %}" alt="Diary Movie1"></img>
                         </div>
                         {% endif %}
                         {% if saved_diary.movie2 %}
                         <div class="content__today-diary-confirmation__item">
-                            <video src="{{ saved_diary.movie2.url }}" alt="Diary Movie2"></video>
+                            <img src="{% static 'diary/assets/movie_icon.svg' %}" alt="Diary Movie2"></img>
                         </div>
                         {% endif %}
                         {% if saved_diary.movie3 %}
                         <div class="content__today-diary-confirmation__item">
-                                <video src="{{ saved_diary.movie3.url }}" alt="Diary Movie3"></video>
+                            <img src="{% static 'diary/assets/movie_icon.svg' %}" alt="Diary Movie3"></img>
                             </div>
                         {% endif %}
                         {% if saved_diary.movie4 %}
                         <div class="content__today-diary-confirmation__item">
-                            <video src="{{ saved_diary.movie4.url }}" alt="Diary Movie4"></video>
+                            <img src="{% static 'diary/assets/movie_icon.svg' %}" alt="Diary Movie4"></img>
                         </div>
                         {% endif %}
                     </div>
