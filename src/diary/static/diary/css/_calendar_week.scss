@@ -166,7 +166,8 @@ th, td {
 @media only screen and (max-width: 480px){
 // @media only screen and (min-height: 600px) {
     .week-calendar__table{
-        height: calc(100vh - 280px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+        margin-bottom: 10px;
+        height: calc(100vh - 285px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
     // 下線
     .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
