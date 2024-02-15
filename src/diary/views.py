@@ -24,9 +24,6 @@ from django.conf import settings
 import os
 import string
 import random
-import cv2
-import base64
-from io import BytesIO
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
