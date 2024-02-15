@@ -407,9 +407,6 @@ def create_diary_confirmation2(request, pk):
     diary.save()
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
-    if saved_diary.movie1 or saved_diary.movie2 or saved_diary.movie3 or saved_diary.movie4:
-        movie1_photo1=1
-
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': movie1_photo1 })
 
 @login_required
