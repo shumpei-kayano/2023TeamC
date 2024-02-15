@@ -30,6 +30,7 @@
                 {% csrf_token %}
                 <div class="content__today-diary__text">
                     <p>{{ saved_diary.content }}</p>
+                    <p>{{ movie_photo1 }}
 
                     <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.photo1 %}
