@@ -409,17 +409,9 @@ def create_diary_confirmation2(request, pk):
     saved_diary = Diary.objects.get(pk=pk)
     if saved_diary.movie1 or saved_diary.movie2 or saved_diary.movie3 or saved_diary.movie4:
         cap = cv2.VideoCapture(saved_diary.movie1.path)
-        if not cap.isOpened():
-            return None
+        movie1_photo1=1
 
-        # 最初のフレームを読み込む
-        _, img = cap.read()
-
-        # 画像をメモリ内で処理する
-        _, buffer = cv2.imencode('.jpg', img)
-        img_str = base64.b64encode(buffer).decode('utf-8')
-
-    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': img_str })
+    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': movie1_photo1 })
 
 @login_required
 def receive_nekoko_advice(request, pk):
