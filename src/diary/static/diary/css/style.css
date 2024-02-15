@@ -1756,7 +1756,7 @@ input[type=text]:focus, input[type=email]:focus {
   object-fit: cover;
 }
 
-.btn--blue, .btn--white .btn--pink {
+.btn--blue, .btn--white, .btn--pink {
   margin: 24px auto 40px auto;
   box-sizing: border-box;
 }
