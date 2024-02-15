@@ -112,6 +112,25 @@
         }
     }
 
+    &--pink {
+        width: 342px;
+        height: 48px;
+        cursor: pointer;
+
+        button, a{
+            @include button-style;
+            
+            background: #FFD4E0;
+            color: #FFF;
+            font-size: 1.6rem;
+            letter-spacing: 0.04rem;
+
+            &:hover {
+                background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
+            }
+        }
+    }
+
     
     &--blue--info {
         width: 342px;
