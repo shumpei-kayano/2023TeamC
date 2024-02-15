@@ -30,7 +30,7 @@
                 {% csrf_token %}
                 <div class="content__today-diary__text">
                     <p>{{ saved_diary.content }}</p>
-                    <p>{{ movie_photo1 }}
+                    <img src="data:image/jpeg;base64,{{ img_str }}" alt="Video Thumbnail">
 
                     <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.photo1 %}

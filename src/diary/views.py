@@ -24,6 +24,9 @@ from django.conf import settings
 import os
 import string
 import random
+import cv2
+import base64
+from io import BytesIO
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -405,8 +408,18 @@ def create_diary_confirmation2(request, pk):
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
     if saved_diary.movie1 or saved_diary.movie2 or saved_diary.movie3 or saved_diary.movie4:
-        movie_photo1 = 1
-    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': movie_photo1})
+        cap = cv2.VideoCapture(saved_diary.movie1.path)
+        if not cap.isOpened():
+            return None
+
+        # 最初のフレームを読み込む
+        _, img = cap.read()
+
+        # 画像をメモリ内で処理する
+        _, buffer = cv2.imencode('.jpg', img)
+        img_str = base64.b64encode(buffer).decode('utf-8')
+
+    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': img_str })
 
 @login_required
 def receive_nekoko_advice(request, pk):
