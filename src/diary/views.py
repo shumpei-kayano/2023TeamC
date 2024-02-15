@@ -407,7 +407,7 @@ def create_diary_confirmation2(request, pk):
     diary.save()
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
-    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': movie1_photo1 })
+    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
 @login_required
 def receive_nekoko_advice(request, pk):
