@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # サンプルユーザーデータを生成
         seeder = Seed.seeder(locale='ja_JP')
         fake = Faker('ja_JP')
-        seeder.add_entity(CustomUser, 10, {
+        seeder.add_entity(CustomUser, 20, {
             'email': lambda x: fake.email(),
             'username': lambda x: fake.user_name(),
             'password': make_password('12345678p'),
