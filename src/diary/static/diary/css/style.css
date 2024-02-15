@@ -377,6 +377,33 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
 .btn--red button:hover, .btn--red a:hover {
   background-color: #E32B2B; /* マウスをかざしたときの背景色 */
 }
+.btn--pink {
+  width: 342px;
+  height: 48px;
+  cursor: pointer;
+}
+.btn--pink button, .btn--pink a {
+  width: 100%; /* ボタンを親要素と同じ幅に広げる */
+  height: 100%; /* ボタンを親要素と同じ高さに広げる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px; /* パディングをここに移動 */
+  border: none; /* ボタンのデフォルトのボーダーを削除 */
+  background: transparent; /* 背景を透明にする */
+  cursor: inherit; /* 親要素のカーソルスタイルを継承する */
+  border-radius: 50px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: #FFD4E0;
+  color: #FFF;
+  font-size: 1.6rem;
+  letter-spacing: 0.04rem;
+}
+.btn--pink button:hover, .btn--pink a:hover {
+  background-color: #EAEAEA; /* マウスをかざしたときの背景色 */
+}
 .btn--blue--info {
   width: 342px;
   height: 48px;
@@ -978,8 +1005,7 @@ th, td {
 .FlexTextarea .content__textarea__img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   position: relative;
 }
 
@@ -1727,11 +1753,10 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
-.btn--blue, .btn--white {
+.btn--blue, .btn--white .btn--pink {
   margin: 24px auto 40px auto;
   box-sizing: border-box;
 }
@@ -1851,9 +1876,7 @@ input[type=text]:focus, input[type=email]:focus {
   cursor: pointer;
   outline: none;
   padding: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   padding: 10px;
   margin: 0 auto;
   color: #A29C9C;
@@ -2011,8 +2034,7 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .button img:hover, .button video:hover {
   filter: brightness(50%);
@@ -3107,8 +3129,7 @@ section {
 }
 .content__home__text__anime:nth-child(1),
 .content__home__text__anime:nth-child(2) {
-  -webkit-clip-path: inset(0 100% 0 0);
-          clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+  clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
 }
 
 .content__home__text__anime:nth-child(1) {
@@ -3123,8 +3144,7 @@ section {
 
 @keyframes textAnime {
   100% {
-    -webkit-clip-path: inset(0 0 0 0);
-            clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 .loading__text {
