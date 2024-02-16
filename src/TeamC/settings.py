@@ -164,13 +164,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #---------------------メール送信設定-------------------------
 # 以下はSMTPサーバーの設定
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# マイクロソフトのメールサービス、office365を使用する
+EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ryougaharada@gmail.com'
-EMAIL_HOST_PASSWORD = 'ssnc deay womq kvaf'
+# 使用しているoffice365のメールアドレスとパスワード
+EMAIL_HOST_USER = 'ooi2272412@stu.o-hara.ac.jp'
+EMAIL_HOST_PASSWORD = 'Neige0617'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Fugoo Customer Support <noreply@example.com>'
-
+# 開発用 コンソールに出力する
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# localhostからooi学番で送るとエラーが起こるので送信元をHOSTと同じにする
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # ---------------------メール送信設定-------------------------
 
 # --------------------allauthの基本設定--------------------
