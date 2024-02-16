@@ -441,7 +441,7 @@ function closeVideo(videoId) {
     const video = document.getElementById('myVideo');
 
     // ビデオが再生されたときに実行されるイベントリスナーを追加
-    video.addEventListener('play', function() {
+    video.addEventListener('autoplay', function() {
       // 5秒後にビデオを一時停止する
       setTimeout(function() {
         video.pause();
