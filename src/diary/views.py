@@ -175,26 +175,6 @@ def contains_forbidden_word(content,emotion):
             return 1
     return 0
 
-# 動画を1フレームだけキャプチャして画像として保存する関数
-def save_single_frame(video_path, output_dir):
-    
-    # 指定された動画ファイルをキャプチャするためのオブジェクトを作成
-    cap = cv2.VideoCapture(video_path)
-    
-    # ファイルが開けなかった場合は何もしない
-    if not cap.isOpened():
-        return
-
-    # 1フレーム読み込む
-    ret, frame = cap.read()
-    # 成功したらifを通る
-    if ret:
-        # 元の動画と同じファイル名パスを作成
-        output_path = os.path.join(output_dir, os.path.basename(video_path).split('.')[0] + '.jpg')
-        # 画像を保存
-        cv2.imwrite(output_path, frame)
-
-
 @login_required
 def account_delete(request):
     return render(request, 'diary/account_delete.html')
@@ -425,18 +405,6 @@ def create_diary_confirmation2(request, pk):
     diary.save()
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
-    
-    #保存されたmovieをキャプチャする
-    movie_rist = []
-    for video_path in [saved_diary.movie1.url,saved_diary.movie2.url, saved_diary.movie3.url,saved_diary.movie4.url]:
-        if video_path:
-            # ristに格納
-            movie_rist.append(video_path)
-    # 保存先のディレクトリを指定
-    output_dir = "diary/static/diary/movie_photo/"
-    # movie_ristに動画があればキャプチャする関数
-    for path in movie_rist:
-        save_single_frame(path, output_dir)
 
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
