@@ -222,7 +222,7 @@
                                 <div class="modal__inner">
                                     <div class="modal__contents">
                                         <div class="modal__content">
-                                            <video id="videoElement1" class="modal__content__img" src="" alt="Diary Movie1"   controls autoplay></video>
+                                            <video id="videoElement1" class="modal__content__img" src="" alt="Diary Movie1"   controls ></video>
                                         </div>
                                     </div>
                 
@@ -234,7 +234,7 @@
                         </div>
                 
                         <button id="video__btn" class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo"  muted>
                                 <source src="{{ diary.movie1.url }}" type="{{ diary.movie1.mime_type }}">
                             </video>
                         </button>
@@ -249,7 +249,7 @@
                                 <div class="modal__inner">
                                     <div class="modal__contents">
                                         <div class="modal__content">
-                                            <video id="videoElement2" class="modal__content__img" src="" alt="Diary Movie2" controls autoplay></video>
+                                            <video id="videoElement2" class="modal__content__img" src="" alt="Diary Movie2" controls ></video>
                                         </div>
                                     </div>
                                     <div class="modal__button-wrap">
@@ -260,7 +260,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo"  muted>
                                 <source src="{{ diary.movie2.url }}" type="{{ diary.movie2.mime_type }}">
                             </video>                             
                         </button>
@@ -275,7 +275,7 @@
                                 <div class="modal__inner">
                                     <div class="modal__contents">
                                         <div class="modal__content">
-                                            <video id="videoElement3" class="modal__content__img" src="" alt="Diary Movie3" controls autoplay></video>
+                                            <video id="videoElement3" class="modal__content__img" src="" alt="Diary Movie3" controls ></video>
                                         </div>
                                     </div>
                                     <div class="modal__button-wrap">
@@ -286,7 +286,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo"  muted>
                                 <source src="{{ diary.movie3.url }}" type="{{ diary.movie3.mime_type }}">
                             </video>                               
                         </button>
@@ -301,7 +301,7 @@
                                 <div class="modal__inner">
                                     <div class="modal__contents">
                                         <div class="modal__content">
-                                            <video id="videoElement4" class="modal__content__img" src="" alt="Diary Movie4" controls autoplay></video>
+                                            <video id="videoElement4" class="modal__content__img" src="" alt="Diary Movie4" controls ></video>
                                         </div>
                                     </div>
                                     <div class="modal__button-wrap">
@@ -312,7 +312,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo"  muted>
                                 <source src="{{ diary.movie4.url }}" type="{{ diary.movie4.mime_type }}">
                             </video>                               
                         </button>
@@ -448,7 +448,6 @@ function closeVideo(videoId) {
         video.pause();
         }, 2000);
         // ビデオを再生
-        video.play();
     });
 </script>
 {% endblock %}
