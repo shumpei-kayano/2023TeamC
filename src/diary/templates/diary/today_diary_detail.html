@@ -234,10 +234,9 @@
                         </div>
                 
                         <button id="video__btn" class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
-                            <svg class="play-button" width="78" height="78" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="78" height="78" fill="black" fill-opacity="0.64"/>
-                              <path d="M39 24C30.7125 24 24 30.7125 24 39C24 47.2875 30.7125 54 39 54C47.2875 54 54 47.2875 54 39C54 30.7125 47.2875 24 39 24ZM35.25 31.5L46.5 39L35.25 46.5V31.5Z"/>
-                            </svg>
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ diary.movie1.url }}" type="video/mp4">
+                            </video>
                         </button>
                     </div>
                     {% endif %}
@@ -261,10 +260,9 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
-                            <svg class="play-button" width="78" height="78" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="78" height="78" fill="black" fill-opacity="0.64"/>
-                              <path d="M39 24C30.7125 24 24 30.7125 24 39C24 47.2875 30.7125 54 39 54C47.2875 54 54 47.2875 54 39C54 30.7125 47.2875 24 39 24ZM35.25 31.5L46.5 39L35.25 46.5V31.5Z"/>
-                            </svg>                              
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ diary.movie2.url }}" type="video/mp4">
+                            </video>                             
                         </button>
                     </div>
                     {% endif %}
@@ -288,10 +286,9 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
-                            <svg class="play-button" width="78" height="78" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="78" height="78" fill="black" fill-opacity="0.64"/>
-                              <path d="M39 24C30.7125 24 24 30.7125 24 39C24 47.2875 30.7125 54 39 54C47.2875 54 54 47.2875 54 39C54 30.7125 47.2875 24 39 24ZM35.25 31.5L46.5 39L35.25 46.5V31.5Z"/>
-                            </svg>                              
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ diary.movie3.url }}" type="video/mp4">
+                            </video>                               
                         </button>
                     </div>
                     {% endif %}
@@ -315,10 +312,9 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
-                            <svg class="play-button" width="78" height="78" viewBox="0 0 78 78" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="78" height="78" fill="black" fill-opacity="0.64"/>
-                              <path d="M39 24C30.7125 24 24 30.7125 24 39C24 47.2875 30.7125 54 39 54C47.2875 54 54 47.2875 54 39C54 30.7125 47.2875 24 39 24ZM35.25 31.5L46.5 39L35.25 46.5V31.5Z"/>
-                            </svg>                              
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ diary.movie4.url }}" type="video/mp4">
+                            </video>                               
                         </button>
                     </div>
                     {% endif %}

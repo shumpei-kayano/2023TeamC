@@ -63,17 +63,23 @@
                         {% endif %}
                         {% if saved_diary.movie2 %}
                         <div class="content__today-diary-confirmation__item">
-                            <img src="{% static 'diary/assets/video_play_icon2.svg' %}" alt="Diary Movie2"></img>
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ saved_diary.movie2.url }}" type="video/mp4">
+                            </video>                        
                         </div>
                         {% endif %}
                         {% if saved_diary.movie3 %}
                         <div class="content__today-diary-confirmation__item">
-                            <img src="{% static 'diary/assets/video_play_icon2.svg' %}" alt="Diary Movie3"></img>
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ saved_diary.movie3.url }}" type="video/mp4">
+                            </video>
                             </div>
                         {% endif %}
                         {% if saved_diary.movie4 %}
                         <div class="content__today-diary-confirmation__item">
-                            <img src="{% static 'diary/assets/video_play_icon2.svg' %}" alt="Diary Movie4"></img>
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ saved_diary.movie4.url }}" type="video/mp4">
+                            </video>
                         </div>
                         {% endif %}
                     </div>
