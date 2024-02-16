@@ -437,15 +437,7 @@ function closeVideo(videoId) {
 
         music.play();
     });
+    document.querySelector("#video").autoplay = false;
 
-    // ページが読み込まれた後に実行される関数
-    document.addEventListener("DOMContentLoaded", function() {
-        // video要素を取得
-        video = document.getElementById("myVideo").get(0);
-            
-        video.pause();
-        
-        // ビデオを再生
-    });
 </script>
 {% endblock %}
