@@ -438,14 +438,7 @@ function closeVideo(videoId) {
         music.play();
     });
 
-    const video = document.getElementById('myVideo');
+    document.querySelector("#video").autoplay = false;
 
-    // ビデオが再生されたときに実行されるイベントリスナーを追加
-    video.addEventListener('autoplay', function() {
-      // 5秒後にビデオを一時停止する
-      setTimeout(function() {
-        video.pause();
-      }, 1); // 1ミリ秒 
-    });
 </script>
 {% endblock %}
