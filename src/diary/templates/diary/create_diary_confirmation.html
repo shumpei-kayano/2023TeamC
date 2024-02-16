@@ -56,7 +56,9 @@
                     <div class="content__today-diary-confirmation__img">
                         {% if saved_diary.movie1 %}
                         <div class="content__today-diary-confirmation__item">
-                            <img src="{% static 'diary/assets/video_play_icon2.svg' %}" alt="Diary Movie1"></img>
+                            <video id="myVideo" autoplay muted>
+                                <source src="{{ saved_diary.movie1.url }}" type="video/mp4">
+                            </video>
                         </div>
                         {% endif %}
                         {% if saved_diary.movie2 %}
