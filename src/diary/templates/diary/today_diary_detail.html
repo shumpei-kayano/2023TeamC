@@ -438,16 +438,14 @@ function closeVideo(videoId) {
         music.play();
     });
 
-    // ページが読み込まれた後に実行される関数
-    document.addEventListener("DOMContentLoaded", function() {
-        // video要素を取得
-        var video = document.getElementById("myVideo");
-    
-        // ビデオが再生される前に、2秒後に停止する
-        
+    const video = document.getElementById('myVideo');
+
+    // ビデオが再生されたときに実行されるイベントリスナーを追加
+    video.addEventListener('play', function() {
+      // 5秒後にビデオを一時停止する
+      setTimeout(function() {
         video.pause();
-        
-        // ビデオを再生
+      }, 1); // 1ミリ秒 
     });
 </script>
 {% endblock %}
