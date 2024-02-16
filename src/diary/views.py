@@ -428,7 +428,7 @@ def create_diary_confirmation2(request, pk):
     
     #保存されたmovieをキャプチャする
     movie_rist = []
-    for video_path in [saved_diary.movie1,saved_diary.movie2, saved_diary.movie3,saved_diary.movie4]:
+    for video_path in [saved_diary.movie1.url,saved_diary.movie2.url, saved_diary.movie3.url,saved_diary.movie4.url]:
         if video_path:
             # ristに格納
             movie_rist.append(video_path)
