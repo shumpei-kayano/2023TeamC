@@ -24,6 +24,7 @@ from django.conf import settings
 import os
 import string
 import random
+import cv2
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -404,9 +405,8 @@ def create_diary_confirmation2(request, pk):
     diary.save()
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
-    if saved_diary.movie1 or saved_diary.movie2 or saved_diary.movie3 or saved_diary.movie4:
-        movie_photo1 = 1
-    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary,'movie_photo1': movie_photo1})
+
+    return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
 @login_required
 def receive_nekoko_advice(request, pk):
