@@ -1,9 +1,8 @@
-
-
+// ラベル
 label {
     font-size: 1.4rem;
 }
-
+// ロゴと戻るボタンのスタイル
 .wrapperHeader {
     color: #333;
     font-size: 2rem;
@@ -17,7 +16,7 @@ label {
     justify-content: space-between;
     align-items: center;
 }
-
+// 見出し
 .signup-text {
     color: #333;
     font-size: 2rem;
@@ -27,7 +26,7 @@ label {
     letter-spacing: 1.12px;
     text-align: center; // テキストを中央揃えにする
 }
-
+// p要素
 .login-text {
     text-align: center; // テキストを中央揃えにする
     color: #333;
@@ -39,22 +38,7 @@ label {
     margin-left: 20px;
     margin-right: 20px;
 }
-
-// img.img__logo {
-//     // margin-left: 24px;
-//     display: flex;
-//     width: 96px;
-//     height: 48px;
-// }   
-
-// img.img__logo {
-//     transform: translateX(280px); /* ここに移動させたい距離を指定 */
-// }
-
-// .back-home {
-//     margin-top: 350px;
-// }
-
+// パスワードをお忘れですか？ボタン
 .forget-pass a{
     text-align: center; // テキストを中央揃えにする
     margin-left: 40px;
@@ -62,17 +46,23 @@ label {
     height: 24px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
+    gap: 10px; // 要素間の間隔を設定
+    flex-shrink: 0; // 要素の縮小を禁止
     color: #A29C9C;
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0.64px;
+    display: block;
+    margin: 0 auto;
+    &:hover{
+        text-decoration: underline;
+        color: #797979;
+    }
 }
 
-
+// エラーメッセージ
 .error-message {
     text-align: center; // テキストを中央揃えにする
     color: #333;
@@ -84,20 +74,18 @@ label {
     margin-left: 20px;
     margin-right: 20px;
 }
-
+// インフォメーション上部
 .user-infomation__container{
     margin: 24px;
 }
-
+// メイン要素
 main{
-    // margin-top: 0rem; /*上に空白を追加*/
-    // height: calc(100vh - 5rem - 15px ); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
     overflow-y: auto; /* コンテンツが画面外になった場合にスクロールバーを表示 */
     -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 }
 // スクロールバー背景色
 main::-webkit-scrollbar {
-    background-color: transparent;
+    background-color: transparent; // 背景色を透明にする
     // スクロールバーの幅を調整
     width: 3px;
     // height: 2px;
@@ -115,7 +103,7 @@ main::-webkit-scrollbar-thumb {
 main::-webkit-scrollbar-thumb:hover {
     background-color: rgb(173, 173, 173);
 }
-
+// article要素を中央揃え
 article{
     display: flex;
     flex-direction: column;
@@ -124,19 +112,25 @@ article{
     width: 39rem;
     max-width: 100%;
     margin: 0 auto;
+    background-color: $main_background_color;
 }
+// article要素のid属性がheight__centerの場合
 #height__center{
     margin-top: 0;
-    height: calc(100vh - 7.2rem);
+    height: calc(100vh - 7.2rem); // 画面の高さからロゴと戻るボタンの高さを引いた値
 }
+
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px) {
+    // main要素
     .ground{
         height: 100vh !important;
     }
+    // ロゴと戻るボタン
     .wrapperHeader{
         padding-top: 50px;
     }
-
+    // article要素のid属性がheight__centerの場合
     #height__center{
         margin-top: 0;
         height: calc(100vh - 9.8rem);
@@ -151,7 +145,7 @@ article{
         // 角丸を指定
         border-radius: 20px;
     }
-    
+    // トップへ戻るボタン
     .back-home {
         margin-top: 50px !important;
     }
@@ -168,14 +162,17 @@ article{
     }
 }
 
-// 追加
+// 他ファイルのスタイルより優先させるため、最後にインポートされるこのファイルに追加
+// トップへ戻るボタン
 .back-home {
     margin-top: 30px;
     margin-left: 0;
 }
+// キャンセルボタン
 .btn--white {
     margin-right: 0;
 }
+// 削除ボタン
 .btn--red {
     margin-left: 0;
     cursor: pointer;
@@ -183,46 +180,47 @@ article{
 // .signup-text{
 //     font-weight: 500;
 // }
+// 実行ボタン
 .btn--blue {
     margin-left: 0;
 }
+// ログインボタン
 #login__btn--blue{
     display: block;
     margin: 30px auto;
 }
-.forget-pass a{
-    display: block;
-    margin: 0 auto;
-    &:hover{
-        text-decoration: underline;
-        color: #797979;
-    }
-}
+// ボタン全体
 button {
     cursor: pointer;
     font-weight: 700;
 }
+// スタートボタン
 .btn--large a, #account_top__btn--white a{
     cursor: pointer;
     font-weight: 700;
 }
+// main要素
 .ground{
     &--white{
         padding-bottom: 0;
     }
 }
+// 白背景の場合
 .ground.ground--white {
     padding-bottom: 0;
 }
+// エラーメッセージ
 .error-message{
     color: red;
     li{
         color: red;
     }
 }
+// フォームチェックボックス
 [type="checkbox"]{
     margin-right: 10px;
 }
+// ここからログインボタン
 .accounts-link{
     color: #00ABB6;
     text-decoration: underline;
@@ -233,40 +231,47 @@ button {
         color: #00737A;
     }
 }
-article{
-    background-color: $main_background_color;
-}
+// テキスト
 .login-text {
     font-size: 1.6rem;
 }
+// パスワードリセットフォーム全体の高さ
 #user-passwd_reset_form{
     height: 180px;
 }
+// フォーム全体
 .user-infomation__container {
     margin: 24px 0 24px 0;
 }
+// ログイン画面の入力欄
 .form__login{
     margin-bottom: 20px;
 }
+// メアド入力欄
 .form-email {
     padding: 0px 0px 16px 0;
 }
+
 #ctrlHolder__verified{
     margin-left: 38px;
 }
+// メアド変更ボタン全体
 .buttonHolder {
     margin-left: 0;
     padding-bottom: 24px;
     border-bottom: 1px solid #ccc;
 }
+// サインアップ入力欄
 .user-infomation__signup{
     margin-top: 20px;
     margin-bottom: 40px;
 }
+// バリデーション発生時にスタイルが崩れるのを修正
 .user-infomation__style--center{
     margin: 0 auto;
     max-width: 342px;
 }
+// chromeの場合に背景色が切れるため修正
 @media only screen and (max-height: 599px){
     #ground__login {
         height: 100%;

@@ -126,13 +126,19 @@ header .header__weather span {
 }
 
 main {
-  margin-top: 50px; /*上に空白を追加*/
+  margin-top: 50px; /*ヘッダー分空白を追加*/
 }
 
 .ground {
   height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
   -webkit-overflow-scrolling: touch;
+}
+.ground--white {
+  background-color: #FFFFFF;
+}
+.ground--blue {
+  background-color: #EEFEFF;
 }
 
 .ground::-webkit-scrollbar {
@@ -148,13 +154,6 @@ main {
 
 .ground::-webkit-scrollbar-thumb:hover {
   background-color: rgb(173, 173, 173);
-}
-
-.ground--white {
-  background-color: #FFFFFF;
-}
-.ground--blue {
-  background-color: #EEFEFF;
 }
 
 footer {
@@ -857,11 +856,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   margin-bottom: 4rem;
 }
 
-.img-dango {
-  margin-top: 340px;
-  margin-left: 24px;
-}
-
 .next__button {
   margin-left: 24px;
 }
@@ -1005,7 +999,8 @@ th, td {
 .FlexTextarea .content__textarea__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   position: relative;
 }
 
@@ -1194,8 +1189,6 @@ table::-webkit-scrollbar-thumb:hover {
   .calendar__month__img {
     max-width: 22px !important;
     max-height: 22px !important;
-  }
-  .calendar__month__img {
     top: 55% !important;
   }
 }
@@ -1331,7 +1324,7 @@ table::-webkit-scrollbar-thumb:hover {
   margin-bottom: 24px;
 }
 
-@media only screen and (min-height: 599px) {
+@media only screen and (min-height: 600px) {
   .user-infomation {
     margin-bottom: 50px;
   }
@@ -1342,10 +1335,6 @@ table::-webkit-scrollbar-thumb:hover {
     bottom: 10rem;
   }
 }
-.user-infomation-edit {
-  margin-top: 24px;
-}
-
 input[type=text], input[type=email] {
   width: 100%;
   height: 45px;
@@ -1365,6 +1354,10 @@ input[type=text]:focus, input[type=email]:focus {
   box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
 }
 
+.user-infomation-edit {
+  margin-top: 24px;
+}
+
 .form-field {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -1375,7 +1368,7 @@ input[type=text]:focus, input[type=email]:focus {
   margin: 10px;
 }
 
-@media only screen and (min-height: 599px) {
+@media only screen and (min-height: 600px) {
   .user-infomation-edit {
     margin-bottom: 50px;
   }
@@ -1520,7 +1513,7 @@ input[type=text]:focus, input[type=email]:focus {
 }
 
 .info__date {
-  color: #000;
+  color: #333;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
@@ -1542,7 +1535,7 @@ input[type=text]:focus, input[type=email]:focus {
   margin-bottom: 40px;
 }
 
-@media only screen and (min-height: 599px) {
+@media only screen and (min-height: 600px) {
   .member__scroll--content {
     height: 100%;
   }
@@ -1688,8 +1681,8 @@ input[type=text]:focus, input[type=email]:focus {
     text-align: justify;
   }
 }
+/* 画面の高さが600px未満の場合のスタイル */
 @media only screen and (max-height: 599px) {
-  /* 画面の高さが600px未満の場合のスタイル */
   .btn--large {
     margin: 30px auto 20px auto;
   }
@@ -1716,6 +1709,7 @@ input[type=text]:focus, input[type=email]:focus {
     text-align: justify;
   }
 }
+/* 画面の高さが600px未満の場合のスタイル */
 @media only screen and (min-height: 600px) {
   .btn--large {
     margin: 40px auto 24px auto !important;
@@ -1753,7 +1747,8 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .btn--blue, .btn--white, .btn--pink {
@@ -1876,7 +1871,9 @@ input[type=text]:focus, input[type=email]:focus {
   cursor: pointer;
   outline: none;
   padding: 0;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   padding: 10px;
   margin: 0 auto;
   color: #A29C9C;
@@ -1915,6 +1912,7 @@ input[type=text]:focus, input[type=email]:focus {
   max-width: 100%;
   height: 100vh;
   min-height: -webkit-fill-available; /* Safari向けの指定 */
+  pointer-events: none;
   background: #EEFEFF;
 }
 #loading #logo {
@@ -2034,7 +2032,8 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .button img:hover, .button video:hover {
   filter: brightness(50%);
@@ -2900,61 +2899,6 @@ article.appear .content {
   pointer-events: auto;
 }
 
-#animation-slideout {
-  display: none;
-}
-#animation-slideout #animation-bg__flex-box {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#animation-slideout #animation-bg__flex-box .animation-bg__logo {
-  width: 200px;
-  height: auto;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  margin-bottom: 50px;
-}
-#animation-slideout #animation-bg__flex-box .animation-bg__img {
-  width: 221px;
-  height: auto;
-}
-
-.animation-bg {
-  background: #04CAD6;
-  content: "";
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  animation: PageAnime-slide 3s forwards;
-}
-
-@keyframes PageAnime-slide {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@media only screen and (max-width: 960px) {
-  #animation-slideout {
-    width: 100%;
-    max-width: none;
-  }
-}
-@media only screen and (min-height: 599px) {
-  .animation-bg__logo {
-    width: 260px !important;
-    margin-bottom: 70px !important;
-  }
-}
 /* スライドインアニメーション*/
 @keyframes slideIn {
   from {
@@ -3129,7 +3073,8 @@ section {
 }
 .content__home__text__anime:nth-child(1),
 .content__home__text__anime:nth-child(2) {
-  clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
 }
 
 .content__home__text__anime:nth-child(1) {
@@ -3144,7 +3089,8 @@ section {
 
 @keyframes textAnime {
   100% {
-    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
   }
 }
 .loading__text {

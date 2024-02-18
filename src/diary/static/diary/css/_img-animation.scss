@@ -4,6 +4,7 @@
 }
 @keyframes buruburu {
     0% {
+        // translate(x(水平), y(垂直)) rotateZ(角度(奥行き))
         transform: translate(0, 2px) rotateZ(0deg);
     }
     25% {
@@ -22,29 +23,29 @@
 
 // コメント時アニメーション
 .diary-detail-img--animation{
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-timing-function: ease-in-out; // 開始と終了が滑らかに
+    animation-iteration-count: infinite; // 無限に繰り返す
+    animation-direction: alternate; // 逆方向にもアニメーションを実行(往復運動)
     animation-duration: 1.5s;
 }
 .content__diary__comment__img-item, .graph__img--keyframe{
     animation-name: anim_sc;
-    transform: scale(0.85,0.85);
+    transform: scale(0.85,0.85); // 元の大きさの85%に縮小された状態で表示
 }
 @keyframes anim_sc {
     100% {
-      transform: scale(1,1);
+        transform: scale(1,1);
     }
 }
 
 // 会員情報ページのアニメーション
 .user-infomation__image--dango {
-    animation: purupuru 0.8s linear 0s 1;
+    animation: purupuru 0.8s linear 0s 1; // 反復回数は1回
 }
 @keyframes purupuru {
-    0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
-    20%  { transform: scale(1.0, 1.06) translate(-5%, -4%) skew(6deg, 0deg); }
-    50%  { transform: scale(1.0, 0.94) translate(5%, 4%) skew(-6deg, 0deg); }
+    0%   { transform: scale(1.0, 1.0) translate(0%, 0%); } // 要素を水平方向（x軸）には1.0倍、垂直方向（y軸）には1.0倍に拡大
+    20%  { transform: scale(1.0, 1.06) translate(-5%, -4%) skew(6deg, 0deg); } // 要素を水平方向には左に5%、垂直方向には上に4%だけ平行移動
+    50%  { transform: scale(1.0, 0.94) translate(5%, 4%) skew(-6deg, 0deg); } // 水平方向には-6度だけ傾斜
     65%  { transform: scale(1.0, 1.03) translate(2%, -2%) skew(-3deg, 0deg); }
     80%  { transform: scale(1.0, 0.97) translate(-2%, 2%) skew(3deg, 0deg); }
     100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -99,10 +100,10 @@
 }
 @keyframes textAnime {
     100% {
-        clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 0 0); // 切り抜かない
     }
 }
-
+// テキスト
 .loading__text{
     font-weight: 400;
 }

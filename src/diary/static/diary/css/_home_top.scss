@@ -1,8 +1,9 @@
+// ホームトップボタン
 .btn--large{
     margin: 15px auto 20px auto;
 }
 
-
+// 中央寄せ
 .content__home {
     display: flex;
     flex-direction: column;
@@ -10,25 +11,30 @@
     align-items: center; // コンテンツを水平方向に中央寄せ
 }
 
+// ロゴ・画像
 .content__home__logo img, .content__home__img img{
     max-width: 100px;
     height: auto;
     margin: 1rem auto 0 auto;
 }
 
+// 画像
 .content__home__img img{
     max-width: 200px;
 }
-
+// ロゴ
 .content__home__logo{
     margin-bottom: 1rem;
 }
 
+// テキスト
 .content__home__text p{
     font-size: 1.6rem;
     margin: 0 auto;
     text-align: justify; // テキストを両端寄せ
 }
+
+// コンテンツ全体
 .content-center{
     display: flex;
     flex-direction: column;
@@ -37,7 +43,7 @@
     align-items: center; // コンテンツを水平方向に中央寄せ
 }
 
-// アニメーション
+// ホームトップアニメーション
 .home-img_animation{
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
@@ -48,12 +54,12 @@
     animation-name: jump;
     animation-duration: 1.5s;
 }
-
 @keyframes jump{
     0%   { transform:translate(0%, 40px) rotateX(30deg); } // 0%の時の位置
     100% { transform:translate(0%, 0%); }
 }
 
+// レスポンシブ
 @media only screen and (max-width: 960px) {
     .content-center{
         display: flex;
@@ -81,8 +87,8 @@
     }
 }
 
+/* 画面の高さが600px未満の場合のスタイル */
 @media only screen and (max-height: 599px) {
-    /* 画面の高さが600px未満の場合のスタイル */
     .btn--large{
         margin: 30px auto 20px auto;
     }
@@ -116,6 +122,7 @@
     }
 }
 
+/* 画面の高さが600px未満の場合のスタイル */
 @media only screen and (min-height: 600px) {
     .btn--large{
         margin: 40px auto 24px auto !important;

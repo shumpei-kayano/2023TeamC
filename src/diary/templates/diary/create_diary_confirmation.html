@@ -234,6 +234,7 @@
         document.querySelector('.dli-loading-1').classList.add('rotate-animation');
     });
 
+    // ネココのアドバイスを受けるボタンをクリックした時の処理
     document.getElementById('submitButton').addEventListener('click', function () {
       // ボタンがクリックされたらローディング画面を表示
       document.getElementById('loading').style.display = 'block';
@@ -241,15 +242,19 @@
       document.getElementById('second-popup').style.display = 'none';
       // アニメーションを開始
       document.querySelector('.dli-loading-1').classList.add('rotate-animation');
-  });
-  document.getElementById('submitButton2').addEventListener('click', function () {
-    // ボタンがクリックされたらローディング画面を表示
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('first-popup').style.display = 'none';
-    document.getElementById('second-popup').style.display = 'none';
-    // アニメーションを開始
-    document.querySelector('.dli-loading-1').classList.add('rotate-animation');
-});
+    });
+
+    // ポップアップ2枚目のネココのアドバイスを受けるボタンをクリックした時の処理
+    document.getElementById('submitButton2').addEventListener('click', function () {
+        // ボタンがクリックされたらローディング画面を表示
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('first-popup').style.display = 'none';
+        document.getElementById('second-popup').style.display = 'none';
+        // アニメーションを開始
+        document.querySelector('.dli-loading-1').classList.add('rotate-animation');
+    });
+
+    // ポップアップ2枚目のキャンセルボタンをクリックした時の処理
     document.getElementById('close-button2').addEventListener('click', function () {
         // ボタンがクリックされたらローディング画面を表示
         document.getElementById('loading').style.display = 'block';

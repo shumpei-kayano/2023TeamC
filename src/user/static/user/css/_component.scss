@@ -1,3 +1,4 @@
+// ボタンのスタイル
 @mixin button-style {
     width: 100%; /* ボタンを親要素と同じ幅に広げる */
     height: 100%; /* ボタンを親要素と同じ高さに広げる */
@@ -12,6 +13,7 @@
     font-family: 'Noto Sans JP', sans-serif;
 }
 
+// ボタン
 .btn {
     display: flex;
     justify-content: center;
@@ -24,6 +26,7 @@
     text-align: center; /* 中央寄せを追加 */
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
+    // 実行ボタン
     &--blue {
         width: 342px;
         height: 48px;
@@ -32,7 +35,7 @@
 
         button, a{
             @include button-style;
-            
+
             background: var(--custom-color, #00ABB6);
             color: #FFF;
             font-size: 1.6rem;
@@ -43,13 +46,14 @@
         }
     }
 
+    // スタートボタン
     &--large {
         width: 342px;
         height: 56px;
 
         button, a{
             @include button-style;
-            
+
             background: var(--custom-color, #00ABB6);
             color: #FFF;
             font-size: 1.6rem;
@@ -60,13 +64,14 @@
         }
     }
 
+    // キャンセルボタン
     &--white {
         width: 342px;
         height: 48px;
-        
+
         button, a{
             @include button-style;
-            
+
             background: var(--custom-color, #FFF);
             color:#00ABB6;
             font-size: 1.6rem;
@@ -79,13 +84,14 @@
         }
     }
 
+    // 削除ボタン
     &--red {
         width: 342px;
         height: 48px;
 
         button, a{
             @include button-style;
-            
+
             background: #FF4747;
             color: #FFF;
             font-size: 1.6rem;
@@ -106,7 +112,7 @@
 
         button {
             @include button-style;
-            
+
             background: var(--, #00ABB6);
             color: #FFF;
             font-size: 1.6rem;
@@ -158,7 +164,6 @@
     box-shadow: 0px 1.77528px 1.77528px 0px rgba(0, 0, 0, 0.25);
     margin-top: 5px;
 }
-
 #id_username, input[type="email"]{
     @include input-style;
 }
@@ -175,7 +180,6 @@
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
     a{
-        
         color: #A29C9C;
         font-size: 1.6rem;
         font-style: normal;
@@ -205,7 +209,7 @@
     gap: 10px;
     padding: 20px; // テキストと吹き出しの間に余白を追加
     background-color: $background_color; // 吹き出しの背景色を白に変更
-    border: 2px solid $header_color; // 枠線を追加    
+    border: 2px solid $header_color; // 枠線を追加
     border-radius: 10px; // 吹き出しの角を丸くする
 
   // 吹き出しの中のpタグにスタイルを適用
@@ -216,45 +220,42 @@
         line-height: normal;
         letter-spacing: 0.8px;
     }
-    
+
     // 吹き出しの尾部分の枠線を作成
     &::before {
         content: "";
         position: absolute;
         top: 100%;
         left: 50%; // 中央に設置
-        transform: translateX(-50%); // 中央揃えの調整        
+        transform: translateX(-50%); // 中央揃えの調整
         border-width: 20px; // 尾部分を大きくする
         border-style: solid;
         border-color: #04CAD6 transparent transparent transparent;
     }
-    
+
     // 吹き出しの尾部分の中を作成
     &::after {
         content: "";
         position: absolute;
         top: 100%;
         left: 50%; // 中央に設置
-        transform: translateX(-50%); // 中央揃えの調整        
+        transform: translateX(-50%); // 中央揃えの調整
         border-width: 18px; // ::beforeより2px小さくする
         border-style: solid;
         border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
     }
 }
 
+// ロゴと戻るボタン
 .header__back__img {
     display: flex;
-    align-items: center; 
-
+    align-items: center;
 
     a {
         display: flex;
         width: 96px;
         height: 48px;
-        // padding: 18px 28px 10px 28px;
-        // justify-content: center;
         align-items: center;
-        // flex-direction: row;
         border-radius: 50px;
         border: 1px solid #FFF;
         background:#00ABB6;
@@ -276,34 +277,19 @@
         margin: 0;  // マージンをリセット
     }
 
-    // img.logo-img {
-    //     margin-left: 170px;  // 中央揃え
-    // }
-
     .header__back__img a, .header__back__img .logo-img {
         display: inline-block; // <a>タグと.logo-imgクラスをインラインブロック要素として扱う
     }
-
-
-
-    // img {
-    //     margin-right: 8px;
-    //     margin-top: 2px;
-    // }
-}    
-
+}
+// ロゴ
 .logo-img {
     width: 90.621px;
     height: 48px;
-    // padding-right: 0px;
-    // justify-content: center;
-    // align-items: center;
     flex-shrink: 0;
     margin-right: 24px;
 }
 
 .back-home {
-    margin-left: -11px;
     margin-top: 50px;
     margin-bottom: 20px;
 }

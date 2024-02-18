@@ -3,6 +3,7 @@
     margin-right: 8px !important;
 }
 
+// 日記詳細
 .content__today-diary__text{
     width: 100%;
     background-color: $background_color;
@@ -12,41 +13,20 @@
     box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
     //outline: 0; // フォーカス時の枠線を削除
 
+    // 編集・削除ボタン
     .delete-edit__btn{
         display: flex;
         justify-content: space-between;
         margin-bottom: 16px;
-
-        // 編集・削除ボタン 文字のみ下線する場合のスタイル
-        // .icon__delete-btn,.icon__edit-btn{
-        //     cursor: pointer;
-        //     color: $a_blue_button;
-        //     font-size: 1.6rem;
-        //     font-weight: 700;
-        //     letter-spacing: 0.04rem;
-        //     .delete__icon, .edit__icon {
-        //         margin-right: 5px;
-        //         fill: $header_color;
-        //     }
-        // }
-        // .icon__delete-btn:hover,.icon__edit-btn:hover {
-        //     text-decoration: underline; // ホバー時に下線を表示
-        //     color: $a_blue_button_hover;  // ホバー時のテキスト色を変更
-        //     // // text-decoration: none;
-        //     // background-repeat: no-repeat;
-        //     // background-size: 99% 4px; // 横幅100%、縦幅4pxの線を引く
-        //     // background-position: 0 calc(100% + 3px); // 下側に3pxの余白を設ける
-        //     .delete__icon, .edit__icon{
-        //         fill: $a_blue_button_hover;
-        //     }
-        // }
     }
-  
+
     p{
         text-align: justify;
         margin: 0;
         margin-bottom: 24px;
     }
+
+    // 日記に保存された画像・動画
     .content__today-diary__img{
         display: flex;
         flex-wrap: wrap; // 子要素を折り返し、複数行に上から下へ並べる
@@ -54,13 +34,13 @@
         align-items: flex-start; // 親要素の開始位置から配置。上揃え
         align-content: flex-start; // 複数行にした時、上揃え
 
+        // 各ファイルのスタイル
         .content__today-diary__item{
             // 最大幅を余白に応じて可変させる
             // max-width: calc(100% - 20px); /* 画像間の余白を調整 */
             // height: calc(100% - 20px); /* 任意の高さを設定 */
             // max-width: calc(100% / 4.2);
             //margin-right: 10px; /* 画像間の余白を調整 */
-
             position: relative;
             width: 24%;
             padding-top: 18.5%;
@@ -74,6 +54,7 @@
     }
 }
 
+// 日記に保存された画像のボタンのスタイル
 .button {
     &--js-modal-button{
         // 日記に保存された画像のボタンのスタイルをリセット
@@ -104,6 +85,7 @@
     }
 }
 
+// 動画のサムネ
 .play-button {
     position: absolute;
     top: 50%;
@@ -118,6 +100,7 @@
     }
 }
 
+// 作成日
 .created-date{
     letter-spacing: 0.04em;
 }
@@ -168,10 +151,12 @@
     }
 }
 
+// カウンセリングネココの吹き出し内の範囲
 .content__diary__ccomment--counseling__p{
     height: 210px;
-    overflow-y: scroll; // 縦スクロールバーを表示
+    overflow-y: scroll;
 }
+// 縦スクロールバーを表示
 .content__diary__ccomment--counseling__p::-webkit-scrollbar {
     background-color: transparent;
     width: 2px;
@@ -235,10 +220,12 @@
     }
 }
 
+// 吹き出し内の範囲（通常）
 .content__diary__ccomment__p{
     height: 210px;
-    overflow-y: scroll; // 縦スクロールバーを表示
+    overflow-y: scroll;
 }
+// 縦スクロールバーを表示
 .content__diary__ccomment__p::-webkit-scrollbar {
     background-color: transparent;
     width: 2px;
@@ -251,6 +238,7 @@
     background-color: #00ABB6;
 }
 
+// 画像のスタイル
 .content__diary__comment__img{
     display: flex;
     align-items: center;
@@ -346,27 +334,15 @@
     // margin-left: auto;
 }
 
-// モーダルウィンドウの中身 画像に背景色を付与する場合のスタイル
+// モーダルウィンドウ中央寄せ
 .modal__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-
-//     margin-top: 125px;
-//     margin-bottom: 125px;
-//     position: relative;
-//     margin-left: auto;
-//     margin-right: auto;
-//     background: #fff;
-//     box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-//     border-radius: 13px;
-//     display: block;
-//     padding: 21px 8px 21px;
-//     height: auto;
 }
-
+// モーダルウィンドウの中身
 .modal__content {
     max-height: 500px; /* 適切な最大高さを設定 */
     overflow-y: auto; /* 縦スクロールを有効にする */
@@ -400,14 +376,7 @@
     background-color: rgb(173, 173, 173);
 }
 
-// .modal__button-area {
-//     // max-width: 843px;
-//     margin-right: auto;
-//     margin-left: auto;
-//     margin-top: 17px;
-//     padding-top: 15px;
-// }
-
+// モーダルを閉じるボタン
 .modal__button-wrap {
     margin-top: 24px;
     width: 342px;
@@ -433,6 +402,7 @@
     }
 }
 
+// レスポンシブ
 @media only screen and (max-width: 960px) {
 // モーダルウィンドウ
     /* グレー背景 */
@@ -455,11 +425,13 @@
     }
 }
 
+// chromeの時
 @media only screen and (max-height: 599px) {
     .modal__content {
         max-height: 400px !important; /* 適切な最大高さを設定 */
     }
 }
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px) {
     // モーダルウィンドウ
     /* グレー背景 */

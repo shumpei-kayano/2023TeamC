@@ -90,35 +90,46 @@
 {% endblock %}
 {% block js %}
 <script>
+    // ページが読み込まれた時のイベントリスナー
     document.addEventListener('DOMContentLoaded', function () {
+        // 要素を取得
         const slider = document.querySelector('.slider');
         const slides = document.querySelectorAll('.slide');
         const nextBtn = document.querySelector('.next-btn');
         const prevBtn = document.querySelector('.prev-btn');
         const dots = document.querySelectorAll('.dot-container');
         const completeBtn = document.querySelector('.complete-btn');
-    
+
+        // スライドのインデックス
         let currentSlide = 0;
 
         // ページが読み込まれたときにボタンの状態を更新
         updateButtons();
-    
+
+        // スライドを表示
         function showSlide(index) {
+            // すべてのスライドから 'active' クラスを削除し、指定されたスライドに 'active' クラスを追加
             slides.forEach((slide) => slide.classList.remove('active'));
             slides[index].classList.add('active');
+            // 横方向にスライドする際の移動距離を計算し、スライダーを移動
             slider.style.transform = `translateX(-${index * slides[0].clientWidth}px)`;
         }
-    
+
+        // ボタンの状態を更新
         function updateButtons() {
+            // 前へボタンを非活性にする
             prevBtn.disabled = currentSlide === 0;
+            // 最後のスライドに到達したら次へボタンを非表示にし、完了ボタンを表示する
             if (currentSlide === slides.length - 1) {
                 nextBtn.style.display = 'none';
                 completeBtn.style.display = 'block';
                 prevBtn.style.display = 'block'
-            } 
-            else if(currentSlide === 0){
-              prevBtn.style.display = 'none'
             }
+            // スライドのインデックスが0の時前へボタンを非表示にする
+            else if(currentSlide === 0){
+                prevBtn.style.display = 'none'
+            }
+            // はじめと最後以外のスライドの時、前へボタンと次へボタンを表示する
             else {
                 nextBtn.style.display = 'block';
                 completeBtn.style.display = 'none';
@@ -126,22 +137,30 @@
             }
         }
 
+        // 完了ボタンの遷移先を設定
         completeBtn.addEventListener('click', function () {
             window.location.href = '{% url "account_signup" %}'; // 遷移先のHTMLファイル名に置き換えてください
         });
-    
+
+        // ページネーションの状態を更新
         function updatePagination() {
             dots.forEach((dotContainer, index) => {
+                // HTML要素を取得
                 const dot = dotContainer.querySelector('.dot');
+                // 現在のスライドのインデックスと一致する場合、'active' クラスを追加
                 dot.classList.toggle('active', index === currentSlide);
             });
         }
-    
+
+        // 完了ボタンの表示状態を更新
         function showCompleteButton() {
+            // 最後のスライドに到達したら完了ボタンを表示
             completeBtn.style.display = currentSlide === slides.length - 1 ? 'block' : 'none';
         }
-    
+
+        // 次へボタンのクリックイベントリスナー
         nextBtn.addEventListener('click', function () {
+            // 最後のスライドに到達していない場合にスライドを更新
             if (currentSlide < slides.length - 1) {
                 currentSlide++;
                 showSlide(currentSlide);
@@ -150,8 +169,10 @@
                 showCompleteButton();
             }
         });
-    
+
+        // 前へボタンのクリックイベントリスナー
         prevBtn.addEventListener('click', function () {
+            // 最初のスライドに到達していない場合にスライドを更新
             if (currentSlide > 0) {
                 currentSlide--;
                 showSlide(currentSlide);
@@ -160,10 +181,12 @@
                 showCompleteButton();
             }
         });
-    
+
+        // ページネーションのクリックイベントリスナー
         dots.forEach((dotContainer, index) => {
             const dot = dotContainer.querySelector('.dot');
             dot.addEventListener('click', function () {
+                // クリックされたドットに対応するスライドに移動
                 currentSlide = index;
                 showSlide(currentSlide);
                 updateButtons();
@@ -172,9 +195,9 @@
             });
         });
     });
-    
+
     // フッターを削除
-    var footer = document.querySelector('footer');
+    let footer = document.querySelector('footer');
     footer.parentNode.removeChild(footer);
 </script>
 {% endblock %}
