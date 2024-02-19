@@ -127,10 +127,10 @@ header .header__weather span {
 
 main {
   margin-top: 50px; /*ヘッダー分空白を追加*/
+  padding-bottom: 90px; /* フッター分空白を追加 */
 }
 
 .ground {
-  height: calc(100vh - 110px); /* ビューポートの高さからヘッダーとフッターの高さを引いたもの */
   overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
   -webkit-overflow-scrolling: touch;
 }
@@ -1179,12 +1179,10 @@ table::-webkit-scrollbar-thumb:hover {
 
 @media only screen and (max-width: 480px) {
   .calendar__month table {
-    margin-bottom: 10px;
-    height: calc(100vh - 285px) !important;
+    height: 100%;
   }
   .calendar__month--today-td, .calendar__month__td {
-    font-size: 18px !important;
-    padding: 8px 0 !important;
+    font-size: 16px !important;
   }
   .calendar__month__img {
     max-width: 22px !important;

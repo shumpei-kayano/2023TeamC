@@ -139,15 +139,15 @@ table::-webkit-scrollbar-thumb:hover {
     // テーブル
     .calendar__month {
         table {
-            margin-bottom: 10px;
-            height: calc(100vh - 285px) !important; // 421px?
+            // margin-bottom: 10px;
+            // height: calc(100vh - 285px) !important; // 421px?
+            height: 100%;
         }
     }
 
     // 日付
     .calendar__month--today-td, .calendar__month__td {
-        font-size: 18px !important;
-        padding: 8px 0 !important;
+        font-size: 16px !important;
     }
     // カレンダー画像
     .calendar__month__img{
