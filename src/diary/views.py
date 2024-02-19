@@ -114,7 +114,7 @@ def aicomment_week(emotion,request):
                         #チャット相手の名前を適切に使用ください。
                         以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n"+"・"+ negative_diary.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {"role": "user", "content": user_diary}
             ]
@@ -151,7 +151,7 @@ def aicomment_month(emotion, request):
                         #チャット相手の名前を適切に使用ください。
                         以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+"・"+ positive_diary.content + "\n" +"・"+ positive_diary1.content + "\n"+ "・"+ negative_diary.content + "\n" + "・"+ negative_diary1.content + "\n" + "名前　" + username
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {"role": "user", "content": user_diary}
             ]
@@ -298,7 +298,7 @@ def create_diary_confirmation(request,old=None):
                             #チャット相手の名前を適切に使用ください。
                             以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+new_diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4",
                 messages= [
                         {   "role"      : "user",
                             "content"   : user_diary
@@ -346,7 +346,7 @@ def create_diary_confirmation2(request, pk):
                             # チャット相手の名前を適切に使用ください。
                             以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4",
                 messages= [
                         {   "role"      : "user",
                             "content"   : user_diary
@@ -432,7 +432,7 @@ def receive_nekoko_advice(request, pk):
                         #チャット相手の名前を適切に使用ください。
                         以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
       response = openai.ChatCompletion.create(
-          model="gpt-3.5-turbo",
+          model="gpt-4",
           messages= [
                   {   "role"      : "user",
                       "content"   : user_diary
@@ -542,7 +542,7 @@ def home_top(request):
                 #豆知識のみレスポンスしてください。
                 #対象年齢は１２歳です。"""
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages= [
                 {   "role"      : "user",
                     "content"   : short
@@ -727,7 +727,7 @@ def positive_conversion(request, pk,):
                     #レスポンスは、日記のポジティブ変換内容のみ返すこと。
                     以下が日記の内容です。\n""" + diary.content
     response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4",
     messages=[
         {"role": "user", "content": user_diary}
         ]
@@ -764,7 +764,7 @@ def positive_conversion2(request, pk):
                     #チャット相手の名前を適切に使用ください。
                     以下の文章はチャット相手の日記の内容と名前です。\n"""+ "日記内容\n"+diary.content + "\n" + "名前　" + username
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages= [
                 {   "role"      : "user",
                     "content"   : user_diary
