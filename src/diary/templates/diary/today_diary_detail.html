@@ -446,9 +446,11 @@ function closeVideo(videoId) {
       ];
   
       videos.forEach(function(video, index) {
-          setTimeout(function() {
-              video.pause();
-          }, 1000);
+          video.addEventListener('loadedmetadata', function() {
+              setTimeout(function() {
+                  video.pause();
+              }, 1000);
+          });
       });
   });
   
