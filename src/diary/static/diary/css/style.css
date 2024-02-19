@@ -237,11 +237,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
-@media only screen and (max-width: 480px) {
-  main {
-    padding-bottom: 170px; /* フッター分空白を追加 +60px */
-  }
-}
 .btn {
   display: flex;
   justify-content: center;
