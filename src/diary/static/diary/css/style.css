@@ -382,7 +382,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   height: 48px;
   cursor: pointer;
 }
-.btn--pink button, .btn--pink a {
+.btn--pink button {
   width: 100%; /* ボタンを親要素と同じ幅に広げる */
   height: 100%; /* ボタンを親要素と同じ高さに広げる */
   display: flex;
@@ -401,7 +401,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   font-size: 1.6rem;
   letter-spacing: 0.04rem;
 }
-.btn--pink button:hover, .btn--pink a:hover {
+.btn--pink button:hover {
   background-color: #e8b0cb; /* マウスをかざしたときの背景色 */
 }
 .btn--blue--info {
