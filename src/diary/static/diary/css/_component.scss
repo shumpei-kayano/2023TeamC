@@ -124,7 +124,7 @@
         height: 48px;
         cursor: pointer;
 
-        button, a{
+        button {
             @include button-style;
             
             background: #FFBBDC;

@@ -234,7 +234,7 @@
                         </div>
                 
                         <button id="video__btn" class="button button--js-modal-button" onclick="openvideo('video1', '{{ diary.movie1.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo1" autoplay muted>
                                 <source src="{{ diary.movie1.url }}" type="{{ diary.movie1.mime_type }}">
                             </video>
                         </button>
@@ -260,7 +260,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video2', '{{ diary.movie2.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo2" autoplay muted>
                                 <source src="{{ diary.movie2.url }}" type="{{ diary.movie2.mime_type }}">
                             </video>                             
                         </button>
@@ -286,7 +286,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video3', '{{ diary.movie3.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo3" autoplay muted>
                                 <source src="{{ diary.movie3.url }}" type="{{ diary.movie3.mime_type }}">
                             </video>                               
                         </button>
@@ -312,7 +312,7 @@
                         </div>
                     
                         <button class="button button--js-modal-button" onclick="openvideo('video4', '{{ diary.movie4.url }}')">
-                            <video id="myVideo" autoplay muted>
+                            <video id="myVideo4" autoplay muted>
                                 <source src="{{ diary.movie4.url }}" type="{{ diary.movie4.mime_type }}">
                             </video>                               
                         </button>
@@ -437,14 +437,21 @@ function closeVideo(videoId) {
 
         music.play();
     });
-    const video = document.getElementById('myVideo');
+        var videos = [
+        document.getElementById('myVideo1'),
+        document.getElementById('myVideo2'),
+        document.getElementById('myVideo3'),
+        document.getElementById('myVideo4')
+    ];
 
-    // ビデオのメタデータが読み込まれた後に実行されるイベントリスナーを追加
-    video.addEventListener('loadedmetadata', function() {
-      setTimeout(function() {
-      // ビデオをすぐに一時停止する
-      video.pause();
-      }, 5); 
+    videos.forEach(function(video, index) {
+        setTimeout(function() {
+            video.play();
+        }, index * 10);
+
+        setTimeout(function() {
+            video.pause();
+        }, (index + 1) * 10);
     });
 
 </script>
