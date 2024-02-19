@@ -51,12 +51,12 @@ th, td {
     box-sizing: border-box; // 要素の横幅や高さの計算にボーダーボックスモデルを使用。ボーダーやパディングも横幅や高さに含む。
 }
 
-// 週間カレンダーテーブルの日付、曜日
+// 週間カレンダーテーブルの日付
 .week-calendar__today, .week-calendar__date{
     vertical-align: bottom;
     width: 80px;
     // height: 38px;
-    padding-top: 8px;
+    padding-top: 5px;
     padding-bottom: 0;
     font-size: 1.4rem;
     letter-spacing: 0.04em;
@@ -71,7 +71,7 @@ th, td {
     font-size: 1.8rem;
     font-weight: 500;
     padding-top: 0;
-    padding-bottom: 8px;
+    padding-bottom: 5px;
 }
 // 週間カレンダー画像
 .week-calendar__emotion-img{
