@@ -36,7 +36,7 @@
 
 // カレンダー
 .calendar__month {
-    // overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
+    overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
     //height: auto; /* コンテンツに基づいて高さを調整できるように固定の高さを削除 */
     -webkit-overflow-scrolling: touch; // スクロール時の滑らかさを設定
 
@@ -45,27 +45,6 @@
         width: 100%;
         table-layout: fixed; /* テーブルのレイアウトを固定にする */
         height: calc(100vh - 215px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
-        overflow-y: scroll;
-    }
-    // スクロールバー背景色
-    table::-webkit-scrollbar {
-        background-color: transparent;
-        // スクロールバーの幅を調整
-        width: 2px;
-        // height: 2px;
-        // 角丸を指定
-        border-radius: 20px;
-    }
-    // スクロールボタン
-    table::-webkit-scrollbar-thumb {
-        background-color: rgb(216, 216, 216);
-        // 角丸を指定
-        border-radius: 20px;
-        // padding-left: 2.4rem;
-    }
-    // スクロールバー（hover時）
-    table::-webkit-scrollbar-thumb:hover {
-        background-color: rgb(173, 173, 173);
     }
 
     // 日付、曜日
@@ -131,6 +110,27 @@
             max-height: 18px;  // 画像の高さを制限
         }
     }
+}
+
+// スクロールバー背景色
+table::-webkit-scrollbar {
+    background-color: transparent;
+    // スクロールバーの幅を調整
+    width: 2px;
+    // height: 2px;
+    // 角丸を指定
+    border-radius: 20px;
+}
+// スクロールボタン
+table::-webkit-scrollbar-thumb {
+    background-color: rgb(216, 216, 216);
+    // 角丸を指定
+    border-radius: 20px;
+    // padding-left: 2.4rem;
+}
+// スクロールバー（hover時）
+table::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(173, 173, 173);
 }
 
 // スマホ用

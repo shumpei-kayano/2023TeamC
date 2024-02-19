@@ -237,6 +237,11 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
+@media only screen and (max-width: 480px) {
+  main {
+    padding-bottom: 170px; /* フッター分空白を追加 +60px */
+  }
+}
 .btn {
   display: flex;
   justify-content: center;
@@ -867,22 +872,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   table-layout: auto;
   height: calc(100vh - 215px);
   background-color: #fff;
-  overflow-y: scroll;
-}
-
-.week-calendar__tablee::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.week-calendar__table::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.week-calendar__table::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
 }
 
 th, td {
@@ -1111,25 +1100,13 @@ th, td {
 }
 
 .calendar__month {
+  overflow: auto; /* カレンダーが横に広がった場合にスクロール可能にする */
   -webkit-overflow-scrolling: touch;
 }
 .calendar__month table {
   width: 100%;
   table-layout: fixed; /* テーブルのレイアウトを固定にする */
   height: calc(100vh - 215px);
-  overflow-y: scroll;
-}
-.calendar__month table::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-.calendar__month table::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-.calendar__month table::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
 }
 .calendar__month th, .calendar__month td {
   text-align: center;
@@ -1180,6 +1157,21 @@ th, td {
   transform: translate(-50%, 0);
   max-width: 18px;
   max-height: 18px;
+}
+
+table::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+table::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+table::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
 }
 
 @media only screen and (max-width: 480px) {
