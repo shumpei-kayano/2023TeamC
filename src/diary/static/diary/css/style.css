@@ -128,10 +128,26 @@ header .header__weather span {
 main {
   margin-top: 50px; /*ヘッダー分空白を追加*/
   padding-bottom: 90px; /* フッター分空白を追加 */
+  height: 100%;
+  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
+}
+
+main::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+  border-radius: 20px;
+}
+
+main::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 20px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 173, 173);
 }
 
 .ground {
-  overflow-y: scroll; /* コンテンツが画面外になった場合にスクロールバーを表示 */
   -webkit-overflow-scrolling: touch;
 }
 .ground--white {
@@ -139,21 +155,6 @@ main {
 }
 .ground--blue {
   background-color: #EEFEFF;
-}
-
-.ground::-webkit-scrollbar {
-  background-color: transparent;
-  width: 2px;
-  border-radius: 20px;
-}
-
-.ground::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 20px;
-}
-
-.ground::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(173, 173, 173);
 }
 
 footer {
@@ -222,14 +223,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   h1 {
     font-size: 20px;
   }
-  .ground::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    border-radius: 20px;
-  }
-  .ground::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-  }
   footer {
     height: 60px;
     padding-right: 24px;
@@ -242,11 +235,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   footer .nav-text {
     font-size: 10px; /* テキストのサイズを10%に調整 */
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
-  }
-}
-@media only screen and (max-width: 480px) {
-  .ground {
-    height: calc(100vh - 183px) !important;
   }
 }
 .btn {
@@ -1178,6 +1166,9 @@ table::-webkit-scrollbar-thumb:hover {
 }
 
 @media only screen and (max-width: 480px) {
+  .calendar__month {
+    height: 100%;
+  }
   .calendar__month table {
     height: 100%;
   }
