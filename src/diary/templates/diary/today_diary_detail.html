@@ -371,7 +371,7 @@
                 </button>
               </div>
               {% endcomment %}
-              <img class="content__diary__comment__img-item" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
+              <img class="content__diary__comment__img-item diary-detail-img--animation" src="{% static 'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
         {% endif %} 
     </div><!-- scroll content -->
 </main>
@@ -436,6 +436,18 @@ function closeVideo(videoId) {
         });
 
         music.play();
+    });
+        var videos = [
+        document.getElementById('myVideo1'),
+        document.getElementById('myVideo2'),
+        document.getElementById('myVideo3'),
+        document.getElementById('myVideo4')
+    ];
+
+    videos.forEach(function(video, index) {
+        setTimeout(function() {
+            video.pause();
+            }, 1000);
     });
 </script>
 {% endblock %}
