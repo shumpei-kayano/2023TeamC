@@ -1,77 +1,59 @@
 /* 共通の記述 */
 .content {
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none; // ユーザーの操作を許可しない
     transition: opacity 0.3s ease-in-out;
 }
+// appearクラス追加時
 article.appear .content {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto; // ユーザーの操作を許可する
 }
 .animation .content {
     opacity: 1;
     pointer-events: auto;
 }
 
-#animation-slideout {
-    display: none;
-    // z-index: 1000;
-    // position: fixed;
-    // top: 0;  // 上部に配置
-    // // left: 0;
+// スライドアウトアニメーション
+// #animation-slideout {
+//     display: none;
+//     // z-index: 1000;
+//     // position: fixed;
+//     // top: 0;  // 上部に配置
+//     // // left: 0;
 
-    // left: 50%;  // 水平方向に中央に配置
-    // transform: translateX(-50%);  // 水平方向に中央に配置
-    // width: 39rem;
-    // max-width: 100%; // ビューポートの幅を超えないように設定
-    // height: 100%;
-    // background: $header_color;
+//     // left: 50%;  // 水平方向に中央に配置
+//     // transform: translateX(-50%);  // 水平方向に中央に配置
+//     // width: 39rem;
+//     // max-width: 100%; // ビューポートの幅を超えないように設定
+//     // height: 100%;
+//     // background: $header_color;
 
-    // 背景内の画像のスタイル
-    #animation-bg__flex-box{
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+//     // 背景内の画像のスタイル
+//     #animation-bg__flex-box{
+//         display: flex;
+//         height: 100%;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
 
-        .animation-bg__logo{
-            width: 200px;
-            height: auto;
-            padding: 10px 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            margin-bottom: 50px;
-        }
-        .animation-bg__img{
-            width: 221px;
-            height: auto;
-        }
-    }
-}
+//         .animation-bg__logo{
+//             width: 200px;
+//             height: auto;
+//             padding: 10px 20px;
+//             background-color: #fff;
+//             border-radius: 10px;
+//             margin-bottom: 50px;
+//         }
+//         .animation-bg__img{
+//             width: 221px;
+//             height: auto;
+//         }
+//     }
+// }
 
-// アニメーション
-.animation-bg {
-    background: $header_color;
-    content: "";
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    animation: PageAnime-slide 3s forwards;
-}
-@keyframes PageAnime-slide {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-// /* ページを進む場合のスタイル */
-// .slide-in .animation-bg {
+// // アニメーション
+// .animation-bg {
 //     background: $header_color;
 //     content: "";
 //     position: fixed;
@@ -81,44 +63,64 @@ article.appear .content {
 //     width: 100%;
 //     height: 100vh;
 //     animation: PageAnime-slide 3s forwards;
-//     // animation-name: PageAnime-fade;
-//     // animation-duration: 0.3s;
-//     // animation-delay: 0.3s;
-//     // animation-timing-function: ease-in-out;
-//     // animation-fill-mode: forwards;
-//     // pointer-events: none;
 // }
 // @keyframes PageAnime-slide {
 //     0% {
 //         transform: translateX(-100%);
-//         opacity: 1;
-//     }
-//     80% {
-//         opacity: 1;
 //     }
 //     100% {
-//         transform: translateX(100%);
-//         opacity: 0;
+//         transform: translateX(0);
 //     }
 // }
-// @keyframes PageAnime-fade {
-//     0% {
-//         opacity: 1;
-//     }
-//     100% {
-//         opacity: 0;
-//     }
-// }
+// // /* ページを進む場合のスタイル */
+// // .slide-in .animation-bg {
+// //     background: $header_color;
+// //     content: "";
+// //     position: fixed;
+// //     z-index: 999;
+// //     top: 0;
+// //     left: 0;
+// //     width: 100%;
+// //     height: 100vh;
+// //     animation: PageAnime-slide 3s forwards;
+// //     // animation-name: PageAnime-fade;
+// //     // animation-duration: 0.3s;
+// //     // animation-delay: 0.3s;
+// //     // animation-timing-function: ease-in-out;
+// //     // animation-fill-mode: forwards;
+// //     // pointer-events: none;
+// // }
+// // @keyframes PageAnime-slide {
+// //     0% {
+// //         transform: translateX(-100%);
+// //         opacity: 1;
+// //     }
+// //     80% {
+// //         opacity: 1;
+// //     }
+// //     100% {
+// //         transform: translateX(100%);
+// //         opacity: 0;
+// //     }
+// // }
+// // @keyframes PageAnime-fade {
+// //     0% {
+// //         opacity: 1;
+// //     }
+// //     100% {
+// //         opacity: 0;
+// //     }
+// // }
 
-@media only screen and (max-width: 960px) {
-    #animation-slideout{
-        width: 100%;
-        max-width: none; // 追加
-    }
-}
-@media only screen and (min-height: 599px) {
-    .animation-bg__logo{
-        width: 260px !important;
-        margin-bottom: 70px !important;
-    }
-}
+// @media only screen and (max-width: 960px) {
+//     #animation-slideout{
+//         width: 100%;
+//         max-width: none; // 追加
+//     }
+// }
+// @media only screen and (min-height: 600px) {
+//     .animation-bg__logo{
+//         width: 260px !important;
+//         margin-bottom: 70px !important;
+//     }
+// }

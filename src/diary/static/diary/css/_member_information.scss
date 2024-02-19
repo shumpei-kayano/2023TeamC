@@ -1,9 +1,11 @@
+// 中央寄せ
 .user-infomation--center{
     display: flex;
     flex-direction: column;
     justify-content: center; // コンテンツを垂直方向に中央寄せ
     align-items: center; // コンテンツを水平方向に中央寄せ
 }
+// ユーザー情報全体
 .content__user-info__list{
     display: flex;
     justify-content: space-between;
@@ -11,6 +13,7 @@
     padding: 12px 15px;
     border-bottom: 1px solid #ccc;
 
+    // 変更ボタン
     .content__user-info__list__btn{
         cursor: pointer;
         border: none;
@@ -38,16 +41,18 @@
     }
 }
 
+// ユーザーパスワードテキスト
 #user-info-password{
     font-size: 1.4rem;
 }
-
+// 画像
 .user-infomation__image {
     margin-top: 30px;
     margin-bottom: 24px;
 }
 
-@media only screen and (min-height: 599px) {
+// スマホまたは、全画面表示時のみ適用
+@media only screen and (min-height: 600px) {
     .user-infomation{
         margin-bottom: 50px;
     }

@@ -1,68 +1,4 @@
-label {
-    font-size: 1.4rem;
-}
-
-.header__back__img  a{
-    margin-left: 24px;
-    display: flex;
-    width: 96px;
-    height: 48px;
-    // padding: 18px 28px 10px 28px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    border: 1px solid #FFF;
-    background:#00ABB6;
-
-    color: #FFF;
-    text-align: center;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.56px;
-
-    &:hover {
-        background-color: #008999;
-    }
-
-    img {
-        margin-right: 8px;
-        margin-top: 2px;
-    }
-        logo-img {
-        margin-left: 170px;  // 中央揃え
-    }
-}    
-
-.btn--blue {
-    margin-top: 40px;
-    margin-left: 24px;
-}
-
-.signup-text {
-    color: #333;
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 1.12px;
-    text-align: center; // テキストを中央揃えにする
-}
-
-.login-text {
-    text-align: center; // テキストを中央揃えにする
-    color: #333;
-    text-align: center;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 170%; /* 23.8px */
-    letter-spacing: 0.56px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
+// 入力フォーム必須部分のスタイル
 .user-infomation__span{
     margin-left: 24px;
     font-size: 1.4rem;
@@ -78,19 +14,20 @@ label {
     padding: 0;
     padding-top: 24px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; // 要素が横に並び切れない場合に改行
     justify-content: space-between;
 }
 .progressbar li {
     position: relative;
-    list-style-type: none;
+    list-style-type: none; //  リストのデフォルトのマーカーを非表示
     text-align: center;
-    text-transform: uppercase;
+    text-transform: uppercase; // テキストを大文字に変換
     width: 33.333%;
     color: #999999;
     font-weight: bold;
-    counter-increment: steps;
+    counter-increment: steps; // カウンター steps を増やす
 }
+// 各進捗ステップの前に表示される番号やカウンターに関するスタイル
 .progressbar li:before {
     position: relative;
     z-index: 2;
@@ -98,14 +35,15 @@ label {
     width: 26px;
     height: 26px;
     margin: 7px auto;
-    content: '';
+    content: ''; // コンテンツなし
     line-height: 26px;
     font-size: 12px;
     text-align: center;
     border-radius: 50%;
     background-color: #ccc;
-    content: counter(steps);
+    content: counter(steps); // カウンターの値を表示
 }
+// 各進捗ステップの間に表示される線に関するスタイル
 .progressbar li:after {
     position: absolute;
     z-index: 1;
@@ -116,31 +54,31 @@ label {
     content: '';
     background-color: #ccc;
 }
+// 兄弟要素のグループの中で最初の要素の場合は線を非表示にする
 .progressbar li:first-child:after {
     content: none;
 }
+// アクティブまたは完了ステップのテキスト色
 .progressbar li.active,
 .progressbar li.complete{
     color: #04CAD6;
 }
+// アクティブまたは完了ステップの番号やカウンターの背景色
 .progressbar li.active:before,
 .progressbar li.complete:before {
     background-color: #04CAD6;
     color: #FFF;
 }
+// アクティブまたは完了ステップの間の線の色
 .progressbar li.active:after,
 .progressbar li.complete:after {
     background-color: #04CAD6;
 }
 
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px){
     // 登録ステップ
     .progressbar {
         padding-top: 0;
     }
 }
-
-/* 装飾 */
-// ul{
-//   margin: 40px 0 !important;
-// }

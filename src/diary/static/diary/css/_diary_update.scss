@@ -1,3 +1,4 @@
+// 作成日
 .created-date_update{
     display: block;
     padding: 10px;
@@ -7,23 +8,26 @@
     letter-spacing: 0.04em;
 }
 
+// ファイル選択ボタン・削除ボタン
 .custom-file-upload__btn{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
+// ファイル選択削除ボタン
 #custom-file-upload__delete-btn{
     padding-right: 0;
 }
-
+// ファイル選択ボタンを囲う要素
 .backcolor{
     padding: 3px 10px 5px 10px;
 }
+// 削除ボタン選択時
 .backcolor.checked {
     background-color:  #80808085;
     border-radius: 5px;
     padding: 3px 10px 5px 10px;
+    // ボタンのテキストとアイコン
     #custom-file-upload__delete-btn, .a--blue--svg{
         color: #FFF;
         fill: #fff;

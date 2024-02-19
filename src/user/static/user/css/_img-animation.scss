@@ -4,6 +4,7 @@
 }
 @keyframes buruburu {
     0% {
+        // translate(x(水平), y(垂直)) rotateZ(角度(奥行き))
         transform: translate(0, 2px) rotateZ(0deg);
     }
     25% {
@@ -23,12 +24,13 @@
 // フェードイン
 .article__content {
     opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
+    pointer-events: none; // ユーザーの操作を許可しない
+    // 要素の不透明度が変化する時間とイージングを設定
+    transition: opacity 0.3s ease-in-out; // 0.3秒かけて変化 ease-in-out(っくりと始まり、中間で速くなり、最後にゆっくりと終わる)
 }
 article.appear .article__content {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto; // ユーザーの操作を許可
 }
 .animation .article__content {
     opacity: 1;

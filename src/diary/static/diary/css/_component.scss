@@ -1,3 +1,4 @@
+// ボタンのスタイルをmixinで定義
 @mixin button-style {
     width: 100%; /* ボタンを親要素と同じ幅に広げる */
     height: 100%; /* ボタンを親要素と同じ高さに広げる */
@@ -14,6 +15,7 @@
     letter-spacing: 0.04em; // remより広めの文字間隔を設定
 }
 
+// ボタン
 .btn {
     display: flex;
     justify-content: center;
@@ -26,6 +28,7 @@
     text-align: center; /* 中央寄せを追加 */
     cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
+    // 実行ボタン
     &--blue {
         width: 342px;
         height: 48px;
@@ -50,6 +53,7 @@
         }
     }
 
+    // ホームトップボタン
     &--large {
         width: 342px;
         height: 56px;
@@ -69,6 +73,7 @@
         }
     }
 
+    // キャンセルボタン
     &--white {
         width: 342px;
         height: 48px;
@@ -93,6 +98,7 @@
         }
     }
 
+    // ログアウト・削除ボタン
     &--red {
         width: 342px;
         height: 48px;
@@ -112,6 +118,7 @@
         }
     }
 
+    // カウンセリングボタン
     &--pink {
         width: 342px;
         height: 48px;
@@ -131,7 +138,7 @@
         }
     }
 
-    
+    // フォームボタン
     &--blue--info {
         width: 342px;
         height: 48px;
@@ -151,6 +158,7 @@
     }
 }
 
+// ホームトップテキスト
 .content__home__text {
     position: relative; // 追加
     fill: $background_color;
@@ -204,7 +212,7 @@
         border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
     }
 }
-// スクロールバーつけたいとき
+// 吹き出し内スクロールバー
 .content__home__text__scroll{
     height: 56px;
     overflow-y: scroll; // 縦スクロールバーを表示
@@ -221,6 +229,7 @@
     background-color: #00ABB6;
 }
 
+// 設定メニュー
 .setting__menu ul{
     list-style: none; /* リストアイテムのマーカーを非表示にする */
     margin-left: 24px;
@@ -246,11 +255,11 @@
         text-decoration: none;
         cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
-            img {
-                width: 24px;
-                height: 24px;
-                flex-shrink: 0;
-            
+        // 矢印アイコン
+        img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
         }
     }
 }
@@ -258,6 +267,7 @@
     background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
 }
 
+// ヘルプメニュー
 .help__menu ul{
     list-style: none; /* リストアイテムのマーカーを非表示にする */
     margin-left: 24px;
@@ -283,19 +293,19 @@
         text-decoration: none;
         cursor: pointer; /* カーソルをポインターに変更することでクリッカブルであることを示す */
 
-            img {
-                width: 24px;
-                height: 24px;
-                flex-shrink: 0;
-            
+        // 矢印アイコン
+        img {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
         }
     }
 }
-
 .help__menu ul li a:hover {
     background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
 }
 
+// aタブのボタン
 .a--blue {
     display: flex;
     width: 72px;
@@ -340,6 +350,7 @@
     }
 }
 
+// カレンダータブ
 .a--tab {
     display: flex; // 追加
     text-align: center; // 追加
@@ -397,10 +408,10 @@
     background-color: #00ABB6;
 }
 
+// カレンダーページネーション
 .next__button {
     display: flex;
 }
-
 .next__button a {
     display: flex;
     margin-right: 10px;
@@ -419,12 +430,12 @@
         background-color: $setting_menu_hover; /* マウスをかざしたときの背景色 */
     }
 }
-
 .next__button a img {
     display: block;
     height: auto; /* 高さは自動 */
 }
 
+// ユーザーフォーム
 .user-infomation {
     width: 342px;
     // height: 273px;
@@ -432,20 +443,22 @@
     margin-right: 24px;
     margin-top: 24px;
 
+    // ラベル
     .user-label{
         font-size: 1.4rem;
         margin: 0;
     }
-
-        .user-info {
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin: 0;
-            padding: 16px;
-            border-bottom: 1px solid #333;
+    // テキスト
+    .user-info {
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin: 0;
+        padding: 16px;
+        border-bottom: 1px solid #333;
     }
 }
 
+// トップに戻るボタン
 .back-home a {
     color: #A29C9C;
     font-size: 1.6rem;
@@ -457,12 +470,14 @@
     cursor: pointer;
 }
 
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px) {
+    // ホームトップテキスト
     .content__home__text {
         height: 120px;
         padding: 20px; // テキストと吹き出しの間に余白を追加
     }
-    // スクロールバーつけたいとき
+    // スクロールバー
     .content__home__text__scroll{
         height: 75px;
     }
