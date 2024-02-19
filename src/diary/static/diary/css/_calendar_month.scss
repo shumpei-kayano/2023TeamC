@@ -144,6 +144,9 @@ table::-webkit-scrollbar-thumb:hover {
             // height: calc(100vh - 285px) !important; // 421px?
             height: 100%;
         }
+        tbody {
+            height: 100%;
+        }
     }
 
     // 日付
