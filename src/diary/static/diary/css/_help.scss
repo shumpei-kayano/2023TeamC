@@ -1,4 +1,6 @@
+// ヘルプページのスタイル
 .help__group{
+    // タイトル
     h2{
         font-size: 2rem;
         font-weight: 500;
@@ -14,17 +16,20 @@
         letter-spacing: 0.04em; // remより広めの文字間隔を設定
     }
 
+    // olリスト
     .help__help__list_text-wrap{
         margin: 0 auto;
         padding: 0 2.4rem 0 4rem;
         font-size: 1.6rem;
-    
+
+        // 本文
         .help__list_text{
             margin-bottom: 1.6rem;
 
             p{
                 margin: 0;
                 text-align: justify;
+                // 本文中のボタン
                 .help__btn--blue{
                     border:#00ABB6 1px solid;
                     padding: 0 1rem;
@@ -34,6 +39,7 @@
                     color: #FFF;
                     font-size: 1.4rem;
                 }
+                // 本文中のボタン（白）
                 .help__btn--white{
                     border:#00ABB6 1px solid;
                     padding: 0 1rem;
@@ -43,6 +49,7 @@
                     color: #00ABB6;
                     font-size: 1.4rem;
                 }
+                // 本文中のボタン（タブ・白）
                 .help__tab-btn--white{
                     border:#00ABB6 1px solid;
                     padding: 0 1rem;
@@ -52,6 +59,7 @@
                     color: #00ABB6;
                     font-size: 1.4rem;
                 }
+                // 本文中のボタン（タブ）
                 .help__tab-btn{
                     border:#00ABB6 1px solid;
                     padding: 0 1rem;
@@ -61,21 +69,25 @@
                     color: #FFF;
                     font-size: 1.4rem;
                 }
+                // 本文中のボタン余白
                 #left--4, #left--3, #left--2, #left--1{
                     margin-left: 0;
                 }
             }
 
+            // ヘルプ図
             .help__chart{
                 margin-top: 1.6rem;
                 text-align: center;
                 margin-left: -1.6rem;
             }
 
+            // 注意書き
             .help__list_text-red{
                 color: red;
             }
 
+            // 最後のヘルプ図
             .help__chart--last{
                 margin-top: 1.6rem;
                 text-align: center;
@@ -86,7 +98,7 @@
     }
 }
 
-
+// ヘルプページのスタイル
 .content__help__group{
     h2{
         font-size: 2rem;
@@ -154,8 +166,3 @@
     }
 }
 
-.img-dango {
-    // position: relative;
-    margin-top: 340px;
-    margin-left: 24px;
-}

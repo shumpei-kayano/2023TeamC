@@ -12,16 +12,15 @@ body {
     height: 100dvh; // アドレスバーの高さを考慮したビューポートの高さを設定
     margin: 0; // ブラウザのデフォルトスタイルを無効化
     display: flex; // 要素を横並びにする
-    flex-direction: column; // 縦並びにする    
+    flex-direction: column; // 縦並びにする
     // 背景画像を設定
     background-image: url("https://teamc.o-hara-oita.click/static/user/assets/html_groud.png");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center top;
+    background-size: cover; // 画像を拡大縮小し、余白ができないようにする
+    background-attachment: fixed; // 背景画像をページ上で固定
+    background-position: center top; // 背景画像の位置を中央上部に配置
 }
 
 p{
-    // line-height: 1.7rem;
     line-height: 170%;
     letter-spacing: 0.04rem;
 }
@@ -31,10 +30,12 @@ a{
     text-decoration: none; // リンクの下線を消す
 }
 
+// li要素
 .menu__item, .list_item{
     list-style: none;
 }
 
+// 背景色
 .ground{
     &--white{
         background-color: $background_color;
@@ -44,93 +45,23 @@ a{
     }
 }
 
-header, .ground, footer {
+// 表示領域
+.ground {
     width: 39rem; // 任意の幅を設定
     max-width: 100%; // ビューポートの幅を超えないように設定
     // height: 100%;
     margin: 0 auto; // 中央に配置
 }
 
-header {
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
-    // position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    color: $header_text_color;
-    background-color: $main_background_color;
-    height: 5rem; // calc(5rem / 844 * 100%);
-    display: flex;
-    align-items: center; /* 垂直方向の中央揃え */
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    margin-bottom: 0; // 追加：ヘッダーの下のマージンを0に設定
-
-    h1 {
-        font-size: 2rem;
-        font-weight: 400;
-    }
-
-    .header__spacer--top{
-        margin-right: auto; /* h1以外の要素を左寄せにする */
-        display: flex;
-        width: 7.2rem;
-        height: 2.8rem;
-    }
-
-    .header__button {
-        margin-right: auto; /* h1以外の要素を左寄せにする */
-        display: flex;
-
-        a {
-            display: flex;
-            align-items: center;
-            width: 7.2rem;
-            height: 2.8rem;
-            font-size: 1.4rem;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: bold;
-            color: #fff;
-            border-radius: 5px;
-            border: 0.1rem solid #FFF;
-            background-color: $header_color;
-
-            svg {
-                margin-right: 0.5rem;
-            }
-
-            &:hover {
-                background-color: #00A3AE;
-            }
-        }
-    }
-    .header__spacer, .header__weather{
-        margin-left: auto; /* 要素を右寄せにする */
-        width: 7.2rem;
-        height: 2.8rem;
-    }
-    .weatherImg{
-        max-width: 2.2rem;
-        height: auto;
-        padding-bottom: 0.4rem;
-    }
-    .header__weather span{
-        margin-left: 0.5rem;
-        font-size: 1.6rem;
-        text-align: right;
-    }
-}
-
+// ロゴ画像
 .logo-img {
-    margin-top: 0; // 追加：次の要素の上のマージンを0に設定
+    margin-top: 0;
 }
 
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (max-width: 960px) {
-    header, .ground, footer {
+    // 画面全体を覆う
+    .ground {
         width: 100%;
         max-width: none; // 追加
     }
@@ -138,48 +69,4 @@ header {
         width: 100% !important;
         max-width: none !important; // 追加
     }
-
-    header {
-        height: 50px;
-        padding-left: 24px;
-        padding-right: 24px;
-
-        a {
-            width: 72px;
-            height: 28px;
-            font-size: 14px;
-            border: 1px solid #FFF;
-
-            svg {
-            margin-right: 5px;
-            }
-            &:hover {
-            background-color: #00A3AE;
-            }
-        }
-    }
-    h1 {
-        font-size: 20px;
-    }
-
-    // footer {
-    //     height: 15px;
-    //     padding-right: 24px;
-    //     padding-left: 24px;
-    //     // bottom: 0;
-    //     position: static; // 修正：フッターの位置を固定しない
-    //     // margin-top: auto; // 追加：フッターを他のコンテンツの下に自動的に配置
-    //     background-color: $main_background_color;
-    //     }
-    }
-
-// .ground.ground--white {
-//     background-color: white;
-//     flex-grow: 1;
-// }
-
-// .tutorial1-page footer margin {
-//     background-color: white;
-// }
-
-
+}

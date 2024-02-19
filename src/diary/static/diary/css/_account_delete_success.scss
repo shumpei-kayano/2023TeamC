@@ -1,3 +1,4 @@
+// 見出し
 .account__delete__success__title{
     margin: 0;
     font-size: 2rem;
@@ -6,7 +7,7 @@
     margin-bottom: 30px;
     text-align: center;
 }
-
+// 画像
 .account__delete__success__img{
     display: block;
     margin-right: auto;
@@ -15,6 +16,7 @@
     margin-bottom: 20px;
 }
 
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px) {
     .account__delete__success__title{
         margin-top: 40px;

@@ -16,3 +16,4 @@ django_seed
 django-axes
 psycopg2
 python-dotenv
+opencv-python

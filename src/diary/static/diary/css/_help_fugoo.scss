@@ -1,27 +1,25 @@
+// 画面全体
 .container{
-    // font-family: 'Arial', sans-serif;
-    // margin: 0;
-    // padding: 0;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     width: 100%;
     height: calc(100vh - 195px);
 }
-
 .slider-container {
     position: relative;
     width: 100%;
     overflow: hidden;
 }
 
+// スライド全体
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 500%; /* スライドの数に応じて調整 */
 }
 
+// スライド
 .slide {
+    // フレックスアイテムが親コンテナの幅に対して20%の幅を持ち、伸縮しないように設定
+    // flex-grow: 0 伸びない、flex-shrink: 0 縮まない、flex-basis: 20% アイテムの基本サイズ
     flex: 0 0 20%; /* スライドの数に応じて調整 */
     padding: 20px;
     padding-top: 24px;
@@ -62,6 +60,7 @@
         margin-top: 10px;
         text-align: center;
     }
+    // 下線
     .slid__span__border{
         letter-spacing: 0.04rem;
         font-weight: 700;
@@ -69,6 +68,7 @@
     }
 }
 
+// 各スライドの画像
 .slid__img--1{
     padding-top: 24px;
     width: 250px;
@@ -84,10 +84,13 @@
     padding-top: 24px;
 }
 
+// アクティブなスライド
 .slide.active {
+    // 要素を可視状態にする 要素が非表示の場合と同じスペースを占有
     visibility: visible;
 }
 
+// ページネーション
 .controls {
     width: 360px;
     position: absolute;
@@ -104,12 +107,12 @@ button {
     cursor: pointer;
 }
 
+// ドット
 .pagination {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .dot-container {
     height: 44px;
     width: 44px;
@@ -128,6 +131,7 @@ button {
     cursor: pointer;
 }
 
+// ページネーションボタン
 .pagination__btn{
     display: flex;
     align-items: center;
@@ -136,6 +140,7 @@ button {
     margin-right: 24px;
     margin-bottom: 24px;
 }
+// 前へボタン
 .prev-btn{
     padding: 12px 32px;
     background: var(--custom-color, #FFF);
@@ -151,6 +156,7 @@ button {
         background-color: $cancel_button_hover; /* マウスをかざしたときの背景色 */
             }
 }
+// 次へ・完了ボタン
 .next-btn, .complete-btn{
     padding: 12px 32px;
     font-size: 1.6rem;
@@ -167,42 +173,52 @@ button {
     }
 }
 
+// ドットのアクティブ状態
 .dot.active {
     background-color: #04CAD6;
 }
 
+// 完了ボタン
 .complete-btn {
     display: none;
 }
 
+// スマホまたは、全画面表示時のみ適用
 @media only screen and (min-height: 600px) and (max-height: 845px) {
     .slider-container {
         height: 100%;
     }
+    // ページネーションの分余白を追加
     .slide {
         // padding-top: 0;
         padding-bottom: 80px;
+        margin-bottom: 30px;
     }
     .slid__samll{
         margin-top: 8px;
     }
     .slid__img--1{
         width: 225px;
-        padding-top: 40px;
+        padding-top: 20px;
     }
     .slid2__img--1, .slid2__img--2{
         padding-top: 16px;
         padding-bottom: 16px;
-        width: 200px;
+        width: 190px;
     }
     .slid3__img--1{
         padding-top: 16px;
-        width: 235px;
+        width: 225px;
         height: auto;
     }
-    .slid4__img--1, .slid5__img--1{
+    .slid4__img--1{
         padding-top: 16px;
         width: 215px;
+        height: auto;
+    }
+    .slid5__img--1{
+        padding-top: 16px;
+        width: 210px;
         height: auto;
     }
 

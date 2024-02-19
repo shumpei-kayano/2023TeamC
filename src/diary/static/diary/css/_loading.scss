@@ -5,23 +5,28 @@
     top: 0;  // 上部に配置
     // left: 0;
 
+    // 要素の幅が可変であっても中央揃えを実現するための設定
     left: 50%;  // 水平方向に中央に配置
     transform: translateX(-50%);  // 水平方向に中央に配置
+
     width: 39rem;
     max-width: 100%; // ビューポートの幅を超えないように設定
-    height: 100%;
-
-    background: #EEFEFF;  
+    height: 100vh;
+    min-height: -webkit-fill-available; /* Safari向けの指定 */
+    pointer-events: none; // ユーザーの操作を許可しない
+    background: #EEFEFF;
+    // ロゴ
     #logo {
-      width: 25%;
-      margin-top: 7%;
-      margin-left: 5%;
-      position: absolute; /* 絶対位置に設定 */
-      top: 0; /* 上端に配置 */
-      left: 0; /* 左端に配置 */
+        width: 25%;
+        margin-top: 7%;
+        margin-left: 5%;
+        position: absolute; /* 絶対位置に設定 */
+        top: 0; /* 上端に配置 */
+        left: 0; /* 左端に配置 */
     }
 }
 
+// ローディングコンテンツ
 #loading .loading-content {
     position: absolute;
     top: 50%;
@@ -31,12 +36,14 @@
     font-size: 180%;
     text-align: center; /* 中央寄せを追加 */
 
+    // ローディングアイコン
     #teacat {
         display: block;
         width: 55%; /* 幅を100pxに設定 */
         margin: auto;
     }
 
+    // テキスト
     .loading__text{
         font-size: 2rem;
         letter-spacing: 0.04em;
@@ -51,28 +58,30 @@
     text-align: center;
     vertical-align: middle;
     color: #04CAD6;
-    line-height: 1;
+    line-height: 1; // 行の高さを1に設定
     width: 3rem;
     height: 3rem;
-    border: 0.2em solid currentColor;
+    border: 0.2em solid currentColor; // 現在の要素のテキストカラーと同じ色を使用する
     border-top-color: rgba(4, 202, 214, 0.27);
     border-radius: 50%;
     box-sizing: border-box;
+    // キーフレームの名前, 1s(秒), 一定の速度で変化, 無限に繰り返す
     animation: rotate 1s linear infinite;
 }
 @keyframes rotate {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(0deg); // 0度回転
     }
     100% {
-        transform: rotate(360deg);
+        transform: rotate(360deg); // 360度回転
     }
 }
+// rotate-animation を持つ要素に対して、rotate アニメーションを適用
 .rotate-animation {
     animation: rotate 1s linear infinite;
 }
 
-
+// レスポンシブ対応
 @media only screen and (max-width: 960px) {
     #loading{
         width: 100%;

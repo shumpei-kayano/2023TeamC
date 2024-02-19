@@ -24,6 +24,7 @@ from django.conf import settings
 import os
 import string
 import random
+import cv2
 
 # comrehendを使って感情分析を行う関数
 def analyze_sentiment(text, diary, user):
@@ -163,9 +164,9 @@ def aicomment_month(emotion, request):
 
 # 特定のワードが含まれているか確認する関数
 def contains_forbidden_word(content,emotion):
-    count ==0
+    count = 0
     # 特定のワードをリストに格納
-    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪"]
+    forbidden_words = ["死", "殺", "悲", "苦", "痛", "怨", "恨", "敵", "怒", "鬱", "嫌", "悪","疲","辛"]
     for word in forbidden_words:
         # 特定のワードが含まれていたら、感情分析でnegativeが70%以上だったら
         if word in content:
@@ -404,6 +405,7 @@ def create_diary_confirmation2(request, pk):
     diary.save()
     # 保存したdiaryを取得
     saved_diary = Diary.objects.get(pk=pk)
+
     return render(request, 'diary/create_diary_confirmation.html', {'saved_diary': saved_diary})
 
 @login_required
@@ -794,10 +796,10 @@ def today_diary_detail(request):
     # 今日の日付を取得
     today = date.today()
     diary = get_object_or_404(Diary, user=request.user, created_date=today)
-    shortstory = diary.ai_comment
-    yomiage = sound(shortstory)
+    #shortstory = diary.ai_comment
+    # yomiage = sound(shortstory)
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'yomiage':yomiage})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today})#,'yomiage':yomiage
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
 
@@ -807,8 +809,8 @@ def today_diary_detail2(request,pk):
     today = date.today()
     diary = get_object_or_404(Diary, id=pk)
   #日記の内容のボイスボックスでの読み上げ
-    shortstory = diary.ai_comment
-    yomiage = sound(shortstory)
+    # shortstory = diary.ai_comment
+    # yomiage = sound(shortstory)
     
     #セッションを受け取る
     cal = Diary.objects.get(id=pk)
@@ -816,7 +818,7 @@ def today_diary_detail2(request,pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     if diary:
-        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date,'yomiage':yomiage})
+        return render(request, 'diary/today_diary_detail.html', {'diary': diary,'today':today,'week':week,'month':month,'cal':created_date})#'yomiage':yomiage
     form = DiaryCreateForm()
     return render(request, 'diary/create_diary.html', {'Diary': form})
   
@@ -926,11 +928,11 @@ def today_diary_graph(request, pk):
     month = 'diary:calendar_month'
     week = 'diary:calender_week'
     # ai_commenを音声に変換
-    path = 'diary/static/diary/voice/'
-    for file_name in os.listdir(path):
-        if file_name.startswith('a'):
-            yomiage = os.path.join(file_name)
-    return render(request,'diary/today_diary_graph.html',{'yomiage':yomiage,'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})
+    # path = 'diary/static/diary/voice/'
+    # for file_name in os.listdir(path):
+    #     if file_name.startswith('a'):
+    #         yomiage = os.path.join(file_name)
+    return render(request,'diary/today_diary_graph.html',{'today':today,'diary':diary, 'ai_comment':ai_comment, 'data':circle_data_json,'cal':created_date,'week':week,'month':month})#'yomiage':yomiage,
 
 @login_required
 def today_counseling_graph(request):
@@ -960,38 +962,38 @@ def sound(ai_comment):
     try:
         # 音声合成クエリの作成28:後鬼(ぬいぐるみver)42:チヴィジイ64:中国うさぎ(ヘラヘラver)70:元気な女の子
         # 音声合成クエリの作成
-
-        res1 = requests.post('http://host.docker.internal:50021/audio_query',params = {'text': text, 'speaker': 70})
-        # 音声合成データの作成
-        res2 = requests.post('http://host.docker.internal:50021/synthesis',params = {'speaker': 70},data=json.dumps(res1.json()))
-        # ファイルの保存先パスを指定
-        path = 'diary/static/diary/voice/'
-        for file_name in os.listdir(path):
-            if file_name.startswith('a'):
-                file_path = os.path.join(path, file_name)
-                os.remove(file_path)
-        # 頭にaを付けて新しいファイル名を生成
-        new_file_name = 'a' + ''.join(random.choices(string.digits, k=4)) + '.wav'
         
-        # path名を取得
-        new_file_path = os.path.join(path, new_file_name) # wavデータの生成
-        # ファイル名を取得
-        yomiage =os.path.join(new_file_name)
-        # ファイルを保存
-        with open(new_file_path, mode='wb') as f:
-            f.write(res2.content)
+        # res1 = requests.post('http://teamc.o-hara-oita.click:50021/audio_query',params = {'text': text, 'speaker': 70})
+        # # 音声合成データの作成
+        # res2 = requests.post('http://teamc.o-hara-oita.click:50021/synthesis',params = {'speaker': 70},data=json.dumps(res1.json()))
+        # # ファイルの保存先パスを指定
+        # path = 'diary/static/diary/voice/'
+        # for file_name in os.listdir(path):
+        #     if file_name.startswith('a'):
+        #         file_path = os.path.join(path, file_name)
+        #         os.remove(file_path)
+        # # 頭にaを付けて新しいファイル名を生成
+        # new_file_name = 'a' + ''.join(random.choices(string.digits, k=4)) + '.wav'
         
-        # ファイル名を返す
-        return yomiage
-
-        # if response.status_code == 200:
-        #     data = response.json()
-        #     wav_download_url = data.get("mp3StreamingUrl")
-        #     return wav_download_url
-        # else:
-        #     # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
-        #     # print("エラー: HTTPステータスコード", response.status_code)
-        #     return 1
+        # # path名を取得
+        # new_file_path = os.path.join(path, new_file_name) # wavデータの生成
+        # # ファイル名を取得
+        # yomiage =os.path.join(new_file_name)
+        # # ファイルを保存
+        # with open(new_file_path, mode='wb') as f:
+        #     f.write(res2.content)
+        
+        # # ファイル名を返す
+        # return yomiage
+        response = requests.post('https://api.tts.quest/v3/voicevox/synthesis?text=' + text + '&speaker=70')
+        if response.status_code == 200:
+            data = response.json()
+            wav_download_url = data.get("mp3StreamingUrl")
+            return wav_download_url
+        else:
+            # エラーレスポンスが返された場合は、エラーメッセージを出力するか、Noneなど適切な値を返す
+            # print("エラー: HTTPステータスコード", response.status_code)
+            return 1
     except Exception as e:
         # エラーが発生した場合はエラーメッセージを出力するか、Noneなど適切な値を返す
         print("エラー:", e)

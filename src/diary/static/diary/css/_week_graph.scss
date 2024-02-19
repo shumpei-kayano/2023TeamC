@@ -1,13 +1,16 @@
+// タブ
 .week-graph-page .a--tab--right.active a{
     background-color: #00ABB6; // active時の左側のボタンの背景色を黒に設定
     color: #FFF; // active時の左側のボタンのテキスト色を白に設定
 }
 
+// 総評
 .content__home__text--pink {
     // display: flex;
     justify-content: center;
     align-items: center;
 
+    // 枠
     .content__today-diary__comment {
         position: relative;
         fill: $background_color;

@@ -1,3 +1,4 @@
+// フォームの確認画面のスタイル
 @mixin button-style {
     width: 100%;
     height: 100%;
@@ -11,7 +12,6 @@
     border-radius: 50px;
     font-family: 'Noto Sans JP', sans-serif;
 }
-
 .a {
     display: flex;
     justify-content: center;
@@ -43,6 +43,7 @@
     }
 }
 
+// 余白を持たせるために追加
 #user-info_edit-check_btn-space{
     margin-top: 40px;
 }
@@ -50,6 +51,7 @@
     margin-top: 30px;
 }
 
+// テキスト
 .member-info__check-text {
     p {
         text-align: center;

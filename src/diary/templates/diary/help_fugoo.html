@@ -29,6 +29,7 @@
 
 {% block content %}
 <section>
+    <div class="content__back-color content__back-color--white">
 <main class="ground ground--white"><!-- 背景色 -->
     {% comment %} <div class="content-center"> {% endcomment %}
 
@@ -39,22 +40,15 @@
                         <h1>Fugooとは</h1>
                         <p>Fugoo（ファグー）とは<br>
                             <span class="slid__span">Fun</span>で<span class="slid__span">Good</span>な日記アプリ！</p>
-                        <p>この日記アプリはAIを活用して
-                            <span class="slid__span">感情分析</span>やポジティブな<span class="slid__span">文章変換</span>、
-                            AI ネココによる<span class="slid__span">コメント</span>を見ることができます。</p>
-                        <p>また、感情分析の<span class="slid__span">統計データ</span>で
-                            感情の変化を可視化することができ、
-                            思考の整理やストレス管理などの
-                            <span class="slid__span">ポジティブな</span>習慣の形成を支援します。</p>
+                        <p>この日記アプリはAIを活用して<span class="slid__span">感情分析</span>やポジティブな<span class="slid__span">文章変換</span>、AI ネココによる<span class="slid__span">コメント</span>を見ることができます。</p>
+                        <p>また、感情分析の<span class="slid__span">統計データ</span>で感情の変化を可視化することができ、思考の整理やストレス管理などの<span class="slid__span">ポジティブな</span>習慣の形成を支援します。</p>
                         <img class="slid__img--1" src="{% static 'diary/assets/slide1_neko.svg' %}" alt="AIネココ">
                     </div>
                     <div class="slide">
                         <h1>AI ネココ</h1>
                         <img class="slid2__img--1" src="{% static 'diary/assets/slide1_neko.svg' %}" alt="AIネココ">
-                        <p>ネココは好奇心旺盛で優しい猫型AI。<br>
-                            日記を読んで感想を送ることが大好き。
-                            カウンセラーモード時はピンク色になる。</p>
-                        <p>ネココをクリックすると<span class="slid__span">話しかけるよ！</span></p>
+                        <p>ネココは好奇心旺盛で優しい猫型AI。<br>日記を読んで感想を送ることが大好き。カウンセラーモード時はピンク色になる。</p>
+                        <p>ホームのネココをクリックすると<span class="slid__span">しゃべる！</span></p>
                         <img class="slid2__img--2" src="{% static 'diary/assets/slide2_neko.svg' %}" alt="AIネココ">
                     </div>
                     <div class="slide">
@@ -66,18 +60,15 @@
                     </div>
                     <div class="slide">
                         <h1>感情の統計グラフ</h1>
-                        <p>毎日の感情分析結果を日・週・月ごとに<br>
-                            <span class="slid__span__border">グラフ</span>で見ることができます</p>
-                            <p>AI ネココが分析結果を<span class="slid__span__border">カウンセリング</span>します</p>
-                            <img class="slid4__img--1" src="{% static 'diary/assets/slide4_1.svg' %}" alt="AIネココ">
-                            <small class="slid__samll">詳しい使い方は設定トップ画面のヘルプからご覧ください。</small>
+                        <p>毎日の感情分析結果を日・週・月ごとに<br><span class="slid__span__border">グラフ</span>で見ることができます</p>
+						<p>AI ネココが分析結果を<span class="slid__span__border">カウンセリング</span>します</p>
+						<img class="slid4__img--1" src="{% static 'diary/assets/slide4_1.svg' %}" alt="AIネココ">
+						<small class="slid__samll">詳しい使い方は設定トップ画面のヘルプからご覧ください。</small>
                     </div>
                     <div class="slide">
                         <h1>カウンセリング</h1>
-                        <p>AI ネココが一般的な*心理学に基づいて<br>
-                            <span class="slid__span__border">コメント</span>をくれます</p>
-                        <p>感情分析の結果によって<br>
-                            AI ネココが<span class="slid__span__border">カウンセリング</span>を行います</p>
+                        <p>AI ネココが一般的な*心理学に基づいて<br><span class="slid__span__border">コメント</span>をくれます</p>
+                        <p>感情分析の結果によって<br>AI ネココが<span class="slid__span__border">カウンセリング</span>を行います</p>
                         <img class="slid5__img--1" src="{% static 'diary/assets/slide5_1.svg' %}" alt="AIネココ">
                         <small class="slid__samll">*CPT-3.5のため、事実と異なる場合があります。予めご了承ください。</small>
                     </div>
@@ -117,52 +108,77 @@
 
     {% comment %} </div> {% endcomment %}
 </main>
+</div>
 </section>
 {% endblock %}
 {% block js %}
 <script>
+    // ページが読み込まれた時のイベントリスナー
     document.addEventListener('DOMContentLoaded', function () {
+        // 要素を取得
         const slider = document.querySelector('.slider');
         const slides = document.querySelectorAll('.slide');
         const nextBtn = document.querySelector('.next-btn');
         const prevBtn = document.querySelector('.prev-btn');
         const dots = document.querySelectorAll('.dot-container');
         const completeBtn = document.querySelector('.complete-btn');
-    
+
+        // スライドのインデックス
         let currentSlide = 0;
 
         // ページが読み込まれたときにボタンの状態を更新
         updateButtons();
-    
+
+        // スライドを表示
         function showSlide(index) {
+             // すべてのスライドから 'active' クラスを削除し、指定されたスライドに 'active' クラスを追加
             slides.forEach((slide) => slide.classList.remove('active'));
             slides[index].classList.add('active');
+            // 横方向にスライドする際の移動距離を計算し、スライダーを移動
             slider.style.transform = `translateX(-${index * slides[0].clientWidth}px)`;
         }
-    
+
+        // ボタンの状態を更新
         function updateButtons() {
+            // 前へボタンを非活性にする
             prevBtn.disabled = currentSlide === 0;
+            // 最後のスライドに到達したら次へボタンを非表示にし、完了ボタンを表示する
             if (currentSlide === slides.length - 1) {
                 nextBtn.style.display = 'none';
                 completeBtn.style.display = 'block';
-            } else {
+                prevBtn.style.display = 'block'
+            }
+            // スライドのインデックスが0の時前へボタンを非表示にする
+            else if(currentSlide === 0){
+                prevBtn.style.display = 'none'
+            }
+            // はじめと最後以外のスライドの時、前へボタンと次へボタンを表示する
+            else {
                 nextBtn.style.display = 'block';
                 completeBtn.style.display = 'none';
+                prevBtn.style.display = 'block'
             }
         }
 
+        // ページネーションを更新
         function updatePagination() {
             dots.forEach((dotContainer, index) => {
+                // HTML要素を取得
                 const dot = dotContainer.querySelector('.dot');
+                // 現在のスライドのインデックスと一致する場合、'active' クラスを追加
                 dot.classList.toggle('active', index === currentSlide);
             });
         }
-    
+
+        // 完了ボタンを表示
         function showCompleteButton() {
+             // 最後のスライドに到達したら完了ボタンを表示
             completeBtn.style.display = currentSlide === slides.length - 1 ? 'block' : 'none';
         }
-    
+
+        // 次へボタンのクリックイベントリスナー
         nextBtn.addEventListener('click', function () {
+            // 最後のスライドに到達していない場合にスライドを更新
             if (currentSlide < slides.length - 1) {
                 currentSlide++;
                 showSlide(currentSlide);
@@ -171,8 +187,10 @@
                 showCompleteButton();
             }
         });
-    
+
+        // 前へボタンのクリックイベントリスナー
         prevBtn.addEventListener('click', function () {
+            // 最初のスライドに到達していない場合にスライドを更新
             if (currentSlide > 0) {
                 currentSlide--;
                 showSlide(currentSlide);
@@ -181,10 +199,12 @@
                 showCompleteButton();
             }
         });
-    
+
+        // ページネーションのドットをクリックしたときのイベントリスナー
         dots.forEach((dotContainer, index) => {
             const dot = dotContainer.querySelector('.dot');
             dot.addEventListener('click', function () {
+                // クリックされたドットに対応するスライドに移動
                 currentSlide = index;
                 showSlide(currentSlide);
                 updateButtons();
@@ -193,6 +213,5 @@
             });
         });
     });
-    
 </script>
 {% endblock %}

@@ -1,16 +1,18 @@
 /* スライドインアニメーション*/
 @keyframes slideIn {
+    // アニメーションの開始時のスタイル
     from {
         opacity: 0;
-        transform: translateX(100%);
+        transform: translateX(100%); // X軸方向に100%分右に移動させて画面外に配置
     }
+    // アニメーションの終了時のスタイル
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0); //  X軸方向に0に戻して表示位置に移動
     }
 }
 
 /* タグ内のすべての要素にアニメーションを適用 */
 section {
-    animation: slideIn 0.5s ease-out;
+    animation: slideIn 0.5s ease-out; // ease-out 開始時は速く進み、徐々に減速して終了する
 }

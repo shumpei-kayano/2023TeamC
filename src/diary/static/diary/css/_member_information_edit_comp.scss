@@ -1,3 +1,4 @@
+// 中央寄せ
 .member__scroll--content {
     display: flex;
     justify-content: center;
@@ -6,6 +7,7 @@
     flex-direction: column; // 子要素を縦方向に並べる
 }
 
+// h3要素
 .member__header-text {
     text-align: center;
     font-size: 2rem;
@@ -15,6 +17,7 @@
     margin-bottom: 16px;
 }
 
+// 本文
 .member__content-text, .member__red-text {
     font-size: 1.6rem;
     line-height: 170%;
@@ -22,23 +25,22 @@
     margin-top: 0;
     margin-bottom: 16px;
 }
-
+// sapn要素
 .highlight {
     font-weight: 700;
 }
-
+// 注意書き
 .member__red-text {
     color: #F00;
     margin-bottom: 24px;
 }
-
+// 画像
 .member__neko {
     margin-top: 24px;
     margin-bottom: 24px;
 }
-
 .info__date {
-    color: #000;
+    color: #333;
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
@@ -46,11 +48,10 @@
     letter-spacing: 0.64px;
     margin-top: 20px;
 }
-
 .info__date p {
-    margin-bottom: 10px; // ここに希望の間隔を指定します
+    margin-bottom: 10px;
 }
-
+// 確認文
 .member-text__content {
     text-align: center;
     font-size: 1.4rem;
@@ -60,7 +61,8 @@
     margin-bottom: 40px;
 }
 
-@media only screen and (min-height: 599px) {
+// // スマホまたは、全画面表示時のみ適用
+@media only screen and (min-height: 600px) {
     .member__scroll--content {
         height: 100%; // 垂直に中央揃えするために必要
     }

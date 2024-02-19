@@ -1,10 +1,11 @@
-// 画像のスタイル
+// 画像・動画のスタイル
 .content__today-diary-confirmation__img{
     display: flex;
     flex-wrap: wrap; // 子要素を折り返し、複数行に上から下へ並べる
     justify-content: flex-start; // 子要素を左から配置
     align-items: flex-start; // 親要素の開始位置から配置。上揃え
     align-content: flex-start; // 複数行にした時、上揃え
+    // 各画像・動画の大きさ
     .content__today-diary-confirmation__item{
         position: relative;
         width: 24%;
@@ -22,7 +23,8 @@
     }
 }
 
-.btn--blue, .btn--white{
+// ボタン
+.btn--blue, .btn--white, .btn--pink{
     margin: 24px auto 40px auto;
     box-sizing: border-box; // パディングとボーダーを幅と高さに含める
 }
@@ -41,6 +43,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.701);
 }
+// ポップアップの中身
 .popup__inner{
     position: absolute;
     top: 50%;
@@ -52,16 +55,20 @@
     border-radius: 10px;
     animation: fadeInUp 0.4s ease-out;
 }
+// ポップアップのアニメーション
 @keyframes fadeInUp {
+    // アニメーションの開始時
     0% {
-      opacity: 0;
-      transform: translate(-50%, 50px);
+        opacity: 0;
+        transform: translate(-50%, 50px); // 要素を水平方向に中央揃えにし、垂直方向に50ピクセル下に移動
     }
+    // アニメーションの終了時
     100% {
-      opacity: 1;
-      transform: translate(-50%, -50%);
+        opacity: 1;
+        transform: translate(-50%, -50%); // 要素を水平方向に中央揃えにし、垂直方向に50ピクセル上に移動
     }
 }
+
 // 吹き出し
 .popup__text{
     position: relative; // 追加
@@ -74,21 +81,24 @@
     border: 2px solid #FFD4E0; // 枠線を追加    
     border-radius: 10px; // 吹き出しの角を丸くする
 
+    // テキスト
     p, .popup__text--second{
         text-align: center;
         margin: 0 auto;
         line-height: 170%;
         letter-spacing: 0.04rem;
     }
+    // 2枚目のテキスト
     .popup__text--second{
         font-size: 1.4rem;
+        // 下線
         .popup__text--second__border{
             letter-spacing: 0.04rem;
             font-weight: 700;
             background:linear-gradient(transparent 90%, #FF5B5B 60%); // マーカー
         }
     }
-    
+
     // 吹き出しの尾部分の枠線を作成
     &::before {
         content: "";
@@ -100,7 +110,7 @@
         border-style: solid;
         border-color: #FFD4E0 transparent transparent transparent;
     }
-    
+
     // 吹き出しの尾部分の中を作成
     &::after {
         content: "";
@@ -114,13 +124,15 @@
         border-color: #FFFFFF transparent transparent transparent; // 中を白色にする
     }
 }
+// ポップアップ画像
 .popup__img{
     display: block;
     margin: 24px auto;
     width: 124px;
     height: auto;
 }
-// ボタン
+
+// ポップアップボタン
 .btn--popup{
     button{
         width: 100%;
@@ -140,6 +152,7 @@
         }
     }
 }
+// ポップアップキャンセルボタン
 .gray__button {
     cursor: pointer;
     text-align: center;
@@ -163,6 +176,7 @@
             text-decoration: underline;
             text-decoration-color: #797979; // 下線の色
         }
+        // アイコン
         .gray__button--icon{
             margin-right: 5px;
             margin-bottom: 3px;
@@ -176,7 +190,9 @@
     }
 }
 
+// ポップアップのレスポンシブ
 @media only screen and (max-width: 960px) {
+    // 表示領域
     #first-popup, #second-popup{
         width: 100%;
         max-width: none; // 追加

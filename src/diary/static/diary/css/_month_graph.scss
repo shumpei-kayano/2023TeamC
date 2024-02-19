@@ -1,17 +1,16 @@
-// main  {
-//     background-color: $main_background_color;
-// }
-
+// ページ全体
 .month-graph-page {
     justify-content: center;
     align-items: center;
 
+    // タブ
     .month-graph-page .a--tab--right.active a{
         background-color: #00ABB6; // active時の左側のボタンの背景色を黒に設定
         color: #FFF; // active時の左側のボタンのテキスト色を白に設定
     }
 }
 
+// グラフ全体
 .emotion__graph__img{
     width: 100%;
     background-color: #FFF;
@@ -20,17 +19,19 @@
     border-top: 1px solid rgba(4, 202, 214, 0.15);
     box-shadow: 0px 2px 2px 0px rgba(4, 202, 214, 0.15);
 
+    // テーブル
     .emotion__graph__table{
         width: 100%;
         margin-bottom: 10px;
+        // td要素
         .emotion__graph__table-td--right{
             text-align: right;
         }
-
         .emotion__graph__table-td--left{
             width: 7.2rem;
             height: 2.8rem;
         }
+        // グラフタイトル
         .emotion__graph_title{
             // display: inline-block;
             text-align: center;
@@ -41,6 +42,7 @@
             letter-spacing: 0.04em; // remより広めの文字間隔を設定
             // color: #00ABB6;
         }
+        // 更新ボタン
         .emotion__graph__btn{
             cursor:pointer;
             // display: inline-block;
@@ -69,6 +71,7 @@
     }
 }
 
+// 総評
 .content__home__text--pink {
     display: flex;
     justify-content: center;
@@ -76,6 +79,7 @@
     width: 100%;
     margin-bottom: 16px;
 
+    // 枠
     .content__today-diary__comment {
         position: relative;
         fill: $background_color;
@@ -95,6 +99,7 @@
         margin-left: 24px; // 左側の余白を追加
         margin-right: 24px; // 右側の余白を追加
 
+        // 画像
         .content__today-diary__comment__img {
             position: absolute;
             top: -23px;
@@ -103,6 +108,7 @@
     }
 }
 
+// 総評コメント
 .month__diary__comment__item {
     p{
         margin: 0 !important;

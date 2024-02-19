@@ -1,65 +1,11 @@
-// main.groundvground--blue {
-// background-color: $main_background_color;
-// }
-
-// .calendar--background calender-week-page {
-//     background-color: $main_background_color;
-// }
-
-// .calendar-header {
-//     width: 100%;
-//     height: 44px;
-//     margin-bottom: 12px;
-// }
-
-// .week-calendar table {
-//     border-collapse: collapse;
-//     border-spacing: 0;
-//     width: 100%;
-//     height: 100%;
-//     table-layout: fixed;
-// }
-
-// .week-calendar th, td {
-//     text-align: center;
-//     margin-bottom: 8px;
-// }
-
-// .week-calendar td {
-//     display: flex;
-//     width: 390px;
-//     height: 72px;
-//     align-items: flex-start;
-//     gap: 40px;
-//     flex-shrink: 0;
-// }
-
-
-// .week-calendar tr {
-//     // background-color: $background_color;
-//     width: 390px;
-//     height: 72px;
-// }
-
-// .week-calendar td {
-//     background-color: $background_color;
-// }
-
-// .week-calendar th {
-//     // background-color: $background_color;
-//     color: black;
-//     font-size: 1.4rem;
-//     font-weight: 400;
-//     line-height: normal;
-//     text-align: left;  // 追加
-// }
-
+// カレンダーページネーション
 .next__button {
     // margin-top: 16px;
     // margin-bottom: 12px;
     margin-left: 24px;
 }
 
+// 週間カレンダータブ
 .calender-week-page {
     .a--tab--left {
         a {
@@ -69,6 +15,7 @@
     }
 }
 
+// 週間カレンダーテーブル
 .week-calendar__table{
     width: 100%;
     // table-layout: fixed; /* テーブルのレイアウトを固定にする */
@@ -76,12 +23,14 @@
     height: calc(100vh - 215px);
     background-color: #fff;
 }
+
+// 月間・週間カレンダーテーブルの日付、曜日
 th, td {
     text-align: center;
     box-sizing: border-box; // 要素の横幅や高さの計算にボーダーボックスモデルを使用。ボーダーやパディングも横幅や高さに含む。
 }
 
-// サイズ   
+// 週間カレンダーテーブルの日付、曜日
 .week-calendar__today, .week-calendar__date{
     vertical-align: bottom;
     width: 80px;
@@ -91,6 +40,7 @@ th, td {
     font-size: 1.4rem;
     letter-spacing: 0.04em;
 }
+// 週間カレンダー曜日
 .week-calendar__week, .week-calendar__week__today{
     vertical-align: top;
     min-width: 80px;
@@ -102,11 +52,12 @@ th, td {
     padding-top: 0;
     padding-bottom: 8px;
 }
-
+// 週間カレンダー画像
 .week-calendar__emotion-img{
     width: 30px;
     height: 30px;
 }
+// 週間カレンダー日記テキスト
 .week-calendar__diary{
     position: relative;  // 子要素の位置指定の基準点
     // height: 76px;
@@ -114,26 +65,26 @@ th, td {
     font-size: 1.6rem;
     color: #A29C9C;
 }
-
+// 週間カレンダー2列目
 .week-calendar__diary__flex-box{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-// 現在の日付のスタイル
+// 週間カレンダー 現在の日付のスタイル
 .week-calendar__today, .week-calendar__week__today{
     background-color: $header_color;
     color: #ffffff;
 }
 
-// 下線
+// 週間カレンダー下線
 .week-calendar__week,.week-calendar__diary,.week-calendar__week__today, .week-calendar__diary__missing_date {
     border-bottom: 3px solid $main_background_color;
     // border-bottom: 3px solid #e4fbfd;
 }
 
-// リンク
+// 週間カレンダー リンク
 .week-calendar__table__a{
     position: absolute;  // 親要素（.week-calendar__diary）に対して絶対位置指定
     top: 0;  // クリック範囲を親要素全体にするために親要素の上下左右の位置を0
@@ -149,6 +100,7 @@ th, td {
     text-decoration: none;
     color: #A29C9C;
 }
+// 週間カレンダー リンクをホバーした時のスタイル
 .week-calendar__diary{
     cursor: pointer;
     &:hover{
@@ -156,6 +108,7 @@ th, td {
     }
 }
 
+// 週間カレンダー 曜日の色
 .sun{
     color: #FC8686;
 }
@@ -163,11 +116,15 @@ th, td {
     color: #0094FF;
 }
 
-@media only screen and (min-height: 600px) {
+// スマホのみ適用
+@media only screen and (max-width: 480px){
+// @media only screen and (min-height: 600px) {
+    // 週間カレンダーテーブル
     .week-calendar__table{
-        height: calc(100vh - 290px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+        margin-bottom: 10px;
+        height: calc(100vh - 285px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
     }
-    // 下線
+    // 週間カレンダー下線
     .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
         border-bottom: 5px solid $main_background_color;
     }

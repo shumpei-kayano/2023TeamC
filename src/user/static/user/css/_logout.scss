@@ -1,3 +1,4 @@
+// 中央寄せ
 .content-center-group{
     display: flex;
     flex-direction: column;
@@ -5,31 +6,33 @@
     justify-content: center; // コンテンツを垂直方向に中央寄せ
     align-items: center; // コンテンツを水平方向に中央寄せ
 }
+// 画像
+.cancel__neko {
+    // margin-top: 16rem;
+    margin-bottom: 1.6rem;
+}
+// テキスト
+.logout-text {
+    margin: 0;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+    text-align: center;
+}
+// 削除ボタン
+.btn--red {
+    margin-bottom: 24px;
+    margin-left: 20px;
+    margin-top: 2rem;
+}
+// キャンセルボタン
+.btn--white{
+    margin-top: 0;
+    margin-right: 14px;
+}
 
-    .cancel__neko {
-        // margin-top: 16rem;
-        margin-bottom: 1.6rem;
-    }
-
-    .logout-text {
-        margin: 0;
-        font-size: 1.6rem;
-        margin-bottom: 1.6rem;
-        text-align: center;
-    }
-    
-    .btn--red {
-        margin-bottom: 24px;
-        margin-left: 20px;
-        margin-top: 2rem;
-    }
-    .btn--white{
-        margin-top: 0;
-        margin-right: 14px;
-    }
-
+/* 画面の高さが600px未満の場合のスタイル */
 @media only screen and (max-height: 599px) {
-    /* 画面の高さが600px未満の場合のスタイル */
+
     .content-center-group{
         display: flex;
         flex-direction: column;
@@ -56,6 +59,7 @@
     }
 }
 
+// スマホまたは、全画面表示時適用
 @media only screen and (min-height: 600px) {
     .cancel__neko {
         margin-bottom: 24px !important;

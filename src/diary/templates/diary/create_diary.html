@@ -150,7 +150,7 @@
 
                 <div class="btn--blue">
                     <button id="submitButton" type="submit" onclick="saveText()">保存</button>
-                    <div id="loading">
+                    <div id="loading" style="height: 100vh;">
                         <img id = "logo" src="{% static 'diary/assets/logo.svg'%}" alt="Loading Image">
                         <div class="loading-content">
                             <img id = "teacat" src="{% static 'diary/assets/tea_neko.svg'%}" alt="Loading Image">
@@ -311,6 +311,8 @@
             }
         }
     });
+
+    // ボタンがクリックされたらローディング画面を表示
     document.getElementById('creatediaryform').addEventListener('submit', function (event) {
       // ボタンがクリックされたらローディング画面を表示
       document.getElementById('loading').style.display = 'block';

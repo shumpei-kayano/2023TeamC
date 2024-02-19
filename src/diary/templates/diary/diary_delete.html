@@ -34,43 +34,15 @@
 <main class="ground ground--blue"><!-- 背景色 -->
     <div class="content-center"><!-- 要素を中央寄せ -->
 
-        {% comment %} <form method="POST" action="{% url 'diary:home_top' diary.pk %}" enctype="multipart/form-data"><!--次のページに遷移させてください--> {% endcomment %}
-            <!-- {% csrf_token %} -->
-            <!-- ユーザーが保存した日記の表示 -->
-            {% comment %} <div class="content__today-diary__text">
-                    作成日時：{{diary.created_date}}</br>
-                    日記内容：{{ diary.content }}
-                    {% if diary.photo1 %}
-                        <img src="{{ diary.photo1.url }}" alt="Diary Photo1">
-                    {% endif %}
-                    {% if diary.photo2 %}
-                        <img src="{{ todya.photo2.url }}" alt="Diary Photo2">
-                    {% endif %}
-                    {% if diary.photo3 %}
-                        <img src="{{ diary.photo3.url }}" alt="Diary Photo3">
-                    {% endif %}
-                    {% if diary.photo4 %}
-                        <img src="{{ todya.photo4.url }}" alt="Diary Photo4">
-                    {% endif %}
-                </div>
-            </div>
-
-        <!-- ネコココメント・画像 -->
-        <div class="content__today-diary__comment__img">
-            {{ diary.ai_comment }}
-            <img src="{% static'diary/assets/neko_comment.svg' %}" alt="ネココの画像">
-        </div> {% endcomment %}
-
         <div class="content-center-group">
             <div class="account__text">
                 <p class="diary__deleta-text--top">日記を削除すると感情分析の<br>データも削除されます。</p>
                 <img class="diary_delete__neko-img" img src="{% static 'diary/assets/cancel_neko.svg' %}">
-                <p  class="diary__deleta-text">日記を削除しますか？</p>
+                <p class="diary__deleta-text">日記を削除しますか？</p>
             </div>
             <div class="btn--red">
                 <a href="{% url 'diary:diary_delete_success' pk=diary.pk %}" onclick="location">日記を削除</a>
             </div>
-        {% comment %} </form> {% endcomment %}
             <div class="btn--white">
                 <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
             </div>

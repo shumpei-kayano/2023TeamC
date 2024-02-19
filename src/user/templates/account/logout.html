@@ -6,8 +6,6 @@
 
 {% block title %}ログアウト{% endblock %}
 
-{% comment %} {% block head_title %}{% trans "Sign Out" %}{% endblock %} {% endcomment %}
-
 {% block css %}
 <!-- ページ固有のCSSを読み込み -->
 <link rel="stylesheet" href="{% static 'user/css/user_page.css' %}">
@@ -15,41 +13,34 @@
 
 {% block content %}
 <section>
-<main class="ground ground--blue">
-<div class="content-center-group">
-    {% comment %} <div class="container-fluid">
-        <div class="card mb-3">
-            <div class="card-header bg-primary"> {% endcomment %}
+    <main class="ground ground--blue">
+        <div class="content-center-group">
 
-              <img id="logout_cancel__neko_img" class="cancel__neko" img src="{% static 'user/assets/cancel_neko.svg' %}">
+            <img id="logout_cancel__neko_img" class="cancel__neko" img src="{% static 'user/assets/cancel_neko.svg' %}">
 
-              <div class="logout__text">
-                <p class="logout-text">ログアウトしますか？</p>
-              </div>
-              
-              {% comment %} <h3><b><font color="white">{% trans "Sign Out" %}</font></b></h3></div> {% endcomment %}
-                  {% comment %} <div class="card-body">
-                    <p>{% trans 'Are you sure you want to sign out?' %}</p> {% endcomment %}
+            <div class="logout__text">
+            <p class="logout-text">ログアウトしますか？</p>
+            </div>
+            
+            {% comment %} <h3><b><font color="white">{% trans "Sign Out" %}</font></b></h3></div> {% endcomment %}
+                {% comment %} <div class="card-body">
+                <p>{% trans 'Are you sure you want to sign out?' %}</p> {% endcomment %}
 
-                <form method="post" action="{% url 'account_logout' %}">
-                  {% csrf_token %}
-                  {% if redirect_field_value %}
-                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                  {% endif %}
-                  <div class="btn--red">
-                    <button class="btn btn-primary" type="submit">{% trans 'Sign Out' %}</button>
-                  </div>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <div class="btn--red">
+                <button class="btn btn-primary" type="submit">{% trans 'Sign Out' %}</button>
+                </div>
 
-                  <div class="btn--white">
-                    <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
-                  </div>
+                <div class="btn--white">
+                <button id="back-button" type="button" onclick="history.back()">キャンセル</button>
+                </div>
 
-                </form>
-              {% comment %} </div> {% endcomment %}
-          {% comment %} </div>
+            </form>
         </div>
-    </div> {% endcomment %}
-</div>
-</main>
+    </main>
 </section>
 {% endblock %}
