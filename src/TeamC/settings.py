@@ -168,7 +168,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 # 使用しているoffice365のメールアドレスとパスワード
-EMAIL_HOST_USER = 'ooi2272412@stu.o-hara.ac.jp'
+EMAIL_HOST_USER = 'fugoo-support@stu.o-hara.ac.jp'
 EMAIL_HOST_PASSWORD = 'Neige0617'
 EMAIL_USE_TLS = True
 # 開発用 コンソールに出力する
