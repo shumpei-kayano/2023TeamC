@@ -237,11 +237,6 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
     margin-top: 5px; /* 画像とテキストの間隔を調整（必要に応じて変更） */
   }
 }
-@media only screen and (max-width: 480px) {
-  main {
-    padding-bottom: 170px; /* フッター分空白を追加 +60px */
-  }
-}
 .btn {
   display: flex;
   justify-content: center;
@@ -956,6 +951,12 @@ th, td {
 }
 
 @media only screen and (max-width: 480px) {
+  .week-calendar {
+    height: 100%;
+  }
+  .week-calendar__table {
+    height: 100%;
+  }
   .week-calendar__week, .week-calendar__diary, .week-calendar__week__today {
     border-bottom: 5px solid #EEFEFF;
   }
@@ -1176,6 +1177,12 @@ table::-webkit-scrollbar-thumb:hover {
 }
 
 @media only screen and (max-width: 480px) {
+  .calendar__month {
+    height: 100%;
+  }
+  .calendar__month table {
+    height: 100%;
+  }
   .calendar__month--today-td, .calendar__month__td {
     font-size: 16px !important;
   }

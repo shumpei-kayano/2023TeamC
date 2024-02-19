@@ -120,10 +120,14 @@ th, td {
 @media only screen and (max-width: 480px){
 // @media only screen and (min-height: 600px) {
     // 週間カレンダーテーブル
-    // .week-calendar__table{
-    //     margin-bottom: 10px;
-    //     height: calc(100vh - 285px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
-    // }
+    .week-calendar{
+        height: 100%;
+    }
+    .week-calendar__table{
+        height: 100%;
+        // margin-bottom: 10px;
+        // height: calc(100vh - 285px); // ビューポートの高さからヘッダーとフッターの高さを引いた値をテーブルの高さとして設定
+    }
     // 週間カレンダー下線
     .week-calendar__week,.week-calendar__diary,.week-calendar__week__today {
         border-bottom: 5px solid $main_background_color;

@@ -137,14 +137,14 @@ table::-webkit-scrollbar-thumb:hover {
 @media only screen and (max-width: 480px){
 // @media only screen and (min-height: 600px) {
     // テーブル
-    // .calendar__month {
-    //     height: 100%;
-    //     table {
-    //         // margin-bottom: 10px;
-    //         // height: calc(100vh - 285px) !important; // 421px?
-    //         height: 100%;
-    //     }
-    // }
+    .calendar__month {
+        height: 100%;
+        table {
+            // margin-bottom: 10px;
+            // height: calc(100vh - 285px) !important; // 421px?
+            height: 100%;
+        }
+    }
 
     // 日付
     .calendar__month--today-td, .calendar__month__td {
