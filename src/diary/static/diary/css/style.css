@@ -383,7 +383,7 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   letter-spacing: 0.04em;
-  background: #FFBBDC;
+  background: #ff94a9;
   color: #FFF;
   font-size: 1.6rem;
   letter-spacing: 0.04rem;
@@ -758,11 +758,11 @@ footer a:hover .footer__home, footer a:hover .footer__week, footer a:hover .foot
   font-size: 1.4rem;
 }
 .help__group .help__help__list_text-wrap .help__list_text p .help__btn--pink {
-  border: #FFBBDC 1px solid;
+  border: #ff94a9 1px solid;
   padding: 0 1rem;
   margin: 0 0.5rem;
   border-radius: 5rem;
-  background: #FFBBDC;
+  background: #ff94a9;
   color: #FFF;
   font-size: 1.4rem;
 }
@@ -1008,8 +1008,7 @@ th, td {
 .FlexTextarea .content__textarea__img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   position: relative;
 }
 
@@ -1748,8 +1747,7 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .btn--blue, .btn--white, .btn--pink {
@@ -1872,9 +1870,7 @@ input[type=text]:focus, input[type=email]:focus {
   cursor: pointer;
   outline: none;
   padding: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   padding: 10px;
   margin: 0 auto;
   color: #A29C9C;
@@ -2033,8 +2029,7 @@ input[type=text]:focus, input[type=email]:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .button img:hover, .button video:hover {
   filter: brightness(50%);
@@ -3074,8 +3069,7 @@ section {
 }
 .content__home__text__anime:nth-child(1),
 .content__home__text__anime:nth-child(2) {
-  -webkit-clip-path: inset(0 100% 0 0);
-          clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
+  clip-path: inset(0 100% 0 0); /* アニメーションの開始時点でテキストを非表示にする */
 }
 
 .content__home__text__anime:nth-child(1) {
@@ -3090,8 +3084,7 @@ section {
 
 @keyframes textAnime {
   100% {
-    -webkit-clip-path: inset(0 0 0 0);
-            clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 .loading__text {
